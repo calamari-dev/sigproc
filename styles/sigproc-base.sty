@@ -1,0 +1,141 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sigproc-base}[2022/04/29 sigproc-base]
+
+\RequirePackage{xcolor}
+\RequirePackage{amsthm,thmtools}
+\RequirePackage{tcolorbox}
+\RequirePackage{cleveref}
+\tcbuselibrary{listings,breakable,skins,theorems}
+
+% 参照
+\crefname{chapter}{第}{第}
+\crefname{section}{第}{第}
+\crefname{subsection}{第}{第}
+\crefname{problem}{演習問題}{演習問題}
+\crefname{table}{表}{表}
+\crefname{figure}{図}{図}
+\crefname{supplement}{コラム}{コラム}
+\crefname{equation}{式}{式}
+
+\creflabelformat{chapter}{#2#1#3章}
+\creflabelformat{section}{#2#1#3節}
+\creflabelformat{subsection}{#2#1#3小節}
+
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\crefpairconjunction}{，}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\creflastconjunction}{，および}
+
+% 論理構造
+\newcommand{\impact}[1]{{\sffamily\bfseries #1}}
+\newcommand{\alert}[1]{{\sffamily\bfseries #1}}
+\newcommand{\termdef}[1]{{\sffamily\bfseries #1}}
+
+% リード文
+\newenvironment{lead}{%
+  \begin{list}{}{%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\leftmargin}{2\zw}%
+    \setlength{\rightmargin}{0pt}%
+  }%
+  \item\small
+}{\end{list}}
+
+% 図
+\newcommand{\smallfigurewidth}{4cm}
+\newcommand{\figurewidth}{6cm}
+
+\tcbset{
+  myframe/.style={
+    colframe=gray,
+    colback=white,
+    boxrule=0.4pt,
+    arc=0mm,
+    boxsep=0mm,
+    left=0mm,
+    right=0mm,
+    top=0mm,
+    bottom=0mm
+  }
+}
+
+% 定理環境
+\newcounter{thcounter}
+\numberwithin{thcounter}{section}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries,
+  headpunct={},
+  notefont=\sffamily\bfseries,
+  notebraces={\inhibitglue（}{）\hspace{-0.5\zw}},
+  postheadspace=1\zw,
+  qed=\diamondsuit
+]{egstyle}
+
+\crefname{example}{例}{例}
+\declaretheorem[style=egstyle,name=問]{problem}
+\declaretheorem[sibling=thcounter,style=egstyle,name=例]{example}
+
+\tcbset{
+  mytheorem/.style={
+    enhanced jigsaw,
+    breakable,
+    beforeafter skip balanced={0.5\baselineskip},
+    theorem style=plain,
+    label type={#1},
+    fonttitle=\sffamily\bfseries,
+    description delimiters={\inhibitglue（}{）\hspace{-0.5\zw}},
+    terminator sign={\hspace{\zw}},
+    colframe=currcolor,
+    coltext=currcolor,
+    coltitle=currcolor,
+    opacityback=0.0,
+    opacitybacktitle=0.0,
+    top=0.5\zh,
+    right=0.5\zw,
+    bottom=0.5\zh,
+    left=0.5\zw,
+    arc=0pt,
+    boxrule=0.4pt
+  }
+}
+
+\newcommand{\base@declareframedtheorem}[2]{
+  \crefname{#1}{#2}{#2}
+  \newtcbtheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{base@#1}{#2}{mytheorem=#1}{#1}
+  \newenvironment{#1}[2]{\colorlet{currcolor}{.}\begin{base@#1}{##1}{##2}}{\end{base@#1}}
+}
+
+\base@declareframedtheorem{definition}{定義}
+\base@declareframedtheorem{theorem}{定理}
+\base@declareframedtheorem{proposition}{命題}
+\base@declareframedtheorem{lemma}{補題}
+\base@declareframedtheorem{corollary}{系}
+\base@declareframedtheorem{exercise}{例題}
+
+% コードブロック
+\definecolor{codeblock}{HTML}{EEEEEE}
+
+\lstdefinestyle{codeblock}{
+  aboveskip=0pt,
+  belowskip=0pt,
+  breaklines=true,
+  breakindent=10pt,
+  basicstyle=\ttfamily\small
+}
+
+\newtcblisting{codeblock}{
+  listing only,
+  listing options={style=codeblock},
+  enhanced,
+  breakable,
+  beforeafter skip balanced={0.5\baselineskip},
+  colback=codeblock,
+  arc=0mm,
+  boxrule=0mm,
+  top=0.5\zh,
+  bottom=0.5\zh,
+  left=0.5\zw,
+  right=0.5\zw,
+  frame hidden
+}

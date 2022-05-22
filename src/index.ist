@@ -1,0 +1,10 @@
+preamble         "\\begin{theindex}\n\\newcommand{\\makeidxhead}[1]{{\\parbox{\\linewidth}{\\makebox[\\linewidth]{\\sffamily\\bfseries 【#1】}}}\\nopagebreak}\n"
+lethead_prefix   "\n\\makeidxhead{"
+lethead_suffix   "}"
+lethead_flag     1
+delim_0          "\\hspace*{\\fill}"
+delim_1          "\\hspace*{\\fill}"
+delim_2          "\\hspace*{\\fill}"
+symhead_positive "記号"
+symbol           "記号"
+letter_head      2

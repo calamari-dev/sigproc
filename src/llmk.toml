@@ -1,0 +1,10 @@
+source = "main.tex"
+sequence = ["latex", "mendex"]
+
+[programs.mendex]
+command = "mendex"
+target = "%B.idx"
+opts = ["-g", "-s"]
+args = ["./index", "%T"]
+generated_target = true
+postprocess = "latex"

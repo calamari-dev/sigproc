@@ -1,0 +1,100 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sigproc-math}[2022/04/29 sigproc-math]
+
+\RequirePackage{mathtools}
+\RequirePackage[ISO]{diffcoeff}
+
+% 汎用
+\newcommand{\holder}{\mathord{\ast}}
+\newcommand{\also}{{,}\quad}
+\newcommand{\where}{{,}\quad\text{where}\quad}
+
+% 算術・代数
+\newcommand{\powerset}[1]{2^{#1}}
+\newcommand{\numset}[1]{\symbb{#1}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\scomp}[1]{#1^{\symrm{c}}}
+\newcommand{\suchthat}{\mathrel{\text{s.t.}}}
+\newcommand{\mapping}[4]{#1\ni #3\mapsto #4\in #2}
+
+\DeclareMathOperator{\rpart}{Re}
+\DeclareMathOperator{\ipart}{Im}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\seq}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\pqty}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\bqty}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\Bqty}{\lbrace}{\rbrace}
+
+\providecommand{\given}{}
+\newcommand{\SetSymbol}[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX{\Set}[1]{\lbrace}{\rbrace}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
+
+% 線形代数
+\newcommand{\vect}[1]{\symbf{#1}}
+\newcommand{\mat}[1]{\symbf{#1}}
+\newcommand{\midx}[3]{#1_{#2\,#3}}
+\newcommand{\matset}[3]{#3^{#1\times #2}}
+\newcommand{\trps}[1]{#1^{\symsfup{T}}}
+\newcommand{\htrps}[1]{#1^{\symsfup{H}}}
+\newcommand{\basis}[1]{\symcal{#1}}
+\newcommand{\pcomp}[1]{#1^{\mathord{\perp}}}
+\newcommand{\pinv}[1]{#1^{\mathord{+}}}
+\newcommand{\ddelta}[2]{\symrm{\delta}_{#1\,#2}}
+\newcommand{\inlinevec}[1]{[{\narrowbaselines\begin{matrix}#1\end{matrix}}]}
+
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spannedby}{span}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\nul}{Ker}
+\DeclareMathOperator{\diag}{diag}
+
+\DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\mnorm}{\lVert}{\rVert}
+\DeclarePairedDelimiterXPP{\fnorm}[1]{}{\lVert}{\rVert}{_{\symrm{F}}}{#1}
+\DeclarePairedDelimiterX{\innerp}[2]{\langle}{\rangle}{#1,#2}
+
+% 微分積分
+\newcommand{\dv}[1]{\dl{#1}}
+\newcommand{\intd}[1]{\dl2#1}
+
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\order}{\symrm{o}}
+\DeclareMathOperator{\Order}{\symrm{O}}
+
+\DeclarePairedDelimiterX{\ccival}[2]{\lbrack}{\rbrack}{#1,#2}
+
+% 関数解析
+\newcommand{\sphere}[1]{S^{#1}}
+\newcommand{\topology}[1]{\symcal{#1}}
+\newcommand{\cont}[1]{C^#1}
+\newcommand{\Lebesgue}[1]{L^#1}
+\newcommand{\lebesgue}[1]{\ell^#1}
+
+\DeclareMathOperator{\clsr}{cl}
+\DeclareMathOperator{\shift}{\symit{T}}
+
+% フーリエ解析
+\newcommand{\fseries}[1]{\hat{#1}}
+
+\DeclareMathOperator{\ftrans}{\symcal{F}}
+\DeclareMathOperator{\ltrans}{\symcal{L}}
+\DeclareMathOperator{\ztrans}{\symcal{Z}}
+
+% 確率統計
+\newcommand{\ndist}{\symcal{N}}
+\newcommand{\mble}[1]{\symcal{#1}}
+
+\DeclareMathOperator{\prob}{\symbb{P}}
+\DeclareMathOperator{\expect}{\symbb{E}}
+\DeclareMathOperator{\variant}{\symbb{V}}
+
+% 定数
+\newcommand{\imat}{\mat{I}}
+\newcommand{\zmat}{\mat{O}}
+\newcommand{\zvec}{\vect{0}}
+\newcommand{\iuni}{\symrm{i}}
+\newcommand{\napr}{\symrm{e}}
+\newcommand{\krez}{\symrm{\pi}}

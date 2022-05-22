@@ -1,0 +1,19 @@
+version: "3"
+services:
+  sigproc:
+    build: ./
+    image: sigproc
+    container_name: sigproc
+    volumes:
+      - type: bind
+        source: ./src
+        target: /workdir/
+      - type: bind
+        source: ./fonts
+        target: /usr/local/share/fonts/lualatex
+      - type: bind
+        source: ./modules
+        target: /python_modules/
+      - type: bind
+        source: ./styles
+        target: /root/texmf/tex/latex

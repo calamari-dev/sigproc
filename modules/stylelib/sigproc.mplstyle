@@ -1,0 +1,53 @@
+# LINES
+lines.linewidth: 0.5
+lines.markersize: 2
+lines.markeredgewidth: 0.5
+markers.fillstyle: none
+
+# PATCHES
+patch.linewidth: 0.5
+
+# FONT
+font.family: serif
+font.size: 7.2 # ~ \footnotesize
+
+# LaTeX
+text.usetex: True
+
+# AXES
+axes.linewidth: 0.5
+axes.prop_cycle: cycler(linestyle=["-", "--", ":", "-."])
+
+# TICKS
+xtick.major.width: 0.4
+xtick.minor.width: 0.4
+xtick.color: gray
+xtick.labelcolor: black
+xtick.direction: in
+ytick.major.width: 0.4
+ytick.minor.width: 0.4
+ytick.color: gray
+ytick.labelcolor: black
+ytick.direction: in
+
+# GRIDS
+grid.color: lightgray
+grid.linewidth: 0.4
+
+# LEGEND
+legend.fancybox: False
+legend.framealpha: 1
+legend.edgecolor: black
+
+# FIGURE
+figure.figsize: 1.9685, 1.9685 # 50 mm in inches
+figure.dpi: 600
+figure.autolayout: True
+
+# SAVING FIGURES
+savefig.format: pdf
+savefig.bbox: tight
+savefig.pad_inches: 0.0041667 # 0.3 pt in inches
+pgf.rcfonts: False
+pgf.texsystem: lualatex
+pgf.preamble: \usepackage{matplotlib}
