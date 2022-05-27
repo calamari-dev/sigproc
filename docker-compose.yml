@@ -1,19 +1,25 @@
 version: "3"
 services:
   sigproc:
-    build: ./
+    build: .
     image: sigproc
-    container_name: sigproc
     volumes:
       - type: bind
         source: ./src
-        target: /workdir/
+        target: /home/anon/src
       - type: bind
         source: ./fonts
-        target: /usr/local/share/fonts/lualatex
-      - type: bind
-        source: ./modules
-        target: /python_modules/
+        target: /home/anon/.fonts
       - type: bind
         source: ./styles
-        target: /root/texmf/tex/latex
+        target: /home/anon/texmf/tex/latex
+      - type: volume
+        source: luatex-cache
+        target: /var/cache/texmf-cache
+      - type: volume
+        source: virtualenvs
+        target: /home/anon/.local/share/virtualenvs
+
+volumes:
+  luatex-cache:
+  virtualenvs:

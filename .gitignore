@@ -1,8 +1,3 @@
-src/**/main.pdf
-src/chapter/**/index.pdf
-fonts/**/.uuid
-modules/fontlist-*.json
-
 # Created by https://www.toptal.com/developers/gitignore/api/latex,visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=latex,visualstudiocode,python
 
@@ -503,3 +498,9 @@ cython_debug/
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/latex,visualstudiocode,python
+
+src/**/main.pdf
+src/chapter/**/index.pdf
+src/modules/fontlist-*.json
+fonts/**/.uuid
+!src/.env

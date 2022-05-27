@@ -1,28 +1,36 @@
+# TeX Live をインストールする
 FROM debian:bullseye-slim AS build
-ENV PATH /usr/local/bin/texlive:$PATH
-WORKDIR /tmp
+ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
 RUN apt-get install --yes perl wget xz-utils fontconfig
-COPY ./texlive.profile ./
+WORKDIR /tmp
+COPY ./texlive.profile .
 RUN wget --no-verbose https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 RUN tar --extract --gzip --file ./install-tl-unx.tar.gz --strip-components=1
 RUN ./install-tl --profile=texlive.profile
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
 RUN tlmgr install appendix cleveref comment diffcoeff environ light-latex-make subfiles tcolorbox thmtools titlesec
 
+# TeX Live を build ステージからコピーする
 FROM python:3.10-slim-bullseye
-ENV PATH /usr/local/bin/texlive:$PATH
-ENV PYTHONPATH /python_modules/:$PYTHONPATH
-ENV MPLCONFIGDIR /python_modules/
-ENV MPLBACKEND pgf
-WORKDIR /workdir
+ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
 RUN apt-get install --yes perl wget xz-utils fontconfig
 COPY --from=build /usr/local/texlive /usr/local/texlive
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
+
+# LuaTeX のキャッシュを永続化する
+RUN mkdir /var/cache/texmf-cache/
+RUN chmod 777 /var/cache/texmf-cache/
+RUN tlmgr conf texmf TEXMFCACHE /var/cache/texmf-cache/
+
+# 一般ユーザで Python の仮想環境を作る
 RUN pip install --upgrade pip
 RUN pip install pipenv
-COPY ./src/Pipfile ./
-RUN pipenv install --dev
-VOLUME ["/usr/local/texlive/.texlive2022/texmf-var/luatex-cache"]
+RUN useradd --create-home --shell /bin/bash/ anon
+USER anon
+ENV PATH=/home/anon/.local/bin:$PATH WORKON_HOME=/home/anon/.local/share/virtualenvs
+RUN mkdir -p /home/anon/.local/share/virtualenvs/
+RUN chmod 777 /home/anon/.local/share/virtualenvs/
+WORKDIR /home/anon/src
 CMD ["bash"]
