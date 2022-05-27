@@ -17,6 +17,5 @@
 $ docker-compose build
 $ docker-compose run sigproc
 $ pipenv sync --dev # 初回のみ
-$ pipenv shell
-$ python publish.py
+$ pipenv run publish
 ```

@@ -2,7 +2,7 @@
 FROM debian:bullseye-slim AS build
 ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
-RUN apt-get install --yes perl wget xz-utils fontconfig
+RUN apt-get install --yes fontconfig perl wget xz-utils
 WORKDIR /tmp
 COPY ./texlive.profile .
 RUN wget --no-verbose https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
@@ -15,7 +15,7 @@ RUN tlmgr install appendix cleveref comment diffcoeff environ light-latex-make s
 FROM python:3.10-slim-bullseye
 ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
-RUN apt-get install --yes perl wget xz-utils fontconfig
+RUN apt-get install --yes fontconfig perl wget xz-utils
 COPY --from=build /usr/local/texlive /usr/local/texlive
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
 
@@ -30,7 +30,7 @@ RUN pip install pipenv
 RUN useradd --create-home --shell /bin/bash/ anon
 USER anon
 ENV PATH=/home/anon/.local/bin:$PATH WORKON_HOME=/home/anon/.local/share/virtualenvs
-RUN mkdir -p /home/anon/.local/share/virtualenvs/
+RUN mkdir --parents /home/anon/.local/share/virtualenvs/
 RUN chmod 777 /home/anon/.local/share/virtualenvs/
 WORKDIR /home/anon/src
 CMD ["bash"]

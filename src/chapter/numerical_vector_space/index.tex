@@ -10,11 +10,22 @@
 
 \section{行列と線型空間}
 \subsection{固有値と固有空間}
+\begin{definition}{固有値，固有空間}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
+\(\mat{A}\)を\(n\)次正方行列とする．
+複素数\(\lambda\)と\(\zvec\)でないベクトル\(\vect{x}\in\numset{C}^n\)が式\(\mat{A}\vect{x}=\lambda\vect{x}\)を満たすとき，
+\(\lambda\)を\(\mat{A}\)の\termdef{固有値}（eigenvalue）という．
+また，\(\vect{x}\)を\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有ベクトル}（eigenvector）という．
+\end{definition}
+
 \begin{definition}{固有空間}{eigenspace}\index{こゆうくうかん@固有空間}
+\cref{definition:eigenvalue}の\(\mat{A}\)，\(\lambda\)について，集合
 \[
   E_\lambda(\mat{A}) = \Set{\vect{x}\in\numset{C}^n\given\mat{A}\vect{x}=\lambda\vect{x}}
-\]  
+\]
+は\(\numset{C}^n\)の部分空間になる．部分空間\(E_\lambda(\mat{A})\)を，
+\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有空間}（eigenspace）という．
 \end{definition}
+
 \subsection{対角化}
 
 \section{直交射影}
