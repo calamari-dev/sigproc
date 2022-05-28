@@ -14,8 +14,8 @@
 ## ビルド方法
 
 ```
-$ docker-compose build
-$ docker-compose run sigproc
+$ docker compose build
+$ docker compose run sigproc
 $ pipenv sync --dev # 初回のみ
 $ pipenv run publish
 ```

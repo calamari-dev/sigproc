@@ -17,11 +17,11 @@
 すなわち，集合\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{R}^n\)のすべての元を\(\basis{B}_n\)の元の線型結合で書ける」という性質を持つ．
 
 一般に，線型空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する---}（generated subspace）といい，
-\(\spannedby S\)と表記する．この言葉を使えば，先述した\(\basis{B}_n\)が持つ性質は「\(\spannedby\basis{B}_n=\numset{R}^n\)が成り立つ」とも言い換えられる．
+\(\spannedby S\)と表記する．この言葉を使えば，先述した\(\basis{B}_n\)が持つ性質を「\(\spannedby\basis{B}_n=\numset{R}^n\)が成り立つ」とも言い換えられる．
 
 \(\spannedby S=\numset{R}^n\)を満たす集合\(S\subset\numset{R}^n\)は，\(\basis{B}_n\)以外にも無数にある．
 たとえば\(n=2\)のとき，集合\(S=\Set{\trps{\inlinevec{1 & 1}},\trps{\inlinevec{2 & -1}},\trps{\inlinevec{-1 & 0}}}\)が生成する部分空間は
-\(\numset{R}^2\)である．しかし，\(\basis{B}\)の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(S\)はこの性質を持たない．
+\(\numset{R}^2\)である．しかし，\(\basis{B}_2\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(S\)はこの性質を持たない（\cref{figure:linear_comb}）．
 
 \begin{figure}[htbp]
   \centering
@@ -33,7 +33,8 @@
     \centering
     \includegraphics{linear_comb2.pdf}    
   \end{minipage}
-  \caption{\(S\)の元の線型結合で\(\vect{x}=\trps{\begin{bmatrix}3/2 & 0\end{bmatrix}}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)と表せるが，一方で\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2\)も成り立つ．}
+  \caption{\(S\)の元の線型結合で\(\vect{x}=\trps{[\begin{matrix}3/2 & 0\end{matrix}]}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2\)も成り立つ．}
+  \label{figure:linear_comb}
 \end{figure}
 
 \subsection{固有値と固有空間}

@@ -1,4 +1,3 @@
-version: "3"
 services:
   sigproc:
     build: .
@@ -19,7 +18,6 @@ services:
       - type: volume
         source: virtualenvs
         target: /home/anon/.local/share/virtualenvs
-
 volumes:
   luatex-cache:
   virtualenvs:
