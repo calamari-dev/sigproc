@@ -35,6 +35,11 @@
 \setmonojfont{HackGen}
 
 % 版面
+\jlreqsetup{
+  caption_font=\small,
+  caption_label_font=\sffamily\bfseries\small
+}
+
 \ModifyPageStyle{plain}{
   nombre_font=\small,
   nombre_position=top-fore-edge,
@@ -63,7 +68,7 @@
 % 目次・補遺
 \patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{empty}\@starttoc}{}{}
 \titlecontents{chapter}[0\zw]{\addvspace{1\zh}\sffamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
-\titlecontents{section}[1.5\zw]{}{\makebox[2.5\zw][l]{\thecontentslabel}}{}{\space\titlerule*[0.5\zw]{.}\contentspage}
+\titlecontents{section}[1.5\zw]{}{\makebox[2.5\zw][l]{\thecontentslabel}}{\hspace{2.5\zw}}{\space\titlerule*[0.5\zw]{.}\contentspage}
 \titlecontents*{subsection}[4\zw]{\small}{}{}{}[／]
 \renewcommand{\appendixname}{補遺}
 
