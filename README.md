@@ -15,7 +15,7 @@
 
 ```
 $ docker compose build
-$ docker compose run sigproc
+$ docker compose run --rm sigproc
 $ pipenv sync --dev # 初回のみ
 $ pipenv run publish
 ```
