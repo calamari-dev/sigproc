@@ -26,7 +26,7 @@
 \RequirePackage{multicol}
 
 \if@watermark
-\RequirePackage{draftwatermark}
+\RequirePackage[colorspec=0.9]{draftwatermark}
 \fi
 
 % フォント
