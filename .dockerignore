@@ -1,3 +1,2 @@
-fonts/
-src/
-styles/
+*
+!texlive.profile

@@ -1,12 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sigproc}[2022/04/29 sigproc class]
+\ProvidesClass{sigproc}[2022/05/31 sigproc class]
 
-\newif\ifebook
-\ebookfalse
-\DeclareOption{ebook}{\ebooktrue}
+\newif\if@ebook
+\newif\if@watermark
+\@ebookfalse
+\@watermarkfalse
+
+\DeclareOption{ebook}{\@ebooktrue}
+\DeclareOption{watermark}{\@watermarktrue}
 \ProcessOptions
 
-\ifebook\else
+\if@ebook\else
 \PassOptionsToClass{twoside,gutter=20mm}{jlreq}
 \fi
 
@@ -14,16 +18,16 @@
 \newcommand{\jlreqxkanjiskip}{0.25em plus 0.15em minus 0.06em}
 \LoadClass[disablejfam,book,paper=a5,fontsize=9bp,head_space=20mm,line_length=112mm,number_of_lines=32,headfoot_verticalposition=11bp]{jlreq}
 
-\ifebook\else
-\RequirePackage{jlreq-trimmarks}
-\fi
-
 \RequirePackage[math-style=ISO,warnings-off={mathtools-colon}]{unicode-math}
 \RequirePackage[no-math,match,deluxe,sourcehan-jp,jfm_yoko=jlreq]{luatexja-preset}
 \RequirePackage{etoolbox}
 \RequirePackage{titletoc}
 \RequirePackage{appendix}
 \RequirePackage{multicol}
+
+\if@watermark
+\RequirePackage{draftwatermark}
+\fi
 
 % フォント
 \ltjsetparameter{jacharrange={-2,-9},alxspmode={`‐,0}}
