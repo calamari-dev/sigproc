@@ -40,7 +40,7 @@ legend.framealpha: 1
 legend.edgecolor: black
 
 # FIGURE
-figure.figsize: 1.9685, 1.9685 # 50 mm in inches
+figure.figsize: 1.7717, 1.7717 # 45 mm in inches
 figure.dpi: 600
 figure.autolayout: True
 

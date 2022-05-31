@@ -18,6 +18,6 @@ ax.text(*v1, r"$\vect{v}_1$", ha="left", va="bottom")
 ax.text(*v2, r"$\vect{v}_2$", ha="left", va="top")
 ax.text(*x, r"$\vect{x}=(\vect{v}_1+\vect{v}_2)/2$", ha="left", va="center")
 
-ax.axis([-0.25, 3.75, -2, 2])
+ax.axis([-0.15, 3.85, -2, 2])
 ax.axis("square")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))
