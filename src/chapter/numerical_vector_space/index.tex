@@ -11,6 +11,35 @@
 \section{行列とベクトル空間}
 信号解析に関連する議論へと移る前に，有限次元の線型代数について簡単に説明しておく．
 
+\subsection{ベクトル空間}
+以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
+
+\begin{note}
+\cref{definition:vector_space}はごてごてしているように見えるが，
+それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
+\end{note}
+
+\begin{definition}{ベクトル空間}{vector_space}\index{べくとるくうかん@ベクトル空間}
+  \(V\)を空でない集合とする．また，任意の\(\vect{x},\vect{y}\in V\)，\(s\in\numset{K}\)について，
+  和\(\vect{x}+\vect{y}\in V\)とスカラー倍\(s\vect{x}\in V\)が定義されているとする．
+  任意の\(\vect{x},\vect{y},\vect{z}\in V\)，\(s,t\in\numset{K}\)に対する以下の条件を満たすとき，
+  \(V\)は\(\numset{K}\)上の\termdef{ベクトル空間}（vector space）であるという．
+
+  \begin{enumerate}
+    \item \((\vect{x}+\vect{y})+\vect{z}=\vect{x}+(\vect{y}+\vect{z})\)
+    \item \(\vect{x}+\vect{y}=\vect{y}+\vect{x}\)
+    \item ある\(\zvec\in V\)が存在し，各\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす
+    \item 各\(\vect{v}\in V\)に対し，ある\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす
+    \item \((s+t)\vect{x}=s\vect{x}+t\vect{x}\)
+    \item \(s(\vect{x}+\vect{y})=s\vect{x}+s\vect{y}\)
+    \item \((st)\vect{x}=s(t\vect{x})\)
+    \item \(1\vect{x}=\vect{x}\)
+  \end{enumerate}
+\end{definition}
+
+\cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
+通常，\(\vect{v}\)の加法逆元は\(-\vect{v}\)と表される．
+
 \subsection{基底}
 任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
 \(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
