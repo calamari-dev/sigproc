@@ -14,11 +14,6 @@
 \subsection{ベクトル空間}
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
 
-\begin{note}
-\cref{definition:vector_space}はごてごてしているように見えるが，
-それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
-\end{note}
-
 \begin{definition}{ベクトル空間}{vector_space}\index{べくとるくうかん@ベクトル空間}
   \(V\)を空でない集合とする．また，任意の\(\vect{x},\vect{y}\in V\)，\(s\in\numset{K}\)について，
   和\(\vect{x}+\vect{y}\in V\)とスカラー倍\(s\vect{x}\in V\)が定義されているとする．
@@ -28,7 +23,7 @@
   \begin{enumerate}
     \item \((\vect{x}+\vect{y})+\vect{z}=\vect{x}+(\vect{y}+\vect{z})\)
     \item \(\vect{x}+\vect{y}=\vect{y}+\vect{x}\)
-    \item ある\(\zvec\in V\)が存在し，各\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす
+    \item ある\(\zvec\in V\)が存在し，任意の\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす
     \item 各\(\vect{v}\in V\)に対し，ある\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす
     \item \((s+t)\vect{x}=s\vect{x}+t\vect{x}\)
     \item \(s(\vect{x}+\vect{y})=s\vect{x}+s\vect{y}\)
@@ -40,15 +35,20 @@
 \cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
 通常，\(\vect{v}\)の加法逆元は\(-\vect{v}\)と表される．
 
+\begin{note}
+  \cref{definition:vector_space}はごてごてしているように見えるが，
+  それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
+\end{note}
+
 \subsection{基底}
 任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
 \(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
-すなわち，集合\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{B}_n\)の元の線型結合で書ける」という性質を持つ．
+すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
 一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する---}（generated subspace）といい，
-\(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{B}_n\)が持つ性質を「\(\spannedby\basis{B}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
+\(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
-\(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{B}_n\)以外にも無数にある．
+\(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
 たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\trps{\inlinevec{1 & 1}},\trps{\inlinevec{2 & -1}},\trps{\inlinevec{-1 & 0}}}\)が生成する部分空間は
 \(\numset{R}^2\)である．しかし，\(\basis{B}_2=\Set{\trps{\inlinevec{1 & 0}},\trps{\inlinevec{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない（\cref{figure:linear_comb}）．
 
@@ -62,7 +62,7 @@
     \centering
     \includegraphics{linear_comb2.pdf}    
   \end{minipage}
-  \caption{\(T\)の元の線型結合で\(\vect{x}=\trps{[\begin{matrix}3/2 & 0\end{matrix}]}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
+  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{[\begin{matrix}3/2 & 0\end{matrix}]}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
   \label{figure:linear_comb}
 \end{figure}
 
@@ -100,13 +100,13 @@
 \end{definition}
 
 \begin{example}[標準基底]
-  \(\basis{B}_n\)は\(\numset{K}^n\)の基底である．\(\basis{B}_n\)を\(\numset{K}^n\)の\termdef{標準基底}\index{ひょうじゅんきてい@標準基底}（standard basis）という．
+  \(\basis{S}_n\)は\(\numset{K}^n\)の基底である．\(\basis{S}_n\)を\(\numset{K}^n\)の\termdef{標準基底}\index{ひょうじゅんきてい@標準基底}（standard basis）という．
 \end{example}
 
 さきほどの議論によれば，\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(c_1,\dots,c_k\in\numset{K}\)について\cref{equation:independence}が成立する．
 すなわち，\(S\)は\(\spannedby S\)の基底である．実はこの逆も示せるので，次の命題が成立する．
 
-\begin{proposition}{}{}
+\begin{proposition}{}{span_and_uniqueness}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．このとき，次の命題は同値である．
   \begin{enumerate}
     \item \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せる
@@ -120,8 +120,23 @@
 \(\sizeof{\basis{B}}\)を\(V\)の\termdef{次元}\index{じげん@次元}（dimension）といい，\(\dim V\)\index{\(\dim V\)}と表記する
 \footnote{\(V\)が有限次元でないときも基底は存在し，濃度は基底の選び方に依存しない（証明は文献\cite{yukie2019}）．}．
 
-\subsection{基底変換}
-以下，\(V\)は有限次元であるとする．
+\subsection{線型写像と表現行列}
+以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)（\(n=\dim V\)）をとることで，
+任意の\(\vect{x}\in V\)を
+\begin{equation}
+  \label{equation:basis_comb}
+  \vect{a} = c_1\vect{v}_1+\dots+c_n\vect{v}_n\quad(c_1,\dots,c_n\in\numset{K})
+\end{equation}
+の形で一意に表せる．言い換えると，各\(\vect{a}\)に\(\trps{\inlinevec{c_1 & \cdots & c_n}}\)を割り当てる写像
+\(\phi\colon V\to\numset{K}^n\)を定義でき，それは単射\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}\index{たんしゃ@単射}である．
+
+\begin{definition}{線型写像}{linear_mapping}\index{せんけいしゃぞう@線型写像}
+  \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
+  \begin{enumerate}
+    \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)
+    \item 任意の\(\vect{x}\in V\)，\(c\in\numset{K}\)に対して\(f(c\vect{x})=cf(\vect{x})\)
+  \end{enumerate}
+\end{definition}
 
 \subsection{固有値と固有空間}
 \begin{definition}{固有値，固有空間}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}

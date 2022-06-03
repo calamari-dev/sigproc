@@ -87,9 +87,7 @@
     fonttitle=\sffamily\bfseries,
     description delimiters={\inhibitglue（}{）\hspace{-0.5\zw}},
     terminator sign={\hspace{\zw}},
-    colframe=currcolor,
-    coltext=currcolor,
-    coltitle=currcolor,
+    coltitle=black,
     opacityback=0.0,
     opacitybacktitle=0.0,
     top=0.5\zh,
@@ -101,10 +99,9 @@
   }
 }
 
-\newcommand{\base@declareframedtheorem}[2]{
-  \crefname{#1}{#2}{#2}
-  \newtcbtheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{base@#1}{#2}{mytheorem=#1}{#1}
-  \newenvironment{#1}[2]{\colorlet{currcolor}{.}\begin{base@#1}{##1}{##2}}{\end{base@#1}}
+\newcommand{\base@declareframedtheorem}[2]{%
+  \crefname{#1}{#2}{#2}%
+  \newtcbtheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{#1}{#2}{mytheorem=#1}{#1}%
 }
 
 \base@declareframedtheorem{definition}{定義}
