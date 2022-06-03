@@ -3,8 +3,9 @@
 
 \RequirePackage{xcolor}
 \RequirePackage{amsthm,thmtools}
-\RequirePackage{tcolorbox}
+\RequirePackage{tikz,tcolorbox}
 \RequirePackage{cleveref}
+\usetikzlibrary{cd}
 \tcbuselibrary{listings,breakable,skins,theorems}
 
 % 参照
@@ -45,6 +46,7 @@
 % 図
 \newcommand{\smallfigurewidth}{4cm}
 \newcommand{\figurewidth}{6cm}
+\tikzcdset{arrow style=tikz,diagrams={>=stealth}}
 
 \tcbset{
   myframe/.style={

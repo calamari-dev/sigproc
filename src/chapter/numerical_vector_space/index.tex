@@ -9,7 +9,8 @@
 \end{lead}
 
 \section{行列とベクトル空間}
-信号解析に関連する議論へと移る前に，有限次元の線型代数について簡単に説明しておく．
+信号解析に関連する議論へと移る前に，有限次元の線型代数について大まかに説明しておく．
+以下の解説はかなり大雑把なので，必要に応じて線型代数の教科書を参照してほしい．
 
 \subsection{ベクトル空間}
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
@@ -121,14 +122,15 @@
 \footnote{\(V\)が有限次元でないときも基底は存在し，濃度は基底の選び方に依存しない（証明は文献\cite{yukie2019}）．}．
 
 \subsection{線型写像と表現行列}
-以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)（\(n=\dim V\)）をとることで，
+以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
 任意の\(\vect{x}\in V\)を
 \begin{equation}
   \label{equation:basis_comb}
-  \vect{a} = c_1\vect{v}_1+\dots+c_n\vect{v}_n\quad(c_1,\dots,c_n\in\numset{K})
+  \vect{x} = c_1\vect{v}_1+\dots+c_m\vect{v}_m\quad(c_1,\dots,c_m\in\numset{K})
 \end{equation}
-の形で一意に表せる．言い換えると，各\(\vect{a}\)に\(\trps{\inlinevec{c_1 & \cdots & c_n}}\)を割り当てる写像
-\(\phi\colon V\to\numset{K}^n\)を定義でき，それは単射\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}\index{たんしゃ@単射}である．
+の形で一意に表せる．言い換えると，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\inlinevec{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，
+それは単射\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}\index{たんしゃ@単射}である．
+この写像\(\phi\)は，次に定義する「線型写像」の1例である．
 
 \begin{definition}{線型写像}{linear_mapping}\index{せんけいしゃぞう@線型写像}
   \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
@@ -137,6 +139,47 @@
     \item 任意の\(\vect{x}\in V\)，\(c\in\numset{K}\)に対して\(f(c\vect{x})=cf(\vect{x})\)
   \end{enumerate}
 \end{definition}
+
+\(W\)を\(\numset{K}\)上の有限次元ベクトル空間とする．\(W\)の基底\(\basis{B}'=\Set{\vect{w}_1,\dots,\vect{w}_n}\)（\(n=\dim W\)）をとると，
+\(\phi\)と同様，任意の\(\vect{y}\in W\)に対して
+\[
+  \phi(\vect{y}) = \trps{\begin{bmatrix}d_1 & \cdots & d_n\end{bmatrix}}
+  \iff\vect{y} = d_1\vect{w}_1+\dots+d_n\vect{w}_n
+\]
+を満たす写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
+
+\(\phi\)と\(\psi\)を利用すると，\(V\)から\(W\)への任意の線型写像\(f\)を，対応する行列によって表現できる．
+\(\vect{x}\in V\)を任意にとる．\(\phi(\vect{x})=\trps{\inlinevec{c_1 & \cdots & c_m}}\)とおくと
+\[
+  f(\vect{x}) = f\pqty*{\sum_{i=1}^mc_i\vect{v}_i} = \sum_{i=1}^mc_if(\vect{v}_i)
+\]
+であるから
+\[
+  \psi(f(\vect{x})) = \sum_{i=1}^mc_i\psi(f(\vect{v}_i))
+  = \begin{bmatrix}\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))\end{bmatrix}\begin{bmatrix}c_1 \\ \vdots \\ c_m\end{bmatrix}
+\]
+となる．よって，\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと，式
+\begin{equation}
+  \label{equation:representation_matrix}
+  \psi(f(\vect{x})) = \mat{A}\phi(\vect{x})
+\end{equation}
+が成り立つ．
+
+ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
+\(n\times m\)行列\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)
+が定まり，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．この\(\mat{A}\)を\(f\)の\termdef{表現行列}という．
+
+\begin{definition}{表現行列}{representation_matrix}\index{ひょうげんぎょうれつ@表現行列}
+準備中．
+\end{definition}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzcd}
+    V \arrow[r, "f"] \arrow[d, "\phi"] & W \arrow[d, "\psi"] \\
+    \numset{K}^m \arrow[r, "\mat{A}"] & \numset{K}^n
+  \end{tikzcd}
+\end{figure}
 
 \subsection{固有値と固有空間}
 \begin{definition}{固有値，固有空間}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
