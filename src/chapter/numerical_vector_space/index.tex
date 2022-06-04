@@ -141,12 +141,12 @@
 \end{definition}
 
 \(W\)を\(\numset{K}\)上の有限次元ベクトル空間とする．\(W\)の基底\(\basis{B}'=\Set{\vect{w}_1,\dots,\vect{w}_n}\)（\(n=\dim W\)）をとると，
-\(\phi\)と同様，任意の\(\vect{y}\in W\)に対して
+\(\phi\)と同様
 \[
-  \phi(\vect{y}) = \trps{\begin{bmatrix}d_1 & \cdots & d_n\end{bmatrix}}
-  \iff\vect{y} = d_1\vect{w}_1+\dots+d_n\vect{w}_n
+  \vect{y} = d_1\vect{w}_1+\dots+d_n\vect{w}_n
+  \iff\psi(\vect{y}) = \trps{\begin{bmatrix}d_1 & \cdots & d_n\end{bmatrix}}
 \]
-を満たす写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
+を満たす線型写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
 
 \(\phi\)と\(\psi\)を利用すると，\(V\)から\(W\)への任意の線型写像\(f\)を，対応する行列によって表現できる．
 \(\vect{x}\in V\)を任意にとる．\(\phi(\vect{x})=\trps{\inlinevec{c_1 & \cdots & c_m}}\)とおくと
@@ -161,51 +161,64 @@
 となる．よって，\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと，式
 \begin{equation}
   \label{equation:representation_matrix}
-  \psi(f(\vect{x})) = \mat{A}\phi(\vect{x})
+  \psi(f(\vect{x})) = T(\phi(\vect{x}))\quad(T(\vect{x})=\mat{A}\vect{x})
 \end{equation}
 が成り立つ．
 
+\begin{floatingfigure}{8\zw}
+  \begin{equation*}
+    \begin{tikzcd}
+      V \arrow[r, "f"] \arrow[d, "\phi"] & W \arrow[d, "\psi"] \\
+      \numset{K}^m \arrow[r, "T"] & \numset{K}^n
+    \end{tikzcd}
+  \end{equation*}
+\end{floatingfigure}
+
 ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
 \(n\times m\)行列\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)
-が定まり，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．この\(\mat{A}\)を\(f\)の\termdef{表現行列}という．
+を定義でき，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
+この\(\mat{A}\)を，基底\(\basis{B}\)と\(\basis{B}'\)に関する\(f\)の\termdef{表現行列}\index{ひょうげんぎょうれつ@表現行列}（representation matrix）という．
 
-\begin{definition}{表現行列}{representation_matrix}\index{ひょうげんぎょうれつ@表現行列}
-準備中．
-\end{definition}
+なお，\(\basis{B}\)の元を並べる順序に応じて，\cref{equation:basis_comb}の\(c_1,\dots,c_n\)の順序も変化するので，
+\(\phi\)は\(\basis{B}\)に対して一意ではない．\(\phi\)は\(\basis{B}\)の元を並べる順序を決めて初めて定まる．
+本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をしたとき，
+\(\basis{B}\)には\(\vect{v}_i\)の添え字\(i\)について昇順の順序が定まっているとみなす．
 
-\begin{figure}[htbp]
-  \centering
-  \begin{tikzcd}
-    V \arrow[r, "f"] \arrow[d, "\phi"] & W \arrow[d, "\psi"] \\
-    \numset{K}^m \arrow[r, "\mat{A}"] & \numset{K}^n
-  \end{tikzcd}
-\end{figure}
+\begin{example}[形式的な微分]
+  \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(n+1\)次元ベクトル空間である．
+  また，写像\(D\colon V_3\to V_2\)を
+  \[
+    D(c_0+c_1x+c_2x^2) = c_1+2c_2x\quad(c_0,c_1,c_2\in\numset{R})
+  \]
+  で定義すると，これは線型写像になる．\(V_n\)の基底として\(\basis{B}_n=\Set{x^i\given i=0,\dots,n}\)をとったとき，
+  基底\(\basis{B}_3\)，\(\basis{B}_2\)に関する\(D\)の表現行列は\(\begin{bsmallmatrix}0 & 1 & 0 \\ 0 & 0 & 2\end{bsmallmatrix}\)である．
+\end{example}
 
 \subsection{固有値と固有空間}
 \begin{definition}{固有値，固有空間}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
-\(\mat{A}\)を\(n\)次正方行列とする．
-複素数\(\lambda\)と\(\zvec\)でないベクトル\(\vect{x}\in\numset{C}^n\)が式\(\mat{A}\vect{x}=\lambda\vect{x}\)を満たすとき，
-\(\lambda\)を\(\mat{A}\)の\termdef{固有値}（eigenvalue）という．
-また，\(\vect{x}\)を\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有ベクトル}（eigenvector）という．
+  \(\mat{A}\)を\(n\)次正方行列とする．
+  複素数\(\lambda\)と\(\zvec\)でないベクトル\(\vect{x}\in\numset{C}^n\)が式\(\mat{A}\vect{x}=\lambda\vect{x}\)を満たすとき，
+  \(\lambda\)を\(\mat{A}\)の\termdef{固有値}（eigenvalue）という．
+  また，\(\vect{x}\)を\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有ベクトル}（eigenvector）という．
 \end{definition}
 
 \begin{definition}{固有空間}{eigenspace}\index{こゆうくうかん@固有空間}\index{\(E_\lambda(\mat{A})\)}
-\cref{definition:eigenvalue}の\(\mat{A}\)，\(\lambda\)について，集合
-\[
-  E_\lambda(\mat{A}) = \Set{\vect{x}\in\numset{C}^n\given\mat{A}\vect{x}=\lambda\vect{x}}
-\]
-は\(\numset{C}^n\)の部分空間になる．部分空間\(E_\lambda(\mat{A})\)を，
-\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有空間}（eigenspace）という．
+  \cref{definition:eigenvalue}の\(\mat{A}\)，\(\lambda\)について，集合
+  \[
+    E_\lambda(\mat{A}) = \Set{\vect{x}\in\numset{C}^n\given\mat{A}\vect{x}=\lambda\vect{x}}
+  \]
+  は\(\numset{C}^n\)の部分空間になる．部分空間\(E_\lambda(\mat{A})\)を，
+  \(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有空間}（eigenspace）という．
 \end{definition}
 
 固有空間は次の性質を持つ．
 
 \begin{proposition}{}{eigenspaces_disjointness}
-\(\lambda_1\)，\(\lambda_2\)を\(n\)次正方行列\(\mat{A}\)の固有値とする．
-\begin{enumerate}
-  \item \(\vect{x}\in E_{\lambda_1}(\mat{A})\implies\mat{A}\vect{x}\in E_{\lambda_1}(\mat{A})\)
-  \item \(\lambda_1\neq\lambda_2\implies E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})=\Set{\zvec}\)
-\end{enumerate}
+  \(\lambda_1\)，\(\lambda_2\)を\(n\)次正方行列\(\mat{A}\)の固有値とする．
+  \begin{enumerate}
+    \item \(\vect{x}\in E_{\lambda_1}(\mat{A})\implies\mat{A}\vect{x}\in E_{\lambda_1}(\mat{A})\)
+    \item \(\lambda_1\neq\lambda_2\implies E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})=\Set{\zvec}\)
+  \end{enumerate}
 \end{proposition}
 
 \subsection{対角化}
