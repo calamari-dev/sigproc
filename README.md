@@ -18,8 +18,10 @@
 
 ## ライセンス
 
-+ `src/`以下のファイルは[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で配布しています
++ `src/`以下のファイルは[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja)の下で配布しています[^1]
 + `fonts/`以下のファイルは各フォントのライセンスの下で再配布しています
+
+[^1]: [コミットe063f2e](https://github.com/calamari-dev/sigproc/commit/e063f2e6e5169269f6557282730d2f6154ede8de)以前は，`src/`以下のファイルを[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)の下で配布していました．
 
 ## ビルド方法
 
