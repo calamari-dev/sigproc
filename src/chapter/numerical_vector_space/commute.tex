@@ -1,0 +1,10 @@
+\documentclass[tikz]{standalone}
+\usepackage{matplotlib}
+\usetikzlibrary{cd}
+\tikzcdset{arrow style=tikz,diagrams={>=stealth}}
+\begin{document}
+  \begin{tikzcd}
+    V \arrow[r, "f"] \arrow[d, "\phi"] & W \arrow[d, "\psi"] \\
+    \numset{K}^m \arrow[r, "T"] & \numset{K}^n
+  \end{tikzcd}
+\end{document}

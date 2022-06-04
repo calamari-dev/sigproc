@@ -4,9 +4,8 @@
 \RequirePackage{xcolor}
 \RequirePackage{amsthm,thmtools}
 \RequirePackage{floatflt}
-\RequirePackage{tikz,tcolorbox}
+\RequirePackage{tcolorbox}
 \RequirePackage{cleveref}
-\usetikzlibrary{cd}
 \tcbuselibrary{listings,breakable,skins,theorems}
 
 % 参照
@@ -45,8 +44,6 @@
 }{\end{list}}
 
 % 図
-\tikzcdset{arrow style=tikz,diagrams={>=stealth}}
-
 \tcbset{
   myframe/.style={
     colframe=gray,

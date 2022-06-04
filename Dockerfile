@@ -9,7 +9,7 @@ RUN wget --no-verbose https://mirror.ctan.org/systems/texlive/tlnet/install-tl-u
 RUN tar --extract --gzip --file ./install-tl-unx.tar.gz --strip-components=1
 RUN ./install-tl --profile=texlive.profile
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
-RUN tlmgr install appendix cleveref comment diffcoeff draftwatermark environ floatflt light-latex-make subfiles tcolorbox thmtools tikz-cd titlesec
+RUN tlmgr install appendix cleveref comment diffcoeff draftwatermark environ floatflt light-latex-make standalone subfiles tcolorbox thmtools tikz-cd titlesec
 
 # TeX Live を build ステージからコピーする
 FROM python:3.10-slim-bullseye
