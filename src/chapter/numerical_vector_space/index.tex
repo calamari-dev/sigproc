@@ -181,22 +181,45 @@
 \(\basis{B}\)には\(\vect{v}_i\)の添え字\(i\)について昇順の順序が定まっているとみなす．
 
 \begin{example}[形式的な微分]
-  \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(n+1\)次元ベクトル空間である．
+  \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(\numset{R}\)上の\(n+1\)次元ベクトル空間である．
   また，写像\(D\colon V_3\to V_2\)を
   \[
     D(c_0+c_1x+c_2x^2) = c_1+2c_2x\quad(c_0,c_1,c_2\in\numset{R})
   \]
-  で定義すると，これは線型写像になる．\(V_n\)の基底として\(\basis{B}_n=\Set{1,x^1,\dots,x^n}\)をとったとき，
-  基底\(\basis{B}_3\)，\(\basis{B}_2\)に関する\(D\)の表現行列は\(\begin{bsmallmatrix}0 & 1 & 0 \\ 0 & 0 & 2\end{bsmallmatrix}\)である．
+  で定義すると，これは線型写像になる．\(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^n}\)をとったとき，
+  基底\(\basis{B}_3\)と\(\basis{B}_2\)に関する\(D\)の表現行列は\(\begin{bsmallmatrix}0 & 1 & 0 \\ 0 & 0 & 2\end{bsmallmatrix}\)である．
 \end{example}
 
 \subsection{固有値と固有空間}
-\begin{definition}{固有値，固有空間}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
+\begin{definition}{固有値，固有ベクトル}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
   \(\mat{A}\)を\(n\)次正方行列とする．
   複素数\(\lambda\)と\(\zvec\)でないベクトル\(\vect{x}\in\numset{C}^n\)が式\(\mat{A}\vect{x}=\lambda\vect{x}\)を満たすとき，
   \(\lambda\)を\(\mat{A}\)の\termdef{固有値}（eigenvalue）という．
   また，\(\vect{x}\)を\(\mat{A}\)の（固有値\(\lambda\)に属する）\termdef{固有ベクトル}（eigenvector）という．
 \end{definition}
+
+\begin{example}
+  \(\vect{x}_1=\trps{\inlinevec{1+\iuni & 2}}\)，\(\vect{x}_2=\trps{\inlinevec{1-\iuni & 2}}\)は\(\mat{A}=\begin{bsmallmatrix}1 & -1 \\ 2 & -1\end{bsmallmatrix}\)の固有ベクトルである．
+  実際\(\mat{A}\vect{x}_1=\iuni\vect{x}_1\)，\(\mat{A}\vect{x}_2=-\iuni\vect{x}_2\)である．
+\end{example}
+
+\cref{definition:eigenvalue}を満たす\(\lambda\)を見つけるには，次の\cref{proposition:characteristic_polynomial}を利用するとよい．
+
+\begin{proposition}{}{characteristic_polynomial}
+  \(\lambda\)が正方行列\(\mat{A}\)の固有値であることと，\(\det(\lambda\imat-\mat{A})=0\)であることは同値である．
+\end{proposition}
+
+\(n\)次多項式\(P(\lambda)=\det(\lambda\imat-\mat{A})\)を\(\mat{A}\)の\termdef{固有多項式}\index{こゆうたこうしき@固有多項式}（characteristic polynomial）という．
+\cref{proposition:characteristic_polynomial}から，集合\(\Set{\lambda\in\numset{C}\given P(\lambda)=0}\)は\(\mat{A}\)の固有値の全体集合である．
+
+\cref{proposition:characteristic_polynomial}から，\cref{corollary:eigen_size}が得られる．
+
+\begin{corollary}{}{eigen_size}
+  任意の\(n\)次正方行列\(\mat{A}\)は，相異なる固有値を少なくとも1個，多くとも\(n\)個もつ．
+\end{corollary}
+\begin{proof}
+  \(\det(\lambda\imat-\mat{A})=0\)は\(\lambda\)に関する\(n\)次方程式なので，解は存在しても\(n\)個以下である．また，代数学の基本定理より解は少なくとも1つ存在する．
+\end{proof}
 
 \begin{definition}{固有空間}{eigenspace}\index{こゆうくうかん@固有空間}\index{\(E_\lambda(\mat{A})\)}
   \cref{definition:eigenvalue}の\(\mat{A}\)，\(\lambda\)について，集合
@@ -210,12 +233,23 @@
 固有空間は次の性質を持つ．
 
 \begin{proposition}{}{eigenspaces_disjointness}
-  \(\lambda_1\)，\(\lambda_2\)を\(n\)次正方行列\(\mat{A}\)の固有値とする．
+  \(\lambda_1\)，\(\lambda_2\)を\(n\)次正方行列\(\mat{A}\)の固有値とする．このとき，次の命題が成立する．
   \begin{enumerate}
     \item \(\vect{x}\in E_{\lambda_1}(\mat{A})\implies\mat{A}\vect{x}\in E_{\lambda_1}(\mat{A})\)
     \item \(\lambda_1\neq\lambda_2\implies E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})=\Set{\zvec}\)
   \end{enumerate}
 \end{proposition}
+\begin{proof}
+  後半のみ示す．\(\mat{A}\zvec=\lambda_1\zvec=\lambda_2\zvec=\zvec\)なので，\(\zvec\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)である．
+  また，任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとると，\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)だから\((\lambda_1-\lambda_2)\vect{x}=\zvec\)である．
+  \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
+\end{proof}
+
+\begin{example}
+  行列\(\mat{R}=\begin{bsmallmatrix}0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1\end{bsmallmatrix}\)を\(\vect{x}\in\numset{R}^3\)に左から掛けると，
+  \(\vect{x}\)を\(z\)軸周りに\(\krez/2\)回転させたベクトルが得られる．一方で，\(\vect{x}\)が\(\mat{R}\)の固有ベクトルならば，
+  \(\vect{x}\)に\(\mat{R}\)を掛けても回転しないはずである．直感的には，そのような\(\vect{x}\)は\(z\)軸に平行なものしかない．
+\end{example}
 
 \subsection{対角化}
 
@@ -227,6 +261,10 @@
 \end{figure}
 
 \subsection{直交補空間}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{orthogonal_complement.pdf}
+\end{figure}
 \subsection{スペクトル定理}
 
 \section{最小二乗問題}

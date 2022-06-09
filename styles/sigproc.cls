@@ -2,12 +2,9 @@
 \ProvidesClass{sigproc}[2022/05/31 sigproc class]
 
 \newif\if@ebook
-\newif\if@watermark
 \@ebookfalse
-\@watermarkfalse
 
 \DeclareOption{ebook}{\@ebooktrue}
-\DeclareOption{watermark}{\@watermarktrue}
 \ProcessOptions
 
 \if@ebook\else
@@ -25,9 +22,6 @@
 \RequirePackage{appendix}
 \RequirePackage{multicol}
 
-\if@watermark
-\RequirePackage[colorspec=0.9]{draftwatermark}
-\fi
 
 % フォント
 \ltjsetparameter{jacharrange={-2,-9},alxspmode={`‐,0}}

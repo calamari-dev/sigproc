@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-publish = "python publish.py"
+figure = "python figure.py"
+preview = "bash -c \"llmk -C && llmk\""
+publish = "bash -c \"llmk -C && MODE=production llmk && mv main.pdf dist.pdf\""
 
 [packages]
 requests = "*"

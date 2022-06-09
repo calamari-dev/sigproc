@@ -14,7 +14,3 @@ for tex in filedir.glob("chapter/**/*.tex"):
 
     print("processing ./chapter/**/" + tex.name + " ...")
     subprocess.run(["lualatex", tex.stem], cwd=tex.parent.as_posix(), stdout=subprocess.DEVNULL)
-
-print("running llmk ...")
-subprocess.run(["llmk", "-C"])
-subprocess.run("llmk", stdout=subprocess.DEVNULL)
