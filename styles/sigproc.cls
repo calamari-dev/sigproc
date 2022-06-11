@@ -28,8 +28,8 @@
 \setmathfont{STIX Two Math}[Scale=1.1]
 \setmainfont{STIX Two Text}[Ligatures=TeX,Scale=1.1]
 \setsansfont{Liberation Sans}[Ligatures=TeX,Scale=1.1]
-\setmonofont{HackGen}
-\setmonojfont{HackGen}
+\setmonofont{PlemolJP}
+\setmonojfont{PlemolJP}
 
 % 版面
 \jlreqsetup{
