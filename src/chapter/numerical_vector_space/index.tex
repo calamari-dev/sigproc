@@ -14,6 +14,7 @@
 
 \subsection{ベクトル空間}
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
+\(\numset{K}\)上のベクトル空間とは次のように定義される，加法とスカラー乗法が備わった集合のことである．
 
 \begin{definition}{ベクトル空間}{vector_space}\index{べくとるくうかん@ベクトル空間}
   \(V\)を空でない集合とする．また，任意の\(\vect{x},\vect{y}\in V\)，\(s\in\numset{K}\)について，
@@ -40,6 +41,10 @@
   \cref{definition:vector_space}はごてごてしているように見えるが，
   それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
 \end{note}
+
+\(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
+\(c_1\vect{v}_1+\dots+c_n\vect{v}_n\)（\(c_1,\dots,c_n\in\numset{K}\)）という形をした\(V\)の元を，
+\(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}\index{せんけいけつごう@線型結合}（linear combination）という．
 
 \subsection{基底}
 任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
@@ -207,12 +212,11 @@
 
 \begin{proposition}{}{characteristic_polynomial}
   \(\lambda\)が正方行列\(\mat{A}\)の固有値であることと，\(\det(\lambda\imat-\mat{A})=0\)であることは同値である．
+  ただし，\(\det\mat{A}\)は\(\mat{A}\)の行列式\index{ぎょうれつしき@行列式}である．
 \end{proposition}
 
 \(n\)次多項式\(P(\lambda)=\det(\lambda\imat-\mat{A})\)を\(\mat{A}\)の\termdef{固有多項式}\index{こゆうたこうしき@固有多項式}（characteristic polynomial）という．
 \cref{proposition:characteristic_polynomial}から，集合\(\Set{\lambda\in\numset{C}\given P(\lambda)=0}\)は\(\mat{A}\)の固有値の全体集合である．
-
-\cref{proposition:characteristic_polynomial}から，\cref{corollary:eigen_size}が得られる．
 
 \begin{corollary}{}{eigen_size}
   任意の\(n\)次正方行列\(\mat{A}\)は，相異なる固有値を少なくとも1個，多くとも\(n\)個もつ．
@@ -233,7 +237,7 @@
 固有空間は次の性質を持つ．
 
 \begin{proposition}{}{eigenspaces_disjointness}
-  \(\lambda_1\)，\(\lambda_2\)を\(n\)次正方行列\(\mat{A}\)の固有値とする．このとき，次の命題が成立する．
+  \(\lambda_1\)，\(\lambda_2\)を正方行列\(\mat{A}\)の固有値とする．このとき，次の命題が成立する．
   \begin{enumerate}
     \item \(\vect{x}\in E_{\lambda_1}(\mat{A})\implies\mat{A}\vect{x}\in E_{\lambda_1}(\mat{A})\)
     \item \(\lambda_1\neq\lambda_2\implies E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})=\Set{\zvec}\)

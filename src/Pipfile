@@ -16,6 +16,7 @@ pandas = "*"
 scipy = "*"
 scikit-learn = "*"
 pywavelets = "*"
+pygments = "*"
 
 [dev-packages]
 black = "*"

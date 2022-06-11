@@ -22,14 +22,13 @@
 \RequirePackage{appendix}
 \RequirePackage{multicol}
 
-
 % フォント
 \ltjsetparameter{jacharrange={-2,-9},alxspmode={`‐,0}}
 \ltjsetparameter{yalbaselineshift=0.02\zh}
 \setmathfont{STIX Two Math}[Scale=1.1]
 \setmainfont{STIX Two Text}[Ligatures=TeX,Scale=1.1]
 \setsansfont{Liberation Sans}[Ligatures=TeX,Scale=1.1]
-\setmonofont{HackGen}[Ligatures=TeX]
+\setmonofont{HackGen}
 \setmonojfont{HackGen}
 
 % 版面

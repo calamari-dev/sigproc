@@ -1,8 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sigproc-math}[2022/04/29 sigproc-math]
-
 \RequirePackage{mathtools}
-\RequirePackage[ISO]{diffcoeff}
 
 % 汎用
 \newcommand{\holder}{\mathord{\ast}}
@@ -56,8 +54,7 @@
 \DeclarePairedDelimiterX{\innerp}[2]{\langle}{\rangle}{#1,#2}
 
 % 微分積分
-\newcommand{\dv}[1]{\dl{#1}}
-\newcommand{\intd}[1]{\dl2#1}
+\newcommand{\intd}[1]{\,\symrm{d}#1}
 
 \DeclareMathOperator{\grad}{grad}
 \DeclareMathOperator{\order}{\symrm{o}}

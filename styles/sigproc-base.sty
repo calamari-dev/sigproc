@@ -6,7 +6,7 @@
 \RequirePackage{floatflt}
 \RequirePackage{tcolorbox}
 \RequirePackage{cleveref}
-\tcbuselibrary{listings,breakable,skins,theorems}
+\tcbuselibrary{minted,breakable,skins,theorems}
 
 % 参照
 \crefname{chapter}{第}{第}
@@ -113,23 +113,17 @@
 % コードブロック
 \definecolor{codeblock}{HTML}{EEEEEE}
 
-\lstdefinestyle{codeblock}{
-  aboveskip=0pt,
-  belowskip=0pt,
-  breaklines=true,
-  breakindent=10pt,
-  basicstyle=\ttfamily\small
-}
-
-\newtcblisting{codeblock}{
+\newtcblisting{codeblock}[1]{
   listing only,
-  listing options={style=codeblock},
+  listing engine=minted,
+  minted language={#1},
+  minted style=bw,
   enhanced,
   breakable,
   beforeafter skip balanced={0.5\baselineskip},
   colback=codeblock,
-  arc=0mm,
-  boxrule=0mm,
+  arc=0pt,
+  boxrule=0pt,
   top=0.5\zh,
   bottom=0.5\zh,
   left=0.5\zw,
