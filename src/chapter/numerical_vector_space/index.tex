@@ -42,13 +42,37 @@
   それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
 \end{note}
 
+ついで，ベクトル空間にかかわる概念を2つ定義する（これらの関係については，すぐ後で説明する）．
+
+\begin{definition}{線型結合}{linear_combination}\index{せんけいけつごう@線型結合}
 \(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
 \(c_1\vect{v}_1+\dots+c_n\vect{v}_n\)（\(c_1,\dots,c_n\in\numset{K}\)）という形をした\(V\)の元を，
-\(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}\index{せんけいけつごう@線型結合}（linear combination）という．
+\(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
+\end{definition}
 
-\(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の部分集合とする．
-\(W\)が\(V\)の加法とスカラー乗法について\cref{definition:vector_space}の条件をすべて満たすとき，
-\(W\)は\(V\)の\termdef{部分ベクトル空間}\index{ぶぶんべくとるくうかん@部分ベクトル空間|see{部分空間}}（vector subspace），あるいは単に\termdef{部分空間}\index{ぶぶんくうかん@部分空間}（subspace）であるという．
+\begin{definition}{部分空間}{subspace}\index{べくとるくうかん@ベクトル空間!ぶぶん@部分---|see{部分空間}}\index{ぶぶんくうかん@部分空間}
+  \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．
+  \(W\)が\(V\)の加法とスカラー乗法について\cref{definition:vector_space}の条件をすべて満たすとき，
+  \(W\)は\(V\)の\termdef{部分ベクトル空間}（vector subspace），あるいは単に\termdef{部分空間}（subspace）であるという．    
+\end{definition}
+
+ある部分集合\(W\subset V\)が\(V\)の部分空間かどうか調べるには，\cref{proposition:subspace_iff}を使うとよい．
+
+\begin{proposition}{}{subspace_iff}
+  \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．このとき，次の命題は同値である．
+  \begin{enumerate}
+    \item \(W\)は\(V\)の部分空間である
+    \item 任意の\(s\in\numset{K}\)，\(\vect{w}_1,\vect{w}_2\in W\)に対して\(s\vect{w}_1,\vect{w}_1+\vect{w}_2\in W\)である
+  \end{enumerate}
+\end{proposition}
+
+\begin{example}
+  \(V\)が\(\numset{K}\)上のベクトル空間なら，\(V\)自身と\(\Set{\zvec}\)は\(V\)の部分空間である．
+\end{example}
+
+\begin{example}
+  集合\(\Set{\trps{\inlinevec{t & 2t & 3t}}\given t\in\numset{R}}\)は\(\numset{R}^3\)の部分空間である．
+\end{example}
 
 \subsection{基底}
 任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
