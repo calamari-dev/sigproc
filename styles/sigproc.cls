@@ -70,8 +70,15 @@
 \renewcommand{\appendixname}{補遺}
 
 % 索引
+\newlength{\midx@columnseprule}
+\newlength{\midx@columnsep}
+\newlength{\midx@multicolsep}
+
 \renewenvironment{theindex}{%
   \jlreq@oldfontcommand@enable%
+  \setlength{\midx@columnseprule}{\columnseprule}%
+  \setlength{\midx@columnsep}{\columnsep}%
+  \setlength{\midx@multicolsep}{\multicolsep}%
   \setlength{\columnseprule}{0pt}%
   \setlength{\columnsep}{2\zw}%
   \setlength{\multicolsep}{0pt}%
@@ -91,8 +98,12 @@
   \let\jlreq@theindex@savedpagestyle\@undefined%
   \clearpage%
   \jlreq@oldfontcommand@disable%
+  \setlength{\columnseprule}{\midx@columnseprule}%
+  \setlength{\columnsep}{\midx@columnsep}%
+  \setlength{\multicolsep}{\midx@multicolsep}%
 }
 
+\newcommand{\seename}{→}
 \renewcommand{\@idxitem}{\par\setlength{\hangindent}{3\zw}}
 \renewcommand{\subitem}{\@idxitem\hspace*{1\zw}}
 \renewcommand{\subsubitem}{\@idxitem\hspace*{2\zw}}
