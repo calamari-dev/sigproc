@@ -210,8 +210,8 @@
 
 なお，\(\basis{B}\)の元を並べる順序に応じて，\cref{equation:basis_comb}の\(c_1,\dots,c_n\)の順序も変化するので，
 \(\phi\)は\(\basis{B}\)に対して一意ではない．\(\phi\)は\(\basis{B}\)の元を並べる順序を決めて初めて定まる．
-本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をしたとき，
-\(\basis{B}\)には\(\vect{v}_i\)の添え字\(i\)について昇順の順序が定まっているとみなす．
+本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をした場合，
+\(\basis{B}\)の元を\(\vect{v}_i\)の添え字\(i\)について昇順に並べると決めておく．
 
 \begin{example}[形式的な微分]
   \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(\numset{R}\)上の\(n+1\)次元ベクトル空間である．
@@ -278,9 +278,11 @@
 \end{proof}
 
 \begin{example}
-  行列\(\mat{R}=\begin{bsmallmatrix}0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1\end{bsmallmatrix}\)を\(\vect{x}\in\numset{R}^3\)に左から掛けると，
-  \(\vect{x}\)を\(z\)軸周りに\(\krez/2\)回転させたベクトルが得られる．一方で，\(\vect{x}\)が\(\mat{R}\)の固有ベクトルならば，
-  \(\vect{x}\)に\(\mat{R}\)を掛けても回転しないはずである．直感的には，そのような\(\vect{x}\)は\(z\)軸に平行なものしかない．
+  行列\(\mat{R}=\begin{bsmallmatrix}1/2 & -1/\sqrt{2} & 1/2 \\ 1/\sqrt{2} & 0 & -1/\sqrt{2} \\ 1/2 & 1/\sqrt{2} & 1/2\end{bsmallmatrix}\)を各\(\vect{x}\in\numset{R}^3\)に左から掛けると，\(\vect{x}\)があるベクトル\(\vect{v}\)を軸に角度\(\theta\)だけ回転する．
+  \(\vect{v}\)と\(\theta\)を求めよう．
+
+  回転軸上にあるベクトルは，\(\mat{R}\)を掛けても回転しない．よって，\(\vect{v}\)は\(\mat{R}\vect{v}=\vect{v}\)を満たす．
+  すなわち，\(\vect{v}\)は\(\mat{R}\)の固有値\(1\)に属する固有ベクトルである．
 \end{example}
 
 \subsection{対角化}
