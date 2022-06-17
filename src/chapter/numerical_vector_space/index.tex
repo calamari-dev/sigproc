@@ -281,8 +281,11 @@
   行列\(\mat{R}=\begin{bsmallmatrix}1/2 & -1/\sqrt{2} & 1/2 \\ 1/\sqrt{2} & 0 & -1/\sqrt{2} \\ 1/2 & 1/\sqrt{2} & 1/2\end{bsmallmatrix}\)を各\(\vect{x}\in\numset{R}^3\)に左から掛けると，\(\vect{x}\)があるベクトル\(\vect{v}\)を軸に角度\(\theta\)だけ回転する．
   \(\vect{v}\)と\(\theta\)を求めよう．
 
-  回転軸上にあるベクトルは，\(\mat{R}\)を掛けても回転しない．よって，\(\vect{v}\)は\(\mat{R}\vect{v}=\vect{v}\)を満たす．
-  すなわち，\(\vect{v}\)は\(\mat{R}\)の固有値\(1\)に属する固有ベクトルである．
+  回転軸上にあるベクトルは\(\mat{R}\)を掛けても回転しないから，\(\vect{v}\)は\(\mat{R}\vect{v}=\vect{v}\)を満たす．
+  よって，\(\vect{v}\)を求めるには，連立1次方程式\((\mat{R}-\imat)\vect{v}=\zvec\)を解けばよい．
+  この解は不定であり，一般解は\(\vect{v}=t\trps{\inlinevec{1 & 0 & 1}}\)（\(t\in\numset{R}\)）となる．
+
+  以下では特に，\(\vect{v}\)の長さが1となる\(\vect{v}=\trps{\inlinevec{1/\sqrt{2} & 0 & 1/\sqrt{2}}}\)の場合について考える．
 \end{example}
 
 \subsection{対角化}

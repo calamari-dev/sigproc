@@ -57,6 +57,16 @@
   mark_format={_chapter={#1}}
 }
 
+\NewPageStyle{appendix}{
+  nombre_font=\small,
+  nombre_position=top-fore-edge,
+  running_head_font=\small,
+  running_head_position=top-center,
+  odd_running_head=_section,
+  even_running_head=_chapter,
+  mark_format={_chapter={付録\thechapter\quad #1},_section={§\thesection\quad #1}}
+}
+
 \jlreqsetup{
   frontmatter_pagestyle=frontmatter,
   backmatter_pagebreak=clearpage

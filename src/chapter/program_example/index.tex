@@ -4,11 +4,55 @@
 \chapter{プログラム例}
 
 \begin{codeblock}{c}
+#include <math.h>
+#include <sndfile.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
-  printf("Hello World!\n");
+  const uint32_t SAMPLE_RATE = 44100;
+  const uint32_t SAMPLE_COUNT = 4 * SAMPLE_RATE;
+  SF_INFO sfinfo = {.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16,
+                    .channels = 1,
+                    .samplerate = SAMPLE_RATE,
+                    .frames = SAMPLE_COUNT};
+
+  SNDFILE *file = sf_open("charp.wav", SFM_WRITE, &sfinfo);
+
+  if (file == NULL) {
+    fprintf(stderr, "failed to open \"charp.wav\".\n");
+    return 1;
+  }
+
+  const double PI = 3.141592653589793;
+  const double MAX_OMEGA = 2 * PI * 523.251 / SAMPLE_RATE;
+  double *const buffer = malloc(sizeof(double) * SAMPLE_COUNT);
+
+  if (buffer == NULL) {
+    fprintf(stderr, "malloc failed.\n");
+    sf_close(file);
+    return 1;
+  }
+
+  for (uint32_t i = 0; i < SAMPLE_COUNT; i++) {
+    buffer[i] = sin(MAX_OMEGA * i * i / SAMPLE_COUNT);
+  }
+
+  if (sf_write_double(file, buffer, SAMPLE_COUNT) != SAMPLE_COUNT) {
+    fprintf(stderr, "%s\n", sf_strerror(file));
+    sf_close(file);
+    free(buffer);
+    return 1;
+  }
+
+  sf_close(file);
+  free(buffer);
   return 0;
 }
+\end{codeblock}
+
+\begin{codeblock}{text}
+gcc charp.c -lm -lsndfile -std=c11
 \end{codeblock}
 \end{document}
