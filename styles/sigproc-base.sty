@@ -110,6 +110,8 @@
 \base@declareframedtheorem{exercise}{例題}
 
 % コードブロック
+\definecolor{codeblock}{HTML}{F8F8F8}
+
 \newtcblisting{codeblock}[1]{
   listing only,
   listing engine=minted,
@@ -120,8 +122,8 @@
   breakable,
   beforeafter skip balanced={0.5\baselineskip},
   coltitle=black,
-  colframe=black,
-  opacityback=0.0,
+  colframe=gray,
+  colback=codeblock,
   opacitybacktitle=0.0,
   top=0.5\zh,
   bottom=0.5\zh,
