@@ -119,14 +119,14 @@
 \renewcommand{\subsubitem}{\@idxitem\hspace*{2\zw}}
 
 % narrowbaselines
-\newif{\ifnbl@narrowbaselines}
+\newif{\ifnarrowbaselines}
 \newlength{\nbl@adskip}
 \newlength{\nbl@asskip}
 \newlength{\nbl@bdskip}
 \newlength{\nbl@bsskip}
 
 \newcommand{\narrowbaselines}{%
-  \nbl@narrowbaselinestrue%
+  \narrowbaselinestrue%
   \setlength{\nbl@adskip}{\abovedisplayskip}%
   \setlength{\nbl@asskip}{\abovedisplayshortskip}%
   \setlength{\nbl@bdskip}{\belowdisplayskip}%
@@ -142,5 +142,5 @@
 }
 
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
-\preto{\normalsize}{\ifnbl@narrowbaselines\setlength{\jlreq@baselineskip}{1.2\jlreq@fontsize}\fi}
-\preto{\small}{\ifnbl@narrowbaselines\setlength{\jlreq@baselineskip}{1.1\jlreq@fontsize}\fi}
+\preto{\normalsize}{\ifnarrowbaselines\setlength{\jlreq@baselineskip}{1.2\jlreq@fontsize}\fi}
+\preto{\small}{\ifnarrowbaselines\setlength{\jlreq@baselineskip}{1.2\jlreq@fontsize}\fi}

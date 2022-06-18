@@ -2,6 +2,44 @@
 
 \begin{document}
 \chapter{プログラム例}
+\section{C言語}
+以下のプログラムはC11に準拠している．まず，動作はするものの不作法なプログラムを示す．
+
+\begin{codeblock}{c}
+#include <math.h>
+#include <sndfile.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int samplerate = 44100;
+  int frames = 4 * samplerate;
+  SF_INFO sfinfo = {.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16,
+                    .channels = 1,
+                    .samplerate = samplerate,
+                    .frames = frames};
+  SNDFILE *file = sf_open("charp.wav", SFM_WRITE, &sfinfo);
+  double *buffer = malloc(sizeof(double) * frames);
+  double pi = 3.141592653589793;
+  double max_omega = 523.25 * 2.0 * pi / samplerate;
+
+  for (int i = 0; i < frames; i++) {
+    buffer[i] = sin(max_omega * i * i / frames);
+  }
+
+  sf_write_double(file, buffer, frames);
+  sf_close(file);
+  free(buffer);
+  return 0;
+}
+\end{codeblock}
+
+\begin{codeblock}{text}
+gcc charp.c -lm -lsndfile -std=c11
+\end{codeblock}
+
+手元でちょっとした実験をしたいだけなら，上のプログラムでも問題ない．
+しかし，誰かに使われる可能性があるのなら，次のように例外処理をきちんと行うほうがよい．
 
 \begin{codeblock}{c}
 #include <math.h>
@@ -11,23 +49,21 @@
 #include <stdlib.h>
 
 int main(void) {
-  const uint32_t SAMPLE_RATE = 44100;
-  const uint32_t SAMPLE_COUNT = 4 * SAMPLE_RATE;
-  SF_INFO sfinfo = {.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16,
-                    .channels = 1,
-                    .samplerate = SAMPLE_RATE,
-                    .frames = SAMPLE_COUNT};
-
-  SNDFILE *file = sf_open("charp.wav", SFM_WRITE, &sfinfo);
+  const uint32_t samplerate = 44100;
+  const uint32_t frames = 4 * samplerate;
+  SNDFILE *const file =
+      sf_open("charp.wav", SFM_WRITE,
+              &(SF_INFO){.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16,
+                          .channels = 1,
+                          .samplerate = samplerate,
+                          .frames = frames});
 
   if (file == NULL) {
     fprintf(stderr, "failed to open \"charp.wav\".\n");
     return 1;
   }
 
-  const double PI = 3.141592653589793;
-  const double MAX_OMEGA = 2 * PI * 523.251 / SAMPLE_RATE;
-  double *const buffer = malloc(sizeof(double) * SAMPLE_COUNT);
+  double *const buffer = malloc(sizeof(double) * frames);
 
   if (buffer == NULL) {
     fprintf(stderr, "malloc failed.\n");
@@ -35,11 +71,14 @@ int main(void) {
     return 1;
   }
 
-  for (uint32_t i = 0; i < SAMPLE_COUNT; i++) {
-    buffer[i] = sin(MAX_OMEGA * i * i / SAMPLE_COUNT);
+  const double pi = 3.141592653589793;
+  const double max_omega = 523.25 * 2.0 * pi / samplerate;
+
+  for (uint32_t i = 0; i < frames; i++) {
+    buffer[i] = sin(max_omega * i * i / frames);
   }
 
-  if (sf_write_double(file, buffer, SAMPLE_COUNT) != SAMPLE_COUNT) {
+  if (sf_write_double(file, buffer, frames) != frames) {
     fprintf(stderr, "%s\n", sf_strerror(file));
     sf_close(file);
     free(buffer);
@@ -52,7 +91,4 @@ int main(void) {
 }
 \end{codeblock}
 
-\begin{codeblock}{text}
-gcc charp.c -lm -lsndfile -std=c11
-\end{codeblock}
 \end{document}
