@@ -142,5 +142,5 @@
 }
 
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
-\preto{\normalsize}{\ifnarrowbaselines\setlength{\jlreq@baselineskip}{1.2\jlreq@fontsize}\fi}
-\preto{\small}{\ifnarrowbaselines\setlength{\jlreq@baselineskip}{1.2\jlreq@fontsize}\fi}
+\preto{\normalsize}{\ifnarrowbaselines\renewcommand{\baselinestretch}{0.706}\fi}
+\preto{\small}{\ifnarrowbaselines\renewcommand{\baselinestretch}{0.9}\fi}

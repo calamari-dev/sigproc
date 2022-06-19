@@ -37,7 +37,7 @@
 \newcommand{\basis}[1]{\symcal{#1}}
 \newcommand{\pcomp}[1]{#1^{\mathord{\perp}}}
 \newcommand{\pinv}[1]{#1^{\mathord{+}}}
-\newcommand{\ddelta}[2]{\symrm{\delta}_{#1\,#2}}
+\newcommand{\kdelta}[2]{\symrm{\delta}_{#1\,#2}}
 \newcommand{\inlinevec}[1]{[{\narrowbaselines\begin{matrix}#1\end{matrix}}]}
 
 \DeclareMathOperator{\trace}{tr}
@@ -74,13 +74,14 @@
 
 % フーリエ解析
 \newcommand{\fseries}[1]{\hat{#1}}
+\newcommand{\dft}[1]{\operatorname{\symcal{F}}_{\numset{Z}_#1}}
+\newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
 
 \DeclareMathOperator{\ftrans}{\symcal{F}}
 \DeclareMathOperator{\ltrans}{\symcal{L}}
 \DeclareMathOperator{\ztrans}{\symcal{Z}}
 
 % 確率統計
-\newcommand{\ndist}{\symcal{N}}
 \newcommand{\mble}[1]{\symcal{#1}}
 
 \DeclareMathOperator{\prob}{\symbb{P}}
