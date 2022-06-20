@@ -11,6 +11,7 @@
 \section{行列とベクトル空間}
 信号解析に関連する議論へと移る前に，有限次元の線型代数について大まかに説明しておく．
 以下の解説はかなり大雑把なので，必要に応じて線型代数の教科書を参照してほしい．
+また，先を急ぐ読者は，この節を読み飛ばして構わない．
 
 \subsection{ベクトル空間}
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
@@ -71,7 +72,8 @@
 \end{example}
 
 \begin{example}
-  集合\(\Set{\trps{\inlinevec{t & 2t & 3t}}\given t\in\numset{R}}\)は\(\numset{R}^3\)の部分空間である．
+  集合\(\numset{K}^n=\Set{\trps{\inlinevec{s_1 & \cdots & s_n}}\given s_1,\dots,s_n\in\numset{K}}\)は，
+  通常の加法とスカラー乗法によって，\(\numset{K}\)上のベクトル空間になる．
 \end{example}
 
 \subsection{基底}
@@ -151,6 +153,37 @@
 すなわち，元の個数\(\sizeof{\basis{B}}\)は基底\(\basis{B}\)のとりかたによらず定まる．
 \(\sizeof{\basis{B}}\)を\(V\)の\termdef{次元}\index{じげん@次元}（dimension）といい，\(\dim V\)\index{\(\dim V\)}と表記する
 \footnote{\(V\)が有限次元でないときも基底は存在し，濃度は基底の選び方に依存しない（証明は文献\cite{yukie2019}）．}．
+
+\subsection{内積}
+\(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
+\cref{definition:inner_product}は，こうした幾何的な考察を，より多くのベクトル空間へと適用可能にする．
+
+\begin{definition}{内積}{inner_product}\index{ないせき@内積}\index{ないせきくうかん@内積空間}\index{\(\innerp{\holder}{\holder}\)}
+  \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
+  任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y},\vect{z}\in V\)に対し，\(\innerp{\holder}{\holder}\)が以下の条件を満たすことをいう．
+  \begin{enumerate}
+    \item \(\innerp{\vect{x}}{\vect{y}}=\conj{\innerp{\vect{y}}{\vect{x}}}\)
+    \item \(\innerp{\lambda\vect{x}+\vect{y}}{\vect{z}}=\lambda\innerp{\vect{x}}{\vect{z}}+\innerp{\vect{y}}{\vect{z}}\)
+    \item \(\innerp{\vect{x}}{\vect{x}}\geq 0\)，\([\innerp{\vect{x}}{\vect{x}}=0\iff\vect{x}=\zvec]\)
+  \end{enumerate}
+
+  また，\(V\)に内積が定義されているとき，\(V\)は\termdef{内積空間}（inner product space）であるという．
+\end{definition}
+
+\begin{example}[標準内積]
+  \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}_2}\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
+  \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の内積になる．\(\innerp{\holder}{\holder}\)を\(\numset{K}^n\)の\termdef{標準内積}\index{ひょうじゅんないせき@標準内積}という．
+\end{example}
+
+\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
+
+\begin{definition}{正規直交基底}{onb}\index{せいきちょっこうきてい@正規直交基底}
+  \(V\)を内積空間とする．\(V\)の基底\(\basis{B}\)が\termdef{正規直交基底}（orthonormal basis）であるとは，任意の\(\vect{e}_1,\vect{e}_2\in\basis{B}\)が条件
+  \[
+    \innerp{\vect{e}_1}{\vect{e}_2} = \begin{cases}1 & (\vect{e}_1=\vect{e}_2),\\ 0 & (\vect{e}_1\neq\vect{e}_2)\end{cases}
+  \]
+  を満たすことをいう．
+\end{definition}
 
 \subsection{線型写像と表現行列}
 以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
