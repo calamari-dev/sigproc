@@ -35,7 +35,8 @@
   \end{enumerate}
 \end{definition}
 
-\cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
+しばしば\(V\)の元をベクトル，\(\numset{K}\)の元をスカラーと呼ぶ．
+また，\cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
 通常，\(\vect{v}\)の加法逆元は\(-\vect{v}\)と表される．
 
 \begin{note}
@@ -43,7 +44,7 @@
   それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるよう，ルールをつけ加えていった結果といえる．
 \end{note}
 
-ついで，ベクトル空間にかかわる概念を2つ定義する（これらの関係については，すぐ後で説明する）．
+ついで，ベクトル空間にかかわる概念を2つ定義する．これらの関係については，すぐ後で説明する．
 
 \begin{definition}{線型結合}{linear_combination}\index{せんけいけつごう@線型結合}
 \(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
@@ -51,7 +52,7 @@
 \(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
 \end{definition}
 
-\begin{definition}{部分空間}{subspace}\index{べくとるくうかん@ベクトル空間!ぶぶん@部分---|see{部分空間}}\index{ぶぶんくうかん@部分空間}
+\begin{definition}{部分空間}{subspace}\index{べくとるくうかん@ベクトル空間!ぶぶん@部分—|see{部分空間}}\index{ぶぶんくうかん@部分空間}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．
   \(W\)が\(V\)の加法とスカラー乗法について\cref{definition:vector_space}の条件をすべて満たすとき，
   \(W\)は\(V\)の\termdef{部分ベクトル空間}（vector subspace），あるいは単に\termdef{部分空間}（subspace）であるという．    
@@ -81,7 +82,7 @@
 \(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
 すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
-一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する---}（generated subspace）といい，
+一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する—}（generated subspace）といい，
 \(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
@@ -158,7 +159,7 @@
 \(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
 \cref{definition:inner_product}は，こうした幾何的な考察を，より多くのベクトル空間へと適用可能にする．
 
-\begin{definition}{内積}{inner_product}\index{ないせき@内積}\index{ないせきくうかん@内積空間}\index{\(\innerp{\holder}{\holder}\)}
+\begin{definition}{内積}{inner_product}\index{ないせき@内積}\index{\(\innerp{\holder}{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y},\vect{z}\in V\)に対し，\(\innerp{\holder}{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
@@ -166,24 +167,32 @@
     \item \(\innerp{\lambda\vect{x}+\vect{y}}{\vect{z}}=\lambda\innerp{\vect{x}}{\vect{z}}+\innerp{\vect{y}}{\vect{z}}\)
     \item \(\innerp{\vect{x}}{\vect{x}}\geq 0\)，\([\innerp{\vect{x}}{\vect{x}}=0\iff\vect{x}=\zvec]\)
   \end{enumerate}
-
-  また，\(V\)に内積が定義されているとき，\(V\)は\termdef{内積空間}（inner product space）であるという．
 \end{definition}
+
+内積が備わっているベクトル空間のことを\termdef{内積空間}\index{ないせきくうかん@内積空間}（inner product space）という．
+また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
+
+\begin{note}
+  この定義によれば，\(\zvec\)は任意のベクトルと直交する．この事実は直感にそぐわないかもしれないが，\(\zvec\)だけを特別扱いするとかえって面倒である．
+\end{note}
 
 \begin{example}[標準内積]
   \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}_2}\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
   \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の内積になる．\(\innerp{\holder}{\holder}\)を\(\numset{K}^n\)の\termdef{標準内積}\index{ひょうじゅんないせき@標準内積}という．
 \end{example}
 
-\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
+\cref{definition:onb}は，本書の中核をなす重要な概念である．
 
-\begin{definition}{正規直交基底}{onb}\index{せいきちょっこうきてい@正規直交基底}
-  \(V\)を内積空間とする．\(V\)の基底\(\basis{B}\)が\termdef{正規直交基底}（orthonormal basis）であるとは，任意の\(\vect{e}_1,\vect{e}_2\in\basis{B}\)が条件
+\begin{definition}{正規直交系，正規直交基底}{onb}\index{せいきちょっこうけい@正規直交系}\index{せいきちょっこうきてい@正規直交基底}
+  \(V\)を内積空間とする．集合\(\basis{B}\subset V\)が\termdef{正規直交系}（orthonormal system; ONS）であるとは，任意の\(\vect{e}_1,\vect{e}_2\in\basis{B}\)が条件
   \[
     \innerp{\vect{e}_1}{\vect{e}_2} = \begin{cases}1 & (\vect{e}_1=\vect{e}_2),\\ 0 & (\vect{e}_1\neq\vect{e}_2)\end{cases}
   \]
-  を満たすことをいう．
+  を満たすことをいう．また，\(\basis{B}\)が\(V\)の基底であるとき，\(\basis{B}\)は\termdef{正規直交基底}（orthonormal basis; ONB）であるという．
 \end{definition}
+
+\(\basis{B}\)が正規直交系なら，有限個の\(\vect{e}_1,\dots,\vect{e}_k\in\basis{B}\)は常に線型独立である．
+よって，正規直交系\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
 
 \subsection{線型写像と表現行列}
 以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
@@ -334,19 +343,6 @@
   また，任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとると，\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)だから\((\lambda_1-\lambda_2)\vect{x}=\zvec\)である．
   \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
 \end{proof}
-
-\begin{example}
-  行列\(\mat{R}=\begin{bsmallmatrix}1/2 & -1/\sqrt{2} & 1/2 \\ 1/\sqrt{2} & 0 & -1/\sqrt{2} \\ 1/2 & 1/\sqrt{2} & 1/2\end{bsmallmatrix}\)を各\(\vect{x}\in\numset{R}^3\)に左から掛けると，\(\vect{x}\)があるベクトル\(\vect{v}\)を軸に角度\(\theta\)だけ回転する．
-  \(\vect{v}\)と\(\theta\)を求めよう．
-
-  回転軸上にあるベクトルは\(\mat{R}\)を掛けても回転しないから，\(\vect{v}\)は\(\mat{R}\vect{v}=\vect{v}\)を満たす．
-  よって，\(\vect{v}\)を求めるには，連立1次方程式\((\mat{R}-\imat)\vect{v}=\zvec\)を解けばよい．
-  この解は不定であり，一般解は\(\vect{v}=t\trps{\inlinevec{1 & 0 & 1}}\)（\(t\in\numset{R}\)）となる．
-
-  以下では特に，\(\vect{v}\)の長さが1となる\(\vect{v}_1=\trps{\inlinevec{1 & 0 & 1}}/\sqrt{2}\)の場合について考える．
-  \(\vect{v}_1\)と直交する2ベクトル\(\vect{v}_2=\trps{\inlinevec{0 & 1 & 0}}\)，\(\vect{v}_3=\trps{\inlinevec{-1 & 0 & 1}}/\sqrt{2}\)をとると，
-  集合\(\basis{B}=\Set{\vect{v}_1,\vect{v}_2,\vect{v}_3}\)は\(\numset{R}^3\)の基底になる．
-\end{example}
 
 \subsection{対角化}
 

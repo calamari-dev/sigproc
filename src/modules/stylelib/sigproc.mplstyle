@@ -21,12 +21,12 @@ axes.prop_cycle: cycler(linestyle=["-", "--", ":", "-."])
 # TICKS
 xtick.major.width: 0.4
 xtick.minor.width: 0.4
-xtick.color: gray
+xtick.color: black
 xtick.labelcolor: black
 xtick.direction: in
 ytick.major.width: 0.4
 ytick.minor.width: 0.4
-ytick.color: gray
+ytick.color: black
 ytick.labelcolor: black
 ytick.direction: in
 
@@ -50,4 +50,4 @@ savefig.bbox: tight
 savefig.pad_inches: 0.0041667 # 0.3 pt in inches
 pgf.rcfonts: False
 pgf.texsystem: lualatex
-pgf.preamble: \usepackage{matplotlib}
+pgf.preamble: \usepackage{sigproc-figure}
