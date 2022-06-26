@@ -291,6 +291,8 @@
 \end{proof}
 
 \subsection{固有値と固有空間}
+対角化に向けて，固有値に関連する事項を整理する．
+
 \begin{definition}{固有値，固有ベクトル}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
   \(\mat{A}\)を\(n\)次正方行列とする．
   複素数\(\lambda\)と\(\zvec\)でないベクトル\(\vect{x}\in\numset{C}^n\)が式\(\mat{A}\vect{x}=\lambda\vect{x}\)を満たすとき，
@@ -345,6 +347,10 @@
 \end{proof}
 
 \subsection{対角化}
+\(\mat{A}\)を\(n\)次正方行列とし，\(f(\vect{x})=\mat{A}\vect{x}\)で線型写像\(f\colon\numset{K}^n\to\numset{K}^n\)を定義する．
+
+\(\mat{A}\)の固有値\(\lambda\)を1つとる．このとき\cref{proposition:eigenspaces_disjointness}より，
+固有空間\(E_\lambda(\mat{A})\)上の線型写像\(f_\lambda\colon E_\lambda(\mat{A})\to E_\lambda(\mat{A})\)を\(f_\lambda(\vect{x})=f(\vect{x})=\lambda\vect{x}\)で定義できる．
 
 \section{直交射影}
 \subsection{直交射影}

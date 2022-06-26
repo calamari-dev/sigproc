@@ -9,7 +9,9 @@ theta = np.linspace(0, np.pi / 2, 300)
 
 plt.figure()
 plt.plot(0.4 * np.cos(theta), 0.4 * np.sin(theta))
-plt.scatter(np.cos(np.pi / 6) / n, np.sin(np.pi / 6) / n, label=r"$z_n$")
+plt.scatter(
+    np.cos(np.pi / 6) / n, np.sin(np.pi / 6) / n, label=r"$z_n$", linewidths=0.4
+)
 plt.legend()
 plt.axis([0, 1.5, 0, 1.5])
 plt.axis("square")

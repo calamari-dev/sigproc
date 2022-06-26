@@ -14,7 +14,7 @@ v1, v2 = np.transpose(pca.components_ * np.sqrt(pca.explained_variance_).T)
 
 fig, ax = plt.subplots()
 
-ax.scatter(csv["x"], csv["y"], color="lightgray")
+ax.scatter(csv["x"], csv["y"], color="lightgray", linewidths=0.5)
 add_2d_vector(ax, (0, 0), v1)
 add_2d_vector(ax, (0, 0), v2)
 ax.text(*v1, r"$\sigma_1\vect{v}_1$", ha="right", va="top")

@@ -20,6 +20,7 @@ class Arrow3D(FancyArrowPatch):
 
 
 def add_2d_vector(ax, posA, posB, *args, **kwargs):
+    kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
     kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
     kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
     arrow = FancyArrowPatch(posA, posB, *args, **kwargs)
@@ -27,6 +28,7 @@ def add_2d_vector(ax, posA, posB, *args, **kwargs):
 
 
 def add_3d_vector(ax, posA, posB, *args, **kwargs):
+    kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
     kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
     kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
     arrow = Arrow3D(posA, posB, *args, **kwargs)
