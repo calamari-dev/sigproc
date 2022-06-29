@@ -47,9 +47,9 @@
 ついで，ベクトル空間にかかわる概念を2つ定義する．これらの関係については，すぐ後で説明する．
 
 \begin{definition}{線型結合}{linear_combination}\index{せんけいけつごう@線型結合}
-\(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
-\(c_1\vect{v}_1+\dots+c_n\vect{v}_n\)（\(c_1,\dots,c_n\in\numset{K}\)）という形をした\(V\)の元を，
-\(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
+  \(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
+  \(c_1\vect{v}_1+\dots+c_n\vect{v}_n\)（\(c_1,\dots,c_n\in\numset{K}\)）という形をした\(V\)の元を，
+  \(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
 \end{definition}
 
 \begin{definition}{部分空間}{subspace}\index{べくとるくうかん@ベクトル空間!ぶぶん@部分—|see{部分空間}}\index{ぶぶんくうかん@部分空間}
@@ -76,6 +76,17 @@
   集合\(\numset{K}^n=\Set{\trps{\inlinevec{s_1 & \cdots & s_n}}\given s_1,\dots,s_n\in\numset{K}}\)は，
   通常の加法とスカラー乗法によって，\(\numset{K}\)上のベクトル空間になる．
 \end{example}
+
+また，2つの部分空間\(W_1,W_2\subset V\)があれば，それらを含むより大きな部分空間を作れる．
+
+\begin{definition}{部分空間の和}{sum_of_subspace}\index{ぶぶんくうかん@部分空間!のわ@—の和}\index{\(W_1+W_2\)}
+  \(V\)を\(\numset{K}\)上のベクトル空間，\(W_1,W_2\subset V\)を部分空間とする．
+  このとき，集合\(W=\Set{\vect{w}_1+\vect{w}_2\given\text{\(\vect{w}_1\in W_1\)，\(\vect{w}_2\in W_2\)}}\)は\(V\)の部分空間になる．
+  \(W\)を\(W_1\)と\(W_2\)の\termdef{和}（sum）といい，\(W_1+W_2\)と表記する．
+\end{definition}
+
+特に\(W_1\cap W_2=\Set{\zvec}\)であるとき，\(W_1+W_2\)を\(W_1\)と\(W_2\)の\termdef{直和}\index{ぶぶんくうかん@部分空間!のちょくわ@—の直和}（direct sum）という．
+直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(W_1\oplus W_2\)}とも書く．
 
 \subsection{基底}
 任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
@@ -195,7 +206,7 @@
 よって，正規直交系\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
 
 \subsection{線型写像と表現行列}
-以下，\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
+\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
 任意の\(\vect{x}\in V\)を
 \begin{equation}
   \label{equation:basis_comb}
@@ -348,9 +359,7 @@
 
 \subsection{対角化}
 \(\mat{A}\)を\(n\)次正方行列とし，\(f(\vect{x})=\mat{A}\vect{x}\)で線型写像\(f\colon\numset{K}^n\to\numset{K}^n\)を定義する．
-
-\(\mat{A}\)の固有値\(\lambda\)を1つとる．このとき\cref{proposition:eigenspaces_disjointness}より，
-固有空間\(E_\lambda(\mat{A})\)上の線型写像\(f_\lambda\colon E_\lambda(\mat{A})\to E_\lambda(\mat{A})\)を\(f_\lambda(\vect{x})=f(\vect{x})=\lambda\vect{x}\)で定義できる．
+\cref{proposition:eigenspaces_disjointness}によれば，\(\mat{A}\)の固有値\(\lambda_1\)，\(\lambda_2\)が\(\lambda_1\neq\lambda_2\)を満たすとき，固有空間の和\(E_{\lambda_1}(\mat{A})+E_{\lambda_2}(\mat{A})\)は直和である．
 
 \section{直交射影}
 \subsection{直交射影}
