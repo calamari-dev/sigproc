@@ -6,6 +6,6 @@ plt.style.use("sigproc")
 
 csv = pd.read_csv("pca.csv", sep=",")
 fig, ax = plt.subplots()
-ax.scatter(csv["x"], csv["y"], linewidths=0.5)
 ax.axis("equal")
+ax.scatter(csv["x"], csv["y"], linewidths=0.5)
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

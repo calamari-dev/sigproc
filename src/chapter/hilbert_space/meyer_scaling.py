@@ -4,8 +4,8 @@ import pywt
 import matplotlib.pyplot as plt
 
 plt.style.use("sigproc")
-wavelet = pywt.Wavelet("dmey")
-phi, psi, x = wavelet.wavefun(level=5)
+
+phi, psi, x = pywt.Wavelet("dmey").wavefun(level=5)
 t = x[np.argmax(phi)]
 x, phi = np.transpose([(x[k] - t, phi[k]) for k in range(len(x)) if abs(x[k] - t) < 8])
 

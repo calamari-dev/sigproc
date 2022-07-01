@@ -19,17 +19,17 @@ class Arrow3D(FancyArrowPatch):
         return np.min(pz)
 
 
-def add_2d_vector(ax, posA, posB, *args, **kwargs):
-    kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
-    kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
-    kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
-    arrow = FancyArrowPatch(posA, posB, *args, **kwargs)
-    ax.add_artist(arrow)
+class Vector2D(FancyArrowPatch):
+    def __init__(self, posA, posB, *args, **kwargs):
+        kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
+        kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
+        kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
+        super().__init__(posA, posB, *args, **kwargs)
 
 
-def add_3d_vector(ax, posA, posB, *args, **kwargs):
-    kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
-    kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
-    kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
-    arrow = Arrow3D(posA, posB, *args, **kwargs)
-    ax.add_artist(arrow)
+class Vector3D(Arrow3D):
+    def __init__(self, posA, posB, *args, **kwargs):
+        kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
+        kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
+        kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
+        super().__init__(posA, posB, *args, **kwargs)
