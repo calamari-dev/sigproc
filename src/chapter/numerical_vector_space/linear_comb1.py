@@ -1,6 +1,6 @@
 from pathlib import PurePath
 import matplotlib.pyplot as plt
-from arrow import add_2d_vector
+from arrow import Vector2D
 
 plt.style.use("sigproc")
 
@@ -11,9 +11,9 @@ v3 = (-1, 0)
 fig, ax = plt.subplots()
 ax.set(xlim=(-1.5, 2.5), ylim=(-2, 2))
 
-add_2d_vector(ax, (0, 0), v1)
-add_2d_vector(ax, (0, 0), v2)
-add_2d_vector(ax, (0, 0), v3)
+ax.add_artist(Vector2D((0, 0), v1))
+ax.add_artist(Vector2D((0, 0), v2))
+ax.add_artist(Vector2D((0, 0), v3))
 
 ax.text(*v1, r"$\vect{v}_1$", ha="left", va="bottom")
 ax.text(*v2, r"$\vect{v}_2$", ha="left", va="top")

@@ -164,7 +164,14 @@
 \(V\)が有限次元なら，\(V\)の基底はすべて有限集合で，その元の個数は等しい．
 すなわち，元の個数\(\sizeof{\basis{B}}\)は基底\(\basis{B}\)のとりかたによらず定まる．
 \(\sizeof{\basis{B}}\)を\(V\)の\termdef{次元}\index{じげん@次元}（dimension）といい，\(\dim V\)\index{\(\dim V\)}と表記する
-\footnote{\(V\)が有限次元でないときも基底は存在し，濃度は基底の選び方に依存しない（証明は文献\cite{yukie2019}）．}．
+\footnote{\(V\)が有限次元でないときも基底は存在する（証明は文献\cite{yukie2019}）．}．
+
+基底に関連して，次の命題が成り立つ．
+
+\begin{proposition}{基底の延長}{basis_extension}
+  \(V\)を\(\numset{K}\)上の\(n\)次元ベクトル空間とする．\(k<n\)個のベクトル\(\vect{v}_1,\dots,\vect{v}_k\in V\)が線型独立なら，
+  集合\(\Set{\vect{v}_1,\dots,\vect{v}_k,\vect{v}_{k+1},\dots,\vect{v}_n}\)が\(V\)の基底になる\(\vect{v}_{k+1},\dots,\vect{v}_n\in V\)が存在する．
+\end{proposition}
 
 \subsection{内積}
 \(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
@@ -359,7 +366,10 @@
 
 \subsection{対角化}
 \(\mat{A}\)を\(n\)次正方行列とし，\(f(\vect{x})=\mat{A}\vect{x}\)で線型写像\(f\colon\numset{K}^n\to\numset{K}^n\)を定義する．
-\cref{proposition:eigenspaces_disjointness}によれば，\(\mat{A}\)の固有値\(\lambda_1\)，\(\lambda_2\)が\(\lambda_1\neq\lambda_2\)を満たすとき，固有空間の和\(E_{\lambda_1}(\mat{A})+E_{\lambda_2}(\mat{A})\)は直和である．
+\(\mat{A}\)の固有値の1つを\(\lambda\)とおき，\(\Set{\vect{v}_1,\dots,\vect{v}_k}\)を固有空間\(E_\lambda(\mat{A})\)の基底とする．
+
+以下では\(k<n\)の場合について考える．\cref{proposition:basis_extension}より，集合\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_k,\vect{v}_{k+1},\dots,\vect{v}_n}\)が\(\numset{K}^n\)の基底になる
+\(\vect{v}_{k+1},\dots,\vect{v}_n\in\numset{K}^n\)がある．
 
 \section{直交射影}
 \subsection{直交射影}
