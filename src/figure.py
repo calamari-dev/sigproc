@@ -13,4 +13,6 @@ for tex in filedir.glob("chapter/**/*.tex"):
         continue
 
     print("processing ./chapter/**/" + tex.name + " ...")
-    subprocess.run(["lualatex", tex.stem], cwd=tex.parent.as_posix(), stdout=subprocess.DEVNULL)
+    subprocess.run(
+        ["lualatex", tex.stem], cwd=tex.parent.as_posix(), stdout=subprocess.DEVNULL
+    )

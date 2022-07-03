@@ -1,7 +1,7 @@
 from pathlib import PurePath
 import numpy as np
 import matplotlib.pyplot as plt
-from arrow import Vector2D
+from vector import Vector2D
 
 plt.style.use("sigproc")
 

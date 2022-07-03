@@ -1,6 +1,7 @@
 from pathlib import PurePath
 import numpy as np
 import matplotlib.pyplot as plt
+from constant import constants
 
 plt.style.use("sigproc")
 
@@ -11,7 +12,12 @@ fig, ax = plt.subplots()
 ax.set(xlim=(0, 1.5), ylim=(0, 1.5))
 
 ax.plot(0.4 * np.cos(t), 0.4 * np.sin(t))
-ax.scatter(np.cos(np.pi / 6) / n, np.sin(np.pi / 6) / n, label=r"$z_n$", linewidths=0.4)
+ax.scatter(
+    np.cos(np.pi / 6) / n,
+    np.sin(np.pi / 6) / n,
+    label=r"$z_n$",
+    linewidths=constants.scatter_linewidth,
+)
 ax.legend()
 
 ax.axis("square")

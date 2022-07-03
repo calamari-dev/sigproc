@@ -122,7 +122,7 @@
 が成立する．\(b_1=\dots=b_k=0\)とすると
 \begin{equation}
   \label{equation:independence}
-  \sum_{i=1}^ka_i\vect{v}_i = \zvec
+  a_1\vect{v}_1+\dots+a_k\vect{v}_k = \zvec
   \implies a_1 = \dots = a_k = 0
 \end{equation}
 が得られる．
@@ -191,7 +191,7 @@
 また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
 
 \begin{note}
-  この定義によれば，\(\zvec\)は任意のベクトルと直交する．この事実は直感にそぐわないかもしれないが，\(\zvec\)だけを特別扱いするとかえって面倒である．
+  定義により，\(\zvec\)は任意のベクトルと直交する．この事実は直感にそぐわないかもしれないが，\(\zvec\)だけを特別扱いするとかえって面倒である．
 \end{note}
 
 \begin{example}[標準内積]
@@ -210,7 +210,7 @@
 \end{definition}
 
 \(\basis{B}\)が正規直交系なら，有限個の\(\vect{e}_1,\dots,\vect{e}_k\in\basis{B}\)は常に線型独立である．
-よって，正規直交系\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
+よって，\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
 
 \subsection{線型写像と表現行列}
 \(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
@@ -256,10 +256,10 @@
 \end{equation}
 が成り立つ．
 
-\begin{floatingfigure}{9\zw}
+\begin{wrapfigure}{o}{9\zw}
   \centering
   \includegraphics{commute.pdf}
-\end{floatingfigure}
+\end{wrapfigure}
 
 ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
 \(n\times m\)行列\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)
@@ -365,11 +365,16 @@
 \end{proof}
 
 \subsection{対角化}
-\(\mat{A}\)を\(n\)次正方行列とし，\(f(\vect{x})=\mat{A}\vect{x}\)で線型写像\(f\colon\numset{K}^n\to\numset{K}^n\)を定義する．
-\(\mat{A}\)の固有値の1つを\(\lambda\)とおき，\(\Set{\vect{v}_1,\dots,\vect{v}_k}\)を固有空間\(E_\lambda(\mat{A})\)の基底とする．
+\begin{proposition}{}{diagonalization}
+  \(n\)次正方行列\(\mat{A}\)の固有値全体を\(\Set{\lambda_1,\dots,\lambda_k}\)とおく．ただし，\(i\neq j\)ならば\(\lambda_i\neq\lambda_j\)とする．
+  このとき，次の命題は同値である．
 
-以下では\(k<n\)の場合について考える．\cref{proposition:basis_extension}より，集合\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_k,\vect{v}_{k+1},\dots,\vect{v}_n}\)が\(\numset{K}^n\)の基底になる
-\(\vect{v}_{k+1},\dots,\vect{v}_n\in\numset{K}^n\)がある．
+  \begin{enumerate}
+    \item \(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底が存在する
+    \item \(\numset{K}^n=E_{\lambda_1}(\mat{A})\oplus\dots\oplus E_{\lambda_k}(\mat{A})\)が成立する
+    \item \(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在して\(\mat{\Lambda}=\mat{P}^{-1}\mat{A}\mat{P}\)を満たす
+  \end{enumerate}
+\end{proposition}
 
 \section{直交射影}
 \subsection{直交射影}

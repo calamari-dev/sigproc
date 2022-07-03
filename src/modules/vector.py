@@ -21,15 +21,11 @@ class Arrow3D(FancyArrowPatch):
 
 class Vector2D(FancyArrowPatch):
     def __init__(self, posA, posB, *args, **kwargs):
-        kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
-        kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
-        kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
+        kwargs = {"linewidth": 0.6, "mutation_scale": 7, "arrowstyle": "-|>"} | kwargs
         super().__init__(posA, posB, *args, **kwargs)
 
 
 class Vector3D(Arrow3D):
     def __init__(self, posA, posB, *args, **kwargs):
-        kwargs["linewidth"] = kwargs.get("linewidth", 0.6)
-        kwargs["mutation_scale"] = kwargs.get("mutation_scale", 7)
-        kwargs["arrowstyle"] = kwargs.get("arrowstyle", "-|>")
+        kwargs = {"linewidth": 0.6, "mutation_scale": 7, "arrowstyle": "-|>"} | kwargs
         super().__init__(posA, posB, *args, **kwargs)
