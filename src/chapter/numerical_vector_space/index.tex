@@ -149,7 +149,7 @@
   \(\basis{S}_n\)は\(\numset{K}^n\)の基底である．\(\basis{S}_n\)を\(\numset{K}^n\)の\termdef{標準基底}\index{ひょうじゅんきてい@標準基底}（standard basis）という．
 \end{example}
 
-さきほどの議論によれば，\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(c_1,\dots,c_k\in\numset{K}\)について\cref{equation:independence}が成立する．
+さきほどの議論によれば，\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_1,\dots,a_k\in\numset{K}\)について\cref{equation:independence}が成立する．
 すなわち，\(S\)は\(\spannedby S\)の基底である．実はこの逆も示せるので，次の命題が成立する．
 
 \begin{proposition}{}{span_and_uniqueness}
@@ -256,12 +256,12 @@
 \end{equation}
 が成り立つ．
 
-\begin{wrapfigure}{o}{9\zw}
-  \centering
+\begin{wrapfigure}{o}{0pt}
   \includegraphics{commute.pdf}
 \end{wrapfigure}
 
-ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
+ここまでの議論をまとめると，次のようになる．
+\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
 \(n\times m\)行列\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)
 を定義でき，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
 この\(\mat{A}\)を，基底\(\basis{B}\)と\(\basis{B}'\)に関する\(f\)の\termdef{表現行列}\index{ひょうげんぎょうれつ@表現行列}（representation matrix）という．
@@ -336,6 +336,7 @@
 \begin{corollary}{}{eigen_size}
   任意の\(n\)次正方行列\(\mat{A}\)は，相異なる固有値を少なくとも1個，多くとも\(n\)個もつ．
 \end{corollary}
+
 \begin{proof}
   \(\det(\lambda\imat-\mat{A})=0\)は\(\lambda\)に関する\(n\)次方程式なので，解は存在しても\(n\)個以下である．また，代数学の基本定理より解は少なくとも1つ存在する．
 \end{proof}
@@ -358,6 +359,7 @@
     \item \(\lambda_1\neq\lambda_2\implies E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})=\Set{\zvec}\)
   \end{enumerate}
 \end{proposition}
+
 \begin{proof}
   後半のみ示す．\(\mat{A}\zvec=\lambda_1\zvec=\lambda_2\zvec=\zvec\)なので，\(\zvec\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)である．
   また，任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとると，\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)だから\((\lambda_1-\lambda_2)\vect{x}=\zvec\)である．
@@ -365,6 +367,7 @@
 \end{proof}
 
 \subsection{対角化}
+
 \begin{proposition}{}{diagonalization}
   \(n\)次正方行列\(\mat{A}\)の固有値全体を\(\Set{\lambda_1,\dots,\lambda_k}\)とおく．ただし，\(i\neq j\)ならば\(\lambda_i\neq\lambda_j\)とする．
   このとき，次の命題は同値である．
