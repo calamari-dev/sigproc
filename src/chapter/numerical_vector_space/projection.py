@@ -16,10 +16,9 @@ ax.set(xlim=(-1, 1), ylim=(-2, 0), zlim3d=(0, 2))
 for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
     axis.set(pane_color=(0.0, 0.0, 0.0, 0.0))
 
-ax.add_artist(Vector3D((0, 0, 0), v1))
-ax.add_artist(Vector3D((0, 0, 0), v2))
-ax.add_artist(Vector3D((0, 0, 0), x1))
-ax.add_artist(Vector3D((0, 0, 0), xm))
+for x in (v1, v2, x1, xm):
+    ax.add_artist(Vector3D((0, 0, 0), x))
+
 ax.add_artist(Vector3D(x1, xm, ls="dashed", arrowstyle="->"))
 
 ax.text(*(0.5 * (x1 + xm)), r"$\proj_V\,$", ha="right")
