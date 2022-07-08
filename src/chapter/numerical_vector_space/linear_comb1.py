@@ -1,4 +1,5 @@
 from pathlib import PurePath
+
 import matplotlib.pyplot as plt
 from vector import Vector2D
 

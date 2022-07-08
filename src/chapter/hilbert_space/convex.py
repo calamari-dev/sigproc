@@ -1,7 +1,8 @@
 from pathlib import PurePath
+
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.interpolate as interp
-import matplotlib.pyplot as plt
 
 plt.style.use("sigproc")
 

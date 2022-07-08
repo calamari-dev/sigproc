@@ -1,6 +1,7 @@
 from pathlib import PurePath
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 plt.style.use("sigproc")
 

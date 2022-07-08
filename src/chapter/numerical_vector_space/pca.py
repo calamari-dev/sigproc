@@ -1,10 +1,11 @@
 from pathlib import PurePath
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-from vector import Vector2D
 from constant import constants
+from sklearn.decomposition import PCA
+from vector import Vector2D
 
 plt.style.use("sigproc")
 

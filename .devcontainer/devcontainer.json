@@ -1,0 +1,26 @@
+{
+  "name": "sigproc",
+  "dockerComposeFile": ["../compose.yaml", "compose.yaml"],
+  "service": "sigproc",
+  "remoteUser": "anon",
+  "workspaceFolder": "/home/anon/src",
+  "extensions": [
+    "james-yu.latex-workshop",
+    "ms-vscode.cpptools-extension-pack",
+    "ms-python.python"
+  ],
+  "settings": {
+    "python.analysis.extraPaths": ["~/.local/share/virtualenvs/src-5mnGTF13/lib/python3.10/site-packages/"],
+    "python.defaultInterpreterPath": "~/.local/share/virtualenvs/src-5mnGTF13/bin/python",
+    "python.formatting.blackPath": "~/.local/share/virtualenvs/src-5mnGTF13/bin/black",
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args": ["--max-line-length=88"],
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "[python]": {
+      "editor.codeActionsOnSave": { "source.organizeImports": true },
+      "editor.formatOnSave": true
+    }
+  }
+}

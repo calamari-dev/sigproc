@@ -1,0 +1,3 @@
+services:
+  sigproc:
+    command: sleep infinity
