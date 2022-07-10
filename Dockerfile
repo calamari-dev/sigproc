@@ -2,12 +2,13 @@
 FROM debian:bullseye-slim AS build
 ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
-RUN apt-get install --yes fontconfig perl wget xz-utils
+RUN apt-get install --yes fontconfig nkf perl wget xz-utils
 WORKDIR /tmp
-COPY ./texlive.profile .
-RUN wget --no-verbose https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-RUN tar --extract --gzip --file ./install-tl-unx.tar.gz --strip-components=1
-RUN ./install-tl --profile=texlive.profile
+COPY texlive.profile .
+RUN nkf -Lu --overwrite texlive.profile
+RUN wget --no-verbose https://texlive.texjp.org/2022/tlnet/install-tl-unx.tar.gz
+RUN tar --extract --gzip --file install-tl-unx.tar.gz --strip-components=1
+RUN ./install-tl --profile=texlive.profile --repository https://texlive.texjp.org/2022/tlnet
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
 RUN tlmgr install light-latex-make tikz-cd
 
