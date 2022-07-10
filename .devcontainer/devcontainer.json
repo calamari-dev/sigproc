@@ -17,7 +17,6 @@
     "python.linting.flake8Args": ["--max-line-length=88"],
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.terminal.activateEnvInCurrentTerminal": true,
     "[python]": {
       "editor.codeActionsOnSave": { "source.organizeImports": true },
       "editor.formatOnSave": true

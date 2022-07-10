@@ -1,18 +1,14 @@
-from pathlib import Path
 import subprocess
+from pathlib import Path
 
-filedir = Path(__file__).parent
+selfdir = Path(__file__).parent
 
-for fig in filedir.glob("chapter/**/*.py"):
-    print("processing ./chapter/**/" + fig.name + " ...")
-    subprocess.run(["black", fig.name], cwd=fig.parent.as_posix())
+for fig in selfdir.glob("chapter/**/*.py"):
+    print("processing chapter/**/" + fig.name + " ...")
     subprocess.run(["python", fig.name], cwd=fig.parent.as_posix())
 
-for tex in filedir.glob("chapter/**/*.tex"):
-    if tex.stem == "index":
-        continue
-
-    print("processing ./chapter/**/" + tex.name + " ...")
+for tex in filter(lambda x: x.stem != "index", selfdir.glob("chapter/**/*.tex")):
+    print("processing chapter/**/" + tex.name + " ...")
     subprocess.run(
         ["lualatex", tex.stem], cwd=tex.parent.as_posix(), stdout=subprocess.DEVNULL
     )
