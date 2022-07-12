@@ -72,6 +72,17 @@
   backmatter_pagebreak=clearpage
 }
 
+% 見出し
+\RenewBlockHeading{chapter}{0}{
+  align=right,
+  format={\jlreqHeadingLabel{#1\\{\normalsize\vspace{1\zh}}}{\huge\sffamily\gtfamily\bfseries #2}},
+  font={\Large},
+  label_format={第\thechapter 章},
+  lines=6,
+  pagebreak=begin_with_odd_page,
+  pagestyle=empty
+}
+
 % 目次・補遺
 \patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{empty}\@starttoc}{}{}
 \titlecontents{chapter}[0\zw]{\addvspace{1\zh}\sffamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
