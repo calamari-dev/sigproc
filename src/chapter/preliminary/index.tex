@@ -209,6 +209,20 @@
 \(\basis{B}\)が正規直交系なら，有限個の\(\vect{e}_1,\dots,\vect{e}_k\in\basis{B}\)は常に線型独立である．
 よって，\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
 
+また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
+
+\begin{proposition}{}{gram_schmidt}
+  \(V\)を内積空間とする．\(\vect{v}_1,\dots,\vect{v}_k\in V\)が線型独立なら，式
+  \[
+    \vect{u}_1 = \vect{v}_1,
+    \quad\vect{u}_i = \vect{v}_i-\sum_{j=1}^{i-1}\frac{\innerp{\vect{u}_j}{\vect{v}_j}}{\innerp{\vect{u}_j}{\vect{u}_j}}\vect{u}_j\quad(i=2,\dots,k)
+  \]
+  でベクトル\(\vect{u}_1,\dots,\vect{u}_k\)を定義すると，集合\(\narrowbaselines\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,k}\)は正規直交系になる．
+\end{proposition}
+
+正規直交系を作る\cref{proposition:gram_schmidt}の方法を\termdef{グラム・シュミットの直交化法}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
+\cref{proposition:gram_schmidt}から，有限次元の内積空間は常に正規直交基底を持つ．
+
 \subsection{線型写像と表現行列}
 \(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
 任意の\(\vect{x}\in V\)を

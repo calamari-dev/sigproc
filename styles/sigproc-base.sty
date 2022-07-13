@@ -10,12 +10,12 @@
 
 % 参照
 \crefname{chapter}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{figure}{図}{図}
+\crefname{problem}{演習問題}{演習問題}
 \crefname{section}{第}{第}
 \crefname{subsection}{第}{第}
-\crefname{problem}{演習問題}{演習問題}
 \crefname{table}{表}{表}
-\crefname{figure}{図}{図}
-\crefname{equation}{式}{式}
 
 \creflabelformat{chapter}{#2#1#3章}
 \creflabelformat{section}{#2#1#3節}
@@ -27,8 +27,8 @@
 \newcommand{\creflastconjunction}{，および}
 
 % 論理構造
-\newcommand{\impact}[1]{{\sffamily\bfseries #1}}
 \newcommand{\alert}[1]{{\sffamily\bfseries #1}}
+\newcommand{\impact}[1]{{\sffamily\bfseries #1}}
 \newcommand{\termdef}[1]{{\sffamily\bfseries #1}}
 
 % リード文
@@ -36,30 +36,16 @@
   \begin{list}{}{%
     \setlength{\listparindent}{\parindent}%
     \setlength{\itemindent}{\parindent}%
-    \setlength{\leftmargin}{2\zw}%
+    \setlength{\leftmargin}{4\zw}%
     \setlength{\rightmargin}{0pt}%
   }%
   \item\small
 }{\end{list}}
 
-% 図
-\tcbset{
-  myframe/.style={
-    colframe=gray,
-    colback=white,
-    boxrule=0.4pt,
-    arc=0mm,
-    boxsep=0mm,
-    left=0mm,
-    right=0mm,
-    top=0mm,
-    bottom=0mm
-  }
-}
-
 % 定理環境
 \newcounter{thcounter}
 \numberwithin{thcounter}{section}
+
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
   headpunct={},
@@ -70,8 +56,9 @@
 ]{egstyle}
 
 \crefname{example}{例}{例}
-\declaretheorem[style=egstyle,name=問]{problem}
+
 \declaretheorem[sibling=thcounter,style=egstyle,name=例]{example}
+\declaretheorem[style=egstyle,name=問]{problem}
 \declaretheorem[numbered=no,style=egstyle,name=ノート]{note}
 
 \tcbset{
@@ -102,12 +89,12 @@
   \newtcbtheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{#1}{#2}{mytheorem=#1}{#1}%
 }
 
-\base@declareframedtheorem{definition}{定義}
-\base@declareframedtheorem{theorem}{定理}
-\base@declareframedtheorem{proposition}{命題}
-\base@declareframedtheorem{lemma}{補題}
 \base@declareframedtheorem{corollary}{系}
+\base@declareframedtheorem{definition}{定義}
 \base@declareframedtheorem{exercise}{例題}
+\base@declareframedtheorem{lemma}{補題}
+\base@declareframedtheorem{proposition}{命題}
+\base@declareframedtheorem{theorem}{定理}
 
 % コードブロック
 \definecolor{codeblock}{HTML}{F8F8F8}
