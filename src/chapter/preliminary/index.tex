@@ -49,7 +49,7 @@
   \(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
 \end{definition}
 
-\begin{definition}{部分空間}{subspace}\index{べくとるくうかん@ベクトル空間!ぶぶん@部分—|see{部分空間}}\index{ぶぶんくうかん@部分空間}
+\begin{definition}{部分空間}{subspace}\index{ぶぶんくうかん@部分空間}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．
   \(W\)が\(V\)の加法とスカラー乗法について\cref{definition:vector_space}の条件をすべて満たすとき，
   \(W\)は\(V\)の\termdef{部分ベクトル空間}（vector subspace），あるいは単に\termdef{部分空間}（subspace）であるという．    
@@ -90,7 +90,7 @@
 \(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
 すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
-一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する—}（generated subspace）といい，
+一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせいぶぶんくうかん@生成（部分空間）}（generated subspace）といい，
 \(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
@@ -220,12 +220,12 @@
 また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
 
 \begin{proposition}{}{gram_schmidt}
-  \(V\)を内積空間とする．\(\vect{v}_1,\dots,\vect{v}_k\in V\)が線型独立なら，式
+  \(V\)を内積空間とする．\(\vect{v}_1,\dots,\vect{v}_n\in V\)が線型独立なら，式
   \[
     \vect{u}_1 = \vect{v}_1,
-    \quad\vect{u}_i = \vect{v}_i-\sum_{j=1}^{i-1}\frac{\innerp{\vect{u}_j}{\vect{v}_j}}{\innerp{\vect{u}_j}{\vect{u}_j}}\vect{u}_j\quad(i=2,\dots,k)
+    \quad\vect{u}_i = \vect{v}_i-\sum_{k=1}^{n-1}\frac{\innerp{\vect{v}_i}{\vect{u}_k}}{\innerp{\vect{u}_k}{\vect{u}_k}}\vect{u}_k\quad(i=2,\dots,n)
   \]
-  でベクトル\(\vect{u}_1,\dots,\vect{u}_k\)を定義すると，集合\(\narrowbaselines\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,k}\)は正規直交系になる．
+  でベクトル\(\vect{u}_1,\dots,\vect{u}_n\)を定義すると，集合\(\narrowbaselines\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は正規直交系になる．
 \end{proposition}
 
 正規直交系を作る\cref{proposition:gram_schmidt}の方法を\termdef{グラム・シュミットの直交化法}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
@@ -381,8 +381,8 @@
 
 \begin{proof}
   後半のみ示す．\(\mat{A}\zvec=\lambda_1\zvec=\lambda_2\zvec=\zvec\)なので，\(\zvec\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)である．
-  また，任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとると，\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)だから\((\lambda_1-\lambda_2)\vect{x}=\zvec\)である．
-  \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
+  任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとる．\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)より\((\lambda_1-\lambda_2)\vect{x}=\zvec\)であり，\(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．
+  よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
 \end{proof}
 
 \subsection{対角化}
@@ -404,10 +404,18 @@
 以下，対角行列\(\begin{bsmallmatrix}a_1 & & \\ & \ddots & \\ & & a_n\end{bsmallmatrix}\)を\(\diag(a_1,\dots,a_n)\)\index{\(\diag(a_1,\dots,a_n)\)}と略記する．
 
 \begin{proof}
-  \(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)があるとき，\(\mat{A}\)は対角化可能であることを示す．
+  1と3の同値性のみ示す．\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)があるとき，\(\mat{A}\)は対角化可能であることを示す．
   \(\mat{P}=\inlinevec{\vect{v}_1 & \cdots & \vect{v}_n}\)とおく．このとき，各\(\vect{v}_i\)に対応する固有値を\(\lambda_i\)とおくと
   \(\mat{A}\mat{P}=\inlinevec{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\inlinevec{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)
-  であるから，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと\(\mat{A}\mat{P}=\mat{P}\mat{\Lambda}\)，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)となる（ただし，\(\mat{P}\)の逆行列が存在することは\cref{proposition:basis_and_matrix}による）．
+  であるから，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと\(\mat{A}\mat{P}=\mat{P}\mat{\Lambda}\)，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)となる．
+  ただし，\(\mat{P}\)の逆行列が存在することは\cref{proposition:basis_and_matrix}による．
+
+  逆に，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)を満たす\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在したとする．
+  \(\mat{P}=\inlinevec{\vect{v}_1 & \cdots & \vect{v}_n}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおく．
+  このとき\(\inlinevec{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\mat{A}\mat{P}=\mat{P}\mat{\Lambda}=\inlinevec{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)なので，
+  各\(\lambda_i\)，\(\vect{v}_i\)は\(\mat{A}\vect{v}_i=\lambda_i\vect{v}_i\)を満たす．
+  また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって，\(\vect{v}_i\)は\(\mat{A}\)の固有値\(\lambda_i\)に属する固有ベクトルである．
+  したがって，\cref{proposition:basis_and_matrix}より\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底である．
 \end{proof}
 
 \end{document}
