@@ -18,7 +18,7 @@
   = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
   \quad\text{(\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{C}^n\))}
 \]
-とする．
+とする\index{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
 
@@ -39,7 +39,7 @@
     = \sum_{i=1}^m\sum_{j=1}^mz_i\conj{z_j}\kdelta{i}{j}
     = \sum_{i=1}^m\abs{z_i}^2
   \]
-  となる．したがって，\(\sum_{k=1}^m\)を\(\sum\)と略記すると
+  となる．したがって（\(\sum_{k=1}^m\)を\(\sum\)と略記すると）
   \begin{align*}
     f(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
     &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z_k}\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
@@ -73,15 +73,18 @@
   任意の\(\vect{y}\in V\)について，\(\vect{y}-\vect{m}\in V\)だから
   \begin{align*}
     \vnorm{\vect{x}-\vect{y}}^2 &= \vnorm{(\vect{x}-\vect{m})-(\vect{y}-\vect{m})}^2 \\
-    &= \vnorm{\vect{x}-\vect{m}}^2-2\rpart[\innerp{\vect{x}-\vect{m}}{\vect{y}-\vect{m}}]+\vnorm{\vect{y}-\vect{m}}^2 \\
+    &= \vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{y}-\vect{m}}+\vnorm{\vect{y}-\vect{m}}^2 \\
     &= \vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{y}-\vect{m}}^2 \geq \vnorm{\vect{x}-\vect{m}}^2
   \end{align*}
   である．よって\(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
+\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
+しかし実は，仮定を満たす\(\vect{m}\)は一意に定まり，それは\cref{proposition:finite_convex_projection}の\(\vect{m}\)と一致する．
+
 \begin{proposition}{}{finite_projection}
   \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
-  このとき，\(\vect{m}\in V\)に関する次の命題は同値である．
+  このとき，\(\vect{m}\in V\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
     \item \(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
     \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である
@@ -124,6 +127,7 @@
 \begin{figure}[htbp]
   \centering
   \includegraphics{projection.pdf}
+  \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
 
 \subsection{直交補空間}
