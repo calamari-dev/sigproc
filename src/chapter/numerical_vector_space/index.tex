@@ -21,10 +21,25 @@
 とする\index{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
+本題へ入る前に，便利な記号を2つ定義しておく．
+
+\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{\(\argmin\)}\index{\(\argmax\)}
+  \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，
+  集合\(\argmin_{x\in S}f(x),\argmax_{x\in S}f(x)\subset S\)を以下の通り定義する．
+  \begin{align*}
+    \argmin_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\geq f(x)}, \\
+    \argmax_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\leq f(x)}
+  \end{align*}
+\end{definition}
+
+\begin{example}
+  \(\argmin_{x\in\coival{0}{\infty}}\exp(-x)=\argmax_{x\in\coival{0}{\infty}}\exp(x)=\emptyset\)である．
+  また\(\argmin_{x\in\numset{R}}\abs{\sin(x)}=\Set{n\krez\given n\in\numset{Z}}\)である．
+\end{example}
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
-  このとき，\(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{m}\in V\)がただ1つ存在する．
+  このとき，\(\Set{\vect{m}}=\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{m}\in V\)がただ1つ存在する．
 \end{proposition}
 
 \begin{proof}
@@ -57,16 +72,15 @@
   \end{equation}
 
   \cref{equation:pre_bessels_inequality}より，\(f(\vect{z})\)は\(z_k=\innerp{\vect{x}}{\vect{e}_k}\)のときに最小値をとる．
-  すなわち，\(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{m}\in V\)は
-  \(\vect{m}=\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)であり，かつ他にない．
+  すなわち，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)の元は\(\vect{m}=\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)の1つのみである．
 \end{proof}
 
 なお，\cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
-  ある\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすとき，
-  \(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  \(V\)のある元\(\vect{m}\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすとき，
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
 
 \begin{proof}
@@ -86,28 +100,23 @@
   \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
   このとき，\(\vect{m}\in V\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
-    \item \(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
+    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
     \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:finite_convex_projection}より，
-  \(\vnorm{\vect{x}-\vect{n}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\in V\)がただ1つ存在する．
-  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら
-  \(\vect{m}=\vect{n}\)である．
+  \cref{proposition:finite_convex_projection}より，\(\vnorm{\vect{x}-\vect{n}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\in V\)がただ1つ存在する．
+  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
-  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)
-  を満たすことを示せばよい．
+  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．
   \(\vect{v}\in V\)を任意にとる．\(\vect{v}=\vect{0}\)なら明らかに\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
-  \(\vect{v}\neq\vect{0}\)のとき，\(\vect{n}\)の定義から\(t\in\numset{R}\)の関数\(f(t)=\vnorm{\vect{x}-(\vect{n}+t\vect{v})}^2\)は\(t=0\)で最小値をとる．
-  一方
+  \(\vect{v}\neq\vect{0}\)のとき，\(\vect{n}\)の定義から\(t\in\numset{R}\)の関数\(f(t)=\vnorm{\vect{x}-(\vect{n}+t\vect{v})}^2\)は\(t=0\)で最小値をとる．一方
   \begin{align*}
     f(t) &= \vnorm{\vect{x}-\vect{n}-t\vect{v}}^2 = \vnorm{\vect{x}-\vect{n}}^2-2t\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+t^2\vnorm{\vect{v}}^2 \\
     &= \pqty*{\vnorm{\vect{v}}t-\frac{\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2+\vnorm{\vect{x}-\vect{n}}^2-\pqty*{\frac{\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2
   \end{align*}
-  は\(t=(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})/\vnorm{\vect{v}}^2\)で最小値をとる．
-  よって\(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
+  は\(t=(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})/\vnorm{\vect{v}}^2\)で最小値をとる．よって\(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 
   同様に，関数\(g(t)=\vnorm{\vect{x}-(\vect{n}+\iuni t\vect{v})}^2\)も\(t=0\)で最小値をとる．一方
   \begin{align*}
