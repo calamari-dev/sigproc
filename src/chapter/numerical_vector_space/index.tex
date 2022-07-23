@@ -11,8 +11,7 @@
 \section{直交射影}
 
 本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．
-特に断りのない限り，\cref{chapter:numerical_vector_space}において\(\innerp{\holder}{\holder}\)は\(\numset{C}^n\)の標準内積を意味する．
-また
+特に断りのない限り，\cref{chapter:numerical_vector_space}において\(\innerp{\holder}{\holder}\)は\(\numset{C}^n\)の標準内積を意味する．また
 \[
   \vnorm{\vect{x}} = \sqrt{\innerp{\vect{x}}{\vect{x}}}
   = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
@@ -21,33 +20,50 @@
 とする\index{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
-本題へ入る前に，便利な記号を2つ定義しておく．
+証明へ入る前に，便利な記号を2つ定義しておく．
 
 \begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{\(\argmin\)}\index{\(\argmax\)}
-  \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，
-  集合\(\argmin_{x\in S}f(x),\argmax_{x\in S}f(x)\subset S\)を以下の通り定義する．
+  \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
   \begin{align*}
     \argmin_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\geq f(x)}, \\
     \argmax_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\leq f(x)}
   \end{align*}
 \end{definition}
 
+\cref{definition:argmin_argmax}からただちに，次のことが分かる．
+
+\begin{proposition}{}{}
+  \(S\)の元\(a\)に関する以下の条件は同値であり，同様のことが\(\argmax\)についても成り立つ．
+  \begin{enumerate}
+    \item \(a\in\argmin_{x\in S}f(x)\)である
+    \item 関数\(f\)は\(S\)上で最小値に達して，その値は\(f(a)\)である
+  \end{enumerate}
+\end{proposition}
+
 \begin{example}
   \(\argmin_{x\in\coival{0}{\infty}}\exp(-x)=\argmax_{x\in\coival{0}{\infty}}\exp(x)=\emptyset\)である．
   また\(\argmin_{x\in\numset{R}}\abs{\sin(x)}=\Set{n\krez\given n\in\numset{Z}}\)である．
 \end{example}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{argmin.pdf}
+  \caption{\(\exp(-x)\)と\(\abs{\sin(x)}\)のグラフ．\(\exp(-x)\to 0\)（\(x\to\infty\)）であるが，\(\exp(-x)=0\)となる実数\(x\)は存在しないことに注意．}
+\end{figure}
+
+\cref{proposition:finite_projection}まで，証明では部分空間が\(\Set{\zvec}\)でないことを仮定するが，部分空間が\(\Set{\zvec}\)のときも命題は成り立つ（証明は省略する）．
+
 \begin{proposition}{}{finite_convex_projection}
-  \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
-  このとき，\(\Set{\vect{m}}=\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{m}\in V\)がただ1つ存在する．
+  \(\vect{x}\in\numset{C}^n\)かつ，\(V\)は\(\numset{C}^n\)の部分空間とする．
+  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ1つの元からなる集合である．
 \end{proposition}
 
 \begin{proof}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，
   \(V\)は\(\Set{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given z_1,\dots,z_m\in\numset{C}}\)と書ける．
-  したがって，関数\(f(\vect{z})=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(\vect{z}=\trps{\inlinevec{z_1 & \cdots & z_m}}\)）の最小値が\(\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  したがって，関数\(f(\vect{z})=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(\vect{z}=\trps{\inlinevec{z_1 & \cdots & z_m}}\in\numset{C}^m\)）の最小値が\(\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 
-  \(f(\vect{z})\)の最小値を計算する．\(\basis{B}\)は正規直交基底だから
+  \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\basis{B}\)は正規直交基底だから
   \[
     \vnorm*{\sum_{i=1}^mz_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
     = \sum_{i=1}^m\sum_{j=1}^mz_i\conj{z_j}\innerp{\vect{e}_i}{\vect{e}_j}
@@ -71,14 +87,14 @@
     f(\vect{z})^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
   \end{equation}
 
-  \cref{equation:pre_bessels_inequality}より，\(f(\vect{z})\)は\(z_k=\innerp{\vect{x}}{\vect{e}_k}\)のときに最小値をとる．
-  すなわち，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)の元は\(\vect{m}=\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)の1つのみである．
+  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})=\Set{\trps{\inlinevec{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
+  \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}\)である．
 \end{proof}
 
 なお，\cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．
 
 \begin{proposition}{}{weak_finite_projection}
-  \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
+  \(\vect{x}\in\numset{C}^n\)かつ，\(V\)は\(\numset{C}^n\)の部分空間とする．
   \(V\)のある元\(\vect{m}\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすとき，
   \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
@@ -94,11 +110,11 @@
 \end{proof}
 
 \cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
-しかし実は，仮定を満たす\(\vect{m}\)は一意に定まり，それは\cref{proposition:finite_convex_projection}の\(\vect{m}\)と一致する．
+しかし実は，仮定を満たす\(\vect{m}\)は一意に定まり，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のただ1つの元である．
 
 \begin{proposition}{}{finite_projection}
-  \(\vect{x}\in\numset{C}^n\)かつ，\(V\neq\Set{\zvec}\)は\(\numset{C}^n\)の部分空間とする．
-  このとき，\(\vect{m}\in V\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
+  \(\vect{x}\in\numset{C}^n\)かつ，\(V\)は\(\numset{C}^n\)の部分空間とする．
+  このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
     \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
     \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である
@@ -106,7 +122,7 @@
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:finite_convex_projection}より，\(\vnorm{\vect{x}-\vect{n}}=\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\in V\)がただ1つ存在する．
+  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\in V\)がただ1つ存在する．
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．
