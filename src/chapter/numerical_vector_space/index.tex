@@ -20,6 +20,12 @@
 とする\index{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{proj2d.pdf}
+  \caption{\(V=\spannedby\Set{\vect{v}}\)の元で\(\vect{x}\)に最も近いベクトル\(\vect{m}\)は，\(\vect{x}-\vect{m}\)が\(\vect{v}\)と直交するようなベクトルである．}
+\end{figure}
+
 証明へ入る前に，便利な記号を2つ定義しておく．
 
 \begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{\(\argmin\)}\index{\(\argmax\)}
@@ -51,7 +57,7 @@
   \caption{\(\exp(-x)\)と\(\abs{\sin(x)}\)のグラフ．\(\exp(-x)\to 0\)（\(x\to\infty\)）であるが，\(\exp(-x)=0\)となる実数\(x\)は存在しないことに注意．}
 \end{figure}
 
-\cref{proposition:finite_projection}まで，証明では部分空間が\(\Set{\zvec}\)でないことを仮定するが，部分空間が\(\Set{\zvec}\)のときも命題は成り立つ（証明は省略する）．
+\cref{proposition:finite_projection}まで，証明では部分空間が\(\Set{\zvec}\)でないことを仮定するが，部分空間が\(\Set{\zvec}\)のときも命題は成り立つ．
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in\numset{C}^n\)かつ，\(V\)は\(\numset{C}^n\)の部分空間とする．
@@ -151,9 +157,19 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{projection.pdf}
+  \includegraphics{proj3d.pdf}
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
+
+\begin{proposition}{}{}
+  \(\numset{C}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{C}^n\to V\)は線型写像である．
+\end{proposition}
+
+\begin{proof}
+  \(s,t\in\numset{C}\)，\(\vect{x},\vect{y}\in\numset{C}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
+  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{s\vect{x}+t\vect{y}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V(\vect{x})}{\vect{v}}+t\innerp{\vect{y}-\proj_V(\vect{y})}{\vect{v}}=s0+t0=0\)となるので，
+  \(\proj_V(s\vect{x}+t\vect{y})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+\end{proof}
 
 \subsection{直交補空間}
 \begin{figure}[htbp]
