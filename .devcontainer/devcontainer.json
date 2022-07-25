@@ -5,7 +5,6 @@
   "remoteUser": "anon",
   "workspaceFolder": "/home/anon/src",
   "extensions": [
-    "james-yu.latex-workshop",
     "ms-vscode.cpptools-extension-pack",
     "ms-python.python"
   ],
