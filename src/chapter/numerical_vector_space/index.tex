@@ -33,7 +33,7 @@
 \(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合について，\(\vect{m}\)を図示したのが\cref{figure:proj2d}である．
 \cref{figure:proj2d}を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
 
-このことは，一般の\(\numset{K}^n\)に対しても成立する．証明へと入る前に，便利な記法を2つ定義しておく．
+一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
 
 \begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{\(\argmin\)}\index{\(\argmax\)}
   \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
@@ -195,7 +195,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\vect{x}\in W\cap\pcomp{W}\)なら，\(\innerp{\vect{x}}{\vect{x}}=0\)なので\(\vect{x}=\zvec\)である．よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
+  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)なので\(\vect{x}=\zvec\)，よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
   \cref{proposition:finite_projection}より，各\(\vect{x}\in V\)について\(\vect{x}-\proj_W(\vect{x})\in\pcomp{W}\)であるから，
   \(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W(\vect{x}))\in W\oplus\pcomp{W}\)である．したがって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
