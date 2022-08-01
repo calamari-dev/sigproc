@@ -28,10 +28,9 @@ RUN tlmgr conf texmf TEXMFCACHE /var/cache/texmf-cache/
 # 一般ユーザで Python の仮想環境を作る
 RUN pip install --upgrade pip
 RUN pip install pipenv
-RUN useradd --create-home --shell /bin/bash/ anon
-USER anon
+RUN useradd --shell /bin/bash --user-group --create-home anon
 ENV PATH=/home/anon/.local/bin:$PATH WORKON_HOME=/home/anon/.local/share/virtualenvs
 RUN mkdir --parents /home/anon/.local/share/virtualenvs/
 RUN chmod 777 /home/anon/.local/share/virtualenvs/
 WORKDIR /home/anon/src
-CMD ["bash"]
+CMD ["/bin/bash"]

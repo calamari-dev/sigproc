@@ -2,6 +2,7 @@ services:
   sigproc:
     build: .
     image: sigproc
+    user: anon
     volumes:
       - type: bind
         source: ./src

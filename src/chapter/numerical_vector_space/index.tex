@@ -74,7 +74,11 @@
 \begin{proof}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，
   \(V\)は\(\Set{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given z_1,\dots,z_m\in\numset{C}}\)と書ける．
-  したがって，関数\(f(\vect{z})=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(\vect{z}=\trps{\inlinevec{z_1 & \cdots & z_m}}\in\numset{C}^m\)）の最小値が\(\min_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  したがって，\(f(z_1,\dots,z_m)=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(z_1,\dots,z_m\in\numset{C}\)）とおくと
+  \[
+    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given\trps{\begin{bmatrix}z_1 & \cdots & z_m\end{bmatrix}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
+  \]
+  である．
 
   \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\basis{B}\)は正規直交基底だから
   \[
@@ -135,27 +139,19 @@
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\in V\)がただ1つ存在する．
+  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)がただ1つ存在する．
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
-  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．
-  \(\vect{v}\in V\)を任意にとる．\(\vect{v}=\vect{0}\)なら明らかに\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
-  \(\vect{v}\neq\vect{0}\)のとき，\(\vect{n}\)の定義から\(t\in\numset{R}\)の関数\(f(t)=\vnorm{\vect{x}-(\vect{n}+t\vect{v})}^2\)は\(t=0\)で最小値をとる．一方
+  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
+  \(\vect{n}\)の定義から，関数\(f(z)=\vnorm{\vect{z}-(\vect{n}+z\vect{v})}^2\)（\(z\in\numset{C}\)）は\(\argmin_{z\in\numset{C}}f(z)=\Set{0}\)を満たす．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    f(t) &= \vnorm{\vect{x}-\vect{n}-t\vect{v}}^2 = \vnorm{\vect{x}-\vect{n}}^2-2t\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+t^2\vnorm{\vect{v}}^2 \\
-    &= \pqty*{\vnorm{\vect{v}}t-\frac{\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2+\vnorm{\vect{x}-\vect{n}}^2-\pqty*{\frac{\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2
+    f(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2
+    = \vnorm{\vect{x}-\vect{n}}^2-2\rpart[(x-\iuni y)\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    &= \vnorm{\vect{x}-\vect{n}}^2-2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
+    &= \vnorm{\vect{x}-\vect{n}}^2+(x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
+    &= \vnorm{\vect{x}-\vect{n}}^2+\abs{z-\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2
   \end{align*}
-  は\(t=(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})/\vnorm{\vect{v}}^2\)で最小値をとる．よって\(\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
-
-  同様に，関数\(g(t)=\vnorm{\vect{x}-(\vect{n}+\iuni t\vect{v})}^2\)も\(t=0\)で最小値をとる．一方
-  \begin{align*}
-    g(t) &= \vnorm{\vect{x}-\vect{n}-\iuni t\vect{v}}^2 = \vnorm{\vect{x}-\vect{n}}^2-2t\rpart[-\iuni\innerp{\vect{x}-\vect{n}}{\vect{v}}]+t^2\vnorm{\vect{v}}^2 \\
-    &= \vnorm{\vect{x}-\vect{n}}^2-2t\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}}+t^2\vnorm{\vect{v}}^2 \\
-    &= \pqty*{\vnorm{\vect{v}}t-\frac{\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2+\vnorm{\vect{x}-\vect{n}}^2-\pqty*{\frac{\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}}}{\vnorm{\vect{v}}}}^2
-  \end{align*}
-  であるので，\(g(t)\)は\(t=(\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})/\vnorm{\vect{v}}^2\)で最小値をとる．
-  よって\(\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)でもあるから，
-  \(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
+  なので\(\argmin_{z\in\numset{C}}f(z)=\Set{\innerp{\vect{x}-\vect{n}}{\vect{v}}}\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影!かずべくとるくうかんじょうの@数ベクトル空間上の—}\index{\(\proj_V(\vect{x})\)}
