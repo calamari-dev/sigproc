@@ -143,7 +143,7 @@
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(f(z)=\vnorm{\vect{z}-(\vect{n}+z\vect{v})}^2\)（\(z\in\numset{C}\)）は\(\argmin_{z\in\numset{C}}f(z)=\Set{0}\)を満たす．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  \(\vect{n}\)の定義から，関数\(f(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2\)（\(z\in\numset{C}\)）は\(\argmin_{z\in\numset{C}}f(z)=\Set{0}\)を満たす．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
     f(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2
     = \vnorm{\vect{x}-\vect{n}}^2-2\rpart[(x-\iuni y)\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
