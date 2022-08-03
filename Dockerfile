@@ -16,7 +16,7 @@ RUN tlmgr install light-latex-make tikz-cd
 FROM python:3.10-slim-bullseye
 ENV PATH=/usr/local/bin/texlive:$PATH
 RUN apt-get update
-RUN apt-get install --yes fontconfig perl wget xz-utils
+RUN apt-get install --yes fontconfig perl xz-utils
 COPY --from=build /usr/local/texlive /usr/local/texlive
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
 

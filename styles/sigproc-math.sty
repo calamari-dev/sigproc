@@ -33,7 +33,7 @@
 \newcommand{\mat}[1]{\symbf{#1}}
 \newcommand{\matset}[3]{#3^{#1\times #2}}
 \newcommand{\midx}[3]{#1_{#2\,#3}}
-\newcommand{\pcomp}[1]{#1^{\mathord{\perp}}}
+\newcommand{\pcomp}[2][]{#2^{\mathord{\perp}#1}}
 \newcommand{\pinv}[1]{#1^{\mathord{+}}}
 \newcommand{\trps}[1]{#1^{\symsfup{T}}}
 \newcommand{\vect}[1]{\symbf{#1}}
@@ -48,6 +48,7 @@
 
 \DeclarePairedDelimiterXPP{\fnorm}[1]{}{\lVert}{\rVert}{_{\symrm{F}}}{#1}
 \DeclarePairedDelimiterX{\innerp}[2]{\langle}{\rangle}{#1,#2}
+\DeclarePairedDelimiterX{\matrice}[1]{\lbrack}{\rbrack}{\begin{matrix}#1\end{matrix}}
 \DeclarePairedDelimiter{\mnorm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 

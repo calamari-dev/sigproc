@@ -5,11 +5,11 @@ services:
     user: anon
     volumes:
       - type: bind
-        source: ./src
-        target: /home/anon/src
-      - type: bind
         source: ./fonts
         target: /home/anon/.fonts
+      - type: bind
+        source: ./src
+        target: /home/anon/src
       - type: bind
         source: ./styles
         target: /home/anon/texmf/tex/latex

@@ -107,14 +107,14 @@
     \centering
     \includegraphics{linear_comb2.pdf}    
   \end{minipage}
-  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{[\begin{matrix}3/2 & 0\end{matrix}]}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
+  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{\matrice{3/2 & 0}}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
   \label{figure:linear_comb}
 \end{figure}
 
 \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_i,b_i\in\numset{K}\)，\(\vect{v}_i\in S\)について
 \[
   \sum_{i=1}^ka_i\vect{v}_i = \sum_{i=1}^kb_i\vect{v}_i
-  \implies \begin{bmatrix}a_1 & \cdots & a_k\end{bmatrix} = \begin{bmatrix}b_1 & \cdots & b_k\end{bmatrix} 
+  \implies\matrice{a_1 & \cdots & a_k} = \matrice{b_1 & \cdots & b_k}
 \]
 が成立する．\(b_1=\dots=b_k=0\)とすると
 \begin{equation}
@@ -254,7 +254,7 @@
 \(\phi\)と同様
 \[
   \vect{y} = d_1\vect{w}_1+\dots+d_n\vect{w}_n
-  \iff\psi(\vect{y}) = \trps{\begin{bmatrix}d_1 & \cdots & d_n\end{bmatrix}}
+  \iff\psi(\vect{y}) = \trps{\matrice{d_1 & \cdots & d_n}}
 \]
 を満たす線型写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
 
@@ -266,7 +266,7 @@
 であるから
 \[
   \psi(f(\vect{x})) = \sum_{i=1}^mc_i\psi(f(\vect{v}_i))
-  = \begin{bmatrix}\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))\end{bmatrix}\begin{bmatrix}c_1 \\ \vdots \\ c_m\end{bmatrix}
+  = \matrice{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\matrice*{c_1 \\ \vdots \\ c_m}
 \]
 となる．よって，\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと，式
 \begin{equation}

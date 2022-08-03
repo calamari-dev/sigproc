@@ -109,7 +109,7 @@
   \begin{multicols}{3}[\section*{\indexname}]%
   \@mkboth{\indexname}{\indexname}%
   \jlreq@theindex@pagestyle%
-  \footnotesize%
+  \small%
   \setlength{\parindent}{0pt}%
   \setlength{\parskip}{0pt plus 0.03\zh}%
   \let\item\@idxitem

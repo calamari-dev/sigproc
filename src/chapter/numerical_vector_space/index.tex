@@ -76,7 +76,7 @@
   \(V\)は\(\Set{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given z_1,\dots,z_m\in\numset{C}}\)と書ける．
   したがって，\(f(z_1,\dots,z_m)=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(z_1,\dots,z_m\in\numset{C}\)）とおくと
   \[
-    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given\trps{\begin{bmatrix}z_1 & \cdots & z_m\end{bmatrix}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
+    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
   \]
   である．
 
@@ -143,15 +143,15 @@
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(f(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2\)（\(z\in\numset{C}\)）は\(\argmin_{z\in\numset{C}}f(z)=\Set{0}\)を満たす．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  \(\vect{n}\)の定義から，関数\(e(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    f(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2
-    = \vnorm{\vect{x}-\vect{n}}^2-2\rpart[(x-\iuni y)\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
-    &= \vnorm{\vect{x}-\vect{n}}^2-2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
-    &= \vnorm{\vect{x}-\vect{n}}^2+(x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
-    &= \vnorm{\vect{x}-\vect{n}}^2+\abs{z-\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2
+    e(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
+    = -2\rpart[(x-\iuni y)\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    &= -2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
+    &= (x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
+    &= \abs{z-\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2
   \end{align*}
-  なので\(\argmin_{z\in\numset{C}}f(z)=\Set{\innerp{\vect{x}-\vect{n}}{\vect{v}}}\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
+  なので\(e(\innerp{\vect{x}-\vect{n}}{\vect{v}})=-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2\geq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影!かずべくとるくうかんじょうの@数ベクトル空間上の—}\index{\(\proj_V(\vect{x})\)}
@@ -164,6 +164,8 @@
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
 
+ここからはしばらく，直交射影が持つ性質を掘り下げていく．その準備として，次の事実を示す．
+
 \begin{proposition}{}{}
   \(\numset{K}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{K}^n\to V\)は線型写像である．
 \end{proposition}
@@ -175,9 +177,9 @@
 \end{proof}
 
 \subsection{直交補空間}
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間!かずべくとるくうかんじょうの@数ベクトル空間上の—}\index{\(\pcomp{W}\)}
-  \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合\(\pcomp{W}=\Set{\vect{x}\in V\given\vect{y}\in W\implies\innerp{\vect{x}}{\vect{y}}=0}\)も\(V\)の部分空間になる．
-  \(\pcomp{W}\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）という．
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間!かずべくとるくうかんじょうの@数ベクトル空間上の—}\index{\(\pcomp{W}\)}\index{\(\pcomp[V]{W}\)}
+  \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合\(X=\Set{\vect{x}\in V\given\vect{y}\in W\implies\innerp{\vect{x}}{\vect{y}}=0}\)も\(V\)の部分空間になる．
+  \(X\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)と表記する．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
 \end{definition}
 
 \begin{example}
