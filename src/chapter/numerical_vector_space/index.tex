@@ -205,6 +205,20 @@
 \end{proof}
 
 \subsection{スペクトル定理}
+直交射影\(\proj_V(\vect{x})\)を具体的な式で表そう．そのためにまず，定義をいくつか導入する．
+
+\begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{\(\htrps{\mat{A}}\)}
+  \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\conj{\trps{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
+\end{definition}
+
+\begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
+  \(\mat{A}\)を\(n\)次複素正方行列とする．
+  \begin{enumerate}
+    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という
+    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)であるとき（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)であるとき），\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という
+  \end{enumerate}
+\end{definition}
+\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書はエルミート転置で統一する．}
 
 \section{最小2乗問題}
 

@@ -33,10 +33,11 @@
 \newcommand{\mat}[1]{\symbf{#1}}
 \newcommand{\matset}[3]{#3^{#1\times #2}}
 \newcommand{\midx}[3]{#1_{#2\,#3}}
-\newcommand{\pcomp}[2][]{#2^{\mathord{\perp}#1}}
 \newcommand{\pinv}[1]{#1^{\mathord{+}}}
 \newcommand{\trps}[1]{#1^{\symsfup{T}}}
 \newcommand{\vect}[1]{\symbf{#1}}
+
+\NewDocumentCommand{\pcomp}{o m}{#2^{\mathord{\perp}\IfValueT{#1}{\mid #1}}}
 
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\img}{im}
