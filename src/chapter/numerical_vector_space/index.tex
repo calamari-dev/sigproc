@@ -164,7 +164,17 @@
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
 
-ここからはしばらく，直交射影が持つ性質を掘り下げていく．その準備として，次の事実を示す．
+\begin{example}
+  \(\vect{v}_1=\trps{\inlinevec{1 & 1 & 1}}\)，\(\vect{v}_2=\trps{\inlinevec{2 & -1+\iuni\sqrt{3} & -1-\iuni\sqrt{3}}}\)とし，
+  \(\numset{C}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)で定義する．
+  このとき\(\innerp{\vect{v}_1}{\vect{v}_2}=0\)，\(\vnorm{\vect{v}_1}=\sqrt{3}\)，\(\vnorm{\vect{v}_2}=\sqrt{12}\)だから，
+  集合\(\Set{\vect{v}_1/\sqrt{3},\vect{v}_2/\sqrt{12}}\)は\(V\)の正規直交基底である．よって
+  \[
+    \proj_V(\vect{x}) = \innerp*{\vect{x}}{\frac{\vect{v}_1}{\sqrt{3}}}\frac{\vect{v}_1}{\sqrt{3}}+\innerp*{\vect{x}}{\frac{\vect{v}_2}{\sqrt{12}}}\frac{\vect{v}_2}{\sqrt{12}}
+    = \frac{\innerp{\vect{x}}{\vect{v}_1}}{3}\vect{v}_1+\frac{\innerp{\vect{x}}{\vect{v}_2}}{12}\vect{v}_2
+  \]
+  である．
+\end{example}
 
 \begin{proposition}{}{}
   \(\numset{K}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{K}^n\to V\)は線型写像である．
@@ -195,7 +205,7 @@
 \end{figure}
 
 \begin{proposition}{}{}
-  \(V\)は\(\numset{K}^n\)の部分空間で，\(W\)は\(V\)の部分空間とする．このとき\(V=W\oplus\pcomp{W}\)である．
+  \(V\)は\(\numset{K}^n\)の部分空間で，\(W\)は\(V\)の部分空間とする．このとき\(V=W\oplus\pcomp[V]{W}\)である．
 \end{proposition}
 
 \begin{proof}
@@ -219,6 +229,26 @@
   \end{enumerate}
 \end{definition}
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書はエルミート転置で統一する．}
+
+\cref{definition:regular_and_unitary_matrix}から，ユニタリ行列は正規行列である．また，次の命題が成立する．
+
+\begin{proposition}{ユニタリ行列の性質}{}
+  \(\mat{U}=\inlinevec{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，以下の命題は同値である．
+  \begin{enumerate}
+    \item \(\mat{U}\)はユニタリ行列である
+    \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \(\htrps{\mat{U}}\mat{U}=[\midx{v}{i}{j}]\)とおく．このとき
+  \[
+    \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
+    = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
+  \]
+  なので，\(\midx{v}{i}{j}=\htrps{\vect{u}_i}\vect{u}_j=\innerp{\vect{u}_j}{\vect{u}_i}\)である．
+  よって，\(\mat{U}^{-1}=\htrps{\mat{U}}\)であることと，各\(i,j\in\Set{1,\dots,n}\)に対して\(\innerp{\vect{u}_i}{\vect{u}_j}=\kdelta{i}{j}\)であることは同値である．
+\end{proof}
 
 \section{最小2乗問題}
 
