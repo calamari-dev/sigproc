@@ -1,10 +1,6 @@
 \documentclass[ebook]{sigproc}
 
-\directlua{
-  if os.env["MODE"] == "production" then else
-    tex.sprint("\\usepackage[colorspec=0.9]{draftwatermark}")
-  end
-}
+\directlua{if not (os.env["MODE"] == "production") then tex.sprint("\\usepackage[colorspec=0.9]{draftwatermark}") end}
 
 \usepackage{graphicx,xcolor}
 \usepackage[unicode,pdfusetitle]{hyperref}

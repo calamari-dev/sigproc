@@ -9,7 +9,7 @@ if __name__ == "__main__":
             stderr=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
         )
-    except:
+    except subprocess.CalledProcessError:
         subprocess.run(["pipenv", "sync", "--dev"])
     finally:
         if len(sys.argv) > 1:

@@ -27,6 +27,5 @@
 
 ```
 $ docker compose build
-$ docker compose run --rm sigproc
-$ pipenv run publish
+$ docker compose run --rm sigproc pipenv run publish
 ```

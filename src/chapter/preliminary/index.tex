@@ -76,21 +76,20 @@
 
 また，2つの部分空間\(W_1,W_2\subset V\)があれば，それらを含むより大きな部分空間を作れる．
 
-\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかん@和（部分空間）}\index{ぶぶんくうかん@部分空間!のわ@—の和}\index{\(W_1+W_2\)}
+\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかんの@和，部分空間の}\index{ぶぶんくうかん@部分空間!わ@和}\index{\(W_1+W_2\)}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W_1,W_2\subset V\)を部分空間とする．
   このとき，集合\(W=\Set{\vect{w}_1+\vect{w}_2\given\text{\(\vect{w}_1\in W_1\)，\(\vect{w}_2\in W_2\)}}\)は\(V\)の部分空間になる．
   \(W\)を\(W_1\)と\(W_2\)の\termdef{和}（sum）といい，\(W_1+W_2\)と表記する．
 \end{definition}
 
-特に\(W_1\cap W_2=\Set{\zvec}\)であるとき，\(W_1+W_2\)を\(W_1\)と\(W_2\)の\termdef{直和}\index{ちょくわぶぶんくうかん@直和（部分空間）}\index{ぶぶんくうかん@部分空間!のちょくわ@—の直和}（direct sum）という．
+特に\(W_1\cap W_2=\Set{\zvec}\)であるとき，\(W_1+W_2\)を\(W_1\)と\(W_2\)の\termdef{直和}\index{ちょくわぶぶんくうかんの@直和，部分空間の}\index{ぶぶんくうかん@部分空間!ちょくわ@直和}（direct sum）という．
 直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(W_1\oplus W_2\)}とも書く．
 
 \subsection{基底}
-任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて
-\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
+任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
 すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
-一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせいぶぶんくうかん@生成（部分空間）}\index{ぶぶんくうかん@部分空間!せいせいする@生成する—}（generated subspace）といい，
+一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせいするぶぶんくうかん@生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する——}（generated subspace）といい，
 \(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
