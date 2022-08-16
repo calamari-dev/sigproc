@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-clang = "clang-format -i -style=llvm"
 figure = "python figure.py"
 chapter = "bash -c \"MODE=production lualatex --shell-escape index\""
 preview = "bash -c \"llmk -C && llmk\""
