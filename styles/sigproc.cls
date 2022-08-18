@@ -133,7 +133,7 @@
 \newlength{\nbl@bdskip}
 \newlength{\nbl@bsskip}
 
-\newcommand{\narrowbaselines}{%
+\DeclareRobustCommand{\narrowbaselines}{%
   \narrowbaselinestrue%
   \setlength{\nbl@adskip}{\abovedisplayskip}%
   \setlength{\nbl@asskip}{\abovedisplayshortskip}%
@@ -151,7 +151,7 @@
 
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
 
-\renewcommand{\normalsize}{%
+\DeclareRobustCommand{\normalsize}{%
   \ifnarrowbaselines
     \@setfontsize{\normalsize}{\jlreq@fontsize}{\dimexpr 12\jlreq@baselineskip/17\relax}%
   \else
@@ -161,10 +161,10 @@
   \setlength{\abovedisplayshortskip}{\z@ \@plus .3\jlreq@fontsize}%
   \setlength{\belowdisplayskip}{.9\jlreq@fontsize \@plus .3\jlreq@fontsize \@minus .4\jlreq@fontsize}%
   \setlength{\belowdisplayshortskip}{\belowdisplayskip}%
-  \let\@listi\@listI%
+  \DeclareCommandCopy{\@listi}{\@listI}%
 }
 
-\renewcommand{\small}{%
+\DeclareRobustCommand{\small}{%
   \ifnarrowbaselines
     \@setfontsize{\small}{.9\jlreq@fontsize}{\dimexpr 12\jlreq@baselineskip/17\relax}%
   \else

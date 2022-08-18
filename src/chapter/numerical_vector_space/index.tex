@@ -214,29 +214,37 @@
   \(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W(\vect{x}))\in W\oplus\pcomp{W}\)である．したがって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
 
-\subsection{解析と合成}
+\subsection{分析と合成}
 \cref{proposition:finite_convex_projection}の証明では，\(\proj_V(\vect{x})\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V(\vect{x})\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
-一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい正規直交系\(\basis{B}\)があって，そこから\(V=\spannedby\basis{B}\)への直交射影\(\proj_V(\vect{x})\)を作ることも多い．そのような場合，直交射影は2つの操作に分解できる．
+一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい正規直交系\(\basis{B}\)があって，そこから\(V=\spannedby\basis{B}\)への直交射影\(\proj_V(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\conj{\trps{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
 \end{definition}
 
-集合\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(\numset{C}^n\)の（基底とは限らない）正規直交系とし，\(V=\spannedby\basis{B}\)とおく．このとき
+集合\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(\numset{C}^n\)の（基底とは限らない）正規直交系とし，\(V=\spannedby\basis{B}\)とおく．
+このとき
 \[
   \proj_V(\vect{x}) = \sum_{i=1}^m\vect{e}_i\innerp{\vect{x}}{\vect{e}_i}
   = \sum_{i=1}^m\vect{e}_i\conj{\innerp{\vect{e}_i}{\vect{x}}}
   = \sum_{i=1}^m\vect{e}_i\htrps{\vect{e}_i}\vect{x}
   = \matrice{\vect{e}_1 & \cdots & \vect{e}_m}\matrice*{\htrps{\vect{e}_1} \\ \vdots \\ \htrps{\vect{e}_m}}\vect{x}
 \]
-なので，\(\proj_V(\vect{x})\)は\(m\times n\)行列\(\mat{W}=\htrps{\inlinevec{\vect{e}_1 & \cdots & \vect{e}_m}}\)により\(\proj_V(\vect{x})=\htrps{\mat{W}}\mat{W}\vect{x}\)と表せる．
-言い換えれば，写像\(T\colon\numset{C}^n\to\numset{C}^m\)，\(\synth{T}\colon\numset{C}^m\to V\)を
+である．ここで，\(\basis{B}\)を延長して，\(\numset{C}^n\)の正規直交基底\(\basis{B}'=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を作る．
+\(m\times n\)行列\(\mat{A}=\inlinevec{\vect{a}_1 & \cdots & \vect{a}_n}\)を\(\mat{A}=\inlinevec{\imat & \zmat}\)で定義すると
 \[
-  T(\vect{x}) = \mat{W}\vect{x} = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m}},
-  \quad\synth{T}(\vect{y}) = \htrps{\mat{W}}\vect{y} = \sum_{i=1}^my_i\vect{e}_i
-  \quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_m}})
+  \matrice{\vect{e}_1 & \cdots & \vect{e}_n}\htrps{\mat{A}} = \matrice{\vect{e}_1 & \cdots & \vect{e}_n}\matrice*{\htrps{\vect{a}_1} \\ \vdots \\ \htrps{\vect{a}_n}}
+  = \sum_{i=1}^n\vect{e}_i\htrps{\vect{a}_i}
+  = \matrice{\vect{e}_1 & \cdots & \vect{e}_m}
 \]
-で定義すると\(\proj_V=\synth{T}T\)が成立する．
+である．よって，\(\mat{U}=\htrps{\inlinevec{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\htrps{\mat{A}}\mat{A}=\diag(1,\dots,1,0,\dots,0)\)とおくと\(\proj_V(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．
+言い換えれば，\(\proj_V\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
+\[
+  U(\vect{x}) = \mat{U}\vect{x} = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
+  \quad L(\vect{x}) = \mat{\Lambda}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec}, \\
+  \quad\synth{U}(\vect{x}) = \htrps{\mat{U}}\vect{x} = \sum_{i=1}^nx_i\vect{e}_i
+\]
+を用いて，\(\proj_V=\synth{U}LU\)と表せる．
 
 \subsection{スペクトル定理}
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
