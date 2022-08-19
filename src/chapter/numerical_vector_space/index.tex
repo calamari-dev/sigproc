@@ -216,37 +216,34 @@
 
 \subsection{分析と合成}
 \cref{proposition:finite_convex_projection}の証明では，\(\proj_V(\vect{x})\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V(\vect{x})\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
-一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい正規直交系\(\basis{B}\)があって，そこから\(V=\spannedby\basis{B}\)への直交射影\(\proj_V(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
+一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
+そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\conj{\trps{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
 \end{definition}
 
-集合\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(\numset{C}^n\)の（基底とは限らない）正規直交系とし，\(V=\spannedby\basis{B}\)とおく．
-このとき
-\[
-  \proj_V(\vect{x}) = \sum_{i=1}^m\vect{e}_i\innerp{\vect{x}}{\vect{e}_i}
-  = \sum_{i=1}^m\vect{e}_i\conj{\innerp{\vect{e}_i}{\vect{x}}}
-  = \sum_{i=1}^m\vect{e}_i\htrps{\vect{e}_i}\vect{x}
-  = \matrice{\vect{e}_1 & \cdots & \vect{e}_m}\matrice*{\htrps{\vect{e}_1} \\ \vdots \\ \htrps{\vect{e}_m}}\vect{x}
-\]
-である．ここで，\(\basis{B}\)を延長して，\(\numset{C}^n\)の正規直交基底\(\basis{B}'=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を作る．
-\(m\times n\)行列\(\mat{A}=\inlinevec{\vect{a}_1 & \cdots & \vect{a}_n}\)を\(\mat{A}=\inlinevec{\imat & \zmat}\)で定義すると
-\[
-  \matrice{\vect{e}_1 & \cdots & \vect{e}_n}\htrps{\mat{A}} = \matrice{\vect{e}_1 & \cdots & \vect{e}_n}\matrice*{\htrps{\vect{a}_1} \\ \vdots \\ \htrps{\vect{a}_n}}
-  = \sum_{i=1}^n\vect{e}_i\htrps{\vect{a}_i}
-  = \matrice{\vect{e}_1 & \cdots & \vect{e}_m}
-\]
-である．よって，\(\mat{U}=\htrps{\inlinevec{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\htrps{\mat{A}}\mat{A}=\diag(1,\dots,1,0,\dots,0)\)とおくと\(\proj_V(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．
-言い換えれば，\(\proj_V\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
-\[
-  U(\vect{x}) = \mat{U}\vect{x} = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
-  \quad L(\vect{x}) = \mat{\Lambda}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec}, \\
-  \quad\synth{U}(\vect{x}) = \htrps{\mat{U}}\vect{x} = \sum_{i=1}^nx_i\vect{e}_i
-\]
-を用いて，\(\proj_V=\synth{U}LU\)と表せる．
+\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\subsection{スペクトル定理}
+\(\mat{U}=\htrps{\inlinevec{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}=\diag(1,\dots,1,0,\dots,0)\)とおく．
+このとき，任意の\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
+\[
+  \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
+  = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
+  \quad\mat{\Lambda}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
+  \quad\htrps{\mat{U}}\vect{x} = \htrps{\mat{U}}\matrice*{x_1 \\ \vdots \\ x_n}
+  = \sum_{i=1}^nx_i\vect{e}_i
+\]
+であるから，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
+\(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．実際
+\[
+  \htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
+  = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
+  = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
+  = \proj_{V_m}(\vect{x})
+\]
+である．
+
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
@@ -254,7 +251,6 @@
     \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)であるとき（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)であるとき），\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という
   \end{enumerate}
 \end{definition}
-\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書はエルミート転置で統一する．}
 
 \cref{definition:regular_and_unitary_matrix}から，ユニタリ行列は正規行列である．また，次の命題が成立する．
 
@@ -274,6 +270,8 @@
   \]
   なので\(\midx{a}{i}{j}=\htrps{\vect{u}_i}\vect{u}_j=\innerp{\vect{u}_j}{\vect{u}_i}\)である．よって，\(\mat{U}^{-1}=\htrps{\mat{U}}\)であることと，各\(i,j\in\Set{1,\dots,n}\)に対して\(\innerp{\vect{u}_i}{\vect{u}_j}=\kdelta{i}{j}\)であることは同値である．
 \end{proof}
+
+\subsection{スペクトル定理}
 
 \section{最小2乗問題}
 
