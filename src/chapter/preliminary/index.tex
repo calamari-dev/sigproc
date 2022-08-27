@@ -70,7 +70,7 @@
 \end{example}
 
 \begin{example}
-  集合\(\numset{K}^n=\Set{\trps{\inlinevec{s_1 & \cdots & s_n}}\given s_1,\dots,s_n\in\numset{K}}\)は，
+  集合\(\numset{K}^n=\Set{\trps{\rowvect{s_1 & \cdots & s_n}}\given s_1,\dots,s_n\in\numset{K}}\)は，
   通常の加法とスカラー乗法によって，\(\numset{K}\)上のベクトル空間になる．ただし，\(\trps{\mat{A}}\)\index{\(\trps{\mat{A}}\)}は行列\(\mat{A}\)の転置行列を意味する．
 \end{example}
 
@@ -86,15 +86,15 @@
 直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(W_1\oplus W_2\)}とも書く．
 
 \subsection{基底}
-任意のベクトル\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
+任意のベクトル\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
 すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
 一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせいするぶぶんくうかん@生成する部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する——}（generated subspace）といい，
 \(\spannedby S\)\index{\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
-たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\trps{\inlinevec{1 & 1}},\trps{\inlinevec{2 & -1}},\trps{\inlinevec{-1 & 0}}}\)が生成する部分空間は
-\(\numset{R}^2\)である．しかし，\(\basis{S}_2=\Set{\trps{\inlinevec{1 & 0}},\trps{\inlinevec{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない（\cref{figure:linear_comb}）．
+たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\trps{\rowvect{1 & 1}},\trps{\rowvect{2 & -1}},\trps{\rowvect{-1 & 0}}}\)が生成する部分空間は
+\(\numset{R}^2\)である．しかし，\(\basis{S}_2=\Set{\trps{\rowvect{1 & 0}},\trps{\rowvect{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない（\cref{figure:linear_comb}）．
 
 \begin{figure}[htbp]
   \centering
@@ -106,7 +106,7 @@
     \centering
     \includegraphics{linear_comb2.pdf}    
   \end{minipage}
-  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{\inlinevec{3/2 & 0}}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
+  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{\rowvect{3/2 & 0}}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
   \label{figure:linear_comb}
 \end{figure}
 
@@ -168,7 +168,7 @@
   \(\vect{v}_1,\dots,\vect{v}_n\in\numset{K}^n\)とする．このとき，次の命題は同値である．
   \begin{enumerate}
     \item 集合\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\numset{K}^n\)の基底である
-    \item 行列\(\inlinevec{\vect{v}_1 & \cdots & \vect{v}_n}\)は正則である
+    \item 行列\(\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)は正則である
   \end{enumerate}
 \end{proposition}
 
@@ -231,13 +231,12 @@
 \cref{proposition:gram_schmidt}から，有限次元の内積空間は常に正規直交基底を持つ．
 
 \subsection{線型写像と表現行列}
-\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，
-任意の\(\vect{x}\in V\)を
+\(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，任意の\(\vect{x}\in V\)を
 \begin{equation}
   \label{equation:basis_comb}
   \vect{x} = c_1\vect{v}_1+\dots+c_m\vect{v}_m\quad(c_1,\dots,c_m\in\numset{K})
 \end{equation}
-の形で一意に表せる．言い換えると，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\inlinevec{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，
+の形で一意に表せる．言い換えると，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\rowvect{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，
 それは単射\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}\index{たんしゃ@単射}である．
 この写像\(\phi\)は，次に定義する「線型写像」の1例である．
 
@@ -258,7 +257,7 @@
 を満たす線型写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
 
 \(\phi\)と\(\psi\)を利用すると，\(V\)から\(W\)への任意の線型写像\(f\)を，対応する行列によって表現できる．
-\(\vect{x}\in V\)を任意にとる．\(\phi(\vect{x})=\trps{\inlinevec{c_1 & \cdots & c_m}}\)とおくと
+\(\vect{x}\in V\)を任意にとる．\(\phi(\vect{x})=\trps{\rowvect{c_1 & \cdots & c_m}}\)とおくと
 \[
   f(\vect{x}) = f\pqty*{\sum_{i=1}^mc_i\vect{v}_i} = \sum_{i=1}^mc_if(\vect{v}_i)
 \]
@@ -267,7 +266,7 @@
   \psi(f(\vect{x})) = \sum_{i=1}^mc_i\psi(f(\vect{v}_i))
   = \matrice{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\matrice*{c_1 \\ \vdots \\ c_m}
 \]
-となる．よって，\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと，式
+となる．よって，\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと，式
 \begin{equation}
   \label{equation:representation_matrix}
   \psi(f(\vect{x})) = T(\phi(\vect{x}))\quad(T(\vect{x})=\mat{A}\vect{x})
@@ -278,10 +277,9 @@
   \includegraphics{commute.pdf}
 \end{wrapfigure}
 
-ここまでの議論をまとめると，次のようになる．
-\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
-\(n\times m\)行列\(\mat{A}=\inlinevec{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)
-を定義でき，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
+ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
+\(n\times m\)行列\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)を定義でき，
+\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
 この\(\mat{A}\)を，基底\(\basis{B}\)と\(\basis{B}'\)に関する\(f\)の\termdef{表現行列}\index{ひょうげんぎょうれつ@表現行列}（representation matrix）という．
 
 なお，\(\basis{B}\)の元を並べる順序に応じて，\cref{equation:basis_comb}の\(c_1,\dots,c_n\)の順序も変化するので，
@@ -320,10 +318,9 @@
   \(f(\zvec)=f(\zvec+\zvec)=f(\zvec)+f(\zvec)\)なので，\(f(\zvec)=\zvec\)である．
   よって，\(f\)が単射なら\(f(\vect{v})=\zvec\iff\vect{v}=\zvec\)だから，\(\nul f=\Set{\zvec}\)である．
 
-  また，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たせば
-  \(f(\vect{v}_1-\vect{v}_2)=f(\vect{v}_1)-f(\vect{v}_2)=\zvec\)である．
+  また，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たせば\(f(\vect{v}_1-\vect{v}_2)=f(\vect{v}_1)-f(\vect{v}_2)=\zvec\)である．
   よって，\(\nul f=\Set{\zvec}\)なら\(\vect{v}_1-\vect{v}_2=\zvec\)，\(\vect{v}_1=\vect{v}_2\)である．
-  すなわち，\(\nul f=\Set{\zvec}\)なら\(f\)は単射である．
+すなわち，\(\nul f=\Set{\zvec}\)なら\(f\)は単射である．
 \end{proof}
 
 \subsection{固有値と固有空間}
@@ -337,7 +334,7 @@
 \end{definition}
 
 \begin{example}
-  \(\vect{x}_1=\trps{\inlinevec{1+\iuni & 2}}\)，\(\vect{x}_2=\trps{\inlinevec{1-\iuni & 2}}\)は\(\mat{A}=\begin{bsmallmatrix}1 & -1 \\ 2 & -1\end{bsmallmatrix}\)の固有ベクトルである．
+  \(\vect{x}_1=\trps{\rowvect{1+\iuni & 2}}\)，\(\vect{x}_2=\trps{\rowvect{1-\iuni & 2}}\)は\(\mat{A}=\begin{bsmallmatrix}1 & -1 \\ 2 & -1\end{bsmallmatrix}\)の固有ベクトルである．
   実際\(\mat{A}\vect{x}_1=\iuni\vect{x}_1\)，\(\mat{A}\vect{x}_2=-\iuni\vect{x}_2\)である．
 \end{example}
 
@@ -379,15 +376,13 @@
 \end{proposition}
 
 \begin{proof}
-  後半のみ示す．\(\mat{A}\zvec=\lambda_1\zvec=\lambda_2\zvec=\zvec\)なので，\(\zvec\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)である．
-  任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとる．\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)より\((\lambda_1-\lambda_2)\vect{x}=\zvec\)であり，\(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．
-  よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
+  2のみ示す．任意に\(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)をとる．\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)より\((\lambda_1-\lambda_2)\vect{x}=\zvec\)であり，
+  \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
 \end{proof}
 
 \subsection{対角化}
-適当な\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)の組を見つけて，\(n\times n\)行列\(\mat{A}\)を\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)の形で書くことを
-\(\mat{A}\)の\termdef{対角化}\index{たいかくか@対角化}（diagonalization）という．
-\(\mat{A}\)が対角化可能である必要十分条件は，次の\cref{proposition:diagonalization}で与えられる．
+適当な\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)の組を見つけて，\(n\)次正方行列\(\mat{A}\)を\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)の形で書くことを
+\(\mat{A}\)の\termdef{対角化}\index{たいかくか@対角化}（diagonalization）という．\(\mat{A}\)が対角化可能である必要十分条件は，次の\cref{proposition:diagonalization}で与えられる．
 
 \begin{proposition}{}{diagonalization}
   \(n\)次正方行列\(\mat{A}\)の固有値全体を\(\Set{\lambda_1,\dots,\lambda_k}\)とおく．ただし，\(i\neq j\)ならば\(\lambda_i\neq\lambda_j\)とする．
@@ -404,14 +399,14 @@
 
 \begin{proof}
   1と3の同値性のみ示す．\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)があるとき，\(\mat{A}\)は対角化可能であることを示す．
-  \(\mat{P}=\inlinevec{\vect{v}_1 & \cdots & \vect{v}_n}\)とおく．このとき，各\(\vect{v}_i\)に対応する固有値を\(\lambda_i\)とおくと
-  \(\mat{A}\mat{P}=\inlinevec{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\inlinevec{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)
+  \(\mat{P}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)とおく．このとき，各\(\vect{v}_i\)に対応する固有値を\(\lambda_i\)とおくと
+  \(\mat{A}\mat{P}=\rowvect{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\rowvect{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)
   であるから，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと\(\mat{A}\mat{P}=\mat{P}\mat{\Lambda}\)，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)となる．
   ただし，\(\mat{P}\)の逆行列が存在することは\cref{proposition:basis_and_matrix}による．
 
   逆に，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)を満たす\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在したとする．
-  \(\mat{P}=\inlinevec{\vect{v}_1 & \cdots & \vect{v}_n}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおく．
-  このとき\(\inlinevec{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\mat{A}\mat{P}=\mat{P}\mat{\Lambda}=\inlinevec{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)なので，
+  \(\mat{P}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおく．
+  このとき\(\rowvect{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\mat{A}\mat{P}=\mat{P}\mat{\Lambda}=\rowvect{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)なので，
   各\(\lambda_i\)，\(\vect{v}_i\)は\(\mat{A}\vect{v}_i=\lambda_i\vect{v}_i\)を満たす．
   また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって，\(\vect{v}_i\)は\(\mat{A}\)の固有値\(\lambda_i\)に属する固有ベクトルである．
   したがって，\cref{proposition:basis_and_matrix}より\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底である．

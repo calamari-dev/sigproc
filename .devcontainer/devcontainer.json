@@ -1,7 +1,7 @@
 {
   "name": "sigproc",
   "dockerComposeFile": ["../compose.yaml", "compose.yaml"],
-  "service": "sigproc",
+  "service": "main",
   "workspaceFolder": "/home/anon/src",
   "extensions": [
     "ms-vscode.cpptools-extension-pack",

@@ -16,7 +16,7 @@
 \[
   \vnorm{\vect{x}} = \sqrt{\innerp{\vect{x}}{\vect{x}}}
   = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
-  \quad\text{(\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{K}^n\))}
+  \quad\text{(\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{K}^n\))}
 \]
 とする\index{\(\vnorm{\holder}\)}．
 
@@ -104,7 +104,7 @@
     f(\vect{z})^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
   \end{equation}
 
-  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})=\Set{\trps{\inlinevec{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
+  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
   \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}\)である．
 \end{proof}
 
@@ -165,7 +165,7 @@
 \end{figure}
 
 \begin{example}
-  \(\vect{v}_1=\trps{\inlinevec{1 & 1 & 1}}\)，\(\vect{v}_2=\trps{\inlinevec{2 & -1+\iuni\sqrt{3} & -1-\iuni\sqrt{3}}}\)とし，
+  \(\vect{v}_1=\trps{\rowvect{1 & 1 & 1}}\)，\(\vect{v}_2=\trps{\rowvect{2 & -1+\iuni\sqrt{3} & -1-\iuni\sqrt{3}}}\)とし，
   \(\numset{C}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)で定義する．
   このとき\(\innerp{\vect{v}_1}{\vect{v}_2}=0\)，\(\vnorm{\vect{v}_1}=\sqrt{3}\)，\(\vnorm{\vect{v}_2}=\sqrt{12}\)だから，
   集合\(\Set{\vect{v}_1/\sqrt{3},\vect{v}_2/\sqrt{12}}\)は\(V\)の正規直交基底である．よって
@@ -225,8 +225,8 @@
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\(\mat{U}=\htrps{\inlinevec{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}=\diag(1,\dots,1,0,\dots,0)\)とおく．
-このとき，任意の\(\vect{x}=\trps{\inlinevec{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
+\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}=\diag(1,\dots,1,0,\dots,0)\)とおく．
+このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
   \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
   = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
@@ -255,7 +255,7 @@
 \cref{definition:regular_and_unitary_matrix}から，ユニタリ行列は正規行列である．また，次の命題が成立する．
 
 \begin{proposition}{ユニタリ行列の性質}{}
-  \(\mat{U}=\inlinevec{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，以下の命題は同値である．
+  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，以下の命題は同値である．
   \begin{enumerate}
     \item \(\mat{U}\)はユニタリ行列である
     \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である

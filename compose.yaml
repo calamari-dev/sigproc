@@ -1,5 +1,5 @@
 services:
-  sigproc:
+  main:
     build: .
     image: sigproc
     user: anon
