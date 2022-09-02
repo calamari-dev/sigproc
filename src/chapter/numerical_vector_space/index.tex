@@ -16,11 +16,12 @@
 \[
   \vnorm{\vect{x}} = \sqrt{\innerp{\vect{x}}{\vect{x}}}
   = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
-  \quad\text{(\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{K}^n\))}
+  \quad(\vect{x}=\trps{\matrice{x_1 & \cdots & x_n}}\in\numset{K}^n)
 \]
 とする\index{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
+
 \(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
 
 \begin{figure}[htbp]
@@ -187,6 +188,7 @@
 \end{proof}
 
 \subsection{直交補空間}
+
 \begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\index{\(\pcomp{W}\)}\index{\(\pcomp[V]{W}\)}
   \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合\(X=\Set{\vect{x}\in V\given\vect{y}\in W\implies\innerp{\vect{x}}{\vect{y}}=0}\)も\(V\)の部分空間になる．
   \(X\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)と表記する．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
@@ -215,6 +217,7 @@
 \end{proof}
 
 \subsection{分析と合成}
+
 \cref{proposition:finite_convex_projection}の証明では，\(\proj_V(\vect{x})\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V(\vect{x})\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
 一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
 そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
@@ -276,7 +279,9 @@
 \section{最小2乗問題}
 
 \subsection{最小2乗問題}
+
 \subsection{特異値分解}
+
 \subsection{擬似逆行列}
 
 \section{離散フーリエ変換}

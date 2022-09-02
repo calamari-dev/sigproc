@@ -11,6 +11,7 @@
 \section{行列とベクトル空間}
 
 \subsection{ベクトル空間}
+
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
 \(\numset{K}\)上のベクトル空間とは次のように定義される，加法とスカラー乗法が備わった集合のことである．
 
@@ -86,6 +87,7 @@
 直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(W_1\oplus W_2\)}とも書く．
 
 \subsection{基底}
+
 任意のベクトル\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
 すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
 
@@ -98,11 +100,11 @@
 
 \begin{figure}[htbp]
   \centering
-  \begin{minipage}{\linewidth/2}
+  \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{linear_comb1.pdf}
   \end{minipage}%
-  \begin{minipage}{\linewidth/2}
+  \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{linear_comb2.pdf}    
   \end{minipage}
@@ -178,6 +180,7 @@
 \end{proposition}
 
 \subsection{内積}
+
 \(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
 \cref{definition:inner_product}は，こうした幾何的な考察を，より多くのベクトル空間へと適用可能にする．
 
@@ -224,13 +227,14 @@
     \vect{u}_1 = \vect{v}_1,
     \quad\vect{u}_i = \vect{v}_i-\sum_{j=1}^{n-1}\frac{\innerp{\vect{v}_i}{\vect{u}_j}}{\innerp{\vect{u}_j}{\vect{u}_j}}\vect{u}_j\quad(i=2,\dots,n)
   \]
-  でベクトル\(\vect{u}_1,\dots,\vect{u}_n\)を定義すると，集合\(\narrowbaselines\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は正規直交系になる．
+  でベクトル\(\vect{u}_1,\dots,\vect{u}_n\)を定義すると，集合\(\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は正規直交系になる．
 \end{proposition}
 
 正規直交系を作る\cref{proposition:gram_schmidt}の方法を\termdef{グラム・シュミットの直交化法}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
 \cref{proposition:gram_schmidt}から，有限次元の内積空間は常に正規直交基底を持つ．
 
 \subsection{線型写像と表現行列}
+
 \(V\)は有限次元であるとする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)（\(m=\dim V\)）をとることで，任意の\(\vect{x}\in V\)を
 \begin{equation}
   \label{equation:basis_comb}
@@ -298,6 +302,7 @@
 \end{example}
 
 \subsection{核と像}
+
 線型写像に付随して，重要なベクトル空間が2つ定まる．
 
 \begin{definition}{核，像}{nul_img}\index{かく@核}\index{ぞう@像}\index{\(\nul f\)}\index{\(\img f\)}
@@ -324,6 +329,7 @@
 \end{proof}
 
 \subsection{固有値と固有空間}
+
 対角化に向けて，固有値に関連する事項を整理する．
 
 \begin{definition}{固有値，固有ベクトル}{eigenvalue}\index{こゆうち@固有値}\index{こゆうべくとる@固有ベクトル}
@@ -381,6 +387,7 @@
 \end{proof}
 
 \subsection{対角化}
+
 適当な\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)の組を見つけて，\(n\)次正方行列\(\mat{A}\)を\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)の形で書くことを
 \(\mat{A}\)の\termdef{対角化}\index{たいかくか@対角化}（diagonalization）という．\(\mat{A}\)が対角化可能である必要十分条件は，次の\cref{proposition:diagonalization}で与えられる．
 

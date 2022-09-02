@@ -3,17 +3,19 @@
 \begin{document}
 \chapter{ヒルベルト空間}
 \label{chapter:hilbert_space}
+
 \begin{lead}
-\cref{chapter:hilbert_space}では，数ベクトルに対する議論を関数に対する議論へと拡張する．
-この拡張によって，連続時間の対象についてもベクトル空間の考え方が適用可能になる．
+  \cref{chapter:hilbert_space}では，数ベクトルに対する議論を関数に対する議論へと拡張する．
+  この拡張によって，連続時間の対象についてもベクトル空間の考え方が適用可能になる．
 \end{lead}
 
 \section{無限次元のベクトル空間}
 
 \subsection{距離空間}
+
 \begin{definition}{距離空間}{metric_space}\index{きょりくうかん@距離空間}\index{\((S,d)\)}
   \(S\)を集合とする．\(d\)が\(S\)上の\termdef{距離}\index{きょり@距離}（metric）であるとは，
-  任意の\(x,y,z\in S\)に対し，\(d\)が以下の条件を満たすことをいう．
+  任意の\(x,y,z\in S\)に対して，\(d\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(d(x,y)\geq 0\)，\([d(x,y)=0\iff x=y]\)
     \item \(d(x,y)=d(y,x)\)
@@ -30,12 +32,12 @@
 
 \begin{example}[離散距離]
   \label{example:discrete_metric}
-  集合\(S\)は空でないとする．任意の\(x,y\in S\)に対し，\(d(x,y)\)は\(x=y\)のとき\(0\)，そうでないとき\(1\)とする．
+  集合\(S\)は空でないとする．また，各\(x,y\in S\)に対して，\(x=y\)のとき\(d(x,y)=0\)，\(x\neq y\)のとき\(d(x,y)=1\)とする．
   このとき\(d\)は\(S\)上の距離になる．距離\(d\)を\termdef{離散距離}\index{りさんきょり@離散距離}（discrete metric），
   距離空間\((S,d)\)を\termdef{離散空間}\index{りさんくうかん@離散空間}（discrete space）という．
 \end{example}
 
-\cref{definition:metric_space}のように抽象的な形式で距離を定義する利点の1つは，\(\numset{K}^n\)以外の集合に対しても，点列の極限を定義できることである．
+\cref{definition:metric_space}のように抽象的な形で距離を定義する利点の1つは，\(\numset{K}^n\)以外の集合に対しても，点列の極限を定義できることである．
 
 \begin{definition}{点列の収束}{sequence_converge}\index{てんれつのしゅうそく@点列の収束}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\in S\)に\termdef{収束する}（converge）とは，
@@ -45,15 +47,14 @@
     x_n\to\alpha\quad(n\to\infty),
     \quad\lim_{n\to\infty}x_n = \alpha
   \]
-
 \end{definition}
 
 \(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\)に収束するとき，\(\alpha\)を\(\seq{x_n}_{n\in\numset{N}}\)の\termdef{極限点}\index{きょくげんてん@極限点}（limit point）という．
-\cref{definition:sequence_converge}は要するに「十分大きな\(N\in\numset{N}\)をとれば，点\(x_{N+1},x_{N+2},\dotsc\)が点\(\alpha\)から距離\(\varepsilon\)以上離れないようにできる」ことを意味する．
+\cref{definition:sequence_converge}は要するに「\(N\)の値を十分に大きくとれば，点\(x_{N+1},x_{N+2},\dotsc\)が点\(\alpha\)から距離\(\varepsilon\)以上離れないようにできる」ことを意味する．
 
 \begin{example}
   \label{example:complex_planes_convergence}
-  \((S,d)\)を\cref{example:metric_space}の距離空間とする．\(S\)上の点列\(\seq{z_n}_{n\in\numset{N}}\)を\(z_n=(\sqrt{3}/2+\iuni /2)/n\)で定義すると，
+  \((S,d)\)を\cref{example:metric_space}の距離空間とする．\(S\)上の点列\(\seq{z_n}_{n\in\numset{N}}\)を\(z_n=(\sqrt{3}+\iuni)/(2n)\)で定義すると，
   \(\seq{z_n}_{n\in\numset{N}}\)は\cref{definition:sequence_converge}の意味で\(z_n\to 0\)（\(n\to\infty\)）を満たす．
 
   \begin{figure}[htbp]
@@ -63,29 +64,27 @@
     \label{figure:sequence_converge}
   \end{figure}
 
-  このことの意味を考えよう．\(d(z,0)=\abs{z}\)だから，複素平面上の点\(0\)から距離\(r\)だけ離れた点の集合は
-  \(\Set{z\in\numset{C}\given\abs{z}=r}\)，すなわち半径\(r\)の円周である．
+  この意味を考えよう．\(d(z,0)=\abs{z}\)だから，複素平面上の点\(0\)から距離\(r\)だけ離れた点の集合は\(\Set{z\in\numset{C}\given\abs{z}=r}\)，すなわち，半径\(r\)の円周である．
   つまり\(z_n\to 0\)（\(n\to\infty\)）とは，\cref{figure:sequence_converge}中にある円周の半径をどのように変えても，
-  円周の内側に点\(z_{N+1},z_{N+2},\dotsc\)がすべて入るように\(N\in\numset{N}\)をとれるということである．
-  これが成立することは直感的には明らかであろう．
+  \(N\)の値を十分大きくとれば，点\(z_{N+1},z_{N+2},\dotsc\)をすべて円周の中に入れられることを意味する．
 \end{example}
 
 \begin{example}[一様収束]
   \label{example:uniform_converge}
-  \(I=\ccival{a}{b}\)を1次元の閉区間とする．\(\cont{0}(I)\)を連続関数\(f\colon I\to\numset{R}\)の全体集合とすると，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)の距離になる．
+  \(I=\ccival{a}{b}\)を1次元の閉区間とする．\(\cont{0}(I)\)を連続関数\(f\colon I\to\numset{R}\)の全体集合とすると，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
   \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
   \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
 
   たとえば\(I=[0,1]\)，\(f_n(x)=x/n\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
-  実際\(d(f_n,\phi)=\sup_{x\in I}\abs{f_n(x)}=1/n\)なので，\(n\)を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
-
-  \begin{figure}[htbp]
-    \centering
-    \includegraphics{func_convergence.pdf}
-    \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子}
-    \label{figure:uniform_converge}
-  \end{figure}
+  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{func_convergence.pdf}
+  \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子}
+  \label{figure:uniform_converge}
+\end{figure}
 
 \begin{note}
   \cref{example:complex_planes_convergence}において\(\abs{z_n}=1/n\)であるから，\(d(f_n,\phi)=\abs{z_n}\)である．
@@ -94,13 +93,13 @@
 \end{note}
 
 \begin{definition}{閉包}{closure}\index{へいほう@閉包}\index{\(\clsr A\)}
-  \((S,d)\)を距離空間とする．集合\(A\subset S\)に対し，\(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
+  \((S,d)\)を距離空間とする．集合\(A\subset S\)に対して，\(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
 \end{definition}
 
 \footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{\(\scomp{A}\)}で表す．}
 
 \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}\index{へいしゅうごう@閉集合}（closed set）であるという．
-すなわち，\(A\)が閉集合であるとは，\(A\)上の任意の収束列が\(A\)上に極限点を持つことを意味する．
+すなわち，\(A\)が閉集合であるとは，\(A\)上の収束列はすべて\(A\)上に極限点を持つということである．
 
 \begin{definition}{コーシー列}{cauchy_sequence}\index{こーしーれつ@コーシー列}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\termdef{コーシー列}（Cauchy sequence）であるとは，
@@ -120,6 +119,7 @@
 \end{example}
 
 \subsection{ノルム空間}
+
 \begin{definition}{ノルム空間}{normed_space}\index{のるむくうかん@ノルム空間}\index{\(\vnorm{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\vnorm{\holder}\)が\(V\)の\termdef{ノルム}\index{のるむ@ノルム}（norm）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y}\in V\)に対して，\(\vnorm{\holder}\)が以下の条件を満たすことをいう．
@@ -141,11 +141,11 @@
 \end{example}
 
 \begin{example}[\(\lebesgue{p}\)空間]
-  複素数列\(\seq{x_n}_{n\in\numset{N}}\)に対し，\(\vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}}\in[0,\infty)\cup\Set{\infty}\)（\(p=1,2,\dotsc\)）を
+  複素数列\(\seq{x_n}_{n\in\numset{N}}\)に対して，\(\vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}}\in\ccival{0}{\infty}\)（\(p=1,2,\dotsc\)）を
   \[
     \vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}} = \pqty*{\sum_{n=1}^\infty\abs{x_n}^p}^{1/p}
   \]
-  と定義する．数列空間の部分空間\(\lebesgue{p}\)を\(\lebesgue{p}=\Set*{\seq{x_n}_{n\in\numset{N}}\given\vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}}<\infty}\)
+  で定義する．数列空間の部分空間\(\lebesgue{p}\)を\(\lebesgue{p}=\Set*{\seq{x_n}_{n\in\numset{N}}\given\vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}}<\infty}\)
   で定義すると，\(\vnorm{\holder}_{\lebesgue{p}}\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}\)はこのノルムについてバナッハ空間になる．
   バナッハ空間\(\lebesgue{p}\)を\termdef{\(\lebesgue{p}\)空間}\index{えるぴーくうかん@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
 \end{example}
@@ -183,8 +183,8 @@
 \end{theorem}
 
 \begin{proof}
-  \(\vect{b}\neq\zvec\)のときについて示す．\(\lambda=\innerp{\vect{a}}{\vect{b}}/\vnorm{\vect{b}}^2\)，\(\vect{a}_{\mathord{\perp}}=\vect{a}-\lambda\vect{b}\)とおく．
-  このとき\(\innerp{\vect{a}_{\mathord{\perp}}}{\vect{b}}=0\)なので，
+  \(\vect{b}\neq\zvec\)のときについて示す．
+  \(\lambda=\innerp{\vect{a}}{\vect{b}}/\vnorm{\vect{b}}^2\)，\(\vect{a}_{\mathord{\perp}}=\vect{a}-\lambda\vect{b}\)とおくと，\(\innerp{\vect{a}_{\mathord{\perp}}}{\vect{b}}=0\)より
   \(
     \vnorm{\vect{a}_{\mathord{\perp}}}^2 = \innerp{\vect{a}_{\mathord{\perp}}}{\vect{a}_{\mathord{\perp}}}
     = \innerp{\vect{a}-\lambda\vect{b}}{\vect{a}_{\mathord{\perp}}}
@@ -192,13 +192,12 @@
     = \innerp{\vect{a}}{\vect{a}_{\mathord{\perp}}}
   \)
   である．よって
-  \[
+  \(
     \vnorm{\vect{a}_{\mathord{\perp}}}^2 = \innerp{\vect{a}}{\vect{a}-\lambda\vect{b}}
     = \vnorm{\vect{a}}^2-\conj{\lambda}\innerp{\vect{a}}{\vect{b}}
-    = \vnorm{\vect{a}}^2-\frac{\conj{\innerp{\vect{a}}{\vect{b}}}}{\vnorm{\vect{b}}^2}\innerp{\vect{a}}{\vect{b}}
-    \geq 0
-  \]
-  である．これを整理すると\(\abs{\innerp{\vect{a}}{\vect{b}}}^2\leq\vnorm{\vect{a}}\vnorm{\vect{b}}^2\)が得られる．
+    = \vnorm{\vect{a}}^2-\abs{\innerp{\vect{a}}{\vect{b}}}^2/\vnorm{\vect{b}}^2
+  \)
+  だから，\((\vnorm{\vect{a}}\vnorm{\vect{b}})^2-\abs{\innerp{\vect{a}}{\vect{b}}}^2=(\vnorm{\vect{a}_{\mathord{\perp}}}\vnorm{\vect{b}})^2\geq 0\)である．
 \end{proof}
 
 \begin{proposition}{ノルムの連続性}{norm_continuous}
@@ -209,18 +208,15 @@
 \end{proposition}
 
 \begin{proof}
-  まず，任意の\(\vect{x},\vect{y}\in V\)について\(\abs{\vnorm{\vect{x}}-\vnorm{\vect{y}}}\leq\vnorm{\vect{x}-\vect{y}}\)が成り立つことを示す．
-  ノルムの定義により\(\vnorm{\vect{x}}\leq\vnorm{\vect{x}-\vect{y}}+\vnorm{\vect{y}}\)，\(\vnorm{\vect{y}}\leq\vnorm{\vect{y}-\vect{x}}+\vnorm{\vect{x}}\)である．
-  よって\(\abs{\vnorm{\vect{x}}-\vnorm{\vect{y}}}\leq\vnorm{\vect{x}-\vect{y}}\)である．
-
   \(\seq{\vect{x}_n}\)を\(V\)上の収束列とし，極限点を\(\vect{a}\)とおく．
-  すると\(\abs{\vnorm{\vect{x}_n}-\vnorm{\vect{a}}}\leq\vnorm{\vect{x}_n-\vect{a}}\to 0\)（\(n\to\infty\)）だから，\(\vnorm{\vect{x}_n}\to\vnorm{\vect{a}}\)（\(n\to\infty\)）である．
+  このとき\(\vnorm{\vect{x}_n}\leq\vnorm{\vect{x}_n-\vect{a}}+\vnorm{\vect{a}}\)，\(\vnorm{\vect{a}}\leq\vnorm{\vect{a}-\vect{x}_n}+\vnorm{\vect{x}_n}\)なので
+  \(\abs{\vnorm{\vect{x}_n}-\vnorm{\vect{a}}}\leq\vnorm{\vect{x}_n-\vect{a}}\to 0\)（\(n\to\infty\)），よって\(\vnorm{\vect{x}_n}\to\vnorm{\vect{a}}\)（\(n\to\infty\)）である．
 \end{proof}
 
 \begin{proposition}{内積の連続性}{inner_products_continuous}
   \(V\)が内積空間なら，\(V\)上の任意の収束列\(\seq{\vect{x}_n}\)，\(\seq{\vect{y}_n}\)について次式が成立する．
   \[
-    \lim_{n\to\infty}\innerp{\vect{x}_n}{\vect{y}_n} = \innerp*{\lim_{m\to\infty}\vect{x}_m}{\lim_{n\to\infty}\vect{y}_n}
+    \lim_{k\to\infty}\innerp{\vect{x}_k}{\vect{y}_k} = \innerp*{\lim_{m\to\infty}\vect{x}_m}{\lim_{n\to\infty}\vect{y}_n}
   \]
 \end{proposition}
 
@@ -228,32 +224,29 @@
   \(\vect{x}_n\to\vect{a}\)，\(\vect{y}_n\to\vect{b}\)（\(n\to\infty\)）とする．
   \(\innerp{\vect{x}_n}{\vect{y}_n}=\innerp{\vect{x}_n-\vect{a}}{\vect{y}_n}+\innerp{\vect{a}}{\vect{y}_n-\vect{b}}+\innerp{\vect{a}}{\vect{b}}\)だから，
   \nameref{theorem:cauchy_schwarz}より\(\abs{\innerp{\vect{x}_n}{\vect{y}_n}-\innerp{\vect{a}}{\vect{b}}}\leq\abs{\innerp{\vect{x}_n-\vect{a}}{\vect{y}_n}}+\abs{\innerp{\vect{a}}{\vect{y}_n-\vect{b}}}\leq\vnorm{\vect{x}_n-\vect{a}}\vnorm{\vect{y}_n}+\vnorm{\vect{a}}\vnorm{\vect{y}_n-\vect{b}}\)である．
-  よって，\(\vnorm{\vect{x}_n-\vect{a}}\to 0\)，\(\vnorm{\vect{y}_n-\vect{a}}\to 0\)（\(n\to\infty\)）より\(\innerp{\vect{x}_n}{\vect{y}_n}\to\innerp{\vect{a}}{\vect{b}}\)（\(n\to\infty\)）である．
+  \cref{proposition:norm_continuous}より\(\vnorm{\vect{x}_n-\vect{a}}\vnorm{\vect{y}_n}\to 0\vnorm{\vect{b}}\)，\(\vnorm{\vect{y}_n-\vect{a}}\to 0\)（\(n\to\infty\)）なので，\(\innerp{\vect{x}_n}{\vect{y}_n}\to\innerp{\vect{a}}{\vect{b}}\)（\(n\to\infty\)）である．
 \end{proof}
 
 \section{直交射影}
 
 \subsection{直交射影}
+
 \begin{definition}{線分，凸集合}{convex_set}\index{せんぶん@線分}\index{とつしゅうごう@凸集合}
-  \(V\)を\(\numset{K}\)上のベクトル空間とする．2点\(\vect{x},\vect{y}\in V\)に対し，集合\(\Set{(1-t)\vect{x}+t\vect{y}\given 0\leq t\leq 1}\)を
+  \(V\)を\(\numset{K}\)上のベクトル空間とする．2点\(\vect{x},\vect{y}\in V\)に対して，集合\(\Set{(1-t)\vect{x}+t\vect{y}\given t\in\ccival{0}{1}}\)を
   \(\vect{x}\)と\(\vect{y}\)を結ぶ\termdef{線分}（line segment）という．
   また，集合\(S\subset V\)に属する任意の2点を結ぶ線分が\(S\)に含まれるとき，\(S\)は\termdef{凸集合}（convex set）であるという．
 \end{definition}
 
-\cref{figure:convex_set,figure:non_convex_set}は，\(\numset{R}^2\)の凸集合と凸集合でない集合の図である．
-
 \begin{figure}[htbp]
-  \begin{minipage}{0.5\textwidth}
+  \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{convex.pdf}
-    \caption{凸集合の例}
-    \label{figure:convex_set}
+    \caption{\(\numset{R}^2\)の凸集合}
   \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
+  \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{non_convex.pdf}
-    \caption{凸集合でない例}
-    \label{figure:non_convex_set}
+    \caption{\(\numset{R}^2\)の凸集合でない部分集合}
   \end{minipage}
 \end{figure}
 
@@ -263,25 +256,24 @@
 \end{theorem}
 
 \begin{proof}
-  まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\delta^2\leq\vnorm{\vect{x}-\vect{y}}^2<\delta^2+1/n}\)は各\(n=1,2,\dotsc\)に対して空ではない．
-  そこで，\(C\)上の点列\(\seq{\vect{m}_n}\)を各\(n\)に対して\(\vect{m}_n\in A_n\)となるようにとれる．
+  まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{x}-\vect{y}}^2<\delta^2+1/n}\)は各\(n=1,2,\dotsc\)に対して空ではない．
+  そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
 
-  \(\seq{\vect{m}_n}\)がコーシー列であることを示す．\nameref{theorem:median_theorem}より，任意の\(n,k\in\numset{N}\)について
+  \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\nameref{theorem:median_theorem}より，任意の\(m,n\in\numset{N}\)について
   \begin{align*}
-    \vnorm{\vect{m}_n-\vect{m}_k}^2 &= \vnorm{(\vect{m}_n-\vect{x})-(\vect{m}_k-\vect{x})}^2 \\
-    &= 2(\vnorm{\vect{m}_n-\vect{x}}^2+\vnorm{\vect{m}_k-\vect{x}}^2)-\vnorm{(\vect{m}_n-\vect{x})+(\vect{m}_k-\vect{x})}^2 \\
-    &= 2\vnorm{\vect{m}_n-\vect{x}}^2+2\vnorm{\vect{m}_k-\vect{x}}^2-4\vnorm*{\frac{\vect{m}_n+\vect{m}_k}{2}-\vect{x}}^2
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 &= \vnorm{(\vect{a}_m-\vect{x})-(\vect{a}_n-\vect{x})}^2 \\
+    &= 2(\vnorm{\vect{a}_m-\vect{x}}^2+\vnorm{\vect{a}_n-\vect{x}}^2)-\vnorm{(\vect{a}_m-\vect{x})+(\vect{a}_n-\vect{x})}^2 \\
+    &= 2\vnorm{\vect{a}_m-\vect{x}}^2+2\vnorm{\vect{a}_n-\vect{x}}^2-4\vnorm*{\frac{\vect{a}_m+\vect{a}_n}{2}-\vect{x}}^2
   \end{align*}
-  である．\(C\)は凸集合だから\((\vect{m}_n+\vect{m}_k)/2\in C\)である．これと\(\vect{m}_n\in A_n\)，\(\vect{m}_k\in A_k\)より
-  \begin{align*}
-    \vnorm{\vect{m}_n-\vect{m}_k}^2 &= 2\vnorm{\vect{m}_n-\vect{x}}^2+2\vnorm{\vect{m}_k-\vect{x}}^2-4\vnorm*{\frac{\vect{m}_n+\vect{m}_k}{2}-\vect{x}}^2 \\
-    &< 2\pqty*{\delta^2+\frac{1}{n}}+2\pqty*{\delta^2+\frac{1}{k}}-4\delta^2 \\
-    &= \frac{2}{n}+\frac{2}{k} \to 0\quad(n,k\to\infty)
-  \end{align*}
-  となる．よって\(\seq{\vect{m}_n}\)はコーシー列なので，極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)であり，また\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{m}_n}=\delta\)である．
+  が成立する．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)である．したがって
+  \[
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 < 2\pqty*{\delta^2+\frac{1}{m}}+2\pqty*{\delta^2+\frac{1}{n}}-4\delta^2
+    = \frac{2}{m}+\frac{2}{n} \to 0\quad(m,n\to\infty)
+  \]
+  である．よって\(\seq{\vect{a}_n}\)はコーシー列なので，極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
 
-  次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が単元集合であることを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．このとき，存在の証明と同様にして
+  次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．このとき，存在の証明と同様にして
   \begin{align*}
     \vnorm{\vect{m}_1-\vect{m}_2}^2 &= 2\vnorm{\vect{m}_1-\vect{x}}^2+2\vnorm{\vect{m}_2-\vect{x}}^2-4\vnorm*{\frac{\vect{m}_1+\vect{m}_2}{2}-\vect{x}}^2 \\
     &\leq 2\delta^2+2\delta^2-4\delta^2 = 0
@@ -300,7 +292,7 @@
 
 \begin{proof}
   閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)がただ1つ存在する．
-  あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に証明できる．
+  あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
 \begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影!ひるべるとくうかん@ヒルベルト空間}\index{\(\proj_V(\vect{x})\)}
@@ -312,14 +304,15 @@
 \end{proposition}
 
 \subsection{正規直交列}
+
 \nameref{theorem:projection_theorem}は直交射影\(\vect{m}\)の存在を示す定理であり，具体的な式を与えるものではない．
 しかし，\(V\)が正規直交系によって生成される空間（正確にはその閉包）であれば，\(\vect{m}\)の具体的な式が得られる．
 
 \begin{theorem}{ベッセルの不等式}{bessels_inequality}\index{べっせるのふとうしき@ベッセルの不等式}
-  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\vect{e}_n}\)が正規直交列なら，次式が成立する．
+  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\vect{e}_n}\)が正規直交列なら，任意の\(\vect{x}\in H\)に対して次式が成立する．
   \begin{equation}
     \label{equation:bessels_inequality}
-    \sum_{n=1}^\infty\abs{\innerp{\vect{x}}{\vect{e}_n}}^2 \leq \vnorm{\vect{x}}^2\quad(\vect{x}\in H)
+    \sum_{n=1}^\infty\abs{\innerp{\vect{x}}{\vect{e}_n}}^2 \leq \vnorm{\vect{x}}^2
   \end{equation}
 \end{theorem}
 
@@ -357,20 +350,19 @@
 
 \begin{proof}
   \(\vect{v}\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{\vect{v}_n}\)で\(\vect{v}_n\to\vect{v}\)（\(n\to\infty\)）を満たすものがある．
-  各\(\vect{v}_n\)は\(V\)の元だから，正規直交系\(\Set{\vect{e}_1,\vect{e}_2,\dotsc}\)の元の有限和で次のように表せる．
+  \(V=\bigcup_{n=1}^\infty V_n\)（\(V_n=\spannedby\Set{\vect{v}_1,\dots,\vect{v}_n}\)）なので，各\(\vect{v}_n\)は次のように表せる．
   \begin{equation}
     \label{equation:closure_approx_sequence}
-    \vect{v}_n = \sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k
-    \quad\text{(\(\midx{z}{n}{k}=\innerp{\vect{v}_n}{\vect{e}_k}\)，\(d_n=\max\Set{k\in\numset{N}\given\midx{z}{n}{k}\neq 0}\))}
+    \vect{v}_n = \sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k\quad\text{(\(d_n=\min\Set{k\in\numset{N}\given\vect{v}_n\in V_k}\)，\(\midx{z}{n}{k}\in\numset{C}\))}
   \end{equation}
 
-  \(\vect{p}=\sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n\)とする．\nameref{proposition:inner_products_continuous}から
+  \(\vect{p}=\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)とする．\nameref{proposition:inner_products_continuous}から
   \begin{align*}
-    \innerp{\vect{x}-\vect{p}}{\vect{v}} &= \innerp[\bigg]{\vect{x}-\sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n}{\lim_{m\to\infty}\sum_{k=1}^{d_m}\midx{z}{m}{k}\vect{e}_k} \\
-    &= \lim_{m\to\infty}\sum_{k=1}^{d_m}\conj{\midx{z}{m}{k}}\innerp[\bigg]{\vect{x}-\sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n}{\vect{e}_k} \\
-    &= \lim_{m\to\infty}\sum_{k=1}^{d_m}\conj{\midx{z}{m}{k}}\pqty[\bigg]{\innerp{\vect{x}}{\vect{e}_k}-\sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\innerp{\vect{e}_n}{\vect{e}_k}}
+    \innerp{\vect{x}-\vect{p}}{\vect{v}} &= \innerp[\bigg]{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\lim_{n\to\infty}\sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k} \\
+    &= \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\innerp[\bigg]{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\vect{e}_k} \\
+    &= \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\pqty[\bigg]{\innerp{\vect{x}}{\vect{e}_k}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\innerp{\vect{e}_m}{\vect{e}_k}}
   \end{align*}
-  であり，\(\innerp{\vect{e}_n}{\vect{e}_k}=\kdelta{n}{k}\)より\(\innerp{\vect{x}-\vect{p}}{\vect{v}}=0\)である．
+  であり，\(\innerp{\vect{e}_m}{\vect{e}_k}=\kdelta{m}{k}\)より\(\innerp{\vect{x}-\vect{p}}{\vect{v}}=0\)である．
 
   \(\clsr V\)がベクトル空間であることは，\(\clsr V\)上の収束列の極限点は\(\clsr V\)に属すること，および\cref{equation:closure_approx_sequence}から示せる．
   よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}(\vect{x})\)である．
@@ -402,10 +394,13 @@
 \section{フーリエ級数展開}
 
 \begin{definition}{複素フーリエ級数}{complex_fourier_series}\index{ふくそふーりえきゅうすう@複素フーリエ級数}
-  任意の\(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)に対して，次式が\(\Lebesgue{2}\)収束の意味で成立する．
+  \(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)とする．
   \[
-    f(t) = \lim_{N\to\infty}\sum_{n=-N}^Nc_n\napr^{\iuni nt},
-    \quad c_n=\frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}
+    c_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
+  \]
+  とおくと，次式が\(\Lebesgue{2}\)収束の意味で成立する．
+  \[
+    \lim_{N\to\infty}\sum_{n=-N}^Nc_n\napr^{\iuni nt} = f(t)
   \]
 \end{definition}
 
