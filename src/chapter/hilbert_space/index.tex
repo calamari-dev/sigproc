@@ -13,17 +13,17 @@
 
 \subsection{距離空間}
 
-\begin{definition}{距離空間}{metric_space}\index{きょりくうかん@距離空間}\index{\((S,d)\)}
-  \(S\)を集合とする．\(d\)が\(S\)上の\termdef{距離}\index{きょり@距離}（metric）であるとは，
+\begin{definition}{距離}{metric}\index{きょり@距離}
+  \(S\)を集合とする．\(d\)が\(S\)上の\termdef{距離}（metric）であるとは，
   任意の\(x,y,z\in S\)に対して，\(d\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(d(x,y)\geq 0\)，\([d(x,y)=0\iff x=y]\)
     \item \(d(x,y)=d(y,x)\)
     \item \(d(x,y)+d(y,z)\geq d(x,z)\)
   \end{enumerate}
-
-  また，集合と距離の組\((S,d)\)を\termdef{距離空間}（metric space）という．
 \end{definition}
+
+集合と距離の組\((S,d)\)を\termdef{距離空間}\index{きょりくうかん@距離空間}\index{\((S,d)\)}（metric space）という．
 
 \begin{example}
   \label{example:metric_space}
@@ -37,7 +37,7 @@
   距離空間\((S,d)\)を\termdef{離散空間}\index{りさんくうかん@離散空間}（discrete space）という．
 \end{example}
 
-\cref{definition:metric_space}のように抽象的な形で距離を定義する利点の1つは，\(\numset{K}^n\)以外の集合に対しても，点列の極限を定義できることである．
+\cref{definition:metric}のように抽象的な形で距離を定義する利点の1つは，\(\numset{K}^n\)以外の集合に対しても，点列の極限を定義できることである．
 
 \begin{definition}{点列の収束}{sequence_converge}\index{てんれつのしゅうそく@点列の収束}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\in S\)に\termdef{収束する}（converge）とは，
@@ -89,7 +89,7 @@
 \begin{note}
   \cref{example:complex_planes_convergence}において\(\abs{z_n}=1/n\)であるから，\(d(f_n,\phi)=\abs{z_n}\)である．
   よって，\cref{figure:sequence_converge}は（\(z_n\)を\(f_n\)に書き換えれば）\(f_n\to\phi\)（\(n\to\infty\)）の様子を描いた図とも考えられる．
-  このように，関数などの一見「点」とは思えないような対象を点とみなして考察するのは，しばしば有用である．
+  このように，関数などの一見「点」とは思えないような対象を点とみなして考察するのは，しばしば理解の助けになる．
 \end{note}
 
 \begin{definition}{閉包}{closure}\index{へいほう@閉包}\index{\(\clsr A\)}
@@ -120,20 +120,19 @@
 
 \subsection{ノルム空間}
 
-\begin{definition}{ノルム空間}{normed_space}\index{のるむくうかん@ノルム空間}\index{\(\vnorm{\holder}\)}
-  \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\vnorm{\holder}\)が\(V\)の\termdef{ノルム}\index{のるむ@ノルム}（norm）であるとは，
+\begin{definition}{ノルム}{norm}\index{のるむ@ノルム}\index{\(\vnorm{\holder}\)}
+  \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\vnorm{\holder}\)が\(V\)の\termdef{ノルム}（norm）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y}\in V\)に対して，\(\vnorm{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(\vnorm{\vect{x}}\geq 0\)，\([\vnorm{\vect{x}}=0\iff\vect{x}=\zvec]\)
     \item \(\vnorm{\lambda\vect{x}}=\abs{\lambda}\vnorm{\vect{x}}\)
     \item \(\vnorm{\vect{x}+\vect{y}}\leq\vnorm{\vect{x}}+\vnorm{\vect{y}}\)
   \end{enumerate}
-
-  また，\(V\)にノルムが定義されているとき，\(V\)は\termdef{ノルム空間}（normed space）であるという．
 \end{definition}
 
-\(d(\vect{x},\vect{y})=\vnorm{\vect{x}-\vect{y}}\)とおくと，\(d\)は\(V\)の距離になる．
-\((V,d)\)が完備距離空間であるとき，ノルム空間\(V\)は\termdef{バナッハ空間}\index{ばなっはくうかん@バナッハ空間}（Banach space）であるという．
+ノルムが備わっているベクトル空間のことを\termdef{ノルム空間}\index{のるむくうかん@ノルム空間}（normed space）という．
+\(V\)がノルム空間であれば，\(d(\vect{x},\vect{y})=\vnorm{\vect{x}-\vect{y}}\)（\(\vect{x},\vect{y}\in V\)）により\(V\)上の距離\(d\)が定義される．
+\((V,d)\)が完備距離空間であるとき，\(V\)は\termdef{バナッハ空間}\index{ばなっはくうかん@バナッハ空間}（Banach space）であるという．
 
 \begin{example}
   \(V\)が\(\numset{K}\)上の内積空間なら，\(V\)の内積\(\innerp{\holder}{\holder}\)から\(V\)のノルムを\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)で定義できる．
@@ -156,6 +155,7 @@
 \end{example}
 
 \section{ヒルベルト空間}
+
 \begin{definition}{ヒルベルト空間}{hilbert_space}\index{ひるべるとくうかん@ヒルベルト空間}
   内積空間\(H\)が\termdef{ヒルベルト空間}（Hilbert space）であるとは，
   \(H\)の内積\(\innerp{\holder}{\holder}\)から定まるノルム\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)について，\(H\)がバナッハ空間であることをいう．
@@ -166,7 +166,7 @@
 
 \begin{note}
   以下に述べる命題は，内積空間であればすべて成立する．内積空間がヒルベルト空間であるための条件「完備性」は，条件を満たす点列に対して，極限点の存在を保証するものである．
-  したがって，ヒルベルト空間でないと成立しない定理は，存在を主張する定理であることが多い．
+  そのため，ヒルベルト空間でないと成立しない定理は，存在を主張する定理であることが多い．
   本書においても，存在定理である\cref{theorem:convex_projection_theorem}で初めて，完備性が本質的に効いてくる．
 \end{note}
 
@@ -257,21 +257,21 @@
 
 \begin{proof}
   まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{x}-\vect{y}}^2<\delta^2+1/n}\)は各\(n=1,2,\dotsc\)に対して空ではない．
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2<\delta^2+1/n}\)は各\(n=1,2,\dotsc\)に対して空ではない．
   そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
 
-  \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\nameref{theorem:median_theorem}より，任意の\(m,n\in\numset{N}\)について
-  \begin{align*}
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 &= \vnorm{(\vect{a}_m-\vect{x})-(\vect{a}_n-\vect{x})}^2 \\
-    &= 2(\vnorm{\vect{a}_m-\vect{x}}^2+\vnorm{\vect{a}_n-\vect{x}}^2)-\vnorm{(\vect{a}_m-\vect{x})+(\vect{a}_n-\vect{x})}^2 \\
-    &= 2\vnorm{\vect{a}_m-\vect{x}}^2+2\vnorm{\vect{a}_n-\vect{x}}^2-4\vnorm*{\frac{\vect{a}_m+\vect{a}_n}{2}-\vect{x}}^2
-  \end{align*}
-  が成立する．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)である．したがって
+  \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\(m,n\in\numset{N}\)とする．\nameref{theorem:median_theorem}より
+  \begin{gather*}
+    \vnorm{(\vect{a}_m-\vect{x})+(\vect{a}_n-\vect{x})}^2+\vnorm{\vect{a}_m-\vect{a}_n}^2 = 2(\vnorm{\vect{a}_m-\vect{x}}^2+\vnorm{\vect{a}_n-\vect{x}}^2), \\
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 = 2\vnorm{\vect{a}_m-\vect{x}}^2+2\vnorm{\vect{a}_n-\vect{x}}^2-4\vnorm*{\frac{\vect{a}_m+\vect{a}_n}{2}-\vect{x}}^2
+  \end{gather*}
+  である．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)である．したがって
   \[
     \vnorm{\vect{a}_m-\vect{a}_n}^2 < 2\pqty*{\delta^2+\frac{1}{m}}+2\pqty*{\delta^2+\frac{1}{n}}-4\delta^2
     = \frac{2}{m}+\frac{2}{n} \to 0\quad(m,n\to\infty)
   \]
-  である．よって\(\seq{\vect{a}_n}\)はコーシー列なので，極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
+  である．よって，\(\seq{\vect{a}_n}\)はコーシー列なので極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
+  したがって，\(\delta\)の定義から\(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
 
   次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．このとき，存在の証明と同様にして
   \begin{align*}

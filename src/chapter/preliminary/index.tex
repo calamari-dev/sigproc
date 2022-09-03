@@ -62,7 +62,7 @@
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．このとき，次の命題は同値である．
   \begin{enumerate}
     \item \(W\)は\(V\)の部分空間である
-    \item 任意の\(s\in\numset{K}\)，\(\vect{w}_1,\vect{w}_2\in W\)に対して\(s\vect{w}_1,\vect{w}_1+\vect{w}_2\in W\)である
+    \item 任意の\(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in W\)に対して\(s\vect{x}+t\vect{y}\in W\)である
   \end{enumerate}
 \end{proposition}
 
@@ -148,7 +148,7 @@
 \end{example}
 
 さきほどの議論によれば，\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_1,\dots,a_k\in\numset{K}\)について\cref{equation:independence}が成立する．
-すなわち，\(S\)は\(\spannedby S\)の基底である．実はこの逆も示せるので，次の命題が成立する．
+すなわち，\(S\)は\(\spannedby S\)の基底である．この逆も成り立つので，次の命題が成立する．
 
 \begin{proposition}{}{span_and_uniqueness}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．このとき，次の命題は同値である．
@@ -162,7 +162,7 @@
 \(V\)が有限次元なら，\(V\)の基底はすべて有限集合で，その元の個数は等しい．
 すなわち，元の個数\(\sizeof{\basis{B}}\)は基底\(\basis{B}\)のとりかたによらず定まる．
 \(\sizeof{\basis{B}}\)を\(V\)の\termdef{次元}\index{じげん@次元}（dimension）といい，\(\dim V\)\index{\(\dim V\)}と表記する
-\footnote{\(V\)が有限次元でないときも基底は存在する（証明は文献\cite{yukie2019}）．}．
+\footnote{任意のベクトル空間は基底を有する（証明は文献\cite{yukie2019}）が，有限集合であるとは限らない．}．
 
 基底に関連して，次の命題が成り立つ．
 
@@ -188,7 +188,7 @@
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y},\vect{z}\in V\)に対し，\(\innerp{\holder}{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
-    \item \(\innerp{\vect{x}}{\vect{y}}=\conj{\innerp{\vect{y}}{\vect{x}}}\)
+    \item \(\innerp{\vect{x}}{\vect{y}}=\conj{\innerp{\vect{y}}{\vect{x}}}\in\numset{K}\)
     \item \(\innerp{\lambda\vect{x}+\vect{y}}{\vect{z}}=\lambda\innerp{\vect{x}}{\vect{z}}+\innerp{\vect{y}}{\vect{z}}\)
     \item \(\innerp{\vect{x}}{\vect{x}}\geq 0\)，\([\innerp{\vect{x}}{\vect{x}}=0\iff\vect{x}=\zvec]\)
   \end{enumerate}
@@ -248,7 +248,7 @@
   \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
   \begin{enumerate}
     \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)である
-    \item 任意の\(\vect{x}\in V\)，\(c\in\numset{K}\)に対して\(f(c\vect{x})=cf(\vect{x})\)である
+    \item 任意の\(c\in\numset{K}\)，\(\vect{x}\in V\)に対して\(f(c\vect{x})=cf(\vect{x})\)である
   \end{enumerate}
 \end{definition}
 
@@ -288,8 +288,7 @@
 
 なお，\(\basis{B}\)の元を並べる順序に応じて，\cref{equation:basis_comb}の\(c_1,\dots,c_n\)の順序も変化するので，
 \(\phi\)は\(\basis{B}\)に対して一意ではない．\(\phi\)は\(\basis{B}\)の元を並べる順序を決めて初めて定まる．
-本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をした場合，
-\(\basis{B}\)の元を\(\vect{v}_i\)の添え字\(i\)について昇順に並べると決めておく．
+本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をした場合，\(\basis{B}\)の元を\(\vect{v}_1,\vect{v}_2,\dotsc\)の順に並べると決めておく．
 
 \begin{example}[形式的な微分]
   \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(\numset{R}\)上の\(n+1\)次元ベクトル空間である．
@@ -418,5 +417,25 @@
   また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって，\(\vect{v}_i\)は\(\mat{A}\)の固有値\(\lambda_i\)に属する固有ベクトルである．
   したがって，\cref{proposition:basis_and_matrix}より\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底である．
 \end{proof}
+
+\section{1変数の微分積分学}
+
+\subsection{実数の性質}
+
+\begin{definition}{上界，下界}{}\index{じょうかい@上界}\index{かかい@下界}
+  \(S\)を\(\numset{R}\)の部分集合とする．
+  \begin{enumerate}
+    \item 実数\(M\)が\(S\)の\termdef{上界}（upper bound）であるとは，任意の\(x\in S\)に対して\(x\leq M\)が成立することをいう
+    \item 実数\(m\)が\(S\)の\termdef{下界}（lower bound）であるとは，任意の\(x\in S\)に対して\(x\geq m\)が成立することをいう
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{\(\sup S\)}\index{\(\inf S\)}
+  \(S\)を\(\numset{R}\)の空でない部分集合とする．\(S\)の上界の全体集合を\(U\)，下界の全体集合を\(L\)とおく．
+  \begin{enumerate}
+    \item \(U\)が空でないとき（つまり\(S\)の上界が存在すれば），\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(S\)の\termdef{上限}（supremum）といい，\(\sup S\)と書く
+    \item \(L\)が空でないとき（つまり\(S\)の下界が存在すれば），\(L\)は最大元\(\max L\)を持つ．\(\max L\)を\(S\)の\termdef{下限}（infimum）といい，\(\inf S\)と書く
+  \end{enumerate}
+\end{definition}
 
 \end{document}
