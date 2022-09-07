@@ -420,22 +420,92 @@
 
 \section{1変数の微分積分学}
 
+ここではε‐δ論法による極限の定義を既知としたうえで，実数の性質からしたがう重要な事実をいくつか挙げる．
+
 \subsection{実数の性質}
 
 \begin{definition}{上界，下界}{}\index{じょうかい@上界}\index{かかい@下界}
-  \(S\)を\(\numset{R}\)の部分集合とする．
+  \(X\)を\(\numset{R}\)の部分集合とする．
   \begin{enumerate}
-    \item 実数\(M\)が\(S\)の\termdef{上界}（upper bound）であるとは，任意の\(x\in S\)に対して\(x\leq M\)が成立することをいう
-    \item 実数\(m\)が\(S\)の\termdef{下界}（lower bound）であるとは，任意の\(x\in S\)に対して\(x\geq m\)が成立することをいう
+    \item 実数\(a\)が\(X\)の\termdef{上界}（upper bound）であるとは，任意の\(x\in X\)に対して\(x\leq a\)が成立することをいう
+    \item 実数\(b\)が\(X\)の\termdef{下界}（lower bound）であるとは，任意の\(x\in X\)に対して\(x\geq b\)が成立することをいう
   \end{enumerate}
 \end{definition}
 
-\begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{\(\sup S\)}\index{\(\inf S\)}
-  \(S\)を\(\numset{R}\)の空でない部分集合とする．\(S\)の上界の全体集合を\(U\)，下界の全体集合を\(L\)とおく．
+\(X\)の上界が存在するとき，\(X\)は上に有界であるという．同様に，\(X\)の下界が存在するとき，\(X\)は下に有界であるという．\(X\)が上にも下にも有界であるときは，単に「有界である」という．
+
+\begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{\(\sup X\)}\index{\(\inf X\)}
+  \(X\)を\(\numset{R}\)の空でない部分集合とする．\(X\)の上界の全体集合を\(U\)，下界の全体集合を\(L\)とおく．
   \begin{enumerate}
-    \item \(U\)が空でないとき（つまり\(S\)の上界が存在すれば），\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(S\)の\termdef{上限}（supremum）といい，\(\sup S\)と書く
-    \item \(L\)が空でないとき（つまり\(S\)の下界が存在すれば），\(L\)は最大元\(\max L\)を持つ．\(\max L\)を\(S\)の\termdef{下限}（infimum）といい，\(\inf S\)と書く
+    \item \(X\)が上に有界であれば，\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(X\)の\termdef{上限}（supremum）といい，\(\sup X\)と書く
+    \item \(X\)が下に有界であれば，\(L\)は最大元\(\max L\)を持つ．\(\max L\)を\(X\)の\termdef{下限}（infimum）といい，\(\inf X\)と書く
   \end{enumerate}
 \end{definition}
+
+上限と下限について議論するときは，次の\cref{proposition:sup_inf_and_eps}が便利である．
+
+\begin{proposition}{}{sup_inf_and_eps}
+  集合\(X\subset\numset{R}\)は上に有界かつ空でないとする．このとき，実数\(s\)に関する以下の条件は同値であり，同様のことが\(\inf X\)についても成り立つ．
+  \begin{enumerate}
+    \item \(s=\sup X\)である
+    \item 任意の\(\varepsilon>0\)に対し，\(x\in X\)が存在して\(x+\varepsilon>s\)を満たす
+  \end{enumerate}
+\end{proposition}
+
+\subsection{数列と級数}
+
+\begin{proposition}{}{monotone_converge}
+  実数列\(\seq{a_n}_{n\in\numset{N}}\)が以下の条件を満たすとき，\(\seq{a_n}_{n\in\numset{N}}\)は収束列である．
+  \begin{enumerate}
+    \item 集合\(\Set{a_1,a_2,\dotsc}\)が上に有界である
+    \item \(\seq{a_n}_{n\in\numset{N}}\)は単調増加する．すなわち，\(a_1\leq a_2\leq\dotsb\)である
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \(S=\Set{a_1,a_2,\dotsc}\)，\(\alpha=\sup S\)とする．このとき\(a_n\to\alpha\)（\(n\to\infty\)）であることを示す．
+  任意に\(\varepsilon>0\)をとる．\cref{proposition:sup_inf_and_eps}より，\(x+\varepsilon>\alpha\)を満たすように\(x\in S\)をとれる．
+  また，\(S\)の定義から\(a_N=x\)となる\(N\in\numset{N}\)が少なくとも1つある．
+  \(n\geq N\)なら，\(a_N\leq a_n\leq\alpha\)より\(\abs{a_n-\alpha}=\alpha-a_n\leq\alpha-a_N<\varepsilon\)である．
+  よって\(a_n\to\alpha\)（\(n\to\infty\)）である．
+\end{proof}
+
+\begin{proposition}{区間縮小法}{nested_intervals}\index{くかんしゅくしょうほう@区間縮小法}
+  \(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）は有界閉区間であり，条件\(I_1\supset I_2\supset\dotsb\)を満たすとする．
+  このとき集合\(\bigcap_{n=1}^\infty I_n\)は空でない．また\(b_n-a_n\to 0\)（\(n\to\infty\)）であれば，\(\bigcap_{n=1}^\infty I_n\)はただ1つの元からなる．
+\end{proposition}
+
+\begin{proof}
+  \cref{proposition:monotone_converge}より，数列\(\seq{a_n}_{n\in\numset{N}}\)，\(\seq{b_n}_{n\in\numset{N}}\)はどちらも収束列である．
+  極限値をそれぞれ\(\alpha\)，\(\beta\)とおく．各\(n\in\numset{N}\)に対して，\(b_n\)は集合\(A=\Set{a_1,a_2,\dotsc}\)の上界だから\(\alpha=\sup A\leq b_n\)である．
+  よって，\(\alpha\)は集合\(B=\Set{b_1,b_2,\dotsc}\)の下界なので\(\alpha\leq\inf B=\beta\)である．
+  したがって，\(n\)の値によらず\(a_n\leq\alpha\leq\beta\leq b_n\)だから\(\ccival{\alpha}{\beta}\subset\bigcap_{n=1}^\infty I_n\)であり，集合\(\bigcap_{n=1}^\infty I_n\)は空でない．
+
+  \(x\in\bigcap_{n=1}^\infty I_n\)を任意にとる．\(x\)は\(A\)の上界なので，\(a_n\leq\alpha\leq x\leq b_n\)，\(0\leq x-\alpha\leq b_n-a_n\)である．
+  よって，\(b_n-a_n\to 0\)（\(n\to\infty\)）なら\(x=\alpha\)，\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)である．
+\end{proof}
+
+\begin{theorem}{ボルツァーノ・ワイエルシュトラスの定理}{}\index{ぼるつぁーのわいえるしゅとらすのていり@ボルツァーノ・ワイエルシュトラスの定理}
+  有界な実数列は収束する部分列を持つ．すなわち，数列\(\seq{x_n}_{n\in\numset{N}}\)の項全体が有界集合であるとき，狭義単調増加する自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)が存在して，数列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)は収束列になる．
+\end{theorem}
+
+\begin{proof}
+  写像\(f\colon\numset{N}\to\numset{R}\)を\(f(n)=x_n\)で定義する．また，\(x_1,x_2,\dotsc\in I_1\)となる有界閉区間\(I_1=\ccival{a_1}{b_1}\)を1つ選び，閉区間\(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）を帰納的に
+  \[
+    I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(f^{-1}(\ccival{a_n}{c_n})\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
+    \quad c_n = \frac{a_n+b_n}{2}
+  \]
+  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので，\cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
+
+  \(f^{-1}(I_n)\)は無限集合であることを帰納法で示す．\(f^{-1}(I_n)\)が無限集合であれば，\(f^{-1}(I_n)=f^{-1}(\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n})=f^{-1}(\ccival{a_n}{c_n})\cup f^{-1}(\ccival{c_n}{b_n})\)より
+  \(f^{-1}(\ccival{a_n}{c_n})\)と\(f^{-1}(\ccival{c_n}{b_n})\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(f^{-1}(I_{n+1})\)は無限集合である．
+
+  \(f^{-1}(I_n)\)は無限集合だから，狭義単調増加する自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)を
+  \[
+    \phi(1) = 1,
+    \quad\phi(n) = \min\Set{k\in f^{-1}(I_n)\given k>\phi(n-1)}\quad(n=2,3,\dotsc)
+  \]
+  で定義できる．\(\alpha\in I_n\)，\(x_{\phi(n)}=f(\phi(n))\in I_n\)より\(\abs{x_{\phi(n)}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi(n)}\to\alpha\)（\(n\to\infty\)）である．
+\end{proof}
 
 \end{document}

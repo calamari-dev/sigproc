@@ -76,7 +76,7 @@
   \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
 
   たとえば\(I=[0,1]\)，\(f_n(x)=x/n\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
-  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
+  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
 
 \begin{figure}[htbp]
@@ -320,12 +320,12 @@
   p.\pageref{xr-equation:pre_bessels_inequality}の\cref{xr-equation:pre_bessels_inequality}と同様に計算すると，
   任意の\(z_1,\dots,z_m\in\numset{C}\)に対して次式が成り立つと分かる．
   \[
-    \vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \vnorm*{\vect{x}-\sum_{k=1}^mz_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
   \]
 
   したがって，特に\(z_k=\innerp{\vect{x}}{\vect{e}_k}\)なら
   \[
-    \vnorm{\vect{x}}^2 = \vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}^2+\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \vnorm{\vect{x}}^2 = \vnorm*{\vect{x}-\sum_{k=1}^m\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}^2+\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
     \geq \sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
   \]
   である．よって，級数\(\sum\abs{\innerp{\vect{x}}{\vect{e}_n}}^2\)は上に有界な正項級数だから収束し，級数の和は\cref{equation:bessels_inequality}を満たす．
