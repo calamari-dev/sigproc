@@ -452,21 +452,20 @@
   \end{enumerate}
 \end{proposition}
 
-\subsection{数列と級数}
+\subsection{数列の極限}
 
 \begin{proposition}{}{monotone_converge}
   実数列\(\seq{a_n}_{n\in\numset{N}}\)が以下の条件を満たすとき，\(\seq{a_n}_{n\in\numset{N}}\)は収束列である．
   \begin{enumerate}
-    \item 集合\(\Set{a_1,a_2,\dotsc}\)が上に有界である
+    \item 集合\(S=\Set{a_1,a_2,\dotsc}\)が上に有界である
     \item \(\seq{a_n}_{n\in\numset{N}}\)は単調増加する．すなわち，\(a_1\leq a_2\leq\dotsb\)である
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-  \(S=\Set{a_1,a_2,\dotsc}\)，\(\alpha=\sup S\)とする．このとき\(a_n\to\alpha\)（\(n\to\infty\)）であることを示す．
-  任意に\(\varepsilon>0\)をとる．\cref{proposition:sup_inf_and_eps}より，\(x+\varepsilon>\alpha\)を満たすように\(x\in S\)をとれる．
-  また，\(S\)の定義から\(a_N=x\)となる\(N\in\numset{N}\)が少なくとも1つある．
-  \(n\geq N\)なら，\(a_N\leq a_n\leq\alpha\)より\(\abs{a_n-\alpha}=\alpha-a_n\leq\alpha-a_N<\varepsilon\)である．
+  \(\alpha=\sup S\)とする．このとき\(a_n\to\alpha\)（\(n\to\infty\)）であることを示す．
+  任意に\(\varepsilon>0\)をとる．\cref{proposition:sup_inf_and_eps}より，\(x+\varepsilon>\alpha\)となる\(x\in S\)がある．
+  \(x=a_N\)を満たす\(N\)について，\(n\geq N\)なら\(a_N\leq a_n\leq\alpha\)，\(\abs{a_n-\alpha}=\alpha-a_n\leq\alpha-a_N<\varepsilon\)である．
   よって\(a_n\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
@@ -485,8 +484,8 @@
   よって，\(b_n-a_n\to 0\)（\(n\to\infty\)）なら\(x=\alpha\)，\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)である．
 \end{proof}
 
-\begin{theorem}{ボルツァーノ・ワイエルシュトラスの定理}{}\index{ぼるつぁーのわいえるしゅとらすのていり@ボルツァーノ・ワイエルシュトラスの定理}
-  有界な実数列は収束する部分列を持つ．すなわち，数列\(\seq{x_n}_{n\in\numset{N}}\)の項全体が有界集合であるとき，狭義単調増加する自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)が存在して，数列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)は収束列になる．
+\begin{theorem}{ボルツァーノ・ワイエルシュトラスの定理}{bolzano_weierstrass}\index{ぼるつぁーのわいえるしゅとらすのていり@ボルツァーノ・ワイエルシュトラスの定理}
+  有界な実数列は収束する部分列を持つ．すなわち，実数列\(\seq{x_n}_{n\in\numset{N}}\)の項全体が有界集合であるとき，\(\phi(1)<\phi(2)<\dotsb\)を満たす自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)が存在して，数列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)は収束列になる．
 \end{theorem}
 
 \begin{proof}
@@ -495,17 +494,41 @@
     I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(f^{-1}(\ccival{a_n}{c_n})\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
     \quad c_n = \frac{a_n+b_n}{2}
   \]
-  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので，\cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
+  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう定理であるが，ここでは認める．}，
+  \cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
 
   \(f^{-1}(I_n)\)は無限集合であることを帰納法で示す．\(f^{-1}(I_n)\)が無限集合であれば，\(f^{-1}(I_n)=f^{-1}(\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n})=f^{-1}(\ccival{a_n}{c_n})\cup f^{-1}(\ccival{c_n}{b_n})\)より
   \(f^{-1}(\ccival{a_n}{c_n})\)と\(f^{-1}(\ccival{c_n}{b_n})\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(f^{-1}(I_{n+1})\)は無限集合である．
 
-  \(f^{-1}(I_n)\)は無限集合だから，狭義単調増加する自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)を
+  以上により，\(f^{-1}(I_n)\)は無限集合である．よって，自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)を
   \[
     \phi(1) = 1,
     \quad\phi(n) = \min\Set{k\in f^{-1}(I_n)\given k>\phi(n-1)}\quad(n=2,3,\dotsc)
   \]
-  で定義できる．\(\alpha\in I_n\)，\(x_{\phi(n)}=f(\phi(n))\in I_n\)より\(\abs{x_{\phi(n)}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi(n)}\to\alpha\)（\(n\to\infty\)）である．
+  で定義できる．\(\alpha\in I_n\)，\(x_{\phi(n)}=f(\phi(n))\in I_n\)だから\(\abs{x_{\phi(n)}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi(n)}\to\alpha\)（\(n\to\infty\)）である．
+\end{proof}
+
+\subsection{コーシー列}
+
+\begin{definition}{コーシー列}{real_cauchy_sequence}\index{こーしーれつ@コーシー列}
+  \(\seq{x_n}_{n\in\numset{N}}\)は実数列とする．\(\seq{x_n}_{n\in\numset{N}}\)が\termdef{コーシー列}（Cauchy sequence）であるとは，
+  任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(m,n>N\implies\abs{x_m-x_n}<\varepsilon\)を満たすことをいう．このことを次のように表す．
+  \[
+    \abs{x_m-x_n} \to 0\quad(m,n\to\infty),
+    \quad\lim_{m,n\to\infty}\abs{x_m-x_n} = 0
+  \]
+\end{definition}
+
+\begin{proposition}{}{}
+  任意のコーシー列は収束列である．
+\end{proposition}
+
+\begin{proof}
+  実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列であるとする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
+  \(m>N\)なら\(\abs{x_m-x_N}<1\)だから，\(x_{N+1},x_{N+2},\dotsc\)はすべて開区間\(I=\ooival{x_N-1}{x_N+1}\)上にある．
+  \(S=\Set{x_1,\dots,x_N}\)とする．このとき集合\(\Set{x_1,x_2,\dotsc}\)は\(\ccival{\min S}{\max S}\cup I\)の部分集合なので，有界である．
+  したがって，\cref{theorem:bolzano_weierstrass}より収束する部分列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)がある．この極限値を\(\alpha\)とおくと，
+  \(\abs{x_n-\alpha}\leq\abs{x_n-x_{\phi(n)}}+\abs{x_{\phi(n)}-\alpha}\to 0\)（\(n\to\infty\)）より\(x_n\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
 \end{document}
