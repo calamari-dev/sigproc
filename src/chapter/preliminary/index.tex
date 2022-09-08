@@ -525,10 +525,9 @@
 
 \begin{proof}
   実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列であるとする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
-  \(m>N\)なら\(\abs{x_m-x_N}<1\)だから，\(x_{N+1},x_{N+2},\dotsc\)はすべて開区間\(I=\ooival{x_N-1}{x_N+1}\)上にある．
-  \(S=\Set{x_1,\dots,x_N}\)とする．このとき集合\(\Set{x_1,x_2,\dotsc}\)は\(\ccival{\min S}{\max S}\cup I\)の部分集合なので，有界である．
-  したがって，\cref{theorem:bolzano_weierstrass}より収束する部分列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)がある．この極限値を\(\alpha\)とおくと，
-  \(\abs{x_n-\alpha}\leq\abs{x_n-x_{\phi(n)}}+\abs{x_{\phi(n)}-\alpha}\to 0\)（\(n\to\infty\)）より\(x_n\to\alpha\)（\(n\to\infty\)）である．
+  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，集合\(\Set{x_{N+1},x_{N+2},\dotsc}\)は有界である．
+  よって，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+\phi(n)}}_{n\in\numset{N}}\)を持つ．
+  この極限値を\(\alpha\)とおくと，\(\abs{x_n-\alpha}\leq\abs{x_n-x_{N+\phi(n)}}+\abs{x_{N+\phi(n)}-\alpha}\to 0\)（\(n\to\infty\)）より\(x_n\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
 \end{document}
