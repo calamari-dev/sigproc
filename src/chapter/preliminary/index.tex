@@ -420,7 +420,7 @@
 
 \section{1変数の微分積分学}
 
-ここではε‐δ論法による極限の定義を既知としたうえで，実数の性質からしたがう重要な事実をいくつか挙げる．
+ここでは\(\varepsilon\)‐\(N\)論法による極限の定義を既知としたうえで，実数の性質からしたがう重要な事実をいくつか挙げる．
 
 \subsection{実数の性質}
 
@@ -480,7 +480,7 @@
   よって，\(\alpha\)は集合\(B=\Set{b_1,b_2,\dotsc}\)の下界なので\(\alpha\leq\inf B=\beta\)である．
   したがって，\(n\)の値によらず\(a_n\leq\alpha\leq\beta\leq b_n\)だから\(\ccival{\alpha}{\beta}\subset\bigcap_{n=1}^\infty I_n\)であり，集合\(\bigcap_{n=1}^\infty I_n\)は空でない．
 
-  \(x\in\bigcap_{n=1}^\infty I_n\)を任意にとる．\(x\)は\(A\)の上界なので，\(a_n\leq\alpha\leq x\leq b_n\)，\(0\leq x-\alpha\leq b_n-a_n\)である．
+  \(x\in\bigcap_{n=1}^\infty I_n\)を任意にとると，\(x,\alpha\in I_n\)より\(\abs{x-\alpha}\leq b_n-a_n\)が成立する．
   よって，\(b_n-a_n\to 0\)（\(n\to\infty\)）なら\(x=\alpha\)，\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)である．
 \end{proof}
 
@@ -489,7 +489,7 @@
 \end{theorem}
 
 \begin{proof}
-  写像\(f\colon\numset{N}\to\numset{R}\)を\(f(n)=x_n\)で定義する．また，\(x_1,x_2,\dotsc\in I_1\)となる有界閉区間\(I_1=\ccival{a_1}{b_1}\)を1つ選び，閉区間\(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）を帰納的に
+  写像\(f\colon\numset{N}\to\numset{R}\)を\(f(n)=x_n\)で定義する．また，\(x_1,x_2,\dotsc\in I_1\)となる有界閉区間\(I_1=\ccival{a_1}{b_1}\)を1つ選び，\(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）を帰納的に
   \[
     I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(f^{-1}(\ccival{a_n}{c_n})\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
     \quad c_n = \frac{a_n+b_n}{2}
@@ -510,8 +510,11 @@
 
 \subsection{コーシー列}
 
+\cref{chapter:hilbert_space}以降では，望ましい性質を持つ収束列を定義して，その極限によって命題を示すことが多くなる．
+極限値が予想できる場合を除き，数列が収束することを示すには，それがコーシー列であることを示すのがよい．
+
 \begin{definition}{コーシー列}{real_cauchy_sequence}\index{こーしーれつ@コーシー列}
-  \(\seq{x_n}_{n\in\numset{N}}\)は実数列とする．\(\seq{x_n}_{n\in\numset{N}}\)が\termdef{コーシー列}（Cauchy sequence）であるとは，
+  \(\seq{x_n}_{n\in\numset{N}}\)を実数列とする．\(\seq{x_n}_{n\in\numset{N}}\)が\termdef{コーシー列}（Cauchy sequence）であるとは，
   任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(m,n>N\implies\abs{x_m-x_n}<\varepsilon\)を満たすことをいう．このことを次のように表す．
   \[
     \abs{x_m-x_n} \to 0\quad(m,n\to\infty),
@@ -519,14 +522,15 @@
   \]
 \end{definition}
 
+一般に，すべての収束列はコーシー列でもある．次の命題から，実数列に関して収束列とコーシー列は同値な概念であることが分かる．
+
 \begin{proposition}{}{}
-  任意のコーシー列は収束列である．
+  実数列について，任意のコーシー列は収束列である．
 \end{proposition}
 
 \begin{proof}
-  実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列であるとする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
-  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，集合\(\Set{x_{N+1},x_{N+2},\dotsc}\)は有界である．
-  よって，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+\phi(n)}}_{n\in\numset{N}}\)を持つ．
+  実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列とする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
+  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+\phi(n)}}_{n\in\numset{N}}\)を持つ．
   この極限値を\(\alpha\)とおくと，\(\abs{x_n-\alpha}\leq\abs{x_n-x_{N+\phi(n)}}+\abs{x_{N+\phi(n)}-\alpha}\to 0\)（\(n\to\infty\)）より\(x_n\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
