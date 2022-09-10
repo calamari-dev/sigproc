@@ -33,7 +33,7 @@
   \end{enumerate}
 \end{definition}
 
-しばしば\(V\)の元をベクトル，\(\numset{K}\)の元をスカラーと呼ぶ．
+しばしば\(V\)の元を\termdef{ベクトル}\index{べくとる@ベクトル}（vector），\(\numset{K}\)の元を\termdef{スカラー}\index{すからー@スカラー}（scalar）と呼ぶ．
 また，\cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
 通常，\(\vect{v}\)の加法逆元は\(-\vect{v}\)と表される．
 
@@ -442,7 +442,7 @@
   \end{enumerate}
 \end{definition}
 
-上限と下限について議論するときは，次の\cref{proposition:sup_inf_and_eps}が便利である．
+上限と下限を用いて議論するときは，次の\cref{proposition:sup_inf_and_eps}が便利である．
 
 \begin{proposition}{}{sup_inf_and_eps}
   集合\(X\subset\numset{R}\)は上に有界かつ空でないとする．このとき，実数\(s\)に関する以下の条件は同値であり，同様のことが\(\inf X\)についても成り立つ．
@@ -494,7 +494,7 @@
     I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(f^{-1}(\ccival{a_n}{c_n})\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
     \quad c_n = \frac{a_n+b_n}{2}
   \]
-  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう定理であるが，ここでは認める．}，
+  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう「定理」であるが，ここでは認める．}，
   \cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
 
   \(f^{-1}(I_n)\)は無限集合であることを帰納法で示す．\(f^{-1}(I_n)\)が無限集合であれば，\(f^{-1}(I_n)=f^{-1}(\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n})=f^{-1}(\ccival{a_n}{c_n})\cup f^{-1}(\ccival{c_n}{b_n})\)より

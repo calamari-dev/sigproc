@@ -256,7 +256,7 @@
 
 \begin{proof}
   まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2<\delta^2+1/n}\)は各\(n=1,2,\dotsc\)に対して空ではない．
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2<\delta^2+1/n}\)は\(n\in\numset{N}\)の値によらず空でない．
   そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
 
   \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\(m,n\in\numset{N}\)とする．\nameref{theorem:median_theorem}より
@@ -270,7 +270,7 @@
     = \frac{2}{m}+\frac{2}{n} \to 0\quad(m,n\to\infty)
   \]
   である．よって，\(\seq{\vect{a}_n}\)はコーシー列なので極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
-  したがって，\(\delta\)の定義から\(\vnorm{\vect{x}-\vect{m}}=\min_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
+  したがって，\(\delta\)の定義から\(\vect{m}\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
 
   次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．このとき，存在の証明と同様にして
   \begin{align*}
@@ -290,7 +290,7 @@
 \end{theorem}
 
 \begin{proof}
-  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)がただ1つ存在する．
+  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)が一意に定まる．
   あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
@@ -355,15 +355,16 @@
     \vect{v}_n = \sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k\quad\text{(\(d_n=\min\Set{k\in\numset{N}\given\vect{v}_n\in V_k}\)，\(\midx{z}{n}{k}\in\numset{C}\))}
   \end{equation}
 
-  \(\vect{p}=\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)とする．\nameref{proposition:inner_products_continuous}から
-  \begin{align*}
-    \innerp{\vect{x}-\vect{p}}{\vect{v}} &= \innerp[\bigg]{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\lim_{n\to\infty}\sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k} \\
-    &= \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\innerp[\bigg]{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\vect{e}_k} \\
-    &= \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\pqty[\bigg]{\innerp{\vect{x}}{\vect{e}_k}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\innerp{\vect{e}_m}{\vect{e}_k}}
-  \end{align*}
-  であり，\(\innerp{\vect{e}_m}{\vect{e}_k}=\kdelta{m}{k}\)より\(\innerp{\vect{x}-\vect{p}}{\vect{v}}=0\)である．
-
-  \(\clsr V\)がベクトル空間であることは，\(\clsr V\)上の収束列の極限点は\(\clsr V\)に属すること，および\cref{equation:closure_approx_sequence}から示せる．
+  \(\vect{p}=\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
+  \begin{gather*}
+    \innerp{\vect{x}-\vect{p}}{\vect{e}_k} = \innerp*{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\vect{e}_k}
+    = \innerp{\vect{x}}{\vect{e}_k}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\innerp{\vect{e}_m}{\vect{e}_k}
+    = 0, \\
+    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k}
+    = \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\innerp{\vect{x}-\vect{p}}{\vect{e}_k}
+    = 0
+  \end{gather*}
+  である．また，\(\clsr V\)の定義と\cref{equation:closure_approx_sequence}から，\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
   よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}(\vect{x})\)である．
 \end{proof}
 
@@ -406,8 +407,8 @@
 \section{多重解像度解析}
 
 \begin{definition}{多重解像度解析}{multiresolution_analysis}\index{たじゅうかいぞうどかいせき@多重解像度解析}
-  \(\Lebesgue{2}(\numset{R})\)の閉部分空間の列\(\Set{V_n}_{n\in\numset{Z}}\)が以下の条件を満たすとき，
-  \(\Set{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
+  \(\Lebesgue{2}(\numset{R})\)の閉部分空間の列\(\seq{V_n}_{n\in\numset{Z}}\)が以下の条件を満たすとき，
+  \(\seq{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
   \begin{enumerate}
     \item \(\dotsb\subset V_{-1}\subset V_0\subset V_1\subset\dotsb\)
     \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{\vect{0}}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
