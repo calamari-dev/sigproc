@@ -349,16 +349,16 @@
 
 \begin{proof}
   \(\vect{v}\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{\vect{v}_n}\)で\(\vect{v}_n\to\vect{v}\)（\(n\to\infty\)）を満たすものがある．
-  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，各\(n\in\numset{N}\)に対して\(\vect{v}_n\in\spannedby\basis{B}_{d(n)}\)を満たす\(d(n)\in\numset{N}\)をとれて，
-  \(\vect{v}_n\)は\(\basis{B}_{d(n)}\)の元の線型結合で\(\vect{v}_n=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d(n)}\vect{e}_{d(n)}\)とおける．
+  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，各\(n\in\numset{N}\)に対して\(\vect{v}_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
+  \(\vect{v}_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(\vect{v}_n=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d_n}\vect{e}_{d_n}\)とおける．
 
   \(\vect{p}=\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
   \begin{gather*}
     \innerp{\vect{x}-\vect{p}}{\vect{e}_k} = \innerp*{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\vect{e}_k}
     = \innerp{\vect{x}}{\vect{e}_k}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\innerp{\vect{e}_m}{\vect{e}_k}
     = 0, \\
-    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{k=1}^{d(n)}\midx{z}{n}{k}\vect{e}_k}
-    = \lim_{n\to\infty}\sum_{k=1}^{d(n)}\conj{\midx{z}{n}{k}}\innerp{\vect{x}-\vect{p}}{\vect{e}_k}
+    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k}
+    = \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\innerp{\vect{x}-\vect{p}}{\vect{e}_k}
     = 0
   \end{gather*}
   である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
