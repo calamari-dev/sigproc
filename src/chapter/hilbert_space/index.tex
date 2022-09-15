@@ -44,10 +44,18 @@
   任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(n>N\implies d(x_n,\alpha)<\varepsilon\)を満たすことをいう．
   このことを次のように表す．
   \[
-    x_n\to\alpha\quad(n\to\infty),
-    \quad\lim_{n\to\infty}x_n = \alpha
+    x_n\to\alpha\quad(n\to\infty)
   \]
 \end{definition}
+
+\begin{note}
+  実数列の極限を既知とするなら，\cref{definition:sequence_converge}は
+  \[
+    x_n \to \alpha\quad(n\to\infty)
+    \iff\lim_{n\to\infty}d(x_n,\alpha) = 0
+  \]
+  を意味する．
+\end{note}
 
 \(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\)に収束するとき，\(\alpha\)を\(\seq{x_n}_{n\in\numset{N}}\)の\termdef{極限点}\index{きょくげんてん@極限点}（limit point）という．
 \cref{definition:sequence_converge}は要するに「\(N\)の値を十分に大きくとれば，点\(x_{N+1},x_{N+2},\dotsc\)が点\(\alpha\)から距離\(\varepsilon\)以上離れないようにできる」ことを意味する．
@@ -92,7 +100,21 @@
   このように，関数などの一見「点」とは思えないような対象を点とみなして考察するのは，しばしば理解の助けになる．
 \end{note}
 
-\begin{definition}{閉包}{closure}\index{へいほう@閉包}\index{\(\clsr A\)}
+\begin{proposition}{}{limit_uniqueness}
+  極限点は存在すれば一意である．すなわち，距離空間\((S,d)\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha,\beta\in S\)に収束するなら，\(\alpha=\beta\)である．
+\end{proposition}
+
+\begin{proof}
+  \(0\leq d(\alpha,\beta)\leq d(\alpha,x_n)+d(x_n,\beta)\)なので，\(d(x_n,\alpha)\to 0\)，\(d(x_n,\beta)\to 0\)（\(n\to\infty\)）なら\(d(\alpha,\beta)=0\)，\(\alpha=\beta\)である．
+\end{proof}
+
+\cref{proposition:limit_uniqueness}から，各収束列\(\seq{x_n}_{n\in\numset{N}}\)に対して，その極限点は一意に定まる．そのため，以降は収束列\(\seq{x_n}_{n\in\numset{N}}\)の極限点を
+\[
+  \lim_{n\to\infty}x_n
+\]
+と書く．
+
+\begin{definition}{閉包}{closure}\index{へいほう@閉包}\index{しーえる@\(\clsr A\)}
   \((S,d)\)を距離空間とする．集合\(A\subset S\)に対して，\(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
 \end{definition}
 
@@ -150,7 +172,7 @@
 
 \begin{example}
   \cref{example:uniform_converge}の集合\(\cont{0}(I)\)は，ノルム\(\vnorm{f}_\infty=\max\Set{\abs{f(x)}\given x\in I}\)についてバナッハ空間になる．
-  ただし，関数の和\(\phi=f+g\)とスカラー倍\(\psi=\lambda f\)はそれぞれ\(\phi(x)=f(x)+g(x)\)，\(\psi(x)=\lambda f(x)\)で定義する．
+  ただし，関数の和\(\phi=f+g\)とスカラー倍\(\psi=\lambda f\)はそれぞれ\(\phi(x)=f(x)+g(x)\)，\(\psi(x)=\lambda\cdot(f(x))\)で定義する．
 \end{example}
 
 \section{ヒルベルト空間}
@@ -294,7 +316,7 @@
   あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
-\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影!ひるべるとくうかん@ヒルベルト空間}\index{\(\proj_V(\vect{x})\)}
+\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影!ひるべるとくうかん@ヒルベルト空間}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
   \cref{theorem:projection_theorem}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
 \end{definition}
 
@@ -410,7 +432,7 @@
     \item \(\dotsb\subset V_{-1}\subset V_0\subset V_1\subset\dotsb\)
     \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{\vect{0}}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
     \item \(f(\holder)\in V_n\iff f(2\holder)\in V_{n+1}\)，ただし\(n\)は任意の整数
-    \item \(\Set{\phi(\holder-n)\given n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する
+    \item \(\seq{\phi(\holder-n)}_{n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する
   \end{enumerate}
 \end{definition}
 

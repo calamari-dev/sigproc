@@ -36,12 +36,12 @@
 
 一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
 
-\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{\(\argmin\)}\index{\(\argmax\)}
+\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{あーぎゅみん@\(\argmin\)}\index{あーぎゅまっくす@\(\argmax\)}
   \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
-  \begin{align*}
-    \argmin_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\geq f(x)}, \\
-    \argmax_{x\in S}f(x) &= \Set{x\in S\given y\in S\implies f(y)\leq f(x)}
-  \end{align*}
+  \begin{gather*}
+    \argmin_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\geq f(x)\)}}, \\
+    \argmax_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\leq f(x)\)}}
+  \end{gather*}
 \end{definition}
 
 \cref{definition:argmin_argmax}からただちに，次のことが分かる．
@@ -50,7 +50,7 @@
   \(S\)の元\(a\)に関する以下の条件は同値であり，同様のことが\(\argmax\)についても成り立つ．
   \begin{enumerate}
     \item \(a\in\argmin_{x\in S}f(x)\)である
-    \item 関数\(f\)は\(S\)上で最小値に達して，その値は\(f(a)\)である
+    \item \(f(a)\)は集合\(\Set{f(x)\given x\in S}\)の下限であり，よって最小元でもある
   \end{enumerate}
 \end{proposition}
 
@@ -118,13 +118,13 @@
 \end{proposition}
 
 \begin{proof}
-  任意に\(\vect{y}\in V\)をとり，\(\vect{e}=\vect{y}-\vect{m}\)とおく．すると，\(\vect{e}\in V\)なので
+  任意に\(\vect{y}\in V\)をとり，\(\vect{e}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\vect{e}}=0\)より
   \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{\vect{x}-\vect{m}-\vect{e}}^2=\vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{e}}+\vnorm{\vect{e}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{e}}^2\)
-  である．よって\(\vnorm{\vect{x}-\vect{y}}^2\geq\vnorm{\vect{x}-\vect{m}}^2\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  が成立する．よって\(\vnorm{\vect{x}-\vect{y}}^2\geq\vnorm{\vect{x}-\vect{m}}^2\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
 \cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
-しかし実は，仮定を満たす\(\vect{m}\)は一意に定まり，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のただ1つの元である．
+しかし実は，仮定を満たす\(\vect{m}\)は一意に存在し，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のただ1つの元である．
 
 \begin{proposition}{}{finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
@@ -151,7 +151,7 @@
   なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-e(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
-\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影!かずべくとるくうかんじょうの@数ベクトル空間}\index{\(\proj_V(\vect{x})\)}
+\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影!かずべくとるくうかんじょうの@数ベクトル空間}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
   \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
 \end{definition}
 
@@ -186,8 +186,11 @@
 \subsection{直交補空間}
 
 \begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\index{\(\pcomp{W}\)}\index{\(\pcomp[V]{W}\)}
-  \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合\(X=\Set{\vect{x}\in V\given\vect{y}\in W\implies\innerp{\vect{x}}{\vect{y}}=0}\)も\(V\)の部分空間になる．
-  \(X\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)と表記する．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
+  \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
+  \[
+    X = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
+  \]
+  も\(V\)の部分空間になる．\(X\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)と表記する．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
 \end{definition}
 
 \begin{example}
@@ -208,8 +211,8 @@
 
 \begin{proof}
   \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)なので\(\vect{x}=\zvec\)，よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
-  \cref{proposition:finite_projection}より，各\(\vect{x}\in V\)について\(\vect{x}-\proj_W(\vect{x})\in\pcomp{W}\)であるから，
-  \(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W(\vect{x}))\in W\oplus\pcomp{W}\)である．したがって\(V=W\oplus\pcomp{W}\)である．
+  また\cref{proposition:finite_projection}より，任意の\(\vect{x}\in V\)に対して\(\vect{x}-\proj_W(\vect{x})\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W(\vect{x}))\in W+\pcomp{W}\)である．
+  したがって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
 
 \subsection{分析と合成}
@@ -233,15 +236,15 @@
   \quad\htrps{\mat{U}}\vect{x} = \htrps{\mat{U}}\matrice*{x_1 \\ \vdots \\ x_n}
   = \sum_{i=1}^nx_i\vect{e}_i
 \]
-であるから，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
-\(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．実際
+であるから
 \[
   \htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
   = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}(\vect{x})
 \]
-である．
+であり，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
+\(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
 
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
