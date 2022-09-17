@@ -63,6 +63,7 @@
 }
 
 \jlreqsetup{
+  appendix_heading={chapter={label_format={付録{\bfseries\thechapter}}}},
   backmatter_pagebreak=clearpage,
   caption_font=\small,
   caption_label_font=\sffamily\bfseries\small,
@@ -121,6 +122,7 @@
   \setlength{\multicolsep}{\midx@multicolsep}%
 }
 
+\newcommand{\twoemdash}{\resizebox{2\zw}{\height}{—}}
 \newcommand{\seename}{→}
 \renewcommand{\@idxitem}{\par\setlength{\hangindent}{1\zw}}
 \renewcommand{\subitem}{\@idxitem\hspace*{2\zw}}
