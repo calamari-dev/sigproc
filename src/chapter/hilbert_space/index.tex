@@ -130,7 +130,7 @@
   \((S,d)\)を距離空間とする．集合\(A\subset S\)に対して，\(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
 \end{definition}
 
-\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{\(\scomp{A}\)}で表す．}
+\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{しー@\(\scomp{A}\)}で表す．}
 
 \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}\index{へいしゅうごう@閉集合}（closed set）であるという．
 すなわち，\(A\)が閉集合であるとは，\(A\)上の収束列はすべて\(A\)上に極限点を持つということである．
@@ -341,12 +341,8 @@
 \nameref{theorem:projection_theorem}は直交射影\(\vect{m}\)の存在を示す定理であり，具体的な式を与えるものではない．
 しかし，\(V\)が正規直交系によって生成される空間（正確にはその閉包）であれば，\(\vect{m}\)の具体的な式が得られる．
 
-\begin{definition}{正規直交系，完全正規直交系}{ons}\index{せいきちょっこうけい@正規直交系}\index{かんぜんせいきちょっこうけい@完全正規直交系}\index{せいきちょっこうけい@正規直交系!かんぜん@完全\twoemdash}
-  \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の点列とする．
-  \begin{enumerate}
-    \item \(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)（\(i,j\in\numset{N}\)）であるとき，\(\seq{\vect{e}_n}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという
-    \item \(\seq{\vect{e}_n}\)が正規直交系かつ\(\clsr(\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc})=H\)であるとき，\(\seq{\vect{e}_n}\)は\termdef{完全正規直交系}（complete orthonormal system; CONS）であるという
-  \end{enumerate}
+\begin{definition}{正規直交系}{ons}\index{せいきちょっこうけい@正規直交系}
+  \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の点列とする．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)（\(i,j\in\numset{N}\)）であるとき，\(\seq{\vect{e}_n}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．
 \end{definition}
 
 \begin{theorem}{ベッセルの不等式}{bessels_inequality}\index{べっせるのふとうしき@ベッセルの不等式}
@@ -407,6 +403,17 @@
   よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}(\vect{x})\)である．
 \end{proof}
 
+\cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(\vect{x}\in H\)に対して
+\[
+  \vect{x} = \proj_H(\vect{x})
+  = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
+\]
+が成立する．そのような正規直交系\(\seq{\vect{e}_n}\)は完全正規直交系と呼ばれる．
+
+\begin{definition}{完全正規直交系}{cons}\index{かんぜんせいきちょっこうけい@完全正規直交系}\index{せいきちょっこうけい@正規直交系!かんぜん@完全\twoemdash}\index{こんす@CONS|see{完全正規直交系}}
+  \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の正規直交系とする．\(\clsr\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc}=H\)であるとき，\(\seq{\vect{e}_n}\)は\termdef{完全正規直交系}（complete orthonormal system; CONS）であるという．
+\end{definition}
+
 \section{\texorpdfstring{\(\Lebesgue{p}\)}{Lp}空間}
 \label{section:lp_space}
 
@@ -432,7 +439,7 @@
 
 \section{フーリエ級数展開}
 
-\begin{definition}{複素フーリエ級数}{complex_fourier_series}\index{ふくそふーりえきゅうすう@複素フーリエ級数}
+\begin{definition}{フーリエ級数}{fourier_series}\index{ふーりえきゅうすう@フーリエ級数}
   \(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)とする．
   \[
     c_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
@@ -445,7 +452,7 @@
 
 \section{多重解像度解析}
 
-\begin{definition}{多重解像度解析}{multiresolution_analysis}\index{たじゅうかいぞうどかいせき@多重解像度解析}
+\begin{definition}{多重解像度解析}{multiresolution_analysis}\index{たじゅうかいぞうどかいせき@多重解像度解析}\index{えむあーるえー@MRA|see{多重解像度解析}}
   \(\Lebesgue{2}(\numset{R})\)の閉部分空間の列\(\seq{V_n}_{n\in\numset{Z}}\)が以下の条件を満たすとき，
   \(\seq{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
   \begin{enumerate}
