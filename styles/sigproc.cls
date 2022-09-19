@@ -17,6 +17,7 @@
 
 \RequirePackage[math-style=ISO,warnings-off={mathtools-colon}]{unicode-math}
 \RequirePackage[no-math,match,deluxe,sourcehan-jp,jfm_yoko=jlreq]{luatexja-preset}
+\RequirePackage{luatexja-ruby}
 \RequirePackage{etoolbox}
 \RequirePackage{titletoc}
 \RequirePackage{appendix}
