@@ -36,7 +36,7 @@
 
 一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
 
-\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{あーぎゅみん@\(\argmin\)}\index{あーぎゅまっくす@\(\argmax\)}
+\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{あーぎゅみん@\(\argmin_{x\in S}f(x)\)}\index{あーぎゅまっくす@\(\argmax_{x\in S}f(x)\)}
   \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
   \begin{gather*}
     \argmin_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\geq f(x)\)}}, \\
@@ -49,8 +49,8 @@
 \begin{proposition}{}{}
   \(S\)の元\(a\)に関する以下の条件は同値であり，同様のことが\(\argmax\)についても成り立つ．
   \begin{enumerate}
-    \item \(a\in\argmin_{x\in S}f(x)\)である
-    \item \(f(a)\)は集合\(\Set{f(x)\given x\in S}\)の下限であり，よって最小元でもある
+    \item \(a\in\argmin_{x\in S}f(x)\)である．
+    \item \(f(a)\)は集合\(\Set{f(x)\given x\in S}\)の下限であり，よって最小元でもある．
   \end{enumerate}
 \end{proposition}
 
@@ -130,8 +130,8 @@
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
-    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
-    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である
+    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である．
   \end{enumerate}
 \end{proposition}
 
@@ -249,8 +249,8 @@
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
-    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という
-    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)であるとき（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)であるとき），\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という
+    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という．
+    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)であるとき（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)であるとき），\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という．
   \end{enumerate}
 \end{definition}
 
@@ -259,8 +259,8 @@
 \begin{proposition}{ユニタリ行列の性質}{}
   \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，以下の命題は同値である．
   \begin{enumerate}
-    \item \(\mat{U}\)はユニタリ行列である
-    \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である
+    \item \(\mat{U}\)はユニタリ行列である．
+    \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である．
   \end{enumerate}
 \end{proposition}
 

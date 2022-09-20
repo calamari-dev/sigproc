@@ -26,6 +26,7 @@
 % フォント
 \ltjsetparameter{jacharrange={-2,-9},alxspmode={`‐,0}}
 \ltjsetparameter{yalbaselineshift=0.02\zh}
+\ltjsetruby{fontcmd=\rmfamily\mcfamily\mdseries}
 \setmathfont{STIX Two Math}[Scale=1.1]
 \setmainfont{STIX Two Text}[Scale=1.1]
 \setsansfont{Liberation Sans}[Scale=1.1]

@@ -24,8 +24,8 @@
   \begin{enumerate}
     \item \((\vect{x}+\vect{y})+\vect{z}=\vect{x}+(\vect{y}+\vect{z})\)
     \item \(\vect{x}+\vect{y}=\vect{y}+\vect{x}\)
-    \item ある\(\zvec\in V\)が存在し，任意の\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす
-    \item 各\(\vect{v}\in V\)に対し，ある\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす
+    \item ある\(\zvec\in V\)が存在し，任意の\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす．
+    \item 各\(\vect{v}\in V\)に対し，ある\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす．
     \item \((s+t)\vect{x}=s\vect{x}+t\vect{x}\)
     \item \(s(\vect{x}+\vect{y})=s\vect{x}+s\vect{y}\)
     \item \((st)\vect{x}=s(t\vect{x})\)
@@ -61,8 +61,8 @@
 \begin{proposition}{}{subspace_iff}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W\)を\(V\)の空でない部分集合とする．このとき，次の命題は同値である．
   \begin{enumerate}
-    \item \(W\)は\(V\)の部分空間である
-    \item 任意の\(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in W\)に対して\(s\vect{x}+t\vect{y}\in W\)である
+    \item \(W\)は\(V\)の部分空間である．
+    \item 任意の\(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in W\)に対して\(s\vect{x}+t\vect{y}\in W\)である．
   \end{enumerate}
 \end{proposition}
 
@@ -132,9 +132,9 @@
 \begin{definition}{生成系・線型独立・線型従属}{independence}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．また，\(\vect{v}_1,\dots,\vect{v}_k\)を\(V\)の元とする．
   \begin{enumerate}
-    \item \(V=\spannedby S\)であるとき，\(S\)を\(V\)の\termdef{生成系}（generating set）という
-    \item \(\sum_{i=1}^kc_i\vect{v}_i=\zvec\)を満たす\(c_1,\dots,c_k\in\numset{K}\)の組が\(c_1=\dots=c_k=0\)しかないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型独立}\index{せんけいどくりつ@線型独立}（linearly independent）であるという
-    \item \(\vect{v}_1,\dots,\vect{v}_k\)が線型独立でないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型従属}\index{せんけいじゅうぞく@線型従属}（linearly dependent）であるという
+    \item \(V=\spannedby S\)であるとき，\(S\)を\(V\)の\termdef{生成系}（generating set）という．
+    \item \(\sum_{i=1}^kc_i\vect{v}_i=\zvec\)を満たす\(c_1,\dots,c_k\in\numset{K}\)の組が\(c_1=\dots=c_k=0\)しかないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型独立}\index{せんけいどくりつ@線型独立}（linearly independent）であるという．
+    \item \(\vect{v}_1,\dots,\vect{v}_k\)が線型独立でないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型従属}\index{せんけいじゅうぞく@線型従属}（linearly dependent）であるという．
   \end{enumerate}
 \end{definition}
 
@@ -153,8 +153,8 @@
 \begin{proposition}{}{span_and_uniqueness}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．このとき，次の命題は同値である．
   \begin{enumerate}
-    \item \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せる
-    \item \(S\)は\(\spannedby S\)の基底である
+    \item \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せる．
+    \item \(S\)は\(\spannedby S\)の基底である．
   \end{enumerate}
 \end{proposition}
 
@@ -169,8 +169,8 @@
 \begin{proposition}{}{basis_and_matrix}
   \(\vect{v}_1,\dots,\vect{v}_n\in\numset{K}^n\)とする．このとき，次の命題は同値である．
   \begin{enumerate}
-    \item 集合\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\numset{K}^n\)の基底である
-    \item 行列\(\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)は正則である
+    \item 集合\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\numset{K}^n\)の基底である．
+    \item 行列\(\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)は正則である．
   \end{enumerate}
 \end{proposition}
 
@@ -247,8 +247,8 @@
 \begin{definition}{線型写像}{linear_mapping}\index{せんけいしゃぞう@線型写像}
   \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
   \begin{enumerate}
-    \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)である
-    \item 任意の\(c\in\numset{K}\)，\(\vect{x}\in V\)に対して\(f(c\vect{x})=cf(\vect{x})\)である
+    \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)である．
+    \item 任意の\(c\in\numset{K}\)，\(\vect{x}\in V\)に対して\(f(c\vect{x})=cf(\vect{x})\)である．
   \end{enumerate}
 \end{definition}
 
@@ -307,8 +307,8 @@
 \begin{definition}{核，像}{nul_img}\index{かく@核}\index{ぞう@像}\index{かーねる@\(\nul f\)}\index{いめーじ@\(\img f\)}
   \(f\colon V\to W\)を線型写像とする．
   \begin{enumerate}
-    \item 集合\(\Set{\vect{v}\in V\given f(\vect{v})=\zvec}\)を\(f\)の\termdef{核}（kernel）といい，\(\nul f\)と表す
-    \item 集合\(\Set{f(\vect{v})\given\vect{v}\in V}\)を\(f\)の\termdef{像}（image）といい，\(\img f\)と表す
+    \item 集合\(\Set{\vect{v}\in V\given f(\vect{v})=\zvec}\)を\(f\)の\termdef{核}（kernel）といい，\(\nul f\)と表す．
+    \item 集合\(\Set{f(\vect{v})\given\vect{v}\in V}\)を\(f\)の\termdef{像}（image）といい，\(\img f\)と表す．
   \end{enumerate}
 \end{definition}
 
@@ -395,9 +395,9 @@
   このとき，次の命題は同値である．
 
   \begin{enumerate}
-    \item \(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底が存在する
-    \item \(\numset{K}^n=E_{\lambda_1}(\mat{A})\oplus\dots\oplus E_{\lambda_k}(\mat{A})\)が成立する
-    \item \(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在して\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)を満たす
+    \item \(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底が存在する．
+    \item \(\numset{K}^n=E_{\lambda_1}(\mat{A})\oplus\dots\oplus E_{\lambda_k}(\mat{A})\)が成立する．
+    \item \(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在して\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)を満たす．
   \end{enumerate}
 \end{proposition}
 
@@ -427,8 +427,8 @@
 \begin{definition}{上界，下界}{}\index{じょうかい@上界}\index{かかい@下界}
   \(X\)を\(\numset{R}\)の部分集合とする．
   \begin{enumerate}
-    \item 実数\(a\)が\(X\)の\termdef{上界}（upper bound）であるとは，任意の\(x\in X\)に対して\(x\leq a\)が成立することをいう
-    \item 実数\(b\)が\(X\)の\termdef{下界}（lower bound）であるとは，任意の\(x\in X\)に対して\(x\geq b\)が成立することをいう
+    \item 実数\(a\)が\(X\)の\termdef{上界}（upper bound）であるとは，任意の\(x\in X\)に対して\(x\leq a\)が成立することをいう．
+    \item 実数\(b\)が\(X\)の\termdef{\ltjruby{下|界}{か|かい}}（lower bound）であるとは，任意の\(x\in X\)に対して\(x\geq b\)が成立することをいう．
   \end{enumerate}
 \end{definition}
 
@@ -437,8 +437,8 @@
 \begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{すーぷ@\(\sup X\)}\index{いんふ@\(\inf X\)}
   \(X\)を\(\numset{R}\)の空でない部分集合とする．\(X\)の上界の全体集合を\(U\)，下界の全体集合を\(L\)とおく．
   \begin{enumerate}
-    \item \(X\)が上に有界であれば，\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(X\)の\termdef{上限}（supremum）といい，\(\sup X\)と書く
-    \item \(X\)が下に有界であれば，\(L\)は最大元\(\max L\)を持つ．\(\max L\)を\(X\)の\termdef{下限}（infimum）といい，\(\inf X\)と書く
+    \item \(X\)が上に有界であれば，\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(X\)の\termdef{上限}（supremum）といい，\(\sup X\)と書く．
+    \item \(X\)が下に有界であれば，\(L\)は最大元\(\max L\)を持つ．\(\max L\)を\(X\)の\termdef{下限}（infimum）といい，\(\inf X\)と書く．
   \end{enumerate}
 \end{definition}
 
@@ -447,18 +447,20 @@
 \begin{proposition}{}{sup_inf_and_eps}
   集合\(X\subset\numset{R}\)は上に有界かつ空でないとする．このとき，実数\(s\)に関する以下の条件は同値であり，同様のことが\(\inf X\)についても成り立つ．
   \begin{enumerate}
-    \item \(s=\sup X\)である
-    \item 任意の\(\varepsilon>0\)に対し，\(x\in X\)が存在して\(x+\varepsilon>s\)を満たす
+    \item \(s=\sup X\)である．
+    \item 任意の\(\varepsilon>0\)に対し，\(x\in X\)が存在して\(x+\varepsilon>s\)を満たす．
   \end{enumerate}
 \end{proposition}
 
 \subsection{数列の極限}
 
+以下の定理はどれも，微積分学を基礎づける重要なものである．本書でも\cref{chapter:hilbert_space}以降，これらの定理をしばしば援用するが，面倒なら証明は読まなくてもよい．
+
 \begin{proposition}{}{monotone_converge}
   実数列\(\seq{a_n}_{n\in\numset{N}}\)が以下の条件を満たすとき，\(\seq{a_n}_{n\in\numset{N}}\)は収束列である．
   \begin{enumerate}
-    \item 集合\(S=\Set{a_1,a_2,\dotsc}\)が上に有界である
-    \item \(\seq{a_n}_{n\in\numset{N}}\)は単調増加する．すなわち，\(a_1\leq a_2\leq\dotsb\)である
+    \item 集合\(S=\Set{a_1,a_2,\dotsc}\)が上に有界である．
+    \item \(\seq{a_n}_{n\in\numset{N}}\)は単調増加する．すなわち，\(a_1\leq a_2\leq\dotsb\)である．
   \end{enumerate}
 \end{proposition}
 
@@ -485,7 +487,7 @@
 \end{proof}
 
 \begin{theorem}{ボルツァーノ・ワイエルシュトラスの定理}{bolzano_weierstrass}\index{ぼるつぁーのわいえるしゅとらすのていり@ボルツァーノ・ワイエルシュトラスの定理}
-  有界な実数列は収束する部分列を持つ．すなわち，実数列\(\seq{x_n}_{n\in\numset{N}}\)の項全体が有界集合であるとき，\(\phi(1)<\phi(2)<\dotsb\)を満たす自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)が存在して，数列\(\seq{x_{\phi(n)}}_{n\in\numset{N}}\)は収束列になる．
+  有界な実数列は収束する部分列を持つ．すなわち，実数列\(\seq{x_n}_{n\in\numset{N}}\)の項全体が有界集合であるとき，\(\phi_1<\phi_2<\dotsb\)を満たす自然数列\(\seq{\phi_n}_{n\in\numset{N}}\)が存在して，数列\(\seq{x_{\phi_n}}_{n\in\numset{N}}\)は収束列になる．
 \end{theorem}
 
 \begin{proof}
@@ -500,12 +502,12 @@
   \(f^{-1}(I_n)\)は無限集合であることを帰納法で示す．\(f^{-1}(I_n)\)が無限集合であれば，\(f^{-1}(I_n)=f^{-1}(\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n})=f^{-1}(\ccival{a_n}{c_n})\cup f^{-1}(\ccival{c_n}{b_n})\)より
   \(f^{-1}(\ccival{a_n}{c_n})\)と\(f^{-1}(\ccival{c_n}{b_n})\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(f^{-1}(I_{n+1})\)は無限集合である．
 
-  以上により，\(f^{-1}(I_n)\)は無限集合である．よって，自然数列\(\seq{\phi(n)}_{n\in\numset{N}}\)を
+  以上により，\(f^{-1}(I_n)\)は無限集合である．よって，自然数列\(\seq{\phi_n}_{n\in\numset{N}}\)を
   \[
-    \phi(1) = 1,
-    \quad\phi(n) = \min\Set{k\in f^{-1}(I_n)\given k>\phi(n-1)}\quad(n=2,3,\dotsc)
+    \phi_1 = 1,
+    \quad\phi_n = \min\Set{k\in f^{-1}(I_n)\given k>\phi_{n-1}}\quad(n=2,3,\dotsc)
   \]
-  で定義できる．\(\alpha\in I_n\)，\(x_{\phi(n)}=f(\phi(n))\in I_n\)だから\(\abs{x_{\phi(n)}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi(n)}\to\alpha\)（\(n\to\infty\)）である．
+  で定義できる．\(\alpha\in I_n\)，\(x_{\phi_n}=f(\phi_n)\in I_n\)だから\(\abs{x_{\phi_n}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi_n}\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
 \subsection{コーシー列}
@@ -530,8 +532,8 @@
 
 \begin{proof}
   実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列とする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
-  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+\phi(n)}}_{n\in\numset{N}}\)を持つ．
-  この極限値を\(\alpha\)とおくと，\(\abs{x_n-\alpha}\leq\abs{x_n-x_{N+\phi(n)}}+\abs{x_{N+\phi(n)}-\alpha}\to 0\)（\(n\to\infty\)）より\(x_n\to\alpha\)（\(n\to\infty\)）である．
+  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+\phi_n}}_{n\in\numset{N}}\)を持つ．
+  この極限値を\(\alpha\)とおくと，\(\abs{x_n-\alpha}\leq\abs{x_n-x_{N+\phi_n}}+\abs{x_{N+\phi_n}-\alpha}\to 0\)（\(n\to\infty\)）なので\(x_n\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
 
 \end{document}

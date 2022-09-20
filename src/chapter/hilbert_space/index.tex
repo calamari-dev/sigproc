@@ -51,7 +51,7 @@
 
 \cref{definition:metric}のように抽象的な形で距離を定義する利点の1つは，\(\numset{K}^n\)以外の集合に対しても，点列の極限を定義できることである．
 
-\begin{definition}{点列の収束}{sequence_converge}\index{てんれつのしゅうそく@点列の収束}
+\begin{definition}{点列の収束}{sequence_converge}\index{しゅうそくてんれつの@収束，点列の}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\in S\)に\termdef{収束する}（converge）とは，
   任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(n>N\implies d(x_n,\alpha)<\varepsilon\)を満たすことをいう．
   このことを次のように表す．
@@ -129,9 +129,9 @@
 \begin{definition}{閉包・閉集合・稠密}{closure}\index{へいほう@閉包}\index{へいしゅうごう@閉集合}\index{ちゅうみつ@稠密}\index{しーえる@\(\clsr A\)}
   \((S,d)\)を距離空間，\(A\)を\(S\)の部分集合とする．
   \begin{enumerate}
-    \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark 
-    \item \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}（closed set）であるという
-    \item 集合\(B\subset A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\ltjruby{\termdef{稠密}}{ちゆうみつ}（dense）であるという
+    \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
+    \item \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}（closed set）であるという．
+    \item 集合\(B\subset A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\termdef{\ltjruby{稠|密}{ちゆう|みつ}}（dense）であるという．
   \end{enumerate}
 \end{definition}
 
@@ -324,8 +324,8 @@
   \(H\)をヒルベルト空間とする．また，\(\vect{x}\in H\)かつ，\(V\)は\(H\)の閉部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
-    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である
-    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である
+    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である．
   \end{enumerate}
 \end{theorem}
 
@@ -396,13 +396,13 @@
   \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，各\(n\in\numset{N}\)に対して\(\vect{v}_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
   \(\vect{v}_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(\vect{v}_n=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d_n}\vect{e}_{d_n}\)とおける．
 
-  \(\vect{p}=\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
+  \(\vect{p}=\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
   \begin{gather*}
-    \innerp{\vect{x}-\vect{p}}{\vect{e}_k} = \innerp*{\vect{x}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}{\vect{e}_k}
-    = \innerp{\vect{x}}{\vect{e}_k}-\sum_{m=1}^\infty\innerp{\vect{x}}{\vect{e}_m}\innerp{\vect{e}_m}{\vect{e}_k}
+    \innerp{\vect{x}-\vect{p}}{\vect{e}_j} = \innerp*{\vect{x}-\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}{\vect{e}_j}
+    = \innerp{\vect{x}}{\vect{e}_j}-\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\innerp{\vect{e}_i}{\vect{e}_j}
     = 0, \\
-    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{k=1}^{d_n}\midx{z}{n}{k}\vect{e}_k}
-    = \lim_{n\to\infty}\sum_{k=1}^{d_n}\conj{\midx{z}{n}{k}}\innerp{\vect{x}-\vect{p}}{\vect{e}_k}
+    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{z}{n}{j}\vect{e}_j}
+    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\conj{\midx{z}{n}{j}}\innerp{\vect{x}-\vect{p}}{\vect{e}_j}
     = 0
   \end{gather*}
   である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
@@ -464,8 +464,8 @@
   \begin{enumerate}
     \item \(\dotsb\subset V_{-1}\subset V_0\subset V_1\subset\dotsb\)
     \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{\vect{0}}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
-    \item \(f(\holder)\in V_n\iff f(2\holder)\in V_{n+1}\)，ただし\(n\)は任意の整数
-    \item \(\seq{\phi(\holder-n)}_{n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する
+    \item \(f(\holder)\in V_n\iff f(2\holder)\in V_{n+1}\)，ただし\(n\)は任意の整数．
+    \item \(\seq{\phi(\holder-n)}_{n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する．
   \end{enumerate}
 \end{definition}
 
