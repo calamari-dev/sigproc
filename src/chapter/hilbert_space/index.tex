@@ -131,7 +131,7 @@
   \begin{enumerate}
     \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
     \item \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}（closed set）であるという．
-    \item 集合\(B\subset A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\termdef{\ltjruby{稠|密}{ちゆう|みつ}}（dense）であるという．
+    \item 集合\(B\subset A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\termdef{\ltjruby{稠密}{ちゆうみつ}}（dense）であるという．
   \end{enumerate}
 \end{definition}
 
@@ -296,7 +296,7 @@
 
 \begin{proof}
   まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2<\delta^2+1/n}\)は\(n\in\numset{N}\)の値によらず空でない．
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2\leq\delta^2+1/n}\)は\(n\in\numset{N}\)の値によらず空でない．
   そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
 
   \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\(m,n\in\numset{N}\)とする．\nameref{theorem:median_theorem}より
@@ -306,7 +306,7 @@
   \end{gather*}
   である．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)である．したがって
   \[
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 < 2\pqty*{\delta^2+\frac{1}{m}}+2\pqty*{\delta^2+\frac{1}{n}}-4\delta^2
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 \leq 2\pqty*{\delta^2+\frac{1}{m}}+2\pqty*{\delta^2+\frac{1}{n}}-4\delta^2
     = \frac{2}{m}+\frac{2}{n} \to 0\quad(m,n\to\infty)
   \]
   である．よって，\(\seq{\vect{a}_n}\)はコーシー列なので極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
