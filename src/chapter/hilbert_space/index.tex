@@ -80,7 +80,7 @@
   \begin{figure}[htbp]
     \centering
     \includegraphics{complex_convergence.pdf}
-    \caption{\(z_1,\dots,z_7\)の様子}
+    \caption{\(z_n\to 0\)（\(n\to\infty\)）の様子．}
     \label{figure:sequence_converge}
   \end{figure}
 
@@ -91,18 +91,18 @@
 
 \begin{example}[一様収束]
   \label{example:uniform_converge}
-  \(I=\ccival{a}{b}\)を1次元の閉区間とする．\(\cont{0}(I)\)を連続関数\(f\colon I\to\numset{R}\)の全体集合とすると，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
+  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
   \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
   \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
 
-  たとえば\(I=[0,1]\)，\(f_n(x)=x/n\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
+  たとえば\(I=[0,1]\)，\(f_n(x)=(1/n)\abs{\sin(n\krez x)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
   実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{func_convergence.pdf}
-  \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子}
+  \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子．}
   \label{figure:uniform_converge}
 \end{figure}
 
@@ -280,12 +280,12 @@
   \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{convex.pdf}
-    \caption{\(\numset{R}^2\)の凸集合}
+    \caption{\(\numset{R}^2\)の凸集合．}
   \end{minipage}%
   \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{non_convex.pdf}
-    \caption{\(\numset{R}^2\)の凸集合でない部分集合}
+    \caption{\(\numset{R}^2\)の凸集合でない部分集合．}
   \end{minipage}
 \end{figure}
 
@@ -473,12 +473,12 @@
   \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{haar_scaling}
-    \caption{Haarのスケーリング関数}
+    \caption{Haarのスケーリング関数．}
   \end{minipage}%
   \begin{minipage}{0.5\linewidth}
     \centering
     \includegraphics{meyer_scaling}
-    \caption{Meyerのスケーリング関数}
+    \caption{Meyerのスケーリング関数．}
   \end{minipage}
 \end{figure}
 

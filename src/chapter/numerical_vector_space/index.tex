@@ -162,13 +162,13 @@
 \end{figure}
 
 \begin{example}
-  \(\vect{v}_1=\trps{\rowvect{1 & 1 & 1}}\)，\(\vect{v}_2=\trps{\rowvect{2 & -1+\iuni\sqrt{3} & -1-\iuni\sqrt{3}}}\)とし，
-  \(\numset{C}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)で定義する．
-  このとき\(\innerp{\vect{v}_1}{\vect{v}_2}=0\)，\(\vnorm{\vect{v}_1}=\sqrt{3}\)，\(\vnorm{\vect{v}_2}=\sqrt{12}\)だから，
-  集合\(\Set{\vect{v}_1/\sqrt{3},\vect{v}_2/\sqrt{12}}\)は\(V\)の正規直交基底である．よって
+  \(\vect{e}_x=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{e}_y=\trps{\rowvect{0 & 1 & 0}}\)とし，
+  \(\numset{R}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{e}_x,\vect{e}_y}\)で定義する．
+  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので
   \[
-    \proj_V(\vect{x}) = \innerp*{\vect{x}}{\frac{\vect{v}_1}{\sqrt{3}}}\frac{\vect{v}_1}{\sqrt{3}}+\innerp*{\vect{x}}{\frac{\vect{v}_2}{\sqrt{12}}}\frac{\vect{v}_2}{\sqrt{12}}
-    = \frac{\innerp{\vect{x}}{\vect{v}_1}}{3}\vect{v}_1+\frac{\innerp{\vect{x}}{\vect{v}_2}}{12}\vect{v}_2
+    \proj_V(\vect{r}) = \innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y
+    = \trps{\matrice{s & t & 0}}
+    \quad(\vect{r}=\trps{\matrice{s & t & u}}\in\numset{R}^3)
   \]
   である．
 \end{example}
@@ -180,7 +180,7 @@
 \begin{proof}
   \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
   このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{s\vect{x}+t\vect{y}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V(\vect{x})}{\vect{v}}+t\innerp{\vect{y}-\proj_V(\vect{y})}{\vect{v}}=s0+t0=0\)となるので，
-  \(\proj_V(s\vect{x}+t\vect{y})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+  \cref{proposition:finite_projection}より\(\proj_V(s\vect{x}+t\vect{y})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
 \end{proof}
 
 \subsection{直交補空間}
