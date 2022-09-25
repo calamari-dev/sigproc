@@ -151,7 +151,7 @@
   なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-e(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
-\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影!かずべくとるくうかんじょうの@数ベクトル空間}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
+\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
   \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
 \end{definition}
 
@@ -245,6 +245,16 @@
 \]
 であり，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
 \(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
+
+\(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
+1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}(\vect{x})}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
+\(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
+もう1つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
+\[
+  \vect{x} = \proj_{V_n}(\vect{x})
+  = \sum_{i=1}^n\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
+\]
+が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．

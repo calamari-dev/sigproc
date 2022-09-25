@@ -112,10 +112,13 @@
   \small%
   \setlength{\parindent}{0pt}%
   \setlength{\parskip}{0pt plus 0.03\zh}%
-  \let\item\@idxitem
+  \DeclareCommandCopy{\item}{\@idxitem}%
 }{%
   \end{multicols}%
-  \ifx\jlreq@theindex@savedpagestyle\@undefined\else\expandafter\pagestyle\expandafter{\jlreq@theindex@savedpagestyle}\fi%
+  \ifx\jlreq@theindex@savedpagestyle\@undefined
+  \else
+    \expandafter\pagestyle\expandafter{\jlreq@theindex@savedpagestyle}%
+  \fi
   \let\jlreq@theindex@savedpagestyle\@undefined%
   \clearpage%
   \jlreq@oldfontcommand@disable%
