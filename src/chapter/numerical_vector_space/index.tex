@@ -113,7 +113,7 @@
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  \(V\)のある元\(\vect{m}\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすとき，
+  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
   \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
 
@@ -123,7 +123,7 @@
   が成立する．よって\(\vnorm{\vect{x}-\vect{y}}^2\geq\vnorm{\vect{x}-\vect{m}}^2\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
-\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
+\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
 しかし実は，仮定を満たす\(\vect{m}\)は一意に存在し，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のただ1つの元である．
 
 \begin{proposition}{}{finite_projection}
@@ -131,13 +131,13 @@
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
     \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
-    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である．
+    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
   \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)がただ1つ存在する．
-  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
+  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
   \(\vect{n}\)の定義から，関数\(e(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと

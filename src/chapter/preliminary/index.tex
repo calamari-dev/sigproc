@@ -404,18 +404,17 @@
 以下，対角行列\(\begin{bsmallmatrix}a_1 & & \\ & \ddots & \\ & & a_n\end{bsmallmatrix}\)を\(\diag(a_1,\dots,a_n)\)\index{だいあごなる@\(\diag(a_1,\dots,a_n)\)}と略記する．
 
 \begin{proof}
-  1と3の同値性のみ示す．\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)があるとき，\(\mat{A}\)は対角化可能であることを示す．
+  1と3の同値性のみ示す．\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)があるとき，\(\mat{A}\)は対角化できることを示す．
   \(\mat{P}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)とおく．このとき，各\(\vect{v}_i\)に対応する固有値を\(\lambda_i\)とおくと
   \(\mat{A}\mat{P}=\rowvect{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\rowvect{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)
-  であるから，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと\(\mat{A}\mat{P}=\mat{P}\mat{\Lambda}\)，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)となる．
+  だから，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと\(\mat{A}\mat{P}=\mat{P}\mat{\Lambda}\)，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)となる．
   ただし，\(\mat{P}\)の逆行列が存在することは\cref{proposition:basis_and_matrix}による．
 
   逆に，\(\mat{A}=\mat{P}\mat{\Lambda}\mat{P}^{-1}\)を満たす\(n\)次正則行列\(\mat{P}\)，対角行列\(\mat{\Lambda}\)が存在したとする．
   \(\mat{P}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_n}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおく．
   このとき\(\rowvect{\mat{A}\vect{v}_1 & \cdots & \mat{A}\vect{v}_n}=\mat{A}\mat{P}=\mat{P}\mat{\Lambda}=\rowvect{\lambda_1\vect{v}_1 & \cdots & \lambda_n\vect{v}_n}\)なので，
   各\(\lambda_i\)，\(\vect{v}_i\)は\(\mat{A}\vect{v}_i=\lambda_i\vect{v}_i\)を満たす．
-  また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって，\(\vect{v}_i\)は\(\mat{A}\)の固有値\(\lambda_i\)に属する固有ベクトルである．
-  したがって，\cref{proposition:basis_and_matrix}より\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底である．
+  また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって\cref{proposition:basis_and_matrix}より，集合\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルからなる\(\numset{K}^n\)の基底である．
 \end{proof}
 
 \section{1変数の微分積分学}

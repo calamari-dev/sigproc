@@ -289,14 +289,14 @@
   \end{minipage}
 \end{figure}
 
-\begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}
+\begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}\index{しゃえいていり@射影定理!とつ@凸\twoemdash}
   \(H\)をヒルベルト空間とする．また，\(\vect{x}\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
   このとき，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)はただ1つの元からなる集合である．
 \end{theorem}
 
 \begin{proof}
   まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2\leq\delta^2+1/n}\)は\(n\in\numset{N}\)の値によらず空でない．
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2\leq\delta^2+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
   そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
 
   \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\(m,n\in\numset{N}\)とする．\nameref{theorem:median_theorem}より
@@ -325,7 +325,7 @@
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
     \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
-    \item 任意の\(\vect{y}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{y}}=0\)である．
+    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
   \end{enumerate}
 \end{theorem}
 
@@ -393,8 +393,8 @@
 
 \begin{proof}
   \(\vect{v}\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{\vect{v}_n}\)で\(\vect{v}_n\to\vect{v}\)（\(n\to\infty\)）を満たすものがある．
-  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，各\(n\in\numset{N}\)に対して\(\vect{v}_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
-  \(\vect{v}_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(\vect{v}_n=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d_n}\vect{e}_{d_n}\)とおける．
+  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，\(n\)の値に応じて\(\vect{v}_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
+  \(\vect{v}_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(\vect{v}_n=\sum_{j=1}^{d_n}\midx{z}{n}{j}\vect{e}_j=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d_n}\vect{e}_{d_n}\)とおける．
 
   \(\vect{p}=\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
   \begin{gather*}
@@ -424,24 +424,20 @@
 \label{section:lp_space}
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{えるぴーくうかん@\(\Lebesgue{p}\)空間}
-  \(-\infty\leq a<b\leq\infty\)，\(I=\Set{x\in\numset{R}\given a\leq x\leq b}\)とする\footnotemark ．
-  各\(p=1,2,\dotsc\)に対して，可測関数\(f\colon I\to\numset{C}\)で
+  集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{C}\)で
   \[
-    \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_I\abs{f(x)}^p\intd{x}}^{1/p}
+    \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
   \]
-  の値が有限であるものの全体集合を\(\Lebesgue{p}(I)\)とおく．
-  このとき，ほとんど至るところ等しい関数を同一視すれば，\(\Lebesgue{p}(I)\)は\(\vnorm{\holder}_{\Lebesgue{p}}\)をノルムとしてバナッハ空間になる．
+  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんど至るところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\vnorm{\holder}_{\Lebesgue{p}}\)をノルムとしてバナッハ空間になる．
   このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
 
 \begin{proposition}{\(\Lebesgue{2}\)空間の性質}{L2_space_property}
-  \(p=2\)のときのみ\(\Lebesgue{p}(I)\)はヒルベルト空間になり，\(\Lebesgue{2}(I)\)の内積は次の式で表される．
+  \(p=2\)のときのみ\(\Lebesgue{p}(\Omega)\)はヒルベルト空間になり，\(\Lebesgue{2}(\Omega)\)の内積は次の式で表される．
   \[
-    \innerp{f}{g} = \int_If(x)\conj{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(I))
+    \innerp{f}{g} = \int_\Omega f(x)\conj{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(\Omega))
   \]
 \end{proposition}
-
-\footnotetext{\(a=-\infty\)，\(b=\infty\)のときもある．たとえば，\(a=-\infty\)，\(b<\infty\)なら\(I=\ocival{-\infty}{b}\)である．}
 
 \section{フーリエ級数展開}
 
@@ -450,9 +446,9 @@
   \[
     c_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
   \]
-  とおくと，次式が\(\Lebesgue{2}\)収束の意味で成立する．
+  とおくと，次式で定義される関数列\(\seq{S_N}\)は\(f\)に\(\Lebesgue{2}\)収束する．
   \[
-    \lim_{N\to\infty}\sum_{n=-N}^Nc_n\napr^{\iuni nt} = f(t)
+    S_N(t) = \sum_{n=-N}^Nc_n\napr^{\iuni nt}\quad(-\krez\leq t\leq\krez)
   \]
 \end{definition}
 
