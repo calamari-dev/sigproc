@@ -37,7 +37,7 @@
 \newcommand{\trps}[1]{#1^{\symsfup{T}}}
 \newcommand{\vect}[1]{\symbf{#1}}
 
-\NewDocumentCommand{\pcomp}{o m}{#2^{\mathord{\perp}\IfValueT{#1}{[#1]}}}
+\NewDocumentCommand{\pcomp}{o m}{#2^{\mathord{\perp}\IfValueT{#1}{\mid #1}}}
 
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\img}{im}

@@ -77,17 +77,25 @@
   \((S,d)\)を\cref{example:metric_space}の距離空間とする．\(S\)上の点列\(\seq{z_n}_{n\in\numset{N}}\)を\(z_n=(\sqrt{3}+\iuni)/(2n)\)で定義すると，
   \(\seq{z_n}_{n\in\numset{N}}\)は\cref{definition:sequence_converge}の意味で\(z_n\to 0\)（\(n\to\infty\)）を満たす．
 
-  \begin{figure}[htbp]
-    \centering
-    \includegraphics{complex_convergence.pdf}
-    \caption{\(z_n\to 0\)（\(n\to\infty\)）の様子．}
-    \label{figure:sequence_converge}
-  \end{figure}
-
   この意味を考えよう．\(d(z,0)=\abs{z}\)だから，複素平面上の点\(0\)から距離\(r\)だけ離れた点の集合は\(\Set{z\in\numset{C}\given\abs{z}=r}\)，すなわち，半径\(r\)の円周である．
   つまり\(z_n\to 0\)（\(n\to\infty\)）とは，\cref{figure:sequence_converge}中にある円周の半径をどのように変えても，
   \(N\)の値を十分大きくとれば，点\(z_{N+1},z_{N+2},\dotsc\)をすべて円周の中に入れられることを意味する．
 \end{example}
+
+\begin{figure}[htbp]
+  \begin{minipage}{0.5\linewidth}
+    \centering
+    \includegraphics{complex_convergence.pdf}
+    \caption{\(z_n\to 0\)（\(n\to\infty\)）の様子．}
+    \label{figure:sequence_converge}
+  \end{minipage}%
+  \begin{minipage}{0.5\linewidth}
+    \centering
+    \includegraphics{func_convergence.pdf}
+    \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子．}
+    \label{figure:uniform_converge}
+  \end{minipage}
+\end{figure}
 
 \begin{example}[一様収束]
   \label{example:uniform_converge}
@@ -98,13 +106,6 @@
   たとえば\(I=[0,1]\)，\(f_n(x)=(1/n)\abs{\sin(n\krez x)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
   実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{func_convergence.pdf}
-  \caption{\(f_n\to\phi\)（\(n\to\infty\)）の様子．}
-  \label{figure:uniform_converge}
-\end{figure}
 
 \begin{note}
   \cref{example:complex_planes_convergence}において\(\abs{z_n}=1/n\)であるから，\(d(f_n,\phi)=\abs{z_n}\)である．
