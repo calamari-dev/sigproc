@@ -49,17 +49,33 @@
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
   headpunct={},
-  notefont=\sffamily\bfseries,
   notebraces={\inhibitglue（}{）\hspace{-0.5\zw}},
+  notefont=\sffamily\bfseries,
   postheadspace=1\zw,
   qed=\diamondsuit
 ]{egstyle}
+
+\declaretheoremstyle[
+  bodyfont={\gtfamily\sffamily\renewcommand{\baselinestretch}{0.9}\selectfont},
+  headfont=\sffamily\bfseries,
+  headpunct={},
+  notebraces={\inhibitglue（}{）\hspace{-0.5\zw}},
+  notefont=\sffamily\bfseries,
+  numbered=no,
+  postheadspace=1\zw
+]{notestyle}
+
+\tcolorboxenvironment{note}{
+  blanker,
+  breakable,
+  left=2\zw
+}
 
 \crefname{example}{例}{例}
 
 \declaretheorem[sibling=thcounter,style=egstyle,name=例]{example}
 \declaretheorem[style=egstyle,name=問]{problem}
-\declaretheorem[numbered=no,style=egstyle,name=ノート]{note}
+\declaretheorem[style=notestyle,name=ノート]{note}
 
 \tcbset{
   mytheorem/.style={
