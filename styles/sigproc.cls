@@ -33,6 +33,7 @@
 \setmonofont{PlemolJP}
 \setmonojfont{PlemolJP}
 
+
 % 版面
 \ModifyPageStyle{plain}{
   nombre_font=\small,
