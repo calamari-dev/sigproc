@@ -81,14 +81,14 @@
   \]
   である．
 
-  \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\basis{B}\)は正規直交基底だから
+  \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
     \vnorm*{\sum_{i=1}^mz_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
-    = \sum_{i=1}^m\sum_{j=1}^mz_i\conj{z_j}\innerp{\vect{e}_i}{\vect{e}_j}
-    = \sum_{i=1}^m\sum_{j=1}^mz_i\conj{z_j}\kdelta{i}{j}
+    = \sum_{i=1}^mz_i\sum_{j=1}^m\conj{z_j}\innerp{\vect{e}_i}{\vect{e}_j}
+    = \sum_{i=1}^mz_i\conj{z_i}
     = \sum_{i=1}^m\abs{z_i}^2
   \]
-  となる．したがって（\(\sum_{k=1}^m\)を\(\sum\)と略記すると）
+  である．したがって（\(\sum_{k=1}^m\)を\(\sum\)と略記すると）
   \begin{align*}
     f(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
     &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z_k}\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
@@ -185,7 +185,7 @@
 
 \subsection{直交補空間}
 
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\index{\(\pcomp{W}\)}\index{\(\pcomp[V]{W}\)}
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\index{\(\pcomp{V}\)}\index{\(\pcomp[V]{W}\)}
   \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
   \[
     X = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
@@ -196,7 +196,7 @@
 \begin{example}
   \(W=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
   このとき，\(\numset{R}^3\)における\(W\)の直交補空間は\(\vect{e}_1\)と\(\vect{e}_2\)に直交する\(\zvec\)でないベクトル\(\vect{e}_3\)で生成される直線\(\spannedby\Set{\vect{e}_3}\)である．
-  特に\(\vect{e}_1\)と\(\vect{e}_2\)が直交するとき，集合\(\Set{\vect{e}_1,\vect{e}_2,\vect{e}_3}\)は\(\numset{R}^3\)の正規直交基底である．
+  特に\(\vect{e}_1\)と\(\vect{e}_2\)が直交するとき，集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -227,7 +227,7 @@
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}=\diag(1,\dots,1,0,\dots,0)\)とおく．
+\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
   \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
@@ -256,6 +256,18 @@
 \]
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
+以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+
+\begin{definition}{分析作用素，合成作用素}{analysis_and_synthesis}\index{ぶんせきさようそ@分析作用素}\index{ごうせいさようそ@合成作用素}
+  \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
+  \begin{enumerate}
+    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
+    \item 線型写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
+  \end{enumerate}
+\end{definition}
+
+分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
+
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
@@ -283,21 +295,38 @@
   なので\(\midx{a}{i}{j}=\htrps{\vect{u}_i}\vect{u}_j=\innerp{\vect{u}_j}{\vect{u}_i}\)である．よって，\(\mat{U}^{-1}=\htrps{\mat{U}}\)であることと，各\(i,j\in\Set{1,\dots,n}\)に対して\(\innerp{\vect{u}_i}{\vect{u}_j}=\kdelta{i}{j}\)であることは同値である．
 \end{proof}
 
-\subsection{スペクトル定理}
+\begin{corollary}{}{}
+  \(T\colon\numset{K}^n\to\numset{K}^n\)を線型写像とする．このとき，以下の命題は同値である．
+  \begin{enumerate}
+    \item \(T\)はある正規直交基底に関する分析作用素（合成作用素）である．
+    \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
+  \end{enumerate}
+\end{corollary}
+
+\section{離散フーリエ変換}
+
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{でぃーえふてぃー@DFT|see{りさんふーりえへんかん}}\index{\(\dft{n}\)}
+  \[
+    \dft{n}{\vect{x}} = \trps{\matrice{X_1 & \cdots & X_n}},
+    \quad X_j = \sum_{k=1}^nx_k\napr^{-2\krez\iuni jk/n}\quad(\vect{x}\in\numset{C}^n)
+  \]
+  で定義される線型写像\(\dft{n}\colon\numset{C}^n\to\numset{C}^n\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
+\end{definition}
 
 \section{最小2乗問題}
 
 \subsection{最小2乗問題}
 
+\subsection{スペクトル定理}
+
 \subsection{特異値分解}
 
 \subsection{擬似逆行列}
 
-\section{離散フーリエ変換}
-
 \section{多重解像度解析}
 
 \section{主成分分析}
+
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering

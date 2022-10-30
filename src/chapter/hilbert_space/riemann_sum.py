@@ -6,7 +6,7 @@ import numpy as np
 plt.style.use("sigproc")
 
 x = np.linspace(0, 1, num=100)
-n = np.linspace(0, 1, num=7)
+n = np.linspace(0, 1, num=8)
 
 f = x**3 - 0.5 * x + 0.5
 g = n**3 - 0.5 * n + 0.5
@@ -18,6 +18,5 @@ ax.fill_between(
 )
 ax.plot(x, f, label=r"$f(t)$")
 ax.legend()
-ax.axis([0, 1, 0, 1])
 ax.axis("square")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

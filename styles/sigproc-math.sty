@@ -18,7 +18,9 @@
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\bqty}{\lbrack}{\rbrack}
 \DeclarePairedDelimiter{\Bqty}{\lbrace}{\rbrace}
+\DeclarePairedDelimiterXPP{\inv}[2]{#1^{-1}}{\lbrack}{\rbrack}{}{#2}
 \DeclarePairedDelimiter{\pqty}{\lparen}{\rparen}
+\DeclarePairedDelimiterXPP{\ran}[2]{#1}{\lbrack}{\rbrack}{}{#2}
 \DeclarePairedDelimiter{\seq}{\lbrace}{\rbrace}
 
 \providecommand{\given}{}
@@ -87,6 +89,7 @@
 \DeclareMathOperator{\ztrans}{\symcal{Z}}
 
 % 確率統計
+\newcommand{\measured}[1]{\symrm{d}#1}
 \newcommand{\mble}[1]{\symcal{#1}}
 
 \DeclareMathOperator{\expect}{\symbb{E}}

@@ -61,7 +61,11 @@
 \end{definition}
 
 \begin{note}
-  \cref{definition:sequence_converge}より，\(n\to\infty\)のとき\(x_n\to\alpha\iff d(x_n,\alpha)\to 0\)である．
+  次の命題が成り立つことに注意．
+  \[
+    x_n \to \alpha\quad(n\to\infty)
+    \iff\lim_{n\to\infty}d(x_n,\alpha) = 0
+  \]
 \end{note}
 
 \(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\)に収束するとき，\(\alpha\)を\(\seq{x_n}_{n\in\numset{N}}\)の\termdef{極限点}\index{きょくげんてん@極限点}（limit point）という．
@@ -113,7 +117,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(0\leq d(\alpha,\beta)\leq d(\alpha,x_n)+d(x_n,\beta)\)なので，\(d(x_n,\alpha)\to 0\)，\(d(x_n,\beta)\to 0\)（\(n\to\infty\)）なら\(d(\alpha,\beta)=0\)，\(\alpha=\beta\)である．
+  \(0\leq d(\alpha,\beta)\leq d(\alpha,x_n)+d(x_n,\beta)=d(x_n,\alpha)+d(x_n,\beta)\)なので，\(d(x_n,\alpha)\to 0\)，\(d(x_n,\beta)\to 0\)（\(n\to\infty\)）なら\(d(\alpha,\beta)=0\)，\(\alpha=\beta\)である．
 \end{proof}
 
 \cref{proposition:limit_uniqueness}から，各収束列\(\seq{x_n}_{n\in\numset{N}}\)に対して，その極限点は一意に定まる．そのため，以降は収束列\(\seq{x_n}_{n\in\numset{N}}\)の極限点を
@@ -122,7 +126,7 @@
 \]
 と書く．
 
-\begin{definition}{閉包・閉集合・稠密}{closure}\index{へいほう@閉包}\index{へいしゅうごう@閉集合}\index{ちゅうみつ@稠密}\index{しーえる@\(\clsr A\)}
+\begin{definition}{閉包・閉集合・稠密}{closure}\index{へいほう@閉包}\index{へいしゅうごう@閉集合}\index{ちゅうみつ@稠密}\index{しーえる@\(\clsr S\)}
   \((S,d)\)を距離空間，\(A\)を\(S\)の部分集合とする．
   \begin{enumerate}
     \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
@@ -131,7 +135,7 @@
   \end{enumerate}
 \end{definition}
 
-\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{しー@\(\scomp{A}\)}で表す．}
+\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{しー@\(\scomp{S}\)}で表す．}
 
 \begin{example}
   \(\clsr\ocival{0}{1}=\ccival{0}{1}\)，\(\clsr\numset{Q}=\numset{R}\)である．
@@ -293,28 +297,26 @@
 
 \begin{proof}
   まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{y}-\vect{x}}^2\leq\delta^2+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
+  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{x}-\vect{y}}\leq\delta+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
   そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
+  \(0\leq\vnorm{\vect{x}-\vect{a}_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{\vect{a}_n}\)がある点\(\vect{m}\)に収束すれば，\nameref{proposition:norm_continuous}より
+  \(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．さらに，\(C\)は閉集合だから\(\vect{m}\in C\)，よって\(\vect{m}\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
 
-  \(\seq{\vect{a}_n}\)がコーシー列であることを示す．\(m,n\in\numset{N}\)とする．\nameref{theorem:median_theorem}より
+  つまり，\(\seq{\vect{a}_n}\)の極限点\(\vect{m}\)が存在すること，すなわち，\(\seq{\vect{a}_n}\)がコーシー列であることを示せばよい．
+  \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
   \begin{gather*}
     \vnorm{(\vect{a}_m-\vect{x})+(\vect{a}_n-\vect{x})}^2+\vnorm{\vect{a}_m-\vect{a}_n}^2 = 2(\vnorm{\vect{a}_m-\vect{x}}^2+\vnorm{\vect{a}_n-\vect{x}}^2), \\
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 = 2\vnorm{\vect{a}_m-\vect{x}}^2+2\vnorm{\vect{a}_n-\vect{x}}^2-4\vnorm*{\frac{\vect{a}_m+\vect{a}_n}{2}-\vect{x}}^2
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 = 2\vnorm{\vect{x}-\vect{a}_m}^2+2\vnorm{\vect{x}-\vect{a}_n}^2-4\vnorm*{\vect{x}-\frac{\vect{a}_m+\vect{a}_n}{2}}^2
   \end{gather*}
-  である．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)である．したがって
+  である．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)で
   \[
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 \leq 2\pqty*{\delta^2+\frac{1}{m}}+2\pqty*{\delta^2+\frac{1}{n}}-4\delta^2
-    = \frac{2}{m}+\frac{2}{n} \to 0\quad(m,n\to\infty)
+    \vnorm{\vect{a}_m-\vect{a}_n}^2 \leq 2\pqty*{\delta+\frac{1}{m}}^2+2\pqty*{\delta+\frac{1}{n}}^2-4\delta^2
+    \to 0\quad(m,n\to\infty)
   \]
-  である．よって，\(\seq{\vect{a}_n}\)はコーシー列なので極限点\(\vect{m}\)が存在する．\(C\)は閉集合だから\(\vect{m}\in C\)で，\nameref{proposition:norm_continuous}より\(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．
-  したがって，\(\delta\)の定義から\(\vect{m}\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
+  である．よって\(\seq{\vect{a}_n}\)はコーシー列だから，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)は空でない．
 
-  次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．このとき，存在の証明と同様にして
-  \begin{align*}
-    \vnorm{\vect{m}_1-\vect{m}_2}^2 &= 2\vnorm{\vect{m}_1-\vect{x}}^2+2\vnorm{\vect{m}_2-\vect{x}}^2-4\vnorm*{\frac{\vect{m}_1+\vect{m}_2}{2}-\vect{x}}^2 \\
-    &\leq 2\delta^2+2\delta^2-4\delta^2 = 0
-  \end{align*}
-  が得られるから，\(\vect{m}_1=\vect{m}_2\)である．
+  次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．
+  このとき\(\vnorm{\vect{x}-\vect{m}_1}=\vnorm{\vect{x}-\vect{m}_2}=\delta\)，\((\vect{m}_1+\vect{m}_2)/2\in C\)なので\(\vnorm{\vect{m}_1-\vect{m}_2}^2=2\delta^2+2\delta^2-4\vnorm{\vect{x}-(\vect{m}_1+\vect{m}_2)/2}^2\leq 0\)，\(\vect{m}_1=\vect{m}_2\)である．
 \end{proof}
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}

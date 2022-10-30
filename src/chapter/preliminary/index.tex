@@ -77,14 +77,14 @@
 
 また，2つの部分空間\(W_1,W_2\subset V\)があれば，それらを含むより大きな部分空間を作れる．
 
-\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかんの@和，部分空間の}\index{ぶぶんくうかん@部分空間!わ@和}\index{\(W_1+W_2\)}
+\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかんの@和，部分空間の}\index{ぶぶんくうかん@部分空間!わ@和}\index{\(V_1+V_2\)}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W_1,W_2\subset V\)を部分空間とする．
   このとき，集合\(W=\Set{\vect{w}_1+\vect{w}_2\given\text{\(\vect{w}_1\in W_1\)，\(\vect{w}_2\in W_2\)}}\)は\(V\)の部分空間になる．
   \(W\)を\(W_1\)と\(W_2\)の\termdef{和}（sum）といい，\(W_1+W_2\)と表記する．
 \end{definition}
 
 特に\(W_1\cap W_2=\Set{\zvec}\)であるとき，\(W_1+W_2\)を\(W_1\)と\(W_2\)の\termdef{直和}\index{ちょくわぶぶんくうかんの@直和，部分空間の}\index{ぶぶんくうかん@部分空間!ちょくわ@直和}（direct sum）という．
-直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(W_1\oplus W_2\)}とも書く．
+直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(V_1\oplus V_2\)}とも書く．
 
 \subsection{基底}
 
@@ -433,7 +433,7 @@
 
 \(X\)の上界が存在するとき，\(X\)は上に有界であるという．同様に，\(X\)の下界が存在するとき，\(X\)は下に有界であるという．\(X\)が上にも下にも有界であるときは，単に「有界である」という．
 
-\begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{すーぷ@\(\sup X\)}\index{いんふ@\(\inf X\)}
+\begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{すーぷ@\(\sup S\)}\index{いんふ@\(\inf S\)}
   \(X\)を\(\numset{R}\)の空でない部分集合とする．\(X\)の上界の全体集合を\(U\)，下界の全体集合を\(L\)とおく．
   \begin{enumerate}
     \item \(X\)が上に有界であれば，\(U\)は最小元\(\min U\)を持つ．\(\min U\)を\(X\)の\termdef{上限}（supremum）といい，\(\sup X\)と書く．
@@ -493,19 +493,20 @@
 \begin{proof}
   写像\(f\colon\numset{N}\to\numset{R}\)を\(f(n)=x_n\)で定義する．また，\(x_1,x_2,\dotsc\in I_1\)となる有界閉区間\(I_1=\ccival{a_1}{b_1}\)を1つ選び，\(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）を帰納的に
   \[
-    I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(f^{-1}(\ccival{a_n}{c_n})\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
+    I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(\inv{f}{\ccival{a_n}{c_n}}\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
     \quad c_n = \frac{a_n+b_n}{2}
   \]
-  で定義する．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう「定理」であるが，ここでは認める．}，
+  で定義する\footnote{写像\(f\colon X\to Y\)と集合\(A\subset X\)，\(B\subset Y\)に関して\(\ran{f}{A}=\Set{f(x)\given x\in A}\)\index{\(\ran{f}{S}\)}，\(\inv{f}{B}=\Set{x\in X\given f(x)\in B}\)\index{\(\inv{f}{S}\)}である．}．
+  このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう「定理」であるが，ここでは認める．}，
   \cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
 
-  \(f^{-1}(I_n)\)は無限集合であることを帰納法で示す．\(f^{-1}(I_n)\)が無限集合であれば，\(f^{-1}(I_n)=f^{-1}(\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n})=f^{-1}(\ccival{a_n}{c_n})\cup f^{-1}(\ccival{c_n}{b_n})\)より
-  \(f^{-1}(\ccival{a_n}{c_n})\)と\(f^{-1}(\ccival{c_n}{b_n})\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(f^{-1}(I_{n+1})\)は無限集合である．
+  \(\inv{f}{I_n}\)は無限集合であることを帰納法で示す．\(\inv{f}{I_n}\)が無限集合であれば，\(\inv{f}{I_n}=\inv{f}{\ccival{a_n}{c_n}\cup\ccival{c_n}{b_n}}=\inv{f}{\ccival{a_n}{c_n}}\cup\inv{f}{\ccival{c_n}{b_n}}\)より
+  \(\inv{f}{\ccival{a_n}{c_n}}\)と\(\inv{f}{\ccival{c_n}{b_n}}\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(\inv{f}{I_{n+1}}\)は無限集合である．
 
-  以上により，\(f^{-1}(I_n)\)は無限集合である．よって，自然数列\(\seq{\phi_n}_{n\in\numset{N}}\)を
+  以上により，\(\inv{f}{I_n}\)は無限集合である．よって，自然数列\(\seq{\phi_n}_{n\in\numset{N}}\)を
   \[
     \phi_1 = 1,
-    \quad\phi_n = \min\Set{k\in f^{-1}(I_n)\given k>\phi_{n-1}}\quad(n=2,3,\dotsc)
+    \quad\phi_n = \min\Set{k\in\inv{f}{I_n}\given k>\phi_{n-1}}\quad(n=2,3,\dotsc)
   \]
   で定義できる．\(\alpha\in I_n\)，\(x_{\phi_n}=f(\phi_n)\in I_n\)だから\(\abs{x_{\phi_n}-\alpha}\leq b_n-a_n\to 0\)（\(n\to\infty\)），\(x_{\phi_n}\to\alpha\)（\(n\to\infty\)）である．
 \end{proof}
