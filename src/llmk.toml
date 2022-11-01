@@ -8,7 +8,7 @@ aux_file = "%B.aux"
 aux_empty_size = 9
 
 [programs.mendex]
-command = "mendex"
+command = "upmendex"
 target = "%B.idx"
 opts = ["-g", "-s"]
 args = ["./index", "%T"]

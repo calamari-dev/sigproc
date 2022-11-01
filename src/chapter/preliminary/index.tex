@@ -77,14 +77,14 @@
 
 また，2つの部分空間\(W_1,W_2\subset V\)があれば，それらを含むより大きな部分空間を作れる．
 
-\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかんの@和，部分空間の}\index{ぶぶんくうかん@部分空間!わ@和}\index{\(V_1+V_2\)}
+\begin{definition}{部分空間の和}{sum_of_subspace}\index{わぶぶんくうかんの@和，部分空間の}\index{ぶぶんくうかん@部分空間!わ@和}\indexsymbol{\(V_1+V_2\)}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(W_1,W_2\subset V\)を部分空間とする．
   このとき，集合\(W=\Set{\vect{w}_1+\vect{w}_2\given\text{\(\vect{w}_1\in W_1\)，\(\vect{w}_2\in W_2\)}}\)は\(V\)の部分空間になる．
   \(W\)を\(W_1\)と\(W_2\)の\termdef{和}（sum）といい，\(W_1+W_2\)と表記する．
 \end{definition}
 
 特に\(W_1\cap W_2=\Set{\zvec}\)であるとき，\(W_1+W_2\)を\(W_1\)と\(W_2\)の\termdef{直和}\index{ちょくわぶぶんくうかんの@直和，部分空間の}\index{ぶぶんくうかん@部分空間!ちょくわ@直和}（direct sum）という．
-直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\index{\(V_1\oplus V_2\)}とも書く．
+直和であることを強調したいときは，和\(W_1+W_2\)を\(W_1\oplus W_2\)\indexsymbol{\(V_1\oplus V_2\)}とも書く．
 
 \subsection{基底}
 
@@ -184,7 +184,7 @@
 \(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
 \cref{definition:inner_product}は，こうした幾何的な考察を，より多くのベクトル空間へと適用可能にする．
 
-\begin{definition}{内積}{inner_product}\index{ないせき@内積}\index{\(\innerp{\holder}{\holder}\)}
+\begin{definition}{内積}{inner_product}\index{ないせき@内積}\indexsymbol{\(\innerp{\holder}{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y},\vect{z}\in V\)に対し，\(\innerp{\holder}{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
@@ -496,7 +496,7 @@
     I_{n+1} = \begin{cases}\ccival{a_n}{c_n} & \text{(\(\inv{f}{\ccival{a_n}{c_n}}\)が無限集合)},\\ \ccival{c_n}{b_n} & \text{(otherwise)},\end{cases}
     \quad c_n = \frac{a_n+b_n}{2}
   \]
-  で定義する\footnote{写像\(f\colon X\to Y\)と集合\(A\subset X\)，\(B\subset Y\)に関して\(\ran{f}{A}=\Set{f(x)\given x\in A}\)\index{\(\ran{f}{S}\)}，\(\inv{f}{B}=\Set{x\in X\given f(x)\in B}\)\index{\(\inv{f}{S}\)}である．}．
+  で定義する\footnote{写像\(f\colon X\to Y\)と集合\(A\subset X\)，\(B\subset Y\)に関して\(\ran{f}{A}=\Set{f(x)\given x\in A}\)\indexsymbol{\(\ran{f}{S}\)}，\(\inv{f}{B}=\Set{x\in X\given f(x)\in B}\)\indexsymbol{\(\inv{f}{S}\)}である．}．
   このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので\footnote{「\(2^{-n}\to 0\)（\(n\to\infty\)）」も実数の性質からしたがう「定理」であるが，ここでは認める．}，
   \cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
 

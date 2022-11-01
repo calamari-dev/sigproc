@@ -18,7 +18,7 @@
   = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
   \quad(\vect{x}=\trps{\matrice{x_1 & \cdots & x_n}}\in\numset{K}^n)
 \]
-とする\index{\(\vnorm{\holder}\)}．
+とする\indexsymbol{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
 
@@ -185,7 +185,7 @@
 
 \subsection{直交補空間}
 
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\index{\(\pcomp{V}\)}\index{\(\pcomp[V]{W}\)}
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp{V}\)}\indexsymbol{\(\pcomp[V]{W}\)}
   \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
   \[
     X = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
@@ -296,7 +296,7 @@
 \end{proof}
 
 \begin{corollary}{}{}
-  \(T\colon\numset{K}^n\to\numset{K}^n\)を線型写像とする．このとき，以下の命題は同値である．
+  \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，以下の命題は同値である．
   \begin{enumerate}
     \item \(T\)はある正規直交基底に関する分析作用素（合成作用素）である．
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
@@ -305,10 +305,11 @@
 
 \section{離散フーリエ変換}
 
-\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{でぃーえふてぃー@DFT|see{離散フーリエ変換}}\index{\(\dft{n}\vect{x}\)}
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{でぃーえふてぃー@DFT|see{離散フーリエ変換}}\indexsymbol{\(\dft{n}\vect{x}\)}
+  各\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
   \[
-    \dft{n}{\vect{x}} = \trps{\matrice{X_1 & \cdots & X_n}},
-    \quad X_j = \sum_{k=1}^nx_k\napr^{-2\krez\iuni jk/n}\quad(\vect{x}\in\numset{C}^n)
+    \dft{n}{\vect{x}} = \trps{\matrice{y_1 & \cdots & y_n}},
+    \quad y_j = \frac{1}{\sqrt{n}}\sum_{k=1}^nx_k\napr^{-2\krez\iuni jk/n}\quad(j=1,\dots,n)
   \]
   で定義される線型写像\(\dft{n}\colon\numset{C}^n\to\numset{C}^n\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
 \end{definition}
