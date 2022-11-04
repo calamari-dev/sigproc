@@ -126,7 +126,7 @@
 \]
 と書く．
 
-\begin{definition}{閉包・閉集合・稠密}{closure}\index{へいほう@閉包}\index{へいしゅうごう@閉集合}\index{ちゅうみつ@稠密}\index{しーえる@\(\clsr S\)}
+\begin{definition}{閉包・閉集合・稠密}{closure}\index{へいほう@閉包}\index{へいしゅうごう@閉集合}\index{ちゅうみつ@稠密}\index{cl@\(\clsr S\)}
   \((S,d)\)を距離空間，\(A\)を\(S\)の部分集合とする．
   \begin{enumerate}
     \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
@@ -135,7 +135,7 @@
   \end{enumerate}
 \end{definition}
 
-\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{しー@\(\scomp{S}\)}で表す．}
+\footnotetext{本書では閉包を\(\clsr A\)，補集合を\(\scomp{A}\)\index{c@\(\scomp{S}\)}で表す．}
 
 \begin{example}
   \(\clsr\ocival{0}{1}=\ccival{0}{1}\)，\(\clsr\numset{Q}=\numset{R}\)である．
@@ -185,7 +185,7 @@
   \]
   で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set*{\seq{x_n}_{n\in\numset{N}}\given\vnorm{\seq{x_n}_{n\in\numset{N}}}_{\lebesgue{p}}<\infty}\)
   で定義すると，\(\vnorm{\holder}_{\lebesgue{p}}\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}(\numset{N})\)はこのノルムについてバナッハ空間になる．
-  バナッハ空間\(\lebesgue{p}(\numset{N})\)を\termdef{\(\lebesgue{p}\)空間}\index{えるぴーくうかん@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
+  バナッハ空間\(\lebesgue{p}(\numset{N})\)を\termdef{\(\lebesgue{p}\)空間}\index{lp空間@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
 \end{example}
 
 \begin{example}
@@ -333,7 +333,7 @@
   あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
-\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
+\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V(\vect{x})\)}
   \cref{theorem:projection_theorem}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
 \end{definition}
 
@@ -416,14 +416,14 @@
 \]
 が成立する．そのような正規直交系\(\seq{\vect{e}_n}\)は完全正規直交系と呼ばれる．
 
-\begin{definition}{完全正規直交系}{cons}\index{かんぜんせいきちょっこうけい@完全正規直交系}\index{せいきちょっこうけい@正規直交系!かんぜん@完全\twoemdash}\index{こんす@CONS|see{完全正規直交系}}
+\begin{definition}{完全正規直交系}{cons}\index{かんぜんせいきちょっこうけい@完全正規直交系}\index{せいきちょっこうけい@正規直交系!かんぜん@完全\twoemdash}\index{CONS|see{完全正規直交系}}
   \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の正規直交系とする．\(\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc}\)が\(H\)において稠密であるとき，\(\seq{\vect{e}_n}\)は\termdef{完全正規直交系}（complete orthonormal system; CONS）であるという．
 \end{definition}
 
 \section{\texorpdfstring{\(\Lebesgue{p}\)}{Lp}空間}
 \label{section:lp_space}
 
-\begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{えるぴーくうかん@\(\Lebesgue{p}\)空間}
+\begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{Lp空間@\(\Lebesgue{p}\)空間}
   集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{C}\)で
   \[
     \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
@@ -444,17 +444,17 @@
 \begin{definition}{フーリエ級数}{fourier_series}\index{ふーりえきゅうすう@フーリエ級数}
   \(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)とする．
   \[
-    c_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
+    \hat{f}_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
   \]
   とおくと，次式で定義される関数列\(\seq{S_N}\)は\(f\)に\(\Lebesgue{2}\)収束する．
   \[
-    S_N(t) = \sum_{n=-N}^Nc_n\napr^{\iuni nt}\quad(-\krez\leq t\leq\krez)
+    S_N(t) = \sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(-\krez\leq t\leq\krez)
   \]
 \end{definition}
 
 \section{多重解像度解析}
 
-\begin{definition}{多重解像度解析}{multiresolution_analysis}\index{たじゅうかいぞうどかいせき@多重解像度解析}\index{えむあーるえー@MRA|see{多重解像度解析}}
+\begin{definition}{多重解像度解析}{multiresolution_analysis}\index{たじゅうかいぞうどかいせき@多重解像度解析}\index{MRA|see{多重解像度解析}}
   \(\Lebesgue{2}(\numset{R})\)の閉部分空間の列\(\seq{V_n}_{n\in\numset{Z}}\)が以下の条件を満たすとき，
   \(\seq{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
   \begin{enumerate}

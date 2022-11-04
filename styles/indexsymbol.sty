@@ -1,0 +1,27 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{indexsymbol}[2022/11/04 indexsymbol]
+
+\RequirePackage{luacode}
+
+\begin{luacode*}
+if indexsymbol == nil then
+  indexsymbol = {}
+end
+
+do
+  local symboltable = {}
+  local currentorder = 0
+
+  indexsymbol.run = function(symbol)
+    if symboltable[symbol] == nil then
+      currentorder = currentorder + 1
+      symboltable[symbol] = currentorder
+    end
+
+    local order = string.format("%03d", symboltable[symbol])
+    tex.sprint("\\index{" .. order .. "@" .. symbol .. "}")
+  end
+end
+\end{luacode*}
+
+\newcommand{\indexsymbol}[1]{\directlua{indexsymbol.run(\luastringN{#1})}}

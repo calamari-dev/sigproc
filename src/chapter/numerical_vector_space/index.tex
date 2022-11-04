@@ -36,7 +36,7 @@
 
 一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
 
-\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{あーぎゅみん@\(\argmin f(x)\)}\index{あーぎゅまっくす@\(\argmax f(x)\)}
+\begin{definition}{\(\argmin\)，\(\argmax\)}{argmin_argmax}\index{argmin@\(\argmin f(x)\)}\index{argmax@\(\argmax f(x)\)}
   \(X\)を集合とする．集合\(S\subset X\)と関数\(f\colon X\to\numset{R}\)に対して，\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
   \begin{gather*}
     \argmin_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\geq f(x)\)}}, \\
@@ -151,7 +151,7 @@
   なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-e(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
-\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{ぷろじぇくしょん@\(\proj_V(\vect{x})\)}
+\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V(\vect{x})\)}
   \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
 \end{definition}
 
@@ -221,7 +221,7 @@
 一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
 そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
 
-\begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{えいち@\(\htrps{\mat{A}}\)}
+\begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\conj{\trps{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
 \end{definition}
 
@@ -305,13 +305,41 @@
 
 \section{離散フーリエ変換}
 
-\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{でぃーえふてぃー@DFT|see{離散フーリエ変換}}\indexsymbol{\(\dft{n}\vect{x}\)}
-  各\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{DFT|see{離散フーリエ変換}}\index{FZn@\(\dft{n}\vect{x}\)}
+  各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{n-1}}}\in\numset{C}^n\)に対して
   \[
-    \dft{n}{\vect{x}} = \trps{\matrice{y_1 & \cdots & y_n}},
-    \quad y_j = \frac{1}{\sqrt{n}}\sum_{k=1}^nx_k\napr^{-2\krez\iuni jk/n}\quad(j=1,\dots,n)
+    \dft{n}{\vect{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{n-1}}},
+    \quad\hat{x}_j = \frac{1}{\sqrt{n}}\sum_{k=0}^{n-1}x_k\napr^{-2\krez\iuni jk/n}
   \]
   で定義される線型写像\(\dft{n}\colon\numset{C}^n\to\numset{C}^n\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
+\end{definition}
+
+以下では\(\napr^{2\krez\iuni/n}=\cos(2\krez/n)+\iuni\sin(2\krez/n)\)を\(\zeta_n\)，もしくは単に\(\zeta\)と書く．
+\(\zeta\)により\(\hat{x}_j\)は\(\hat{x}_j=n^{-1/2}(x_0\zeta^{-0j}+x_1\zeta^{-1j}+\dots+x_{n-1}\zeta^{-(n-1)j})\)と表せる．
+
+\begin{proposition}{}{}
+  \(\vect{w}_j=n^{-1/2}\trps{\rowvect{\zeta^{0j} & \cdots & \zeta^{(n-1)j}}}\)とする．
+  このとき，集合\(\Set{\vect{w}_0,\dots,\vect{w}_{n-1}}\)は\(\numset{C}^n\)の正規直交基底である．
+\end{proposition}
+
+\begin{proof}
+  \(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)を示すのはめんどうなので，\(\innerp{\vect{w}_{j-1}}{\vect{w}_j}=0\)のみ示す．
+  方程式\(z^n-1=0\)の解は\(z=\zeta^0,\dots,\zeta^{n-1}\)である．よって\(z^n-1=(z-\zeta^0)\dotsm(z-\zeta^{n-1})\)だから，\(n-1\)次の係数を比較すると\(\zeta^0+\dots+\zeta^{n-1}=0\)が得られる．したがって
+  \[
+    \innerp{\vect{w}_{j-1}}{\vect{w}_j} = \sum_{k=0}^{n-1}\frac{\zeta^{-(j-1)k}}{\sqrt{n}}\frac{\conj{\zeta^{-jk}}}{\sqrt{n}}
+    = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^k
+    = 0
+  \]
+  である．
+\end{proof}
+
+\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}
+  自然数\(n_1,\dots,n_d\)に対して\(\mat{N}=\diag(n_1,\dots,n_d)\)，\(I=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\in\numset{Z}^d\given 0\leq x_j<n_j}\)とおく．
+  関数\(f\colon I\to\numset{C}\)に対して，関数
+  \[
+    \hat{f}(\vect{\nu}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{x}\in I}f(\vect{x})\napr^{-2\krez\iuni j\innerp{\mat{N}^{-1}\vect{\nu}}{\vect{x}}}\quad(\vect{\nu}\in I)
+  \]
+  を対応づける線型写像を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
 \section{最小2乗問題}
