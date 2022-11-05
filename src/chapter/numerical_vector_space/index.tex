@@ -323,24 +323,32 @@
 \end{proposition}
 
 \begin{proof}
-  \(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)を示すのはめんどうなので，\(\innerp{\vect{w}_{j-1}}{\vect{w}_j}=0\)のみ示す．
+  \(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)を示すのはめんどうなので，\(\innerp{\vect{w}_j}{\vect{w}_{j-1}}=0\)のみ示す．
   方程式\(z^n-1=0\)の解は\(z=\zeta^0,\dots,\zeta^{n-1}\)である．よって\(z^n-1=(z-\zeta^0)\dotsm(z-\zeta^{n-1})\)だから，\(n-1\)次の係数を比較すると\(\zeta^0+\dots+\zeta^{n-1}=0\)が得られる．したがって
   \[
-    \innerp{\vect{w}_{j-1}}{\vect{w}_j} = \sum_{k=0}^{n-1}\frac{\zeta^{-(j-1)k}}{\sqrt{n}}\frac{\conj{\zeta^{-jk}}}{\sqrt{n}}
+    \innerp{\vect{w}_j}{\vect{w}_{j-1}} = \sum_{k=0}^{n-1}\frac{\zeta^{jk}}{\sqrt{n}}\frac{\conj{\zeta^{(j-1)k}}}{\sqrt{n}}
     = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^k
     = 0
   \]
   である．
 \end{proof}
 
-\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}
-  自然数\(n_1,\dots,n_d\)に対して\(\mat{N}=\diag(n_1,\dots,n_d)\)，\(I=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\in\numset{Z}^d\given 0\leq x_j<n_j}\)とおく．
-  関数\(f\colon I\to\numset{C}\)に対して，関数
+\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}f\)}
+  \(\vect{n}=\trps{\rowvect{n_1 & \cdots & n_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\given\text{\(x_j\in\numset{Z}\)，\(0\leq x_j<n_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(n_1,\dots,n_d)\)とおく．
+  関数\(f\colon\Omega\to\numset{C}\)に対して，関数
   \[
-    \hat{f}(\vect{\nu}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{x}\in I}f(\vect{x})\napr^{-2\krez\iuni j\innerp{\mat{N}^{-1}\vect{\nu}}{\vect{x}}}\quad(\vect{\nu}\in I)
+    \hat{f}(\vect{\nu}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{x}\in\Omega}f(\vect{x})\napr^{-2\krez\iuni\trps{\vect{\nu}}\mat{N}^{-1}\vect{x}}\quad(\vect{\nu}\in\Omega)
   \]
-  を対応づける線型写像を\termdef{\(d\)次元離散フーリエ変換}という．
+  を対応づける線型写像\(\dft[d]{\vect{n}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
+
+特に\(d=2\)のとき
+\begin{align*}
+  \hat{f}(\nu_1,\nu_2) &= \frac{1}{\sqrt{n_1n_2}}\sum_{x_1=0}^{n_1-1}\sum_{x_2=0}^{n_2-1}f(x_1,x_2)\napr^{-2\krez\iuni(\nu_1x_1/n_1+\nu_2x_2/n_2)} \\
+  &= \sum_{x_1=0}^{n_1-1}\frac{\napr^{-2\krez\iuni\nu_1x_1/n_1}}{\sqrt{n_1}}\sum_{x_2=0}^{n_2-1}\frac{\napr^{-2\krez\iuni\nu_2x_2/n_2}}{\sqrt{n_2}}f(x_1,x_2)
+\end{align*}
+であり，右辺は\(f(x_1,x_2)\)を各変数に関して離散フーリエ変換した形になっている．
+より一般に，\(f(x_1,\dots,x_d)\)の\(d\)次元離散フーリエ変換は，\(f(x_1,\dots,x_d)\)を各変数に関して離散フーリエ変換したものと一致する．
 
 \section{最小2乗問題}
 

@@ -80,7 +80,7 @@
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}
 
 % フーリエ解析
-\newcommand{\dft}[1]{\operatorname{\symcal{F}}_{\numset{Z}_#1}}
+\NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
 \newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operatorname{\symcal{F}}_{\numset{T}}}
 
