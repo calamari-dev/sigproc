@@ -7,10 +7,11 @@
 \newcommand{\pholder}{(\holder)}
 
 % 算術・代数
-\newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\numset}[1]{\symbb{#1}}
 \newcommand{\scomp}[1]{#1^{\symrm{c}}}
 \newcommand{\sizeof}[1]{\mathoctothorpe #1}
+
+\NewDocumentCommand{\conj}{s m}{\IfBooleanTF{#1}{\overline{#2}}{\bar{#2}}}
 
 \DeclareMathOperator{\ipart}{Im}
 \DeclareMathOperator{\rpart}{Re}
@@ -80,9 +81,10 @@
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}
 
 % フーリエ解析
-\NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
 \newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operatorname{\symcal{F}}_{\numset{T}}}
+
+\NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
 
 \DeclareMathOperator{\ftrans}{\symcal{F}}
 \DeclareMathOperator{\ltrans}{\symcal{L}}

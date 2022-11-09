@@ -18,7 +18,7 @@
 \end{figure}
 
 \[
-  \sum_{n=0}^{N-1}x(n\increment t)\conj{y(n\increment t)}\increment t \to \int_0^1x(t)\conj{y(t)}\intd{t}\quad(N\to\infty)
+  \sum_{n=0}^{N-1}x(n\increment t)\conj*{y(n\increment t)}\increment t \to \int_0^1x(t)\conj*{y(t)}\intd{t}\quad(N\to\infty)
 \]
 
 \section{無限次元のベクトル空間}
@@ -402,7 +402,7 @@
     = \innerp{\vect{x}}{\vect{e}_j}-\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\innerp{\vect{e}_i}{\vect{e}_j}
     = 0, \\
     \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{z}{n}{j}\vect{e}_j}
-    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\conj{\midx{z}{n}{j}}\innerp{\vect{x}-\vect{p}}{\vect{e}_j}
+    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{\conj{z}}{n}{j}\innerp{\vect{x}-\vect{p}}{\vect{e}_j}
     = 0
   \end{gather*}
   である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
@@ -435,7 +435,7 @@
 \begin{proposition}{\(\Lebesgue{2}\)空間の性質}{L2_space_property}
   \(p=2\)のときのみ\(\Lebesgue{p}(\Omega)\)はヒルベルト空間になり，\(\Lebesgue{2}(\Omega)\)の内積は次の式で表される．
   \[
-    \innerp{f}{g} = \int_\Omega f(x)\conj{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(\Omega))
+    \innerp{f}{g} = \int_\Omega f(x)\conj*{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(\Omega))
   \]
 \end{proposition}
 

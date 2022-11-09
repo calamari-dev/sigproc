@@ -8,7 +8,7 @@
   \cref{chapter:preliminary}では，素朴集合論・線型代数学・微分積分学で有名な事実を，本書で必要となるものに限って概観する．
 \end{lead}
 
-\section{行列とベクトル空間}
+\section{ベクトル空間と行列}
 
 \subsection{ベクトル空間}
 
@@ -188,7 +188,7 @@
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y},\vect{z}\in V\)に対し，\(\innerp{\holder}{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
-    \item \(\innerp{\vect{x}}{\vect{y}}=\conj{\innerp{\vect{y}}{\vect{x}}}\in\numset{K}\)
+    \item \(\innerp{\vect{x}}{\vect{y}}=\conj*{\innerp{\vect{y}}{\vect{x}}}\in\numset{K}\)
     \item \(\innerp{\lambda\vect{x}+\vect{y}}{\vect{z}}=\lambda\innerp{\vect{x}}{\vect{z}}+\innerp{\vect{y}}{\vect{z}}\)
     \item \(\innerp{\vect{x}}{\vect{x}}\geq 0\)，\([\innerp{\vect{x}}{\vect{x}}=0\iff\vect{x}=\zvec]\)
   \end{enumerate}
@@ -202,7 +202,7 @@
 \end{note}
 
 \begin{example}[標準内積]
-  \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}_2}\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
+  \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}}_2\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
   \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の内積になる．\(\innerp{\holder}{\holder}\)を\(\numset{K}^n\)の\termdef{標準内積}\index{ひょうじゅんないせき@標準内積}という．
 \end{example}
 
