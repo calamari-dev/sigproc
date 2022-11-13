@@ -77,9 +77,9 @@
   \(V\)は\(\Set{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given z_1,\dots,z_m\in\numset{C}}\)と書ける．
   したがって，\(f(z_1,\dots,z_m)=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(z_1,\dots,z_m\in\numset{C}\)）とおくと
   \[
-    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
+    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{\sum z_k\vect{e}_k\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
   \]
-  である．
+  である（\(\sum_{k=1}^m\)を\(\sum\)と略記した）．
 
   \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
@@ -88,7 +88,7 @@
     = \sum_{i=1}^mz_i\conj{z}_i
     = \sum_{i=1}^m\abs{z_i}^2
   \]
-  である．したがって（\(\sum_{k=1}^m\)を\(\sum\)と略記すると）
+  である．したがって
   \begin{align*}
     f(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
     &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z}_k\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
@@ -250,10 +250,11 @@
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}(\vect{x})}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
 \(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
 もう1つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
-\[
+\begin{equation}
+  \label{equation:analysis_and_synthesis}
   \vect{x} = \proj_{V_n}(\vect{x})
   = \sum_{i=1}^n\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
-\]
+\end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
 以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
@@ -266,7 +267,8 @@
   \end{enumerate}
 \end{definition}
 
-分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
+\cref{equation:analysis_and_synthesis}より，合成作用素は分析作用素の逆写像である．
+また，分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
 
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
@@ -317,21 +319,41 @@
 以下では\(\napr^{2\krez\iuni/n}=\cos(2\krez/n)+\iuni\sin(2\krez/n)\)を\(\zeta_n\)，もしくは単に\(\zeta\)と書く．
 \(\zeta\)により\(\hat{x}_j\)は\(\hat{x}_j=n^{-1/2}(x_0\zeta^{-0j}+x_1\zeta^{-1j}+\dots+x_{n-1}\zeta^{-(n-1)j})\)と表せる．
 
-\begin{proposition}{}{}
+\begin{proposition}{}{dft_onb}
   \(\vect{w}_j=n^{-1/2}\trps{\rowvect{\zeta^{0j} & \cdots & \zeta^{(n-1)j}}}\)とする．
   このとき，集合\(\Set{\vect{w}_0,\dots,\vect{w}_{n-1}}\)は\(\numset{C}^n\)の正規直交基底である．
 \end{proposition}
 
 \begin{proof}
-  \(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)を示すのはめんどうなので，\(\innerp{\vect{w}_j}{\vect{w}_{j-1}}=0\)のみ示す．
-  方程式\(z^n-1=0\)の解は\(z=\zeta^0,\dots,\zeta^{n-1}\)である．よって\(z^n-1=(z-\zeta^0)\dotsm(z-\zeta^{n-1})\)だから，\(n-1\)次の係数を比較すると\(\zeta^0+\dots+\zeta^{n-1}=0\)が得られる．したがって
+  \(\innerp{\vect{w}_i}{\vect{w}_i}=1\)はすぐ分かる．\(0\leq i<j<n\)のとき
   \[
-    \innerp{\vect{w}_j}{\vect{w}_{j-1}} = \sum_{k=0}^{n-1}\frac{\zeta^{jk}}{\sqrt{n}}\frac{\conj{\zeta}^{(j-1)k}}{\sqrt{n}}
-    = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^k
-    = 0
+    \innerp{\vect{w}_i}{\vect{w}_j} = \sum_{k=0}^{n-1}\frac{\zeta^{ik}}{\sqrt{n}}\frac{\conj{\zeta}^{jk}}{\sqrt{n}}
+    = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^{(i-j)k}
+    = \frac{1}{n}\frac{\zeta^{(i-j)n}-1}{\zeta^{(i-j)}-1}
   \]
-  である．
+  であり，\(\zeta^n=1\)より\(\innerp{\vect{w}_i}{\vect{w}_j}=0\)である．
 \end{proof}
+
+\cref{proposition:dft_onb}から，\(\dft{n}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{n-1}}\)に関する分析作用素である．
+分析作用素の逆写像は合成作用素なので，\(\dft{n}\)の逆変換は
+\[
+  \vect{x} = \sum_{k=0}^{n-1}\hat{x}_k\vect{w}_k,
+  \quad x_j = \frac{1}{\sqrt{n}}\sum_{k=0}^{n-1}\hat{x}_k\napr^{2\krez\iuni kj/n}
+\]
+と書ける．
+
+\begin{proposition}{プランシュレルの定理}{dft_plancherel}
+  \(\hat{\vect{x}}=\dft{n}\vect{x}\)，\(\hat{\vect{y}}=\dft{n}\vect{y}\)とすると，\(\innerp{\hat{\vect{x}}}{\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)が成立する．
+  これを\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）という．
+\end{proposition}
+
+\begin{proof}
+  標準基底に関する\(\dft{n}\)の表現行列を\(\mat{W}\)とおく．このとき
+  \(\innerp{\hat{\vect{x}}}{\hat{\vect{y}}}=\innerp{\mat{W}\vect{x}}{\hat{\vect{y}}}=\trps{\vect{x}}\trps{\mat{W}}\conj{\hat{\vect{y}}}=\trps{\vect{x}}\conj*{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}\)
+  であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\hat{\vect{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
+\end{proof}
+
+\nameref{proposition:dft_plancherel}において，\(\vect{x}=\vect{y}\)とすると\(\vnorm{\dft{n}\vect{x}}=\vnorm{\vect{x}}\)が得られる．このことを\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem）という．
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}f\)}
   \(\vect{n}=\trps{\rowvect{n_1 & \cdots & n_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\given\text{\(x_j\in\numset{Z}\)，\(0\leq x_j<n_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(n_1,\dots,n_d)\)とおく．
