@@ -15,6 +15,7 @@
     "python.linting.flake8Args": ["--max-line-length=88"],
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
+    "terminal.integrated.defaultProfile.linux": "bash",
     "[python]": {
       "editor.codeActionsOnSave": { "source.organizeImports": true },
       "editor.formatOnSave": true

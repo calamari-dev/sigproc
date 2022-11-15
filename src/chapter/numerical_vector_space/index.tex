@@ -355,6 +355,16 @@
 
 \nameref{proposition:dft_plancherel}において，\(\vect{x}=\vect{y}\)とすると\(\vnorm{\dft{n}\vect{x}}=\vnorm{\vect{x}}\)が得られる．このことを\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem）という．
 
+\subsection{エイリアシング}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{aliasing.pdf}
+  \caption{エイリアシングの様子．}
+\end{figure}
+
+\subsection{多次元離散フーリエ変換}
+
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}f\)}
   \(\vect{n}=\trps{\rowvect{n_1 & \cdots & n_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\given\text{\(x_j\in\numset{Z}\)，\(0\leq x_j<n_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(n_1,\dots,n_d)\)とおく．
   関数\(f\colon\Omega\to\numset{C}\)に対して，関数
