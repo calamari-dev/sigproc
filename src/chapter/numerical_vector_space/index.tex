@@ -307,6 +307,10 @@
 
 \section{離散フーリエ変換}
 
+本節から，本書の主題である信号解析に入っていく．
+
+\subsection{離散フーリエ変換}
+
 \begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{DFT|see{離散フーリエ変換}}\index{FZn@\(\dft{n}\vect{x}\)}
   各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{n-1}}}\in\numset{C}^n\)に対して，\(\numset{C}^n\)の元
   \[
@@ -342,9 +346,8 @@
 \]
 と書ける．
 
-\begin{proposition}{プランシュレルの定理}{dft_plancherel}
+\begin{proposition}{}{dft_plancherel}
   \(\hat{\vect{x}}=\dft{n}\vect{x}\)，\(\hat{\vect{y}}=\dft{n}\vect{y}\)とすると，\(\innerp{\hat{\vect{x}}}{\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)が成立する．
-  これを\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）という．
 \end{proposition}
 
 \begin{proof}
@@ -353,7 +356,15 @@
   であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\hat{\vect{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
 \end{proof}
 
-\nameref{proposition:dft_plancherel}において，\(\vect{x}=\vect{y}\)とすると\(\vnorm{\dft{n}\vect{x}}=\vnorm{\vect{x}}\)が得られる．このことを\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem）という．
+\cref{proposition:dft_plancherel}において，\(\vect{x}=\vect{y}\)とすると
+\begin{equation}
+  \label{equation:dft_parseval}
+  \vnorm{\dft{n}\vect{x}} = \vnorm{\vect{x}},
+  \quad\sum_{k=0}^{n-1}\abs{\hat{x}_k}^2 = \sum_{k=0}^{n-1}\abs{x_k}^2
+\end{equation}
+となる．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem），あるいは\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem）と呼ぶ．
+
+さらなる諸性質を紹介する前に，離散フーリエ変換の工学的重要性を見ておこう．
 
 \subsection{エイリアシング}
 
