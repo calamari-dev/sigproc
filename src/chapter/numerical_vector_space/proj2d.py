@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from vector import Vector2D
 
-plt.style.use("sigproc")
+plt.style.use(["sigproc", "sigproc-small"])
 
 fig, ax = plt.subplots()
 ax.set(

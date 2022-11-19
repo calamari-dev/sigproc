@@ -22,17 +22,14 @@
 
 \subsection{直交射影}
 
+\begin{wrapfigure}[8]{o}{0pt}
+  \includegraphics{proj2d.pdf}
+\end{wrapfigure}
+
 \(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{proj2d.pdf}
-  \caption{\(V=\spannedby\Set{\vect{v}}\)の元で\(\vect{x}\)に最も近いベクトル\(\vect{m}\)の様子．}
-  \label{figure:proj2d}
-\end{figure}
-
-\(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合について，\(\vect{m}\)を図示したのが\cref{figure:proj2d}である．
-\cref{figure:proj2d}を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
+\(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合，\(\vect{m}\)は図の位置にある．
+図を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
 
 一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
 
@@ -50,7 +47,7 @@
   \(S\)の元\(a\)に関する以下の条件は同値であり，同様のことが\(\argmax\)についても成り立つ．
   \begin{enumerate}
     \item \(a\in\argmin_{x\in S}f(x)\)である．
-    \item \(f(a)\)は集合\(\Set{f(x)\given x\in S}\)の下限であり，よって最小元でもある．
+    \item \(f(a)\)は集合\(\ran{f}{S}=\Set{f(x)\given x\in S}\)の最小元である．
   \end{enumerate}
 \end{proposition}
 
@@ -195,7 +192,7 @@
 
 \begin{example}
   \(W=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
-  このとき，\(\numset{R}^3\)における\(W\)の直交補空間は\(\vect{e}_1\)と\(\vect{e}_2\)に直交する\(\zvec\)でないベクトル\(\vect{e}_3\)で生成される直線\(\spannedby\Set{\vect{e}_3}\)である．
+  このとき，\(\numset{R}^3\)における\(W\)の直交補空間は，\(\vect{e}_1\)と\(\vect{e}_2\)に直交する\(\zvec\)でないベクトル\(\vect{e}_3\)で生成される直線\(\spannedby\Set{\vect{e}_3}\)である．
   特に\(\vect{e}_1\)と\(\vect{e}_2\)が直交するとき，集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
 \end{example}
 
