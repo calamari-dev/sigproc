@@ -326,13 +326,12 @@
 \end{proposition}
 
 \begin{proof}
-  \(\innerp{\vect{w}_i}{\vect{w}_i}=1\)はすぐ分かる．\(0\leq i<j<n\)のとき
+  \(\conj{\zeta}=\zeta^{-1}\)を利用すれば，\(\innerp{\vect{w}_i}{\vect{w}_j}=\trps{\vect{w}_i}\conj{\vect{w}}_j\)は
   \[
-    \innerp{\vect{w}_i}{\vect{w}_j} = \sum_{k=0}^{n-1}\frac{\zeta^{ik}}{\sqrt{n}}\frac{\conj{\zeta}^{jk}}{\sqrt{n}}
-    = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^{(i-j)k}
-    = \frac{1}{n}\frac{\zeta^{(i-j)n}-1}{\zeta^{(i-j)}-1}
+    \sum_{k=0}^{n-1}\frac{\zeta^{ik}}{\sqrt{n}}\frac{\conj{\zeta}^{jk}}{\sqrt{n}} = \frac{1}{n}\sum_{k=0}^{n-1}\zeta^{(i-j)k}
+    = \begin{cases}n^{-1}(\zeta^{(i-j)n}-1)/(\zeta^{i-j}-1) & (i\neq j), \\ 1 & (i=j)\end{cases}
   \]
-  であり，\(\zeta^n=1\)より\(\innerp{\vect{w}_i}{\vect{w}_j}=0\)である．
+  と計算できる．\(\zeta^n=1\)なので\(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)である．
 \end{proof}
 
 \cref{proposition:dft_onb}から，\(\dft{n}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{n-1}}\)に関する分析作用素である．
@@ -353,26 +352,28 @@
   であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\hat{\vect{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
 \end{proof}
 
-\cref{proposition:dft_plancherel}において，\(\vect{x}=\vect{y}\)とすると
+\cref{proposition:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
 \begin{equation}
   \label{equation:dft_parseval}
-  \vnorm{\dft{n}\vect{x}} = \vnorm{\vect{x}},
+  \vnorm{\dft{n}\vect{x}}^2 = \vnorm{\vect{x}}^2,
   \quad\sum_{k=0}^{n-1}\abs{\hat{x}_k}^2 = \sum_{k=0}^{n-1}\abs{x_k}^2
 \end{equation}
-となる．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem），あるいは\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem）と呼ぶ．
+である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
 
-さらなる諸性質を紹介する前に，離散フーリエ変換の工学的重要性を見ておこう．
+さらなる諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．
+\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{time_domain.pdf}
-  \caption{「いいえ」の波形．}
+  \caption{「あ」の波形．}
+  \label{figure:time_domain}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{frequency_domain.pdf}
-  \caption{「いいえ」のスペクトル．}
+  \caption{「あ」のスペクトル．}
 \end{figure}
 
 \subsection{エイリアシング}
@@ -385,22 +386,22 @@
 
 \subsection{多次元離散フーリエ変換}
 
-\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}f\)}
-  \(\vect{n}=\trps{\rowvect{n_1 & \cdots & n_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{x_1 & \cdots & x_d}}\given\text{\(x_j\in\numset{Z}\)，\(0\leq x_j<n_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(n_1,\dots,n_d)\)とおく．
-  関数\(f\colon\Omega\to\numset{C}\)に対して，関数
+\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}x\)}
+  \(\vect{n}=\trps{\rowvect{n_1 & \cdots & n_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_j\in\numset{Z}\)，\(0\leq u_j<n_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(n_1,\dots,n_d)\)とおく．
+  関数\(x\colon\Omega\to\numset{C}\)に対して，関数
   \[
-    \hat{f}(\vect{\nu}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{x}\in\Omega}f(\vect{x})\napr^{-2\krez\iuni\trps{\vect{\nu}}\mat{N}^{-1}\vect{x}}\quad(\vect{\nu}\in\Omega)
+    \hat{x}(\vect{\nu}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x(\vect{r})\napr^{-2\krez\iuni\trps{\vect{\nu}}\mat{N}^{-1}\vect{r}}\quad(\vect{\nu}\in\Omega)
   \]
   を対応づける線型写像\(\dft[d]{\vect{n}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
 特に\(d=2\)のとき
 \begin{align*}
-  \hat{f}(\nu_1,\nu_2) &= \frac{1}{\sqrt{n_1n_2}}\sum_{x_2=0}^{n_2-1}\sum_{x_1=0}^{n_1-1}f(x_1,x_2)\napr^{-2\krez\iuni(\nu_1x_1/n_1+\nu_2x_2/n_2)} \\
-  &= \frac{1}{\sqrt{n_2}}\sum_{x_2=0}^{n_2-1}\pqty*{\frac{1}{\sqrt{n_1}}\sum_{x_1=0}^{n_1-1}f(x_1,x_2)\napr^{-2\krez\iuni\nu_1x_1/n_1}}\napr^{-2\krez\iuni\nu_2x_2/n_2}
+  \hat{x}(\nu_1,\nu_2) &= \frac{1}{\sqrt{n_1n_2}}\sum_{r_2=0}^{n_2-1}\sum_{r_1=0}^{n_1-1}x(r_1,r_2)\napr^{-2\krez\iuni(\nu_1r_1/n_1+\nu_2r_2/n_2)} \\
+  &= \frac{1}{\sqrt{n_2}}\sum_{r_2=0}^{n_2-1}\pqty*{\frac{1}{\sqrt{n_1}}\sum_{r_1=0}^{n_1-1}x(r_1,r_2)\napr^{-2\krez\iuni\nu_1r_1/n_1}}\napr^{-2\krez\iuni\nu_2r_2/n_2}
 \end{align*}
-であり，右辺は\(f(x_1,x_2)\)を各変数に関して離散フーリエ変換した形になっている．
-より一般に，\(f(x_1,\dots,x_d)\)の\(d\)次元離散フーリエ変換は，\(f(x_1,\dots,x_d)\)を各変数に関して離散フーリエ変換したものと一致する．
+であり，右辺は\(x(r_1,r_2)\)を各変数に関して離散フーリエ変換した形になっている．
+より一般に，\(x(r_1,\dots,r_d)\)の\(d\)次元離散フーリエ変換は，\(x(r_1,\dots,r_d)\)を各変数に関して離散フーリエ変換したものと一致する．
 
 \section{最小2乗問題}
 
