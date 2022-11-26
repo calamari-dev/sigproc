@@ -10,7 +10,7 @@ RUN wget --no-verbose https://texlive.texjp.org/2022/tlnet/install-tl-unx.tar.gz
 RUN tar --extract --gzip --file install-tl-unx.tar.gz --strip-components=1
 RUN ./install-tl --profile=texlive.profile --repository https://texlive.texjp.org/2022/tlnet
 RUN ln -sf /usr/local/texlive/*/bin/* /usr/local/bin/texlive
-RUN tlmgr install light-latex-make tikz-cd
+RUN tlmgr install light-latex-make siunitx tikz-cd
 
 # TeX Live を build ステージからコピーする
 FROM python:3.10-slim-bullseye
