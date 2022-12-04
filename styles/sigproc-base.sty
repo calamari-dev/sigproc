@@ -67,9 +67,9 @@
 
 \tcolorboxenvironment{note}{
   blanker,
-  borderline west={0.5\zw}{0pt}{lightgray},
+  borderline west={0.45\zw}{0pt}{lightgray},
   breakable,
-  left=1\zw
+  left=0.9\zw
 }
 
 \crefname{example}{例}{例}
@@ -114,25 +114,31 @@
 \base@declareframedtheorem{theorem}{定理}
 
 % コードブロック
-\definecolor{codeblock}{HTML}{F8F8F8}
-
-\newtcblisting{codeblock}[1]{
+\def\base@codeblockoptions{
   listing only,
   listing engine=minted,
-  minted language={#1},
   minted style=bw,
   minted options={fontsize=\small,baselinestretch=0.9},
   enhanced jigsaw,
   breakable,
   beforeafter skip balanced={0.5\baselineskip},
-  coltitle=black,
-  colframe=gray,
-  colback=codeblock,
-  opacitybacktitle=0.0,
+  colframe=black,
+  colback=white,
   top=0.5\zh,
   bottom=0.5\zh,
   left=0.5\zw,
   right=0.5\zw,
   arc=0pt,
   boxrule=0.4pt
+}
+
+\newtcblisting{codeblock}[1]{
+  minted language=#1,
+  code={\pgfkeysalsofrom{\base@codeblockoptions}}
+}
+
+\newtcbinputlisting{\inputcodeblock}[2]{
+  listing file={#2},
+  minted language=#1,
+  code={\pgfkeysalsofrom{\base@codeblockoptions}}
 }

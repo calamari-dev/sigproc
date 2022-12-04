@@ -23,7 +23,7 @@
 \subsection{直交射影}
 
 \begin{wrapfigure}[8]{o}{0pt}
-  \includegraphics{proj2d.pdf}
+  \includegraphics{figure/proj2d.pdf}
 \end{wrapfigure}
 
 \(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
@@ -58,7 +58,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{argmin.pdf}
+  \includegraphics{figure/argmin.pdf}
   \caption{\(\exp(-x)\)と\(\abs{\sin(x)}\)のグラフ．\(\exp(-x)\to 0\)（\(x\to\infty\)）であるが，\(\exp(-x)=0\)となる実数\(x\)は存在しないことに注意．}
 \end{figure}
 
@@ -70,15 +70,14 @@
 \end{proposition}
 
 \begin{proof}
-  \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，
-  \(V\)は\(\Set{z_1\vect{e}_1+\dots+z_m\vect{e}_m\given z_1,\dots,z_m\in\numset{C}}\)と書ける．
-  したがって，\(f(z_1,\dots,z_m)=\vnorm{\vect{x}-(z_1\vect{e}_1+\dots+z_m\vect{e}_m)}\)（\(z_1,\dots,z_m\in\numset{C}\)）とおくと
+  本証明に限り，\(\sum_{k=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
+  このとき\(V=\Set{\sum z_k\vect{e}_k\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\epsilon(z_1,\dots,z_m)=\vnorm{\vect{x}-\sum z_k\vect{e}_k}\)とおくと
   \[
-    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{\sum z_k\vect{e}_k\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})}
+    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{\sum z_k\vect{e}_k\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})}
   \]
-  である（\(\sum_{k=1}^m\)を\(\sum\)と略記した）．
+  である．
 
-  \(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
+  \(\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
     \vnorm*{\sum_{i=1}^mz_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
     = \sum_{i=1}^mz_i\sum_{j=1}^m\conj{z}_j\innerp{\vect{e}_i}{\vect{e}_j}
@@ -87,23 +86,23 @@
   \]
   である．したがって
   \begin{align*}
-    f(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
+    \epsilon(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
     &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z}_k\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
   \end{align*}
-  である．よって，\(f(\vect{z})^2\)は\(s_k=\rpart z_k\)と\(t_k=\ipart z_k\)の式で
+  である．よって，\(\epsilon(\vect{z})^2\)は\(s_k=\rpart z_k\)と\(t_k=\ipart z_k\)の式で
   \begin{align*}
-    f(\vect{z})^2 &= \vnorm{\vect{x}}^2+\sum(-2\rpart[(s_k-\iuni t_k)\innerp{\vect{x}}{\vect{e}_k}]+s_k^2+t_k^2) \\
+    \epsilon(\vect{z})^2 &= \vnorm{\vect{x}}^2+\sum(-2\rpart[(s_k-\iuni t_k)\innerp{\vect{x}}{\vect{e}_k}]+s_k^2+t_k^2) \\
     &= \vnorm{\vect{x}}^2+\sum(-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})+s_k^2+t_k^2) \\
     &= \vnorm{\vect{x}}^2+\sum((s_k-\rpart\innerp{\vect{x}}{\vect{e}_k})^2+(t_k-\ipart\innerp{\vect{x}}{\vect{e}_k})^2-\abs{\innerp{\vect{x}}{\vect{e}_k}}^2)
   \end{align*}
   と書けるので，次式が成立する．
   \begin{equation}
     \label{equation:pre_bessels_inequality}
-    f(\vect{z})^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \epsilon(\vect{z})^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
   \end{equation}
 
-  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}f(\vect{z})=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
-  \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\innerp{\vect{x}}{\vect{e}_1}\vect{e}_1+\dots+\innerp{\vect{x}}{\vect{e}_m}\vect{e}_m}\)である．
+  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
+  \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
 \end{proof}
 
 なお，\cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．
@@ -115,8 +114,8 @@
 \end{proposition}
 
 \begin{proof}
-  任意に\(\vect{y}\in V\)をとり，\(\vect{e}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\vect{e}}=0\)より
-  \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{\vect{x}-\vect{m}-\vect{e}}^2=\vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{e}}+\vnorm{\vect{e}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{e}}^2\)
+  任意に\(\vect{y}\in V\)をとり，\(\vect{\epsilon}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}=0\)より
+  \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{\vect{x}-\vect{m}-\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}+\vnorm{\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{\epsilon}}^2\)
   が成立する．よって\(\vnorm{\vect{x}-\vect{y}}^2\geq\vnorm{\vect{x}-\vect{m}}^2\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
@@ -137,15 +136,15 @@
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(e(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  \(\vect{n}\)の定義から，関数\(d(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    e(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
-    = -2\rpart[(x-\iuni y)\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    d(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
+    = -2\rpart[\conj{z}\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
     &= -2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
     &= (x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
     &= \abs{z-\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2
   \end{align*}
-  なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-e(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
+  なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-d(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V(\vect{x})\)}
@@ -154,7 +153,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{proj3d.pdf}
+  \includegraphics{figure/proj3d.pdf}
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
 
@@ -198,7 +197,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{orthogonal_complement.pdf}
+  \includegraphics{figure/orthogonal_complement.pdf}
   \caption{\(W\)と\(\vect{e}_1\)，\(\vect{e}_2\)，\(\vect{e}_3\)の様子．}
 \end{figure}
 
@@ -365,14 +364,14 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{time_domain.pdf}
+  \includegraphics{figure/time_domain.pdf}
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{frequency_domain.pdf}
+  \includegraphics{figure/frequency_domain.pdf}
   \caption{「あ」のスペクトル．}
   \label{figure:frequency_domain}
 \end{figure}
@@ -383,7 +382,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{aliasing.pdf}
+  \includegraphics{figure/aliasing.pdf}
   \caption{エイリアシングの様子．}
 \end{figure}
 
@@ -423,11 +422,11 @@
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{scatter.pdf}
+    \includegraphics{figure/scatter.pdf}
   \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{pca.pdf}
+    \includegraphics{figure/pca.pdf}
   \end{minipage}
 \end{figure}
 
