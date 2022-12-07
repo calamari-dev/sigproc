@@ -8,6 +8,24 @@
   \cref{chapter:numerical_vector_space}では，数ベクトル空間における直交性と最良近似の関係を説明する．
 \end{lead}
 
+\section{イントロダクション}
+\label{section:numerical_vector_space_introduction}
+
+\cref{chapter:numerical_vector_space}では，数ベクトル空間\(\numset{K}^n\)（\(\numset{K}=\numset{R},\numset{C}\)）に関する理論を扱う．
+信号解析において，この理論は
+\begin{enumerate}
+  \item 離散時間信号の時系列分析
+  \item 観測値をモデルに対応づける回帰・判別分析
+\end{enumerate}
+という，2つの方向に応用される．
+
+音声信号処理は前者の主要な例である．音声信号を計算機で処理するには，時々刻々と値が変わる信号を有限長のデータで表現しなければならない．
+たとえば，CDでは音声信号の瞬時値を1秒あたり44100個記録している．すなわち，時刻\(t\)秒における瞬時値を\(x(t)\)，収録時間を\(T\)秒とおくと，CDには数列\(\seq{x(n/44100)}_{n=0}^T\)が記録されている．
+そこで，収録されたデータを\(\numset{R}^{T+1}\)の元とみなせば，\(\numset{R}^n\)に関する理論に基づいて音声を解析できる．
+
+後者の主要な例は最小2乗法である．実験で得られた標本を理論と見比べるとき，理論から得られる式へのあてはめ（回帰）がしばしば試される．
+あてはまりのよさを示す指標はいろいろあるが，最もポピュラーなのは2乗誤差を指標にする最小2乗法である．本書ではこの最小2乗法を，内積と関連づけ幾何的に説明する．
+
 \section{直交射影}
 
 本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．
@@ -23,7 +41,7 @@
 \subsection{直交射影}
 
 \begin{wrapfigure}[8]{o}{0pt}
-  \includegraphics{figure/proj2d.pdf}
+  \includegraphics{figures/proj2d.pdf}
 \end{wrapfigure}
 
 \(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
@@ -31,7 +49,7 @@
 \(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合，\(\vect{m}\)は図の位置にある．
 図を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
 
-一般の部分空間\(V\subset\numset{K}^n\)についても，直交性は最良近似を特徴づける．証明へと入る前に，便利な記法を2つ定義しておく．
+一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
 \begin{definition}{argmin，argmax}{argmin_argmax}\index{argmin@\(\argmin f(x)\)}\index{argmax@\(\argmax f(x)\)}
   実数値関数\(f\)は集合\(S\)を定義域に含むとする．\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
@@ -58,11 +76,19 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/argmin.pdf}
+  \includegraphics{figures/argmin.pdf}
   \caption{\(\exp(-x)\)と\(\abs{\sin(x)}\)のグラフ．\(\exp(-x)\to 0\)（\(x\to\infty\)）であるが，\(\exp(-x)=0\)となる実数\(x\)は存在しないことに注意．}
 \end{figure}
 
 \(\numset{K}=\numset{R}\)の場合も同様に証明できるので，\cref{proposition:finite_projection}まで証明では\(\numset{K}=\numset{C}\)を仮定する．また，部分空間が\(\Set{\zvec}\)でないことも仮定する．
+
+\begin{lemma}{}{binomial_square}
+  各\(\vect{x},\vect{y}\in\numset{K}^n\)に対して\(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)が成立する．
+\end{lemma}
+
+\begin{proof}
+  \(\vnorm{\vect{x}+\vect{y}}^2=\innerp{\vect{x}+\vect{y}}{\vect{x}+\vect{y}}\)の右辺を展開すれば示せる．
+\end{proof}
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
@@ -84,7 +110,7 @@
     = \sum_{i=1}^mz_i\conj{z}_i
     = \sum_{i=1}^m\abs{z_i}^2
   \]
-  である．したがって
+  である．したがって，\cref{lemma:binomial_square}より
   \begin{align*}
     \epsilon(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
     &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z}_k\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
@@ -116,7 +142,7 @@
 \begin{proof}
   任意に\(\vect{y}\in V\)をとり，\(\vect{\epsilon}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}=0\)より
   \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{\vect{x}-\vect{m}-\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}+\vnorm{\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{\epsilon}}^2\)
-  が成立する．よって\(\vnorm{\vect{x}-\vect{y}}^2\geq\vnorm{\vect{x}-\vect{m}}^2\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  が成立する．よって\(\vnorm{\vect{x}-\vect{y}}\geq\vnorm{\vect{x}-\vect{m}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
 \cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
@@ -138,7 +164,7 @@
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
   \(\vect{n}\)の定義から，関数\(d(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    d(z) &= \vnorm{\vect{x}-\vect{n}-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
+    d(z) &= \vnorm{(\vect{x}-\vect{n})-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
     = -2\rpart[\conj{z}\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
     &= -2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
     &= (x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
@@ -153,7 +179,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/proj3d.pdf}
+  \includegraphics{figures/proj3d.pdf}
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
 \end{figure}
 
@@ -174,9 +200,9 @@
 \end{proposition}
 
 \begin{proof}
-  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
-  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{s\vect{x}+t\vect{y}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V(\vect{x})}{\vect{v}}+t\innerp{\vect{y}-\proj_V(\vect{y})}{\vect{v}}=s0+t0=0\)となるので，
-  \cref{proposition:finite_projection}より\(\proj_V(s\vect{x}+t\vect{y})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{z}=s\vect{x}+t\vect{y}\)，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
+  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V(\vect{x})}{\vect{v}}+t\innerp{\vect{y}-\proj_V(\vect{y})}{\vect{v}}=s0+t0=0\)なので，
+  \(\proj_V(\vect{z})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
 \end{proof}
 
 \subsection{直交補空間}
@@ -197,7 +223,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/orthogonal_complement.pdf}
+  \includegraphics{figures/orthogonal_complement.pdf}
   \caption{\(W\)と\(\vect{e}_1\)，\(\vect{e}_2\)，\(\vect{e}_3\)の様子．}
 \end{figure}
 
@@ -364,14 +390,17 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/time_domain.pdf}
+  \includegraphics{figures/time_domain.pdf}
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
 
+\cref{section:numerical_vector_space_introduction}に述べた要領で，\cref{figure:time_domain}のデータを数ベクトル\(\vect{x}\in\numset{R}^n\)と見なそう．
+\(\vect{x}\)を離散フーリエ変換すると，\(\abs{\hat{x}_j}\)（\(j=0,\dots,n-1\)）は\cref{figure:frequency_domain}のようになる．
+
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/frequency_domain.pdf}
+  \includegraphics{figures/frequency_domain.pdf}
   \caption{「あ」のスペクトル．}
   \label{figure:frequency_domain}
 \end{figure}
@@ -382,7 +411,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figure/aliasing.pdf}
+  \includegraphics{figures/aliasing.pdf}
   \caption{エイリアシングの様子．}
 \end{figure}
 
@@ -407,6 +436,8 @@
 
 \section{最小2乗問題}
 
+本節では，直交射影の理論を近似へと応用する．
+
 \subsection{最小2乗問題}
 
 \subsection{スペクトル定理}
@@ -422,11 +453,11 @@
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{figure/scatter.pdf}
+    \includegraphics{figures/scatter.pdf}
   \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{figure/pca.pdf}
+    \includegraphics{figures/pca.pdf}
   \end{minipage}
 \end{figure}
 

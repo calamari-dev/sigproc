@@ -101,7 +101,7 @@
   \setlength{\midx@columnseprule}{\columnseprule}%
   \setlength{\midx@columnsep}{\columnsep}%
   \setlength{\midx@multicolsep}{\multicolsep}%
-  \setlength{\columnseprule}{0pt}%
+  \setlength{\columnseprule}{0.4pt}%
   \setlength{\columnsep}{2\zw}%
   \setlength{\multicolsep}{0pt}%
   \clearpage%
