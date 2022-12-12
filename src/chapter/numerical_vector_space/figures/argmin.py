@@ -3,7 +3,7 @@ from pathlib import PurePath
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use("sigproc")
+plt.style.use(["sigproc", "sigproc-small"])
 
 x = np.linspace(0, 8, num=300)
 fig, ax = plt.subplots()
