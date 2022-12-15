@@ -135,7 +135,7 @@
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
+  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
   \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
 
@@ -294,10 +294,10 @@
   \end{enumerate}
 \end{definition}
 
-\cref{definition:regular_and_unitary_matrix}から，ユニタリ行列は正規行列である．また，次の命題が成立する．
+正規行列とユニタリ行列の関係については\cref{section:least_square}で詳述することにして，ここでは次の命題を示す．
 
 \begin{proposition}{ユニタリ行列の性質}{}
-  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，以下の命題は同値である．
+  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{U}\)はユニタリ行列である．
     \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である．
@@ -305,16 +305,15 @@
 \end{proposition}
 
 \begin{proof}
-  \(\htrps{\mat{U}}\mat{U}=[\midx{a}{i}{j}]\)とおくと
   \[
     \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
     = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
   \]
-  なので\(\midx{a}{i}{j}=\htrps{\vect{u}_i}\vect{u}_j=\innerp{\vect{u}_j}{\vect{u}_i}\)である．よって，\(\mat{U}^{-1}=\htrps{\mat{U}}\)であることと，各\(i,j\in\Set{1,\dots,n}\)に対して\(\innerp{\vect{u}_i}{\vect{u}_j}=\kdelta{i}{j}\)であることは同値である．
+  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
 \end{proof}
 
 \begin{corollary}{}{}
-  \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，以下の命題は同値である．
+  \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，\(T\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(T\)はある正規直交基底に関する分析作用素（合成作用素）である．
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
@@ -323,11 +322,11 @@
 
 \section{離散フーリエ変換}
 
-本節から，本書の主題である信号解析に入っていく．
+この節から，本書の主題である信号解析に入っていく．
 
 \subsection{離散フーリエ変換}
 
-\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{DFT|see{離散フーリエ変換}}\index{FZn@\(\dft{n}\vect{x}\)}
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{DFT|see{離散フーリエ変換}}\index{FZn@\(\dft{N}\vect{x}\)}
   各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)に対して，\(\numset{C}^N\)の元
   \[
     \hat{\vect{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
@@ -339,7 +338,7 @@
 以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を\(\zeta_N\)，もしくは単に\(\zeta\)と書く．
 
 \begin{proposition}{}{dft_onb}
-  \(\vect{w}_k=(1/\sqrt{N})\trps{\rowvect{\zeta^{k\cdot 0} & \cdots & \zeta^{k(N-1)}}}\)とする．
+  \(\vect{w}_k=N^{-1/2}\trps{\rowvect{\zeta^{k\cdot 0} & \cdots & \zeta^{k(N-1)}}}\)とする．
   このとき，集合\(\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)は\(\numset{C}^N\)の正規直交基底である．
 \end{proposition}
 
@@ -354,10 +353,11 @@
 
 \cref{proposition:dft_onb}から，\(\dft{N}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)に関する分析作用素である．
 分析作用素の逆写像は合成作用素なので，\(\dft{N}\)の逆変換は
-\[
+\begin{equation}
+  \label{equation:idft}
   \vect{x} = \sum_{k=0}^{N-1}\hat{x}_k\vect{w}_k,
   \quad x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
-\]
+\end{equation}
 と書ける．
 
 \begin{proposition}{}{dft_plancherel}
@@ -378,9 +378,6 @@
 \end{equation}
 である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
 
-さらなる諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．
-\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
-
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/time_domain.pdf}
@@ -388,8 +385,17 @@
   \label{figure:time_domain}
 \end{figure}
 
-\cref{section:numerical_vector_space_introduction}に述べた要領で，\cref{figure:time_domain}のデータを数ベクトル\(\vect{x}\in\numset{R}^N\)と見なそう．
-\(\vect{x}\)を離散フーリエ変換すると，\(\abs{\hat{x}_k}\)（\(k=0,\dots,N-1\)）は\cref{figure:frequency_domain}のようになる．
+さらなる諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
+
+\begin{wrapfigure}[10]{o}{0pt}
+  \includegraphics{figures/helix.pdf}
+\end{wrapfigure}
+
+\cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{R}^N\)と見なせる．
+そして，\(x_n\)と\(\hat{x}_k\)の間には\cref{equation:idft}の関係がある．
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum sodales erat, sed tempor tellus mollis a. Donec dapibus turpis non efficitur convallis. Fusce varius, eros nec sodales mattis, ipsum neque varius metus, vel bibendum quam sapien id sapien. Aliquam purus mi, aliquet eu luctus nec, placerat vitae ligula. Nulla vestibulum purus in ornare fermentum. Vestibulum tristique sagittis mi quis commodo. Morbi ex purus, consequat porttitor sagittis eget, lacinia vel sem. Curabitur suscipit lectus eget scelerisque facilisis. Sed ac feugiat lorem. Praesent lacinia libero vel euismod consectetur.
+
+\(\abs{\hat{x}_k}\)（\(k=0,\dots,N-1\)）は\cref{figure:frequency_domain}のようになる．
 
 \begin{figure}[htbp]
   \centering
@@ -411,23 +417,24 @@
 \subsection{多次元離散フーリエ変換}
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}x\)}
-  \(N_1,\dots,N_d\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_j\in\numset{Z}\)，\(0\leq u_j<N_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
+  \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_j\in\numset{Z}\)，\(0\leq u_j<N_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
   関数\(x\colon\Omega\to\numset{C}\)に対して，関数
   \[
-    \hat{x}(\vect{k}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{n}\in\Omega}x(\vect{n})\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{n}}\quad(\vect{k}\in\Omega)
+    \hat{x}(\vect{k}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x(\vect{r})\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
   \]
-  を対応づける線型写像\(\dft[d]{\mat{N}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
+  を対応づける線型写像\(\dft[d]{\vect{n}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
 特に\(d=2\)のとき
 \begin{align*}
-  \hat{x}(k_1,k_2) &= \frac{1}{\sqrt{N_1N_2}}\sum_{n_2=0}^{N_2-1}\sum_{n_1=0}^{N_1-1}x(n_1,n_2)\napr^{-2\krez\iuni(k_1n_1/N_1+k_2n_2/N_2)} \\
-  &= \frac{1}{\sqrt{N_2}}\sum_{n_2=0}^{N_2-1}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{n_1=0}^{N_1-1}x(n_1,n_2)\napr^{-2\krez\iuni k_1n_1/N_1}}\napr^{-2\krez\iuni k_2n_2/N_2}
+  \hat{x}(k_1,k_2) &= \frac{1}{\sqrt{N_1N_2}}\sum_{r_2=0}^{N_2-1}\sum_{r_1=0}^{N_1-1}x(r_1,r_2)\napr^{-2\krez\iuni(k_1r_1/N_1+k_2r_2/N_2)} \\
+  &= \frac{1}{\sqrt{N_2}}\sum_{r_2=0}^{N_2-1}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{r_1=0}^{N_1-1}x(r_1,r_2)\napr^{-2\krez\iuni k_1r_1/N_1}}\napr^{-2\krez\iuni k_2r_2/N_2}
 \end{align*}
-であり，右辺は\(x(n_1,n_2)\)を各変数に関して離散フーリエ変換した形になっている．
-より一般に，\(x(n_1,\dots,n_d)\)の\(d\)次元離散フーリエ変換は，\(x(n_1,\dots,n_d)\)を各変数に関して離散フーリエ変換したものと一致する．
+であり，右辺は\(x(r_1,r_2)\)を各変数に関して離散フーリエ変換した形になっている．
+より一般に，\(x(r_1,\dots,r_d)\)の\(d\)次元離散フーリエ変換は，\(x(r_1,\dots,r_d)\)を各変数に関して離散フーリエ変換したものと一致する．
 
 \section{最小2乗問題}
+\label{section:least_square}
 
 本節では，直交射影の理論を近似へと応用する．
 
