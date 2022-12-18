@@ -378,6 +378,8 @@
 \end{equation}
 である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
 
+他の諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．
+
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/time_domain.pdf}
@@ -385,26 +387,31 @@
   \label{figure:time_domain}
 \end{figure}
 
-さらなる諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
-
 \begin{wrapfigure}[10]{o}{0pt}
   \includegraphics{figures/helix.pdf}
 \end{wrapfigure}
 
+\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
 \cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{R}^N\)と見なせる．
-そして，\(x_n\)と\(\hat{x}_k\)の間には\cref{equation:idft}の関係がある．
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum sodales erat, sed tempor tellus mollis a. Donec dapibus turpis non efficitur convallis. Fusce varius, eros nec sodales mattis, ipsum neque varius metus, vel bibendum quam sapien id sapien. Aliquam purus mi, aliquet eu luctus nec, placerat vitae ligula. Nulla vestibulum purus in ornare fermentum. Vestibulum tristique sagittis mi quis commodo. Morbi ex purus, consequat porttitor sagittis eget, lacinia vel sem. Curabitur suscipit lectus eget scelerisque facilisis. Sed ac feugiat lorem. Praesent lacinia libero vel euismod consectetur.
+そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
+つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
+\[
+  x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
+  = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\abs{\hat{x}_k}\napr^{\iuni(2\krez kn/N+\arg\hat{x}_k)}
+\]
+となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は図のような螺旋形を描く（矢印は時間軸）．
 
-\(\abs{\hat{x}_k}\)（\(k=0,\dots,N-1\)）は\cref{figure:frequency_domain}のようになる．
+実際に\(\abs{\hat{x}_k}\)を計算すると，\cref{figure:frequency_domain}のようになる．
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/frequency_domain.pdf}
-  \caption{「あ」のスペクトル．}
+  \caption{「あ」の離散フーリエ変換．}
   \label{figure:frequency_domain}
 \end{figure}
 
-\cref{figure:frequency_domain}を見ると，\SI{250}{Hz}周辺にピークが現れている．
+\cref{figure:frequency_domain}を見ると，\SI{250}{Hz}周辺に1つめのピークが現れている．これは音声\(\vect{x}\)の\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
+人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．ピッチと基本周波数は多くの場合対応するが，同一視できないケースも存在する\cite{kashino}．}．
 
 \subsection{エイリアシング}
 
