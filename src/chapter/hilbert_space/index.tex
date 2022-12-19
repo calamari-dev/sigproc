@@ -441,14 +441,30 @@
 
 \section{フーリエ級数展開}
 
-\begin{definition}{フーリエ級数}{fourier_series}\index{ふーりえきゅうすう@フーリエ級数}
-  \(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)とする．
+\begin{theorem}{リース・フィッシャーの定理}{riesz_fischer}\index{りーすふぃっしゃーのていり@リース・フィッシャーの定理}
+  \(\Lebesgue{2}(\ccival{-\krez}{\krez})\)上の関数列\(\seq{e_n}_{n\in\numset{Z}}\)を\(e_n(t)=(2\krez)^{-1/2}\napr^{\iuni nt}\)で定義する．
+  このとき\(\seq{e_n}_{n\in\numset{Z}}\)は完全正規直交系である．これを\termdef{リース・フィッシャーの定理}（Riesz–Fischer theorem）という．
+\end{theorem}
+
+\nameref{theorem:riesz_fischer}によれば
+\[
+  \hat{f}_n = \frac{\innerp{f}{e_n}}{\sqrt{2\krez}}
+  = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
+\]
+とおくと，次式で定義される関数列\(\seq{S_N}_{N\in\numset{N}}\)は\(f\)に\(\Lebesgue{2}\)収束する．
+\[
+  S_N(t) = \sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+\]
+このことを形式的に
+\[
+  f(t) = \liminmean_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+\]
+と表そう\index{lim@\(\liminmean\)}\footnote{\(\liminmean\)はlimit in meanの略であり，\(\Lebesgue{2}\)収束を意味する．}．
+
+\begin{definition}{フーリエ級数展開}{fourier_series_expansion}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
+  各\(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)に対して，次式を\(f\)の\termdef{フーリエ級数展開}（Fourier series expansion）という．
   \[
-    \hat{f}_n = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
-  \]
-  とおくと，次式で定義される関数列\(\seq{S_N}\)は\(f\)に\(\Lebesgue{2}\)収束する．
-  \[
-    S_N(t) = \sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(-\krez\leq t\leq\krez)
+    f(t) = \liminmean_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
   \]
 \end{definition}
 
