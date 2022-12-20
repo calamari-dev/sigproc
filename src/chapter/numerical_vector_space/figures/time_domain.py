@@ -11,8 +11,7 @@ samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
 duration = data.shape[0] / samplerate
 t = np.linspace(0, duration, num=data.shape[0])
-t = t[t < 0.1]
-data = data[0:len(t)] / 32767
+data = data / 32767
 
 fig, ax = plt.subplots()
 ax.plot(t, data, lw=0.4)

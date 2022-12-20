@@ -399,7 +399,7 @@
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
   = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\abs{\hat{x}_k}\napr^{\iuni(2\krez kn/N+\arg\hat{x}_k)}
 \]
-となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は図のような螺旋形を描く（矢印は時間軸）．
+となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は図のような螺旋形を描く（矢印は時間軸）．
 
 実際に\(\abs{\hat{x}_k}\)を計算すると，\cref{figure:frequency_domain}のようになる．
 
@@ -410,7 +410,7 @@
   \label{figure:frequency_domain}
 \end{figure}
 
-\cref{figure:frequency_domain}を見ると，\SI{250}{Hz}周辺に1つめのピークが現れている．これは音声\(\vect{x}\)の\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
+\cref{figure:frequency_domain}を見ると，\SI{350}{Hz}周辺に1つめのピークが現れている．これは音声\(\vect{x}\)の\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
 人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．ピッチと基本周波数は多くの場合対応するが，同一視できないケースも存在する\cite{kashino}．}．
 
 \subsection{エイリアシング}

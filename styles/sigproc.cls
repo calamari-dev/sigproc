@@ -15,7 +15,7 @@
 \newcommand{\jlreqxkanjiskip}{0.25em plus 0.15em minus 0.06em}
 \LoadClass[disablejfam,book,paper=a5,fontsize=9bp,head_space=20mm,line_length=112mm,number_of_lines=32,headfoot_verticalposition=11bp]{jlreq}
 
-\RequirePackage[math-style=TeX,bold-style=ISO,warnings-off={mathtools-colon}]{unicode-math}
+\RequirePackage[math-style=ISO,warnings-off={mathtools-colon}]{unicode-math}
 \RequirePackage[no-math,match,deluxe,sourcehan-jp,jfm_yoko=jlreq]{luatexja-preset}
 \RequirePackage{luatexja-ruby}
 \RequirePackage{etoolbox}
