@@ -75,10 +75,16 @@
   \label{example:complex_planes_convergence}
   \((S,d)\)を\cref{example:metric_space}の距離空間とする．\(S\)上の点列\(\seq{z_n}_{n\in\numset{N}}\)を\(z_n=(\sqrt{3}+\iuni)/(2n)\)で定義すると，
   \(\seq{z_n}_{n\in\numset{N}}\)は\cref{definition:sequence_converge}の意味で\(z_n\to 0\)（\(n\to\infty\)）を満たす．
+\end{example}
 
-  この意味を考えよう．\(d(z,0)=\abs{z}\)だから，複素平面上の点\(0\)から距離\(r\)だけ離れた点の集合は\(\Set{z\in\numset{C}\given\abs{z}=r}\)，すなわち，半径\(r\)の円周である．
-  つまり\(z_n\to 0\)（\(n\to\infty\)）とは，\cref{figure:sequence_converge}中にある円周の半径をどのように変えても，
-  \(N\)の値を十分大きくとれば，点\(z_{N+1},z_{N+2},\dotsc\)をすべて円周の中に入れられることを意味する．
+\begin{example}[一様収束]
+  \label{example:uniform_converge}
+  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
+  \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
+  \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
+
+  たとえば\(I=[0,1]\)，\(f_n(x)=(1/n)\abs{\sin(n\krez x)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
+  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
 
 \begin{figure}[htbp]
@@ -95,16 +101,6 @@
     \label{figure:uniform_converge}
   \end{minipage}
 \end{figure}
-
-\begin{example}[一様収束]
-  \label{example:uniform_converge}
-  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
-  \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
-  \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
-
-  たとえば\(I=[0,1]\)，\(f_n(x)=(1/n)\abs{\sin(n\krez x)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
-  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
-\end{example}
 
 \begin{note}
   \cref{example:complex_planes_convergence}において\(\abs{z_n}=1/n\)であるから，\(d(f_n,\phi)=\abs{z_n}\)である．
@@ -424,7 +420,7 @@
 \label{section:lp_space}
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{Lp空間@\(\Lebesgue{p}\)空間}
-  集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{C}\)で
+  集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{K}\)で
   \[
     \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
   \]
@@ -457,16 +453,26 @@
 \]
 このことを形式的に
 \[
-  f(t) = \liminmean_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+  f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
 \]
-と表そう\index{lim@\(\liminmean\)}\footnote{\(\liminmean\)はlimit in meanの略であり，\(\Lebesgue{2}\)収束を意味する．}．
+と表そう\index{lim@\(\sqlim\)}\footnote{\(\sqlim\)はlimit in the meanの略．}．
 
 \begin{definition}{フーリエ級数展開}{fourier_series_expansion}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
   各\(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)に対して，次式を\(f\)の\termdef{フーリエ級数展開}（Fourier series expansion）という．
   \[
-    f(t) = \liminmean_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+    f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
   \]
 \end{definition}
+
+\begin{note}
+  \cref{definition:fourier_series_expansion}で「形式的に」と断りを入れたのは，\(f(t)=\sqlim_{N\to\infty}S_N(t)\)（\(t\in\ccival{-\krez}{\krez}\)）であっても，各\(a\in\ccival{-\krez}{\krez}\)に対して数列\(\seq{S_N(a)}\)が\(f(a)\)に収束するとは言えないからである．
+  \(\sqlim\)は，関数列の\(\Lebesgue{2}\)収束
+  \[
+    f(t)=\sqlim_{N\to\infty}S_N(t)\quad(t\in\torus)
+    \iff\lim_{N\to\infty}\int_{\torus}\abs{f(t)-S_N(t)}^2\intd{t} = 0
+  \]
+  で定義される（\(\torus=\ccival{-\krez}{\krez}\)）．
+\end{note}
 
 \section{多重解像度解析}
 

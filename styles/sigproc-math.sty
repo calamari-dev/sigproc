@@ -75,16 +75,17 @@
 \newcommand{\cont}[1]{C^#1}
 \newcommand{\lebesgue}[1]{\ell^#1}
 \newcommand{\Lebesgue}[1]{L^#1}
+\newcommand{\torus}{\symbb{T}}
 
 \DeclareMathOperator{\clsr}{cl}
-\DeclareMathOperator*{\liminmean}{l{.}i{.}m}
+\DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
 
 % フレーム理論
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}
 
 % フーリエ解析
 \newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
-\newcommand{\fseries}{\operatorname{\symcal{F}}_{\numset{T}}}
+\newcommand{\fseries}{\operatorname{\symcal{F}}_{\torus}}
 
 \NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
 
