@@ -84,12 +84,15 @@
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}
 
 % フーリエ解析
+\newcommand{\circconv}{\ast}
+\newcommand{\cycles}[2]{#1^{\numset{Z}/#2}}
 \newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operatorname{\symcal{F}}_{\torus}}
 
 \NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
 
 \DeclareMathOperator{\ftrans}{\symcal{F}}
+\DeclareMathOperator{\lagop}{\symit{L}}
 \DeclareMathOperator{\ltrans}{\symcal{L}}
 \DeclareMathOperator{\ztrans}{\symcal{Z}}
 

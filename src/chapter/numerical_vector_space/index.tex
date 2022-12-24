@@ -202,11 +202,11 @@
 \subsection{直交補空間}
 
 \begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp{V}\)}\indexsymbol{\(\pcomp[V]{W}\)}
-  \(V\)は\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
+  \(V\)を\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
   \[
-    X = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
+    \pcomp[V]{W} = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
   \]
-  も\(V\)の部分空間になる．\(X\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)と表記する．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
+  も\(V\)の部分空間になる．\(\pcomp[V]{W}\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）という．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
 \end{definition}
 
 \begin{example}
@@ -305,10 +305,10 @@
 \end{proposition}
 
 \begin{proof}
-  \[
-    \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
-    = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
-  \]
+\[
+  \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
+   = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
+ \]
   なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
 \end{proof}
 
@@ -326,7 +326,7 @@
 
 \subsection{離散フーリエ変換}
 
-\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換}\index{DFT|see{離散フーリエ変換}}\index{FZn@\(\dft{N}\vect{x}\)}
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\vect{x}\)}
   各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)に対して，\(\numset{C}^N\)の元
   \[
     \hat{\vect{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
@@ -415,6 +415,86 @@
 
 また，\cref{figure:frequency_domain}の破線部\(\hat{h}_k\)は，基本周波数に起因する細かな変動を\(\abs{\hat{x}_k}\)から除いた曲線である．
 この曲線は\termdef{スペクトル包絡}\index{すぺくとるほうらく@スペクトル包絡}（spectral envelope）といい，音声の音色とよく対応する．
+つまり，離散フーリエ変換を使うことで，音声が持つ基本周波数（\(\mathord{\fallingdotseq}\text{声の高さ}\)）由来の性質と，スペクトル包絡（\(\mathord{\fallingdotseq}\text{音色}\)）由来の性質を分離して解析できる．
+
+\subsection{巡回畳み込み}
+
+以下に\cref{equation:idft}を再掲する．
+\[
+  x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
+\]
+
+\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\hat{\vect{x}}=\dft{N}\vect{x}\)によって表す式である．
+しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x_n}_{n\in\numset{Z}}\)へと拡張できる．
+そこで，周期\(N\)の複素数列\(x=\seq{x_n}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
+
+\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}x\)}
+  周期\(N\)の複素数列全体\(\Set{\seq{u_i}_{i\in\numset{Z}}\given\text{\(u_i=u_{i+N}\in\numset{C}\)（\(i\in\numset{Z}\)）}}\)を\(\cycles{\numset{C}}{N}\)と表す．
+  線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
+  \[
+    \dft{N}x = \seq{\hat{x}_k}_{k\in\numset{Z}},
+    \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
+  \]
+\end{definition}
+
+\(\cycles{\numset{C}}{N}\)は加法\(\seq{x_n}_{n\in\numset{Z}}+\seq{y_n}_{n\in\numset{Z}}=\seq{x_n+y_n}_{n\in\numset{Z}}\)，スカラー乗法\(\lambda\seq{x_n}_{n\in\numset{Z}}=\seq{\lambda x_n}_{n\in\numset{Z}}\)に関する\(N\)次元ベクトル空間である．
+
+\begin{note}
+  はじめに定義した離散フーリエ変換と\cref{definition:cycle_dft}の\(\dft{N}\)は，ある意味「同じもの」と見なせる．実際，数列
+  \[
+    e_l = \seq{\midx{e}{l}{n}}_{n\in\numset{Z}},
+    \quad\midx{e}{l}{n} = \sum_{m\in\numset{Z}}\kdelta{mN}{(n-l)}
+    = \begin{cases}1 & (n\equiv l\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}
+  \]
+  からなる集合\(\basis{S}=\Set{e_0,\dots,e_{N-1}}\)は\(\cycles{\numset{C}}{N}\)の基底であり，\(\numset{C}^N\)の標準基底と\(\basis{S}\)を対応づければ，2つの\(\dft{N}\)を同一視できる．
+\end{note}
+
+ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop\seq{x_n}_{n\in\numset{Z}}=\seq{x_{n-1}}_{n\in\numset{Z}}\)で定義する．
+このとき，\cref{proposition:shift_theorem}が成立する．
+
+\begin{proposition}{}{shift_theorem}
+  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\(\dft{N}\lagop x=\seq{\zeta^{-k}\hat{x}_k}_{k\in\numset{Z}}\)である．
+\end{proposition}
+
+\begin{proof}
+  \(\sum\)の添字\(n\)を\(n'=n+1\)に置き換えると
+  \[
+    \zeta^{-k}\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni k(n+1)/N}
+    = \frac{1}{\sqrt{N}}\sum_{n'=1}^Nx_{n'-1}\napr^{-2\krez\iuni kn'/N}
+  \]
+  となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{n'=1}^N\)を\(\sum_{n'=0}^{N-1}\)に変えても値は変わらない．よって\(\seq{\zeta^{-k}\hat{x}_k}_{k\in\numset{Z}}=\dft{N}\lagop x\)である．
+\end{proof}
+
+\begin{definition}{巡回畳み込み}{circular_convolution}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(x\circconv y\)}
+  \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(z\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）といい，\(x\circconv y\)と表記する．
+  \[
+    z_n = \sum_{m=0}^{N-1}x_my_{n-m}\quad(n\in\numset{Z})
+  \]
+\end{definition}
+
+\begin{proposition}{}{convolution_theorem}
+  任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
+  \[
+    \dft{N}(x\circconv y) = \sqrt{N}\seq{\hat{x}_k\hat{y}_k}_{k\in\numset{Z}},
+    \quad\dft{N}\seq{x_ny_n}_{n\in\numset{Z}} = \sqrt{N}(\hat{x}\circconv\hat{y})
+  \]
+\end{proposition}
+
+\begin{proof}
+  1つめのみ示す．\(z=x\circconv y\)とし，和の順序を交換すると
+  \begin{align*}
+    \hat{z}_k &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}z_n\napr^{-2\krez\iuni kn/N}
+    = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x_my_{n-m}}\napr^{-2\krez\iuni kn/N} \\
+    &= \sum_{m=0}^{N-1}x_m\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y_{n-m}\napr^{-2\krez\iuni kn/N}}
+  \end{align*}
+  となる．\cref{proposition:shift_theorem}より\(\dft{N}\seq{y_{n-m}}_{n\in\numset{Z}}=\dft{N}\lagop^my=\seq{\zeta^{-mk}\hat{y}_k}_{k\in\numset{Z}}\)なので
+  \[
+    \hat{z}_k = \sum_{m=0}^{N-1}x_m(\zeta^{-mk}\hat{y}_k)
+    = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x_m\zeta^{-km}}\hat{y}_k
+    = \sqrt{N}\hat{x}_k\hat{y}_k
+  \]
+  である．
+\end{proof}
 
 \subsection{エイリアシング}
 
@@ -472,7 +552,10 @@
 \end{figure}
 
 \begin{subappendices}
+\section{窓関数}
+
 \section{低ランク近似}
+
 \end{subappendices}
 
 \section*{演習問題}
