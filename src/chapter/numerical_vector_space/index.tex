@@ -421,7 +421,7 @@
 
 さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，実はここに注意すべきことがある．
 
-周波数\(\nu\,\si{Hz}\)の波\(\napr^{2\krez\iuni\nu t}\)について，瞬時値を1秒ごとに\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni\nu n/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
+周波数\(\nu\,\si{Hz}\)の波\(\napr^{2\krez\iuni\nu t}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni\nu n/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
 一方，周波数\(\nu-f_{\symrm{s}}\,\si{Hz}\)の波\(\napr^{2\krez\iuni(\nu-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
 \[
   \napr^{2\krez\iuni(\nu-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}-2\krez\iuni n}
@@ -439,6 +439,8 @@
   \caption{エイリアシングの様子．}
   \label{figure:aliasing}
 \end{figure}
+
+一般に，連続時間の信号から離散時間の信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
 
 \subsection{巡回畳み込み}
 
