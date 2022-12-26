@@ -335,7 +335,7 @@
   を対応づける線型写像\(\dft{N}\colon\numset{C}^N\to\numset{C}^N\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
 \end{definition}
 
-以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を\(\zeta_N\)，もしくは単に\(\zeta\)と書く．
+以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を単に\(\zeta\)と書く．
 
 \begin{proposition}{}{dft_onb}
   \(\vect{w}_k=N^{-1/2}\trps{\rowvect{\zeta^{k\cdot 0} & \cdots & \zeta^{k(N-1)}}}\)とする．
@@ -417,6 +417,29 @@
 この曲線は\termdef{スペクトル包絡}\index{すぺくとるほうらく@スペクトル包絡}（spectral envelope）といい，音声の音色とよく対応する．
 つまり，離散フーリエ変換を使うことで，音声が持つ基本周波数（\(\mathord{\fallingdotseq}\text{声の高さ}\)）由来の性質と，スペクトル包絡（\(\mathord{\fallingdotseq}\text{音色}\)）由来の性質を分離して解析できる．
 
+\subsection{エイリアシング}
+
+さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，実はここに注意すべきことがある．
+
+周波数\(\nu\,\si{Hz}\)の波\(\napr^{2\krez\iuni\nu t}\)について，瞬時値を1秒ごとに\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni\nu n/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
+一方，周波数\(\nu-f_{\symrm{s}}\,\si{Hz}\)の波\(\napr^{2\krez\iuni(\nu-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
+\[
+  \napr^{2\krez\iuni(\nu-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}-2\krez\iuni n}
+  = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
+  = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}}
+\]
+となる．つまり，周波数が\(\nu\,\si{Hz}\)でも\(\nu-f_{\symrm{s}}\,\si{Hz}\)でも，できる数列は変わらない．
+
+言い換えると，周波数が\(f_{\symrm{s}}\,\si{Hz}\)だけ異なる波は数列から区別できない．\cref{figure:aliasing}は\(f_{\symrm{s}}=\SI{2.5}{Hz}\)のとき，
+周波数\SI{2}{Hz}の波\(\sin(4\krez t)\)と\SI{-0.5}{Hz}の波\(\sin(-\krez t)\)が，時刻\(n/f_{\symrm{s}}\)秒（\(n\in\numset{Z}\)）では同じ瞬時値を持つことを示している．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/aliasing.pdf}
+  \caption{エイリアシングの様子．}
+  \label{figure:aliasing}
+\end{figure}
+
 \subsection{巡回畳み込み}
 
 以下に\cref{equation:idft}を再掲する．
@@ -450,9 +473,9 @@
 \end{note}
 
 ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop\seq{x_n}_{n\in\numset{Z}}=\seq{x_{n-1}}_{n\in\numset{Z}}\)で定義する．
-このとき，\cref{proposition:shift_theorem}が成立する．
+このとき，\cref{proposition:dft_shift_theorem}が成立する．
 
-\begin{proposition}{}{shift_theorem}
+\begin{proposition}{}{dft_shift_theorem}
   任意の\(x\in\cycles{\numset{C}}{N}\)に対して\(\dft{N}\lagop x=\seq{\zeta^{-k}\hat{x}_k}_{k\in\numset{Z}}\)である．
 \end{proposition}
 
@@ -472,7 +495,7 @@
   \]
 \end{definition}
 
-\begin{proposition}{}{convolution_theorem}
+\begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
   \[
     \dft{N}(x\circconv y) = \sqrt{N}\seq{\hat{x}_k\hat{y}_k}_{k\in\numset{Z}},
@@ -482,12 +505,11 @@
 
 \begin{proof}
   1つめのみ示す．\(z=x\circconv y\)とし，和の順序を交換すると
-  \begin{align*}
-    \hat{z}_k &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}z_n\napr^{-2\krez\iuni kn/N}
-    = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x_my_{n-m}}\napr^{-2\krez\iuni kn/N} \\
-    &= \sum_{m=0}^{N-1}x_m\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y_{n-m}\napr^{-2\krez\iuni kn/N}}
-  \end{align*}
-  となる．\cref{proposition:shift_theorem}より\(\dft{N}\seq{y_{n-m}}_{n\in\numset{Z}}=\dft{N}\lagop^my=\seq{\zeta^{-mk}\hat{y}_k}_{k\in\numset{Z}}\)なので
+  \[
+    \hat{z}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x_my_{n-m}}\zeta^{-kn}
+    = \sum_{m=0}^{N-1}x_m\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y_{n-m}\zeta^{-kn}}
+  \]
+  となる．\cref{proposition:dft_shift_theorem}より\(\dft{N}\seq{y_{n-m}}_{n\in\numset{Z}}=\dft{N}\lagop^my=\seq{\zeta^{-mk}\hat{y}_k}_{k\in\numset{Z}}\)なので
   \[
     \hat{z}_k = \sum_{m=0}^{N-1}x_m(\zeta^{-mk}\hat{y}_k)
     = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x_m\zeta^{-km}}\hat{y}_k
@@ -495,14 +517,6 @@
   \]
   である．
 \end{proof}
-
-\subsection{エイリアシング}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/aliasing.pdf}
-  \caption{エイリアシングの様子．}
-\end{figure}
 
 \subsection{多次元離散フーリエ変換}
 
