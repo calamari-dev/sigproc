@@ -419,18 +419,18 @@
 
 \subsection{エイリアシング}
 
-さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，実はここに注意すべきことがある．
+さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
 
-周波数\(\nu\,\si{Hz}\)の波\(\napr^{2\krez\iuni\nu t}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni\nu n/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
-一方，周波数\(\nu-f_{\symrm{s}}\,\si{Hz}\)の波\(\napr^{2\krez\iuni(\nu-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
+周波数\(f\,\si{Hz}\)の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
+一方，周波数\(f-f_{\symrm{s}}\,\si{Hz}\)の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
 \[
-  \napr^{2\krez\iuni(\nu-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}-2\krez\iuni n}
-  = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
-  = \napr^{2\krez\iuni\nu n/f_{\symrm{s}}}
+  \napr^{2\krez\iuni(f-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni fn/f_{\symrm{s}}-2\krez\iuni n}
+  = \napr^{2\krez\iuni fn/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
+  = \napr^{2\krez\iuni fn/f_{\symrm{s}}}
 \]
-となる．つまり，周波数が\(\nu\,\si{Hz}\)でも\(\nu-f_{\symrm{s}}\,\si{Hz}\)でも，できる数列は変わらない．
+となる．つまり，周波数が\(f\,\si{Hz}\)でも\(f-f_{\symrm{s}}\,\si{Hz}\)でも，できる数列は変わらない．
 
-言い換えると，周波数が\(f_{\symrm{s}}\,\si{Hz}\)だけ異なる波は数列から区別できない．\cref{figure:aliasing}は\(f_{\symrm{s}}=\SI{2.5}{Hz}\)のとき，
+言い換えると，周波数が\(f_{\symrm{s}}\)だけ異なる波は数列から区別できない．\cref{figure:aliasing}は\(f_{\symrm{s}}=\SI{2.5}{Hz}\)のとき，
 周波数\SI{2}{Hz}の波\(\sin(4\krez t)\)と\SI{-0.5}{Hz}の波\(\sin(-\krez t)\)が，時刻\(n/f_{\symrm{s}}\)秒（\(n\in\numset{Z}\)）では同じ瞬時値を持つことを示している．
 
 \begin{figure}[htbp]
@@ -440,7 +440,14 @@
   \label{figure:aliasing}
 \end{figure}
 
-一般に，連続時間の信号から離散時間の信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
+一般に，連続時間の信号から離散時間の信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}\index{サンプリング|see{標本化}}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
+また，\(f_{\symrm{s}}\)を\termdef{標本化周波数}\index{ひょうほんかしゅうはすう@標本化周波数}（sampling frequency）という．
+
+\cref{figure:aliasing}の場合，標本化後の信号は周波数の絶対値が小さい（つまり低周波である）\SI{-0.5}{Hz}の波を表すと考えるほうが自然だろう．
+周波数\(f\)の波を標本化すると，\(f\)より低周波の波と区別できなくなるのは\(\abs{f}\geq f_{\symrm{s}}/2\)のときである．\(f_{\symrm{s}}/2\)のことを\termdef{ナイキスト周波数}\index{ないきすとしゅうはすう@ナイキスト周波数}（Nyquist frequency）という．
+
+話を離散フーリエ変換に戻すと，\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は\(f=k\)の波が\(f_{\symrm{s}}=N\)で標本化されたものとみなせる．
+そのため，\(k>N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
 
 \subsection{巡回畳み込み}
 
@@ -500,9 +507,10 @@
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
   \[
-    \dft{N}(x\circconv y) = \sqrt{N}\seq{\hat{x}_k\hat{y}_k}_{k\in\numset{Z}},
-    \quad\dft{N}\seq{x_ny_n}_{n\in\numset{Z}} = \sqrt{N}(\hat{x}\circconv\hat{y})
+    \dft{N}(x\circconv y) = \sqrt{N}(\hat{x}\cdot\hat{y}),
+    \quad\dft{N}(x\cdot y) = \sqrt{N}(\hat{x}\circconv\hat{y})
   \]
+  ただし\(x\cdot y=\seq{x_ny_n}_{n\in\numset{Z}}\)である．
 \end{proposition}
 
 \begin{proof}
