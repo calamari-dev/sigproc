@@ -326,7 +326,7 @@
 
 \subsection{離散フーリエ変換}
 
-\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\vect{x}\)}
+\begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\)}
   各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)に対して，\(\numset{C}^N\)の元
   \[
     \hat{\vect{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
@@ -460,7 +460,7 @@
 しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x_n}_{n\in\numset{Z}}\)へと拡張できる．
 そこで，周期\(N\)の複素数列\(x=\seq{x_n}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
-\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}x\)}
+\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
   周期\(N\)の複素数列全体\(\Set{\seq{u_i}_{i\in\numset{Z}}\given\text{\(u_i=u_{i+N}\in\numset{C}\)（\(i\in\numset{Z}\)）}}\)を\(\cycles{\numset{C}}{N}\)と表す．
   線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
@@ -539,13 +539,13 @@
 \end{corollary}
 
 \begin{proof}
-  2つめのみ示す．\cref{proposition:dft_convolution_theorem}より\(\dft{N}((x\circconv y)\circconv z)=(\dft{N}(x\circconv y))\cdot\hat{z}=(\hat{x}\cdot\hat{y})\cdot\hat{z}\)である．
-  よって\((x\circconv y)\circconv z=\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，右辺は\(x\circconv (y\circconv z)\)とも等しい．
+  2つめのみ示す．\cref{proposition:dft_convolution_theorem}より\(\dft{N}((x\circconv y)\circconv z)=\sqrt{N}(\dft{N}(x\circconv y))\cdot\hat{z}=N(\hat{x}\cdot\hat{y})\cdot\hat{z}\)である．
+  よって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，右辺は\(x\circconv (y\circconv z)\)とも等しい．
 \end{proof}
 
 \subsection{多次元離散フーリエ変換}
 
-\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}x\)}
+\begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
   \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_j\in\numset{Z}\)，\(0\leq u_j<N_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
   関数\(x\colon\Omega\to\numset{C}\)に対して，関数
   \[
