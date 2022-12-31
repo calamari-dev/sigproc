@@ -499,7 +499,7 @@
 
 \cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x_ny_n}_{n\in\numset{Z}}\)と離散フーリエ変換の間にある関係を示せる．形式ばらずに言えば，積は\(\dft{N}\)で次の2項演算に写される．
 
-\begin{definition}{巡回畳み込み}{circular_convolution}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(x\circconv y\)}
+\begin{definition}{巡回畳み込み}{}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(\circconv\)}
   \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(z\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）といい，\(x\circconv y\)と表記する．
   \[
     z_n = \sum_{m=0}^{N-1}x_my_{n-m}\quad(n\in\numset{Z})
@@ -542,6 +542,8 @@
   2つめのみ示す．\cref{proposition:dft_convolution_theorem}より\(\dft{N}((x\circconv y)\circconv z)=\sqrt{N}(\dft{N}(x\circconv y))\cdot\hat{z}=N(\hat{x}\cdot\hat{y})\cdot\hat{z}\)である．
   よって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，右辺は\(x\circconv (y\circconv z)\)とも等しい．
 \end{proof}
+
+最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換する．\(i\)を\(N\)で割ったあまりを\(\bar{\imath}\)と書く．
 
 \subsection{多次元離散フーリエ変換}
 
