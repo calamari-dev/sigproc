@@ -60,7 +60,7 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\newcommand{\intd}[1]{\,\symrm{d}#1}
+\newcommand{\intd}[1]{\mathop{}\!\symrm{d}#1}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -100,9 +100,12 @@
 
 % 確率統計
 \newcommand{\borelset}[1]{\symcal{B}(#1)}
+\newcommand{\extendedreal}{\bar{\numset{R}}}
 \newcommand{\indicator}{\symbb{1}}
 \newcommand{\sigmaalg}[1]{\symcal{#1}}
-\newcommand{\measured}[2]{\mathop{}\!#1(\symrm{d}#2)}
+\newcommand{\sigmagen}[1]{\sigma(#1)}
+
+\NewDocumentCommand{\measured}{o m}{\mathop{}\!\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
 
 \DeclareMathOperator{\expval}{\symbb{E}}
 \DeclareMathOperator{\prob}{\symbb{P}}

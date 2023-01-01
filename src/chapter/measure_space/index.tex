@@ -7,6 +7,8 @@
 
 \section{測度論の基本概念}
 
+\subsection{σ‐加法族}
+
 \begin{definition}{σ‐加法族}{sigma_algebra}\index{しぐまかほうぞく@σ‐加法族}
   \(\Omega\)を集合，\(\sigmaalg{F}\)を\(\powerset{\Omega}\)の部分集合とする．
   \(\sigmaalg{F}\)が\(\Omega\)上の\termdef{σ‐加法族}（σ‐algebra）であるとは，\(\sigmaalg{F}\)が以下の条件を満たすことをいう．
@@ -28,15 +30,15 @@
   このとき，\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)は\(\Omega\)上のσ‐加法族である．
 \end{example}
 
-\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\twoemdash}\indexsymbol{\(\sigma(S)\)}
+\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\twoemdash}\indexsymbol{\(\sigmagen{S}\)}
   \(\Omega\)を集合，\(S\)を\(\powerset{\Omega}\)の部分集合とする．また，\(S\)を包含する\(\Omega\)上のσ‐加法族全体を\(\Sigma(S)\)とおく．このとき，集合
   \[
-    \sigma(S) = \bigcap_{\sigmaalg{F}\in\Sigma(S)}\sigmaalg{F}
+    \sigmagen{S} = \bigcap_{\sigmaalg{F}\in\Sigma(S)}\sigmaalg{F}
   \]
-  は\(\Sigma(S)\)に属し，\(\Sigma(S)\)の任意の元は\(\sigma(S)\)を包含する．\(\sigma(S)\)を\(S\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
+  は\(\Sigma(S)\)に属し，\(\Sigma(S)\)の任意の元は\(\sigmagen{S}\)を包含する．\(\sigmagen{S}\)を\(S\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
 \end{definition}
 
-\begin{example}[ボレル集合族]\index{ぼれるしゅうごうぞく@ボレル集合族}\indexsymbol{\(\borelset{\numset{R}}\)}
+\begin{example}[ボレル集合族]\index{ぼれるしゅうごうぞく@ボレル集合族}\index{BR@\(\borelset{\numset{R}}\)}
   左半開区間の全体集合\(S=\Set{\ocival{-\infty}{a}\given a\in\numset{R}}\)により生成されるσ‐加法族を\termdef{ボレル集合族}（Borel algebra）といい，\(\borelset{\numset{R}}\)と表記する．
 \end{example}
 
@@ -45,19 +47,32 @@
 \end{note}
 
 \begin{example}
-  \cref{example:dice}のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}=\sigma(\Set{O})\)と書ける．
+  \cref{example:dice}のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}=\sigmagen{\Set{O}}\)と書ける．
   実際，\(\sigmaalg{F}\)が\(\Set{O}\)を包含するσ‐加法族なら\(\scomp{O}\in\sigmaalg{F}\)，\(\sigmaalg{G}\subset\sigmaalg{F}\)である．
-  つまり，\(\sigmaalg{G}\)は\(\Set{O}\)を包含する最小のσ‐加法族だから，\(\sigmaalg{G}=\sigma(\Set{O})\)である．
+  つまり，\(\sigmaalg{G}\)は\(\Set{O}\)を包含する最小のσ‐加法族だから，\(\sigmaalg{G}=\sigmagen{\Set{O}}\)である．
 \end{example}
 
-\section{ボレル測度とルベーグ測度}
+\subsection{ボレル測度とルベーグ測度}
+
+\begin{definition}{拡大実数}{extended_real}\index{かくだいじっすう@拡大実数}\index{R@\(\extendedreal\)}
+  \(\numset{R}\)に正負の無限大\(+\infty,-\infty\notin\numset{R}\)を加えた集合\(\extendedreal=\numset{R}\cup\Set{\pm\infty}\)を\termdef{拡大実数}（extended real number）という．
+  各\(a\in\numset{R}\)，\(x\in\extendedreal\)に対し，\(\extendedreal\)における演算を以下の通り定義する（複合同順）．
+  \begin{gather*}
+    a+(\pm\infty) = \pm\infty,
+    \quad a-(\pm\infty) = \mp\infty,
+    \quad(\pm\infty)+(\pm\infty) = \pm\infty, \\
+    (\pm\infty)-(\mp\infty) = \pm\infty,
+    \quad\frac{a}{\pm\infty} = 0,
+    \quad x\times(\pm\infty) = \begin{cases}\pm\infty & (x>0),\\ 0 & (x=0),\\ \mp\infty & (x<0)\end{cases}
+  \end{gather*}
+\end{definition}
 
 \(\seq{A_n}_{n\in\numset{N}}\)を集合列とする．\(\seq{A_n}_{n\in\numset{N}}\)が\termdef{互いに素}\index{たがいにそ@互いに素}（disjoint）であるとは，
 異なる任意の2数\(i,j\in\numset{N}\)に対して\(A_i\cap A_j=\emptyset\)であることをいう．
 互いに素な集合の和であることを強調したいときは，和集合\(\bigcup_nA_n\)を\(\bigsqcup_nA_n\)とも書く．
 
 \begin{definition}{測度}{measure}\index{そくど@測度}\index{そくど@測度}
-  \(\sigmaalg{F}\)をσ‐加法族とする．写像\(\mu\colon\sigmaalg{F}\to\ccival{0}{\infty}\)が\(\sigmaalg{F}\)上の\termdef{測度}（measure）であるとは，
+  \(\sigmaalg{F}\)をσ‐加法族とする．写像\(\mu\colon\sigmaalg{F}\to\ccival{0}{+\infty}\)が\(\sigmaalg{F}\)上の\termdef{測度}（measure）であるとは，
   \(\mu\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(\mu(\emptyset)=0\)である．
@@ -70,7 +85,7 @@
 また，確率空間のσ‐加法族\(\sigmaalg{F}\)に属する各元は\termdef{事象}\index{じしょう@事象}（event）と呼ばれる．
 
 \begin{example}[計数測度]\index{けいすうそくど@計数測度}
-  \(\sigmaalg{F}\)をσ‐加法族とする．また，各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合のとき\(\mu(A)=\sizeof{A}\)，無限集合のとき\(\mu(A)=\infty\)とする．
+  \(\sigmaalg{F}\)をσ‐加法族とする．また，各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合のとき\(\mu(A)=\sizeof{A}\)，無限集合のとき\(\mu(A)=+\infty\)とする．
   このとき\(\mu\)は\(\sigmaalg{F}\)上の測度になる．\(\mu\)を\termdef{計数測度}（counting measure）という．
 \end{example}
 
@@ -95,7 +110,7 @@
 \end{definition}
 
 \begin{definition}{有限加法的測度}{finitely_additive_measure}\index{ゆうげんかほうてきそくど@有限加法的測度}\index{そくど@測度!ゆうげんかほうてき@有限加法的\twoemdash}
-  \(\sigmaalg{A}\)を有限加法族とする．写像\(m\colon\sigmaalg{A}\to\ccival{0}{\infty}\)が\(\sigmaalg{A}\)上の\termdef{有限加法的測度}（finitely additive measure）であるとは，
+  \(\sigmaalg{A}\)を有限加法族とする．写像\(m\colon\sigmaalg{A}\to\ccival{0}{+\infty}\)が\(\sigmaalg{A}\)上の\termdef{有限加法的測度}（finitely additive measure）であるとは，
   \(m\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(m(\emptyset)=0\)である．
@@ -111,45 +126,45 @@
   \(\sigmaalg{A}\)を集合\(\Omega\)上の有限加法族，\(m\)を\(\sigmaalg{A}\)上の有限加法的測度とする．このとき，以下の命題は同値である．
   \begin{enumerate}
     \item \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)が互いに素で\(A=\bigsqcup_{n\in\numset{N}}A_n\in\sigmaalg{A}\)を満たすとき，\(m(A)=\sum_{n=1}^\infty m(A_n)\)である．
-    \item \(\sigma(\sigmaalg{A})\)上の測度\(\mu\)で，任意の\(A\in\sigmaalg{A}\)に対して\(\mu(A)=m(A)\)を満たすものが存在する．
+    \item \(\sigmagen{\sigmaalg{A}}\)上の測度\(\mu\)で，任意の\(A\in\sigmaalg{A}\)に対して\(\mu(A)=m(A)\)を満たすものが存在する．
   \end{enumerate}
-  さらに，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(\mu\)は一意である．
+  さらに，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(\mu\)は一意である．
   これを\termdef{ホップの拡張定理}（Hopf extension theorem）という．
 \end{theorem}
 
 \begin{note}
-  \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，
+  \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，
   \(m\)は\termdef{σ‐有限}\index{しぐまゆうげん@σ‐有限}（σ‐finite）であるという．本書が扱う（有限加法的）測度はすべてσ‐有限なので，\cref{theorem:hopf_extension}から定まる拡張された測度は常に一意である．
 \end{note}
 
 \begin{proof}
-証明のおおまかな流れだけ述べておく．各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{i\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
-そして，写像\(m^{\mathord{\ast}}\colon\powerset{\Omega}\to\ccival{0}{\infty}\)を
+証明のおおまかな流れだけ述べておく．各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
+そして，写像\(\mu^{\mathord{\ast}}\colon\powerset{\Omega}\to\ccival{0}{+\infty}\)を
 \[
-  m^{\mathord{\ast}}(S) = \inf\Set*{\sum_{n=1}^\infty m(A_n)\given\seq{A_n}_{n\in\numset{N}}\in\operatornamewithlimits{cover}_{\sigmaalg{A}}S}
+  \mu^{\mathord{\ast}}(S) = \inf\Set*{\sum_{n=1}^\infty m(A_n)\given\seq{A_n}_{n\in\numset{N}}\in\operatornamewithlimits{cover}_{\sigmaalg{A}}S}
 \]
 で定義する．すると，集合
 \[
-  \sigmaalg{F} = \Set{A\in\powerset{\Omega}\given\text{任意の\(E\in\powerset{\Omega}\)に対し\(m^{\mathord{\ast}}(A)=m^{\mathord{\ast}}(A\cap E)+m^{\mathord{\ast}}(A\setminus E)\)}}
+  \sigmaalg{F} = \Set{A\in\powerset{\Omega}\given\text{任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)}}
 \]
-は完全加法族であり，\(\sigmaalg{A}\)を包含する．また，\(m^{\mathord{\ast}}\)の始域を\(\sigmaalg{F}\)へと制限した写像\(\bar{\mu}\)は，\(\sigmaalg{F}\)上の測度であることが示せる．
-したがって，\(\bar{\mu}\)の\(\sigma(\sigmaalg{A})\)への制限\(\mu\)は\(\sigma(\sigmaalg{A})\)上の測度である．
+は完全加法族であり，\(\sigmaalg{A}\)を包含する．また，\(\mu^{\mathord{\ast}}\)の始域を\(\sigmaalg{F}\)へと制限した写像\(\bar{\mu}\)は，\(\sigmaalg{F}\)上の測度であることが示せる．
+したがって，\(\bar{\mu}\)の\(\sigmagen{\sigmaalg{A}}\)への制限\(\mu\)は\(\sigmagen{\sigmaalg{A}}\)上の測度である．
 \end{proof}
 
-\(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなす．
+\(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなす．
 \(\sigmaalg{A}\)上の有限加法的測度\(\operatorname{vol}\)を
 \[
   \operatorname{vol}\pqty*{\bigsqcup_{k=1}^n\ocival{a_k}{b_k}} = \sum_{k=1}^n(b_k-a_k)
 \]
-で定義する．このとき\(\operatorname{vol}\)はσ‐有限かつ\nameref{theorem:hopf_extension}の条件を満たすので，\(\sigma(\sigmaalg{A})\)上の測度\(\mu\)へと一意に拡張できる．
+で定義する．このとき\(\operatorname{vol}\)はσ‐有限かつ\nameref{theorem:hopf_extension}の条件を満たすので，\(\sigmagen{\sigmaalg{A}}\)上の測度\(\mu\)へと一意に拡張できる．
 
-実は\(\sigma(\sigmaalg{A})=\borelset{\numset{R}}\)である．この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\twoemdash}（Borel measure）という．
+実は\(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)である．この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\twoemdash}（Borel measure）という．
 また，\(m=\operatorname{vol}\)のときの\(\bar{\mu}\)を\termdef{ルベーグ測度}\index{るべーぐそくど@ルベーグ測度}\index{そくど@測度!るべーぐ@ルベーグ\twoemdash}（Lebesgue measure）という．
 
 \section{ルベーグ積分}
 
 \begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}
-  \((\Omega,\sigmaalg{F})\)を可測空間とする．写像\(f\colon\Omega\to\numset{R}\)が\termdef{可測関数}（measurable function）であるとは，
+  \((\Omega,\sigmaalg{F})\)を可測空間とする．写像\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（measurable function）であるとは，
   任意の\(A\in\borelset{\numset{R}}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立することをいう．
 \end{definition}
 
@@ -164,35 +179,42 @@
   ただし\(\indicator_{A_k}\)は\termdef{指示関数}（indicator function）であり，\(x\in A_k\)のとき\(\indicator_{A_k}(x)=1\)，\(x\notin A_k\)のとき\(\indicator_{A_k}(x)=0\)で定義される．
 \end{definition}
 
-まず，非負値単関数\(\phi=\sum_{k=1}^na_k\indicator_{A_k}\)の積分を
+可測関数\(f\)の積分\(\int f\measured{\mu}=\int f(x)\measured[x]{\mu}\)を定義しよう．まず，非負値単関数\(\phi=\sum_{k=1}^na_k\indicator_{A_k}\)の積分を
 \[
-  \int_\Omega\phi(x)\measured{\mu}{x} = \sum_{k=1}^na_k\mu(A_k)
+  \int\phi\measured{\mu} = \sum_{k=1}^na_k\mu(A_k)
 \]
 で定義する．そして，非負値可測関数\(f\)の積分を
 \[
-  \int_\Omega f(x)\measured{\mu}{x} = \sup\Set*{\int_\Omega\phi(x)\measured{\mu}{x}\given\text{\(\phi\)は\(0\leq\phi\leq f\)を満たす単関数}}
+  \int f\measured{\mu} = \sup\Set*{\int\phi\measured{\mu}\given\text{\(\phi\)は\(0\leq\phi\leq f\)を満たす単関数}}
 \]
 で定義する．ただし\(\phi\leq f\)とは，任意の\(x\in\Omega\)に対して\(\phi(x)\leq f(x)\)が成り立つことを意味する．
 
 \begin{note}
-  より具体的に，\(\int_\Omega f(x)\measured{\mu}{x}\)を非負値単関数の積分の極限で表すこともできる．
+  より具体的に，\(\int f\measured{\mu}\)を非負値単関数の積分の極限で表すこともできる．
   \(\midx{E}{n}{k}=\inv{f}{\coival{2^{-n}k}{2^{-n}(k+1)}}\)とする．このとき
   \[
-    \phi_n(x) = n\indicator_{\inv{f}{\coival{n}{\infty}}}(x)+\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\indicator_{\midx{E}{n}{k}}(x)\quad(x\in\Omega)
+    \phi_n = n\indicator_{\inv{f}{\ccival{n}{+\infty}}}+\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\indicator_{\midx{E}{n}{k}}
   \]
-  は非負値単関数で，\(\int_\Omega\phi_n(x)\measured{\mu}{x}\to\int_\Omega f(x)\measured{\mu}{x}\)（\(n\to\infty\)）である．
+  は非負値単関数で，\(\int\phi_n\measured{\mu}\to\int f\measured{\mu}\)（\(n\to\infty\)）である．
 \end{note}
 
-\(f\)が負の値をとりうる可測関数のときは，\(f^{\mathord{+}}(x)=f(x)\indicator_{\inv{f}{\coival{0}{\infty}}}(x)\)と\(f^{\mathord{-}}(x)=-f(x)\indicator_{\inv{f}{\ocival{-\infty}{0}}}(x)\)が非負値可測関数であることを利用して
+\(f\)が負の値をとりうる可測関数のときは，\(f^{\mathord{+}}(x)=f(x)\indicator_{\inv{f}{\ccival{0}{+\infty}}}(x)\)と\(f^{\mathord{-}}(x)=-f(x)\indicator_{\inv{f}{\ccival{-\infty}{0}}}(x)\)が非負値可測関数であることを利用して
 \[
-  \int_\Omega f(x)\measured{\mu}{x} = \int_\Omega f^{\mathord{+}}(x)\measured{\mu}{x}-\int_\Omega f^{\mathord{-}}(x)\measured{\mu}{x}
+  \int f\measured{\mu} = \int f^{\mathord{+}}\measured{\mu}-\int f^{\mathord{-}}\measured{\mu}
 \]
-と定義する．ただし，\(\int_\Omega f^{\mathord{+}}(x)\measured{\mu}{x}\)と\(\int_\Omega f^{\mathord{-}}(x)\measured{\mu}{x}\)がどちらも\(\infty\)のとき\(\int_\Omega f(x)\measured{\mu}{x}\)は定義されない．
+と定義する．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
+\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がどちらも有限なとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．
 
-特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のときは，確率変数\(X\)の積分\(\int_\Omega X(\omega)\measured{\prob}{\omega}\)を\(X\)の\termdef{期待値}\index{きたいち@期待値}\indexsymbol{\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
+また，集合\(S\in\sigmaalg{F}\)上での積分は
+\[
+  \int_Sf\measured{\mu} = \int f(x)\indicator_S(x)\measured[x]{\mu}
+\]
+で定義される．
+
+特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，確率変数\(X\)の積分\(\int_\Omega X(\omega)\measured[\omega]{\prob}\)を\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{EX@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
 
 \begin{example}
-  \cref{example:equally_possible}の確率空間\((\Omega,\sigmaalg{F},\prob)\)において，各\(\omega\in\Omega\)に対し\(X(\omega)\)を\(\omega\)の目で定義する．すなわち\(X(\dicei)=1,X(\diceii)=2,\dotsc\)とする．
+  \cref{example:equally_possible}の確率空間\((\Omega,\sigmaalg{F},\prob)\)において，各\(\omega\in\Omega\)に対し\(X(\omega)\)を\(\omega\)の目で定義する．すなわち\(X(\dicei)=1\)，\(X(\diceii)=2\)のようにする．
   このとき\(X=1\indicator_{\Set{\dicei}}+2\indicator_{\Set{\diceii}}+\dots+6\indicator_{\Set{\dicevi}}\)だから
   \[
     \expval[X] = 1\prob({\Set{\dicei}})+2\prob(\Set{\diceii})+\dots+6\prob({\Set{\dicevi}})
@@ -201,5 +223,13 @@
   \]
   である．この場合，\(\expval[X]=7/2\)は公平な6面ダイスの出目の期待値に相当する．
 \end{example}
+
+\begin{proposition}{}{}
+  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)は可積分であり
+  \[
+    \int_a^bf(x)\intd{x} = \int_If\measured{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+  \]
+  が成立する．
+\end{proposition}
 
 \end{document}
