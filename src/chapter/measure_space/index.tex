@@ -5,6 +5,24 @@
 
 \section{イントロダクション}
 
+\cref{chapter:hilbert_space}，\cref{chapter:probability_space}では，関数空間での直交射影を積分に基づいて論じた．
+関数空間でも直交射影を定義できる理由は，\(\Lebesgue{2}(\Omega)=\Set{f\given\int_\Omega\abs{f(x)}^2\intd{x}<+\infty}\)がヒルベルト空間，つまり，完備な内積空間だからである．
+そして，\(\Lebesgue{2}(\Omega)\)の完備性には，積分がリーマン積分ではなくルベーグ積分であることが効いている．
+
+また，確率変数の期待値はルベーグ積分で定義される．これは，ルベーグ積分を使うと関数の定義域をより自由に選べることの恩恵である．まとめると，ルベーグ積分はリーマン積分に次の2点で優る．
+\begin{enumerate}
+  \item 積分と極限の相性がよい．
+  \item 関数の定義域が\(\numset{R}^n\)の部分集合でなくともよい．
+\end{enumerate}
+
+これらの強みは主に，ルベーグ積分では面積の測り方（測度）を自由に決められること，そして，測度の観点から区別できないものは同一視できることに由来する．言い換えると，ルベーグ積分のメリットを存分に享受するには
+\begin{enumerate}
+  \item 面積が定義される集合のあつまり（\impact{σ‐加法族}）を用意する．
+  \item 各集合に面積を割り当てる写像（\impact{測度}）を用意する．
+  \item 積分を定義できる関数（\impact{可測関数}）を規定する．
+\end{enumerate}
+という，3つの段階を要する．本章では，この3ステップをどう踏んでいけばよいのかを，かけ足で概観する．
+
 \section{測度論の基本概念}
 
 \subsection{σ‐加法族}
@@ -172,7 +190,7 @@
 
 特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間であるとき，可測関数のことを（実数値）\termdef{確率変数}\index{かくりつへんすう@確率変数}（random variable）ともいう．
 
-\begin{proposition}{}{}
+\begin{proposition}{}{sigmagen_and_measurable}
   集合\(S\subset\powerset{\numset{R}}\)が\(\sigmagen{S}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in S\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
   特に，任意の\(a\in\numset{R}\)に対して\(\inv{f}{\ocival{-\infty}{a}}\in\sigmaalg{F}\)なら，\(f\)は可測関数である．
 \end{proposition}
@@ -247,20 +265,20 @@
 
 \subsection{収束定理}
 
-\begin{theorem}{ファトゥの補題}{fatou}\index{ふぁとうのほだい@ファトゥの補題}
-  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．任意の可測関数列\(\seq{f_n}_{n\in\numset{N}}\)に対して
-  \[
-    \int\pqty*{\liminf_{n\to\infty}f_n(x)}\measured[x]{\mu} \leq \liminf_{n\to\infty}\int f_n(x)\measured[x]{\mu}
-  \]
-  である．これを\termdef{ファトゥの補題}（Fatou's lemma）という．
-\end{theorem}
-
 \begin{theorem}{単調収束定理}{monotone_convergence}\index{たんちょうしゅうそくていり@単調収束定理}\index{MCT|see{単調収束定理}}
   \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が\(0\leq f_1\leq f_2\leq\dotsb\)を満たすとき
   \[
     \lim_{n\to\infty}\int f_n(x)\measured[x]{\mu} = \int\pqty*{\lim_{n\to\infty}f_n(x)}\measured[x]{\mu}
   \]
   である．これを\termdef{単調収束定理}（monotone convergence theorem; MCT）という．
+\end{theorem}
+
+\begin{theorem}{ファトゥの補題}{fatou}\index{ふぁとうのほだい@ファトゥの補題}
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．任意の可測関数列\(\seq{f_n}_{n\in\numset{N}}\)に対して
+  \[
+    \int\pqty*{\liminf_{n\to\infty}f_n(x)}\measured[x]{\mu} \leq \liminf_{n\to\infty}\int f_n(x)\measured[x]{\mu}
+  \]
+  である．これを\termdef{ファトゥの補題}（Fatou's lemma）という．
 \end{theorem}
 
 \begin{theorem}{優収束定理}{dominated_convergence}\index{ゆうしゅうそくていり@優収束定理}\index{DCT|see{優収束定理}}
