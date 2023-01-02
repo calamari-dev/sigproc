@@ -7,14 +7,7 @@ from vector import Vector2D
 plt.style.use(["sigproc", "sigproc-small"])
 
 fig, ax = plt.subplots()
-ax.set(
-    xlim=(-0.15, 1.15),
-    ylim=(-0.15, 1.15),
-    xticks=[0, 0.5, 1],
-    yticks=[0, 0.5, 1],
-    xticklabels=["0.0", "0.5", "1.0"],
-    yticklabels=["0.0", "0.5", "1.0"],
-)
+ax.set(xlim=(-0.15, 1.15), ylim=(-0.15, 1.15), xticks=[0, 0.5, 1], yticks=[0, 0.5, 1])
 
 v = np.array((1, 0))
 x = np.array((np.cos(np.pi / 3) + 0.2, np.sin(np.pi / 3)))

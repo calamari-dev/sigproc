@@ -163,12 +163,23 @@
 
 \section{ルベーグ積分}
 
+\subsection{ルベーグ積分}
+
 \begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}
-  \((\Omega,\sigmaalg{F})\)を可測空間とする．写像\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（measurable function）であるとは，
+  \((\Omega,\sigmaalg{F})\)を可測空間とする．関数\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（measurable function）であるとは，
   任意の\(A\in\borelset{\numset{R}}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立することをいう．
 \end{definition}
 
 特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間であるとき，可測関数のことを（実数値）\termdef{確率変数}\index{かくりつへんすう@確率変数}（random variable）ともいう．
+
+\begin{proposition}{}{}
+  集合\(S\subset\powerset{\numset{R}}\)が\(\sigmagen{S}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in S\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
+  特に，任意の\(a\in\numset{R}\)に対して\(\inv{f}{\ocival{-\infty}{a}}\in\sigmaalg{F}\)なら，\(f\)は可測関数である．
+\end{proposition}
+
+\begin{proof}
+  集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(S\subset\sigmaalg{G}\)なので\(\sigmagen{S}\subset\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
+\end{proof}
 
 \begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}
   \((\Omega,\sigmaalg{F})\)を可測空間とする．\(a_1,\dots,a_n\in\numset{R}\)と互いに素な\(A_1,\dots,A_n\in\sigmaalg{F}\)を用いて
@@ -185,33 +196,35 @@
 \]
 で定義する．そして，非負値可測関数\(f\)の積分を
 \[
-  \int f\measured{\mu} = \sup\Set*{\int\phi\measured{\mu}\given\text{\(\phi\)は\(0\leq\phi\leq f\)を満たす単関数}}
+  \int f\measured{\mu} = \sup\Set*{\int\phi\measured{\mu}\given\text{\(\phi\in\simplefuncs{\sigmaalg{F}}\)，\(0\leq\phi\leq f\)}}
 \]
-で定義する．ただし\(\phi\leq f\)とは，任意の\(x\in\Omega\)に対して\(\phi(x)\leq f(x)\)が成り立つことを意味する．
+で定義する．ただし，\(\simplefuncs{\sigmaalg{F}}\)は単関数の全体集合であり，\(\phi\leq f\)は任意の\(x\in\Omega\)に対し\(\phi(x)\leq f(x)\)であることを意味する．
 
-\begin{note}
-  より具体的に，\(\int f\measured{\mu}\)を非負値単関数の積分の極限で表すこともできる．
-  \(\midx{E}{n}{k}=\inv{f}{\coival{2^{-n}k}{2^{-n}(k+1)}}\)とする．このとき
-  \[
-    \phi_n = n\indicator_{\inv{f}{\ccival{n}{+\infty}}}+\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\indicator_{\midx{E}{n}{k}}
-  \]
-  は非負値単関数で，\(\int\phi_n\measured{\mu}\to\int f\measured{\mu}\)（\(n\to\infty\)）である．
-\end{note}
+\begin{wrapfigure}[8]{o}{0pt}
+  \includegraphics{figures/integration.pdf}
+\end{wrapfigure}
 
-\(f\)が負の値をとりうる可測関数のときは，\(f^{\mathord{+}}(x)=f(x)\indicator_{\inv{f}{\ccival{0}{+\infty}}}(x)\)と\(f^{\mathord{-}}(x)=-f(x)\indicator_{\inv{f}{\ccival{-\infty}{0}}}(x)\)が非負値可測関数であることを利用して
+より具体的に，\(\int f\measured{\mu}\)を非負値単関数の積分に関する極限で表すこともできる．\(\midx{E}{n}{k}=\inv{f}{\coival{2^{-n}k}{2^{-n}(k+1)}}\)とする．このとき
+\[
+  \phi_n = n\indicator_{\inv{f}{\ccival{n}{+\infty}}}+\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\indicator_{\midx{E}{n}{k}}
+\]
+は非負値単関数で，\(\int\phi_n\measured{\mu}\to\int f\measured{\mu}\)（\(n\to\infty\)）である．
+
+\(f\)が負の値をとりうる可測関数のときは，\(f^{\mathord{+}}(x)=\max\Set{f(x),0}\)と\(f^{\mathord{-}}(x)=\max\Set{-f(x),0}\)が非負値可測関数であることを利用して
 \[
   \int f\measured{\mu} = \int f^{\mathord{+}}\measured{\mu}-\int f^{\mathord{-}}\measured{\mu}
 \]
-と定義する．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
+と定義する．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=+\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
 \(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がどちらも有限なとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．
 
 また，集合\(S\in\sigmaalg{F}\)上での積分は
 \[
-  \int_Sf\measured{\mu} = \int f(x)\indicator_S(x)\measured[x]{\mu}
+  \int_Sf\measured{\mu} = \int_Sf(x)\measured[x]{\mu}
+  = \int f(x)\indicator_S(x)\measured[x]{\mu}
 \]
 で定義される．
 
-特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，確率変数\(X\)の積分\(\int_\Omega X(\omega)\measured[\omega]{\prob}\)を\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{EX@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
+特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，確率変数\(X\)の積分\(\int X(\omega)\measured[\omega]{\prob}\)を\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{EX@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
 
 \begin{example}
   \cref{example:equally_possible}の確率空間\((\Omega,\sigmaalg{F},\prob)\)において，各\(\omega\in\Omega\)に対し\(X(\omega)\)を\(\omega\)の目で定義する．すなわち\(X(\dicei)=1\)，\(X(\diceii)=2\)のようにする．
@@ -225,11 +238,38 @@
 \end{example}
 
 \begin{proposition}{}{}
-  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)は可積分であり
+  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ可測かつ可積分で
   \[
     \int_a^bf(x)\intd{x} = \int_If\measured{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
   \]
   が成立する．
 \end{proposition}
+
+\subsection{収束定理}
+
+\begin{theorem}{ファトゥの補題}{fatou}\index{ふぁとうのほだい@ファトゥの補題}
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．任意の可測関数列\(\seq{f_n}_{n\in\numset{N}}\)に対して
+  \[
+    \int\pqty*{\liminf_{n\to\infty}f_n(x)}\measured[x]{\mu} \leq \liminf_{n\to\infty}\int f_n(x)\measured[x]{\mu}
+  \]
+  である．これを\termdef{ファトゥの補題}（Fatou's lemma）という．
+\end{theorem}
+
+\begin{theorem}{単調収束定理}{monotone_convergence}\index{たんちょうしゅうそくていり@単調収束定理}\index{MCT|see{単調収束定理}}
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が\(0\leq f_1\leq f_2\leq\dotsb\)を満たすとき
+  \[
+    \lim_{n\to\infty}\int f_n(x)\measured[x]{\mu} = \int\pqty*{\lim_{n\to\infty}f_n(x)}\measured[x]{\mu}
+  \]
+  である．これを\termdef{単調収束定理}（monotone convergence theorem; MCT）という．
+\end{theorem}
+
+\begin{theorem}{優収束定理}{dominated_convergence}\index{ゆうしゅうそくていり@優収束定理}\index{DCT|see{優収束定理}}
+  \((\Omega,\sigmaalg{F},\mu)\)は測度空間で，可測関数列\(\seq{f_n}_{n\in\numset{N}}\)は関数\(f\)に各点収束するとする．
+  このとき，可測関数\(g\)ですべての\(n\in\numset{N}\)に対し\(\abs{f_n}\leq g\)を満たすものが存在すれば
+  \[
+    \lim_{n\to\infty}\int f_n\measured{\mu} = \int f\measured{\mu}
+  \]
+  である．これを\termdef{優収束定理}（dominated convergence theorem; DCT）という．
+\end{theorem}
 
 \end{document}
