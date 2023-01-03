@@ -18,6 +18,7 @@ scipy = "*"
 scikit-learn = "*"
 pywavelets = "*"
 pygments = "*"
+pillow = "*"
 
 [dev-packages]
 black = "*"

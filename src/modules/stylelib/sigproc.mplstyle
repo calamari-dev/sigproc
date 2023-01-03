@@ -13,6 +13,7 @@ font.size: 7.2 # ~ \footnotesize
 
 # LaTeX
 text.usetex: True
+mathtext.fontset: stix
 
 # AXES
 axes.linewidth: 0.6

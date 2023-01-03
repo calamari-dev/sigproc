@@ -74,20 +74,24 @@
 
 \begin{definition}{拡大実数}{extended_real}\index{かくだいじっすう@拡大実数}\index{R@\(\extendedreal\)}
   \(\numset{R}\)に正負の無限大\(+\infty,-\infty\notin\numset{R}\)を加えた集合\(\extendedreal=\numset{R}\cup\Set{\pm\infty}\)を\termdef{拡大実数}（extended real number）という．
-  各\(a\in\numset{R}\)，\(x\in\extendedreal\)に対し，\(\extendedreal\)における演算を以下の通り定義する（複合同順）．
+  各\(a\in\numset{R}\)，\(x\in\extendedreal\)に対し，\(\pm\infty\)との演算を以下の通り定義する（複合同順）．
   \begin{gather*}
-    a+(\pm\infty) = \pm\infty,
-    \quad a-(\pm\infty) = \mp\infty,
-    \quad(\pm\infty)+(\pm\infty) = \pm\infty, \\
-    (\pm\infty)-(\mp\infty) = \pm\infty,
-    \quad\frac{a}{\pm\infty} = 0,
-    \quad x\times(\pm\infty) = \begin{cases}\pm\infty & (x>0),\\ 0 & (x=0),\\ \mp\infty & (x<0)\end{cases}
+    a+(\pm\infty) = (\pm\infty)+a = \pm\infty,
+    \quad a-(\pm\infty) = \mp\infty, \\
+    (\pm\infty)+(\pm\infty) = \pm\infty,
+    \quad(\pm\infty)-(\mp\infty) = \pm\infty, \\
+    \frac{a}{\pm\infty} = 0,
+    \quad x\cdot(\pm\infty) = (\pm\infty)\cdot x = \begin{cases}\pm\infty & (x>0),\\ 0 & (x=0), \\ \mp\infty & (x<0)\end{cases}
   \end{gather*}
 \end{definition}
 
+\begin{note}
+  \((\pm\infty)+(\mp\infty)\)や\((\pm\infty)-(\pm\infty)\)などは定義されない．要するに，\(\extendedreal\)上では不定形でない極限のみ計算できる．また，普通\(0\cdot(\pm\infty)\)は不定形だが，ここでは\(0\cdot(\pm\infty)=0\)と定義した．
+\end{note}
+
 \(\seq{A_n}_{n\in\numset{N}}\)を集合列とする．\(\seq{A_n}_{n\in\numset{N}}\)が\termdef{互いに素}\index{たがいにそ@互いに素}（disjoint）であるとは，
 異なる任意の2数\(i,j\in\numset{N}\)に対して\(A_i\cap A_j=\emptyset\)であることをいう．
-互いに素な集合の和であることを強調したいときは，和集合\(\bigcup_nA_n\)を\(\bigsqcup_nA_n\)とも書く．
+互いに素な集合の和であることを強調したいときは，和集合\(\bigcup_nA_n\)を\(\bigsqcup_nA_n\)とも書く\indexsymbol{\(A\sqcup B\)}．
 
 \begin{definition}{測度}{measure}\index{そくど@測度}\index{そくど@測度}
   \(\sigmaalg{F}\)をσ‐加法族とする．写像\(\mu\colon\sigmaalg{F}\to\ccival{0}{+\infty}\)が\(\sigmaalg{F}\)上の\termdef{測度}（measure）であるとは，
@@ -217,6 +221,12 @@
   \int f\measured{\mu} = \sup\Set*{\int\phi\measured{\mu}\given\text{\(\phi\in\simplefuncs{\sigmaalg{F}}\)，\(0\leq\phi\leq f\)}}
 \]
 で定義する．ただし，\(\simplefuncs{\sigmaalg{F}}\)は単関数の全体集合であり，\(\phi\leq f\)は任意の\(x\in\Omega\)に対し\(\phi(x)\leq f(x)\)であることを意味する．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/simple_function.pdf}
+  \caption{\(\phi=a_1\indicator_{A_1}+a_2\indicator_{A_2}+a_3\indicator_{A_3}\)の模式図．}
+\end{figure}
 
 \begin{wrapfigure}[8]{o}{0pt}
   \includegraphics{figures/integration.pdf}
