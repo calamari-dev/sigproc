@@ -253,6 +253,7 @@
 で定義される．
 
 特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，確率変数\(X\)の積分\(\int X(\omega)\measured[\omega]{\prob}\)を\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{EX@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
+また，\(\expval[X\indicator_A]=\int_AX(\omega)\measured[\omega]{\prob}\)を\(\expval[X,A]\)\index{EXA@\(\expval[X,A]\)}とも表記する．
 
 \begin{example}
   \cref{example:equally_possible}の確率空間\((\Omega,\sigmaalg{F},\prob)\)において，各\(\omega\in\Omega\)に対し\(X(\omega)\)を\(\omega\)の目で定義する．すなわち\(X(\dicei)=1\)，\(X(\diceii)=2\)のようにする．
@@ -266,7 +267,7 @@
 \end{example}
 
 \begin{proposition}{}{}
-  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ可測かつ可積分で
+  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ測度に関して可積分で
   \[
     \int_a^bf(x)\intd{x} = \int_If\measured{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
   \]
@@ -299,5 +300,56 @@
   \]
   である．これを\termdef{優収束定理}（dominated convergence theorem; DCT）という．
 \end{theorem}
+
+\section{条件つき期待値}
+
+\cref{example:dice,example:equally_possible}において，確率変数\(X\)の期待値は\(7/2\)であった．
+これは，公平なサイコロをなんども投げ続けたとき，出目は平均的に\(7/2\)くらいの値をとることを意味する．
+しかし，出目が奇数のとき，すなわち\(O\)に属するときだけ勘定に入れると条件づけた場合，\(X\)の期待値は変わると予想される．
+直感的には，この条件の下で\(\dicei,\diceiii,\dicev\)が出る確率は等しく\(1/3\)であり，\(X\)の期待値は\((1+3+5)/3=3\)になるだろう．
+
+出目の偶奇に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)である．確率空間\((\Omega,\sigmaalg{G},\prob)\)上の確率変数\(\condexpval{X\given\sigmaalg{G}}\)を
+\begin{equation}
+  \label{equation:discrete_conditional_expectation}
+  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{A\in\Set{O,\scomp{O}}}\frac{\expval[X,A]}{\prob(A)}\indicator_A(\omega)
+\end{equation}
+と定める．このとき
+\[
+  \condexpval{X\given\sigmaalg{G}}(\omega) = \begin{cases}\expval[X,O]/\prob(O) = 3 & (\omega\in O),\\ \expval[X,\scomp{O}]/\prob(\scomp{O}) = 4 & (\omega\in\scomp{O})\end{cases}
+\]
+であるから，\(\condexpval{X\given\sigmaalg{G}}\)は各\(\omega\in\Omega\)に対し，\(\omega\)が属する\(\sigmaalg{G}\)上の事象で条件づけたときの，\(X\)の期待値を与える確率変数といえる．
+確率変数\(\condexpval{X\given\sigmaalg{G}}\)をσ‐加法族\(\sigmaalg{G}\)に関する\(X\)の\termdef{条件つき期待値}（conditional expectation）という．
+
+\cref{equation:discrete_conditional_expectation}で\(\condexpval{X\given\sigmaalg{G}}\)を定義できるのは，\(\sigmaalg{G}\)が有限集合かつ\(\Omega=O\sqcup\scomp{O}\)だからである．
+以下では一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する，\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
+
+\(X\)と\(Y\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
+
+\(Y\)の値に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\inv{Y}{A}\given A\in\borelset{\numset{R}}}\)である．
+また，\cref{equation:discrete_conditional_expectation}から察するに，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
+\[
+  \frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\quad(\delta Y_n=\Set{\omega\in\Omega\given(n-1)\increment y<Y(\omega)\leq n\increment y})
+\]
+はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
+\[
+  \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)
+\]
+と「定義」してみよう．\(\int\)，\(\lim\)，\(\sum\)を形式的に交換すると，任意の\(A\in\sigmaalg{G}\)に対して
+\begin{align*}
+  \expval[\condexpval{X\given\sigmaalg{G}},A] &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\int_A\indicator_{\delta Y_n}(\omega)\measured[\omega]{\prob} \\
+  &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\frac{\prob(A\cap\delta Y_n)}{\prob(\delta Y_n)} \\
+  &= \expval[X,A]
+\end{align*}
+となることが予想される．
+
+実は逆に，\(\condexpval{X\given\sigmaalg{G}}\)は「任意の\(A\in\sigmaalg{G}\)に対し\(\expval[\condexpval{X\given\sigmaalg{G}},A]=\expval[X,A]\)を満たす」確率変数として定義される．
+
+\begin{definition}{条件つき期待値}{}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\twoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{EXG@\(\condexpval{X\given\sigmaalg{G}}\)}
+  \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subset\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
+  このとき，\((\Omega,\sigmaalg{G},\prob)\)上の確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
+  \(Y\)を\(\sigmaalg{G}\)に関する\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
+\end{definition}
+
+\footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
 
 \end{document}

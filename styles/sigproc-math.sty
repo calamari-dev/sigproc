@@ -60,7 +60,7 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\newcommand{\intd}[1]{\mathop{}\!\symrm{d}#1}
+\NewDocumentCommand{\intd}{o m}{\mathop{}\!\IfValueTF{#1}{\symrm{d}^#1}{\symrm{d}}#2}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -111,6 +111,9 @@
 \DeclareMathOperator{\expval}{\symbb{E}}
 \DeclareMathOperator{\prob}{\symbb{P}}
 \DeclareMathOperator{\variant}{\symbb{V}}
+
+\DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 
 % 定数
 \newcommand{\imat}{\mat{I}}

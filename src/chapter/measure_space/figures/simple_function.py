@@ -30,7 +30,7 @@ text = Text3D(xy[1] + np.array([0.5, 0.35, z[1]]), f"$A_2$", size=0.6)
 ax.add_patch(text)
 text.to_3d()
 
-text = Text3D(xy[2] + np.array([0.8, 0.55, z[2]]), f"$A_3$", size=0.6)
+text = Text3D(xy[2] + np.array([0.75, 0.55, z[2]]), f"$A_3$", size=0.6)
 ax.add_patch(text)
 text.to_3d()
 
