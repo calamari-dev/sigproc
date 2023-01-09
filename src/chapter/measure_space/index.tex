@@ -48,7 +48,7 @@
   このとき，\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)は\(\Omega\)上のσ‐加法族である．
 \end{example}
 
-\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\twoemdash}\indexsymbol{\(\sigmagen{S}\)}
+\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\texttwoemdash}\indexsymbol{\(\sigmagen{S}\)}
   \(\Omega\)を集合，\(S\)を\(\powerset{\Omega}\)の部分集合とする．また，\(S\)を包含する\(\Omega\)上のσ‐加法族全体を\(\Sigma(S)\)とおく．このとき，集合
   \[
     \sigmagen{S} = \bigcap_{\sigmaalg{F}\in\Sigma(S)}\sigmaalg{F}
@@ -103,8 +103,8 @@
 \end{definition}
 
 3つ組\((\Omega,\sigmaalg{F},\mu)\)を\termdef{測度空間}\index{そくどくうかん@測度空間}（measure space）という．
-特に\(\mu(\Omega)=1\)であるとき，\(\mu\)を\termdef{確率測度}\index{かくりつそくど@確率測度}\index{そくど@測度!かくりつ@確率\twoemdash}（probability measure），\((\Omega,\sigmaalg{F},\mu)\)を\termdef{確率空間}\index{かくりつくうかん@確率空間}（probability space）という．
-また，確率空間のσ‐加法族\(\sigmaalg{F}\)に属する各元は\termdef{事象}\index{じしょう@事象}（event）と呼ばれる．
+特に\(\mu(\Omega)=1\)であるとき，\(\mu\)を\termdef{確率測度}\index{かくりつそくど@確率測度}\index{そくど@測度!かくりつ@確率\texttwoemdash}（probability measure），\((\Omega,\sigmaalg{F},\mu)\)を\termdef{確率空間}\index{かくりつくうかん@確率空間}（probability space）という．
+また，確率空間の\(\Omega\)に属する各元は\termdef{根源事象}\index{こんげんじしょう@根源事象}（elementary event），\(\sigmaalg{F}\)に属する各元は\termdef{事象}\index{じしょう@事象}（event）と呼ばれる．
 
 \begin{example}[計数測度]\index{けいすうそくど@計数測度}
   \(\sigmaalg{F}\)をσ‐加法族とする．また，各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合のとき\(\mu(A)=\sizeof{A}\)，無限集合のとき\(\mu(A)=+\infty\)とする．
@@ -131,7 +131,7 @@
   \end{enumerate}
 \end{definition}
 
-\begin{definition}{有限加法的測度}{finitely_additive_measure}\index{ゆうげんかほうてきそくど@有限加法的測度}\index{そくど@測度!ゆうげんかほうてき@有限加法的\twoemdash}
+\begin{definition}{有限加法的測度}{finitely_additive_measure}\index{ゆうげんかほうてきそくど@有限加法的測度}\index{そくど@測度!ゆうげんかほうてき@有限加法的\texttwoemdash}
   \(\sigmaalg{A}\)を有限加法族とする．写像\(m\colon\sigmaalg{A}\to\ccival{0}{+\infty}\)が\(\sigmaalg{A}\)上の\termdef{有限加法的測度}（finitely additive measure）であるとは，
   \(m\)が以下の条件を満たすことをいう．
   \begin{enumerate}
@@ -160,18 +160,24 @@
 \end{note}
 
 \begin{proof}
-証明のおおまかな流れだけ述べておく．各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
+各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
 そして，写像\(\mu^{\mathord{\ast}}\colon\powerset{\Omega}\to\ccival{0}{+\infty}\)を
 \[
   \mu^{\mathord{\ast}}(S) = \inf\Set*{\sum_{n=1}^\infty m(A_n)\given\seq{A_n}_{n\in\numset{N}}\in\operatornamewithlimits{cover}_{\sigmaalg{A}}S}
 \]
 で定義する．すると，集合
-\[
-  \sigmaalg{F} = \Set{A\in\powerset{\Omega}\given\text{任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)}}
-\]
-は完全加法族であり，\(\sigmaalg{A}\)を包含する．また，\(\mu^{\mathord{\ast}}\)の始域を\(\sigmaalg{F}\)へと制限した写像\(\bar{\mu}\)は，\(\sigmaalg{F}\)上の測度であることが示せる．
+\begin{equation}
+  \label{equation:caratheodory_measurable}
+  \Set{A\in\powerset{\Omega}\given\text{任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)}}
+\end{equation}
+は完全加法族であり，\(\sigmaalg{A}\)を包含する．この集合を\(\sigmaalg{F}\)とおくと，\(\mu^{\mathord{\ast}}\)の始域を\(\sigmaalg{F}\)へと制限した写像\(\bar{\mu}\)は，\(\sigmaalg{F}\)上の測度であることが示せる．
 したがって，\(\bar{\mu}\)の\(\sigmagen{\sigmaalg{A}}\)への制限\(\mu\)は\(\sigmagen{\sigmaalg{A}}\)上の測度である．
 \end{proof}
+
+\begin{note}
+  集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属するとき，つまり，任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)であるとき，
+  \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
+\end{note}
 
 \(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなす．
 \(\sigmaalg{A}\)上の有限加法的測度\(\operatorname{vol}\)を
@@ -180,15 +186,15 @@
 \]
 で定義する．このとき\(\operatorname{vol}\)はσ‐有限かつ\nameref{theorem:hopf_extension}の条件を満たすので，\(\sigmagen{\sigmaalg{A}}\)上の測度\(\mu\)へと一意に拡張できる．
 
-実は\(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)である．この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\twoemdash}（Borel measure）という．
-また，\(m=\operatorname{vol}\)のときの\(\bar{\mu}\)を\termdef{ルベーグ測度}\index{るべーぐそくど@ルベーグ測度}\index{そくど@測度!るべーぐ@ルベーグ\twoemdash}（Lebesgue measure）という．
+実は\(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)である．この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\texttwoemdash}（Borel measure）という．
+また，\(m=\operatorname{vol}\)のときの\(\bar{\mu}\)を\termdef{ルベーグ測度}\index{るべーぐそくど@ルベーグ測度}\index{そくど@測度!るべーぐ@ルベーグ\texttwoemdash}（Lebesgue measure）という．
 
 \section{ルベーグ積分}
 
 \subsection{ルベーグ積分}
 
-\begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}
-  \((\Omega,\sigmaalg{F})\)を可測空間とする．関数\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（measurable function）であるとは，
+\begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}\index{fkasoku@\(\sigmaalg{F}\)‐可測}
+  \((\Omega,\sigmaalg{F})\)を可測空間とする．関数\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（\termdef{\(\sigmaalg{F}\)‐可測}，measurable function）であるとは，
   任意の\(A\in\borelset{\numset{R}}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立することをいう．
 \end{definition}
 
@@ -267,9 +273,9 @@
 \end{example}
 
 \begin{proposition}{}{}
-  実数値関数\(f\)は有界閉区間\(I=\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ測度に関して可積分で
+  実数値関数\(f\)は有界閉区間\(\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ測度に関して可積分で
   \[
-    \int_a^bf(x)\intd{x} = \int_If\measured{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+    \int_a^bf(x)\intd{x} = \int_{\ccival{a}{b}}f(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
   \]
   が成立する．
 \end{proposition}
@@ -304,11 +310,11 @@
 \section{条件つき期待値}
 
 \cref{example:dice,example:equally_possible}において，確率変数\(X\)の期待値は\(7/2\)であった．
-これは，公平なサイコロをなんども投げ続けたとき，出目は平均的に\(7/2\)くらいの値をとることを意味する．
+これは，公平な6面ダイスをなんども投げ続けたとき，出目は平均的に\(7/2\)くらいの値をとることを意味する．
 しかし，出目が奇数のとき，すなわち\(O\)に属するときだけ勘定に入れると条件づけた場合，\(X\)の期待値は変わると予想される．
 直感的には，この条件の下で\(\dicei,\diceiii,\dicev\)が出る確率は等しく\(1/3\)であり，\(X\)の期待値は\((1+3+5)/3=3\)になるだろう．
 
-出目の偶奇に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)である．確率空間\((\Omega,\sigmaalg{G},\prob)\)上の確率変数\(\condexpval{X\given\sigmaalg{G}}\)を
+出目の偶奇に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)である．\(\sigmaalg{G}\)‐可測な確率変数\(\condexpval{X\given\sigmaalg{G}}\)を
 \begin{equation}
   \label{equation:discrete_conditional_expectation}
   \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{A\in\Set{O,\scomp{O}}}\frac{\expval[X,A]}{\prob(A)}\indicator_A(\omega)
@@ -317,22 +323,39 @@
 \[
   \condexpval{X\given\sigmaalg{G}}(\omega) = \begin{cases}\expval[X,O]/\prob(O) = 3 & (\omega\in O),\\ \expval[X,\scomp{O}]/\prob(\scomp{O}) = 4 & (\omega\in\scomp{O})\end{cases}
 \]
-であるから，\(\condexpval{X\given\sigmaalg{G}}\)は各\(\omega\in\Omega\)に対し，\(\omega\)が属する\(\sigmaalg{G}\)上の事象で条件づけたときの，\(X\)の期待値を与える確率変数といえる．
-確率変数\(\condexpval{X\given\sigmaalg{G}}\)をσ‐加法族\(\sigmaalg{G}\)に関する\(X\)の\termdef{条件つき期待値}（conditional expectation）という．
+であるから，\(\condexpval{X\given\sigmaalg{G}}\)は各\(\omega\in\Omega\)に対し，\(\omega\)が属する\(\sigmaalg{G}\)上の事象で条件づけたときの，\(X\)の期待値を与える確率変数とみなせる．
+確率変数\(\condexpval{X\given\sigmaalg{G}}\)をσ‐加法族\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）という．
+もう少し一般に，\(\sigmaalg{G}\)が\(\Omega\)の有限または可算な分割\(\Omega=\bigsqcup_{n\in I}A_n\)（\(A_n\in\sigmaalg{F}\)，\(\prob(A_n)>0\)）から生成される場合は，\(\condexpval{X\given\sigmaalg{G}}\)を\cref{equation:discrete_conditional_expectation}と同様に
+\begin{equation}
+  \label{equation:disjoint_conditional_expectation}
+  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{n\in I}\frac{\expval[X,A_n]}{\prob(A_n)}\indicator_{A_n}(\omega)\quad(\sigmaalg{G}=\sigmagen{\Set{A_n\given n\in I}})
+\end{equation}
+で定義できる．
 
-\cref{equation:discrete_conditional_expectation}で\(\condexpval{X\given\sigmaalg{G}}\)を定義できるのは，\(\sigmaalg{G}\)が有限集合かつ\(\Omega=O\sqcup\scomp{O}\)だからである．
-以下では一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する，\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
-
-\(X\)と\(Y\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
+以下では，一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
+\(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
 
 \(Y\)の値に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\inv{Y}{A}\given A\in\borelset{\numset{R}}}\)である．
-また，\cref{equation:discrete_conditional_expectation}から察するに，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
+また，6面ダイスの例からの類推で，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
 \[
-  \frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\quad(\delta Y_n=\Set{\omega\in\Omega\given(n-1)\increment y<Y(\omega)\leq n\increment y})
+  \frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\quad(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y})
 \]
-はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
+はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
+
+\begin{note}
+  \(\Set{(n-1)\increment y<Y\leq n\increment y}=\Set{\omega\in\Omega\given(n-1)\increment y<Y(\omega)\leq n\increment y}\)である．確率論ではしばしば「確率変数\(X\)の値が集合\(A\in\borelset{\numset{R}}\)に属する」という事象\(\inv{X}{A}=\Set{\omega\in\Omega\given X(\omega)\in A}\)を\(\Set{X\in A}\)と書く．
+\end{note}
+
+また，\(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，\(\prob(\delta Y_n)>0\)なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)は
 \[
-  \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)
+  \condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega) = \sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)\quad(\sigmaalg{G}_{\increment y}=\sigmagen{\Set{\delta Y_n\given n\in\numset{Z}}})
+\]
+で定義できる．この確率変数は集合\(\Set{Y=y}\)上で一定の値をとり，その値は条件\(\delta Y_n\)（つまり\(Y\fallingdotseq y\)）の下での\(X\)の期待値を表す．
+
+そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
+\[
+  \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega)
+  = \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)
 \]
 と「定義」してみよう．\(\int\)，\(\lim\)，\(\sum\)を形式的に交換すると，任意の\(A\in\sigmaalg{G}\)に対して
 \begin{align*}
@@ -344,12 +367,15 @@
 
 実は逆に，\(\condexpval{X\given\sigmaalg{G}}\)は「任意の\(A\in\sigmaalg{G}\)に対し\(\expval[\condexpval{X\given\sigmaalg{G}},A]=\expval[X,A]\)を満たす」確率変数として定義される．
 
-\begin{definition}{条件つき期待値}{}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\twoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{EXG@\(\condexpval{X\given\sigmaalg{G}}\)}
+\begin{definition}{条件つき期待値}{conditional_expectation}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\texttwoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{EXG@\(\condexpval{X\given\sigmaalg{G}}\)}
   \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subset\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
-  このとき，\((\Omega,\sigmaalg{G},\prob)\)上の確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
+  このとき，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
   \(Y\)を\(\sigmaalg{G}\)に関する\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
 \end{definition}
 
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
+\cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．
+すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=\prob(\Set{\omega\in\Omega\given Y(\omega)\neq Y'(\omega)})=0\)である．
+このことを\(\almostsurely{Y=Y'}\)\index{as@\(\almostsurely{}\)}\index{ほとんどかくじつに@ほとんど確実に|see{\(\almostsurely{}\)}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
 
 \end{document}

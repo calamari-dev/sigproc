@@ -128,7 +128,6 @@
   \setlength{\multicolsep}{\midx@multicolsep}%
 }
 
-\newcommand{\twoemdash}{\resizebox{2\zw}{\height}{—}}
 \newcommand{\seename}{→}
 \renewcommand{\@idxitem}{\par\setlength{\hangindent}{1\zw}}
 \renewcommand{\subitem}{\@idxitem\hspace*{2\zw}}
