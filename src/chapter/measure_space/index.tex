@@ -121,6 +121,9 @@
   \(\prob\)は「どの目が出るのも同様に確からしい（公平な）6面ダイスに関する確率」を表すと解釈できる．たとえば，奇数の目が出る確率は\(\prob(O)=1/2\)である．
 \end{example}
 
+\cref{example:equally_possible}のように\(\Omega\)が有限集合のときは，各\(\omega\in\Omega\)に対して\(\mu(\Set{\omega})\)の値を決定することで，測度\(\mu\)を直に構成できる．
+しかし，たとえば\(\sigmaalg{B}(\numset{R})\)上の測度を定める場合，この方法は使えない．そうした状況では代わりに，σ‐加法族よりも考えやすい集合族の上で測度の「原型」を作り，それをσ‐加法族全体へと拡張する．
+
 \begin{definition}{有限加法族}{finite_additive_class}\index{ゆうげんかほうぞく@有限加法族}
   \(\Omega\)を集合，\(\sigmaalg{A}\)を\(\powerset{\Omega}\)の部分集合とする．
   \(\sigmaalg{A}\)が\(\Omega\)上の\termdef{有限加法族}（finitely additive class）であるとは，\(\sigmaalg{A}\)が以下の条件を満たすことをいう．
@@ -179,14 +182,13 @@
   \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
 \end{note}
 
-\(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなす．
-\(\sigmaalg{A}\)上の有限加法的測度\(\operatorname{vol}\)を
+\(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなし，
+\(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)が成り立つ．\(\sigmaalg{A}\)上の有限加法的測度\(\operatorname{vol}\)を
 \[
   \operatorname{vol}\pqty*{\bigsqcup_{k=1}^n\ocival{a_k}{b_k}} = \sum_{k=1}^n(b_k-a_k)
 \]
-で定義する．このとき\(\operatorname{vol}\)はσ‐有限かつ\nameref{theorem:hopf_extension}の条件を満たすので，\(\sigmagen{\sigmaalg{A}}\)上の測度\(\mu\)へと一意に拡張できる．
-
-実は\(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)である．この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\texttwoemdash}（Borel measure）という．
+で定義する．このとき\(\operatorname{vol}\)はσ‐有限かつ\nameref{theorem:hopf_extension}の条件を満たすので，\(\borelset{\numset{R}}\)上の測度\(\mu\)へと一意に拡張できる．
+この\(\borelset{\numset{R}}\)上の測度\(\mu\)を\termdef{ボレル測度}\index{ぼれるそくど@ボレル測度}\index{そくど@測度!ぼれる@ボレル\texttwoemdash}（Borel measure）という．
 また，\(m=\operatorname{vol}\)のときの\(\bar{\mu}\)を\termdef{ルベーグ測度}\index{るべーぐそくど@ルベーグ測度}\index{そくど@測度!るべーぐ@ルベーグ\texttwoemdash}（Lebesgue measure）という．
 
 \section{ルベーグ積分}
@@ -269,7 +271,7 @@
     = \frac{1+2+\dots+6}{6}
     = \frac{7}{2}
   \]
-  である．この場合，\(\expval[X]=7/2\)は公平な6面ダイスの出目の期待値に相当する．
+  であり，これは公平な6面ダイスの出目の期待値に相当する．
 \end{example}
 
 \begin{proposition}{}{}
@@ -280,7 +282,22 @@
   が成立する．
 \end{proposition}
 
+\begin{note}
+  積分区間が有界でないときは注意を要する．たとえば，\termdef{ディリクレ積分}\index{でぃりくれせきぶん@ディリクレ積分}（Dirichlet integral）
+  \[
+    \int_0^\infty\frac{\sin x}{x}\intd{x} = \lim_{\varepsilon\downarrow 0}\int_\varepsilon^1f(x)\intd{x}+\lim_{R\to\infty}\int_1^Rf(x)\intd{x}\quad(f(x)=(1/x)\sin x)
+  \]
+  の値は，広義積分の意味で\(\krez/2\)であることが知られているが
+  \[
+    \int_I\max\Set{f(x),0}\measured[x]{\lambda} = \int_I\max\Set{-f(x),0}\measured[x]{\lambda}
+    = +\infty\quad(I=\ooival{0}{+\infty})
+  \]
+  なのでルベーグ積分できない．
+\end{note}
+
 \subsection{収束定理}
+
+極限と積分を交換したいときは，以下の定理が非常に強力である．
 
 \begin{theorem}{単調収束定理}{monotone_convergence}\index{たんちょうしゅうそくていり@単調収束定理}\index{MCT|see{単調収束定理}}
   \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が\(0\leq f_1\leq f_2\leq\dotsb\)を満たすとき
@@ -346,18 +363,16 @@
   \(\Set{(n-1)\increment y<Y\leq n\increment y}=\Set{\omega\in\Omega\given(n-1)\increment y<Y(\omega)\leq n\increment y}\)である．確率論ではしばしば「確率変数\(X\)の値が集合\(A\in\borelset{\numset{R}}\)に属する」という事象\(\inv{X}{A}=\Set{\omega\in\Omega\given X(\omega)\in A}\)を\(\Set{X\in A}\)と書く．
 \end{note}
 
-また，\(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，\(\prob(\delta Y_n)>0\)なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)は
+\(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，各\(\prob(\delta Y_n)\)の値が正なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)を
 \[
   \condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega) = \sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)\quad(\sigmaalg{G}_{\increment y}=\sigmagen{\Set{\delta Y_n\given n\in\numset{Z}}})
 \]
-で定義できる．この確率変数は集合\(\Set{Y=y}\)上で一定の値をとり，その値は条件\(\delta Y_n\)（つまり\(Y\fallingdotseq y\)）の下での\(X\)の期待値を表す．
-
-そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
+としてよい．\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)は集合\(\Set{Y=y}\)上で一定であり，その値は条件\(\delta Y_n\)（つまり\(Y\fallingdotseq y\)）の下での\(X\)の期待値を表す．そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
 \[
   \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega)
   = \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)
 \]
-と「定義」してみよう．\(\int\)，\(\lim\)，\(\sum\)を形式的に交換すると，任意の\(A\in\sigmaalg{G}\)に対して
+と「定義」してみよう．\(\int\)，\(\lim\)，\(\sum\)を交換すると，任意の\(A\in\sigmaalg{G}\)に対して
 \begin{align*}
   \expval[\condexpval{X\given\sigmaalg{G}},A] &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\int_A\indicator_{\delta Y_n}(\omega)\measured[\omega]{\prob} \\
   &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\frac{\prob(A\cap\delta Y_n)}{\prob(\delta Y_n)} \\
@@ -370,7 +385,7 @@
 \begin{definition}{条件つき期待値}{conditional_expectation}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\texttwoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{EXG@\(\condexpval{X\given\sigmaalg{G}}\)}
   \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subset\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
   このとき，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
-  \(Y\)を\(\sigmaalg{G}\)に関する\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
+  \(Y\)を\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
 \end{definition}
 
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
