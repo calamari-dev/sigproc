@@ -195,7 +195,7 @@
 
 \subsection{ルベーグ積分}
 
-\begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}\index{fkasoku@\(\sigmaalg{F}\)‐可測}
+\begin{definition}{可測関数}{}\index{かそくかんすう@可測関数}
   \((\Omega,\sigmaalg{F})\)を可測空間とする．関数\(f\colon\Omega\to\extendedreal\)が\termdef{可測関数}（\termdef{\(\sigmaalg{F}\)‐可測}，measurable function）であるとは，
   任意の\(A\in\borelset{\numset{R}}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立することをいう．
 \end{definition}
@@ -298,9 +298,10 @@
 \subsection{収束定理}
 
 極限と積分を交換したいときは，以下の定理が非常に強力である．
+\cref{theorem:monotone_convergence,theorem:fatou,theorem:dominated_convergence}はすべて，任意の測度空間\((\Omega,\sigmaalg{F},\mu)\)上で成立する．
 
 \begin{theorem}{単調収束定理}{monotone_convergence}\index{たんちょうしゅうそくていり@単調収束定理}\index{MCT|see{単調収束定理}}
-  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が\(0\leq f_1\leq f_2\leq\dotsb\)を満たすとき
+  可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が\(0\leq f_1\leq f_2\leq\dotsb\)を満たすとき
   \[
     \lim_{n\to\infty}\int f_n(x)\measured[x]{\mu} = \int\pqty*{\lim_{n\to\infty}f_n(x)}\measured[x]{\mu}
   \]
@@ -308,7 +309,7 @@
 \end{theorem}
 
 \begin{theorem}{ファトゥの補題}{fatou}\index{ふぁとうのほだい@ファトゥの補題}
-  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．任意の可測関数列\(\seq{f_n}_{n\in\numset{N}}\)に対して
+  任意の可測関数列\(\seq{f_n}_{n\in\numset{N}}\)に対して
   \[
     \int\pqty*{\liminf_{n\to\infty}f_n(x)}\measured[x]{\mu} \leq \liminf_{n\to\infty}\int f_n(x)\measured[x]{\mu}
   \]
@@ -316,46 +317,65 @@
 \end{theorem}
 
 \begin{theorem}{優収束定理}{dominated_convergence}\index{ゆうしゅうそくていり@優収束定理}\index{DCT|see{優収束定理}}
-  \((\Omega,\sigmaalg{F},\mu)\)は測度空間で，可測関数列\(\seq{f_n}_{n\in\numset{N}}\)は関数\(f\)に各点収束するとする．
-  このとき，可測関数\(g\)ですべての\(n\in\numset{N}\)に対し\(\abs{f_n}\leq g\)を満たすものが存在すれば
+  可測関数列\(\seq{f_n}_{n\in\numset{N}}\)は関数\(f\)に各点収束するとする．このとき，可測関数\(g\)ですべての\(n\in\numset{N}\)に対し\(\abs{f_n}\leq g\)を満たすものが存在すれば
   \[
     \lim_{n\to\infty}\int f_n\measured{\mu} = \int f\measured{\mu}
   \]
   である．これを\termdef{優収束定理}（dominated convergence theorem; DCT）という．
 \end{theorem}
 
-\section{条件つき期待値}
+\section{確率論の基本概念}
+
+\subsection{確率変数が定める量}
+
+個々の確率変数の様子は，以下の関数から解析できる．
+
+\begin{definition}{}{}\index{るいせきぶんぷかんすう@累積分布関数}\index{かくりつみつどかんすう@確率密度関数}\index{かくりつしつりょうかんすう@確率質量関数}\index{CDF|see{累積分布関数}}\index{PDF|see{確率密度関数}}\index{PMF|see{確率質量関数}}
+  \(X\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
+  \begin{enumerate}
+    \item 関数\(F(x)=\prob(\inv{X}{\ocival{-\infty}{x}})\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
+    \item 像\(\ran{X}{\Omega}\)が可算なとき，関数\(f(x)=\prob(X=x)\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
+    \item \(F\)が導関数\(f(x)=F'(x)\)を持つとき，\(f\)を\(X\)の\termdef{確率密度関数}（probability density function; PDF）という\footnotemark．
+  \end{enumerate}
+\end{definition}
+
+\footnotetext{確率密度関数は微分可能性よりも弱い仮定の下で定義できる\cite{funaki2022}．}
+
+\subsection{条件つき期待値}
 
 \cref{example:dice,example:equally_possible}において，確率変数\(X\)の期待値は\(7/2\)であった．
 これは，公平な6面ダイスをなんども投げ続けたとき，出目は平均的に\(7/2\)くらいの値をとることを意味する．
 しかし，出目が奇数のとき，すなわち\(O\)に属するときだけ勘定に入れると条件づけた場合，\(X\)の期待値は変わると予想される．
 直感的には，この条件の下で\(\dicei,\diceiii,\dicev\)が出る確率は等しく\(1/3\)であり，\(X\)の期待値は\((1+3+5)/3=3\)になるだろう．
 
+以上の考え方に基づいて，事象\(A\)の下での事象\(B\)の\termdef{条件つき確率}\(\condprob{B\given A}\)，確率変数\(X\)の\termdef{条件つき期待値}\(\condexpval{X\given A}\)を，それぞれ
+\[
+  \condprob{B\given A} = \frac{\prob(B\cap A)}{\prob(A)},
+  \quad\condexpval{X\given A} = \frac{\expval[X,A]}{\prob(A)}
+\]
+と定義する（\(\prob(A)=0\)のときはどちらも定義しない）．
+
 出目の偶奇に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)である．\(\sigmaalg{G}\)‐可測な確率変数\(\condexpval{X\given\sigmaalg{G}}\)を
 \begin{equation}
   \label{equation:discrete_conditional_expectation}
-  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{A\in\Set{O,\scomp{O}}}\frac{\expval[X,A]}{\prob(A)}\indicator_A(\omega)
+  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{A\in\Set{O,\scomp{O}}}\condexpval{X\given A}\indicator_A(\omega)
+  = \begin{cases}\condexpval{X\given O} & (\omega\in O),\\ \condexpval{X\given\scomp{O}} & (\omega\in\scomp{O})\end{cases}
 \end{equation}
-と定める．このとき
-\[
-  \condexpval{X\given\sigmaalg{G}}(\omega) = \begin{cases}\expval[X,O]/\prob(O) = 3 & (\omega\in O),\\ \expval[X,\scomp{O}]/\prob(\scomp{O}) = 4 & (\omega\in\scomp{O})\end{cases}
-\]
-であるから，\(\condexpval{X\given\sigmaalg{G}}\)は各\(\omega\in\Omega\)に対し，\(\omega\)が属する\(\sigmaalg{G}\)上の事象で条件づけたときの，\(X\)の期待値を与える確率変数とみなせる．
-確率変数\(\condexpval{X\given\sigmaalg{G}}\)をσ‐加法族\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）という．
+と定める．このとき，\(\condexpval{X\given\sigmaalg{G}}\)は各\(\omega\in\Omega\)に対し，\(\omega\)が属する\(\sigmaalg{G}\)上の事象で条件づけたときの，\(X\)の条件つき期待値を与える確率変数である．
+確率変数\(\condexpval{X\given\sigmaalg{G}}\)をσ‐加法族\(\sigmaalg{G}\)の下での\(X\)の条件つき期待値という．
 もう少し一般に，\(\sigmaalg{G}\)が\(\Omega\)の有限または可算な分割\(\Omega=\bigsqcup_{n\in I}A_n\)（\(A_n\in\sigmaalg{F}\)，\(\prob(A_n)>0\)）から生成される場合は，\(\condexpval{X\given\sigmaalg{G}}\)を\cref{equation:discrete_conditional_expectation}と同様に
-\begin{equation}
-  \label{equation:disjoint_conditional_expectation}
-  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{n\in I}\frac{\expval[X,A_n]}{\prob(A_n)}\indicator_{A_n}(\omega)\quad(\sigmaalg{G}=\sigmagen{\Set{A_n\given n\in I}})
-\end{equation}
+\[
+  \condexpval{X\given\sigmaalg{G}}(\omega) = \sum_{n\in I}\condexpval{X\given A_n}\indicator_{A_n}(\omega)\quad(\sigmaalg{G}=\sigmagen{\Set{A_n\given n\in I}})
+\]
 で定義できる．
 
 以下では，一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
 \(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
 
 \(Y\)の値に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\inv{Y}{A}\given A\in\borelset{\numset{R}}}\)である．
-また，6面ダイスの例からの類推で，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
+また，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
 \[
-  \frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\quad(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y})
+  \condexpval{X\given\delta Y_n}\quad(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y})
 \]
 はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
 
@@ -365,20 +385,26 @@
 
 \(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，各\(\prob(\delta Y_n)\)の値が正なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)を
 \[
-  \condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega) = \sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)\quad(\sigmaalg{G}_{\increment y}=\sigmagen{\Set{\delta Y_n\given n\in\numset{Z}}})
+  \condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega) = \sum_{n\in\numset{Z}}\condexpval{X\given\delta Y_n}\indicator_{\delta Y_n}(\omega)\quad(\sigmaalg{G}_{\increment y}=\sigmagen{\Set{\delta Y_n\given n\in\numset{Z}}})
 \]
-としてよい．\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)は集合\(\Set{Y=y}\)上で一定であり，その値は条件\(\delta Y_n\)（つまり\(Y\fallingdotseq y\)）の下での\(X\)の期待値を表す．そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
+と定義できる．\(\condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega)\)の値は集合\(\Set{Y=y}\)上で一定であり，条件\(\delta Y_n\)（つまり\(Y\fallingdotseq y\)）の下での\(X\)の期待値を表す．
+そこで，いったん\(\condexpval{X\given\sigmaalg{G}}\)を
 \[
   \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega)
-  = \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\indicator_{\delta Y_n}(\omega)
+  = \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\condexpval{X\given\delta Y_n}\indicator_{\delta Y_n}(\omega)
 \]
-と「定義」してみよう．\(\int\)，\(\lim\)，\(\sum\)を交換すると，任意の\(A\in\sigmaalg{G}\)に対して
-\begin{align*}
-  \expval[\condexpval{X\given\sigmaalg{G}},A] &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\int_A\indicator_{\delta Y_n}(\omega)\measured[\omega]{\prob} \\
-  &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\frac{\prob(A\cap\delta Y_n)}{\prob(\delta Y_n)} \\
-  &= \expval[X,A]
-\end{align*}
-となることが予想される．
+と「定義」してみよう．任意の\(B\in\borelset{\numset{R}}\)に対し，\(\int\)と\(\lim\sum\)が交換できれば
+\begin{align}
+  \expval[\condexpval{X\given\sigmaalg{G}},\Set{Y\in B}] &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\int_{\Set{Y\in B}}\indicator_{\delta Y_n}(\omega)\measured[\omega]{\prob} \\
+  &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\frac{\prob(\Set{Y\in B}\cap\delta Y_n)}{\prob(\delta Y_n)} \\
+  &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\condprob{Y\in B\given\delta Y_n} \label{equation:limit_of_conditional_expectation}
+\end{align}
+となる．事象\(\Set{Y=y}\)の下での\(\Set{Y\in B}\)の条件つき確率は，\(y\in B\)のとき\(1\)，\(y\notin B\)のとき\(0\)と考えるのが妥当だろう．
+つまり，大雑把に言って\cref{equation:limit_of_conditional_expectation}は，\(y\in B\)となるすべての\(y\in\numset{R}\)に関して\(\expval[X,Y=y]\)を足しているから
+\[
+  \expval[\condexpval{X\given\sigmaalg{G}},A] = \expval[X,A]\quad(A=\Set{Y\in B})
+\]
+と考えられる．
 
 実は逆に，\(\condexpval{X\given\sigmaalg{G}}\)は「任意の\(A\in\sigmaalg{G}\)に対し\(\expval[\condexpval{X\given\sigmaalg{G}},A]=\expval[X,A]\)を満たす」確率変数として定義される．
 
@@ -387,10 +413,11 @@
   このとき，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
   \(Y\)を\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
 \end{definition}
-
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
 \cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．
 すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=\prob(\Set{\omega\in\Omega\given Y(\omega)\neq Y'(\omega)})=0\)である．
 このことを\(\almostsurely{Y=Y'}\)\index{as@\(\almostsurely{}\)}\index{ほとんどかくじつに@ほとんど確実に|see{\(\almostsurely{}\)}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
+
+また，指示関数\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
 
 \end{document}
