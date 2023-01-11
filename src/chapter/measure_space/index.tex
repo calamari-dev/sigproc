@@ -334,7 +334,7 @@
   \(X\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
   \begin{enumerate}
     \item 関数\(F(x)=\prob(\inv{X}{\ocival{-\infty}{x}})\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
-    \item 像\(\ran{X}{\Omega}\)が可算なとき，関数\(f(x)=\prob(X=x)\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
+    \item 像\(\ran{X}{\Omega}\)が有限または可算集合のとき，関数\(f(x)=\prob(\inv{X}{x})\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
     \item \(F\)が導関数\(f(x)=F'(x)\)を持つとき，\(f\)を\(X\)の\termdef{確率密度関数}（probability density function; PDF）という\footnotemark．
   \end{enumerate}
 \end{definition}
@@ -419,5 +419,23 @@
 このことを\(\almostsurely{Y=Y'}\)\index{as@\(\almostsurely{}\)}\index{ほとんどかくじつに@ほとんど確実に|see{\(\almostsurely{}\)}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
 
 また，指示関数\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
+
+\section{\texorpdfstring{\(\Lebesgue{p}\)空間}{Lp空間}}
+
+\begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\)で
+  \[
+    \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_\Omega\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
+  \]
+  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)とおく．このとき，ほとんど至るところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)は\(\vnorm{\holder}_{\Lebesgue{p}}\)をノルムとしてバナッハ空間になる．
+  このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
+\end{definition}
+
+\begin{proposition}{}{}
+  \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subset\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，任意の確率変数\(X\)に対して，次の式が成立する．
+  \[
+    \almostsurely{\condexpval{X\given\sigmaalg{G}} = \proj_V(X)}\quad(V=\Lebesgue{p}(\Omega,\sigmaalg{G},\prob))
+  \]
+\end{proposition}
 
 \end{document}
