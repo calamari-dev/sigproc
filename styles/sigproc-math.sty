@@ -98,7 +98,7 @@
 \DeclareMathOperator{\ltrans}{\symcal{L}}
 \DeclareMathOperator{\ztrans}{\symcal{Z}}
 
-% 確率統計
+% 測度論
 \newcommand{\borelset}[1]{\symcal{B}(#1)}
 \newcommand{\extendedreal}{\bar{\numset{R}}}
 \newcommand{\indicator}{\symbb{1}}
@@ -106,8 +106,11 @@
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
-\NewDocumentCommand{\almostsurely}{m}{\IfValueT{#1}{#1\;}\mathit{a{.}s{.}}}
+\NewDocumentCommand{\almosteverywhere}{o m}{#2\;\mathrm{a{.}e{.}}\IfValueT{#1}{\;#1}}
 \NewDocumentCommand{\measured}{o m}{\mathop{}\!\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
+
+% 確率統計
+\NewDocumentCommand{\almostsurely}{o m}{#2\;\mathrm{a{.}s{.}}\IfValueT{#1}{\;#1}}
 
 \DeclareMathOperator{\expval}{\symbb{E}}
 \DeclareMathOperator{\prob}{\symbb{P}}

@@ -416,25 +416,36 @@
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
 \cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．
 すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=\prob(\Set{\omega\in\Omega\given Y(\omega)\neq Y'(\omega)})=0\)である．
-このことを\(\almostsurely{Y=Y'}\)\index{as@\(\almostsurely{}\)}\index{ほとんどかくじつに@ほとんど確実に|see{\(\almostsurely{}\)}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
+このことを\(\almostsurely{Y=Y'}\)\index{ほとんどかくじつに@ほとんど確実に}\index{as@a{.}s{.}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
 
 また，指示関数\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
 
 \section{\texorpdfstring{\(\Lebesgue{p}\)空間}{Lp空間}}
 
+\((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．
+
+\begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@a{.}e{.}}
+  \(P(x)\)を\(\Omega\)の元\(x\)に関する条件とする．\(\mu(N)=0\)，\(\scomp{\Set{x\given P(x)}}\subset N\)を満たす集合\(N\in\sigmaalg{F}\)が存在するとき，
+  \(P(x)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．このことを\(\almosteverywhere[x\in\Omega]{P(x)}\)と書く．
+\end{definition}
+
+可測関数間の同値関係\(\sim\)を\(f\sim g\iff\almosteverywhere[x\in\Omega]{f(x)=g(x)}\)で定義する．
+
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\)で
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．各\(p\in\coival{1}{+\infty}\)に対し，\(\sim\)の同値類\([f]\)で
   \[
-    \vnorm{f}_{\Lebesgue{p}} = \pqty*{\int_\Omega\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
+    \vnorm{[f]}_p = \pqty*{\int_\Omega\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
   \]
-  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)とおく．このとき，ほとんど至るところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)は\(\vnorm{\holder}_{\Lebesgue{p}}\)をノルムとしてバナッハ空間になる．
+  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)とおく．このとき，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)は\(\vnorm{\holder}_p\)をノルムとしてバナッハ空間になる．
   このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
+
+通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\vnorm{[f]}_p\)を単に\(\vnorm{f}_p\)と書く．
 
 \begin{proposition}{}{}
   \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subset\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，任意の確率変数\(X\)に対して，次の式が成立する．
   \[
-    \almostsurely{\condexpval{X\given\sigmaalg{G}} = \proj_V(X)}\quad(V=\Lebesgue{p}(\Omega,\sigmaalg{G},\prob))
+    \almostsurely{\condexpval{X\given\sigmaalg{G}} = \proj_V(X)}\quad(V=\Lebesgue{2}(\Omega,\sigmaalg{G},\prob))
   \]
 \end{proposition}
 
