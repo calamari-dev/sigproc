@@ -214,10 +214,10 @@
 \begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}
   \((\Omega,\sigmaalg{F})\)を可測空間とする．\(a_1,\dots,a_n\in\numset{R}\)と互いに素な\(A_1,\dots,A_n\in\sigmaalg{F}\)を用いて
   \[
-    \phi(x) = \sum_{k=1}^na_k\indicator_{A_k}(x)
+    \phi(x) = \sum_{k=1}^na_k\indicator_{A_k}(x),
+    \quad\indicator_{A_k}(x) = \begin{cases}1 & (x\in A_k),\\ 0 & (x\notin A_k)\end{cases}
   \]
   と表される関数\(\phi\colon\Omega\to\numset{R}\)を\termdef{単関数}（simple function）という．
-  ただし\(\indicator_{A_k}\)は\termdef{指示関数}（indicator function）であり，\(x\in A_k\)のとき\(\indicator_{A_k}(x)=1\)，\(x\notin A_k\)のとき\(\indicator_{A_k}(x)=0\)で定義される．
 \end{definition}
 
 可測関数\(f\)の積分\(\int f\measured{\mu}=\int f(x)\measured[x]{\mu}\)を定義しよう．まず，非負値単関数\(\phi=\sum_{k=1}^na_k\indicator_{A_k}\)の積分を
@@ -251,9 +251,7 @@
   \int f\measured{\mu} = \int f^{\mathord{+}}\measured{\mu}-\int f^{\mathord{-}}\measured{\mu}
 \]
 と定義する．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=+\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
-\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がどちらも有限なとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．
-
-また，集合\(S\in\sigmaalg{F}\)上での積分は
+\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がどちらも有限なとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．また，集合\(S\in\sigmaalg{F}\)上での積分は
 \[
   \int_Sf\measured{\mu} = \int_Sf(x)\measured[x]{\mu}
   = \int f(x)\indicator_S(x)\measured[x]{\mu}
@@ -317,9 +315,9 @@
 \end{theorem}
 
 \begin{theorem}{優収束定理}{dominated_convergence}\index{ゆうしゅうそくていり@優収束定理}\index{DCT|see{優収束定理}}
-  可測関数列\(\seq{f_n}_{n\in\numset{N}}\)は関数\(f\)に各点収束するとする．このとき，可測関数\(g\)ですべての\(n\in\numset{N}\)に対し\(\abs{f_n}\leq g\)を満たすものが存在すれば
+  可測関数列\(\seq{f_n}_{n\in\numset{N}}\)が各点収束列であり，可測関数\(g\)ですべての\(n\in\numset{N}\)に対し\(\abs{f_n}\leq g\)を満たすものが存在すれば
   \[
-    \lim_{n\to\infty}\int f_n\measured{\mu} = \int f\measured{\mu}
+    \lim_{n\to\infty}\int f_n(x)\measured[x]{\mu} = \int\pqty*{\lim_{n\to\infty}f_n(x)}\measured[x]{\mu}
   \]
   である．これを\termdef{優収束定理}（dominated convergence theorem; DCT）という．
 \end{theorem}
@@ -432,7 +430,7 @@
 可測関数間の同値関係\(\sim\)を\(f\sim g\iff\almosteverywhere[x\in\Omega]{f(x)=g(x)}\)で定義する．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．各\(p\in\coival{1}{+\infty}\)に対し，\(\sim\)の同値類\([f]\)で
+  \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．各\(p\in\coival{1}{+\infty}\)に対し，\(\sim\)に関する可測関数\(f\)の同値類\([f]\)で
   \[
     \vnorm{[f]}_p = \pqty*{\int_\Omega\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
   \]
@@ -443,7 +441,7 @@
 通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\vnorm{[f]}_p\)を単に\(\vnorm{f}_p\)と書く．
 
 \begin{proposition}{}{}
-  \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subset\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，任意の確率変数\(X\)に対して，次の式が成立する．
+  \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subset\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，\(\expval[\abs{X}^2]<+\infty\)を満たす任意の確率変数\(X\)に対して，次の式が成立する．
   \[
     \almostsurely{\condexpval{X\given\sigmaalg{G}} = \proj_V(X)}\quad(V=\Lebesgue{2}(\Omega,\sigmaalg{G},\prob))
   \]
