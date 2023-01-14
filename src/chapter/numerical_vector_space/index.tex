@@ -329,7 +329,7 @@
 \begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\)}
   各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)に対して，\(\numset{C}^N\)の元
   \[
-    \hat{\vect{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
+    \vect{\hat{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
     \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
   \]
   を対応づける線型写像\(\dft{N}\colon\numset{C}^N\to\numset{C}^N\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
@@ -361,13 +361,13 @@
 と書ける．
 
 \begin{proposition}{}{dft_plancherel}
-  \(\hat{\vect{x}}=\dft{N}\vect{x}\)，\(\hat{\vect{y}}=\dft{N}\vect{y}\)とすると，\(\innerp{\hat{\vect{x}}}{\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)が成立する．
+  \(\vect{\hat{x}}=\dft{N}\vect{x}\)，\(\vect{\hat{y}}=\dft{N}\vect{y}\)とすると，\(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)が成立する．
 \end{proposition}
 
 \begin{proof}
   標準基底に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．このとき
-  \(\innerp{\hat{\vect{x}}}{\hat{\vect{y}}}=\innerp{\mat{W}\vect{x}}{\hat{\vect{y}}}=\trps{\vect{x}}\trps{\mat{W}}\conj{\hat{\vect{y}}}=\trps{\vect{x}}\conj*{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}\)
-  であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\hat{\vect{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\hat{\vect{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
+  \(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\mat{W}\vect{x}}{\vect{\hat{y}}}=\trps{\vect{x}}\trps{\mat{W}}\conj{\vect{\hat{y}}}=\trps{\vect{x}}\conj*{\htrps{\mat{W}}\vect{\hat{y}}}=\innerp{\vect{x}}{\htrps{\mat{W}}\vect{\hat{y}}}\)
+  であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\vect{\hat{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
 \end{proof}
 
 \cref{proposition:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
@@ -447,7 +447,7 @@
 周波数\(f\)の波を標本化すると，\(f\)より低周波の波と区別できなくなるのは\(\abs{f}\geq f_{\symrm{s}}/2\)のときである．\(f_{\symrm{s}}/2\)のことを\termdef{ナイキスト周波数}\index{ないきすとしゅうはすう@ナイキスト周波数}（Nyquist frequency）という．
 
 話を離散フーリエ変換に戻すと，\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は\(f=k\)の波が\(f_{\symrm{s}}=N\)で標本化されたものとみなせる．
-そのため，\(k>N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
+そのため，\(k\geq N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
 
 \subsection{巡回畳み込み}
 
@@ -456,77 +456,86 @@
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
 \]
 
-\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\hat{\vect{x}}=\dft{N}\vect{x}\)によって表す式である．
-しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x_n}_{n\in\numset{Z}}\)へと拡張できる．
-そこで，周期\(N\)の複素数列\(x=\seq{x_n}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
+\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
+しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
+そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
-  周期\(N\)の複素数列全体\(\Set{\seq{u_i}_{i\in\numset{Z}}\given\text{\(u_i=u_{i+N}\in\numset{C}\)（\(i\in\numset{Z}\)）}}\)を\(\cycles{\numset{C}}{N}\)と表す．
+  周期\(N\)の複素数列全体\(\Set{\seq{u[i]}_{i\in\numset{Z}}\given u[i]=u[i+N]\in\numset{C}}\)を\(\cycles{\numset{C}}{N}\)と表記する\footnotemark ．
   線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
-    \dft{N}x = \seq{\hat{x}_k}_{k\in\numset{Z}},
-    \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
+    (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
   \]
 \end{definition}
 
-\(\cycles{\numset{C}}{N}\)は加法\(\seq{x_n}_{n\in\numset{Z}}+\seq{y_n}_{n\in\numset{Z}}=\seq{x_n+y_n}_{n\in\numset{Z}}\)，スカラー乗法\(\lambda\seq{x_n}_{n\in\numset{Z}}=\seq{\lambda x_n}_{n\in\numset{Z}}\)に関する\(N\)次元ベクトル空間である．
+\footnotetext{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}
+\(\cycles{\numset{C}}{N}\)は加法\(x+y=\seq{x[n]+y[n]}\)，スカラー乗法\(\lambda x=\seq{\lambda x[n]}\)に関する\(N\)次元ベクトル空間である．
+
+はじめに定義した離散フーリエ変換と\cref{definition:cycle_dft}の\(\dft{N}\)は，ある意味「同じもの」と見なせる．実際，数列
+\[
+  \delta_i[n] = \sum_{m\in\numset{Z}}\kdelta{n}{(mN+i)}
+  = \begin{cases}1 & (n\equiv i\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}\quad(0\leq i<N)
+\]
+からなる集合\(\basis{D}=\Set{\delta_0,\dots,\delta_{N-1}}\)は\(\cycles{\numset{C}}{N}\)の基底であり，\(\numset{C}^N\)の標準基底と\(\basis{D}\)を対応づければ，2つの\(\dft{N}\)を同一視できる．
 
 \begin{note}
-  はじめに定義した離散フーリエ変換と\cref{definition:cycle_dft}の\(\dft{N}\)は，ある意味「同じもの」と見なせる．実際，数列
-  \[
-    e_l = \seq{\midx{e}{l}{n}}_{n\in\numset{Z}},
-    \quad\midx{e}{l}{n} = \sum_{m\in\numset{Z}}\kdelta{mN}{(n-l)}
-    = \begin{cases}1 & (n\equiv l\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}
-  \]
-  からなる集合\(\basis{S}=\Set{e_0,\dots,e_{N-1}}\)は\(\cycles{\numset{C}}{N}\)の基底であり，\(\numset{C}^N\)の標準基底と\(\basis{S}\)を対応づければ，2つの\(\dft{N}\)を同一視できる．
+形式ばらずにいえば，数列\(x\)の周期が\(N\)なら，\(x\)の様子は時刻\(N-1\)までのデータ\(\phi(x)=\trps{\rowvect{x[0] & \cdots & x[N-1]}}=\sum_{i=0}^{N-1}x[i]\vect{e}_i\)から解析できるし，\(\phi(x)\)から\(x\)を復元するのも容易である．この対応を
+\[
+  \sum_{i=0}^{N-1}x_i\delta_i \longleftrightarrow \sum_{i=0}^{N-1}x_i\vect{e}_i
+\]
+と表すと，\(\dft{N}\)は\(\longleftrightarrow\)を保ち，次式が成立する（\cref{subsection:representation_matrix}を見よ）．
+\[
+  \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\delta_i} = \sum_{i=0}^{N-1}x_i\hat{\delta}_i
+  \longleftrightarrow \sum_{i=0}^{N-1}x_i\vect{\hat{e}}_i
+  = \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\vect{e}_i}
+\]
 \end{note}
 
-ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop\seq{x_n}_{n\in\numset{Z}}=\seq{x_{n-1}}_{n\in\numset{Z}}\)で定義する．
+ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義する．
 このとき，\cref{proposition:dft_shift_theorem}が成立する．
 
 \begin{proposition}{}{dft_shift_theorem}
-  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\(\dft{N}\lagop x=\seq{\zeta^{-k}\hat{x}_k}_{k\in\numset{Z}}\)である．
+  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}_k\)である．
 \end{proposition}
 
 \begin{proof}
-  \(\sum\)の添字\(n\)を\(n'=n+1\)に置き換えると
+  \(\sum\)の添字\(n\)を\(m=n+1\)に置き換えると
   \[
-    \zeta^{-k}\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni k(n+1)/N}
-    = \frac{1}{\sqrt{N}}\sum_{n'=1}^Nx_{n'-1}\napr^{-2\krez\iuni kn'/N}
+    \zeta^{-k}\hat{x}[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni k(n+1)/N}
+    = \frac{1}{\sqrt{N}}\sum_{m=1}^Nx[m-1]\napr^{-2\krez\iuni km/N}
   \]
-  となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{n'=1}^N\)を\(\sum_{n'=0}^{N-1}\)に変えても値は変わらない．よって\(\seq{\zeta^{-k}\hat{x}_k}_{k\in\numset{Z}}=\dft{N}\lagop x\)である．
+  となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{m=1}^N\)を\(\sum_{m=0}^{N-1}\)に変えても値は変わらない．よって\(\zeta^{-k}\hat{x}_k=(\dft{N}\lagop x)[k]\)である．
 \end{proof}
 
-\cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x_ny_n}_{n\in\numset{Z}}\)と離散フーリエ変換の間にある関係を示せる．形式ばらずに言えば，積は\(\dft{N}\)で次の2項演算に写される．
+\cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x[n]y[n]}\)と離散フーリエ変換の間にある関係を示せる．積は\(\dft{N}\)で，次の2項演算へと写される．
 
 \begin{definition}{巡回畳み込み}{}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(x\circconv y\)}
   \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(z\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）といい，\(x\circconv y\)と表記する．
   \[
-    z_n = \sum_{m=0}^{N-1}x_my_{n-m}\quad(n\in\numset{Z})
+    z[n] = \sum_{m=0}^{N-1}x[m]y[n-m]\quad(n\in\numset{Z})
   \]
 \end{definition}
 
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
   \[
-    \dft{N}(x\circconv y) = \sqrt{N}(\hat{x}\cdot\hat{y}),
-    \quad\dft{N}(x\cdot y) = \sqrt{N}(\hat{x}\circconv\hat{y})
+    \dft{N}(x\circconv y)[k] = \sqrt{N}\hat{x}[k]\hat{y}[k],
+    \quad\dft{N}(x\cdot y)[k] = \sqrt{N}(\hat{x}\circconv\hat{y})[k]
   \]
 \end{proposition}
 
 \begin{proof}
-  1つめのみ示す．\(z=x\circconv y\)とし，和の順序を交換すると
+  1つめのみ示す．\(z=x\circconv y\)とし，\(\sum_n\)と\(\sum_m\)を交換すると
+  \begin{align*}
+    (\dft{N}z)[k] &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x[m]y[n-m]}\zeta^{-kn} \\
+    &= \sum_{m=0}^{N-1}x[m]\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y[n-m]\zeta^{-kn}}
+  \end{align*}
+  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=\zeta^{-mk}\hat{y}_k\)なので
   \[
-    \hat{z}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x_my_{n-m}}\zeta^{-kn}
-    = \sum_{m=0}^{N-1}x_m\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y_{n-m}\zeta^{-kn}}
+    (\dft{N}z)[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-mk}\hat{y}[k])
+    = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
   \]
-  となる．\cref{proposition:dft_shift_theorem}より\(\dft{N}\seq{y_{n-m}}_{n\in\numset{Z}}=\dft{N}\lagop^my=\seq{\zeta^{-mk}\hat{y}_k}_{k\in\numset{Z}}\)なので
-  \[
-    \hat{z}_k = \sum_{m=0}^{N-1}x_m(\zeta^{-mk}\hat{y}_k)
-    = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x_m\zeta^{-km}}\hat{y}_k
-    = \sqrt{N}\hat{x}_k\hat{y}_k
-  \]
-  である．
+  である．よって\((\dft{N}z)[k]=\sqrt{N}\hat{x}[k]\hat{y}[k]\)である．
 \end{proof}
 
 \begin{corollary}{}{circular_convolution_properties}
@@ -539,11 +548,34 @@
 \end{corollary}
 
 \begin{proof}
-  2つめのみ示す．\cref{proposition:dft_convolution_theorem}より\(\dft{N}((x\circconv y)\circconv z)=\sqrt{N}(\dft{N}(x\circconv y))\cdot\hat{z}=N(\hat{x}\cdot\hat{y})\cdot\hat{z}\)である．
-  よって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，右辺は\(x\circconv (y\circconv z)\)とも等しい．
+  2つめのみ示す．\(\dft{N}((x\circconv y)\circconv z)=\sqrt{N}(\dft{N}(x\circconv y))\cdot\hat{z}=N(\hat{x}\cdot\hat{y})\cdot\hat{z}\)より
+  \((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\(x\circconv (y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
-最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換する．\(i\)を\(N\)で割ったあまりを\(\bar{\imath}\)と書く．
+最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，作用素\(\operatorname{\symit{H}}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operatorname{\symit{H}}x=x\circconv h\)で定義する．
+基底\(\basis{D}\)に関する\(\operatorname{\symit{H}}\)の表現行列\(\mat{H}\)は
+\[
+  \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
+\]
+という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}（circulant matrix）という．
+
+同様に，基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
+
+\begin{proposition}{}{}
+  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}^{-1}\mat{H}\mat{W}\)は対角行列である．
+\end{proposition}
+
+\begin{proof}
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の作用素\(\operatorname{\symit{H}}\)，\(\operatorname{\symit{\hat{H}}}\)をそれぞれ
+  \(\operatorname{\symit{H}}x=h\circconv x\)，\(\operatorname{\symit{\hat{H}}}x=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
+  \[
+    (\dft{N}^{-1}\operatorname{\symit{H}}\dft{N})x = \dft{N}^{-1}(\hat{h}\circconv\dft{N}x)
+    = \hat{h}\cdot x
+    = \operatorname{\symit{\hat{H}}}x\quad(x\in\cycles{\numset{C}}{N})
+  \]
+  だから，基底\(\basis{D}\)に関する\(\operatorname{\symit{\hat{H}}}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}^{-1}\operatorname{\symit{H}}\dft{N}\)の表現行列\(\mat{W}^{-1}\mat{H}\mat{W}\)でもある．
+\end{proof}
 
 \subsection{多次元離散フーリエ変換}
 
@@ -601,5 +633,9 @@
 
 \section*{演習問題}
 \addcontentsline{toc}{section}{演習問題}
+
+\begin{enumerate}
+  \item 環\((\cycles{\numset{C}}{N},+,\circconv)\)は\(\numset{C}[x]/\langle x^N-1\rangle\)と同型であることを示せ．
+\end{enumerate}
 
 \end{document}

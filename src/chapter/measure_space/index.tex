@@ -15,13 +15,13 @@
   \item 関数の定義域が\(\numset{R}^n\)の部分集合でなくともよい．
 \end{enumerate}
 
-これらの強みは主に，ルベーグ積分では面積の測り方（測度）を自由に決められること，そして，測度の観点から区別できないものは同一視できることに由来する．言い換えると，ルベーグ積分のメリットを存分に享受するには
+これらの強みは主に，ルベーグ積分では面積の測り方（測度）を自由に決められること，そして，測度の観点から区別できないものは同一視できることに由来する．そのため，ルベーグ積分の利点を享受するには
 \begin{enumerate}
   \item 面積が定義される集合のあつまり（\impact{σ‐加法族}）を用意する．
   \item 各集合に面積を割り当てる写像（\impact{測度}）を用意する．
   \item 積分を定義できる関数（\impact{可測関数}）を規定する．
 \end{enumerate}
-という，3つの段階を要する．本章では，この3ステップをどう踏んでいけばよいのかを，かけ足で概観する．
+という，3つの段階を要する．本章では，この3段階をどう踏んでいけばよいのかを，かけ足で概観する．
 
 \section{測度論の基本概念}
 
@@ -287,8 +287,8 @@
   \]
   の値は，広義積分の意味で\(\krez/2\)であることが知られているが
   \[
-    \int_I\max\Set{f(x),0}\measured[x]{\lambda} = \int_I\max\Set{-f(x),0}\measured[x]{\lambda}
-    = +\infty\quad(I=\ooival{0}{+\infty})
+    \int_{\ooival{0}{+\infty}}\max\Set{f(x),0}\measured[x]{\lambda} = \int_{\ooival{0}{+\infty}}\max\Set{-f(x),0}\measured[x]{\lambda}
+    = +\infty
   \]
   なのでルベーグ積分できない．
 \end{note}
@@ -331,9 +331,9 @@
 \begin{definition}{}{}\index{るいせきぶんぷかんすう@累積分布関数}\index{かくりつみつどかんすう@確率密度関数}\index{かくりつしつりょうかんすう@確率質量関数}\index{CDF|see{累積分布関数}}\index{PDF|see{確率密度関数}}\index{PMF|see{確率質量関数}}
   \(X\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
   \begin{enumerate}
-    \item 関数\(F(x)=\prob(\inv{X}{\ocival{-\infty}{x}})\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
-    \item 像\(\ran{X}{\Omega}\)が有限または可算集合のとき，関数\(f(x)=\prob(\inv{X}{x})\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
-    \item \(F\)が導関数\(f(x)=F'(x)\)を持つとき，\(f\)を\(X\)の\termdef{確率密度関数}（probability density function; PDF）という\footnotemark．
+    \item 関数\(F_X(x)=\prob(\inv{X}{\ocival{-\infty}{x}})\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
+    \item 像\(\ran{X}{\Omega}\)が有限または可算集合のとき，関数\(p_X(x)=\prob(\inv{X}{x})\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
+    \item \(F_X\)が導関数\(f_X(x)=F_X'(x)\)を持つとき，\(f_X\)を\(X\)の\termdef{確率密度関数}（probability density function; PDF）という\footnotemark．
   \end{enumerate}
 \end{definition}
 
