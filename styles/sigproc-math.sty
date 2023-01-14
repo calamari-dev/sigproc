@@ -34,12 +34,13 @@
 % 線形代数
 \newcommand{\basis}[1]{\symcal{#1}}
 \newcommand{\htrps}[1]{#1^{\symsfup{H}}}
-\newcommand{\rowvect}[1]{[{\narrowbaselines\begin{matrix}#1\end{matrix}}]}
+\newcommand{\rowvect}[1]{({\narrowbaselines\begin{matrix}#1\end{matrix}})}
 \newcommand{\kdelta}[2]{\symrm{\delta}_{#1\,#2}}
 \newcommand{\mat}[1]{\symbf{#1}}
 \newcommand{\matset}[3]{#3^{#1\times #2}}
 \newcommand{\midx}[3]{#1_{#2\,#3}}
 \newcommand{\pinv}[1]{#1^{\mathord{+}}}
+\newcommand{\smallmatrice}[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
 \newcommand{\trps}[1]{#1^{\symsfup{T}}}
 \newcommand{\vect}[1]{\symbf{#1}}
 
@@ -55,7 +56,7 @@
 
 \DeclarePairedDelimiterXPP{\fnorm}[1]{}{\lVert}{\rVert}{_{\symrm{F}}}{#1}
 \DeclarePairedDelimiterX{\innerp}[2]{\langle}{\rangle}{#1,#2}
-\DeclarePairedDelimiterX{\matrice}[1]{\lbrack}{\rbrack}{\begin{matrix}#1\end{matrix}}
+\DeclarePairedDelimiterX{\matrice}[1]{\lparen}{\rparen}{\begin{matrix}#1\end{matrix}}
 \DeclarePairedDelimiter{\mnorm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 

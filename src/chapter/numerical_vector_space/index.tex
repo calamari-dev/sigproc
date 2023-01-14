@@ -243,7 +243,7 @@
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\begin{bsmallmatrix}\imat_m & \\ & \zmat_{n-m}\end{bsmallmatrix}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
+\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
   \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
@@ -481,12 +481,12 @@
 \begin{note}
 形式ばらずにいえば，数列\(x\)の周期が\(N\)なら，\(x\)の様子は時刻\(N-1\)までのデータ\(\phi(x)=\trps{\rowvect{x[0] & \cdots & x[N-1]}}=\sum_{i=0}^{N-1}x[i]\vect{e}_i\)から解析できるし，\(\phi(x)\)から\(x\)を復元するのも容易である．この対応を
 \[
-  \sum_{i=0}^{N-1}x_i\delta_i \longleftrightarrow \sum_{i=0}^{N-1}x_i\vect{e}_i
+  \sum_{i=0}^{N-1}x_i\delta_i \stackrel{\phi}{\longleftrightarrow} \sum_{i=0}^{N-1}x_i\vect{e}_i
 \]
-と表すと，\(\dft{N}\)は\(\longleftrightarrow\)を保ち，次式が成立する（\cref{subsection:representation_matrix}を見よ）．
+と表すと，\(\dft{N}\)は\(\stackrel{\phi}{\longleftrightarrow}\)を保ち，次式が成立する（\cref{subsection:representation_matrix}を見よ）．
 \[
   \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\delta_i} = \sum_{i=0}^{N-1}x_i\hat{\delta}_i
-  \longleftrightarrow \sum_{i=0}^{N-1}x_i\vect{\hat{e}}_i
+  \stackrel{\phi}{\longleftrightarrow} \sum_{i=0}^{N-1}x_i\vect{\hat{e}}_i
   = \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\vect{e}_i}
 \]
 \end{note}
@@ -495,7 +495,7 @@
 このとき，\cref{proposition:dft_shift_theorem}が成立する．
 
 \begin{proposition}{}{dft_shift_theorem}
-  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}_k\)である．
+  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
 \end{proposition}
 
 \begin{proof}
@@ -504,7 +504,7 @@
     \zeta^{-k}\hat{x}[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni k(n+1)/N}
     = \frac{1}{\sqrt{N}}\sum_{m=1}^Nx[m-1]\napr^{-2\krez\iuni km/N}
   \]
-  となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{m=1}^N\)を\(\sum_{m=0}^{N-1}\)に変えても値は変わらない．よって\(\zeta^{-k}\hat{x}_k=(\dft{N}\lagop x)[k]\)である．
+  となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{m=1}^N\)を\(\sum_{m=0}^{N-1}\)に変えても値は変わらない．よって\(\zeta^{-k}\hat{x}[k]=(\dft{N}\lagop x)[k]\)である．
 \end{proof}
 
 \cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x[n]y[n]}\)と離散フーリエ変換の間にある関係を示せる．積は\(\dft{N}\)で，次の2項演算へと写される．
@@ -519,8 +519,8 @@
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
   \[
-    \dft{N}(x\circconv y)[k] = \sqrt{N}\hat{x}[k]\hat{y}[k],
-    \quad\dft{N}(x\cdot y)[k] = \sqrt{N}(\hat{x}\circconv\hat{y})[k]
+    \dft{N}(x\circconv y) = \sqrt{N}\hat{x}\cdot\hat{y},
+    \quad\dft{N}(x\cdot y) = \frac{1}{\sqrt{N}}\hat{x}\circconv\hat{y}
   \]
 \end{proposition}
 
@@ -530,7 +530,7 @@
     (\dft{N}z)[k] &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x[m]y[n-m]}\zeta^{-kn} \\
     &= \sum_{m=0}^{N-1}x[m]\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y[n-m]\zeta^{-kn}}
   \end{align*}
-  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=\zeta^{-mk}\hat{y}_k\)なので
+  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=\zeta^{-mk}\hat{y}[k]\)なので
   \[
     (\dft{N}z)[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-mk}\hat{y}[k])
     = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
@@ -553,10 +553,10 @@
 \end{proof}
 
 最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，作用素\(\operatorname{\symit{H}}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operatorname{\symit{H}}x=x\circconv h\)で定義する．
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，作用素\(\operatorname{\symit{H}}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operatorname{\symit{H}}x=h\circconv x\)で定義する．
 基底\(\basis{D}\)に関する\(\operatorname{\symit{H}}\)の表現行列\(\mat{H}\)は
 \[
-  \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
+  \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
 \]
 という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}（circulant matrix）という．
 
@@ -567,7 +567,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の作用素\(\operatorname{\symit{H}}\)，\(\operatorname{\symit{\hat{H}}}\)をそれぞれ
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の作用素\(\operatorname{\symit{H}}\)，\(\operatorname{\symit{\hat{H}}}\)をそれぞれ
   \(\operatorname{\symit{H}}x=h\circconv x\)，\(\operatorname{\symit{\hat{H}}}x=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
   \[
     (\dft{N}^{-1}\operatorname{\symit{H}}\dft{N})x = \dft{N}^{-1}(\hat{h}\circconv\dft{N}x)
@@ -580,21 +580,33 @@
 \subsection{多次元離散フーリエ変換}
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
-  \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_j\in\numset{Z}\)，\(0\leq u_j<N_j\)（\(1\leq j\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
+  \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_i\in\numset{Z}\)，\(0\leq u_i<N_i\)（\(1\leq i\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
   関数\(x\colon\Omega\to\numset{C}\)に対して，関数
   \[
-    \hat{x}(\vect{k}) = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x(\vect{r})\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
+    \hat{x}[\vect{k}] = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x[\vect{r}]\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
   \]
   を対応づける線型写像\(\dft[d]{\vect{n}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
 特に\(d=2\)のとき
 \begin{align*}
-  \hat{x}(k_1,k_2) &= \frac{1}{\sqrt{N_1N_2}}\sum_{r_2=0}^{N_2-1}\sum_{r_1=0}^{N_1-1}x(r_1,r_2)\napr^{-2\krez\iuni(k_1r_1/N_1+k_2r_2/N_2)} \\
-  &= \frac{1}{\sqrt{N_2}}\sum_{r_2=0}^{N_2-1}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{r_1=0}^{N_1-1}x(r_1,r_2)\napr^{-2\krez\iuni k_1r_1/N_1}}\napr^{-2\krez\iuni k_2r_2/N_2}
+  \hat{x}[k_1,k_2] &= \frac{1}{\sqrt{N_1N_2}}\sum_{r_2=0}^{N_2-1}\sum_{r_1=0}^{N_1-1}x[r_1,r_2]\napr^{-2\krez\iuni(k_1r_1/N_1+k_2r_2/N_2)} \\
+  &= \frac{1}{\sqrt{N_2}}\sum_{r_2=0}^{N_2-1}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{r_1=0}^{N_1-1}x[r_1,r_2]\napr^{-2\krez\iuni k_1r_1/N_1}}\napr^{-2\krez\iuni k_2r_2/N_2}
 \end{align*}
-であり，右辺は\(x(r_1,r_2)\)を各変数に関して離散フーリエ変換した形になっている．
-より一般に，\(x(r_1,\dots,r_d)\)の\(d\)次元離散フーリエ変換は，\(x(r_1,\dots,r_d)\)を各変数に関して離散フーリエ変換したものと一致する．
+であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
+より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics[width=45mm]{figures/building.png}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/2ddft.pdf}
+  \end{minipage}
+  \caption{モノクロ画像の2次元離散フーリエ変換．振幅に直線がいくつか現れている．}
+\end{figure}
 
 \section{最小2乗問題}
 \label{section:least_square}

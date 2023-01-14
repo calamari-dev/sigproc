@@ -45,6 +45,9 @@ figure.figsize: 1.7717, 1.7717 # 45 mm in inches
 figure.dpi: 600
 figure.autolayout: True
 
+# IMAGES
+image.cmap: gray
+
 # SAVING FIGURES
 savefig.format: pdf
 savefig.bbox: tight
