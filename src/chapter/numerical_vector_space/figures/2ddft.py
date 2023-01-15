@@ -8,11 +8,13 @@ from PIL import Image
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
-png = Image.open(str(PurePath(__file__).parent / "building.png"))
+png = Image.open(str(PurePath(__file__).parent / "pudding.png"))
 amp = np.abs(fft.fftshift(fft.fft2(png, norm="ortho")))
 
 mm = 1 / 25.4
 fig, ax = plt.subplots(figsize=(60 * mm, 45 * mm))
+ax.set(xticks=[-531, 0, 531], xticklabels=[r"$-\krez$", r"$0$", r"$\krez$"])
+ax.set(yticks=[-531, 0, 531], yticklabels=[r"$-\krez$", r"$0$", r"$\krez$"])
 img = ax.pcolormesh(
     *np.mgrid[-531:532, -531:532],
     amp,
