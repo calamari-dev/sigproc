@@ -259,7 +259,7 @@
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}(\vect{x})
 \]
-であり，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの写像
+であり，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
 \(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
@@ -548,13 +548,13 @@
 \end{corollary}
 
 \begin{proof}
-  2つめのみ示す．\(\dft{N}((x\circconv y)\circconv z)=\sqrt{N}(\dft{N}(x\circconv y))\cdot\hat{z}=N(\hat{x}\cdot\hat{y})\cdot\hat{z}\)より
-  \((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\(x\circconv (y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
+  2つめのみ示す．\(\dft{N}(x\circconv (y\circconv z))=\sqrt{N}\hat{x}\cdot\dft{N}(y\circconv z)=N\hat{x}\cdot(\hat{y}\cdot\hat{z})\)より
+  \(x\circconv(y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
 最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，作用素\(\operatorname{\symit{H}}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operatorname{\symit{H}}x=h\circconv x\)で定義する．
-基底\(\basis{D}\)に関する\(\operatorname{\symit{H}}\)の表現行列\(\mat{H}\)は
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
+基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
 \[
   \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
 \]
@@ -563,18 +563,18 @@
 同様に，基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
 
 \begin{proposition}{}{}
-  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}^{-1}\mat{H}\mat{W}\)は対角行列である．
+  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}\mat{H}\mat{W}^{-1}\)は対角行列である．
 \end{proposition}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の作用素\(\operatorname{\symit{H}}\)，\(\operatorname{\symit{\hat{H}}}\)をそれぞれ
-  \(\operatorname{\symit{H}}x=h\circconv x\)，\(\operatorname{\symit{\hat{H}}}x=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
+  \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
   \[
-    (\dft{N}^{-1}\operatorname{\symit{H}}\dft{N})x = \dft{N}^{-1}(\hat{h}\circconv\dft{N}x)
+    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
     = \hat{h}\cdot x
-    = \operatorname{\symit{\hat{H}}}x\quad(x\in\cycles{\numset{C}}{N})
+    = \hat{H}(x)\quad(x\in\cycles{\numset{C}}{N})
   \]
-  だから，基底\(\basis{D}\)に関する\(\operatorname{\symit{\hat{H}}}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}^{-1}\operatorname{\symit{H}}\dft{N}\)の表現行列\(\mat{W}^{-1}\mat{H}\mat{W}\)でもある．
+  だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
 \subsection{多次元離散フーリエ変換}
@@ -599,11 +599,11 @@
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics[width=45mm]{figures/pudding.png}
+    \includegraphics{figures/pudding.pdf}
   \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{figures/2ddft.pdf}
+    \includegraphics{figures/pudding_dft.pdf}
   \end{minipage}
   \caption{画像の2次元離散フーリエ変換．}
 \end{figure}
@@ -615,7 +615,7 @@
     \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{figures/2dcosdft.pdf}
+    \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
   \caption{\(\cos(3x+4y)\)のグラフと2次元離散フーリエ変換．}
 \end{figure}

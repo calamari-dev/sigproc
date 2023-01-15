@@ -14,7 +14,6 @@ amp = np.abs(fft.fftshift(fft.fft2(zz, norm="ortho")))
 
 mm = 1 / 25.4
 fig, ax = plt.subplots(figsize=(60 * mm, 45 * mm))
-
 ax.set(xticks=[-np.pi, 0, np.pi], xticklabels=[r"$-\krez$", r"$0$", r"$\krez$"])
 ax.set(yticks=[-np.pi, 0, np.pi], yticklabels=[r"$-\krez$", r"$0$", r"$\krez$"])
 img = ax.pcolormesh(xx, yy, amp, rasterized=True)

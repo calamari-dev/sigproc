@@ -9,7 +9,8 @@ from PIL import Image
 plt.style.use(["sigproc", "sigproc-wide"])
 
 png = Image.open(str(PurePath(__file__).parent / "pudding.png"))
-amp = np.abs(fft.fftshift(fft.fft2(png, norm="ortho")))
+mat = np.array(png.rotate(-90)).T / (2 ** 16 - 1)
+amp = np.abs(fft.fftshift(fft.fft2(mat, norm="ortho")))
 
 mm = 1 / 25.4
 fig, ax = plt.subplots(figsize=(60 * mm, 45 * mm))
