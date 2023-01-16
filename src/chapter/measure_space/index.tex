@@ -340,11 +340,11 @@
 \footnotetext{確率密度関数は微分可能性よりも弱い仮定の下で定義できる\cite{funaki2022}．}
 \(X\)が確率質量関数\(p_X\)を持つとき，任意の\(A\in\borelset{\numset{R}}\)に対して
 \[
-  \prob(\inv{X}{A}) = \sum_{x\in\inv{X}{A}}p_X(x)
+  \prob(\inv{X}{A}) = \sum_{x\in A}p_X(x)
 \]
-が成立する．また，\(X\)が確率密度関数\(f_X\)を持てば
+が成立する．同様に，\(X\)が確率密度関数\(f_X\)を持てば
 \[
-  \prob(\inv{X}{A}) = \int_{\inv{X}{A}}f_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+  \prob(\inv{X}{A}) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
 \]
 が成立する．
 
