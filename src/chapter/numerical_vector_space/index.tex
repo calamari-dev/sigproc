@@ -596,17 +596,12 @@
 であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
-\begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/pudding.pdf}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/pudding_dft.pdf}
-  \end{minipage}
-  \caption{画像の2次元離散フーリエ変換．}
-\end{figure}
+次の命題は，一般の次元で離散フーリエ変換が分析作用素であることを示している．
+ただし，\(\numset{C}^\Omega\)の内積は1変数のときと同様\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
+
+\begin{proposition}{}{}
+  \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\numset{C}^\Omega\)の正規直交基底である．
+\end{proposition}
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -618,6 +613,18 @@
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
   \caption{\(\cos(3x+4y)\)のグラフと2次元離散フーリエ変換．}
+\end{figure}
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/pudding.pdf}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/pudding_dft.pdf}
+  \end{minipage}
+  \caption{画像の2次元離散フーリエ変換．}
 \end{figure}
 
 \section{最小2乗問題}
