@@ -173,20 +173,20 @@
   なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-d(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
 \end{proof}
 
-\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V(\vect{x})\)}
-  \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
+\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\vect{x}\)}
+  \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V\vect{x}\)と表す．
 \end{definition}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/proj3d.pdf}
-  \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V(\vect{x})\)の模式図．}
+  \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V\vect{x}\)の模式図．}
 \end{figure}
 
 \begin{example}[\(xy\)平面への直交射影]
   \(\vect{e}_x=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{e}_y=\trps{\rowvect{0 & 1 & 0}}\)とし，
   \(\numset{R}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{e}_x,\vect{e}_y}\)で定義する．
-  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので\(\proj_V(\vect{r})=\innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\in\numset{R}^3\)）である．
+  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\in\numset{R}^3\)）である．
 \end{example}
 
 \begin{proposition}{}{}
@@ -195,8 +195,8 @@
 
 \begin{proof}
   \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{z}=s\vect{x}+t\vect{y}\)，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
-  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V(\vect{x})}{\vect{v}}+t\innerp{\vect{y}-\proj_V(\vect{y})}{\vect{v}}=s0+t0=0\)なので，
-  \(\proj_V(\vect{z})=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V\vect{x}}{\vect{v}}+t\innerp{\vect{y}-\proj_V\vect{y}}{\vect{v}}=s0+t0=0\)なので，
+  \(\proj_V\vect{z}=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
 \end{proof}
 
 \subsection{直交補空間}
@@ -227,15 +227,15 @@
 
 \begin{proof}
   \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)なので\(\vect{x}=\zvec\)，よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
-  また\cref{proposition:finite_projection}より，任意の\(\vect{x}\in V\)に対して\(\vect{x}-\proj_W(\vect{x})\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W(\vect{x}))\in W+\pcomp{W}\)である．
+  また\cref{proposition:finite_projection}より，任意の\(\vect{x}\in V\)に対して\(\vect{x}-\proj_W\vect{x}\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W\vect{x})\in W+\pcomp{W}\)である．
   したがって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
 
 \subsection{分析と合成}
 
-\cref{proposition:finite_convex_projection}の証明では，\(\proj_V(\vect{x})\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V(\vect{x})\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
+\cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
 一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
-そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}(\vect{x})\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
+そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}\vect{x}\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
@@ -257,29 +257,29 @@
   \htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
   = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
-  = \proj_{V_m}(\vect{x})
+  = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}(\vect{x})=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(T(\vect{x})=\mat{U}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
+\(\operateur{T}\vect{x}=\mat{U}\vect{x}\)，\(\operateur{L}\vect{x}=\mat{\Lambda}\vect{x}\)，\(\operateur{\synth{T}}\vect{x}=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
 
-\(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
-1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}(\vect{x})}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
+\(\operateur{T}\vect{x}\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
+1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
 \(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
 もう1つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
 \begin{equation}
   \label{equation:analysis_and_synthesis}
-  \vect{x} = \proj_{V_n}(\vect{x})
+  \vect{x} = \proj_{V_n}\vect{x}
   = \sum_{i=1}^n\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
 \end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
-以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+以上の理由から，本書では線型写像\(\operateur{T}\vect{x}=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\operateur{\synth{T}}\vect{x}=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
 
 \begin{definition}{分析作用素，合成作用素}{analysis_and_synthesis}\index{ぶんせきさようそ@分析作用素}\index{ごうせいさようそ@合成作用素}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
   \begin{enumerate}
-    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
-    \item 線型写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
+    \item 線型写像\(\operateur{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\operateur{T}\vect{x}=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
+    \item 線型写像\(\operateur{\synth{T}}\colon\numset{K}^n\to\numset{K}^n\)，\(\operateur{\synth{T}}\trps{\rowvect{x_1 & \cdots & x_n}}=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
   \end{enumerate}
 \end{definition}
 
@@ -458,17 +458,16 @@
 
 \cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
 しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
-そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
+そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する\footnote{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
-  周期\(N\)の複素数列全体\(\Set{\seq{u[i]}_{i\in\numset{Z}}\given u[i]=u[i+N]\in\numset{C}}\)を\(\cycles{\numset{C}}{N}\)と表記する\footnotemark ．
+  周期\(N\)の複素数列全体\(\Set{\seq{u[i]}_{i\in\numset{Z}}\given u[i]=u[i+N]\in\numset{C}}\)を\(\cycles{\numset{C}}{N}\)と表記する．
   線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
     (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
   \]
 \end{definition}
 
-\footnotetext{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}
 \(\cycles{\numset{C}}{N}\)は加法\(x+y=\seq{x[n]+y[n]}\)，スカラー乗法\(\lambda x=\seq{\lambda x[n]}\)に関する\(N\)次元ベクトル空間である．
 
 はじめに定義した離散フーリエ変換と\cref{definition:cycle_dft}の\(\dft{N}\)は，ある意味「同じもの」と見なせる．実際，数列
@@ -553,8 +552,8 @@
 \end{proof}
 
 最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
-基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(\operateur{H}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operateur{H}x=h\circconv x\)で定義する．
+基底\(\basis{D}\)に関する\(\operateur{H}\)の表現行列\(\mat{H}\)は
 \[
   \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
 \]
@@ -567,14 +566,14 @@
 \end{proposition}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
-  \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(\operateur{H}\)，\(\operateur{\hat{H}}\)をそれぞれ
+  \(\operateur{H}x=h\circconv x\)，\(\operateur{\hat{H}}x=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
   \[
-    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
+    (\dft{N}\operateur{H}\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
     = \hat{h}\cdot x
-    = \hat{H}(x)\quad(x\in\cycles{\numset{C}}{N})
+    = \operateur{\hat{H}}x\quad(x\in\cycles{\numset{C}}{N})
   \]
-  だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
+  だから，基底\(\basis{D}\)に関する\(\operateur{\hat{H}}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}\operateur{H}\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
 \subsection{多次元離散フーリエ変換}

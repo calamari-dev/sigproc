@@ -5,6 +5,7 @@
 
 % 汎用
 \newcommand{\holder}{\mathvisiblespace}
+\newcommand{\operateur}[1]{\mathop{\kern\z@ #1}\nolimits}
 \newcommand{\pholder}{(\holder)}
 
 % 算術・代数
@@ -66,8 +67,8 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator{\grad}{grad}
-\DeclareMathOperator{\order}{\symrm{o}}
-\DeclareMathOperator{\Order}{\symrm{O}}
+\DeclareMathOperator{\order}{o}
+\DeclareMathOperator{\Order}{O}
 
 \DeclarePairedDelimiterX{\ccival}[2]{\lbrack}{\rbrack}{#1,#2}
 \DeclarePairedDelimiterX{\coival}[2]{\lbrack}{\rparen}{#1,#2}
@@ -92,12 +93,12 @@
 \newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operatorname{\symcal{F}}_{\torus}}
 
-\NewDocumentCommand{\dft}{o m}{\operatorname{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^d}{\numset{Z}}/#2}}
+\NewDocumentCommand{\dft}{o m}{\operateur{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
 
-\DeclareMathOperator{\ftrans}{\symcal{F}}
-\DeclareMathOperator{\lagop}{\symit{L}}
-\DeclareMathOperator{\ltrans}{\symcal{L}}
-\DeclareMathOperator{\ztrans}{\symcal{Z}}
+\DeclareRobustCommand{\ftrans}{\operateur{\symcal{F}}}
+\DeclareRobustCommand{\lagop}{\operateur{\symit{L}}}
+\DeclareRobustCommand{\ltrans}{\operateur{\symcal{L}}}
+\DeclareRobustCommand{\ztrans}{\operateur{\symcal{Z}}}
 
 % 測度論
 \newcommand{\borelset}[1]{\symcal{B}(#1)}
@@ -113,9 +114,9 @@
 % 確率統計
 \NewDocumentCommand{\almostsurely}{o m}{#2\;\mathrm{a{.}s{.}}\IfValueT{#1}{\;#1}}
 
-\DeclareMathOperator{\expval}{\symbb{E}}
-\DeclareMathOperator{\prob}{\symbb{P}}
-\DeclareMathOperator{\variant}{\symbb{V}}
+\DeclareRobustCommand{\expval}{\operateur{\symbb{E}}}
+\DeclareRobustCommand{\prob}{\operateur{\symbb{P}}}
+\DeclareRobustCommand{\variant}{\operateur{\symbb{V}}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
