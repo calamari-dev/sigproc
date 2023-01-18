@@ -122,7 +122,7 @@
 \end{example}
 
 \cref{example:equally_possible}のように\(\Omega\)が有限集合のときは，各\(\omega\in\Omega\)に対して\(\mu(\Set{\omega})\)の値を決定することで，測度\(\mu\)を直に構成できる．
-しかし，たとえば\(\sigmaalg{B}(\numset{R})\)上の測度を定める場合，この方法は使えない．そうした状況では代わりに，σ‐加法族よりも考えやすい集合族の上で測度の「原型」を作り，それをσ‐加法族全体へと拡張する．
+しかし，たとえば\(\sigmaalg{B}(\numset{R})\)上の測度を定める場合，この方法は使えない．そうした状況では代わりに，σ‐加法族よりも考えやすい集合族の上で測度の雛形を作り，それをσ‐加法族全体へと拡張する．
 
 \begin{definition}{有限加法族}{finite_additive_class}\index{ゆうげんかほうぞく@有限加法族}
   \(\Omega\)を集合，\(\sigmaalg{A}\)を\(\powerset{\Omega}\)の部分集合とする．
@@ -157,11 +157,6 @@
   これを\termdef{ホップの拡張定理}（Hopf extension theorem）という．
 \end{theorem}
 
-\begin{note}
-  \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(m\)は\termdef{σ‐有限}\index{しぐまゆうげん@σ‐有限}（σ‐finite）であるという．
-  本書が扱う（有限加法的）測度はすべてσ‐有限なので，\cref{theorem:hopf_extension}から定まる拡張された測度は常に一意である．
-\end{note}
-
 \begin{proof}
 各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
 そして，写像\(\mu^{\mathord{\ast}}\colon\powerset{\Omega}\to\ccival{0}{+\infty}\)を
@@ -178,7 +173,9 @@
 \end{proof}
 
 \begin{note}
-  集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属するとき，つまり，任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)であるとき，
+  \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(m\)は\termdef{σ‐有限}\index{しぐまゆうげん@σ‐有限}（σ‐finite）であるという．
+  本書が扱う（有限加法的）測度はすべてσ‐有限なので，\cref{theorem:hopf_extension}から定まる拡張された測度は常に一意である．
+  また，集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属するとき\texttwoemdash つまり，任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)であるとき\texttwoemdash
   \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
 \end{note}
 

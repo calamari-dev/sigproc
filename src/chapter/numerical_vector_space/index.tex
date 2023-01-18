@@ -457,8 +457,8 @@
 \]
 
 \cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
-しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
-そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する\footnote{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}．
+しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる\footnote{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}．
+そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
   周期\(N\)の複素数列全体\(\Set{\seq{u[i]}_{i\in\numset{Z}}\given u[i]=u[i+N]\in\numset{C}}\)を\(\cycles{\numset{C}}{N}\)と表記する．
@@ -469,29 +469,18 @@
 \end{definition}
 
 \(\cycles{\numset{C}}{N}\)は加法\(x+y=\seq{x[n]+y[n]}\)，スカラー乗法\(\lambda x=\seq{\lambda x[n]}\)に関する\(N\)次元ベクトル空間である．
-
-はじめに定義した離散フーリエ変換と\cref{definition:cycle_dft}の\(\dft{N}\)は，ある意味「同じもの」と見なせる．実際，数列
+ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\delta\in\cycles{\numset{C}}{N}\)を
 \[
-  \delta_i[n] = \sum_{m\in\numset{Z}}\kdelta{n}{(mN+i)}
-  = \begin{cases}1 & (n\equiv i\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}\quad(0\leq i<N)
+  \delta[n] = \sum_{m\in\numset{Z}}\kdelta{n}{mN}
+  = \begin{cases}1 & (n\equiv 0\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}
 \]
-からなる集合\(\basis{D}=\Set{\delta_0,\dots,\delta_{N-1}}\)は\(\cycles{\numset{C}}{N}\)の基底であり，\(\numset{C}^N\)の標準基底と\(\basis{D}\)を対応づければ，2つの\(\dft{N}\)を同一視できる．
-
-\begin{note}
-形式ばらずにいえば，数列\(x\)の周期が\(N\)なら，\(x\)の様子は時刻\(N-1\)までのデータ\(\phi(x)=\trps{\rowvect{x[0] & \cdots & x[N-1]}}=\sum_{i=0}^{N-1}x[i]\vect{e}_i\)から解析できるし，\(\phi(x)\)から\(x\)を復元するのも容易である．この対応を
+と定める．このとき，集合\(\basis{D}=\Set{\lagop^0\delta,\lagop^1\delta,\dots,\lagop^{N-1}\delta}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+実際，任意の\(x\in\cycles{\numset{C}}{N}\)に対して
 \[
-  \sum_{i=0}^{N-1}x_i\delta_i \stackrel{\phi}{\longleftrightarrow} \sum_{i=0}^{N-1}x_i\vect{e}_i
+  \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = \sum_{m=0}^{N-1}x[m]\delta[n-m]
+  = x[n]\quad(0\leq n<N)
 \]
-と表すと，\(\dft{N}\)は\(\stackrel{\phi}{\longleftrightarrow}\)を保ち，次式が成立する（\cref{subsection:representation_matrix}を見よ）．
-\[
-  \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\delta_i} = \sum_{i=0}^{N-1}x_i\hat{\delta}_i
-  \stackrel{\phi}{\longleftrightarrow} \sum_{i=0}^{N-1}x_i\vect{\hat{e}}_i
-  = \dft{N}\pqty*{\sum_{i=0}^{N-1}x_i\vect{e}_i}
-\]
-\end{note}
-
-ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義する．
-このとき，\cref{proposition:dft_shift_theorem}が成立する．
+なので，\(x\)は\(\basis{D}\)の元の線型結合で\(x=\sum_{m=0}^{N-1}x[m](\lagop^m\delta)\)と表せる．
 
 \begin{proposition}{}{dft_shift_theorem}
   任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
@@ -567,7 +556,7 @@
 
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(\operateur{H}\)，\(\operateur{\hat{H}}\)をそれぞれ
-  \(\operateur{H}x=h\circconv x\)，\(\operateur{\hat{H}}x=\hat{h}\cdot x\)（\(h=\sum_{i=0}^{N-1}h_i\delta_i\)）で定義する．\cref{proposition:dft_convolution_theorem}より
+  \(\operateur{H}x=h\circconv x\)，\(\operateur{\hat{H}}x=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
   \[
     (\dft{N}\operateur{H}\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
     = \hat{h}\cdot x
