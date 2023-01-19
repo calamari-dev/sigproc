@@ -175,7 +175,7 @@
 \begin{note}
   \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(m\)は\termdef{σ‐有限}\index{しぐまゆうげん@σ‐有限}（σ‐finite）であるという．
   本書が扱う（有限加法的）測度はすべてσ‐有限なので，\cref{theorem:hopf_extension}から定まる拡張された測度は常に一意である．
-  また，集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属するとき\texttwoemdash つまり，任意の\(E\in\powerset{\Omega}\)に対し\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)であるとき\texttwoemdash
+  また，集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属する\texttwoemdash つまり，任意の\(E\in\powerset{\Omega}\)に対して\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)である\texttwoemdash とき，
   \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
 \end{note}
 
@@ -208,7 +208,7 @@
   集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(S\subset\sigmaalg{G}\)なので\(\sigmagen{S}\subset\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
 \end{proof}
 
-\begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}
+\begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}\indexsymbol{\(\indicator_A\)}
   \((\Omega,\sigmaalg{F})\)を可測空間とする．\(a_1,\dots,a_n\in\numset{R}\)と互いに素な\(A_1,\dots,A_n\in\sigmaalg{F}\)を用いて
   \[
     \phi(x) = \sum_{k=1}^na_k\indicator_{A_k}(x),
@@ -287,7 +287,7 @@
     \int_{\ooival{0}{+\infty}}\max\Set{f(x),0}\measured[x]{\lambda} = \int_{\ooival{0}{+\infty}}\max\Set{-f(x),0}\measured[x]{\lambda}
     = +\infty
   \]
-  なのでルベーグ積分できない．
+  であり，ルベーグ積分できない．
 \end{note}
 
 \subsection{収束定理}
@@ -321,29 +321,39 @@
 
 \section{確率論の基本概念}
 
+本節では，確率空間\((\Omega,\sigmaalg{F},\prob)\)上で定義される諸概念を見ていく．
+
+確率論ではしばしば，\(\extendedreal\)の元\(x\)に関する条件\(C(x)\)と確率変数\(X\)に対して，集合\(\Set{\omega\given C(X(\omega))}\)を\(\Set{C(X)}\)と書く．
+たとえば\(\Set{X=1}=\Set{\omega\given X(\omega)=1}=\inv{X}{1}\)，\(\prob(X=Y)=\prob(\Set{\omega\given X(\omega)=Y(\omega)})\)である．
+
 \subsection{確率変数が定める量}
 
 個々の確率変数の様子は，以下の関数から解析できる．
 
 \begin{definition}{}{}\index{るいせきぶんぷかんすう@累積分布関数}\index{かくりつみつどかんすう@確率密度関数}\index{かくりつしつりょうかんすう@確率質量関数}\index{CDF|see{累積分布関数}}\index{PDF|see{確率密度関数}}\index{PMF|see{確率質量関数}}
-  \(X\)を確率空間\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
+  \(X\)を確率変数とする．
   \begin{enumerate}
-    \item 関数\(F_X(x)=\prob(\inv{X}{\ocival{-\infty}{x}})\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
-    \item 像\(\ran{X}{\Omega}\)が有限または可算集合のとき，関数\(p_X(x)=\prob(\inv{X}{x})\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
+    \item 関数\(F_X(x)=\prob(X\leq x)\)を\(X\)の\termdef{累積分布関数}（cumulative distribution function; CDF）という．
+    \item 像\(\ran{X}{\Omega}\)が有限または可算集合のとき，関数\(p_X(x)=\prob(X=x)\)を\(X\)の\termdef{確率質量関数}（probability mass function; PMF）という．
     \item \(F_X\)が導関数\(f_X(x)=F_X'(x)\)を持つとき，\(f_X\)を\(X\)の\termdef{確率密度関数}（probability density function; PDF）という\footnotemark．
   \end{enumerate}
 \end{definition}
 
 \footnotetext{確率密度関数は微分可能性よりも弱い仮定の下で定義できる\cite{funaki2022}．}
+写像\(\prob^X\colon\borelset{\numset{R}}\to\ccival{0}{+\infty}\)を\(\prob^X(A)=\prob(X\in A)\)で定義すると，\(\prob^X\)は\(\borelset{\numset{R}}\)上の確率測度になる．
+\(\prob^X\)を\(X\)の\termdef{確率分布}\index{かくりつぶんぷ@確率分布}\index{PX@\(\prob^X\)}（probability distribution），もしくは\(X\)による\(\prob\)の\termdef{像測度}\index{ぞうそくど@像測度}\index{そくど@測度!ぞう@像\texttwoemdash}（image measure）という．
 \(X\)が確率質量関数\(p_X\)を持つとき，任意の\(A\in\borelset{\numset{R}}\)に対して
 \[
-  \prob(\inv{X}{A}) = \sum_{x\in A}p_X(x)
+  \prob^X(A) = \sum_{x\in A}p_X(x)
 \]
-が成立する．同様に，\(X\)が確率密度関数\(f_X\)を持てば
+が成立する．同様に，\(X\)が確率密度関数\(f_X\)を持つとき
 \[
-  \prob(\inv{X}{A}) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+  \prob^X(A) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
 \]
 が成立する．
+
+これらの関数は，期待値を計算するときに重用される．\(\numset{R}\)上で定義された可測関数\(f\)に関して\(\expval[f(X)]=\int f(X(\omega))\measured[\omega]{\prob}\)であるが，
+この値を計算するときは\(X(\omega)\to x\)，\(1\measured[\omega]{\prob}\to f_X(x)\measured[x]{\lambda}\)と置き換えて，\(\int f(x)f_X(x)\measured[x]{\lambda}\)を計算すればよい．
 
 \subsection{条件つき期待値}
 
@@ -383,10 +393,6 @@
 \]
 はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
 
-\begin{note}
-  \(\Set{(n-1)\increment y<Y\leq n\increment y}=\Set{\omega\in\Omega\given(n-1)\increment y<Y(\omega)\leq n\increment y}\)である．確率論ではしばしば「確率変数\(X\)の値が集合\(A\in\borelset{\numset{R}}\)に属する」という事象\(\inv{X}{A}=\Set{\omega\in\Omega\given X(\omega)\in A}\)を\(\Set{X\in A}\)と書く．
-\end{note}
-
 \(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，各\(\prob(\delta Y_n)\)の値が正なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)を
 \[
   \condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega) = \sum_{n\in\numset{Z}}\condexpval{X\given\delta Y_n}\indicator_{\delta Y_n}(\omega)\quad(\sigmaalg{G}_{\increment y}=\sigmagen{\Set{\delta Y_n\given n\in\numset{Z}}})
@@ -418,19 +424,18 @@
   \(Y\)を\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
 \end{definition}
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
-\cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．
-すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=\prob(\Set{\omega\in\Omega\given Y(\omega)\neq Y'(\omega)})=0\)である．
+\cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=0\)である．
 このことを\(\almostsurely{Y=Y'}\)\index{ほとんどかくじつに@ほとんど確実に}\index{as@a{.}s{.}}と表す\footnote{\(\almostsurely{}\)はalmost surely（ほとんど確実に）の略．}．
 
-また，指示関数\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
+また，\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
 
 \section{\texorpdfstring{\(\Lebesgue{p}\)空間}{Lp空間}}
 
 \((\Omega,\sigmaalg{F},\mu)\)を測度空間とする．
 
 \begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@a{.}e{.}}
-  \(P(x)\)を\(\Omega\)の元\(x\)に関する条件とする．\(\mu(N)=0\)，\(\scomp{\Set{x\given P(x)}}\subset N\)を満たす集合\(N\in\sigmaalg{F}\)が存在するとき，
-  \(P(x)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．このことを\(\almosteverywhere[x\in\Omega]{P(x)}\)と書く．
+  \(C(x)\)を\(\Omega\)の元\(x\)に関する条件とする．\(\mu(N)=0\)，\(\scomp{\Set{x\given C(x)}}\subset N\)を満たす集合\(N\in\sigmaalg{F}\)が存在するとき，
+  \(C(x)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．このことを\(\almosteverywhere[x\in\Omega]{C(x)}\)と書く．
 \end{definition}
 
 可測関数間の同値関係\(\sim\)を\(f\sim g\iff\almosteverywhere[x\in\Omega]{f(x)=g(x)}\)で定義する．
