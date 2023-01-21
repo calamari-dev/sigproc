@@ -62,7 +62,7 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\NewDocumentCommand{\intd}{o m}{\mathop{}\!\IfValueTF{#1}{\symrm{d}^#1}{\symrm{d}}#2}
+\NewDocumentCommand{\intd}{o m}{\,\IfValueTF{#1}{\symrm{d}^#1}{\symrm{d}}#2}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -104,19 +104,20 @@
 \newcommand{\borelset}[1]{\symcal{B}(#1)}
 \newcommand{\extendedreal}{\bar{\numset{R}}}
 \newcommand{\indicator}{\symbb{1}}
+\newcommand{\imgmeasure}[2]{#1\mathoctothorpe #2}
 \newcommand{\sigmaalg}[1]{\symcal{#1}}
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
-\NewDocumentCommand{\almosteverywhere}{o m}{#2\;\mathrm{a{.}e{.}}\IfValueT{#1}{\;#1}}
-\NewDocumentCommand{\measured}{o m}{\mathop{}\!\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
+\NewDocumentCommand{\almosteverywhere}{o}{\mathrel{\IfValueT{#1}{#1\mathhyphen}\mathrm{a{.}e{.}}}}
+\NewDocumentCommand{\measured}{o m}{\,\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
 
 % 確率統計
-\NewDocumentCommand{\almostsurely}{o m}{#2\;\mathrm{a{.}s{.}}\IfValueT{#1}{\;#1}}
+\newcommand{\expval}{\symbb{E}}
+\newcommand{\prob}{\symbb{P}}
+\newcommand{\variant}{\symbb{V}}
 
-\DeclareRobustCommand{\expval}{\operateur{\symbb{E}}}
-\DeclareRobustCommand{\prob}{\operateur{\symbb{P}}}
-\DeclareRobustCommand{\variant}{\operateur{\symbb{V}}}
+\NewDocumentCommand{\almostsurely}{o}{\mathrel{\IfValueT{#1}{#1\mathhyphen}\mathrm{a{.}s{.}}}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}

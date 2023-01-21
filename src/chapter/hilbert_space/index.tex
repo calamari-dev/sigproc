@@ -329,8 +329,8 @@
   あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
-\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V(\vect{x})\)}
-  \cref{theorem:projection_theorem}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V(\vect{x})\)と表す．
+\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\vect{x}\)}
+  \cref{theorem:projection_theorem}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V\vect{x}\)と表す．
 \end{definition}
 
 \begin{proposition}{}{orthogonal_direct_sum}
@@ -382,7 +382,7 @@
 \begin{proposition}{}{orthonormal_system_and_projection}
   \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\vect{e}_n}\)が正規直交系なら，任意の\(\vect{x}\in H\)について次式が成立する．
   \[
-    \proj_{\clsr V}(\vect{x}) = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
+    \proj_{\clsr V}\vect{x} = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
     \quad(V=\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc})
   \]
 \end{proposition}
@@ -402,12 +402,12 @@
     = 0
   \end{gather*}
   である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
-  よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}(\vect{x})\)である．
+  よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}\vect{x}\)である．
 \end{proof}
 
 \cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(\vect{x}\in H\)に対して
 \[
-  \vect{x} = \proj_H(\vect{x})
+  \vect{x} = \proj_H\vect{x}
   = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
 \]
 が成立する．そのような正規直交系\(\seq{\vect{e}_n}\)は完全正規直交系と呼ばれる．
@@ -424,7 +424,7 @@
   \[
     \vnorm{f}_p = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
   \]
-  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんど至るところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\vnorm{\holder}_p\)をノルムとしてバナッハ空間になる．
+  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんどいたるところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\vnorm{\holder}_p\)をノルムとしてバナッハ空間になる．
   このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
 
