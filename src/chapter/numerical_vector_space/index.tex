@@ -4,10 +4,6 @@
 \chapter{数ベクトル空間}
 \label{chapter:numerical_vector_space}
 
-\begin{lead}
-  \cref{chapter:numerical_vector_space}では，数ベクトル空間における直交性と最良近似の関係を説明する．
-\end{lead}
-
 \section{イントロダクション}
 \label{section:numerical_vector_space_introduction}
 
@@ -20,11 +16,13 @@
 という，2つの方向に応用される．
 
 音声信号処理は前者の主要な例である．音声信号を計算機で処理するには，時々刻々と値が変わる信号を有限長のデータで表現しなければならない．
-たとえば，CDでは音声信号の瞬時値を1秒あたり44100個記録している．すなわち，時刻\(t\)秒における瞬時値を\(x(t)\)，収録時間を\(T\)秒とおくと，CDには数列\(\seq{x(n/44100)}_{n=0}^{44100T}\)が記録されている．
-そこで，収録されたデータを\(\numset{R}^{44100T+1}\)の元とみなせば，\(\numset{R}^n\)に関する理論に基づいて音声を解析できる．
+たとえば，CDでは音声信号の瞬時値を1秒あたり44100個記録している．すなわち，時刻\(t\)秒における瞬時値を\(x(t)\)，収録時間を\(T\)秒とおくと，CDには数列\(\seq{x(n/44100)}_{n=0}^{44100T-1}\)が記録されている．
+そこで，収録されたデータを\(\numset{R}^{44100T}\)の元とみなせば，\(\numset{R}^n\)に関する理論に基づいて音声を解析できる．
 
 後者の主要な例は最小2乗法である．実験で得られた標本を理論と見比べるとき，理論から得られる式へのあてはめ（回帰）がしばしば試される．
 あてはまりのよさを示す指標はいろいろあるが，最もポピュラーなのは2乗誤差を指標にする最小2乗法である．本書ではこの最小2乗法を，内積と関連づけ幾何的に説明する．
+
+\pagebreak
 
 \section{直交射影}
 
@@ -75,8 +73,8 @@
 
 図は\(\napr^{-x}\)と\(\abs{\sin x}\)のグラフである．\(\napr^{-x}\to 0\)（\(x\to\infty\)）であるが，\(\napr^{-x}=0\)となる実数\(x\)は存在しない．そのため
 \begin{gather*}
-  \argmin_{x\in\coival{0}{\infty}}\napr^{-x} = \emptyset\quad\text{(空集合)}, \\
-  \argmin_{x\in\coival{0}{\infty}}\abs{\sin x} = \Set{0,\krez,2\krez,\dotsc}
+  \argmin_{x\in\coival{0}{+\infty}}\napr^{-x} = \emptyset\quad\text{(空集合)}, \\
+  \argmin_{x\in\coival{0}{+\infty}}\abs{\sin x} = \Set{0,\krez,2\krez,\dotsc}
 \end{gather*}
 である．このように，\(\argmin_{x\in S}f(x)\)は空になることも，無限集合になることもある．
 
@@ -319,6 +317,19 @@
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
   \end{enumerate}
 \end{corollary}
+
+\section{最小2乗問題}
+\label{section:least_square}
+
+本節では，直交射影の理論を近似へと応用する．
+
+\subsection{最小2乗問題}
+
+\subsection{スペクトル定理}
+
+\subsection{特異値分解}
+
+\subsection{擬似逆行列}
 
 \section{離散フーリエ変換}
 
@@ -614,19 +625,6 @@
   \end{minipage}
   \caption{画像の2次元離散フーリエ変換．}
 \end{figure}
-
-\section{最小2乗問題}
-\label{section:least_square}
-
-本節では，直交射影の理論を近似へと応用する．
-
-\subsection{最小2乗問題}
-
-\subsection{スペクトル定理}
-
-\subsection{特異値分解}
-
-\subsection{擬似逆行列}
 
 \section{多重解像度解析}
 

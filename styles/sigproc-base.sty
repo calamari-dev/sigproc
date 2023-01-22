@@ -32,17 +32,6 @@
 \newcommand{\termdef}[1]{{\gtfamily\bfseries #1}}
 \newcommand{\texttwoemdash}{\resizebox{2\zw}{\height}{—}}
 
-% リード文
-\newenvironment{lead}{%
-  \begin{list}{}{%
-    \setlength{\listparindent}{\parindent}%
-    \setlength{\itemindent}{\parindent}%
-    \setlength{\leftmargin}{4\zw}%
-    \setlength{\rightmargin}{0pt}%
-  }%
-  \item\small
-}{\end{list}}
-
 % 定理環境
 \newcounter{thcounter}
 \numberwithin{thcounter}{section}

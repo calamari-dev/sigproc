@@ -250,15 +250,15 @@
   \int f\measured{\mu} = \int f^{\mathord{+}}\measured{\mu}-\int f^{\mathord{-}}\measured{\mu}
 \]
 とする．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=+\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
-\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がどちらも有限なとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．また，集合\(S\in\sigmaalg{F}\)上での積分は
+\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がともに有限\texttwoemdash つまり\(\int\abs{f(x)}\measured[x]{\mu}<+\infty\)\texttwoemdash のとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．また，集合\(S\in\sigmaalg{F}\)上での積分は
 \[
   \int_Sf\measured{\mu} = \int_Sf(x)\measured[x]{\mu}
   = \int f(x)\indicator_S(x)\measured[x]{\mu}
 \]
 で定義される．
 
-特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，\(\int X\measured{\prob}\)を確率変数\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{EX@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
-また，\(\int_AX\measured{\prob}\)を\(\expval[X,A]\)\index{EXA@\(\expval[X,A]\)}とも表記する．
+特に\((\Omega,\sigmaalg{F},\prob)\)が確率空間のとき，\(\int X\measured{\prob}\)を確率変数\(X\)の\termdef{期待値}\index{きたいち@期待値}\index{E@\(\expval[X]\)}（expected value）といい，\(\expval[X]\)と書く．
+また，\(\int_AX\measured{\prob}\)を\(\expval[X,A]\)\index{E@\(\expval[X,A]\)}とも表記する．
 
 \begin{example}
   \cref{example:equally_possible}の確率空間\((\Omega,\sigmaalg{F},\prob)\)において，各\(\omega\in\Omega\)に対し\(X(\omega)\)を\(\omega\)の目で定義する．すなわち\(X(\dicei)=1\)，\(X(\diceii)=2\)のようにする．
@@ -346,15 +346,15 @@
 \end{definition}
 
 \footnotetext{測度論を活用して，確率密度関数をより弱い仮定の下で定義することもできる\cite{funaki2022}．}
-写像\(\imgmeasure{X}{\prob}\colon\borelset{\numset{R}}\to\ccival{0}{1}\)を\(\imgmeasure{X}{\prob}(A)=\prob(X\in A)\)で定義すると，\(\imgmeasure{X}{\prob}\)は\(\borelset{\numset{R}}\)上の確率測度になる．
-\(\imgmeasure{X}{\prob}\)を\(X\)の\termdef{確率分布}\index{かくりつぶんぷ@確率分布}\index{PX@\(\imgmeasure{X}{\prob}\)}（probability distribution），もしくは\(X\)による\(\prob\)の\termdef{像測度}\index{ぞうそくど@像測度}\index{そくど@測度!ぞう@像\texttwoemdash}（image measure）という．
+写像\(\imgmeasure{X}{\prob}\colon\borelset{\numset{R}}\to\ccival{0}{1}\)を\((\imgmeasure{X}{\prob})(A)=\prob(X\in A)\)で定義すると，\(\imgmeasure{X}{\prob}\)は\(\borelset{\numset{R}}\)上の確率測度になる．
+\(\imgmeasure{X}{\prob}\)を\(X\)の\termdef{確率分布}\index{かくりつぶんぷ@確率分布}\index{P@\(\imgmeasure{X}{\prob}\)}（probability distribution），もしくは\(X\)による\(\prob\)の\termdef{像測度}\index{ぞうそくど@像測度}\index{そくど@測度!ぞう@像\texttwoemdash}（image measure）という．
 \(X\)が確率質量関数\(p_X\)を持つとき，任意の\(A\in\borelset{\numset{R}}\)に対して
 \[
-  \imgmeasure{X}{\prob}(A) = \sum_{x\in A}p_X(x)
+  (\imgmeasure{X}{\prob})(A) = \sum_{x\in A}p_X(x)
 \]
 が成立する．同様に，\(X\)が確率密度関数\(f_X\)を持つとき
 \[
-  \imgmeasure{X}{\prob}(A) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+  (\imgmeasure{X}{\prob})(A) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
 \]
 が成立する．
 
@@ -390,14 +390,14 @@
 で定義できる．
 
 以下では，一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
-\(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
+\(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい．
+
+\begin{note}
+  たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．  
+\end{note}
 
 \(Y\)の値に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\inv{Y}{A}\given A\in\borelset{\numset{R}}}\)である．
-また，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら
-\[
-  \condexpval{X\given\delta Y_n}\quad(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y})
-\]
-はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
+また，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら\(\condexpval{X\given\delta Y_n}\)（\(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y}\)）はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
 
 \(\Omega=\bigsqcup_{n\in\numset{Z}}\delta Y_n\)であるから，各\(\prob(\delta Y_n)\)の値が正なら\(\condexpval{X\given\sigmaalg{G}_{\increment y}}\)を
 \[
@@ -424,7 +424,7 @@
 
 実は逆に，\(\condexpval{X\given\sigmaalg{G}}\)は「任意の\(A\in\sigmaalg{G}\)に対し\(\expval[\condexpval{X\given\sigmaalg{G}},A]=\expval[X,A]\)を満たす」確率変数として定義される．
 
-\begin{definition}{条件つき期待値}{conditional_expectation}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\texttwoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{EXG@\(\condexpval{X\given\sigmaalg{G}}\)}
+\begin{definition}{条件つき期待値}{conditional_expectation}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\texttwoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{E@\(\condexpval{X\given\sigmaalg{G}}\)}
   \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subset\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
   このとき，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
   \(Y\)を\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
@@ -433,7 +433,7 @@
 \cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=0\)である．
 このことを\(Y=Y'\almostsurely\)\index{ほとんどかくじつに@ほとんど確実に}\index{as@\(\almostsurely\)}と表す\footnote{\(\almostsurely\)はalmost surely（ほとんど確実に）の略．}．
 
-また，\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{PAG@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
+また，\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{P@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
 
 \section{\texorpdfstring{\(\Lebesgue{p}\)空間}{Lp空間}}
 
@@ -442,7 +442,7 @@
 \begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@\(\almosteverywhere\)}
   \(C(\omega)\)を変数\(\omega\)に関する条件とする．\(\mu(N)=0\)，\(\scomp{\Set{\omega\in\Omega\given C(\omega)}}\subset N\)を満たす集合\(N\in\sigmaalg{F}\)が存在するとき，
   \(C(\omega)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．このことを\(C(\omega)\almosteverywhere[\mu]\omega\in\Omega\)と書く．
-  誤解のおそれがなければ，測度と集合を省略して\(C(\omega)\almosteverywhere\omega\)とも書く．
+  誤解のおそれがなければ，\(C(\omega)\almosteverywhere\omega\)や\(C\almosteverywhere\)などと略記する．
 \end{definition}
 
 \cref{chapter:hilbert_space}で見たように，\(\int\abs{f(x)}^p\measured[x]{\mu}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
@@ -451,38 +451,74 @@
   \vnorm{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
 \]
 で定義すると，\(\vnorm{\holder}\)はノルムの条件のうち\(\vnorm{af}=\abs{a}\vnorm{f}\)，\(\vnorm{f+g}\leq\vnorm{f}+\vnorm{g}\)を満たす．特に，後者の事実
-\[
-  \int\abs{f(x)+g(x)}^p\measured[x]{\mu} \leq \int(\abs{f(x)}^p+\abs{g(x)}^p)\measured[x]{\mu}\quad(f,g\in\symcal{L}^p)
-\]
+\begin{equation}
+  \label{equation:minkowski}
+  \int\abs{f(x)+g(x)}^p\measured[x]{\mu} \leq \int(\abs{f(x)}^p+\abs{g(x)}^p)\measured[x]{\mu}
+\end{equation}
 は\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）と呼ばれる．
 
-しかし厄介なことに，\(\vnorm{\holder}\)が任意の\(f\in\symcal{L}^p\)に対して\(\vnorm{f}=0\iff f=0\)を満たすのは，\(\mu\)が特別な測度のときに限られる．一方で，次の事実がある．
+しかし厄介なことに，\(\vnorm{\holder}\)が任意の\(f\in\symcal{L}^p\)に対して\(\vnorm{f}=0\iff f=0\)を満たすのは，\(\mu\)が特殊な測度のときに限られる．一方で，次の事実がある．
 
 \begin{proposition}{}{kernel_of_integration}
-  \(f\)を非負値可測関数とする．このとき，\(f\)に関する以下の条件は同値である．
+  \(f\)を可測関数とする．このとき，\(f\)に関する以下の条件は同値である．
   \begin{enumerate}
-    \item \(\int f\measured{\mu}=0\)である．
-    \item \(f(x)=0\almosteverywhere[\mu]x\in\Omega\)である．
+    \item \(\int\abs{f(x)}\measured[x]{\mu}=0\)である．
+    \item \(f=0\almosteverywhere[\mu]\)である．
   \end{enumerate}
 \end{proposition}
 
-\cref{proposition:kernel_of_integration}から，\(\vnorm{f}=0\)となるのは\(f(x)=0\almosteverywhere x\)のときだけである．
-そのため，ほとんどいたるところいたるところで等しい値をとる関数を同一視すれば，\(\symcal{L}^p\)はバナッハ空間になる．
+\cref{proposition:kernel_of_integration}から，\(\vnorm{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere x\)，すなわち\(f=0\almosteverywhere\)のときだけである．
+そのため，ほとんどいたるところで等しい値をとる関数を同一視すれば，\(\symcal{L}^p\)はノルム空間になる．
+
+この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\vnorm{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
+また，各\(f\in\symcal{L}^p\)に対して集合\(\Set{f+\varphi\given\varphi\in N}\)を\(f+N\)とおく．このとき，任意の可測関数\(f,g\)について
+\[
+  g(x) = f(x)\almosteverywhere x
+  \iff g-f \in N
+  \iff g = f+(g-f)
+  \in f+N
+\]
+だから，\(f+N\)はほとんどいたるところで値が\(f\)と等しい可測関数の全体集合である．
+しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\vnorm{f}=\vnorm{(f+\varphi)-\varphi}\leq\vnorm{f+\varphi}\leq\vnorm{f}\)，\(\vnorm{f+\varphi}=\vnorm{f}\)である．
+よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\symcal{L}^p}\)の元\(F\)に対して，\(\vnorm{F}_p\)を
+\[
+  \vnorm{F}_p = \vnorm{f}
+  = \int\abs{f(x)}^p\measured[x]{\mu}\quad\text{(\(f\)は\(F\)の任意の元)}
+\]
+で定義できる．\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間であり，\(\vnorm{\holder}_p\)は\(\Lebesgue{p}\)のノルムである．
+
+実は，\(\Lebesgue{p}\)はノルム\(\vnorm{\holder}_p\)によってバナッハ空間になる．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  任意の可測関数\(f\)について，\([f]\)を\([f]=\Set{g\given\text{\(g\)は可測関数で\(f(x)=g(x)\almosteverywhere x\)}}\)で定義する．
-  このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given f\in\symcal{L}^p}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(\lambda[f]=[\lambda f]\)に関するベクトル空間である．
+  任意の可測関数\(f\)について，\([f]\)を\([f]=\Set{g\given g(x)=f(x)\almosteverywhere x}\)で定義する．
+  このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given\int\abs{f(x)}^p\measured[x]{\mu}<+\infty}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(a[f]=[af]\)に関するベクトル空間である．
   また，ノルム\(\vnorm{\holder}_p\)を
   \[
-    \vnorm{[f]}_p = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}\quad\text{(\(f\in\symcal{L}^p\))}
+    \vnorm{[f]}_p = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
   \]
   で定義すると，\(\Lebesgue{p}\)はバナッハ空間になる．バナッハ空間\(\Lebesgue{p}=\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
 
+\begin{note}
+  細かいことを言うと，この定義はいわゆる「well‐definedness」が問題になるが，本書では深く考えないことにする．
+\end{note}
+
 通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\vnorm{[f]}_p\)を単に\(\vnorm{f}_p\)と書く．
 
 \begin{example}
-  \(\lebesgue{p}(\numset{Z})\)は計数測度\(\mu\colon\powerset{\numset{Z}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
+  \(\lebesgue{p}(\numset{N})\)は計数測度\(\mu\colon\powerset{\numset{N}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
+  実際，関数\(f\colon\numset{N}\to\numset{K}\)が\(\mu\)‐可測なら，関数\(\phi^{\mathord{+}}_n=\sum_{k=1}^nf^{\mathord{+}}(k)\indicator_{\Set{k}}\)は非負値単関数であり，\nameref{theorem:monotone_convergence}から
+  \[
+    \int f^{\mathord{+}}\measured{\mu} = \lim_{n\to\infty}\int\phi_n^{\mathord{+}}\measured{\mu}
+    = \lim_{n\to\infty}\sum_{k=1}^nf^{\mathord{+}}(k)\mu(\Set{k})
+    = \sum_{k=1}^\infty f^{\mathord{+}}(k)
+  \]
+  となる．\(f^{\mathord{-}}\)についても同じように考えれば，\(f=f^{\mathord{+}}-f^{\mathord{-}}\)より
+  \[
+    \int f\measured{\mu} = \pqty*{\sum_{n=1}^\infty f^{\mathord{+}}(n)}-\pqty*{\sum_{n=1}^\infty f^{\mathord{-}}(n)}
+    = \sum_{n=1}^\infty f(n)
+  \]
+  である．よって\(\int\abs{f(n)}^p\measured[n]{\mu}=\sum_{n=1}^\infty\abs{f(n)}^p\)なので，\(\lebesgue{p}(\numset{N})=\Lebesgue{p}(\numset{N},\powerset{\numset{N}},\mu)\)である．
 \end{example}
 
 \begin{proposition}{}{}
