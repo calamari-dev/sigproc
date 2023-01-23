@@ -457,18 +457,18 @@
 \end{note}
 
 \(1\leq p<+\infty\)とする．\cref{chapter:hilbert_space}で見たように，\(\int\abs{f(x)}^p\measured[x]{\mu}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
-この空間を\(\symcal{L}^p=\symcal{L}^p(\Omega,\sigmaalg{F},\mu)\)としよう．\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）
+この空間を\(\Lebesgue*{p}=\Lebesgue*{p}(\Omega,\sigmaalg{F},\mu)\)としよう．\(\Lpseminorm{p}{\holder}\)を
+\[
+  \Lpseminorm{p}{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
+\]
+で定義すると，\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）
 \begin{equation}
   \label{equation:minkowski}
-  \int\abs{f(x)+g(x)}^p\measured[x]{\mu} \leq \int(\abs{f(x)}^p+\abs{g(x)}^p)\measured[x]{\mu}
+  \Lpseminorm{p}{f+g} \leq \Lpseminorm{p}{f}+\Lpseminorm{p}{g}
 \end{equation}
-から，\(\symcal{L}^p\)はベクトル空間である．また，\(\vnorm{\holder}\)を
-\[
-  \vnorm{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}\quad(f\in\symcal{L}^p)
-\]
-で定義すると，\(\vnorm{\holder}\)はノルムの条件のうち\(\vnorm{af}=\abs{a}\vnorm{f}\)，\(\vnorm{f+g}\leq\vnorm{f}+\vnorm{g}\)を満たす．
+から，\(\Lebesgue*{p}\)はベクトル空間である．また，\(\Lpseminorm{p}{\holder}\)はノルムの条件のうち\(\Lpseminorm{p}{af}=\abs{a}\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+g}\leq\Lpseminorm{p}{f}+\Lpseminorm{p}{g}\)を満たす．
 
-しかし厄介なことに，\(\vnorm{\holder}\)が任意の\(f\in\symcal{L}^p\)に対して\(\vnorm{f}=0\iff f=0\)を満たすのは，\(\mu\)が特殊な測度のときに限られる．一方で，次の事実がある．
+しかし厄介なことに，\(\Lpseminorm{p}{\holder}\)が任意の\(f\in\Lebesgue*{p}\)に対して\(\Lpseminorm{p}{f}=0\iff f=0\)を満たすのは，\(\mu\)が特殊な測度のときに限られる．一方で，次の事実がある．
 
 \begin{proposition}{}{kernel_of_integration}
   \(f\)を可測関数とする．このとき，\(f\)に関する以下の条件は同値である．
@@ -478,11 +478,11 @@
   \end{enumerate}
 \end{proposition}
 
-\cref{proposition:kernel_of_integration}から，\(\vnorm{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere x\)，すなわち\(f=0\almosteverywhere\)のときだけである．
-そのため，ほとんどいたるところで等しい値をとる関数を同一視すれば，\(\symcal{L}^p\)はノルム空間になる．
+\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere x\)，つまり\(f=0\almosteverywhere\)のときだけである．
+そのため，ほとんどいたるところで等しい値をとる関数を同じものとみなせば，\(\Lebesgue*{p}\)はノルム空間になる．
 
-この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\vnorm{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
-また，各\(f\in\symcal{L}^p\)に対して集合\(\Set{f+\varphi\given\varphi\in N}\)を\(f+N\)とおく．このとき，任意の可測関数\(f,g\)について
+この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\Lpseminorm{p}{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
+また，各\(f\in\Lebesgue*{p}\)に対して集合\(\Set{f+\varphi\given\varphi\in N}\)を\(f+N\)とおく．このとき，任意の可測関数\(f,g\)について
 \[
   f = g\almosteverywhere
   \iff g-f \in N
@@ -490,27 +490,28 @@
   \in f+N
 \]
 だから，\(f+N\)はほとんどいたるところ\(f\)と値が等しい可測関数の全体集合である．
-しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\vnorm{f}=\vnorm{(f+\varphi)-\varphi}\leq\vnorm{f+\varphi}\leq\vnorm{f}\)，\(\vnorm{f+\varphi}=\vnorm{f}\)である．
-よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\symcal{L}^p}\)の元\(F\)に対して，\(\vnorm{F}_p\)を\(\vnorm{F}_p=\vnorm{f}=(\int\abs{f(x)}^p\measured[x]{\mu})^{1/p}\)で定義できる．ただし，\(f\)は\(F\)の任意の元である．
-\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間で，\(\vnorm{\holder}_p\)は\(\Lebesgue{p}\)のノルムである．
+しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\Lpseminorm{p}{f}=\Lpseminorm{p}{(f+\varphi)-\varphi}\leq\Lpseminorm{p}{f+\varphi}\leq\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+\varphi}=\Lpseminorm{p}{f}\)である．
+よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\Lebesgue*{p}}\)の元\(F\)に対して，\(\Lpnorm{p}{F}\)を\(\Lpnorm{p}{F}=\Lpseminorm{p}{f}\)で定義できる．ただし，\(f\)は\(F\)の任意の元である．
+\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間で，\(\Lpnorm{p}{\holder}\)は\(\Lebesgue{p}\)のノルムである．
 
 実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
   任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{g\given f=g\almosteverywhere}\)で定義する．
   このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given\int\abs{f(x)}^p\measured[x]{\mu}<+\infty}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(a[f]=[af]\)に関するベクトル空間である．
-  また，ノルム\(\vnorm{\holder}_p\)を
+  また，ノルム\(\Lpnorm{p}{\holder}\)を
   \[
-    \vnorm{[f]}_p = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
+    \Lpnorm{p}{[f]} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
   \]
   で定義すると，\(\Lebesgue{p}\)はバナッハ空間になる．バナッハ空間\(\Lebesgue{p}=\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
 
 \begin{note}
-  細かいことを言うと，この定義はいわゆる「well‐definedness」が問題になるが，本書では深く考えないことにする．
+  \(\Lebesgue{p}\)のLは数学者ルベーグ（Lebesgue, Henri Léon，1875–1941）にちなむ．
+  なお，細かいことを言うと\cref{definition:lp_space}はいわゆる「well‐definedness」を検証すべき定義だが，本書では深く考えないことにする．
 \end{note}
 
-通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\vnorm{[f]}_p\)を単に\(\vnorm{f}_p\)と書く．
+通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\Lpnorm{p}{[f]}\)を単に\(\Lpnorm{p}{f}\)と書く．
 
 \begin{example}
   \(\lebesgue{p}(\numset{N})\)は計数測度\(\mu\colon\powerset{\numset{N}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
@@ -525,7 +526,7 @@
     \int f\measured{\mu} = \pqty*{\sum_{n=1}^\infty f^{\mathord{+}}(n)}-\pqty*{\sum_{n=1}^\infty f^{\mathord{-}}(n)}
     = \sum_{n=1}^\infty f(n)
   \]
-  である．よって\((\int\abs{f(n)}^p\measured[n]{\mu})^{1/p}=(\sum\abs{f(n)}^p)^{1/p}\)，\(\lebesgue{p}(\numset{N})=\Lebesgue{p}(\numset{N},\powerset{\numset{N}},\mu)\)である．
+  である．よって\(\Lpnorm{p}{f}=(\sum\abs{f(n)}^p)^{1/p}\)，\(\lebesgue{p}(\numset{N})=\Lebesgue{p}(\numset{N},\powerset{\numset{N}},\mu)\)である．
 \end{example}
 
 \begin{proposition}{}{}

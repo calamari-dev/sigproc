@@ -78,11 +78,16 @@
 % 関数解析
 \newcommand{\cont}[1]{C^#1}
 \newcommand{\lebesgue}[1]{\ell^#1}
-\newcommand{\Lebesgue}[1]{L^#1}
 \newcommand{\torus}{\symbb{T}}
+
+\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symcal{L}}{L}^#2}
 
 \DeclareMathOperator{\clsr}{cl}
 \DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
+
+\DeclarePairedDelimiterXPP{\lpnorm}[2]{}{\lVert}{\rVert}{_{#1}}{#2}
+\DeclarePairedDelimiterXPP{\Lpnorm}[2]{}{\lVert}{\rVert}{_{#1}}{#2}
+\DeclarePairedDelimiterXPP{\Lpseminorm}[2]{}{\lVert}{\rVert}{_{\Lebesgue*{#1}}}{#2}
 
 % フレーム理論
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}

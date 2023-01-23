@@ -174,10 +174,10 @@
 \begin{example}[\(\lebesgue{p}\)空間]
   複素数列\(\seq{x_n}_{n\in\numset{N}}\)に対して，\(\vnorm{\seq{x_n}_{n\in\numset{N}}}_p\in\ccival{0}{+\infty}\)（\(p\geq 1\)）を
   \[
-    \vnorm{\seq{x_n}_{n\in\numset{N}}}_p = \pqty*{\sum_{n=1}^\infty\abs{x_n}^p}^{1/p}
+    \lpnorm{p}{\seq{x_n}_{n\in\numset{N}}} = \pqty*{\sum_{n=1}^\infty\abs{x_n}^p}^{1/p}
   \]
-  で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set*{\seq{x_n}_{n\in\numset{N}}\given\vnorm{\seq{x_n}_{n\in\numset{N}}}_p<+\infty}\)
-  で定義すると，\(\vnorm{\holder}_p\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}(\numset{N})\)はこのノルムについてバナッハ空間になる．
+  で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set*{\seq{x_n}_{n\in\numset{N}}\given\lpnorm{p}{\seq{x_n}_{n\in\numset{N}}}<+\infty}\)
+  で定義すると，\(\lpnorm{p}{\holder}\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}(\numset{N})\)はこのノルムについてバナッハ空間になる．
   バナッハ空間\(\lebesgue{p}(\numset{N})\)を\termdef{\(\lebesgue{p}\)空間}\index{lpkukan@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
 \end{example}
 
@@ -419,14 +419,14 @@
 \begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
   集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{K}\)で
   \[
-    \vnorm{f}_p = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
+    \Lpnorm{p}{f} = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
   \]
-  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんどいたるところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\vnorm{\holder}_p\)をノルムとしてバナッハ空間になる．
+  の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんどいたるところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\Lpnorm{p}{\holder}\)をノルムとしてバナッハ空間になる．
   このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
 \end{definition}
 
 \begin{proposition}{\(\Lebesgue{2}\)空間の性質}{L2_space_property}
-  \(p=2\)のときのみ\(\Lebesgue{p}(\Omega)\)はヒルベルト空間になり，\(\Lebesgue{2}(\Omega)\)の内積は次の式で表される．
+  \(p=2\)のときのみ\(\Lebesgue{p}(\Omega)\)はヒルベルト空間になり，内積は次の式で表される．
   \[
     \innerp{f}{g} = \int_\Omega f(x)\conj*{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(\Omega))
   \]
