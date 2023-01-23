@@ -106,12 +106,12 @@
 特に\(\mu(\Omega)=1\)であるとき，\(\mu\)を\termdef{確率測度}\index{かくりつそくど@確率測度}\index{そくど@測度!かくりつ@確率\texttwoemdash}（probability measure），\((\Omega,\sigmaalg{F},\mu)\)を\termdef{確率空間}\index{かくりつくうかん@確率空間}（probability space）という．
 また，確率空間の\(\Omega\)に属する各元は\termdef{根源事象}\index{こんげんじしょう@根源事象}（elementary event），\(\sigmaalg{F}\)に属する各元は\termdef{事象}\index{じしょう@事象}（event）と呼ばれる．
 
-\begin{example}[計数測度]\index{けいすうそくど@計数測度}
+\begin{example}[計数測度]\index{けいすうそくど@計数測度}\index{そくど@測度!けいすう@計数\texttwoemdash}
   \(\sigmaalg{F}\)をσ‐加法族とする．また，各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合のとき\(\mu(A)=\sizeof{A}\)，無限集合のとき\(\mu(A)=+\infty\)とする．
   このとき\(\mu\)は\(\sigmaalg{F}\)上の測度になる．\(\mu\)を\termdef{計数測度}（counting measure）という．
 \end{example}
 
-\begin{example}[ディラック測度]\index{でぃらっくそくど@ディラック測度}
+\begin{example}[ディラック測度]\index{でぃらっくそくど@ディラック測度}\index{そくど@測度!でぃらっく@ディラック\texttwoemdash}
   \((\Omega,\sigmaalg{F})\)を可測空間とし，任意に\(x\in\Omega\)をとる．また，各\(A\in\sigmaalg{F}\)に対して，\(x\in A\)のとき\(\delta_x(A)=1\)，\(x\notin A\)のとき\(\delta_x(A)=0\)とする．
   このとき\(\delta_x\)は\(\sigmaalg{F}\)上の測度になる．\(\delta_x\)を\termdef{ディラック測度}（Dirac measure）という．
 \end{example}
@@ -329,7 +329,7 @@
 
 本節では，確率空間\((\Omega,\sigmaalg{F},\prob)\)上で定義される諸概念を見ていく．
 
-確率論ではしばしば，変数\(x\)に関する条件\(C(x)\)と確率変数\(X\)に対して，集合\(\Set{\omega\in\Omega\given C(X(\omega))}\)を\(\Set{C(X)}\)と書く．
+確率論ではしばしば，実数\(x\)に関する条件\(C(x)\)と確率変数\(X\)に対して，集合\(\Set{\omega\in\Omega\given C(X(\omega))}\)を\(\Set{C(X)}\)と書く．
 たとえば\(\Set{X=1}=\Set{\omega\in\Omega\given X(\omega)=1}=\inv{X}{1}\)，\(\prob(X=Y)=\prob(\Set{\omega\in\Omega\given X(\omega)=Y(\omega)})\)である．
 
 \subsection{確率変数が定める量}
@@ -439,23 +439,34 @@
 
 以下，\((\Omega,\sigmaalg{F},\mu)\)を測度空間，\(\numset{K}\)を\(\numset{R}\)または\(\numset{C}\)とする．
 
-\begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@\(\almosteverywhere\)}
-  \(C(\omega)\)を変数\(\omega\)に関する条件とする．\(\mu(N)=0\)，\(\scomp{\Set{\omega\in\Omega\given C(\omega)}}\subset N\)を満たす集合\(N\in\sigmaalg{F}\)が存在するとき，
-  \(C(\omega)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．このことを\(C(\omega)\almosteverywhere[\mu]\omega\in\Omega\)と書く．
-  誤解のおそれがなければ，\(C(\omega)\almosteverywhere\omega\)や\(C\almosteverywhere\)などと略記する．
+\begin{definition}{零集合}{}\index{ぜろしゅうごう@零集合}
+  \(A\)を\(\Omega\)の部分集合とする．\(\mu(N)=0\)，\(A\subset N\)を満たす集合\(N\in\sigmaalg{F}\)があるとき，\(A\)は\termdef{\(\mu\)‐零集合}（\(\mu\)‐null set）であるという．
 \end{definition}
 
-\cref{chapter:hilbert_space}で見たように，\(\int\abs{f(x)}^p\measured[x]{\mu}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
-この空間を\(\symcal{L}^p=\symcal{L}^p(\Omega,\sigmaalg{F},\mu)\)としよう．積分の線型性から\(\symcal{L}^p\)はベクトル空間である．また，\(\vnorm{\holder}\)を
-\[
-  \vnorm{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
-\]
-で定義すると，\(\vnorm{\holder}\)はノルムの条件のうち\(\vnorm{af}=\abs{a}\vnorm{f}\)，\(\vnorm{f+g}\leq\vnorm{f}+\vnorm{g}\)を満たす．特に，後者の事実
+\begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@\(\almosteverywhere\)}
+  \begin{enumerate}
+    \item \(C(\omega)\)を\(\Omega\)の元\(\omega\)に関する条件とする．集合\(\scomp{\Set{\omega\given C(\omega)}}\)が\(\mu\)‐零集合であるとき，\(C(\omega)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．
+      このことを\(C(\omega)\almosteverywhere[\mu]\omega\in\Omega\)と書く．
+    \item 関数\(f\colon\Omega\to\numset{K}\)は\(\sigmaalg{F}\)‐可測で，\(C(z)\)は\(\numset{K}\)の元\(z\)に関する条件とする．\(C(f(\omega))\almosteverywhere[\mu]\omega\in\Omega\)であるとき，これを\(C(f)\almosteverywhere[\mu]\)と表す．
+  \end{enumerate}
+\end{definition}
+
+\begin{note}
+  すべての\(\mu\)‐零集合が\(\sigmaalg{F}\)に属するとき，\(\mu\)を\termdef{完備測度}\index{かんびそくど@完備測度}\index{そくど@測度!かんび@完備\texttwoemdash}（complete measure）という．
+  \(\numset{R}\)上のボレル測度は完備測度でないが，ルベーグ測度は完備測度である．
+\end{note}
+
+\(1\leq p<+\infty\)とする．\cref{chapter:hilbert_space}で見たように，\(\int\abs{f(x)}^p\measured[x]{\mu}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
+この空間を\(\symcal{L}^p=\symcal{L}^p(\Omega,\sigmaalg{F},\mu)\)としよう．\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）
 \begin{equation}
   \label{equation:minkowski}
   \int\abs{f(x)+g(x)}^p\measured[x]{\mu} \leq \int(\abs{f(x)}^p+\abs{g(x)}^p)\measured[x]{\mu}
 \end{equation}
-は\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）と呼ばれる．
+から，\(\symcal{L}^p\)はベクトル空間である．また，\(\vnorm{\holder}\)を
+\[
+  \vnorm{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}\quad(f\in\symcal{L}^p)
+\]
+で定義すると，\(\vnorm{\holder}\)はノルムの条件のうち\(\vnorm{af}=\abs{a}\vnorm{f}\)，\(\vnorm{f+g}\leq\vnorm{f}+\vnorm{g}\)を満たす．
 
 しかし厄介なことに，\(\vnorm{\holder}\)が任意の\(f\in\symcal{L}^p\)に対して\(\vnorm{f}=0\iff f=0\)を満たすのは，\(\mu\)が特殊な測度のときに限られる．一方で，次の事実がある．
 
@@ -473,24 +484,20 @@
 この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\vnorm{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
 また，各\(f\in\symcal{L}^p\)に対して集合\(\Set{f+\varphi\given\varphi\in N}\)を\(f+N\)とおく．このとき，任意の可測関数\(f,g\)について
 \[
-  g(x) = f(x)\almosteverywhere x
+  f = g\almosteverywhere
   \iff g-f \in N
   \iff g = f+(g-f)
   \in f+N
 \]
-だから，\(f+N\)はほとんどいたるところで値が\(f\)と等しい可測関数の全体集合である．
+だから，\(f+N\)はほとんどいたるところ\(f\)と値が等しい可測関数の全体集合である．
 しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\vnorm{f}=\vnorm{(f+\varphi)-\varphi}\leq\vnorm{f+\varphi}\leq\vnorm{f}\)，\(\vnorm{f+\varphi}=\vnorm{f}\)である．
-よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\symcal{L}^p}\)の元\(F\)に対して，\(\vnorm{F}_p\)を
-\[
-  \vnorm{F}_p = \vnorm{f}
-  = \int\abs{f(x)}^p\measured[x]{\mu}\quad\text{(\(f\)は\(F\)の任意の元)}
-\]
-で定義できる．\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間であり，\(\vnorm{\holder}_p\)は\(\Lebesgue{p}\)のノルムである．
+よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\symcal{L}^p}\)の元\(F\)に対して，\(\vnorm{F}_p\)を\(\vnorm{F}_p=\vnorm{f}=(\int\abs{f(x)}^p\measured[x]{\mu})^{1/p}\)で定義できる．ただし，\(f\)は\(F\)の任意の元である．
+\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間で，\(\vnorm{\holder}_p\)は\(\Lebesgue{p}\)のノルムである．
 
-実は，\(\Lebesgue{p}\)はノルム\(\vnorm{\holder}_p\)によってバナッハ空間になる．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
+実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  任意の可測関数\(f\)について，\([f]\)を\([f]=\Set{g\given g(x)=f(x)\almosteverywhere x}\)で定義する．
+  任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{g\given f=g\almosteverywhere}\)で定義する．
   このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given\int\abs{f(x)}^p\measured[x]{\mu}<+\infty}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(a[f]=[af]\)に関するベクトル空間である．
   また，ノルム\(\vnorm{\holder}_p\)を
   \[
@@ -507,7 +514,7 @@
 
 \begin{example}
   \(\lebesgue{p}(\numset{N})\)は計数測度\(\mu\colon\powerset{\numset{N}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
-  実際，関数\(f\colon\numset{N}\to\numset{K}\)が\(\mu\)‐可測なら，関数\(\phi^{\mathord{+}}_n=\sum_{k=1}^nf^{\mathord{+}}(k)\indicator_{\Set{k}}\)は非負値単関数であり，\nameref{theorem:monotone_convergence}から
+  実際，関数\(f\colon\numset{N}\to\numset{K}\)が\(\sigmaalg{F}\)‐可測なら，関数\(\phi^{\mathord{+}}_n=\sum_{k=1}^nf^{\mathord{+}}(k)\indicator_{\Set{k}}\)は非負値単関数であり，\nameref{theorem:monotone_convergence}から
   \[
     \int f^{\mathord{+}}\measured{\mu} = \lim_{n\to\infty}\int\phi_n^{\mathord{+}}\measured{\mu}
     = \lim_{n\to\infty}\sum_{k=1}^nf^{\mathord{+}}(k)\mu(\Set{k})
@@ -518,7 +525,7 @@
     \int f\measured{\mu} = \pqty*{\sum_{n=1}^\infty f^{\mathord{+}}(n)}-\pqty*{\sum_{n=1}^\infty f^{\mathord{-}}(n)}
     = \sum_{n=1}^\infty f(n)
   \]
-  である．よって\(\int\abs{f(n)}^p\measured[n]{\mu}=\sum_{n=1}^\infty\abs{f(n)}^p\)なので，\(\lebesgue{p}(\numset{N})=\Lebesgue{p}(\numset{N},\powerset{\numset{N}},\mu)\)である．
+  である．よって\((\int\abs{f(n)}^p\measured[n]{\mu})^{1/p}=(\sum\abs{f(n)}^p)^{1/p}\)，\(\lebesgue{p}(\numset{N})=\Lebesgue{p}(\numset{N},\powerset{\numset{N}},\mu)\)である．
 \end{example}
 
 \begin{proposition}{}{}
