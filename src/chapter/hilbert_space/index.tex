@@ -76,12 +76,12 @@
 
 \begin{example}[一様収束]
   \label{example:uniform_converge}
-  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(x)-g(x)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
+  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(t)-g(t)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
   \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
   \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
 
-  たとえば\(I=[0,1]\)，\(f_n(x)=(1/n)\abs{\sin(n\krez x)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(x)=0\)に一様収束する．
-  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(x)}\given x\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
+  たとえば\(I=[0,1]\)，\(f_n(t)=(1/n)\abs{\sin(n\krez t)}\)のとき，\(\seq{f_n}_{n\in\numset{N}}\)は定数関数\(\phi(t)=0\)に一様収束する．
+  実際\(d(f_n,\phi)=\max\Set{\abs{f_n(t)}\given t\in I}=1/n\)なので，\(n\)の値を十分大きくとれば\(d(f_n,\phi)\)の値を限りなく小さくできる（\cref{figure:uniform_converge}）．
 \end{example}
 
 \begin{figure}[htbp]
@@ -154,20 +154,20 @@
 
 \begin{definition}{ノルム}{norm}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\vnorm{\holder}\)が\(V\)の\termdef{ノルム}（norm）であるとは，
-  任意の\(\lambda\in\numset{K}\)，\(\vect{x},\vect{y}\in V\)に対して，\(\vnorm{\holder}\)が以下の条件を満たすことをいう．
+  任意の\(\lambda\in\numset{K}\)，\(x,y\in V\)に対して，\(\vnorm{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
-    \item \(\vnorm{\vect{x}}\geq 0\)，\([\vnorm{\vect{x}}=0\iff\vect{x}=\zvec]\)
-    \item \(\vnorm{\lambda\vect{x}}=\abs{\lambda}\vnorm{\vect{x}}\)
-    \item \(\vnorm{\vect{x}+\vect{y}}\leq\vnorm{\vect{x}}+\vnorm{\vect{y}}\)
+    \item \(\vnorm{x}\geq 0\)，\([\vnorm{x}=0\iff x=0]\)
+    \item \(\vnorm{\lambda x}=\abs{\lambda}\vnorm{x}\)
+    \item \(\vnorm{x+y}\leq\vnorm{x}+\vnorm{y}\)
   \end{enumerate}
 \end{definition}
 
 ノルムが備わっているベクトル空間のことを\termdef{ノルム空間}\index{のるむくうかん@ノルム空間}（normed space）という．
-\(V\)がノルム空間であれば，\(d(\vect{x},\vect{y})=\vnorm{\vect{x}-\vect{y}}\)（\(\vect{x},\vect{y}\in V\)）により\(V\)上の距離\(d\)が定義される．
+\(V\)がノルム空間であれば，\(d(x,y)=\vnorm{x-y}\)（\(x,y\in V\)）により\(V\)上の距離\(d\)が定義される．
 \((V,d)\)が完備距離空間であるとき，\(V\)は\termdef{バナッハ空間}\index{ばなっはくうかん@バナッハ空間}（Banach space）であるという．
 
 \begin{example}
-  \(V\)が\(\numset{K}\)上の内積空間なら，\(V\)の内積\(\innerp{\holder}{\holder}\)から\(V\)のノルムを\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)で定義できる．
+  \(V\)が\(\numset{K}\)上の内積空間なら，\(V\)の内積\(\innerp{\holder}{\holder}\)から\(V\)のノルムを\(\vnorm{x}=\sqrt{\innerp{x}{x}}\)で定義できる．
   つまり，内積空間はノルム空間でもある．
 \end{example}
 
@@ -182,18 +182,18 @@
 \end{example}
 
 \begin{example}
-  \cref{example:uniform_converge}の集合\(\cont{0}(I)\)は，ノルム\(\vnorm{f}_\infty=\max\Set{\abs{f(x)}\given x\in I}\)についてバナッハ空間になる．
-  ただし，関数の和\(\phi=f+g\)とスカラー倍\(\psi=\lambda f\)はそれぞれ\(\phi(x)=f(x)+g(x)\)，\(\psi(x)=\lambda\cdot(f(x))\)で定義する．
+  \cref{example:uniform_converge}の集合\(\cont{0}(I)\)は，ノルム\(\vnorm{f}_\infty=\max\Set{\abs{f(t)}\given t\in I}\)についてバナッハ空間になる．
+  ただし，関数の和\(\phi=f+g\)とスカラー倍\(\psi=\lambda f\)はそれぞれ\(\phi(t)=f(t)+g(t)\)，\(\psi(t)=\lambda\cdot(f(t))\)で定義する．
 \end{example}
 
 \section{ヒルベルト空間}
 
 \begin{definition}{ヒルベルト空間}{hilbert_space}\index{ひるべるとくうかん@ヒルベルト空間}
   内積空間\(H\)が\termdef{ヒルベルト空間}（Hilbert space）であるとは，
-  \(H\)の内積\(\innerp{\holder}{\holder}\)から定まるノルム\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)について，\(H\)がバナッハ空間であることをいう．
+  \(H\)の内積\(\innerp{\holder}{\holder}\)から定まるノルム\(\vnorm{x}=\sqrt{\innerp{x}{x}}\)について，\(H\)がバナッハ空間であることをいう．
 \end{definition}
 
-もう少し定義をさかのぼると，ノルム空間\(H\)がバナッハ空間であるとは，距離\(d(\vect{x},\vect{y})=\vnorm{\vect{x}-\vect{y}}\)について\((H,d)\)が完備距離空間であることをいうのであった．
+もう少し定義をさかのぼると，ノルム空間\(H\)がバナッハ空間であるとは，距離\(d(x,y)=\vnorm{x-y}\)について\((H,d)\)が完備距離空間であることをいうのであった．
 したがって，完備距離空間・ノルム空間・バナッハ空間・内積空間が有する性質はすべて，ヒルベルト空間にも引き継がれる．
 
 \begin{note}
@@ -203,61 +203,60 @@
 \end{note}
 
 \begin{theorem}{中線定理}{median_theorem}\index{ちゅうせんていり@中線定理}
-  \(V\)を内積空間とするとき，任意の\(\vect{x},\vect{y}\in V\)に対して\(\vnorm{\vect{x}+\vect{y}}^2+\vnorm{\vect{x}-\vect{y}}^2=2(\vnorm{\vect{x}}^2+\vnorm{\vect{y}}^2)\)が成立する．
+  \(V\)を内積空間とするとき，任意の\(x,y\in V\)に対して\(\vnorm{x+y}^2+\vnorm{x-y}^2=2(\vnorm{x}^2+\vnorm{y}^2)\)が成立する．
 \end{theorem}
 
 \begin{proof}
-  実際\(\vnorm{\vect{x}+\vect{y}}^2+\vnorm{\vect{x}-\vect{y}}^2=(\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2)+(\vnorm{\vect{x}}^2-2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2)=2(\vnorm{\vect{x}}^2+\vnorm{\vect{y}}^2)\)である．
+  実際\(\vnorm{x+y}^2+\vnorm{x-y}^2=(\vnorm{x}^2+2\rpart\innerp{x}{y}+\vnorm{y}^2)+(\vnorm{x}^2-2\rpart\innerp{x}{y}+\vnorm{y}^2)=2(\vnorm{x}^2+\vnorm{y}^2)\)である．
 \end{proof}
 
 \begin{theorem}{コーシー・シュワルツの不等式}{cauchy_schwarz}\index{こーしーしゅわるつのふとうしき@コーシー・シュワルツの不等式}
-  \(V\)を内積空間とする．このとき，任意の\(\vect{a},\vect{b}\in V\)について\(\abs{\innerp{\vect{a}}{\vect{b}}}\leq\vnorm{\vect{a}}\vnorm{\vect{b}}\)が成立する．
+  \(V\)を内積空間とする．このとき，任意の\(a,b\in V\)について\(\abs{\innerp{a}{b}}\leq\vnorm{a}\vnorm{b}\)が成立する．
   これを\termdef{コーシー・シュワルツの不等式}（Cauchy–Schwarz inequality）という．
 \end{theorem}
 
 \begin{proof}
-  \(\vect{b}\neq\zvec\)のときについて示す．
-  \(\lambda=\innerp{\vect{a}}{\vect{b}}/\vnorm{\vect{b}}^2\)，\(\vect{a}_{\mathord{\perp}}=\vect{a}-\lambda\vect{b}\)とおくと，\(\innerp{\vect{a}_{\mathord{\perp}}}{\vect{b}}=0\)より
+  \(b\neq 0\)のときについて示す．\(\lambda=\innerp{a}{b}/\vnorm{b}^2\)，\(a_{\mathord{\perp}}=a-\lambda b\)とおくと，\(\innerp{a_{\mathord{\perp}}}{b}=0\)より
   \(
-    \vnorm{\vect{a}_{\mathord{\perp}}}^2 = \innerp{\vect{a}_{\mathord{\perp}}}{\vect{a}_{\mathord{\perp}}}
-    = \innerp{\vect{a}-\lambda\vect{b}}{\vect{a}_{\mathord{\perp}}}
-    = \innerp{\vect{a}}{\vect{a}_{\mathord{\perp}}} - \lambda\innerp{\vect{b}}{\vect{a}_{\mathord{\perp}}}
-    = \innerp{\vect{a}}{\vect{a}_{\mathord{\perp}}}
+    \vnorm{a_{\mathord{\perp}}}^2 = \innerp{a_{\mathord{\perp}}}{a_{\mathord{\perp}}}
+    = \innerp{a-\lambda b}{a_{\mathord{\perp}}}
+    = \innerp{a}{a_{\mathord{\perp}}} - \lambda\innerp{b}{a_{\mathord{\perp}}}
+    = \innerp{a}{a_{\mathord{\perp}}}
   \)
   である．よって
   \(
-    \vnorm{\vect{a}_{\mathord{\perp}}}^2 = \innerp{\vect{a}}{\vect{a}-\lambda\vect{b}}
-    = \vnorm{\vect{a}}^2-\conj{\lambda}\innerp{\vect{a}}{\vect{b}}
-    = \vnorm{\vect{a}}^2-\abs{\innerp{\vect{a}}{\vect{b}}}^2/\vnorm{\vect{b}}^2
+    \vnorm{a_{\mathord{\perp}}}^2 = \innerp{a}{a-\lambda b}
+    = \vnorm{a}^2-\conj{\lambda}\innerp{a}{b}
+    = \vnorm{a}^2-\abs{\innerp{a}{b}}^2/\vnorm{b}^2
   \)
-  だから，\((\vnorm{\vect{a}}\vnorm{\vect{b}})^2-\abs{\innerp{\vect{a}}{\vect{b}}}^2=(\vnorm{\vect{a}_{\mathord{\perp}}}\vnorm{\vect{b}})^2\geq 0\)である．
+  だから，\((\vnorm{a}\vnorm{b})^2-\abs{\innerp{a}{b}}^2=(\vnorm{a_{\mathord{\perp}}}\vnorm{b})^2\geq 0\)である．
 \end{proof}
 
 \begin{proposition}{ノルムの連続性}{norm_continuous}
-  \(V\)がノルム空間なら，\(V\)上の任意の収束列\(\seq{\vect{x}_n}\)について次式が成立する．
+  \(V\)がノルム空間なら，\(V\)上の任意の収束列\(\seq{x_n}\)について次式が成立する．
   \[
-    \lim_{n\to\infty}\vnorm{\vect{x}_n} = \vnorm*{\lim_{n\to\infty}\vect{x}_n}
+    \lim_{n\to\infty}\vnorm{x_n} = \vnorm*{\lim_{n\to\infty}x_n}
   \]
 \end{proposition}
 
 \begin{proof}
-  \(\seq{\vect{x}_n}\)を\(V\)上の収束列とし，極限点を\(\vect{a}\)とおく．
-  このとき\(\vnorm{\vect{x}_n}\leq\vnorm{\vect{x}_n-\vect{a}}+\vnorm{\vect{a}}\)，\(\vnorm{\vect{a}}\leq\vnorm{\vect{a}-\vect{x}_n}+\vnorm{\vect{x}_n}\)なので
-  \(\abs{\vnorm{\vect{x}_n}-\vnorm{\vect{a}}}\leq\vnorm{\vect{x}_n-\vect{a}}\to 0\)（\(n\to\infty\)），よって\(\vnorm{\vect{x}_n}\to\vnorm{\vect{a}}\)（\(n\to\infty\)）である．
+  \(\seq{x_n}\)を\(V\)上の収束列とし，極限点を\(a\)とおく．
+  このとき\(\vnorm{x_n}\leq\vnorm{x_n-a}+\vnorm{a}\)，\(\vnorm{a}\leq\vnorm{a-x_n}+\vnorm{x_n}\)なので
+  \(\abs{\vnorm{x_n}-\vnorm{a}}\leq\vnorm{x_n-a}\to 0\)（\(n\to\infty\)），よって\(\vnorm{x_n}\to\vnorm{a}\)（\(n\to\infty\)）である．
 \end{proof}
 
 \begin{proposition}{内積の連続性}{inner_products_continuous}
-  \(V\)が内積空間なら，\(V\)上の任意の収束列\(\seq{\vect{x}_n}\)，\(\seq{\vect{y}_n}\)について次式が成立する．
+  \(V\)が内積空間なら，\(V\)上の任意の収束列\(\seq{x_n}\)，\(\seq{y_n}\)について次式が成立する．
   \[
-    \lim_{k\to\infty}\innerp{\vect{x}_k}{\vect{y}_k} = \innerp*{\lim_{m\to\infty}\vect{x}_m}{\lim_{n\to\infty}\vect{y}_n}
+    \lim_{k\to\infty}\innerp{x_k}{y_k} = \innerp*{\lim_{m\to\infty}x_m}{\lim_{n\to\infty}y_n}
   \]
 \end{proposition}
 
 \begin{proof}
-  \(\vect{x}_n\to\vect{a}\)，\(\vect{y}_n\to\vect{b}\)（\(n\to\infty\)）とする．
-  \(\innerp{\vect{x}_n}{\vect{y}_n}=\innerp{\vect{x}_n-\vect{a}}{\vect{y}_n}+\innerp{\vect{a}}{\vect{y}_n-\vect{b}}+\innerp{\vect{a}}{\vect{b}}\)だから，
-  \nameref{theorem:cauchy_schwarz}より\(\abs{\innerp{\vect{x}_n}{\vect{y}_n}-\innerp{\vect{a}}{\vect{b}}}\leq\abs{\innerp{\vect{x}_n-\vect{a}}{\vect{y}_n}}+\abs{\innerp{\vect{a}}{\vect{y}_n-\vect{b}}}\leq\vnorm{\vect{x}_n-\vect{a}}\vnorm{\vect{y}_n}+\vnorm{\vect{a}}\vnorm{\vect{y}_n-\vect{b}}\)である．
-  \cref{proposition:norm_continuous}より\(\vnorm{\vect{x}_n-\vect{a}}\vnorm{\vect{y}_n}\to 0\vnorm{\vect{b}}\)，\(\vnorm{\vect{y}_n-\vect{a}}\to 0\)（\(n\to\infty\)）なので，\(\innerp{\vect{x}_n}{\vect{y}_n}\to\innerp{\vect{a}}{\vect{b}}\)（\(n\to\infty\)）である．
+  \(x_n\to a\)，\(y_n\to b\)（\(n\to\infty\)）とする．
+  \(\innerp{x_n}{y_n}=\innerp{x_n-a}{y_n}+\innerp{a}{y_n-b}+\innerp{a}{b}\)だから，
+  \nameref{theorem:cauchy_schwarz}より\(\abs{\innerp{x_n}{y_n}-\innerp{a}{b}}\leq\abs{\innerp{x_n-a}{y_n}}+\abs{\innerp{a}{y_n-b}}\leq\vnorm{x_n-a}\vnorm{y_n}+\vnorm{a}\vnorm{y_n-b}\)である．
+  \cref{proposition:norm_continuous}より\(\vnorm{x_n-a}\vnorm{y_n}\to 0\vnorm{b}\)，\(\vnorm{y_n-a}\to 0\)（\(n\to\infty\)）なので，\(\innerp{x_n}{y_n}\to\innerp{a}{b}\)（\(n\to\infty\)）である．
 \end{proof}
 
 \section{直交射影}
@@ -265,8 +264,8 @@
 \subsection{直交射影}
 
 \begin{definition}{線分，凸集合}{convex_set}\index{せんぶん@線分}\index{とつしゅうごう@凸集合}
-  \(V\)を\(\numset{K}\)上のベクトル空間とする．2点\(\vect{x},\vect{y}\in V\)に対して，集合\(\Set{(1-t)\vect{x}+t\vect{y}\given t\in\ccival{0}{1}}\)を
-  \(\vect{x}\)と\(\vect{y}\)を結ぶ\termdef{線分}（line segment）という．
+  \(V\)を\(\numset{K}\)上のベクトル空間とする．2点\(x,y\in V\)に対して，集合\(\Set{(1-t)x+ty\given t\in\ccival{0}{1}}\)を
+  \(x\)と\(y\)を結ぶ\termdef{線分}（line segment）という．
   また，集合\(S\subset V\)に属する任意の2点を結ぶ線分が\(S\)に含まれるとき，\(S\)は\termdef{凸集合}（convex set）であるという．
 \end{definition}
 
@@ -284,50 +283,50 @@
 \end{figure}
 
 \begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}\index{しゃえいていり@射影定理!とつ@凸\texttwoemdash}
-  \(H\)をヒルベルト空間とする．また，\(\vect{x}\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
-  このとき，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)はただ1つの元からなる集合である．
+  \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
+  このとき，\(\argmin_{y\in C}\vnorm{x-y}\)はただ1つの元からなる集合である．
 \end{theorem}
 
 \begin{proof}
-  まず，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{\vect{x}-\vect{y}}\given\vect{y}\in C}\)とおくと，
-  集合\(A_n=\Set{\vect{y}\in C\given\vnorm{\vect{x}-\vect{y}}\leq\delta+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
-  そこで，\(C\)上の点列\(\seq{\vect{a}_n}\)を各\(n\)に対して\(\vect{a}_n\in A_n\)となるようにとれる．
-  \(0\leq\vnorm{\vect{x}-\vect{a}_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{\vect{a}_n}\)がある点\(\vect{m}\)に収束すれば，\nameref{proposition:norm_continuous}より
-  \(\vnorm{\vect{x}-\vect{m}}=\lim_{n\to\infty}\vnorm{\vect{x}-\vect{a}_n}=\delta\)である．さらに，\(C\)は閉集合だから\(\vect{m}\in C\)，よって\(\vect{m}\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)である．
+  まず，\(\argmin_{y\in C}\vnorm{x-y}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，
+  集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
+  そこで，\(C\)上の点列\(\seq{a_n}\)を各\(n\)に対して\(a_n\in A_n\)となるようにとれる．
+  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)がある点\(x_{\mathord{\ast}}\)に収束すれば，\nameref{proposition:norm_continuous}より
+  \(\vnorm{x-x_{\mathord{\ast}}}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．さらに，\(C\)は閉集合だから\(x_{\mathord{\ast}}\in C\)，よって\(x_{\mathord{\ast}}\in\argmin_{y\in C}\vnorm{x-y}\)である．
 
-  つまり，\(\seq{\vect{a}_n}\)の極限点\(\vect{m}\)が存在すること，すなわち，\(\seq{\vect{a}_n}\)がコーシー列であることを示せばよい．
+  つまり，\(\seq{a_n}\)の極限点\(x_{\mathord{\ast}}\)が存在すること，すなわち，\(\seq{a_n}\)がコーシー列であることを示せばよい．
   \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
   \begin{gather*}
-    \vnorm{(\vect{a}_m-\vect{x})+(\vect{a}_n-\vect{x})}^2+\vnorm{\vect{a}_m-\vect{a}_n}^2 = 2(\vnorm{\vect{a}_m-\vect{x}}^2+\vnorm{\vect{a}_n-\vect{x}}^2), \\
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 = 2\vnorm{\vect{x}-\vect{a}_m}^2+2\vnorm{\vect{x}-\vect{a}_n}^2-4\vnorm*{\vect{x}-\frac{\vect{a}_m+\vect{a}_n}{2}}^2
+    \vnorm{(a_m-x)+(a_n-x)}^2+\vnorm{a_m-a_n}^2 = 2(\vnorm{a_m-x}^2+\vnorm{a_n-x}^2), \\
+    \vnorm{a_m-a_n}^2 = 2\vnorm{x-a_m}^2+2\vnorm{x-a_n}^2-4\vnorm*{x-\frac{a_m+a_n}{2}}^2
   \end{gather*}
-  である．\(\vect{a}_m\in A_m\)，\(\vect{a}_n\in A_n\)かつ，\(C\)は凸集合だから\((\vect{a}_m+\vect{a}_n)/2\in C\)で
+  である．\(a_m\in A_m\)，\(a_n\in A_n\)かつ，\(C\)は凸集合だから\((a_m+a_n)/2\in C\)で
   \[
-    \vnorm{\vect{a}_m-\vect{a}_n}^2 \leq 2\pqty*{\delta+\frac{1}{m}}^2+2\pqty*{\delta+\frac{1}{n}}^2-4\delta^2
+    \vnorm{a_m-a_n}^2 \leq 2\pqty*{\delta+\frac{1}{m}}^2+2\pqty*{\delta+\frac{1}{n}}^2-4\delta^2
     \to 0\quad(m,n\to\infty)
   \]
-  である．よって\(\seq{\vect{a}_n}\)はコーシー列だから，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)は空でない．
+  である．よって\(\seq{a_n}\)はコーシー列だから，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
 
-  次に，\(\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)の元は1つしかないことを示す．\(\vect{m}_1,\vect{m}_2\in\argmin_{\vect{y}\in C}\vnorm{\vect{x}-\vect{y}}\)とする．
-  このとき\(\vnorm{\vect{x}-\vect{m}_1}=\vnorm{\vect{x}-\vect{m}_2}=\delta\)，\((\vect{m}_1+\vect{m}_2)/2\in C\)なので\(\vnorm{\vect{m}_1-\vect{m}_2}^2=2\delta^2+2\delta^2-4\vnorm{\vect{x}-(\vect{m}_1+\vect{m}_2)/2}^2\leq 0\)，したがって\(\vect{m}_1=\vect{m}_2\)である．
+  次に，\(\argmin_{y\in C}\vnorm{x-y}\)の元は1つしかないことを示す．\(x_{\mathord{\ast}},x'_{\mathord{\ast}}\in\argmin_{y\in C}\vnorm{x-y}\)とする．
+  このとき\(\vnorm{x-x_{\mathord{\ast}}}=\vnorm{x-x'_{\mathord{\ast}}}=\delta\)，\((x_{\mathord{\ast}}+x'_{\mathord{\ast}})/2\in C\)なので\(\vnorm{x_{\mathord{\ast}}-x'_{\mathord{\ast}}}^2=2\delta^2+2\delta^2-4\vnorm{x-(x_{\mathord{\ast}}+x'_{\mathord{\ast}})/2}^2\leq 0\)，したがって\(x_{\mathord{\ast}}=x'_{\mathord{\ast}}\)である．
 \end{proof}
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}
-  \(H\)をヒルベルト空間とする．また，\(\vect{x}\in H\)かつ，\(V\)は\(H\)の閉部分空間とする．
-  このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
+  \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，\(V\)は\(H\)の閉部分空間とする．
+  このとき，\(V\)の元\(m\)に関する以下の条件は同値であり，条件を満たす\(m\)はただ1つ存在する．
   \begin{enumerate}
-    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
-    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
+    \item \(m\in\argmin_{y\in V}\vnorm{x-y}\)である．
+    \item 任意の\(v\in V\)に対して\(\innerp{x-m}{v}=0\)である．
   \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)が一意に定まる．
+  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(n\in\argmin_{y\in V}\vnorm{x-y}\)を満たす\(n\)が一意に定まる．
   あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
-\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\vect{x}\)}
-  \cref{theorem:projection_theorem}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V\vect{x}\)と表す．
+\begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_Vx\)}
+  \cref{theorem:projection_theorem}の\(m\)を\(x\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_Vx\)と表す．
 \end{definition}
 
 \begin{proposition}{}{orthogonal_direct_sum}
@@ -336,19 +335,19 @@
 
 \subsection{正規直交系}
 
-\nameref{theorem:projection_theorem}は直交射影\(\vect{m}\)の存在を示す定理であり，具体的な式を与えるものではない．
-しかし，\(V\)が正規直交系によって生成される空間（正確にはその閉包）であれば，\(\vect{m}\)の具体的な式が得られる．
+\nameref{theorem:projection_theorem}は直交射影\(\proj_Vx\)の存在を示す定理であり，具体的な式を与えるものではない．
+しかし，\(V\)が正規直交系によって生成される空間（正確にはその閉包）であれば，\(\proj_Vx\)の具体的な式が得られる．
 
 \begin{definition}{正規直交系}{ons}\index{せいきちょっこうけい@正規直交系}
-  \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の点列とする．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)（\(i,j\in\numset{N}\)）であるとき，\(\seq{\vect{e}_n}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．
+  \(H\)をヒルベルト空間，\(\seq{\phi_n}\)を\(H\)上の点列とする．\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)（\(i,j\in\numset{N}\)）であるとき，\(\seq{\phi_n}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．
 \end{definition}
 
 \begin{theorem}{ベッセルの不等式}{bessels_inequality}\index{べっせるのふとうしき@ベッセルの不等式}
-  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\vect{e}_n}\)が正規直交系なら，任意の\(\vect{x}\in H\)に対して次式が成立する．
+  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\phi_n}\)が正規直交系なら，任意の\(x\in H\)に対して次式が成立する．
   これを\termdef{ベッセルの不等式}（Bessel's inequality）という．
   \begin{equation}
     \label{equation:bessels_inequality}
-    \sum_{n=1}^\infty\abs{\innerp{\vect{x}}{\vect{e}_n}}^2 \leq \vnorm{\vect{x}}^2
+    \sum_{n=1}^\infty\abs{\innerp{x}{\phi_n}}^2 \leq \vnorm{x}^2
   \end{equation}
 \end{theorem}
 
@@ -356,61 +355,61 @@
   p.\pageref{xr-equation:pre_bessels_inequality}の\cref{xr-equation:pre_bessels_inequality}と同様に計算すると，
   任意の\(z_1,\dots,z_m\in\numset{C}\)に対して次式が成り立つと分かる．
   \[
-    \vnorm*{\vect{x}-\sum_{k=1}^mz_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \vnorm*{x-\sum_{k=1}^mz_k\phi_k}^2 = \vnorm{x}^2+\sum_{k=1}^m\abs{z_k-\innerp{x}{\phi_k}}^2-\sum_{k=1}^m\abs{\innerp{x}{\phi_k}}^2
   \]
 
-  したがって，特に\(z_k=\innerp{\vect{x}}{\vect{e}_k}\)なら
+  したがって，特に\(z_k=\innerp{x}{\phi_k}\)なら
   \[
-    \vnorm{\vect{x}}^2 = \vnorm*{\vect{x}-\sum_{k=1}^m\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}^2+\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
-    \geq \sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \vnorm{x}^2 = \vnorm*{x-\sum_{k=1}^m\innerp{x}{\phi_k}\phi_k}^2+\sum_{k=1}^m\abs{\innerp{x}{\phi_k}}^2
+    \geq \sum_{k=1}^m\abs{\innerp{x}{\phi_k}}^2
   \]
-  である．よって，級数\(\sum\abs{\innerp{\vect{x}}{\vect{e}_n}}^2\)は上に有界な正項級数だから収束し，級数の和は\cref{equation:bessels_inequality}を満たす．
+  である．よって，級数\(\sum\abs{\innerp{x}{\phi_n}}^2\)は上に有界な正項級数だから収束し，級数の和は\cref{equation:bessels_inequality}を満たす．
 \end{proof}
 
-\cref{theorem:bessels_inequality}の状況で，点列\(\seq{\vect{x}_n}\)を\(\vect{x}_n=\sum_{k=1}^n\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k\)で定義すると，
-\(\seq{\vect{x}_n}\)は収束列になる．実際，\(m>n\)なら
+\cref{theorem:bessels_inequality}の状況で，点列\(\seq{x_n}\)を\(x_n=\sum_{k=1}^n\innerp{x}{\phi_k}\phi_k\)で定義すると，
+\(\seq{x_n}\)は収束列になる．実際，\(m>n\)なら
 \[
-  \vnorm{\vect{x}_m-\vect{x}_n}^2 = \vnorm*{\sum_{k=n+1}^m\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}^2
-  = \sum_{k=n+1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+  \vnorm{x_m-x_n}^2 = \vnorm*{\sum_{k=n+1}^m\innerp{x}{\phi_k}\phi_k}^2
+  = \sum_{k=n+1}^m\abs{\innerp{x}{\phi_k}}^2
 \]
-となるので，\(\seq{\vect{x}_n}\)がコーシー列であることと，級数\(\sum\abs{\innerp{\vect{x}}{\vect{e}_n}}^2\)がコーシー列であることとは同値である．
-そして，\cref{equation:bessels_inequality}の級数は収束しているから，\(\seq{\vect{x}_n}\)はコーシー列である．
+となるので，\(\seq{x_n}\)がコーシー列であることと，級数\(\sum\abs{\innerp{x}{\phi_n}}^2\)がコーシー列であることとは同値である．
+そして，\cref{equation:bessels_inequality}の級数は収束しているから，\(\seq{x_n}\)はコーシー列である．
 
 \begin{proposition}{}{orthonormal_system_and_projection}
-  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\vect{e}_n}\)が正規直交系なら，任意の\(\vect{x}\in H\)について次式が成立する．
+  \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\phi_n}\)が正規直交系なら，任意の\(x\in H\)について次式が成立する．
   \[
-    \proj_{\clsr V}\vect{x} = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
-    \quad(V=\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc})
+    \proj_{\clsr V}x = \sum_{n=1}^\infty\innerp{x}{\phi_n}\phi_n
+    \quad(V=\spannedby\Set{\phi_1,\phi_2,\dotsc})
   \]
 \end{proposition}
 
 \begin{proof}
-  \(\vect{v}\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{\vect{v}_n}\)で\(\vect{v}_n\to\vect{v}\)（\(n\to\infty\)）を満たすものがある．
-  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)）なので，\(n\)の値に応じて\(\vect{v}_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
-  \(\vect{v}_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(\vect{v}_n=\sum_{j=1}^{d_n}\midx{z}{n}{j}\vect{e}_j=\midx{z}{n}{1}\vect{e}_1+\dots+\midx{z}{n}{d_n}\vect{e}_{d_n}\)とおける．
+  \(v\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{v_n}\)で\(v_n\to v\)（\(n\to\infty\)）を満たすものがある．
+  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\phi_1,\dots,\phi_n}\)）なので，\(n\)の値に応じて\(v_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
+  \(v_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(v_n=\sum_{j=1}^{d_n}\midx{z}{n}{j}\phi_j=\midx{z}{n}{1}\phi_1+\dots+\midx{z}{n}{d_n}\phi_{d_n}\)とおける．
 
-  \(\vect{p}=\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)より
+  \(p=\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
   \begin{gather*}
-    \innerp{\vect{x}-\vect{p}}{\vect{e}_j} = \innerp*{\vect{x}-\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}{\vect{e}_j}
-    = \innerp{\vect{x}}{\vect{e}_j}-\sum_{i=1}^\infty\innerp{\vect{x}}{\vect{e}_i}\innerp{\vect{e}_i}{\vect{e}_j}
+    \innerp{x-p}{\phi_j} = \innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
+    = \innerp{x}{\phi_j}-\sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}
     = 0, \\
-    \innerp{\vect{x}-\vect{p}}{\vect{v}} = \innerp*{\vect{x}-\vect{p}}{\lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{z}{n}{j}\vect{e}_j}
-    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{\conj{z}}{n}{j}\innerp{\vect{x}-\vect{p}}{\vect{e}_j}
+    \innerp{x-p}{v} = \innerp*{x-p}{\lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{z}{n}{j}\phi_j}
+    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{\conj{z}}{n}{j}\innerp{x-p}{\phi_j}
     = 0
   \end{gather*}
   である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
-  よって，\nameref{theorem:projection_theorem}より\(\vect{p}=\proj_{\clsr V}\vect{x}\)である．
+  よって，\nameref{theorem:projection_theorem}より\(p=\proj_{\clsr V}x\)である．
 \end{proof}
 
-\cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(\vect{x}\in H\)に対して
+\cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(x\in H\)に対して
 \[
-  \vect{x} = \proj_H\vect{x}
-  = \sum_{n=1}^\infty\innerp{\vect{x}}{\vect{e}_n}\vect{e}_n
+  x = \proj_Hx
+  = \sum_{n=1}^\infty\innerp{x}{\phi_n}\phi_n
 \]
-が成立する．そのような正規直交系\(\seq{\vect{e}_n}\)は完全正規直交系と呼ばれる．
+が成立する．そのような正規直交系\(\seq{\phi_n}\)は完全正規直交系と呼ばれる．
 
 \begin{definition}{完全正規直交系}{cons}\index{かんぜんせいきちょっこうけい@完全正規直交系}\index{せいきちょっこうけい@正規直交系!かんぜん@完全\texttwoemdash}\index{CONS|see{完全正規直交系}}
-  \(H\)をヒルベルト空間，\(\seq{\vect{e}_n}\)を\(H\)上の正規直交系とする．\(\spannedby\Set{\vect{e}_1,\vect{e}_2,\dotsc}\)が\(H\)において稠密であるとき，\(\seq{\vect{e}_n}\)は\termdef{完全正規直交系}（complete orthonormal system; CONS）であるという．
+  \(H\)をヒルベルト空間，\(\seq{\phi_n}\)を\(H\)上の正規直交系とする．\(\spannedby\Set{\phi_1,\phi_2,\dotsc}\)が\(H\)において稠密であるとき，\(\seq{\phi_n}\)は\termdef{完全正規直交系}（complete orthonormal system; CONS）であるという．
 \end{definition}
 
 \section{\texorpdfstring{\(\Lebesgue{p}\)}{Lp}空間}
@@ -419,7 +418,7 @@
 \begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
   集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{K}\)で
   \[
-    \Lpnorm{p}{f} = \pqty*{\int_\Omega\abs{f(x)}^p\intd{x}}^{1/p}
+    \Lpnorm{p}{f} = \pqty*{\int_\Omega\abs{f(t)}^p\intd{t}}^{1/p}
   \]
   の値が有限であるものの全体集合を\(\Lebesgue{p}(\Omega)\)とおく．このとき，ほとんどいたるところ等しい関数を同一視すれば，\(\Lebesgue{p}(\Omega)\)は\(\Lpnorm{p}{\holder}\)をノルムとしてバナッハ空間になる．
   このバナッハ空間を\termdef{\(\Lebesgue{p}\)空間}（\(\Lebesgue{p}\) space）という．
@@ -428,47 +427,48 @@
 \begin{proposition}{\(\Lebesgue{2}\)空間の性質}{L2_space_property}
   \(p=2\)のときのみ\(\Lebesgue{p}(\Omega)\)はヒルベルト空間になり，内積は次の式で表される．
   \[
-    \innerp{f}{g} = \int_\Omega f(x)\conj*{g(x)}\intd{x}\quad(f,g\in\Lebesgue{2}(\Omega))
+    \innerp{f}{g} = \int_\Omega f(t)\conj*{g(t)}\intd{t}\quad(f,g\in\Lebesgue{2}(\Omega))
   \]
 \end{proposition}
 
 \section{フーリエ級数展開}
 
+\(\torus=\ccival{-\krez}{\krez}\)とする．
+
 \begin{theorem}{リース・フィッシャーの定理}{riesz_fischer}\index{りーすふぃっしゃーのていり@リース・フィッシャーの定理}
-  \(\Lebesgue{2}(\ccival{-\krez}{\krez})\)上の関数列\(\seq{e_n}_{n\in\numset{Z}}\)を\(e_n(t)=(2\krez)^{-1/2}\napr^{\iuni nt}\)で定義する．
-  このとき\(\seq{e_n}_{n\in\numset{Z}}\)は完全正規直交系である．これを\termdef{リース・フィッシャーの定理}（Riesz–Fischer theorem）という．
+  \(\Lebesgue{2}(\torus)\)上の関数列\(\seq{\phi_n}_{n\in\numset{Z}}\)を
+  \[
+    \phi_n(t) = \frac{\napr^{\iuni nt}}{\sqrt{2\krez}}
+  \]
+  で定義する．このとき\(\seq{\phi_n}_{n\in\numset{Z}}\)は完全正規直交系である．これを\termdef{リース・フィッシャーの定理}（Riesz–Fischer theorem）という．
 \end{theorem}
 
 \nameref{theorem:riesz_fischer}によれば
 \[
-  \hat{f}_n = \frac{\innerp{f}{e_n}}{\sqrt{2\krez}}
-  = \frac{1}{2\krez}\int_{-\krez}^{\krez}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
+  \hat{f}_n = \frac{\innerp{f}{\phi_n}}{\sqrt{2\krez}}
+  = \frac{1}{2\krez}\int_{\torus}f(t)\napr^{-\iuni nt}\intd{t}\quad(n\in\numset{Z})
 \]
-とおくと，次式で定義される関数列\(\seq{S_N}_{N\in\numset{N}}\)は\(f\)に\(\Lebesgue{2}\)収束する．
+とおくと，\(\torus\)上の関数列\(S_N(t)=\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\)は\(f\)に\(\Lebesgue{2}\)収束する．このことを形式的に
 \[
-  S_N(t) = \sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
-\]
-このことを形式的に
-\[
-  f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+  f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\torus)
 \]
 と表そう\index{lim@\(\sqlim\)}\footnote{\(\sqlim\)はlimit in the mean（平均収束）の略．}．
 
 \begin{definition}{フーリエ級数展開}{fourier_series_expansion}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
-  各\(f\in\Lebesgue{2}(\ccival{-\krez}{\krez})\)に対して，次式を\(f\)の\termdef{フーリエ級数展開}（Fourier series expansion）という．
+  各\(f\in\Lebesgue{2}(\torus)\)に対して，次式を\(f\)の\termdef{フーリエ級数展開}（Fourier series expansion）という．
   \[
-    f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\ccival{-\krez}{\krez})
+    f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\torus)
   \]
 \end{definition}
 
 \begin{note}
-  \cref{definition:fourier_series_expansion}で「形式的に」と断りを入れたのは，\(f(t)=\sqlim_{N\to\infty}S_N(t)\)（\(t\in\ccival{-\krez}{\krez}\)）であっても，各\(a\in\ccival{-\krez}{\krez}\)に対して数列\(\seq{S_N(a)}\)が\(f(a)\)に収束するとは言えないからである．
-  \(\sqlim\)は，関数列の\(\Lebesgue{2}\)収束
+  \cref{definition:fourier_series_expansion}で「形式的に」と断りを入れたのは，\(f(t)=\sqlim_{N\to\infty}S_N(t)\)（\(t\in\torus\)）であっても，
+  各\(a\in\torus\)に対して数列\(\seq{S_N(a)}\)が\(f(a)\)に収束するとは言えないからである．あくまで\(\sqlim\)は，関数列の\(\Lebesgue{2}\)収束
   \[
     f(t)=\sqlim_{N\to\infty}S_N(t)\quad(t\in\torus)
     \iff\lim_{N\to\infty}\int_{\torus}\abs{f(t)-S_N(t)}^2\intd{t} = 0
   \]
-  で定義される（\(\torus=\ccival{-\krez}{\krez}\)）．
+  で定義される．
 \end{note}
 
 \section{多重解像度解析}
@@ -478,7 +478,7 @@
   \(\seq{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
   \begin{enumerate}
     \item \(\dotsb\subset V_{-1}\subset V_0\subset V_1\subset\dotsb\)
-    \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{\vect{0}}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
+    \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{0}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
     \item \(f(\holder)\in V_n\iff f(2\holder)\in V_{n+1}\)，ただし\(n\)は任意の整数．
     \item \(\seq{\phi(\holder-n)}_{n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する．
   \end{enumerate}

@@ -27,6 +27,9 @@
 
 \subsection{σ‐加法族}
 
+集合\(S\)の部分集合全体を，\(S\)の\termdef{べき集合}\index{べきしゅうごう@べき集合}\indexsymbol{\(\powerset{S}\)}（power set）という．
+以後，\(S\)のべき集合を\(\powerset{S}\)と表す．
+
 \begin{definition}{σ‐加法族}{sigma_algebra}\index{しぐまかほうぞく@σ‐加法族}
   \(\Omega\)を集合，\(\sigmaalg{F}\)を\(\powerset{\Omega}\)の部分集合とする．
   \(\sigmaalg{F}\)が\(\Omega\)上の\termdef{σ‐加法族}（σ‐algebra）であるとは，\(\sigmaalg{F}\)が以下の条件を満たすことをいう．
@@ -52,12 +55,13 @@
   \(\Omega\)を集合，\(\symcal{S}\)を\(\powerset{\Omega}\)の部分集合とする．また，\(\symcal{S}\)を包含する\(\Omega\)上のσ‐加法族全体を\(\Sigma(\symcal{S})\)とおく．このとき，集合
   \[
     \sigmagen{\symcal{S}} = \bigcap_{\sigmaalg{F}\in\Sigma(\symcal{S})}\sigmaalg{F}
+    = \Set{A\in\powerset{\Omega}\given\text{\(\Sigma(\symcal{S})\)の元すべてに\(A\)は属する}}
   \]
-  は\(\Sigma(\symcal{S})\)に属し，\(\Sigma(\symcal{S})\)の任意の元は\(\sigmagen{\symcal{S}}\)を包含する．\(\sigmagen{\symcal{S}}\)を\(\symcal{S}\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
+  は\(\Sigma(\symcal{S})\)に属する．\(\sigmagen{\symcal{S}}\)を\(\symcal{S}\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
 \end{definition}
 
 \begin{example}[ボレル集合族]\index{ぼれるしゅうごうぞく@ボレル集合族}\index{BR@\(\borelset{\numset{R}}\)}
-  左半開区間の全体集合\(\symcal{S}=\Set{\ocival{-\infty}{a}\given a\in\numset{R}}\)により生成されるσ‐加法族を\termdef{ボレル集合族}（Borel algebra）といい，\(\borelset{\numset{R}}\)と表記する．
+  集合\(\symcal{S}=\Set{\ocival{-\infty}{a}\given a\in\numset{R}}\)により生成されるσ‐加法族を\(\numset{R}\)上の\termdef{ボレル集合族}（Borel algebra）といい，\(\borelset{\numset{R}}\)と表記する．
 \end{example}
 
 \begin{note}
@@ -98,7 +102,7 @@
   \(\mu\)が以下の条件を満たすことをいう．
   \begin{enumerate}
     \item \(\mu(\emptyset)=0\)である．
-    \item \(\sigmaalg{F}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)が互いに素であるとき，\(\mu(\bigsqcup_{n\in\numset{N}}A_n)=\sum_{n=1}^\infty\mu(A_n)\)である．
+    \item \(\sigmaalg{F}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)が互いに素ならば\(\mu(\bigsqcup_{n\in\numset{N}}A_n)=\sum_{n=1}^\infty\mu(A_n)\)である．
   \end{enumerate}
 \end{definition}
 
@@ -107,13 +111,13 @@
 また，確率空間の\(\Omega\)に属する各元は\termdef{根源事象}\index{こんげんじしょう@根源事象}（elementary event），\(\sigmaalg{F}\)に属する各元は\termdef{事象}\index{じしょう@事象}（event）と呼ばれる．
 
 \begin{example}[計数測度]\index{けいすうそくど@計数測度}\index{そくど@測度!けいすう@計数\texttwoemdash}
-  \(\sigmaalg{F}\)をσ‐加法族とする．また，各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合のとき\(\mu(A)=\sizeof{A}\)，無限集合のとき\(\mu(A)=+\infty\)とする．
-  このとき\(\mu\)は\(\sigmaalg{F}\)上の測度になる．\(\mu\)を\termdef{計数測度}（counting measure）という．
+  \(\sigmaalg{F}\)をσ‐加法族とする．各\(A\in\sigmaalg{F}\)に対して，\(A\)が有限集合なら\(\mu(A)=\sizeof{A}\)，無限集合なら\(\mu(A)=+\infty\)とすると，\(\mu\)は\(\sigmaalg{F}\)上の測度になる．
+  \(\mu\)を\termdef{計数測度}（counting measure）という．
 \end{example}
 
 \begin{example}[ディラック測度]\index{でぃらっくそくど@ディラック測度}\index{そくど@測度!でぃらっく@ディラック\texttwoemdash}
-  \((\Omega,\sigmaalg{F})\)を可測空間とし，任意に\(x\in\Omega\)をとる．また，各\(A\in\sigmaalg{F}\)に対して，\(x\in A\)のとき\(\delta_x(A)=1\)，\(x\notin A\)のとき\(\delta_x(A)=0\)とする．
-  このとき\(\delta_x\)は\(\sigmaalg{F}\)上の測度になる．\(\delta_x\)を\termdef{ディラック測度}（Dirac measure）という．
+  \((\Omega,\sigmaalg{F})\)を可測空間とし，\(x\in\Omega\)を1つ選ぶ．各\(A\in\sigmaalg{F}\)に対して，\(x\in A\)なら\(\delta_x(A)=1\)，\(x\notin A\)なら\(\delta_x(A)=0\)とすると，\(\delta_x\)は\(\sigmaalg{F}\)上の測度になる．
+  \(\delta_x\)を\termdef{ディラック測度}（Dirac measure）という．
 \end{example}
 
 \begin{example}\label{example:equally_possible}
@@ -431,7 +435,7 @@
 \end{definition}
 \footnotetext{これは\termdef{ラドン・ニコディムの定理}（Radon–Nikodým theorem）から保証される．}
 \cref{definition:conditional_expectation}の\(\condexpval{X\given\sigmaalg{G}}\)は，測度\(0\)の集合上での違いを除いて一意に定まる．すなわち，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)と\(Y'\)がともに\(\condexpval{X\given\sigmaalg{G}}\)の条件を満たすとき，\(\prob(Y\neq Y')=0\)である．
-このことを\(Y=Y'\almostsurely\)\index{ほとんどかくじつに@ほとんど確実に}\index{as@\(\almostsurely\)}と表す\footnote{\(\almostsurely\)はalmost surely（ほとんど確実に）の略．}．
+このことを\(Y=Y'\almostsurely\)\index{ほとんどかくじつに@ほとんど確実に}\index{as@a{.}s{.}}と表す\footnote{a{.}s{.}はalmost surely（ほとんど確実に）の略．}．
 
 また，\(\indicator_A\)（\(A\in\sigmaalg{F}\)）の条件つき期待値\(\condexpval{\indicator_A\given\sigmaalg{G}}\)を\(\sigmaalg{G}\)の下での\(A\)の\termdef{条件つき確率}\index{じょうけんつきかくりつ@条件つき確率}（conditional probability）といい，\(\condprob{A\given\sigmaalg{G}}\)\index{P@\(\condprob{A\given\sigmaalg{G}}\)}と書く．
 
@@ -443,11 +447,11 @@
   \(A\)を\(\Omega\)の部分集合とする．\(\mu(N)=0\)，\(A\subset N\)を満たす集合\(N\in\sigmaalg{F}\)があるとき，\(A\)は\termdef{\(\mu\)‐零集合}（\(\mu\)‐null set）であるという．
 \end{definition}
 
-\begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@\(\almosteverywhere\)}
+\begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@a{.}e{.}}
   \begin{enumerate}
     \item \(C(\omega)\)を\(\Omega\)の元\(\omega\)に関する条件とする．集合\(\scomp{\Set{\omega\given C(\omega)}}\)が\(\mu\)‐零集合であるとき，\(C(\omega)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．
-      このことを\(C(\omega)\almosteverywhere[\mu]\omega\in\Omega\)と書く．
-    \item 関数\(f\colon\Omega\to\numset{K}\)は\(\sigmaalg{F}\)‐可測で，\(C(z)\)は\(\numset{K}\)の元\(z\)に関する条件とする．\(C(f(\omega))\almosteverywhere[\mu]\omega\in\Omega\)であるとき，これを\(C(f)\almosteverywhere[\mu]\)と表す．
+      このことを\(C(\omega)\almosteverywhere[\mu][\omega\in\Omega]\)と書く．
+    \item 関数\(f\colon\Omega\to\numset{K}\)は\(\sigmaalg{F}\)‐可測で，\(C(z)\)は\(\numset{K}\)の元\(z\)に関する条件とする．\(C(f(\omega))\almosteverywhere[\mu][\omega\in\Omega]\)であるとき，これを\(C(f)\almosteverywhere[\mu]\)と表す．
   \end{enumerate}
 \end{definition}
 
@@ -478,7 +482,7 @@
   \end{enumerate}
 \end{proposition}
 
-\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere x\)，つまり\(f=0\almosteverywhere\)のときだけである．
+\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，つまり\(f=0\almosteverywhere\)のときだけである．
 そのため，ほとんどいたるところで等しい値をとる関数を同じものとみなせば，\(\Lebesgue*{p}\)はノルム空間になる．
 
 この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\Lpseminorm{p}{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
@@ -492,7 +496,7 @@
 だから，\(f+N\)はほとんどいたるところ\(f\)と値が等しい可測関数の全体集合である．
 しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\Lpseminorm{p}{f}=\Lpseminorm{p}{(f+\varphi)-\varphi}\leq\Lpseminorm{p}{f+\varphi}\leq\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+\varphi}=\Lpseminorm{p}{f}\)である．
 よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\Lebesgue*{p}}\)の元\(F\)に対して，\(\Lpnorm{p}{F}\)を\(\Lpnorm{p}{F}=\Lpseminorm{p}{f}\)で定義できる．ただし，\(f\)は\(F\)の任意の元である．
-\(\Lebesgue{p}\)は加法\((f+N)+(g+N)=(f+g)+N\)，スカラー乗法\(a(f+N)=(af)+N\)に関するベクトル空間で，\(\Lpnorm{p}{\holder}\)は\(\Lebesgue{p}\)のノルムである．
+\(\Lebesgue{p}\)は加法\(F+G=\Set{f+g\given\text{\(f\in F\)，\(g\in G\)}}\)，スカラー乗法\(aF=\Set{af\given f\in F}\)に関するベクトル空間で，\(\Lpnorm{p}{\holder}\)は\(\Lebesgue{p}\)のノルムである．
 
 実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 

@@ -114,7 +114,7 @@
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
-\NewDocumentCommand{\almosteverywhere}{o}{\mathrel{\IfValueT{#1}{#1\mathhyphen}\mathrm{a{.}e{.}}}}
+\NewDocumentCommand{\almosteverywhere}{o o}{\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
 \NewDocumentCommand{\measured}{o m}{\,\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
 
 % 確率統計
@@ -122,7 +122,7 @@
 \newcommand{\prob}{\symbb{P}}
 \newcommand{\variant}{\symbb{V}}
 
-\NewDocumentCommand{\almostsurely}{o}{\mathrel{\IfValueT{#1}{#1\mathhyphen}\mathrm{a{.}s{.}}}}
+\NewDocumentCommand{\almostsurely}{o o}{\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}

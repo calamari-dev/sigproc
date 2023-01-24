@@ -10,7 +10,7 @@ x = np.linspace(0, 1, num=300)
 fig, ax = plt.subplots()
 
 for i in range(1, 4):
-    ax.plot(x, np.abs(np.sin(i * np.pi * x)) / i, label=f"$f_{i}(x)$")
+    ax.plot(x, np.abs(np.sin(i * np.pi * x)) / i, label=f"$f_{i}(t)$")
 
 ax.legend()
 ax.axis("square")
