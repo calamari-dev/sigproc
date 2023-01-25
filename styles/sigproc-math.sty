@@ -62,7 +62,7 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\NewDocumentCommand{\intd}{o m}{\,\IfValueTF{#1}{\symrm{d}^#1}{\symrm{d}}#2}
+\NewDocumentCommand{\intd}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^#2}{\symrm{d}}#3}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -114,15 +114,15 @@
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
-\NewDocumentCommand{\almosteverywhere}{o o}{\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
-\NewDocumentCommand{\measured}{o m}{\,\IfValueTF{#1}{#2(\symrm{d}#1)}{\symrm{d}#2}}
+\NewDocumentCommand{\almosteverywhere}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\measured}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{#3(\symrm{d}#2)}{\symrm{d}#3}}
 
 % 確率統計
 \newcommand{\expval}{\symbb{E}}
 \newcommand{\prob}{\symbb{P}}
 \newcommand{\variant}{\symbb{V}}
 
-\NewDocumentCommand{\almostsurely}{o o}{\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\almostsurely}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}

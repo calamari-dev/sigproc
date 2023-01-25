@@ -290,11 +290,11 @@
 \begin{proof}
   まず，\(\argmin_{y\in C}\vnorm{x-y}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，
   集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
-  そこで，\(C\)上の点列\(\seq{a_n}\)を各\(n\)に対して\(a_n\in A_n\)となるようにとれる．
-  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)がある点\(x_{\mathord{\ast}}\)に収束すれば，\nameref{proposition:norm_continuous}より
-  \(\vnorm{x-x_{\mathord{\ast}}}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．さらに，\(C\)は閉集合だから\(x_{\mathord{\ast}}\in C\)，よって\(x_{\mathord{\ast}}\in\argmin_{y\in C}\vnorm{x-y}\)である．
+  そこで，\(C\)上の点列\(\seq{a_n}\)を各\(n\)に対して\(a_n\in A_n\)となるように選べる．
+  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)がある点\(a_\infty\)に収束すれば，\nameref{proposition:norm_continuous}より
+  \(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．さらに，\(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
 
-  つまり，\(\seq{a_n}\)の極限点\(x_{\mathord{\ast}}\)が存在すること，すなわち，\(\seq{a_n}\)がコーシー列であることを示せばよい．
+  要するに，\(a_\infty\)が存在する\texttwoemdash つまり\(\seq{a_n}\)がコーシー列である\texttwoemdash ならば，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
   \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
   \begin{gather*}
     \vnorm{(a_m-x)+(a_n-x)}^2+\vnorm{a_m-a_n}^2 = 2(\vnorm{a_m-x}^2+\vnorm{a_n-x}^2), \\
@@ -307,8 +307,8 @@
   \]
   である．よって\(\seq{a_n}\)はコーシー列だから，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
 
-  次に，\(\argmin_{y\in C}\vnorm{x-y}\)の元は1つしかないことを示す．\(x_{\mathord{\ast}},x'_{\mathord{\ast}}\in\argmin_{y\in C}\vnorm{x-y}\)とする．
-  このとき\(\vnorm{x-x_{\mathord{\ast}}}=\vnorm{x-x'_{\mathord{\ast}}}=\delta\)，\((x_{\mathord{\ast}}+x'_{\mathord{\ast}})/2\in C\)なので\(\vnorm{x_{\mathord{\ast}}-x'_{\mathord{\ast}}}^2=2\delta^2+2\delta^2-4\vnorm{x-(x_{\mathord{\ast}}+x'_{\mathord{\ast}})/2}^2\leq 0\)，したがって\(x_{\mathord{\ast}}=x'_{\mathord{\ast}}\)である．
+  次に，\(\argmin_{y\in C}\vnorm{x-y}\)の元は1つしかないことを示す．\(y_1,y_2\in\argmin_{y\in C}\vnorm{x-y}\)とする．
+  このとき\(\vnorm{x-y_1}=\vnorm{x-y_2}=\delta\)，\((y_1+y_2)/2\in C\)なので\(\vnorm{y_1-y_2}^2=2\delta^2+2\delta^2-4\vnorm{x-(y_1+y_2)/2}^2\leq 0\)，したがって\(y_1=y_2\)である．
 \end{proof}
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}

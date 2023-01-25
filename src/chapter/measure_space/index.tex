@@ -296,7 +296,7 @@
 
 最後に，複素数値可測関数の積分を定義しよう．関数\(\rpart f(x)\)，\(\ipart f(x)\)がどちらも\(\sigmaalg{F}\)‐可測であるとき，関数\(f\colon\Omega\to\numset{C}\)は\(\sigmaalg{F}\)‐可測であるという．\(f\)の積分は
 \[
-  \int f\measured{\mu}=\int\rpart f(x)\measured[x]{\mu}+\iuni\int\ipart f(x)\measured[x]{\mu}
+  \int f\measured{\mu}=\int(\rpart f(x))\measured[x]{\mu}+\iuni\int(\ipart f(x))\measured[x]{\mu}
 \]
 で定義される．
 
@@ -363,7 +363,7 @@
 が成立する．
 
 これらの関数は，期待値を計算するとき重用される．\(\numset{R}\)上のボレル可測関数\(f\)に関して\(\expval[f(X)]=\int f(X(\omega))\measured[\omega]{\prob}\)だが，
-この値を求めるには\(X(\omega)\to x\)，\(1\measured[\omega]{\prob}\to f_X(x)\measured[x]{\lambda}\)と置き換えて，\(\int f(x)f_X(x)\measured[x]{\lambda}\)を計算すればよい．
+この値を求めるには\(X(\omega)\to x\)，\(\measured*[\omega]{\prob}\to f_X(x)\measured[x]{\lambda}\)と置き換えて，\(\int f(x)f_X(x)\measured[x]{\lambda}\)を計算すればよい．
 
 \subsection{条件つき期待値}
 
@@ -451,7 +451,7 @@
   \begin{enumerate}
     \item \(C(\omega)\)を\(\Omega\)の元\(\omega\)に関する条件とする．集合\(\scomp{\Set{\omega\given C(\omega)}}\)が\(\mu\)‐零集合であるとき，\(C(\omega)\)は\termdef{ほとんどいたるところ}（almost everywhere; a{.}e{.}）成立するという．
       このことを\(C(\omega)\almosteverywhere[\mu][\omega\in\Omega]\)と書く．
-    \item 関数\(f\colon\Omega\to\numset{K}\)は\(\sigmaalg{F}\)‐可測で，\(C(z)\)は\(\numset{K}\)の元\(z\)に関する条件とする．\(C(f(\omega))\almosteverywhere[\mu][\omega\in\Omega]\)であるとき，これを\(C(f)\almosteverywhere[\mu]\)と表す．
+    \item \(C(z)\)を\(\numset{K}\)の元\(z\)に関する条件とする．関数\(f\colon\Omega\to\numset{K}\)が\(C(f(\omega))\almosteverywhere[\mu][\omega\in\Omega]\)を満たすとき，これを\(C(f)\almosteverywhere[\mu]\)と表す．
   \end{enumerate}
 \end{definition}
 
@@ -511,8 +511,8 @@
 \end{definition}
 
 \begin{note}
-  \(\Lebesgue{p}\)のLは数学者ルベーグ（Lebesgue, Henri Léon，1875–1941）にちなむ．
-  なお，細かいことを言うと\cref{definition:lp_space}はいわゆる「well‐definedness」を検証すべき定義だが，本書では深く考えないことにする．
+  \(\Lebesgue{p}\)のLは数学者アンリ・ルベーグ（Lebesgue, Henri Léon，1875–1941）にちなむ．
+  なお，細かいことを言うと\cref{definition:lp_space}はいわゆる「well‐definedness」を検証すべき定義だが，気にしないことにする．
 \end{note}
 
 通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\Lpnorm{p}{[f]}\)を単に\(\Lpnorm{p}{f}\)と書く．
