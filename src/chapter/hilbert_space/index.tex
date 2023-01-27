@@ -222,14 +222,11 @@
     = \innerp{a-\lambda b}{a_{\mathord{\perp}}}
     = \innerp{a}{a_{\mathord{\perp}}} - \lambda\innerp{b}{a_{\mathord{\perp}}}
     = \innerp{a}{a_{\mathord{\perp}}}
-  \)
-  である．よって
-  \(
-    \vnorm{a_{\mathord{\perp}}}^2 = \innerp{a}{a-\lambda b}
+    = \innerp{a}{a-\lambda b}
     = \vnorm{a}^2-\conj{\lambda}\innerp{a}{b}
     = \vnorm{a}^2-\abs{\innerp{a}{b}}^2/\vnorm{b}^2
   \)
-  だから，\((\vnorm{a}\vnorm{b})^2-\abs{\innerp{a}{b}}^2=(\vnorm{a_{\mathord{\perp}}}\vnorm{b})^2\geq 0\)である．
+  である．よって\((\vnorm{a}\vnorm{b})^2-\abs{\innerp{a}{b}}^2=(\vnorm{a_{\mathord{\perp}}}\vnorm{b})^2\geq 0\)である．
 \end{proof}
 
 \begin{proposition}{ノルムの連続性}{norm_continuous}
@@ -288,11 +285,9 @@
 \end{theorem}
 
 \begin{proof}
-  まず，\(\argmin_{y\in C}\vnorm{x-y}\)が空でないことを示す．\(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，
-  集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n=1,2,\dotsc\)）は\(n\)の値によらず空でない．
-  そこで，\(C\)上の点列\(\seq{a_n}\)を各\(n\)に対して\(a_n\in A_n\)となるように選べる．
-  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)がある点\(a_\infty\)に収束すれば，\nameref{proposition:norm_continuous}より
-  \(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．さらに，\(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
+  \(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n\in\numset{N}\)）は\(n\)の値によらず空でない．そこで，各\(n\)に対して\(A_n\)の元\(a_n\)を1つずつ選べる．
+  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)の極限点\(a_\infty\)が存在すれば，\nameref{proposition:norm_continuous}より\(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．
+  \(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
 
   要するに，\(a_\infty\)が存在する\texttwoemdash つまり\(\seq{a_n}\)がコーシー列である\texttwoemdash ならば，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
   \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
@@ -305,10 +300,10 @@
     \vnorm{a_m-a_n}^2 \leq 2\pqty*{\delta+\frac{1}{m}}^2+2\pqty*{\delta+\frac{1}{n}}^2-4\delta^2
     \to 0\quad(m,n\to\infty)
   \]
-  である．よって\(\seq{a_n}\)はコーシー列だから，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
+  である．よって\(\seq{a_n}\)はコーシー列なので，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
 
   次に，\(\argmin_{y\in C}\vnorm{x-y}\)の元は1つしかないことを示す．\(y_1,y_2\in\argmin_{y\in C}\vnorm{x-y}\)とする．
-  このとき\(\vnorm{x-y_1}=\vnorm{x-y_2}=\delta\)，\((y_1+y_2)/2\in C\)なので\(\vnorm{y_1-y_2}^2=2\delta^2+2\delta^2-4\vnorm{x-(y_1+y_2)/2}^2\leq 0\)，したがって\(y_1=y_2\)である．
+  このとき\(\vnorm{x-y_1}=\vnorm{x-y_2}=\delta\)，\((y_1+y_2)/2\in C\)だから\(\vnorm{y_1-y_2}^2=2\delta^2+2\delta^2-4\vnorm{x-(y_1+y_2)/2}^2\leq 0\)，したがって\(y_1=y_2\)である．
 \end{proof}
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}
