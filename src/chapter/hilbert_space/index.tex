@@ -373,27 +373,23 @@
 \begin{proposition}{}{orthonormal_system_and_projection}
   \(H\)をヒルベルト空間とする．\(H\)上の点列\(\seq{\phi_n}\)が正規直交系なら，任意の\(x\in H\)について次式が成立する．
   \[
-    \proj_{\clsr V}x = \sum_{n=1}^\infty\innerp{x}{\phi_n}\phi_n
-    \quad(V=\spannedby\Set{\phi_1,\phi_2,\dotsc})
+    \proj_{\clsr V}x = \sum_{n=1}^\infty\innerp{x}{\phi_n}\phi_n\quad(V=\spannedby\Set{\phi_1,\phi_2,\dotsc})
   \]
 \end{proposition}
 
 \begin{proof}
-  \(v\in\clsr V\)を任意にとる．閉包の定義から，\(V\)上の点列\(\seq{v_n}\)で\(v_n\to v\)（\(n\to\infty\)）を満たすものがある．
-  \(V=\bigcup_{n=1}^\infty\spannedby\basis{B}_n\)（\(\basis{B}_n=\Set{\phi_1,\dots,\phi_n}\)）なので，\(n\)の値に応じて\(v_n\in\spannedby\basis{B}_{d_n}\)を満たす\(d_n\in\numset{N}\)をとれて，
-  \(v_n\)は\(\basis{B}_{d_n}\)の元の線型結合で\(v_n=\sum_{j=1}^{d_n}\midx{z}{n}{j}\phi_j=\midx{z}{n}{1}\phi_1+\dots+\midx{z}{n}{d_n}\phi_{d_n}\)とおける．
+  \(v\in\clsr V\)を任意にとる．\(\epsilon=x-\sum\innerp{x}{\phi_n}\phi_n\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
+  \nameref{theorem:projection_theorem}から\(\proj_{\clsr V}x=\sum\innerp{x}{\phi_n}\phi_n\)といえる．
 
-  \(p=\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i\)とする．\nameref{proposition:inner_products_continuous}と\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
-  \begin{gather*}
-    \innerp{x-p}{\phi_j} = \innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
+  \(v\in\clsr V\)なので，\(\vnorm{v-\tilde{v}_n}\to 0\)（\(n\to\infty\)）を満たす\(V\)上の点列\(\seq{\tilde{v}_n}\)がある．
+  \nameref{proposition:inner_products_continuous}と\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
+  \[
+    \innerp{\epsilon}{\phi_j} = \innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
     = \innerp{x}{\phi_j}-\sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}
-    = 0, \\
-    \innerp{x-p}{v} = \innerp*{x-p}{\lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{z}{n}{j}\phi_j}
-    = \lim_{n\to\infty}\sum_{j=1}^{d_n}\midx{\conj{z}}{n}{j}\innerp{x-p}{\phi_j}
     = 0
-  \end{gather*}
-  である．また，\(\clsr V\)の定義から\(\clsr V\)は\(H\)の閉部分空間であることがしたがう．
-  よって，\nameref{theorem:projection_theorem}より\(p=\proj_{\clsr V}x\)である．
+  \]
+  だから，\(V=\spannedby\Set{\phi_1,\phi_2,\dotsc}\)の元はすべて\(\epsilon\)と直交する．よって\(\innerp{\epsilon}{\tilde{v}_n}=0\)，\(\innerp{\epsilon}{v}=\innerp{\epsilon}{v-\tilde{v}_n}\)である．
+  したがって，\nameref{theorem:cauchy_schwarz}より\(\abs{\innerp{\epsilon}{v}}\leq\vnorm{\epsilon}\vnorm{v-\tilde{v}_n}\to 0\)（\(n\to\infty\)），\(\innerp{\epsilon}{v}=0\)である．
 \end{proof}
 
 \cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(x\in H\)に対して
