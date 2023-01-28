@@ -51,17 +51,17 @@
   このとき，\(\sigmaalg{G}=\Set{\emptyset,O,\scomp{O},\Omega}\)は\(\Omega\)上のσ‐加法族である．
 \end{example}
 
-\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\texttwoemdash}\indexsymbol{\(\sigmagen{\symcal{S}}\)}
-  \(\Omega\)を集合，\(\symcal{S}\)を\(\powerset{\Omega}\)の部分集合とする．また，\(\symcal{S}\)を包含する\(\Omega\)上のσ‐加法族全体を\(\Sigma(\symcal{S})\)とおく．このとき，集合
+\begin{definition}{生成するσ‐加法族}{}\index{せいせい@生成!しぐまかほうぞく@σ‐加法族}\index{しぐまかほうぞく@σ‐加法族!せいせいする@生成する\texttwoemdash}\indexsymbol{\(\sigmagen{\symscr{S}}\)}
+  \(\Omega\)を集合，\(\symscr{S}\)を\(\powerset{\Omega}\)の部分集合とする．また，\(\symscr{S}\)を包含する\(\Omega\)上のσ‐加法族全体を\(\Sigma(\symscr{S})\)とおく．このとき，集合
   \[
-    \sigmagen{\symcal{S}} = \bigcap_{\sigmaalg{F}\in\Sigma(\symcal{S})}\sigmaalg{F}
-    = \Set{A\in\powerset{\Omega}\given\text{\(\Sigma(\symcal{S})\)の元すべてに\(A\)は属する}}
+    \sigmagen{\symscr{S}} = \bigcap_{\sigmaalg{F}\in\Sigma(\symscr{S})}\sigmaalg{F}
+    = \Set{A\in\powerset{\Omega}\given\text{\(\Sigma(\symscr{S})\)の元すべてに\(A\)は属する}}
   \]
-  は\(\Sigma(\symcal{S})\)に属する．\(\sigmagen{\symcal{S}}\)を\(\symcal{S}\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
+  は\(\Sigma(\symscr{S})\)に属する．\(\sigmagen{\symscr{S}}\)を\(\symscr{S}\)が\termdef{生成するσ‐加法族}（generated σ‐algebra）という．
 \end{definition}
 
 \begin{example}[ボレル集合族]\index{ぼれるしゅうごうぞく@ボレル集合族}\index{BR@\(\borelset{\numset{R}}\)}
-  集合\(\symcal{S}=\Set{\ocival{-\infty}{a}\given a\in\numset{R}}\)により生成されるσ‐加法族を\(\numset{R}\)上の\termdef{ボレル集合族}（Borel algebra）といい，\(\borelset{\numset{R}}\)と表記する．
+  集合\(\symscr{S}=\Set{\ocival{-\infty}{a}\given a\in\numset{R}}\)により生成されるσ‐加法族を\(\numset{R}\)上の\termdef{ボレル集合族}（Borel algebra）といい，\(\borelset{\numset{R}}\)と表記する．
 \end{example}
 
 \begin{note}
@@ -183,7 +183,7 @@
   \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
 \end{note}
 
-\(\symcal{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symcal{E}\)は互いに素}}\)は有限加法族をなし，
+\(\symscr{E}\)を左半開区間\(\ocival{a}{b}\cap\numset{R}\)（\(-\infty\leq a<b\leq+\infty\)）の全体集合とすると，集合\(\sigmaalg{A}=\Set{\emptyset}\cup\Set{\bigsqcup_{k=1}^nI_k\given\text{\(I_1,\dots,I_n\in\symscr{E}\)は互いに素}}\)は有限加法族をなし，
 \(\sigmagen{\sigmaalg{A}}=\borelset{\numset{R}}\)が成り立つ．\(\sigmaalg{A}\)上の有限加法的測度\(\operatorname{vol}\)を
 \[
   \operatorname{vol}\pqty*{\bigsqcup_{k=1}^n\ocival{a_k}{b_k}} = \sum_{k=1}^n(b_k-a_k)
@@ -206,12 +206,12 @@
 特に，確率空間における可測関数は（実数値）\termdef{確率変数}\index{かくりつへんすう@確率変数}（random variable）とも呼ばれる．
 
 \begin{proposition}{}{sigmagen_and_measurable}
-  集合\(\symcal{S}\subset\powerset{\numset{R}}\)が\(\sigmagen{\symcal{S}}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in\symcal{S}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
+  集合\(\symscr{S}\subset\powerset{\numset{R}}\)が\(\sigmagen{\symscr{S}}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in\symscr{S}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
   特に，任意の\(a\in\numset{R}\)に対して\(\inv{f}{\ocival{-\infty}{a}}\in\sigmaalg{F}\)なら，\(f\)は可測関数である．
 \end{proposition}
 
 \begin{proof}
-  集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(\symcal{S}\subset\sigmaalg{G}\)なので\(\sigmagen{\symcal{S}}\subset\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
+  集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(\symscr{S}\subset\sigmaalg{G}\)なので\(\sigmagen{\symscr{S}}\subset\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
 \end{proof}
 
 \begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}\indexsymbol{\(\indicator_A\)}
@@ -296,7 +296,7 @@
 
 最後に，複素数値可測関数の積分を定義しよう．関数\(\rpart f(x)\)，\(\ipart f(x)\)がどちらも\(\sigmaalg{F}\)‐可測であるとき，関数\(f\colon\Omega\to\numset{C}\)は\(\sigmaalg{F}\)‐可測であるという．\(f\)の積分は
 \[
-  \int f\measured{\mu}=\int(\rpart f(x))\measured[x]{\mu}+\iuni\int(\ipart f(x))\measured[x]{\mu}
+  \int f\measured{\mu} = \int\rpart f(x)\measured[x]{\mu}+\iuni\int\ipart f(x)\measured[x]{\mu}
 \]
 で定義される．
 
@@ -482,26 +482,14 @@
   \end{enumerate}
 \end{proposition}
 
-\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，つまり\(f=0\almosteverywhere\)のときだけである．
+\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，すなわち\(f=0\almosteverywhere\)のときだけである．
 そのため，ほとんどいたるところで等しい値をとる関数を同じものとみなせば，\(\Lebesgue*{p}\)はノルム空間になる．
-
-この同一視を数学の言葉で書くと，以下のようになる．集合\(N\)を\(N=\Set{\varphi\given\Lpseminorm{p}{\varphi}=0}=\Set{\varphi\given\varphi=0\almosteverywhere}\)で定義する．
-また，各\(f\in\Lebesgue*{p}\)に対して集合\(\Set{f+\varphi\given\varphi\in N}\)を\(f+N\)とおく．このとき，任意の可測関数\(f,g\)について
-\[
-  f = g\almosteverywhere
-  \iff g-f \in N
-  \iff g = f+(g-f)
-  \in f+N
-\]
-だから，\(f+N\)はほとんどいたるところ\(f\)と値が等しい可測関数の全体集合である．
-しかも，\(\varphi\in N\)なら\cref{equation:minkowski}より\(\Lpseminorm{p}{f}=\Lpseminorm{p}{(f+\varphi)-\varphi}\leq\Lpseminorm{p}{f+\varphi}\leq\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+\varphi}=\Lpseminorm{p}{f}\)である．
-よって，集合\(\Lebesgue{p}=\Set{f+N\given f\in\Lebesgue*{p}}\)の元\(F\)に対して，\(\Lpnorm{p}{F}\)を\(\Lpnorm{p}{F}=\Lpseminorm{p}{f}\)で定義できる．ただし，\(f\)は\(F\)の任意の元である．
-\(\Lebesgue{p}\)は加法\(F+G=\Set{f+g\given\text{\(f\in F\)，\(g\in G\)}}\)，スカラー乗法\(aF=\Set{af\given f\in F}\)に関するベクトル空間で，\(\Lpnorm{p}{\holder}\)は\(\Lebesgue{p}\)のノルムである．
+つまり，\(f\)と同一視される関数全体を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)とおくと，集合\(\Lebesgue{p}=\Set{[f]\given f\in\Lebesgue*{p}}\)はノルム空間になる．
 
 実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{g\given f=g\almosteverywhere}\)で定義する．
+  任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)で定義する．
   このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given\int\abs{f(x)}^p\measured[x]{\mu}<+\infty}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(a[f]=[af]\)に関するベクトル空間である．
   また，ノルム\(\Lpnorm{p}{\holder}\)を
   \[
@@ -515,7 +503,7 @@
   なお，細かいことを言うと\cref{definition:lp_space}はいわゆる「well‐definedness」を検証すべき定義だが，気にしないことにする．
 \end{note}
 
-通常は\(f\)と\([f]\)を区別せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなし，\(\Lpnorm{p}{[f]}\)を単に\(\Lpnorm{p}{f}\)と書く．
+通常は\(\Lebesgue*{p}\)と\(\Lebesgue{p}\)の違いをあまり意識せず，\(\Lebesgue{p}(\Omega,\sigmaalg{F},\mu)\)を関数からなる集合とみなして，\(\Lpnorm{p}{[f]}\)を単に\(\Lpnorm{p}{f}\)と書く．
 
 \begin{example}
   \(\lebesgue{p}(\numset{N})\)は計数測度\(\mu\colon\powerset{\numset{N}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
@@ -525,7 +513,7 @@
     = \lim_{n\to\infty}\sum_{k=1}^nf^{\mathord{+}}(k)\mu(\Set{k})
     = \sum_{k=1}^\infty f^{\mathord{+}}(k)
   \]
-  となる．\(f^{\mathord{-}}\)についても同じように考えれば，\(f=f^{\mathord{+}}-f^{\mathord{-}}\)より
+  となる．\(f^{\mathord{-}}\)についても同じように考えれば
   \[
     \int f\measured{\mu} = \pqty*{\sum_{n=1}^\infty f^{\mathord{+}}(n)}-\pqty*{\sum_{n=1}^\infty f^{\mathord{-}}(n)}
     = \sum_{n=1}^\infty f(n)

@@ -158,7 +158,7 @@
 \(V\)が有限次元なら，\(V\)の基底はすべて有限集合で，その元の個数は等しい．
 すなわち，元の個数\(\sizeof{\basis{B}}\)は基底\(\basis{B}\)のとりかたによらず定まる．
 \(\sizeof{\basis{B}}\)を\(V\)の\termdef{次元}\index{じげん@次元}（dimension）といい，\(\dim V\)\index{dim@\(\dim V\)}と表記する
-\footnote{任意のベクトル空間は基底を有する（証明は文献\cite{yukie2019}）が，有限集合であるとは限らない．}．
+\footnote{任意のベクトル空間は基底を持つ（雪江\cite{yukie2019}に証明がある）が，有限集合とは限らない．}．
 
 基底に関連して，次の命題が成り立つ．
 
@@ -441,6 +441,18 @@
   \]
   は任意の有界列\(\seq{a_n}_{n\in\numset{N}}\)に対して存在する．これらをそれぞれ\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{上極限}（limit superior），\termdef{下極限}（limit inferior）という．
 \end{definition}
+
+\begin{proposition}{}{}
+  \(\seq{a_n}_{n\in\numset{N}}\)を実数列とする．このとき，実数\(\alpha\)に関する以下の条件は同値である．
+  \begin{enumerate}
+    \item \(a_n\to\alpha\)（\(n\to\infty\)）である．
+    \item \(\liminf_{n\to\infty}a_n=\limsup_{n\to\infty}a_n=\alpha\)である．
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  省略する．杉浦\cite{sugiura2018}に証明が記載されている．
+\end{proof}
 
 \begin{proposition}{区間縮小法}{nested_intervals}\index{くかんしゅくしょうほう@区間縮小法}
   \(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）は有界閉区間であり，条件\(I_1\supset I_2\supset\dotsb\)を満たすとする．

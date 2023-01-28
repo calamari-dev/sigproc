@@ -33,7 +33,7 @@
 \DeclarePairedDelimiterX{\Set}[1]{\lbrace}{\rbrace}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 
 % 線形代数
-\newcommand{\basis}[1]{\symcal{#1}}
+\newcommand{\basis}[1]{\symscr{#1}}
 \newcommand{\htrps}[1]{#1^{\symsfup{H}}}
 \newcommand{\rowvect}[1]{({\narrowbaselines\begin{matrix}#1\end{matrix}})}
 \newcommand{\kdelta}[2]{\symrm{\delta}_{#1\,#2}}
@@ -81,7 +81,7 @@
 \newcommand{\lebesgue}[1]{\ell^#1}
 \newcommand{\torus}{\symbb{T}}
 
-\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symcal{L}}{L}^#2}
+\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symscr{L}}{L}^#2}
 
 \DeclareMathOperator{\clsr}{cl}
 \DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
@@ -96,22 +96,22 @@
 % フーリエ解析
 \newcommand{\circconv}{\ast}
 \newcommand{\cycles}[2]{#1^{\numset{Z}/#2}}
-\newcommand{\dtft}{\operatorname{\symcal{F}}_{\numset{Z}}}
-\newcommand{\fseries}{\operatorname{\symcal{F}}_{\torus}}
+\newcommand{\dtft}{\operatorname{\symscr{F}}_{\numset{Z}}}
+\newcommand{\fseries}{\operatorname{\symscr{F}}_{\torus}}
 
-\NewDocumentCommand{\dft}{o m}{\operateur{\symcal{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
+\NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
 
-\DeclareRobustCommand{\ftrans}{\operateur{\symcal{F}}}
+\DeclareRobustCommand{\ftrans}{\operateur{\symscr{F}}}
 \DeclareRobustCommand{\lagop}{\operateur{\symit{L}}}
-\DeclareRobustCommand{\ltrans}{\operateur{\symcal{L}}}
-\DeclareRobustCommand{\ztrans}{\operateur{\symcal{Z}}}
+\DeclareRobustCommand{\ltrans}{\operateur{\symscr{L}}}
+\DeclareRobustCommand{\ztrans}{\operateur{\symscr{Z}}}
 
 % 測度論
-\newcommand{\borelset}[1]{\symcal{B}(#1)}
+\newcommand{\borelset}[1]{\symscr{B}(#1)}
 \newcommand{\extendedreal}{\bar{\numset{R}}}
 \newcommand{\indicator}{\symbb{1}}
 \newcommand{\imgmeasure}[2]{#1\mathoctothorpe #2}
-\newcommand{\sigmaalg}[1]{\symcal{#1}}
+\newcommand{\sigmaalg}[1]{\symscr{#1}}
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
