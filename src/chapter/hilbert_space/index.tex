@@ -207,7 +207,7 @@
 \end{theorem}
 
 \begin{proof}
-  実際\(\vnorm{x+y}^2+\vnorm{x-y}^2=(\vnorm{x}^2+2\rpart\innerp{x}{y}+\vnorm{y}^2)+(\vnorm{x}^2-2\rpart\innerp{x}{y}+\vnorm{y}^2)=2(\vnorm{x}^2+\vnorm{y}^2)\)である．
+  式\(\vnorm{x\pm y}^2=\vnorm{x}^2\pm 2\rpart\innerp{x}{y}+\vnorm{y}^2\)（複合同順）から分かる．
 \end{proof}
 
 \begin{theorem}{コーシー・シュワルツの不等式}{cauchy_schwarz}\index{こーしーしゅわるつのふとうしき@コーシー・シュワルツの不等式}
@@ -261,8 +261,7 @@
 \subsection{直交射影}
 
 \begin{definition}{線分，凸集合}{convex_set}\index{せんぶん@線分}\index{とつしゅうごう@凸集合}
-  \(V\)を\(\numset{K}\)上のベクトル空間とする．2点\(x,y\in V\)に対して，集合\(\Set{(1-t)x+ty\given t\in\ccival{0}{1}}\)を
-  \(x\)と\(y\)を結ぶ\termdef{線分}（line segment）という．
+  \(V\)をベクトル空間とする．2点\(x,y\in V\)に対し，集合\(\Set{(1-t)x+ty\given t\in\ccival{0}{1}}\)を\(x\)と\(y\)を結ぶ\termdef{線分}（line segment）という．
   また，集合\(S\subset V\)に属する任意の2点を結ぶ線分が\(S\)に含まれるとき，\(S\)は\termdef{凸集合}（convex set）であるという．
 \end{definition}
 
@@ -286,8 +285,8 @@
 
 \begin{proof}
   \(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n\in\numset{N}\)）は\(n\)の値によらず空でない．そこで，各\(n\)に対して\(A_n\)の元\(a_n\)を1つずつ選べる．
-  \(0\leq\vnorm{x-a_n}-\delta\leq 1/n\to 0\)（\(n\to\infty\)）なので，\(\seq{a_n}\)の極限点\(a_\infty\)が存在すれば，\nameref{proposition:norm_continuous}より\(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．
-  \(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
+  \(\delta\leq\vnorm{x-a_n}\leq\delta+1/n\)なので，\(\seq{a_n}\)の極限点\(a_\infty\)が存在すれば\(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．
+  また，\(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
 
   要するに，\(a_\infty\)が存在する\texttwoemdash つまり\(\seq{a_n}\)がコーシー列である\texttwoemdash ならば，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
   \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
@@ -316,8 +315,7 @@
 \end{theorem}
 
 \begin{proof}
-  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(n\in\argmin_{y\in V}\vnorm{x-y}\)を満たす\(n\)が一意に定まる．
-  あとはp.\pageref{xr-proposition:finite_projection}の\cref{xr-proposition:finite_projection}と同様に示せる．
+  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(n\in\argmin_{y\in V}\vnorm{x-y}\)を満たす\(n\)が一意に定まる．あとは\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
 \begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_Vx\)}
@@ -347,7 +345,7 @@
 \end{theorem}
 
 \begin{proof}
-  p.\pageref{xr-equation:pre_bessels_inequality}の\cref{xr-equation:pre_bessels_inequality}と同様に計算すると，
+  \cref{xr-proposition:finite_convex_projection}の\cref{xr-equation:pre_bessels_inequality}と同様に計算すると，
   任意の\(z_1,\dots,z_m\in\numset{C}\)に対して次式が成り立つと分かる．
   \[
     \vnorm*{x-\sum_{k=1}^mz_k\phi_k}^2 = \vnorm{x}^2+\sum_{k=1}^m\abs{z_k-\innerp{x}{\phi_k}}^2-\sum_{k=1}^m\abs{\innerp{x}{\phi_k}}^2
@@ -381,15 +379,15 @@
   \(v\in\clsr V\)を任意にとる．\(\epsilon=x-\sum\innerp{x}{\phi_n}\phi_n\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
   \nameref{theorem:projection_theorem}から\(\proj_{\clsr V}x=\sum\innerp{x}{\phi_n}\phi_n\)といえる．
 
-  \(v\in\clsr V\)なので，\(\vnorm{v-\tilde{v}_n}\to 0\)（\(n\to\infty\)）を満たす\(V\)上の点列\(\seq{\tilde{v}_n}\)がある．
-  \nameref{proposition:inner_products_continuous}と\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
+  \(v\in\clsr V\)なので，\(\tilde{v}_n\to v\)（\(n\to\infty\)）を満たす\(V\)上の点列\(\seq{\tilde{v}_n}\)がある．
+  また，\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
   \[
     \innerp{\epsilon}{\phi_j} = \innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
     = \innerp{x}{\phi_j}-\sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}
     = 0
   \]
   だから，\(V=\spannedby\Set{\phi_1,\phi_2,\dotsc}\)の元はすべて\(\epsilon\)と直交する．よって\(\innerp{\epsilon}{\tilde{v}_n}=0\)，\(\innerp{\epsilon}{v}=\innerp{\epsilon}{v-\tilde{v}_n}\)である．
-  したがって，\nameref{theorem:cauchy_schwarz}より\(\abs{\innerp{\epsilon}{v}}\leq\vnorm{\epsilon}\vnorm{v-\tilde{v}_n}\to 0\)（\(n\to\infty\)），\(\innerp{\epsilon}{v}=0\)である．
+  \(n\to\infty\)とすれば\(\innerp{\epsilon}{v}=\innerp{\epsilon}{0}=0\)が分かる．
 \end{proof}
 
 \cref{proposition:orthonormal_system_and_projection}より，\(\clsr V=H\)であれば任意の\(x\in H\)に対して

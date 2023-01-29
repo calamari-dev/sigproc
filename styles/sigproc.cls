@@ -33,7 +33,6 @@
 \setmonofont{PlemolJP}
 \setmonojfont{PlemolJP}
 
-
 % 版面
 \ModifyPageStyle{plain}{
   nombre_font=\small,
@@ -132,6 +131,9 @@
 \renewcommand{\@idxitem}{\par\setlength{\hangindent}{1\zw}}
 \renewcommand{\subitem}{\@idxitem\hspace*{2\zw}}
 \renewcommand{\subsubitem}{\@idxitem\hspace*{3\zw}}
+
+% 数式
+\setlength{\predisplaypenalty}{\z@}
 
 % narrowbaselines
 \newif{\ifnarrowbaselines}

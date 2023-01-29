@@ -5,7 +5,7 @@
 
 \section{イントロダクション}
 
-\cref{chapter:hilbert_space}，\cref{chapter:probability_space}では，関数空間での直交射影を積分に基づいて論じた．
+\cref{xr-chapter:hilbert_space}，\cref{xr-chapter:probability_space}では，関数空間での直交射影を積分に基づいて論じた．
 関数空間でも直交射影を定義できる理由は，\(\Lebesgue{2}(\Omega)=\Set{f\given\int_\Omega\abs{f(x)}^2\intd{x}<+\infty}\)がヒルベルト空間，つまり，完備な内積空間だからである．
 そして，\(\Lebesgue{2}(\Omega)\)の完備性には，積分がリーマン積分ではなくルベーグ積分であることが効いている．
 
@@ -484,12 +484,12 @@
 
 \cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，すなわち\(f=0\almosteverywhere\)のときだけである．
 そのため，ほとんどいたるところで等しい値をとる関数を同じものとみなせば，\(\Lebesgue*{p}\)はノルム空間になる．
-つまり，\(f\)と同一視される関数全体を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)とおくと，集合\(\Lebesgue{p}=\Set{[f]\given f\in\Lebesgue*{p}}\)はノルム空間になる．
+つまり，\(f\)と同一視される可測関数全体を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)とおくと，集合\(\Lebesgue{p}=\Set{[f]\given f\in\Lebesgue*{p}}\)はノルム空間になる．
 
 実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)で定義する．
+  任意の可測関数\(f\)について，集合\([f]\)を\([f]=\Set{\varphi\given\text{\(\varphi\)は可測関数で\(\varphi=f\almosteverywhere\)}}\)とする．
   このとき，各\(p\in\coival{1}{+\infty}\)に対して集合\(\Lebesgue{p}=\Set{[f]\given\int\abs{f(x)}^p\measured[x]{\mu}<+\infty}\)は，加法\([f]+[g]=[f+g]\)，スカラー乗法\(a[f]=[af]\)に関するベクトル空間である．
   また，ノルム\(\Lpnorm{p}{\holder}\)を
   \[
@@ -499,7 +499,7 @@
 \end{definition}
 
 \begin{note}
-  \(\Lebesgue{p}\)のLは数学者アンリ・ルベーグ（Lebesgue, Henri Léon，1875–1941）にちなむ．
+  \(\Lebesgue{p}\)のLは数学者アンリ・ルベーグ（Lebesgue, Henri L.，1875–1941）にちなむ．
   なお，細かいことを言うと\cref{definition:lp_space}はいわゆる「well‐definedness」を検証すべき定義だが，気にしないことにする．
 \end{note}
 
