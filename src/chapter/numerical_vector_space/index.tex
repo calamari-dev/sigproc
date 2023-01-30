@@ -26,15 +26,8 @@
 
 \section{直交射影}
 
-本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．
-特に断りのない限り，\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
-\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また
-\[
-  \vnorm{\vect{x}} = \sqrt{\innerp{\vect{x}}{\vect{x}}}
-  = \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}
-  \quad(\vect{x}=\trps{\matrice{x_1 & \cdots & x_n}}\in\numset{K}^n)
-\]
-とする\indexsymbol{\(\vnorm{\holder}\)}．
+本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
+\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)とする\indexsymbol{\(\vnorm{\holder}\)}．
 
 \subsection{直交射影}
 
@@ -50,7 +43,7 @@
 一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
 \begin{definition}{argmin，argmax}{argmin_argmax}\index{argmin@\(\argmin f(x)\)}\index{argmax@\(\argmax f(x)\)}
-  実数値関数\(f\)は集合\(S\)を定義域に含むとする．\(S\)の部分集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
+  集合\(S\)を定義域に含む実数値関数\(f\)に対して，集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
   \begin{gather*}
     \argmin_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\geq f(x)\)}}, \\
     \argmax_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\leq f(x)\)}}
@@ -81,7 +74,7 @@
 \(\numset{K}=\numset{R}\)の場合も同様に証明できるので，\cref{proposition:finite_projection}まで証明では\(\numset{K}=\numset{C}\)を仮定する．また，部分空間が\(\Set{\zvec}\)でないことも仮定する．
 
 \begin{lemma}{}{binomial_square}
-  各\(\vect{x},\vect{y}\in\numset{K}^n\)に対して\(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)が成立する．
+  \(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)（\(\vect{x},\vect{y}\in\numset{K}^n\)）である．
 \end{lemma}
 
 \begin{proof}
@@ -94,7 +87,7 @@
 \end{proposition}
 
 \begin{proof}
-  本証明に限り，\(\sum_{k=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
+  本証明に限り，\(\sum_{k=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
   このとき\(V=\Set{\sum z_k\vect{e}_k\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\epsilon(z_1,\dots,z_m)=\vnorm{\vect{x}-\sum z_k\vect{e}_k}\)とおくと
   \[
     \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{\sum z_k\vect{e}_k\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})}
@@ -230,6 +223,7 @@
 \end{proof}
 
 \subsection{分析と合成}
+\label{subsection:analysis_and_synthesis}
 
 \cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
 一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
@@ -294,29 +288,43 @@
 
 正規行列とユニタリ行列の関係については\cref{section:least_square}で詳述することにして，ここでは次の命題を示す．
 
-\begin{proposition}{ユニタリ行列の性質}{}
-  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
+\begin{proposition}{ユニタリ行列の特徴づけ}{unitary_matrix_property}
+  \(\mat{U}=\htrps{\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{U}\)はユニタリ行列である．
     \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である．
+    \item 任意の\(\vect{x},\vect{y}\in\numset{C}^n\)に対して\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\vect{y}}\)である．
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-\[
-  \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
-   = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
+  まず，1と2の同値性を示す．
+  \[
+    \mat{U}\htrps{\mat{U}} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
+     = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
  \]
-  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
+  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\mat{U}\htrps{\mat{U}}=\imat\)と同値である．
+
+  次に，3と1の同値性を示す．\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\trps{(\mat{U}\vect{x})}\conj*{\mat{U}\vect{y}}=\trps{\vect{x}}\conj*{\htrps{\mat{U}}\mat{U}\vect{y}}=\innerp{\vect{x}}{\htrps{\mat{U}}\mat{U}\vect{y}}\)より，
+  \(\mat{E}=\imat-\htrps{\mat{U}}\mat{U}\)とおくと\(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}\)である．
+  任意の\(\vect{x}\in\numset{C}^n\)に対し\(\innerp{\vect{x}}{\mat{E}\vect{y}}=0\)なら，\(\vect{x}=\mat{E}\vect{y}\)とすれば\(\vnorm{\mat{E}\vect{y}}^2=0\)，すなわち\(\mat{E}\vect{y}=\zvec\)が得られる．
+  \(\mat{E}\vect{y}=\zvec\)がすべての\(\vect{y}\in\numset{C}^n\)で成り立つとき，\(\mat{E}=\zmat\)だから\(\mat{U}\)はユニタリ行列である．
+  逆に\(\mat{U}\)がユニタリ行列なら，\(\mat{E}=\zmat\)より\(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}=0\)である．
 \end{proof}
 
 \begin{corollary}{}{}
   \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，\(T\)に関する以下の条件は同値である．
   \begin{enumerate}
-    \item \(T\)はある正規直交基底に関する分析作用素（合成作用素）である．
+    \item \(T\)は\(\numset{C}^n\)のある正規直交基底に関する分析作用素である．
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
   \end{enumerate}
 \end{corollary}
+
+\begin{proof}
+  \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分析作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
+  \(\operateur{T}\vect{x}=\mat{U}\vect{x}\)（\(\mat{U}=\htrps{\rowvect{\vect{u}_1 & \dots & \vect{u}_n}}\)）である．
+  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_property}より\(\mat{U}\)はユニタリ行列である．逆の証明は省略する．
+\end{proof}
 
 \section{最小2乗問題}
 \label{section:least_square}
@@ -324,6 +332,18 @@
 本節では，直交射影の理論を近似へと応用する．
 
 \subsection{最小2乗問題}
+
+いまから考えるのは，変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)に関する連立1次方程式
+\begin{equation}
+  \label{equation:linear_equation}
+  \matrice*{\midx{a}{1}{1} & \cdots & \midx{a}{1}{p} \\ \vdots & \ddots & \vdots \\ \midx{a}{n}{1} & \cdots & \midx{a}{n}{p}}\matrice*{x_1 \\ \vdots \\ x_p}
+  = \matrice*{y_1 \\ \vdots \\ y_n}
+\end{equation}
+の解き方である．\(\mat{A}=\matfence{\midx{a}{i}{j}}\)，\(\vect{y}=\trps{\rowvect{y_1 & \cdots & y_n}}\)とおくと，
+\cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{y}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，\cref{equation:linear_equation}の解は\(\vect{x}=\mat{A}^{-1}\vect{y}\)ただ1つである．
+
+\(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{y}\)次第である．
+そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\vect{y}-\mat{A}\vect{x}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
 
 \subsection{スペクトル定理}
 
