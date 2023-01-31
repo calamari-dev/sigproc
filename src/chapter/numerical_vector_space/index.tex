@@ -83,85 +83,86 @@
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ1つの元からなる集合である．
+  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)はただ1つの元からなる集合である．
 \end{proposition}
 
 \begin{proof}
-  本証明に限り，\(\sum_{k=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
-  このとき\(V=\Set{\sum z_k\vect{e}_k\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\epsilon(z_1,\dots,z_m)=\vnorm{\vect{x}-\sum z_k\vect{e}_k}\)とおくと
+  本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
+  このとき\(V=\Set{\sum z_i\vect{e}_i\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\vect{\epsilon}(z_1,\dots,z_m)=\sum z_i\vect{e}_i-\vect{x}\)とおくと
   \[
-    \argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}} = \Set*{\sum z_k\vect{e}_k\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})}
+    \argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}} = \Set*{\sum z_i\vect{e}_i\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}}
   \]
   である．
 
-  \(\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
+  \(\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
-    \vnorm*{\sum_{i=1}^mz_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
+    \vnorm*{\sum z_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
     = \sum_{i=1}^mz_i\sum_{j=1}^m\conj{z}_j\innerp{\vect{e}_i}{\vect{e}_j}
-    = \sum_{i=1}^mz_i\conj{z}_i
-    = \sum_{i=1}^m\abs{z_i}^2
+    = \sum z_i\conj{z}_i
+    = \sum\abs{z_i}^2
   \]
   である．したがって，\cref{lemma:binomial_square}より
   \begin{align*}
-    \epsilon(\vect{z})^2 &= \vnorm*{\vect{x}-\sum z_k\vect{e}_k}^2 = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_k\vect{e}_k}+\vnorm*{\sum z_k\vect{e}_k}^2 \\
-    &= \vnorm{\vect{x}}^2-2\sum\rpart[\conj{z}_k\innerp{\vect{x}}{\vect{e}_k}]+\sum\abs{z_k}^2
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm*{\sum z_i\vect{e}_i-\vect{x}}^2
+    = \vnorm*{\sum z_i\vect{e}_i}^2-2\rpart\innerp*{\sum z_i\vect{e}_i}{\vect{x}}+\vnorm{\vect{x}}^2 \\
+    &= \sum\abs{z_i}^2-2\sum\rpart[z_i\innerp{\vect{e}_i}{\vect{x}}]+\vnorm{\vect{x}}^2
   \end{align*}
-  である．よって，\(\epsilon(\vect{z})^2\)は\(s_k=\rpart z_k\)と\(t_k=\ipart z_k\)の式で
+  である．よって，\(\vnorm{\vect{\epsilon}(\vect{z})}^2\)は\(s_i=\rpart z_i\)と\(t_i=\ipart z_i\)の式で
   \begin{align*}
-    \epsilon(\vect{z})^2 &= \vnorm{\vect{x}}^2+\sum(-2\rpart[(s_k-\iuni t_k)\innerp{\vect{x}}{\vect{e}_k}]+s_k^2+t_k^2) \\
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(-2\rpart[(s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}}]+s_k^2+t_k^2) \\
     &= \vnorm{\vect{x}}^2+\sum(-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})+s_k^2+t_k^2) \\
     &= \vnorm{\vect{x}}^2+\sum((s_k-\rpart\innerp{\vect{x}}{\vect{e}_k})^2+(t_k-\ipart\innerp{\vect{x}}{\vect{e}_k})^2-\abs{\innerp{\vect{x}}{\vect{e}_k}}^2)
   \end{align*}
   と書けるので，次式が成立する．
   \begin{equation}
     \label{equation:pre_bessels_inequality}
-    \epsilon(\vect{z})^2 = \vnorm{\vect{x}}^2+\sum_{k=1}^m\abs{z_k-\innerp{\vect{x}}{\vect{e}_k}}^2-\sum_{k=1}^m\abs{\innerp{\vect{x}}{\vect{e}_k}}^2
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
   \end{equation}
 
   \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
-  \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
+  \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
 \end{proof}
 
 なお，\cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
-  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすとき，
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
 \end{proposition}
 
 \begin{proof}
-  任意に\(\vect{y}\in V\)をとり，\(\vect{\epsilon}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}=0\)より
-  \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{\vect{x}-\vect{m}-\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2-2\rpart\innerp{\vect{x}-\vect{m}}{\vect{\epsilon}}+\vnorm{\vect{\epsilon}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\vect{\epsilon}}^2\)
-  が成立する．よって\(\vnorm{\vect{x}-\vect{y}}\geq\vnorm{\vect{x}-\vect{m}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+  任意に\(\vect{y}\in V\)をとり，\(\vect{\epsilon}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{m}-\vect{x}}{\vect{\epsilon}}=0\)より
+  \(\vnorm{\vect{y}-\vect{x}}^2=\vnorm{\vect{m}-\vect{x}+\vect{\epsilon}}^2=\vnorm{\vect{m}-\vect{x}}^2+2\rpart\innerp{\vect{m}-\vect{x}}{\vect{\epsilon}}+\vnorm{\vect{\epsilon}}^2=\vnorm{\vect{m}-\vect{x}}^2+\vnorm{\vect{\epsilon}}^2\)
+  が成立する．よって\(\vnorm{\vect{y}-\vect{x}}\geq\vnorm{\vect{m}-\vect{x}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
 \end{proof}
 
-\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
-しかし実は，仮定を満たす\(\vect{m}\)は一意に存在し，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のただ1つの元である．
+\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
+しかし実は，仮定を満たす\(\vect{m}\)は一意に存在し，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)のただ1つの元である．
 
 \begin{proposition}{}{finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ1つ存在する．
   \begin{enumerate}
-    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
-    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
+    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
+    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)である．
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)を満たす\(\vect{n}\)がただ1つ存在する．
-  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
+  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)を満たす\(\vect{n}\)がただ1つ存在する．
+  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
-  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(d(z)=\vnorm{\vect{x}-(\vect{n}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{n}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
+  \(\vect{n}\)の定義から，関数\(d(z)=\vnorm{(\vect{n}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{n}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    d(z) &= \vnorm{(\vect{x}-\vect{n})-z\vect{v}}^2-\vnorm{\vect{x}-\vect{n}}^2
-    = -2\rpart[\conj{z}\innerp{\vect{x}-\vect{n}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
-    &= -2(x\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})+x^2+y^2 \\
-    &= (x-\rpart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{n}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2 \\
-    &= \abs{z-\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2
+    d(z) &= \vnorm{(\vect{n}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{n}-\vect{x}}^2
+    = 2\rpart[\conj{z}\innerp{\vect{n}-\vect{x}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    &= 2(x\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}}+y\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})+x^2+y^2 \\
+    &= (x+\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2+(y+\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2 \\
+    &= \abs{z+\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2
   \end{align*}
-  なので\(\abs{\innerp{\vect{x}-\vect{n}}{\vect{v}}}^2=-d(\innerp{\vect{x}-\vect{n}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{n}}{\vect{v}}=0\)である．
+  より\(-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2=d(-\innerp{\vect{n}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)である．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\vect{x}\)}
@@ -186,8 +187,8 @@
 
 \begin{proof}
   \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{z}=s\vect{x}+t\vect{y}\)，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
-  このとき，任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V\vect{x}}{\vect{v}}+t\innerp{\vect{y}-\proj_V\vect{y}}{\vect{v}}=s0+t0=0\)なので，
-  \(\proj_V\vect{z}=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+  このとき，任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので，
+  \(\vect{m}=\proj_V\vect{z}\)である．よって，\(\proj_V\)は線型写像である．
 \end{proof}
 
 \subsection{直交補空間}
@@ -235,24 +236,24 @@
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Lambda}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
+\(\mat{U}=\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}\)，\(\mat{\Lambda}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
-  \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
+  \htrps{\mat{U}}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
   = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
   \quad\mat{\Lambda}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
-  \quad\htrps{\mat{U}}\vect{x} = \htrps{\mat{U}}\matrice*{x_1 \\ \vdots \\ x_n}
+  \quad\mat{U}\vect{x} = \mat{U}\matrice*{x_1 \\ \vdots \\ x_n}
   = \sum_{i=1}^nx_i\vect{e}_i
 \]
 であるから
 \[
-  \htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
-  = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
+  \mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x} = \mat{U}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
+  = \mat{U}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\htrps{\mat{U}}\mat{\Lambda}\mat{U}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(\operateur{T}\vect{x}=\mat{U}\vect{x}\)，\(\operateur{L}\vect{x}=\mat{\Lambda}\vect{x}\)，\(\operateur{\synth{T}}\vect{x}=\htrps{\mat{U}}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
+\(\operateur{T}\vect{x}=\htrps{\mat{U}}\vect{x}\)，\(\operateur{L}\vect{x}=\mat{\Lambda}\vect{x}\)，\(\operateur{\synth{T}}\vect{x}=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
 
 \(\operateur{T}\vect{x}\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
@@ -289,7 +290,7 @@
 正規行列とユニタリ行列の関係については\cref{section:least_square}で詳述することにして，ここでは次の命題を示す．
 
 \begin{proposition}{ユニタリ行列の特徴づけ}{unitary_matrix_property}
-  \(\mat{U}=\htrps{\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
+  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{U}\)はユニタリ行列である．
     \item 集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底である．
@@ -300,10 +301,10 @@
 \begin{proof}
   まず，1と2の同値性を示す．
   \[
-    \mat{U}\htrps{\mat{U}} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
+    \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
      = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
  \]
-  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\mat{U}\htrps{\mat{U}}=\imat\)と同値である．
+  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
 
   次に，3と1の同値性を示す．\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\trps{(\mat{U}\vect{x})}\conj*{\mat{U}\vect{y}}=\trps{\vect{x}}\conj*{\htrps{\mat{U}}\mat{U}\vect{y}}=\innerp{\vect{x}}{\htrps{\mat{U}}\mat{U}\vect{y}}\)より，
   \(\mat{E}=\imat-\htrps{\mat{U}}\mat{U}\)とおくと\(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}\)である．
@@ -322,8 +323,8 @@
 
 \begin{proof}
   \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分析作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
-  \(\operateur{T}\vect{x}=\mat{U}\vect{x}\)（\(\mat{U}=\htrps{\rowvect{\vect{u}_1 & \dots & \vect{u}_n}}\)）である．
-  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_property}より\(\mat{U}\)はユニタリ行列である．逆の証明は省略する．
+  \(\operateur{T}\vect{x}=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \dots & \vect{u}_n}\)）である．
+  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_property}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
 \section{最小2乗問題}
@@ -343,7 +344,7 @@
 \cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{y}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，\cref{equation:linear_equation}の解は\(\vect{x}=\mat{A}^{-1}\vect{y}\)ただ1つである．
 
 \(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{y}\)次第である．
-そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\vect{y}-\mat{A}\vect{x}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
+そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
 
 \subsection{スペクトル定理}
 
