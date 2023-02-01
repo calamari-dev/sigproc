@@ -88,7 +88,7 @@
 
 \begin{proof}
   本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
-  このとき\(V=\Set{\sum z_i\vect{e}_i\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\vect{\epsilon}(z_1,\dots,z_m)=\sum z_i\vect{e}_i-\vect{x}\)とおくと
+  このとき\(V=\Set{\sum z_i\vect{e}_i\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\vect{\epsilon}(z_1,\dots,z_m)=(\sum z_i\vect{e}_i)-\vect{x}\)とおくと
   \[
     \argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}} = \Set*{\sum z_i\vect{e}_i\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}}
   \]
@@ -101,16 +101,16 @@
     = \sum z_i\conj{z}_i
     = \sum\abs{z_i}^2
   \]
-  である．したがって，\cref{lemma:binomial_square}より
+  である．したがって，\cref{lemma:binomial_square}から
   \begin{align*}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm*{\sum z_i\vect{e}_i-\vect{x}}^2
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm*{\pqty*{\sum z_i\vect{e}_i}-\vect{x}}^2
     = \vnorm*{\sum z_i\vect{e}_i}^2-2\rpart\innerp*{\sum z_i\vect{e}_i}{\vect{x}}+\vnorm{\vect{x}}^2 \\
-    &= \sum\abs{z_i}^2-2\sum\rpart[z_i\innerp{\vect{e}_i}{\vect{x}}]+\vnorm{\vect{x}}^2
+    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart[\innerp{z_i\vect{e}_i}{\vect{x}}])
   \end{align*}
-  である．よって，\(\vnorm{\vect{\epsilon}(\vect{z})}^2\)は\(s_i=\rpart z_i\)と\(t_i=\ipart z_i\)の式で
+  である．よって，\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと，\(\innerp{z_i\vect{e}_i}{\vect{x}}=z_i\conj*{\innerp{\vect{x}}{\vect{e}_i}}\)より
   \begin{align*}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(-2\rpart[(s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}}]+s_k^2+t_k^2) \\
-    &= \vnorm{\vect{x}}^2+\sum(-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})+s_k^2+t_k^2) \\
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2\rpart[(s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}}]) \\
+    &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})) \\
     &= \vnorm{\vect{x}}^2+\sum((s_k-\rpart\innerp{\vect{x}}{\vect{e}_k})^2+(t_k-\ipart\innerp{\vect{x}}{\vect{e}_k})^2-\abs{\innerp{\vect{x}}{\vect{e}_k}}^2)
   \end{align*}
   と書けるので，次式が成立する．
@@ -119,7 +119,7 @@
     \vnorm{\vect{\epsilon}(\vect{z})}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
   \end{equation}
 
-  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}\epsilon(\vect{z})=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
+  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
   \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
 \end{proof}
 
@@ -346,6 +346,19 @@
 \(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{y}\)次第である．
 そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
 
+\begin{proposition}{}{}
+  \(\vect{y}\in\numset{C}^n\)かつ，\(\mat{A}\)は\(n\times p\)複素行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)）は空でない．
+\end{proposition}
+
+\begin{proof}
+  線型写像\(T\colon\numset{C}^p\to\numset{C}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
+  \[
+    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{T(\vect{x})-\vect{y}} = \inv*{T}{\argmin_{\tilde{\vect{y}}\in\img T}\vnorm{\tilde{\vect{y}}-\vect{y}}}
+    = \inv{T}{\Set{\proj_{\img T}\vect{y}}}
+  \]
+  が成立する．よって\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{y}}\)であり，この集合は明らかに空でない．
+\end{proof}
+
 \subsection{スペクトル定理}
 
 \subsection{特異値分解}
@@ -393,7 +406,7 @@
 と書ける．
 
 \begin{proposition}{}{dft_plancherel}
-  \(\vect{\hat{x}}=\dft{N}\vect{x}\)，\(\vect{\hat{y}}=\dft{N}\vect{y}\)とすると，\(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)が成立する．
+  \(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)（\(\vect{x},\vect{y}\in\numset{C}^N\)）である．
 \end{proposition}
 
 \begin{proof}
@@ -418,6 +431,8 @@
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
+
+\pagebreak
 
 \begin{wrapfigure}[10]{o}{0pt}
   \includegraphics{figures/helix.pdf}
