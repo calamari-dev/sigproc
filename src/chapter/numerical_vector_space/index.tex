@@ -353,11 +353,22 @@
 \begin{proof}
   線型写像\(T\colon\numset{C}^p\to\numset{C}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
   \[
-    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{T(\vect{x})-\vect{y}} = \inv*{T}{\argmin_{\tilde{\vect{y}}\in\img T}\vnorm{\tilde{\vect{y}}-\vect{y}}}
-    = \inv{T}{\Set{\proj_{\img T}\vect{y}}}
+    \ran*{T}{\argmin_{\vect{x}\in\numset{C}^p}\vnorm{T(\vect{x})-\vect{y}}} = \argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{y}}
+    = \Set{\proj_{\img T}\vect{y}}
   \]
   が成立する．よって\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{y}}\)であり，この集合は明らかに空でない．
 \end{proof}
+
+\begin{example}
+  \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(T(x,y)=\mat{A}\trps{\rowvect{x & y}}\)のとき，\(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}\)，\(\vect{e}_2=\trps{\rowvect{0 & 3 & 2}}\)とおくと
+  \(\img T=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)である．
+\end{example}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/underdetermined.pdf}
+  \caption{最小2乗法の模式図．}
+\end{figure}
 
 \subsection{スペクトル定理}
 
