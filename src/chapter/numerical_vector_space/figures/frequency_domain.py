@@ -2,9 +2,9 @@ from pathlib import PurePath
 
 import matplotlib.pyplot as plt
 import numpy as np
+from constant import constants
 from scipy.fft import fft, fftfreq, ifft
 from scipy.io import wavfile
-from constant import constants
 
 plt.style.use(["sigproc", "sigproc-wide"])
 

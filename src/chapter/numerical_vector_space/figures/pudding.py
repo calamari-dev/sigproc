@@ -7,7 +7,7 @@ from PIL import Image
 plt.style.use(["sigproc", "sigproc-wide"])
 
 png = Image.open(str(PurePath(__file__).parent / "pudding.png"))
-mat = np.array(png.rotate(-90)).T / (2 ** 16 - 1)
+mat = np.array(png.rotate(-90)).T / (2**16 - 1)
 
 mm = 1 / 25.4
 fig, ax = plt.subplots(figsize=(60 * mm, 45 * mm))

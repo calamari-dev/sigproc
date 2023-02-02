@@ -1,7 +1,7 @@
+import mpl_toolkits.mplot3d.art3d as art3d
 from matplotlib.patches import PathPatch
 from matplotlib.text import TextPath
 from matplotlib.transforms import Affine2D
-import mpl_toolkits.mplot3d.art3d as art3d
 
 
 class Text3D(PathPatch):

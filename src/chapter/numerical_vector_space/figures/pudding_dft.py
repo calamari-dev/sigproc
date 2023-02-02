@@ -1,15 +1,15 @@
 from pathlib import PurePath
 
 import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
-from scipy import fft
 import numpy as np
+from matplotlib.colors import LogNorm
 from PIL import Image
+from scipy import fft
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
 png = Image.open(str(PurePath(__file__).parent / "pudding.png"))
-mat = np.array(png.rotate(-90)).T / (2 ** 16 - 1)
+mat = np.array(png.rotate(-90)).T / (2**16 - 1)
 amp = np.abs(fft.fftshift(fft.fft2(mat, norm="ortho")))
 
 mm = 1 / 25.4

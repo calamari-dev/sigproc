@@ -1,9 +1,8 @@
 from pathlib import PurePath
 
 import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
-from scipy import fft
 import numpy as np
+from scipy import fft
 
 plt.style.use(["sigproc", "sigproc-wide"])
 

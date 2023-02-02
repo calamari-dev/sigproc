@@ -5,7 +5,7 @@ import numpy as np
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
-t = np.linspace(-np.pi, np.pi, num=300)
+t = np.linspace(-np.pi, np.pi, num=64)
 xx, yy = np.meshgrid(t, t)
 zz = np.cos(3 * xx + 4 * yy)
 

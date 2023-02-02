@@ -2,8 +2,8 @@ from pathlib import PurePath
 
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.io import wavfile
 from constant import constants
+from scipy.io import wavfile
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
