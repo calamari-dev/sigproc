@@ -215,17 +215,15 @@
 
 また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
 
-\begin{proposition}{}{gram_schmidt}
+\begin{proposition}{グラム・シュミットの直交化法}{gram_schmidt}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}
   \(V\)を内積空間とする．\(\vect{v}_1,\dots,\vect{v}_n\in V\)が線型独立なら
   \[
     \vect{u}_1 = \vect{v}_1,
     \quad\vect{u}_i = \vect{v}_i-\sum_{j=1}^{n-1}\frac{\innerp{\vect{v}_i}{\vect{u}_j}}{\innerp{\vect{u}_j}{\vect{u}_j}}\vect{u}_j\quad(i=2,\dots,n)
   \]
-  で\(\vect{u}_i\)を定義すると，集合\(\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は正規直交系になる．
+  で\(\vect{u}_i\)を定義すると，集合\(\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は\(V\)の正規直交系になる．
+  正規直交系を作るこの方法を\termdef{グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
 \end{proposition}
-
-正規直交系を作る\cref{proposition:gram_schmidt}の方法を\termdef{グラム・シュミットの直交化法}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
-\cref{proposition:gram_schmidt}から，有限次元の内積空間は常に正規直交基底を持つ．
 
 \subsection{線型写像と表現行列}
 \label{subsection:representation_matrix}

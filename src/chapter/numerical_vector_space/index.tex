@@ -253,9 +253,9 @@
   = \proj_{V_m}\vect{x}
 \]
 であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(\operateur{T}\vect{x}=\htrps{\mat{U}}\vect{x}\)，\(\operateur{L}\vect{x}=\mat{\Lambda}\vect{x}\)，\(\operateur{\synth{T}}\vect{x}=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
+\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
 
-\(\operateur{T}\vect{x}\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
+\(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
 \(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
 もう1つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
@@ -266,13 +266,13 @@
 \end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
-以上の理由から，本書では線型写像\(\operateur{T}\vect{x}=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\operateur{\synth{T}}\vect{x}=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
 
 \begin{definition}{分析作用素，合成作用素}{analysis_and_synthesis}\index{ぶんせきさようそ@分析作用素}\index{ごうせいさようそ@合成作用素}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
   \begin{enumerate}
-    \item 線型写像\(\operateur{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\operateur{T}\vect{x}=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
-    \item 線型写像\(\operateur{\synth{T}}\colon\numset{K}^n\to\numset{K}^n\)，\(\operateur{\synth{T}}\trps{\rowvect{x_1 & \cdots & x_n}}=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
+    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
+    \item 線型写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
   \end{enumerate}
 \end{definition}
 
@@ -323,7 +323,7 @@
 
 \begin{proof}
   \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分析作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
-  \(\operateur{T}\vect{x}=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \dots & \vect{u}_n}\)）である．
+  \(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \dots & \vect{u}_n}\)）である．
   また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_property}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
@@ -347,27 +347,44 @@
 そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
 
 \begin{proposition}{}{}
-  \(\vect{y}\in\numset{C}^n\)かつ，\(\mat{A}\)は\(n\times p\)複素行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)）は空でない．
+  \(\vect{y}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)）は空でない．
 \end{proposition}
 
 \begin{proof}
-  線型写像\(T\colon\numset{C}^p\to\numset{C}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
+  線型写像\(T\colon\numset{K}^p\to\numset{K}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
   \[
-    \ran*{T}{\argmin_{\vect{x}\in\numset{C}^p}\vnorm{T(\vect{x})-\vect{y}}} = \argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{y}}
+    \ran*{T}{\argmin_{\vect{x}\in\numset{K}^p}\vnorm{T(\vect{x})-\vect{y}}} = \argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{y}}
     = \Set{\proj_{\img T}\vect{y}}
   \]
-  が成立する．よって\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{y}}\)であり，この集合は明らかに空でない．
+  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{y}}\)であり，この集合は明らかに空でない．
 \end{proof}
 
+上の証明における\(\img T\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
+\(\mat{A}=\rowvect{\vect{a}_1 & \cdots & \vect{a}_p}\)とおくと
+\[
+  \mat{A}\vect{x} = \matrice{\vect{a}_1 & \cdots & \vect{a}_p}\matrice*{x_1 \\ \vdots \\ x_p}
+  = \sum_{j=1}^px_j\vect{a}_j\quad(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}})
+\]
+だから，\(\colsp\mat{A}\)は\(\mat{A}\)の列ベクトル全体が生成する空間でもある．
+
 \begin{example}
-  \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(T(x,y)=\mat{A}\trps{\rowvect{x & y}}\)のとき，\(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}\)，\(\vect{e}_2=\trps{\rowvect{0 & 3 & 2}}\)とおくと
-  \(\img T=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)である．
+  \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(\vect{y}=\trps{\rowvect{-4 & -6 & 4}}\)とする．
+  \(\vect{v}_1=\trps{\rowvect{4 & 1 & 2}}\)，\(\vect{v}_2=\trps{\rowvect{0 & 3 & 2}}\)とおくと\(\colsp\mat{A}=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)である．
+
+  \(P=\proj_{\colsp\mat{A}}\)とおく．\(\Set{\vect{v}_1,\vect{v}_2}\)に\nameref{xr-proposition:gram_schmidt}を適用すると
+  \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので
+  \[
+    P(\vect{y}) = \innerp{\vect{y}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{y}}{\vect{e}_2}\vect{e}_2
+    = -\frac{2}{3}\matrice*{4 \\ 1 \\ 2}-\frac{2}{3}\matrice*{-1 \\ 2 \\ 1}
+    = \matrice*{-2 \\ -2 \\ -2}
+  \]
+  である．よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{y}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
 \end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/overdetermined.pdf}
-  \caption{最小2乗法の模式図．}
+  \caption{\(\vect{v}_1\)，\(\vect{v}_2\)と\(P(\vect{y})=\mat{A}\vect{x}\)の様子．}
 \end{figure}
 
 \subsection{スペクトル定理}
@@ -599,8 +616,8 @@
 \end{proof}
 
 最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(\operateur{H}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(\operateur{H}x=h\circconv x\)で定義する．
-基底\(\basis{D}\)に関する\(\operateur{H}\)の表現行列\(\mat{H}\)は
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
+基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
 \[
   \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
 \]
@@ -613,14 +630,14 @@
 \end{proposition}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(\operateur{H}\)，\(\operateur{\hat{H}}\)をそれぞれ
-  \(\operateur{H}x=h\circconv x\)，\(\operateur{\hat{H}}x=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
+  \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
   \[
-    (\dft{N}\operateur{H}\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
+    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
     = \hat{h}\cdot x
-    = \operateur{\hat{H}}x\quad(x\in\cycles{\numset{C}}{N})
+    = \hat{H}(x)\quad(x\in\cycles{\numset{C}}{N})
   \]
-  だから，基底\(\basis{D}\)に関する\(\operateur{\hat{H}}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}\operateur{H}\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
+  だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
 \subsection{多次元離散フーリエ変換}
