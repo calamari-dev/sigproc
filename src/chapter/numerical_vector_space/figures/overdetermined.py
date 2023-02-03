@@ -32,6 +32,6 @@ ax.text(*(0.5 * (y1 + ym)), r"$P\,$", ha="right", va="top")
 ax.text(*v1, r"$\vect{a}_1$", ha="left", va="center")
 ax.text(*v2, r"$\vect{a}_2$", ha="left", va="bottom")
 ax.text(*ym, r"$\mat{A}\vect{x}$", ha="right", va="top")
-ax.text(*y1, r"$\vect{y}$", ha="right", va="bottom")
+ax.text(*y1, r"$\vect{b}$", ha="right", va="bottom")
 
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

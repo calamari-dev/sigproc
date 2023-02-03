@@ -88,7 +88,7 @@
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator{\gradof}{grad}
+\DeclareMathOperator{\gradof}{\mathbfup{grad}}
 \DeclareMathOperator{\order}{o}
 \DeclareMathOperator{\Order}{O}
 
@@ -122,10 +122,10 @@
 
 \NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
 
-\DeclareRobustCommand{\ftrans}{\operateur{\symscr{F}}}
-\DeclareRobustCommand{\lagop}{\operateur{\symit{L}}}
-\DeclareRobustCommand{\ltrans}{\operateur{\symscr{L}}}
-\DeclareRobustCommand{\ztrans}{\operateur{\symscr{Z}}}
+\NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
+\NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
+\NewDocumentCommand{\ltrans}{}{\operateur{\symscr{L}}}
+\NewDocumentCommand{\ztrans}{}{\operateur{\symscr{Z}}}
 
 % 測度論
 \newcommand{\borelset}[1]{\symscr{B}(#1)}

@@ -338,25 +338,25 @@
 \begin{equation}
   \label{equation:linear_equation}
   \matrice*{\midx{a}{1}{1} & \cdots & \midx{a}{1}{p} \\ \vdots & \ddots & \vdots \\ \midx{a}{n}{1} & \cdots & \midx{a}{n}{p}}\matrice*{x_1 \\ \vdots \\ x_p}
-  = \matrice*{y_1 \\ \vdots \\ y_n}
+  = \matrice*{b_1 \\ \vdots \\ b_n}
 \end{equation}
-の解き方である．\(\mat{A}=\matfence{\midx{a}{i}{j}}\)，\(\vect{y}=\trps{\rowvect{y_1 & \cdots & y_n}}\)とおくと，\cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{y}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，解は\(\vect{x}=\mat{A}^{-1}\vect{y}\)ただ1つである．
+の解き方である．\(\mat{A}=\matfence{\midx{a}{i}{j}}\)，\(\vect{b}=\trps{\rowvect{b_1 & \cdots & b_n}}\)とおくと，\cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{b}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，解は\(\vect{x}=\mat{A}^{-1}\vect{b}\)ただ1つである．
 
-\(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{y}\)次第である．
-そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
+\(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{b}\)次第である．
+そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
 次の命題から，\(\vnorm{\vect{\epsilon}(\vect{x})}\)の値を最小にする\(\vect{x}\)は常に存在する．
 
 \begin{proposition}{}{least_square_existence}
-  \(\vect{y}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{y}\)）は空でない．
+  \(\vect{b}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)）は空でない．
 \end{proposition}
 
 \begin{proof}
   線型写像\(T\colon\numset{K}^p\to\numset{K}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
   \[
-    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{T(\vect{x})-\vect{y}} = \inv*{T}{\argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{y}}}
-    = \inv{T}{\Set{\proj_{\img T}\vect{y}}}
+    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{T(\vect{x})-\vect{b}} = \inv*{T}{\argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{b}}}
+    = \inv{T}{\Set{\proj_{\img T}\vect{b}}}
   \]
-  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{y}}\)であり，この集合は明らかに空でない．
+  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{b}}\)であり，この集合は明らかに空でない．
 \end{proof}
 
 上の証明における\(\img T\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
@@ -368,53 +368,62 @@
 だから，\(\colsp\mat{A}\)は\(\mat{A}\)の列ベクトル全体が生成する空間でもある．
 
 \begin{example}\label{example:overdetermined}
-  \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(\vect{y}=\trps{\rowvect{-4 & -6 & 4}}\)とする．
+  \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(\vect{b}=\trps{\rowvect{-4 & -6 & 4}}\)とする．
   \(\vect{a}_1=\trps{\rowvect{4 & 1 & 2}}\)，\(\vect{a}_2=\trps{\rowvect{0 & 3 & 2}}\)とおくと\(\colsp\mat{A}=\spannedby\Set{\vect{a}_1,\vect{a}_2}\)である．
 
   \(P=\proj_{\colsp\mat{A}}\)とおく．\(\Set{\vect{a}_1,\vect{a}_2}\)に\nameref{xr-proposition:gram_schmidt}を適用すると
   \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので
   \[
-    P(\vect{y}) = \innerp{\vect{y}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{y}}{\vect{e}_2}\vect{e}_2
+    P(\vect{b}) = \innerp{\vect{b}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{b}}{\vect{e}_2}\vect{e}_2
     = -\frac{2}{3}\matrice*{4 \\ 1 \\ 2}-\frac{2}{3}\matrice*{-1 \\ 2 \\ 1}
     = \matrice*{-2 \\ -2 \\ -2}
   \]
-  である．よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{y}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
+  である．よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
 \end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/overdetermined.pdf}
-  \caption{\(\vect{a}_1\)，\(\vect{a}_2\)と\(P(\vect{y})=\mat{A}\vect{x}\)の様子．}
+  \caption{\(\vect{a}_1\)，\(\vect{a}_2\)と\(P(\vect{b})=\mat{A}\vect{x}\)の様子．}
 \end{figure}
 
-\cref{example:overdetermined}から分かるように，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めるには\(\tilde{\vect{y}}=\proj_{\colsp\mat{A}}\vect{y}\)を計算して，方程式\(\mat{A}\vect{x}=\tilde{\vect{y}}\)を解けばよい．
+\cref{example:overdetermined}から分かるように，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めるには\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)を計算して，方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)を解けばよい．
 一方で，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)をより機械的に求める方法もある．
 
 \(\increment\vect{x}\in\numset{K}^p\)とする．\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)とおくと
 \begin{align*}
-  \increment\epsilon(\vect{x}) &= \vnorm{(\mat{A}\vect{x}-\vect{y})+(\mat{A}\increment\vect{x})}^2-\vnorm{\mat{A}\vect{x}-\vect{y}}^2 \\
-  &= 2\rpart\innerp{\mat{A}\vect{x}-\vect{y}}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
-  &= 2\rpart\innerp{\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{y}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+  \increment\epsilon(\vect{x}) &= \vnorm{(\mat{A}\vect{x}-\vect{b})+(\mat{A}\increment\vect{x})}^2-\vnorm{\mat{A}\vect{x}-\vect{b}}^2 \\
+  &= 2\rpart\innerp{\mat{A}\vect{x}-\vect{b}}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
+  &= 2\rpart\innerp{\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{b}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
 \end{align*}
-である．よって，\(\numset{K}^p\)の元\(\vect{x}_0\)が\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{y}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{x}_0)=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
+である．よって，\(\numset{K}^p\)の元\(\vect{x}_0\)が\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{x}_0)=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
 関数\(\epsilon\)は点\(\vect{x}_0\)で最小値をとる．
 
-また，\(\increment\vect{x}=-t\vect{g}\)（\(t>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}_0-\htrps{\mat{A}}\vect{y}\)）のとき\(\increment\epsilon(\vect{x}_0)=-2t\vnorm{\vect{g}}^2+t^2\vnorm{\mat{A}\vect{g}}^2\)なので，
-\(\vect{g}=\zvec\)でなければ\(t\)の値が十分小さいとき\(\increment\epsilon(\vect{x}_0)<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{y}\)でなければ\(\epsilon(\vect{x}_0)\)は関数\(\epsilon\)の最小値ではない．
+また，\(\increment\vect{x}=-t\vect{g}\)（\(t>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}_0-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{x}_0)=-2t\vnorm{\vect{g}}^2+t^2\vnorm{\mat{A}\vect{g}}^2\)なので，
+\(\vect{g}=\zvec\)でなければ\(t\)の値が十分小さいとき\(\increment\epsilon(\vect{x}_0)<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{x}_0)\)は関数\(\epsilon\)の最小値ではない．
 
 以上の議論から，次の命題が成り立つ．
 
 \begin{proposition}{}{normal_equation}
-  \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})} = \Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{y}}\)である．
+  \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})} = \Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
-\(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{y}\)を，方程式\(\mat{A}\vect{x}=\vect{y}\)の\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
+\(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)の\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 \begin{note}
-  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
-  \(\increment\vect{x}\)を無限小とみなせば\(\intd*{\epsilon}=2\vect{g}\cdot\intd*{\vect{x}}\)である．つまり，\(2\vect{g}=2(\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{y})\)は\(\epsilon(\vect{x})\)の勾配である．
+  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，\(\increment\vect{x}\)を無限小とみなせば\(\intd*{\epsilon}=2\vect{g}\cdot\intd*{\vect{x}}\)である．
+  つまり，\(2\vect{g}=2(\trps{\mat{A}}\mat{A}\vect{x}-\trps{\mat{A}}\vect{b})\)は\(\epsilon(\vect{x})\)の勾配なので，正規方程式を\(\gradof\epsilon(\vect{x})=\zvec\)とも書ける．
 \end{note}
+
+正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
+よって，\(\vect{v}=\vect{a}_j\)とすれば\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{a}_j}=\htrps{\vect{a}_j}(\mat{A}\vect{x}-\vect{b})=0\)だから
+\[
+  \htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b}) = \matrice*{\htrps{\vect{a}_1} \\ \vdots \\ \htrps{\vect{a}_p}}(\mat{A}\vect{x}-\vect{b})
+  = \matrice*{\htrps{\vect{a}_1}(\mat{A}\vect{x}-\vect{b}) \\ \vdots \\ \htrps{\vect{a}_p}(\mat{A}\vect{x}-\vect{b})}
+  = \zvec
+\]
+である．
 
 \subsection{スペクトル定理}
 
