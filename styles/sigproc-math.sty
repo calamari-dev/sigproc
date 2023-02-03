@@ -4,17 +4,21 @@
 \RequirePackage[group-digits=none]{siunitx}
 \ProvidesExplPackage{sigproc-math}{2023-02-01}{1.0}{nomenclature of the signal processing}
 
+\newmuskip\scriptthinmuskip \scriptthinmuskip=.3\thinmuskip
+
 \RenewDocumentCommand{\,}{}{
   \mode_if_math:TF{
     \int_compare:nNnTF{\mathstyle}>{\crampedtextstyle}{
-      \mspace{0.8\thinmuskip}
+      \mskip\scriptthinmuskip
     }{
-      \mspace{\thinmuskip}
+      \mskip\thinmuskip
     }
   }{
-    \thinspace
+    \kern.16667em
   }
 }
+
+\RenewCommandCopy{\thinspace}{\,}
 
 \ExplSyntaxOff
 
@@ -29,7 +33,7 @@
 \newcommand{\scomp}[1]{#1^{\symrm{c}}}
 \newcommand{\sizeof}[1]{\mathoctothorpe #1}
 
-\NewDocumentCommand{\conj}{sm}{\IfBooleanTF{#1}{\overline{#2}}{\bar{#2}}}
+\NewDocumentCommand{\conj}{s m}{\IfBooleanTF{#1}{\overline{#2}}{\bar{#2}}}
 
 \DeclareMathOperator{\ipart}{Im}
 \DeclareMathOperator{\rpart}{Re}
@@ -60,7 +64,7 @@
 \newcommand{\trps}[1]{#1^{\symsfup{T}}}
 \newcommand{\vect}[1]{\symbf{#1}}
 
-\NewDocumentCommand{\pcomp}{om}{#2^{\mathord{\perp}\IfValueT{#1}{\mid #1}}}
+\NewDocumentCommand{\pcomp}{o m}{#2^{\mathord{\perp}\IfValueT{#1}{\mid #1}}}
 
 \DeclareMathOperator{\colsp}{col}
 \DeclareMathOperator{\diag}{diag}
@@ -80,11 +84,11 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\NewDocumentCommand{\intd}{som}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^#2}{\symrm{d}}#3}
+\NewDocumentCommand{\intd}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^#2}{\symrm{d}}#3}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\gradof}{grad}
 \DeclareMathOperator{\order}{o}
 \DeclareMathOperator{\Order}{O}
 
@@ -98,7 +102,7 @@
 \newcommand{\lebesgue}[1]{\ell^#1}
 \newcommand{\torus}{\symbb{T}}
 
-\NewDocumentCommand{\Lebesgue}{sm}{\IfBooleanTF{#1}{\symscr{L}}{L}^#2}
+\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symscr{L}}{L}^#2}
 
 \DeclareMathOperator{\clsr}{cl}
 \DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
@@ -116,7 +120,7 @@
 \newcommand{\dtft}{\operatorname{\symscr{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operatorname{\symscr{F}}_{\torus}}
 
-\NewDocumentCommand{\dft}{om}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
+\NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
 
 \DeclareRobustCommand{\ftrans}{\operateur{\symscr{F}}}
 \DeclareRobustCommand{\lagop}{\operateur{\symit{L}}}
@@ -132,15 +136,15 @@
 \newcommand{\sigmagen}[1]{\sigma(#1)}
 \newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
 
-\NewDocumentCommand{\almosteverywhere}{oo}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
-\NewDocumentCommand{\measured}{som}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{#3(\symrm{d}#2)}{\symrm{d}#3}}
+\NewDocumentCommand{\almosteverywhere}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\measured}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{#3(\symrm{d}#2)}{\symrm{d}#3}}
 
 % 確率統計
 \newcommand{\expval}{\symbb{E}}
 \newcommand{\prob}{\symbb{P}}
 \newcommand{\variant}{\symbb{V}}
 
-\NewDocumentCommand{\almostsurely}{oo}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\almostsurely}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}

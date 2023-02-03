@@ -7,12 +7,13 @@
 \DeclareOption{ebook}{\@ebooktrue}
 \ProcessOptions
 
-\if@ebook\else
-\PassOptionsToClass{twoside,gutter=20mm}{jlreq}
+\if@ebook
+\else
+  \PassOptionsToClass{twoside,gutter=20mm}{jlreq}
 \fi
 
-\newcommand{\jlreqkanjiskip}{0pt plus 0.1\zw minus 0.01\zw}
-\newcommand{\jlreqxkanjiskip}{0.25em plus 0.15em minus 0.06em}
+\newcommand{\jlreqkanjiskip}{\z@ \@plus .1\zw \@minus .01\zw}
+\newcommand{\jlreqxkanjiskip}{.25em \@plus .15em \@minus .06em}
 \LoadClass[disablejfam,book,paper=a5,fontsize=9bp,head_space=20mm,line_length=112mm,number_of_lines=32,headfoot_verticalposition=11bp]{jlreq}
 
 \RequirePackage[math-style=ISO,warnings-off={mathtools-colon}]{unicode-math}
@@ -25,7 +26,7 @@
 
 % フォント
 \ltjsetparameter{jacharrange={-2,-9},alxspmode={`‐,0}}
-\ltjsetparameter{yalbaselineshift=0.02\zh}
+\ltjsetparameter{yalbaselineshift=.02\zh}
 \ltjsetruby{fontcmd=\rmfamily\mcfamily\mdseries}
 \setmathfont{STIX Two Math}[Scale=1.1]
 \setmainfont{STIX Two Text}[Scale=1.1]
@@ -86,7 +87,7 @@
 % 目次・補遺
 \patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{empty}\@starttoc}{}{}
 \titlecontents{chapter}[0\zw]{\addvspace{1\zh}\sffamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
-\titlecontents{section}[1\zw]{}{\makebox[3\zw][l]{\thecontentslabel}}{\hspace{3\zw}}{\space\titlerule*[0.5\zw]{.}\contentspage}
+\titlecontents{section}[1\zw]{}{\makebox[3\zw][l]{\thecontentslabel}}{\hspace{3\zw}}{\space\titlerule*[.5\zw]{.}\contentspage}
 \titlecontents*{subsection}[4\zw]{\small}{}{}{}[／]
 \renewcommand{\appendixname}{補遺}
 
@@ -100,9 +101,9 @@
   \setlength{\midx@columnseprule}{\columnseprule}%
   \setlength{\midx@columnsep}{\columnsep}%
   \setlength{\midx@multicolsep}{\multicolsep}%
-  \setlength{\columnseprule}{0.4pt}%
+  \setlength{\columnseprule}{.4\p@}%
   \setlength{\columnsep}{2\zw}%
-  \setlength{\multicolsep}{0pt}%
+  \setlength{\multicolsep}{\z@}%
   \clearpage%
   \phantomsection%
   \addcontentsline{toc}{chapter}{\indexname}%
@@ -110,8 +111,8 @@
   \@mkboth{\indexname}{\indexname}%
   \jlreq@theindex@pagestyle%
   \small%
-  \setlength{\parindent}{0pt}%
-  \setlength{\parskip}{0pt plus 0.03\zh}%
+  \setlength{\parindent}{\z@}%
+  \setlength{\parskip}{\z@ \@plus .03\zh}%
   \DeclareCommandCopy{\item}{\@idxitem}%
 }{%
   \end{multicols}%
