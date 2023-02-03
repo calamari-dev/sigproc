@@ -397,15 +397,10 @@
   &= 2\rpart\innerp{\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{y}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
 \end{align*}
 である．よって，\(\numset{K}^p\)の元\(\vect{x}_0\)が\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{y}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{x}_0)=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
-関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)は点\(\vect{x}_0\)で最小値をとる．
+関数\(\epsilon\)は点\(\vect{x}_0\)で最小値をとる．
 
-また，\(\increment\vect{x}=-t\vect{g}\)（\(t>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}_0-\htrps{\mat{A}}\vect{y}\)）のとき
-\[
-  \increment\epsilon(\vect{x}_0) = -2t\vnorm{\vect{g}}^2+t^2\vnorm{\mat{A}\vect{g}}^2
-  = \pqty*{\frac{\vnorm{\vect{g}}^2}{\vnorm{\mat{A}\vect{g}}}-t\vnorm{\mat{A}\vect{g}}}^2-\pqty*{\frac{\vnorm{\vect{g}}^2}{\vnorm{\mat{A}\vect{g}}}}^2
-\]
-なので，\(\vect{g}=\zvec\)でなければ\(t\)の値が十分小さいとき\(\increment\epsilon(\vect{x}_0)<0\)である．
-つまり，\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{y}\)でなければ\(\vnorm{\vect{\epsilon}(\vect{x}_0)}\)は関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)の最小値ではない．
+また，\(\increment\vect{x}=-t\vect{g}\)（\(t>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}_0-\htrps{\mat{A}}\vect{y}\)）のとき\(\increment\epsilon(\vect{x}_0)=-2t\vnorm{\vect{g}}^2+t^2\vnorm{\mat{A}\vect{g}}^2\)なので，
+\(\vect{g}=\zvec\)でなければ\(t\)の値が十分小さいとき\(\increment\epsilon(\vect{x}_0)<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{y}\)でなければ\(\epsilon(\vect{x}_0)\)は関数\(\epsilon\)の最小値ではない．
 
 以上の議論から，次の命題が成り立つ．
 
@@ -418,7 +413,7 @@
 
 \begin{note}
   \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
-  \(\increment\vect{x}\)を無限小とみなせば\(\intd*{\epsilon}=2\vect{g}\cdot\intd*{\vect{x}}\)である．つまり，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{y}\)は\(\epsilon(\vect{x})\)の勾配ベクトルである．
+  \(\increment\vect{x}\)を無限小とみなせば\(\intd*{\epsilon}=2\vect{g}\cdot\intd*{\vect{x}}\)である．つまり，\(2\vect{g}=2(\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{y})\)は\(\epsilon(\vect{x})\)の勾配である．
 \end{note}
 
 \subsection{スペクトル定理}
