@@ -1,5 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sigproc}[2022/05/31 sigproc class]
+\RequirePackage{expl3}
+\ProvidesExplClass{sigproc}{2023-02-04}{1.0}{sigproc class}
+\ExplSyntaxOff
 
 \newif\if@ebook
 \@ebookfalse
@@ -135,6 +137,24 @@
 
 % 数式
 \setlength{\predisplaypenalty}{\z@}
+\newmuskip\scriptthinmuskip \scriptthinmuskip=.7\thinmuskip
+
+\ExplSyntaxOn
+\cs_new:Nn{\sigproc_thinskip:}{
+  \mode_if_math:TF{
+    \int_compare:nNnTF{\mathstyle}>{\crampedtextstyle}{
+      \mskip\scriptthinmuskip
+    }{
+      \mskip\thinmuskip
+    }
+  }{
+    \kern.16667em
+  }
+}
+
+\RenewDocumentCommand{\,}{}{\sigproc_thinskip:}
+\RenewDocumentCommand{\thinspace}{}{\sigproc_thinskip:}
+\ExplSyntaxOff
 
 % narrowbaselines
 \newif{\ifnarrowbaselines}
@@ -142,6 +162,8 @@
 \newlength{\nbl@asskip}
 \newlength{\nbl@bdskip}
 \newlength{\nbl@bsskip}
+\NewCommandCopy{\nbl@normalsize}{\normalsize}
+\NewCommandCopy{\nbl@small}{\small}
 
 \DeclareRobustCommand{\narrowbaselines}{%
   \narrowbaselinestrue%
@@ -159,29 +181,28 @@
   \setlength{\belowdisplayshortskip}{\nbl@bsskip}%
 }
 
-\everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
-
 \DeclareRobustCommand{\normalsize}{%
   \ifnarrowbaselines
     \@setfontsize{\normalsize}{\jlreq@fontsize}{\dimexpr 12\jlreq@baselineskip/17\relax}%
+    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
+    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \nbl@normalsize%
+    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
   \else
-    \@setfontsize{\normalsize}{\jlreq@fontsize}{\jlreq@baselineskip}%
+    \nbl@normalsize%
   \fi
-  \setlength{\abovedisplayskip}{1.1\jlreq@fontsize \@plus .3\jlreq@fontsize \@minus .4\jlreq@fontsize}%
-  \setlength{\abovedisplayshortskip}{\z@ \@plus .3\jlreq@fontsize}%
-  \setlength{\belowdisplayskip}{.9\jlreq@fontsize \@plus .3\jlreq@fontsize \@minus .4\jlreq@fontsize}%
-  \setlength{\belowdisplayshortskip}{\belowdisplayskip}%
-  \DeclareCommandCopy{\@listi}{\@listI}%
 }
 
 \DeclareRobustCommand{\small}{%
   \ifnarrowbaselines
     \@setfontsize{\small}{.9\jlreq@fontsize}{\dimexpr 12\jlreq@baselineskip/17\relax}%
+    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
+    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \nbl@small%
+    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
   \else
-    \@setfontsize{\small}{.9\jlreq@fontsize}{\dimexpr 13\jlreq@baselineskip/17\relax}%
+    \nbl@small%
   \fi
-  \setlength{\abovedisplayskip}{.9\jlreq@fontsize \@plus .3\jlreq@fontsize \@minus .4\jlreq@fontsize}%
-  \setlength{\abovedisplayshortskip}{\z@ \@plus .3\jlreq@fontsize}%
-  \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}%
-  \setlength{\belowdisplayskip}{\abovedisplayskip}%
 }
+
+\everydisplay=\expandafter{\the\everydisplay \narrowbaselines}

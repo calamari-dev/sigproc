@@ -1,26 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3}
+\ProvidesExplPackage{sigproc-math}{2023-02-01}{1.0}{nomenclature of the signal processing}
+\ExplSyntaxOff
+
 \RequirePackage{mathtools}
 \RequirePackage[group-digits=none]{siunitx}
-\ProvidesExplPackage{sigproc-math}{2023-02-01}{1.0}{nomenclature of the signal processing}
-
-\newmuskip\scriptthinmuskip \scriptthinmuskip=.3\thinmuskip
-
-\RenewDocumentCommand{\,}{}{
-  \mode_if_math:TF{
-    \int_compare:nNnTF{\mathstyle}>{\crampedtextstyle}{
-      \mskip\scriptthinmuskip
-    }{
-      \mskip\thinmuskip
-    }
-  }{
-    \kern.16667em
-  }
-}
-
-\RenewCommandCopy{\thinspace}{\,}
-
-\ExplSyntaxOff
 
 % 汎用
 \newcommand{\holder}{\mathvisiblespace}
