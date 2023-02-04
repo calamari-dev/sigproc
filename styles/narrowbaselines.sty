@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{expl3}
+\ProvidesExplPackage{narrowbaselines}{2023-02-04}{1.0}{narrowbaselines}
+
+\newlength{\nbl@baselineskip}
+\newlength{\nbl@fontsize}
+
+\DeclareKeys[narrowbaselines]{
+  baselineskip.code = \setlength{\nbl@baselineskip}{\dimeval{#1}},
+  baselineskip.usage = load,
+  fontsize.code = \setlength{\nbl@fontsize}{\dimeval{#1}},
+  fontsize.usage = load
+}
+
+\ProcessKeyOptions[narrowbaselines]
+
+\group_begin:
+  \skip_new:N\l_nbl_abovedisplay_skip
+  \skip_new:N\l_nbl_belowdisplay_skip
+  \skip_new:N\l_nbl_abovedisplayshort_skip
+  \skip_new:N\l_nbl_belowdisplayshort_skip
+
+  \cs_new:Nn{\nbl_restore_skip:}{
+    \skip_set:Nn\l_nbl_abovedisplay_skip{\abovedisplayskip}
+    \skip_set:Nn\l_nbl_belowdisplay_skip{\belowdisplayskip}
+    \skip_set:Nn\l_nbl_abovedisplayshort_skip{\abovedisplayshortskip}
+    \skip_set:Nn\l_nbl_belowdisplayshort_skip{\belowdisplayshortskip}
+  }
+
+  \cs_new:Nn{\nbl_recover_skip:}{
+    \setlength{\abovedisplayskip}{\skip_use:N\l_nbl_abovedisplay_skip}
+    \setlength{\belowdisplayskip}{\skip_use:N\l_nbl_belowdisplay_skip}
+    \setlength{\abovedisplayshortskip}{\skip_use:N\l_nbl_abovedisplayshort_skip}
+    \setlength{\belowdisplayshortskip}{\skip_use:N\l_nbl_belowdisplayshort_skip}
+  }
+\group_end:
+
+\NewDocumentCommand{\nbl@restoreskip}{}{\nbl_restore_skip:}
+\NewDocumentCommand{\nbl@recoverskip}{}{\nbl_recover_skip:}
+\ExplSyntaxOff
+
+\newif{\ifnarrowbaselines}
+\NewCommandCopy{\nbl@normalsize}{\normalsize}
+\NewCommandCopy{\nbl@small}{\small}
+
+\DeclareRobustCommand{\narrowbaselines}{%
+  \narrowbaselinestrue%
+  \nbl@restoreskip%
+  \DeclareCommandCopy{\nbl@nomath}{\@nomath}%
+  \RenewCommandCopy{\@nomath}{\@gobble}%
+  \@currsize\selectfont%
+  \RenewCommandCopy{\@nomath}{\nbl@nomath}%
+  \nbl@recoverskip%
+}
+
+\RenewDocumentCommand{\normalsize}{}{%
+  \ifnarrowbaselines
+    \@setfontsize{\normalsize}{\nbl@fontsize}{\dimeval{12\nbl@baselineskip / 17}}%
+    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
+    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \nbl@normalsize%
+    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
+  \else
+    \nbl@normalsize%
+  \fi
+}
+
+\RenewDocumentCommand{\small}{}{%
+  \ifnarrowbaselines
+    \@setfontsize{\small}{.9\nbl@fontsize}{\dimeval{12\nbl@baselineskip / 17}}%
+    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
+    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \nbl@small%
+    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
+  \else
+    \nbl@small%
+  \fi
+}
+
+\everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
