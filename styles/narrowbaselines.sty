@@ -2,17 +2,25 @@
 \RequirePackage{expl3}
 \ProvidesExplPackage{narrowbaselines}{2023-02-04}{1.0}{narrowbaselines}
 
-\newlength{\nbl@baselineskip}
-\newlength{\nbl@fontsize}
-
 \DeclareKeys[narrowbaselines]{
-  baselineskip.code = \setlength{\nbl@baselineskip}{\dimeval{#1}},
+  baselineskip.if = @nbl@option@baselineskip,
+  baselineskip.store = \nbl@option@baselineskip,
   baselineskip.usage = load,
-  fontsize.code = \setlength{\nbl@fontsize}{\dimeval{#1}},
+  fontsize.store = \nbl@option@fontsize,
   fontsize.usage = load
 }
 
 \ProcessKeyOptions[narrowbaselines]
+
+\newlength{\nbl@baselineskip}
+\newlength{\nbl@fontsize}
+\setlength{\nbl@fontsize}{\dimeval{\nbl@option@fontsize}}
+
+\if@nbl@option@baselineskip
+  \setlength{\nbl@baselineskip}{\skipeval{\nbl@option@baselineskip}}
+\else
+  \setlength{\nbl@baselineskip}{\baselineskip}
+\fi
 
 \group_begin:
   \skip_new:N\l_nbl_abovedisplay_skip
@@ -43,7 +51,7 @@
 \NewCommandCopy{\nbl@normalsize}{\normalsize}
 \NewCommandCopy{\nbl@small}{\small}
 
-\DeclareRobustCommand{\narrowbaselines}{%
+\NewDocumentCommand{\narrowbaselines}{}{%
   \narrowbaselinestrue%
   \nbl@restoreskip%
   \DeclareCommandCopy{\nbl@nomath}{\@nomath}%
@@ -55,7 +63,7 @@
 
 \RenewDocumentCommand{\normalsize}{}{%
   \ifnarrowbaselines
-    \@setfontsize{\normalsize}{\nbl@fontsize}{\dimeval{12\nbl@baselineskip / 17}}%
+    \@setfontsize{\normalsize}{\nbl@fontsize}{\skipeval{12 \nbl@baselineskip / 17}}%
     \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
     \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
     \nbl@normalsize%
@@ -67,7 +75,7 @@
 
 \RenewDocumentCommand{\small}{}{%
   \ifnarrowbaselines
-    \@setfontsize{\small}{.9\nbl@fontsize}{\dimeval{12\nbl@baselineskip / 17}}%
+    \@setfontsize{\small}{.9\nbl@fontsize}{\skipeval{12 \nbl@baselineskip / 17}}%
     \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
     \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
     \nbl@small%
