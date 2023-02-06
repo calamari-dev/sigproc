@@ -253,7 +253,7 @@
   = \proj_{V_m}\vect{x}
 \]
 であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(L(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}LT\)と表せる．
+\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(\Lambda(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}\Lambda T\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
@@ -427,8 +427,13 @@
 
 \subsection{スペクトル定理}
 
-引き続き，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．
-\(P=\proj_{\colsp\mat{A}}\)，\(\pcomp{P}=\proj_{\pcomp{(\colsp\mat{A})}}\)とおく．
+\begin{proposition}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
+  \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
+  \begin{enumerate}
+    \item \(\mat{A}\)は正規行列である．
+    \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
+  \end{enumerate}
+\end{proposition}
 
 \subsection{特異値分解}
 

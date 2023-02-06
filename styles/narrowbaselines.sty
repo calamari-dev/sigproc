@@ -2,26 +2,6 @@
 \RequirePackage{expl3}
 \ProvidesExplPackage{narrowbaselines}{2023-02-04}{1.0}{narrowbaselines}
 
-\DeclareKeys[narrowbaselines]{
-  baselineskip.if = @nbl@option@baselineskip,
-  baselineskip.store = \nbl@option@baselineskip,
-  baselineskip.usage = load,
-  fontsize.store = \nbl@option@fontsize,
-  fontsize.usage = load
-}
-
-\ProcessKeyOptions[narrowbaselines]
-
-\newlength{\nbl@baselineskip}
-\newlength{\nbl@fontsize}
-\setlength{\nbl@fontsize}{\dimeval{\nbl@option@fontsize}}
-
-\if@nbl@option@baselineskip
-  \setlength{\nbl@baselineskip}{\skipeval{\nbl@option@baselineskip}}
-\else
-  \setlength{\nbl@baselineskip}{\baselineskip}
-\fi
-
 \group_begin:
   \skip_new:N\l_nbl_abovedisplay_skip
   \skip_new:N\l_nbl_belowdisplay_skip
@@ -36,50 +16,48 @@
   }
 
   \cs_new:Nn{\nbl_recover_skip:}{
-    \setlength{\abovedisplayskip}{\skip_use:N\l_nbl_abovedisplay_skip}
-    \setlength{\belowdisplayskip}{\skip_use:N\l_nbl_belowdisplay_skip}
-    \setlength{\abovedisplayshortskip}{\skip_use:N\l_nbl_abovedisplayshort_skip}
-    \setlength{\belowdisplayshortskip}{\skip_use:N\l_nbl_belowdisplayshort_skip}
+    \setlength\abovedisplayskip{\skip_use:N\l_nbl_abovedisplay_skip}
+    \setlength\belowdisplayskip{\skip_use:N\l_nbl_belowdisplay_skip}
+    \setlength\abovedisplayshortskip{\skip_use:N\l_nbl_abovedisplayshort_skip}
+    \setlength\belowdisplayshortskip{\skip_use:N\l_nbl_belowdisplayshort_skip}
   }
 \group_end:
 
-\NewDocumentCommand{\nbl@restoreskip}{}{\nbl_restore_skip:}
-\NewDocumentCommand{\nbl@recoverskip}{}{\nbl_recover_skip:}
+\NewDocumentCommand\nbl@restoreskip{}{\nbl_restore_skip:}
+\NewDocumentCommand\nbl@recoverskip{}{\nbl_recover_skip:}
 \ExplSyntaxOff
 
-\newif{\ifnarrowbaselines}
-\NewCommandCopy{\nbl@normalsize}{\normalsize}
-\NewCommandCopy{\nbl@small}{\small}
+\newif\ifnarrowbaselines
+\NewCommandCopy\nbl@normalsize\normalsize
+\NewCommandCopy\nbl@small\small
 
-\NewDocumentCommand{\narrowbaselines}{}{%
+\DeclareRobustCommand\narrowbaselines{%
   \narrowbaselinestrue%
   \nbl@restoreskip%
-  \DeclareCommandCopy{\nbl@nomath}{\@nomath}%
-  \RenewCommandCopy{\@nomath}{\@gobble}%
+  \DeclareCommandCopy\nbl@nomath\@nomath%
+  \DeclareCommandCopy\@nomath\@gobble%
   \@currsize\selectfont%
-  \RenewCommandCopy{\@nomath}{\nbl@nomath}%
+  \DeclareCommandCopy\@nomath\nbl@nomath%
   \nbl@recoverskip%
 }
 
-\RenewDocumentCommand{\normalsize}{}{%
+\DeclareRobustCommand\normalsize{%
   \ifnarrowbaselines
-    \@setfontsize{\normalsize}{\nbl@fontsize}{\skipeval{12 \nbl@baselineskip / 17}}%
-    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
-    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \DeclareCommandCopy\nbl@setfontsize\@setfontsize%
+    \def\@setfontsize##1##2##3{\nbl@setfontsize{##1}{##2}{\dimexpr 12 ##3 / 17\relax}}%
     \nbl@normalsize%
-    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
+    \DeclareCommandCopy\@setfontsize\nbl@setfontsize%
   \else
     \nbl@normalsize%
   \fi
 }
 
-\RenewDocumentCommand{\small}{}{%
+\DeclareRobustCommand\small{%
   \ifnarrowbaselines
-    \@setfontsize{\small}{.9\nbl@fontsize}{\skipeval{12 \nbl@baselineskip / 17}}%
-    \DeclareCommandCopy{\nbl@setfontsize}{\@setfontsize}%
-    \RenewCommandCopy{\@setfontsize}{\@gobblethree}%
+    \DeclareCommandCopy\nbl@setfontsize\@setfontsize%
+    \def\@setfontsize##1##2##3{\nbl@setfontsize{##1}{##2}{\dimexpr 12 ##3 / 17\relax}}%
     \nbl@small%
-    \RenewCommandCopy{\@setfontsize}{\nbl@setfontsize}%
+    \DeclareCommandCopy\@setfontsize\nbl@setfontsize%
   \else
     \nbl@small%
   \fi
