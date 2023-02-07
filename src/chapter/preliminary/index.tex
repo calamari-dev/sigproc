@@ -90,23 +90,13 @@
 一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせい@生成!ぶぶんくうかん@部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する\texttwoemdash}（generated subspace）といい，
 \(\spannedby S\)\index{span@\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
+\begin{wrapfigure}[10]{o}{0pt}
+  \includegraphics{figures/linear_comb.pdf}
+\end{wrapfigure}
+
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
 たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\trps{\rowvect{1 & 1}},\trps{\rowvect{2 & -1}},\trps{\rowvect{-1 & 0}}}\)が生成する部分空間は
-\(\numset{R}^2\)である．しかし，\(\basis{S}_2=\Set{\trps{\rowvect{1 & 0}},\trps{\rowvect{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない（\cref{figure:linear_comb}）．
-
-\begin{figure}[htbp]
-  \centering
-  \begin{minipage}{0.5\linewidth}
-    \centering
-    \includegraphics{figures/linear_comb1.pdf}
-  \end{minipage}%
-  \begin{minipage}{0.5\linewidth}
-    \centering
-    \includegraphics{figures/linear_comb2.pdf}    
-  \end{minipage}
-  \caption{\(\vect{v}_1,\vect{v}_2,\vect{v}_3\in T\)の線型結合で\(\vect{x}=\trps{\rowvect{3/2 & 0}}\)を表した様子．明らかに\(\vect{x}=(-3/2)\vect{v}_3\)である一方，\(\vect{x}=(\vect{v}_1+\vect{v}_2)/2=(1/2)\vect{v}_1+(1/2)\vect{v}_2\)も成り立つ．}
-  \label{figure:linear_comb}
-\end{figure}
+\(\numset{R}^2\)である．しかし，\(\basis{S}_2=\Set{\trps{\rowvect{1 & 0}},\trps{\rowvect{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない．
 
 \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_i,b_i\in\numset{K}\)，\(\vect{v}_i\in S\)について
 \[
@@ -177,8 +167,8 @@
 
 \subsection{内積}
 
-\(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
-\cref{definition:inner_product}は，こうした幾何的な考察を，より多くのベクトル空間へと適用可能にする．
+\(\numset{R}^2\)において，ベクトルのなす角はドット積\((x_1,x_2)\cdot(y_1,y_2)=x_1y_1+x_2y_2\)から計算できた．
+次の定義は，ドット積が持つ性質を捨象したものである．
 
 \begin{definition}{内積}{inner_product}\index{ないせき@内積}\indexsymbol{\(\innerp{\holder}{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
@@ -193,25 +183,18 @@
 内積が備わっているベクトル空間のことを\termdef{内積空間}\index{ないせきくうかん@内積空間}（inner product space）という．
 また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
 
-\begin{note}
-  定義により，\(\zvec\)は任意のベクトルと直交する．この事実は直感にそぐわないかもしれないが，\(\zvec\)だけを特別扱いするとかえって面倒である．
-\end{note}
-
 \begin{example}[標準内積]
   \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}}_2\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
   \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の内積になる．\(\innerp{\holder}{\holder}\)を\(\numset{K}^n\)の\termdef{標準内積}\index{ひょうじゅんないせき@標準内積}という．
 \end{example}
 
 \begin{definition}{正規直交系，正規直交基底}{onb}\index{せいきちょっこうけい@正規直交系}\index{せいきちょっこうきてい@正規直交基底}\index{ONS|see{正規直交系}}\index{ONB|see{正規直交基底}}
-  \(V\)を内積空間とする．集合\(\basis{B}\subset V\)が\termdef{正規直交系}（orthonormal system; ONS）であるとは，任意の\(\vect{e}_1,\vect{e}_2\in\basis{B}\)が条件
-  \[
-    \innerp{\vect{e}_1}{\vect{e}_2} = \begin{cases}1 & (\vect{e}_1=\vect{e}_2),\\ 0 & (\vect{e}_1\neq\vect{e}_2)\end{cases}
-  \]
-  を満たすことをいう．また，\(\basis{B}\)が\(V\)の基底であるとき，\(\basis{B}\)は\termdef{正規直交基底}（orthonormal basis; ONB）であるという．
+  \(V\)を内積空間，\(\basis{B}\)を\(V\)の空でない部分集合とする．\(\basis{B}\)の相異なる2元が常に直交し，すべての\(\vect{e}\in\basis{B}\)が\(\innerp{\vect{e}}{\vect{e}}=1\)を満たすとき，
+  \(\basis{B}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．また，正規直交系である基底を\termdef{正規直交基底}（orthonormal basis; ONB）という．
 \end{definition}
 
-\(\basis{B}\)が正規直交系なら，有限個の\(\vect{e}_1,\dots,\vect{e}_k\in\basis{B}\)は常に線型独立である．
-よって，\(\basis{B}\)が基底であることを見るには，\(V=\spannedby\basis{B}\)だけ確認すればよい．
+\(\basis{B}\)が正規直交系なら，有限個の\(\basis{B}\)の元からなる組はすべて線型独立である．
+よって，\(\basis{B}\)が基底であることを見るには\(V=\spannedby\basis{B}\)だけ確かめればよい．
 
 また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
 
@@ -233,9 +216,8 @@
   \label{equation:basis_comb}
   \vect{x} = c_1\vect{v}_1+\dots+c_m\vect{v}_m\quad(c_1,\dots,c_m\in\numset{K})
 \end{equation}
-の形で一意に表せる．言い換えれば，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\rowvect{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，
-それは単射\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}\index{たんしゃ@単射}である．
-この写像\(\phi\)は，次に定義する「線型写像」の1例である．
+の形で一意に表せる．言い換えれば，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\rowvect{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，それは単射である
+\index{たんしゃ@単射}\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について，命題「\(f(x)=f(y)\implies x=y\)」が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}．この写像\(\phi\)は，次に定義する「線型写像」の1例である．
 
 \begin{definition}{線型写像}{linear_mapping}\index{せんけいしゃぞう@線型写像}
   \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
@@ -280,9 +262,9 @@
 本書では，\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_n}\)のような書き方をした場合，\(\basis{B}\)の元を\(\vect{v}_1,\vect{v}_2,\dotsc\)の順に並べると決めておく．
 
 \begin{example}[形式的な微分]
-  \(n\)次以下の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_nx^n\given c_0,\dots,c_n\in\numset{R}}\)は，\(\numset{R}\)上の\(n+1\)次元ベクトル空間である．
-  また，写像\(D\colon V_3\to V_2\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線型写像になる．
-  \(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^n}\)をとったとき，基底\(\basis{B}_3\)と\(\basis{B}_2\)に関する\(D\)の表現行列は\(\smallmatrice{0 & 1 & 0 \\ 0 & 0 & 2}\)である．
+  次数が\(n\)未満の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_{n-1}x^{n-1}\given c_0,\dots,c_{n-1}\in\numset{R}}\)は，\(\numset{R}\)上の\(n\)次元ベクトル空間である．
+  また，写像\(D\colon V_4\to V_3\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線型写像になる．
+  \(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^{n-1}}\)をとったとき，基底\(\basis{B}_4\)と\(\basis{B}_3\)に関する\(D\)の表現行列は\(\smallmatrice{0 & 1 & 0 \\ 0 & 0 & 2}\)である．
 \end{example}
 
 \subsection{核と像}
@@ -351,7 +333,7 @@
 
 \begin{proof}
   \(\vect{x}\in E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)とすると，\(\mat{A}\vect{x}=\lambda_1\vect{x}=\lambda_2\vect{x}\)より\((\lambda_1-\lambda_2)\vect{x}=\zvec\)であり，
-  \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって，\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
+  \(\lambda_1\neq\lambda_2\)なので\(\vect{x}=\zvec\)である．よって\(E_{\lambda_1}(\mat{A})\cap E_{\lambda_2}(\mat{A})\)は\(\zvec\)以外に元を持たない．
 \end{proof}
 
 \subsection{対角化}
@@ -384,11 +366,12 @@
   また，\(\mat{P}\)は正則だから\(\vect{v}_i\neq\zvec\)である．よって\cref{proposition:basis_and_matrix}より，集合\(\Set{\vect{v}_1,\dots,\vect{v}_n}\)は\(\mat{A}\)の固有ベクトルからなる\(\numset{K}^n\)の基底である．
 \end{proof}
 
-\section{1変数の微分積分学}
-
-ここでは\(\varepsilon\)‐\(N\)論法による極限の定義を既知としたうえで，実数の性質からしたがう重要な事実をいくつか挙げる．
+\section{微分積分学}
 
 \subsection{実数の性質}
+
+ここでは\(\varepsilon\)‐\(N\)論法による極限の定義を既知として，実数の性質からしたがう事実をいくつか挙げる．
+なお，紙幅の都合で証明はほぼ省略した．興味があれば杉浦\cite{sugiura2018}を参照するとよい．
 
 \begin{definition}{上界，下界}{}\index{じょうかい@上界}\index{かかい@下界}
   \(X\)を\(\numset{R}\)の部分集合とする．
@@ -398,7 +381,8 @@
   \end{enumerate}
 \end{definition}
 
-\(X\)の上界が存在するとき，\(X\)は上に有界であるという．同様に，\(X\)の下界が存在するとき，\(X\)は下に有界であるという．\(X\)が上にも下にも有界であるときは，単に「有界である」という．
+\(X\)の上界が存在するとき，\(X\)は\termdef{上に有界}であるという．同様に，\(X\)の下界が存在するとき，\(X\)は\termdef{下に有界}であるという．
+\(X\)が上にも下にも有界であるときは，単に「\termdef{有界}である」という．
 
 \begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{sup@\(\sup S\)}\index{inf@\(\inf S\)}
   \(X\)を\(\numset{R}\)の空でない部分集合とする．
@@ -408,10 +392,11 @@
   \end{enumerate}
 \end{definition}
 
+便宜上，\(X\)が上に有界でないときは\(\sup X=+\infty\)，\(X\)が下に有界でないときは\(\inf X=-\infty\)と決めておく．
 上限と下限を用いて議論するときは，次の\cref{proposition:sup_inf_and_eps}が便利である．
 
 \begin{proposition}{}{sup_inf_and_eps}
-  集合\(X\subset\numset{R}\)は上に有界とする．このとき，実数\(s\)に関する以下の条件は同値であり，同様のことが\(\inf X\)についても成り立つ．
+  \(X\)を\(\numset{R}\)の部分集合とする．このとき，実数\(s\)に関する以下の条件は同値であり，同様のことが\(\inf X\)についても成り立つ．
   \begin{enumerate}
     \item \(s=\sup X\)である．
     \item 任意の\(\varepsilon>0\)に対し，\(x\in X\)が存在して\(x+\varepsilon>s\)を満たす．
@@ -420,8 +405,10 @@
 
 \subsection{数列の極限}
 
+数列の各項からなる集合が有界であるとき，数列は有界であるという．
+
 \begin{proposition}{}{monotone_converge}
-  \(\seq{a_n}_{n\in\numset{N}}\)を実数列とする．\(a_1\leq a_2\leq\dotsb\)かつ，集合\(S=\Set{a_1,a_2,\dotsc}\)が上に有界ならば，\(\seq{a_n}_{n\in\numset{N}}\)は収束する．
+  実数列\(\seq{a_n}_{n\in\numset{N}}\)は上に有界とする．このとき，\(a_1\leq a_2\leq\dotsb\)なら\(\seq{a_n}_{n\in\numset{N}}\)は収束する．
 \end{proposition}
 
 \begin{proof}
@@ -432,13 +419,17 @@
 \end{proof}
 
 \begin{definition}{上極限，下極限}{}\index{じょうきょくげん@上極限}\index{かきょくげん@下極限}\index{limsup@\(\limsup\)}\index{liminf@\(\liminf\)}
-  \cref{proposition:monotone_converge}から，極限値
-  \[
-    \limsup_{n\to\infty}a_n = \lim_{n\to\infty}\sup_{k\geq n}a_k,
-    \quad\liminf_{n\to\infty}a_n = \lim_{n\to\infty}\inf_{k\geq n}a_k
-  \]
-  は任意の有界列\(\seq{a_n}_{n\in\numset{N}}\)に対して存在する．これらをそれぞれ\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{上極限}（limit superior），\termdef{下極限}（limit inferior）という．
+  実数列\(\seq{a_n}_{n\in\numset{N}}\)に対して，\(\limsup_{n\to\infty}a_n\)と\(\liminf_{n\to\infty}a_n\)を
+  \begin{gather*}
+    \limsup_{n\to\infty}a_n = \lim_{n\to\infty}\sup\Set{a_n,a_{n+1},\dotsc}, \\
+    \liminf_{n\to\infty}a_n = \lim_{n\to\infty}\inf\Set{a_n,a_{n+1},\dotsc}
+  \end{gather*}
+  で定義する．\(\limsup_{n\to\infty}a_n\)を数列\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{上極限}（limit superior），
+  \(\liminf_{n\to\infty}a_n\)を数列\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{下極限}（limit inferior）という．
 \end{definition}
+
+\cref{proposition:monotone_converge}より，\(\limsup_{n\to\infty}a_n<+\infty\)と\(\sup\Set{a_1,a_2,\dotsc}<+\infty\)は同値であり，
+同様のことが\(\liminf_{n\to\infty}a_n\)についても成り立つ．上極限と下極限について，次のことが知られている．
 
 \begin{proposition}{}{}
   \(\seq{a_n}_{n\in\numset{N}}\)を実数列とする．このとき，実数\(\alpha\)に関する以下の条件は同値である．
@@ -448,49 +439,7 @@
   \end{enumerate}
 \end{proposition}
 
-\begin{proof}
-  省略する．杉浦\cite{sugiura2018}に証明が記載されている．
-\end{proof}
-
-\begin{proposition}{区間縮小法}{nested_intervals}\index{くかんしゅくしょうほう@区間縮小法}
-  \(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）は有界閉区間であり，条件\(I_1\supset I_2\supset\dotsb\)を満たすとする．
-  このとき集合\(I_\infty=\bigcap_{n=1}^\infty I_n\)は空でない．また，\(b_n-a_n\to 0\)（\(n\to\infty\)）ならば\(\sizeof{I_\infty}=1\)である．
-\end{proposition}
-
-\begin{proof}
-  \cref{proposition:monotone_converge}より，数列\(\seq{a_n}_{n\in\numset{N}}\)，\(\seq{b_n}_{n\in\numset{N}}\)はどちらも収束列である．
-  極限値をそれぞれ\(\alpha\)，\(\beta\)とおく．各\(n\in\numset{N}\)に対して，\(b_n\)は集合\(A=\Set{a_1,a_2,\dotsc}\)の上界だから\(\alpha=\sup A\leq b_n\)である．
-  よって，\(\alpha\)は集合\(B=\Set{b_1,b_2,\dotsc}\)の下界なので\(\alpha\leq\inf B=\beta\)である．
-  したがって，\(n\)の値によらず\(a_n\leq\alpha\leq\beta\leq b_n\)だから\(\ccival{\alpha}{\beta}\subset\bigcap_{n=1}^\infty I_n\)であり，集合\(I_\infty\)は空でない．
-
-  \(x\in I_\infty\)を任意にとると，\(x,\alpha\in I_n\)より\(\abs{x-\alpha}\leq b_n-a_n\)が成立する．
-  よって，\(b_n-a_n\to 0\)（\(n\to\infty\)）なら\(x=\alpha\)，\(I_\infty=\Set{\alpha}\)である．
-\end{proof}
-
-\begin{theorem}{ボルツァーノ・ワイエルシュトラスの定理}{bolzano_weierstrass}\index{ぼるつぁーのわいえるしゅとらすのていり@ボルツァーノ・ワイエルシュトラスの定理}
-  有界な実数列は収束する部分列を持つ．すなわち，\(\numset{R}\)の部分集合\(\Set{x_1,x_2,\dotsc}\)が有界であれば，\(n(1)<n(2)<\dotsb\)を満たす自然数列\(\seq{n(k)}_{k\in\numset{N}}\)が存在し，数列\(\seq{x_{n(k)}}_{k\in\numset{N}}\)は収束する．
-  これを\termdef{ボルツァーノ・ワイエルシュトラスの定理}（Bolzano–Weierstrass theorem）という．
-\end{theorem}
-
-\begin{proof}
-  写像\(f\colon\numset{N}\to\numset{R}\)を\(f(n)=x_n\)で定義する．また，\(x_1,x_2,\dotsc\in I_1\)となる有界閉区間\(I_1=\ccival{a_1}{b_1}\)を1つ選び，\(I_n=\ccival{a_n}{b_n}\)（\(n=1,2,\dotsc\)）を帰納的に
-  \[
-    I_{n+1} = \begin{cases}L_n & \text{(\(\inv{f}{L_n}\)が無限集合)},\\ R_n & \text{(otherwise)},\end{cases}
-    \quad L_n = \ccival{a_n}{c_n},
-    \quad R_n = \ccival{c_n}{b_n}
-  \]
-  で定義する．ただし\(c_n=(a_n+b_n)/2\)である．このとき\(I_1\supset I_2\supset\dotsb\)，\(b_n-a_n=2^{1-n}(b_1-a_1)\to 0\)（\(n\to\infty\)）なので，\cref{proposition:nested_intervals}より\(\bigcap_{n=1}^\infty I_n=\Set{\alpha}\)となる実数\(\alpha\)がある．
-
-  帰納法により，各\(\inv{f}{I_n}\)は無限集合であることを示す．\(\inv{f}{I_n}\)が無限集合であれば，\(\inv{f}{I_n}=\inv{f}{L_n\cup R_n}=\inv{f}{L_n}\cup\inv{f}{R_n}\)より
-  \(\inv{f}{L_n}\)と\(\inv{f}{R_n}\)の少なくとも一方は無限集合である．したがって，\(I_{n+1}\)の定義から\(\inv{f}{I_{n+1}}\)は無限集合である．
-
-  各\(\inv{f}{I_n}\)は無限集合なので，\(n(k)\in\inv{f}{I_k}\)，\(n(k)<n(k+1)\)がすべての\(k\)で成立するように自然数列\(\seq{n(k)}_{k\in\numset{N}}\)を選べる．
-  \(\alpha\in I_k\)，\(x_{n(k)}=f(n(k))\in I_k\)だから\(\abs{x_{n(k)}-\alpha}\leq b_k-a_k\to 0\)（\(k\to\infty\)）である．
-\end{proof}
-
-\subsection{コーシー列}
-
-\cref{chapter:hilbert_space}以降では，望ましい性質を持つ収束列を定義して，その極限によって命題を示すことが多くなる．
+\cref{xr-chapter:hilbert_space}以降では，望ましい性質を持つ収束列を定義して，その極限によって命題を示すことが多くなる．
 極限値が予想できる場合を除き，数列が収束することを示すには，それがコーシー列であることを示すのがよい．
 
 \begin{definition}{コーシー列}{real_cauchy_sequence}\index{こーしーれつ@コーシー列}
@@ -502,16 +451,11 @@
   \]
 \end{definition}
 
-一般に，すべての収束列はコーシー列でもある．次の命題から，実数列に関して収束列とコーシー列は同値な概念であることが分かる．
+実数列について，数列がコーシー列であることと収束列であることは同値である．ただし，コーシー列であることは極限値を使わないで確かめられる．
 
-\begin{proposition}{}{}
-  実数列について，任意のコーシー列は収束列である．
-\end{proposition}
-
-\begin{proof}
-  実数列\(\seq{x_n}_{n\in\numset{N}}\)はコーシー列とする．このとき，条件「\(m,n>N\implies\abs{x_m-x_n}<1\)」を満たす\(N\in\numset{N}\)がある．
-  \(m>N\)なら\(\abs{x_m-x_{N+1}}<1\)だから，\cref{theorem:bolzano_weierstrass}より数列\(\seq{x_{N+n}}_{n\in\numset{N}}\)は収束する部分列\(\seq{x_{N+n(k)}}_{k\in\numset{N}}\)を持つ．
-  この極限値を\(\alpha\)とおくと，\(\abs{x_k-\alpha}\leq\abs{x_k-x_{N+n(k)}}+\abs{x_{N+n(k)}-\alpha}\to 0\)（\(k\to\infty\)）なので\(x_n\to\alpha\)（\(n\to\infty\)）である．
-\end{proof}
+\begin{example}
+  \(\sqrt{2}=1{.}41421356\dotso\)の小数点以下第\(n\)位まで拾った有理数を\(a_n\)とする．
+  すなわち\(a_1=1{.}4\)，\(a_2=1{.}41\)のようにする．このとき\(\abs{a_m-a_n}\leq 10^{-\min\Set{m,n}}\to 0\)（\(m,n\to\infty\)）だから，\(\seq{a_n}_{n\in\numset{N}}\)はコーシー列である．
+\end{example}
 
 \end{document}

@@ -425,17 +425,15 @@
 \]
 である．
 
-\subsection{スペクトル定理}
+\subsection{スペクトル定理と特異値分解}
 
-\begin{proposition}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
+\begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
   \begin{enumerate}
     \item \(\mat{A}\)は正規行列である．
     \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
   \end{enumerate}
-\end{proposition}
-
-\subsection{特異値分解}
+\end{theorem}
 
 \subsection{擬似逆行列}
 
@@ -751,12 +749,24 @@
   \end{minipage}
 \end{figure}
 
-\begin{subappendices}
-\section{窓関数}
+\section{補遺}
 
-\section{低ランク近似}
+\subsection{スペクトル分解の証明}
 
-\end{subappendices}
+\begin{theorem}{シューア分解}{}\index{しゅーあぶんかい@シューア分解}
+  任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
+  \(n\)次ユニタリ行列\(\mat{U}\)が存在して，行列\(\tilde{\mat{A}}=\htrps{\mat{U}}\mat{A}\mat{U}\)は以下の形になる．
+  式\(\mat{A}=\mat{U}\tilde{\mat{A}}\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{シューア分解}（Schur decomposition）という．
+  \[
+    \tilde{\mat{A}} = \matrice*{\midx{\tilde{a}}{1}{1} & \midx{\tilde{a}}{1}{2} & \cdots & \midx{\tilde{a}}{1}{n} \\ & \midx{\tilde{a}}{2}{2} & \cdots & \midx{\tilde{a}}{2}{n} \\ & & \ddots & \vdots \\ 0 & & & \midx{\tilde{a}}{n}{n}}
+  \]
+\end{theorem}
+
+\begin{proof}
+  \(E\)を\(\mat{A}\)のある固有値\(\lambda\)に属する固有空間とする．
+  また，集合\(\basis{B}_1=\Set{\vect{u}_1,\dots,\vect{u}_d}\)，\(\basis{B}_2=\Set{\vect{u}_{d+1},\dots,\vect{u}_n}\)をそれぞれ\(E\)，\(\pcomp{E}\)の正規直交基底とする．
+  このとき，集合\(\basis{B}=\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底である．
+\end{proof}
 
 \section*{演習問題}
 \addcontentsline{toc}{section}{演習問題}
