@@ -365,7 +365,7 @@
   \mat{A}\vect{x} = \matrice{\vect{a}_1 & \cdots & \vect{a}_p}\matrice*{x_1 \\ \vdots \\ x_p}
   = \sum_{j=1}^px_j\vect{a}_j\quad(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}})
 \]
-だから，\(\colsp\mat{A}\)は\(\mat{A}\)の列ベクトル全体が生成する空間でもある．
+だから，\(\colsp\mat{A}\)は\(\mat{A}\)の列ベクトル全体が生成する部分空間でもある．
 
 \begin{example}\label{example:overdetermined}
   \(\mat{A}=\trps{\smallmatrice{4 & 1 & 2 \\ 0 & 3 & 2}}\)，\(\vect{b}=\trps{\rowvect{-4 & -6 & 4}}\)とする．
@@ -396,11 +396,11 @@
   &= 2\rpart\innerp{\mat{A}\vect{x}-\vect{b}}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
   &= 2\rpart\innerp{\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{b}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
 \end{align*}
-である．よって，\(\numset{K}^p\)の元\(\vect{x}_0\)が\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{x}_0)=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
-関数\(\epsilon\)は点\(\vect{x}_0\)で最小値をとる．
+である．よって，\(\numset{K}^p\)の元\(\vect{a}\)が\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
+関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
 
-また，\(\increment\vect{x}=-t\vect{g}\)（\(t>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{x}_0-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{x}_0)=-2t\vnorm{\vect{g}}^2+t^2\vnorm{\mat{A}\vect{g}}^2\)なので，
-\(\vect{g}=\zvec\)でなければ\(t\)の値が十分小さいとき\(\increment\epsilon(\vect{x}_0)<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{x}_0=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{x}_0)\)は関数\(\epsilon\)の最小値ではない．
+また，\(\increment\vect{x}=-h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{a}-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
+\(\vect{g}=\zvec\)でなければ\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
 
 以上の議論から，次の命題が成り立つ．
 
@@ -412,14 +412,14 @@
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 \begin{note}
-  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
+  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{a})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
   \(\increment\vect{x}\)を\(x_i\)方向の単位ベクトル\(\vect{e}_i\)に沿って動かすとき\(\increment\vect{x}=h\vect{e}_i\)（\(h\in\numset{R}\)）とおけて
   \[
-    \diffp{\epsilon(\vect{x})}{x_i} = \lim_{h\to 0}\frac{\increment\epsilon(\vect{x})}{h}
-    = \lim_{h\to 0}\pqty*{2\innerp{\vect{g}}{\vect{e}_i}+\abs{h}\vnorm{\mat{A}\vect{e}_i}^2}
-    = 2\innerp{\vect{g}}{\vect{e}_i}
+    \diffp{\epsilon}{x_i}(\vect{a}) = \lim_{h\to 0}\frac{\increment\epsilon(\vect{a})}{h}
+    = \lim_{h\to 0}(2\innerp{\vect{g}}{\vect{e}_i}+h\vnorm{\mat{A}\vect{e}_i}^2)
+    = 2g_i\quad(\vect{g}=\trps{\matrice{g_1 & \cdots & g_p}})
   \]
-  である．よって，正規方程式は\(\diffp*{\epsilon(\vect{x})}/{x_i}=0\)（\(1\leq i\leq p\)）とも書ける．
+  である．よって，正規方程式は\(\diffp*{\epsilon(\vect{x})}/{x_i}=0\)（\(1\leq i\leq p\)）と同値である．
 \end{note}
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
@@ -758,9 +758,6 @@
 \section{補遺}
 
 \subsection{スペクトル分解の証明}
-
-スペクトル分解を示す前に，1つ準備をしよう．\(T\colon\numset{K}^m\to\numset{K}^n\)は線型写像で，集合\(V\)は\(\numset{K}^m\)の\(\Set{\zvec}\)でない部分空間とする．
-このとき，線型写像\(T_1\colon V\to\numset{K}^n\)，\(T_2\colon\pcomp{V}\to\numset{K}^n\)を\(T_i(\vect{x})=T(\vect{x})\)で定義すると\(T=T_1\proj_V+T_2\proj_{\pcomp{V}}\)が成立する．
 
 \begin{theorem}{シューア分解}{}\index{しゅーあぶんかい@シューア分解}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
