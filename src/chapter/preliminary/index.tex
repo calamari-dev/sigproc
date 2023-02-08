@@ -6,6 +6,9 @@
 
 \section{ベクトル空間と行列}
 
+ここでは簡単に（特に有限次元の）ベクトル空間が持つ性質を確かめる．
+省略した証明については，たとえば斎藤\cite{saito2020}を参照するとよい．
+
 \subsection{ベクトル空間}
 
 以下，集合\(\numset{K}\)は実数の全体集合\(\numset{R}\)か，複素数の全体集合\(\numset{C}\)であるとする．
@@ -21,7 +24,7 @@
     \item \((\vect{x}+\vect{y})+\vect{z}=\vect{x}+(\vect{y}+\vect{z})\)
     \item \(\vect{x}+\vect{y}=\vect{y}+\vect{x}\)
     \item ある\(\zvec\in V\)が存在し，任意の\(\vect{v}\in V\)に対して\(\vect{v}+\zvec=\vect{v}\)を満たす．
-    \item 各\(\vect{v}\in V\)に対し，ある\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす．
+    \item 各\(\vect{v}\in V\)に対し，\(\vect{w}\in V\)が一意に存在して\(\vect{v}+\vect{w}=\zvec\)を満たす．
     \item \((s+t)\vect{x}=s\vect{x}+t\vect{x}\)
     \item \(s(\vect{x}+\vect{y})=s\vect{x}+s\vect{y}\)
     \item \((st)\vect{x}=s(t\vect{x})\)
@@ -33,12 +36,7 @@
 また，\cref{definition:vector_space}の\(\zvec\)を\termdef{零ベクトル}\index{ぜろべくとる@零ベクトル}（zero vector），\(\vect{w}\)を\(\vect{v}\)の\termdef{加法逆元}\index{かほうぎゃくげん@加法逆元}（additive inverse）という．
 通常，\(\vect{v}\)の加法逆元は\(-\vect{v}\)と表される．
 
-\begin{note}
-  \cref{definition:vector_space}はごてごてしているように見えるが，
-  それは和とスカラー倍について，\(\numset{K}^n\)と同様に計算できるようルールを加えていった結果といえる．
-\end{note}
-
-ベクトル空間にかかわる概念を2つ定義する．
+ついで，ベクトル空間にかかわる概念を2つ定義する．
 
 \begin{definition}{線型結合}{linear_combination}\index{せんけいけつごう@線型結合}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
@@ -167,8 +165,8 @@
 
 \subsection{内積}
 
-\(\numset{R}^2\)において，ベクトルのなす角はドット積\((x_1,x_2)\cdot(y_1,y_2)=x_1y_1+x_2y_2\)から計算できた．
-次の定義は，ドット積が持つ性質を捨象したものである．
+\(\numset{R}^3\)において，ベクトルの長さとなす角はドット積\((x_1,x_2,x_3)\cdot(y_1,y_2,y_3)=\sum_{i=1}^3x_iy_i\)から計算できた．
+次の定義はドット積を抽象したものである．
 
 \begin{definition}{内積}{inner_product}\index{ないせき@内積}\indexsymbol{\(\innerp{\holder}{\holder}\)}
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\innerp{\holder}{\holder}\)が\(V\)の\termdef{内積}（inner product）であるとは，
@@ -181,7 +179,7 @@
 \end{definition}
 
 内積が備わっているベクトル空間のことを\termdef{内積空間}\index{ないせきくうかん@内積空間}（inner product space）という．
-また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
+また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるときベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
 
 \begin{example}[標準内積]
   \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}}_2\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
@@ -368,10 +366,10 @@
 
 \section{微分積分学}
 
-\subsection{実数の性質}
-
-ここでは\(\varepsilon\)‐\(N\)論法による極限の定義を既知として，実数の性質からしたがう事実をいくつか挙げる．
+ここでは\(\varepsilon\mathhyphen N\)論法による極限の定義を既知として，実数の性質からしたがう事実をいくつか挙げる．
 なお，紙幅の都合で証明はほぼ省略した．興味があれば杉浦\cite{sugiura2018}を参照するとよい．
+
+\subsection{上限と下限}
 
 \begin{definition}{上界，下界}{}\index{じょうかい@上界}\index{かかい@下界}
   \(X\)を\(\numset{R}\)の部分集合とする．
@@ -382,7 +380,7 @@
 \end{definition}
 
 \(X\)の上界が存在するとき，\(X\)は\termdef{上に有界}であるという．同様に，\(X\)の下界が存在するとき，\(X\)は\termdef{下に有界}であるという．
-\(X\)が上にも下にも有界であるときは，単に「\termdef{有界}である」という．
+\(X\)が上にも下にも有界\texttwoemdash つまり集合\(\Set{\abs{x}\given x\in X}\)が上に有界\texttwoemdash なときは，単に\termdef{有界}\index{ゆうかい@有界}であるという．
 
 \begin{definition}{上限，下限}{}\index{じょうげん@上限}\index{かげん@下限}\index{sup@\(\sup S\)}\index{inf@\(\inf S\)}
   \(X\)を\(\numset{R}\)の空でない部分集合とする．
@@ -405,7 +403,7 @@
 
 \subsection{数列の極限}
 
-数列の各項からなる集合が有界であるとき，数列は有界であるという．
+数列の各項からなる集合が有界であるとき，その数列は有界であるという．
 
 \begin{proposition}{}{monotone_converge}
   実数列\(\seq{a_n}_{n\in\numset{N}}\)は上に有界とする．このとき，\(a_1\leq a_2\leq\dotsb\)なら\(\seq{a_n}_{n\in\numset{N}}\)は収束する．
@@ -428,8 +426,8 @@
   \(\liminf_{n\to\infty}a_n\)を数列\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{下極限}（limit inferior）という．
 \end{definition}
 
-\cref{proposition:monotone_converge}より，\(\limsup_{n\to\infty}a_n<+\infty\)と\(\sup\Set{a_1,a_2,\dotsc}<+\infty\)は同値であり，
-同様のことが\(\liminf_{n\to\infty}a_n\)についても成り立つ．上極限と下極限について，次のことが知られている．
+\cref{proposition:monotone_converge}より\(\limsup_{n\to\infty}a_n<+\infty\iff\sup\Set{a_1,a_2,\dotsc}<+\infty\)であり，
+同様のことが\(\liminf_{n\to\infty}a_n\)についても成り立つ．また，次のことが知られている．
 
 \begin{proposition}{}{}
   \(\seq{a_n}_{n\in\numset{N}}\)を実数列とする．このとき，実数\(\alpha\)に関する以下の条件は同値である．
@@ -451,11 +449,18 @@
   \]
 \end{definition}
 
-実数列について，数列がコーシー列であることと収束列であることは同値である．ただし，コーシー列であることは極限値を使わないで確かめられる．
+実数列について，数列がコーシー列であることと収束列であることは同値である．ただし，コーシー列であることは極限値を使わずに確かめられる．
 
 \begin{example}
-  \(\sqrt{2}=1{.}41421356\dotso\)の小数点以下第\(n\)位まで拾った有理数を\(a_n\)とする．
-  すなわち\(a_1=1{.}4\)，\(a_2=1{.}41\)のようにする．このとき\(\abs{a_m-a_n}\leq 10^{-\min\Set{m,n}}\to 0\)（\(m,n\to\infty\)）だから，\(\seq{a_n}_{n\in\numset{N}}\)はコーシー列である．
+  \(a_n=\sum_{i=0}^n(-1)^i/(i!)\)とする．このとき，\(m>n\geq N\)なら
+  \[
+    \abs{a_m-a_n} \leq \sum_{i=n+1}^m\frac{1}{i!}
+    \leq \sum_{i=n+1}^m\frac{1}{i(i-1)}
+    = \sum_{i=n+1}^m\pqty*{\frac{1}{i-1}-\frac{1}{i}}
+    = \frac{1}{n}-\frac{1}{m}
+  \]
+  であり，\(1/n-1/m\leq 1/N\to 0\)（\(N\to\infty\)）だから\(\seq{a_n}_{n\in\numset{N}}\)はコーシー列である．
+  よって，級数\(\sum(-1)^n/(n!)\)は収束する．よく知られているように，この値は\(\exp(-1)\)である．
 \end{example}
 
 \end{document}

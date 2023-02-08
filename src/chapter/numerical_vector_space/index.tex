@@ -412,8 +412,14 @@
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 \begin{note}
-  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，\(\increment\vect{x}\)を無限小とみなせば\(\intd*{\epsilon}=2\vect{g}\cdot\intd*{\vect{x}}\)である．
-  つまり，\(2\vect{g}=2(\trps{\mat{A}}\mat{A}\vect{x}-\trps{\mat{A}}\vect{b})\)は\(\epsilon(\vect{x})\)の勾配なので，正規方程式を\(\gradof\epsilon(\vect{x})=\zvec\)とも書ける．
+  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{x})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
+  \(\increment\vect{x}\)を\(x_i\)方向の単位ベクトル\(\vect{e}_i\)に沿って動かすとき\(\increment\vect{x}=h\vect{e}_i\)（\(h\in\numset{R}\)）とおけて
+  \[
+    \diffp{\epsilon(\vect{x})}{x_i} = \lim_{h\to 0}\frac{\increment\epsilon(\vect{x})}{h}
+    = \lim_{h\to 0}\pqty*{2\innerp{\vect{g}}{\vect{e}_i}+\abs{h}\vnorm{\mat{A}\vect{e}_i}^2}
+    = 2\innerp{\vect{g}}{\vect{e}_i}
+  \]
+  である．よって，正規方程式は\(\diffp*{\epsilon(\vect{x})}/{x_i}=0\)（\(1\leq i\leq p\)）とも書ける．
 \end{note}
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
@@ -752,6 +758,9 @@
 \section{補遺}
 
 \subsection{スペクトル分解の証明}
+
+スペクトル分解を示す前に，1つ準備をしよう．\(T\colon\numset{K}^m\to\numset{K}^n\)は線型写像で，集合\(V\)は\(\numset{K}^m\)の\(\Set{\zvec}\)でない部分空間とする．
+このとき，線型写像\(T_1\colon V\to\numset{K}^n\)，\(T_2\colon\pcomp{V}\to\numset{K}^n\)を\(T_i(\vect{x})=T(\vect{x})\)で定義すると\(T=T_1\proj_V+T_2\proj_{\pcomp{V}}\)が成立する．
 
 \begin{theorem}{シューア分解}{}\index{しゅーあぶんかい@シューア分解}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
