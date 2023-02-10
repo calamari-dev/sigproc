@@ -279,7 +279,7 @@
 \cref{equation:analysis_and_synthesis}より，合成作用素は分析作用素の逆写像である．
 また，分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
 
-\begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ゆにたりぎょうれつ@ユニタリ行列}
+\begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
     \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という．
@@ -419,7 +419,7 @@
     = \lim_{h\to 0}(2\innerp{\vect{g}}{\vect{e}_i}+h\vnorm{\mat{A}\vect{e}_i}^2)
     = 2g_i\quad(\vect{g}=\trps{\matrice{g_1 & \cdots & g_p}})
   \]
-  である．よって，正規方程式は\(\diffp*{\epsilon(\vect{x})}/{x_i}=0\)（\(1\leq i\leq p\)）と同値である．
+  である．よって，正規方程式は\(\gradof\epsilon(\vect{x})=\sum_{i=1}^p(\difsp{\epsilon}{x_i})(\vect{x})\vect{e}_i=\zvec\)と等価である．
 \end{note}
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
@@ -437,9 +437,12 @@
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
   \begin{enumerate}
     \item \(\mat{A}\)は正規行列である．
-    \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
+    \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，行列\(\mat{\Lambda}=\htrps{\mat{U}}\mat{A}\mat{U}\)が対角行列になるユニタリ行列\(\mat{U}\)が存在する．
   \end{enumerate}
 \end{theorem}
+
+ユニタリ行列による対角化は\termdef{スペクトル分解}\index{すぺくとるぶんかい@スペクトル分解}（spectral decomposition）と呼ばれる．
+\cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
 
 \subsection{擬似逆行列}
 
@@ -671,7 +674,7 @@
 \[
   \mat{H} = \matrice*{h_0 & h_{N-1} & h_{N-2} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \cdots & h_3 & h_2 \\ h_2 & h_1 & h_0 & \cdots & h_4 & h_3 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h_{N-2} & h_{N-3} & h_{N-4} & \cdots & h_0 & h_{N-1} \\  h_{N-1} & h_{N-2} & h_{N-3} & \cdots & h_1 & h_0}\quad(h_i=h[i])
 \]
-という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}（circulant matrix）という．
+という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
 
 同様に，基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
 
@@ -759,35 +762,55 @@
 
 \subsection{スペクトル分解の証明}
 
-\begin{theorem}{シューア分解}{}\index{しゅーあぶんかい@シューア分解}
+\nameref{theorem:spectral_theorem}を証明する前に，次の定理を示そう．
+
+\begin{theorem}{シューア分解}{schur_decomposition}\index{しゅーあぶんかい@シューア分解}\index{うえさんかくぎょうれつ@上三角行列}\index{ぎょうれつ@行列!うえさんかく@上三角\texttwoemdash}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
-  \(n\)次ユニタリ行列\(\mat{U}\)が存在して，行列\(\tilde{\mat{A}}=\htrps{\mat{U}}\mat{A}\mat{U}\)は以下の形になる．
-  式\(\mat{A}=\mat{U}\tilde{\mat{A}}\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{シューア分解}（Schur decomposition）という．
+  \(n\)次ユニタリ行列\(\mat{U}\)が存在して，行列\(\mat{A}'=\htrps{\mat{U}}\mat{A}\mat{U}\)は以下の形になる．
+  式\(\mat{A}=\mat{U}\mat{A}'\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{シューア分解}（Schur decomposition）という．
   \[
-    \tilde{\mat{A}} = \matrice*{\midx{\tilde{a}}{1}{1} & \midx{\tilde{a}}{1}{2} & \cdots & \midx{\tilde{a}}{1}{n} \\ & \midx{\tilde{a}}{2}{2} & \cdots & \midx{\tilde{a}}{2}{n} \\ & & \ddots & \vdots \\ 0 & & & \midx{\tilde{a}}{n}{n}}
+    \mat{A}' = \matrice*{\midx{a'}{1}{1} & \midx{a'}{1}{2} & \cdots & \midx{a'}{1}{n} \\ & \midx{a'}{2}{2} & \cdots & \midx{a'}{2}{n} \\ & & \ddots & \vdots \\ 0 & & & \midx{a'}{n}{n}}
   \]
 \end{theorem}
 
 \begin{proof}
   \(n\)に関する帰納法で示す．\(E\)を\(\mat{A}\)のある固有値\(\lambda\)に属する固有空間とする．
   また，集合\(\basis{B}_1=\Set{\vect{u}_1,\dots,\vect{u}_d}\)，\(\basis{B}_2=\Set{\vect{u}_{d+1},\dots,\vect{u}_n}\)をそれぞれ\(E\)，\(\pcomp{E}\)の正規直交基底とする．
-  このとき，集合\(\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底だから，行列\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
+  このとき，集合\(\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底だから\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
 
   \(\numset{C}^n\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)とおくと，\(\htrps{\mat{U}}\mat{A}\vect{u}_i=\lambda\htrps{\mat{U}}\vect{u}_i=\lambda\vect{e}_i\)（\(1\leq i\leq d\)）なので
   \(\htrps{\mat{U}}\mat{A}\mat{U}=\rowvect{\lambda\vect{e}_1 & \cdots & \lambda\vect{e}_d & \htrps{\mat{U}}\mat{A}\vect{u}_{d+1} & \cdots & \htrps{\mat{U}}\mat{A}\vect{u}_n}\)である．
   右辺を\(\smallmatrice{\lambda\imat_d & \mat{B} \\ & \mat{C}}\)とおくと，\(\mat{B}\)は\((n-d)\times d\)行列，\(\mat{C}\)は\((n-d)\times(n-d)\)行列である．
 
-  帰納法の仮定により，\(\mat{C}\)はシューア分解できる．\(\mat{C}\)のシューア分解\(\mat{C}=\mat{V}\tilde{\mat{C}}\htrps{\mat{V}}\)から，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{\imat_d & \\ & \mat{V}}\)で定義する．このとき
+  帰納法の仮定により，\(\mat{C}\)はシューア分解できる．\(\mat{C}\)のシューア分解\(\mat{C}=\mat{V}\mat{C}'\htrps{\mat{V}}\)から，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{\imat_d & \\ & \mat{V}}\)で定義する．このとき
   \[
-    \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{C}} = \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{V}\tilde{\mat{C}}\htrps{\mat{V}}}
-    = \matrice*{\imat_d & \\ & \mat{V}}\matrice*{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \tilde{\mat{C}}}\matrice*{\imat_d & \\ & \htrps{\mat{V}}}
+    \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{C}} = \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{V}\mat{C}'\htrps{\mat{V}}}
+    = \matrice*{\imat_d & \\ & \mat{V}}\matrice*{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \mat{C}'}\matrice*{\imat_d & \\ & \htrps{\mat{V}}}
   \]
-  だから，\(\tilde{\mat{A}}=\smallmatrice{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \tilde{\mat{C}}}\)とおくと\(\htrps{\mat{U}}\mat{A}\mat{U}=\mat{W}\tilde{\mat{A}}\htrps{\mat{W}}\)である．
-  よって，\(\mat{U}\mat{W}\)を\(\mat{U}\)と置き直せば\(\mat{A}=\mat{U}\tilde{\mat{A}}\htrps{\mat{U}}\)で，\(\tilde{\mat{A}}\)は上三角行列なので，これは\(\mat{A}\)のシューア分解になっている．
+  だから，\(\mat{A}'=\smallmatrice{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \mat{C}'}\)とおくと\(\htrps{\mat{U}}\mat{A}\mat{U}=\mat{W}\mat{A}'\htrps{\mat{W}}\)である．
+  よって，\(\mat{U}\mat{W}\)を\(\mat{U}\)と置き直せば\(\mat{A}=\mat{U}\mat{A}'\htrps{\mat{U}}\)で，\(\mat{A}'\)は上三角行列なので，これは\(\mat{A}\)のシューア分解になっている．
 \end{proof}
 
-\section*{演習問題}
-\addcontentsline{toc}{section}{演習問題}
+\cref{theorem:schur_decomposition}を利用すると，\nameref{theorem:spectral_theorem}は次のようにして示せる．
+
+\begin{proof}[\nameref{theorem:spectral_theorem}の証明]
+  ユニタリ行列で対角化できれば正規行列であることはすぐ分かる．
+  \(\mat{A}\)を\(n\)次正規行列とする．\(\mat{A}\)のシューア分解を\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)とおくと，
+  \(\htrps{\mat{A}}\mat{A}-\mat{A}\htrps{\mat{A}}=\mat{U}(\htrps{\mat{B}}\mat{B}-\mat{B}\htrps{\mat{B}})\htrps{\mat{U}}=\zmat\)より\(\mat{B}\)も正規行列である．
+
+  \(\mat{B}=\matfence{\midx{b}{i}{j}}\)とおく．\(\htrps{\mat{B}}=\matfence{\midx{\conj{b}}{j}{i}}\)なので，\(\htrps{\mat{B}}\mat{B}=\mat{B}\htrps{\mat{B}}\)の\(i\)行\(i\)列にある成分を比較すれば
+  \[
+    \sum_{j=1}^n\midx{\conj{b}}{j}{i}\midx{b}{j}{i} = \sum_{j=1}^n\midx{b}{i}{j}\midx{\conj{b}}{i}{j},
+    \quad\sum_{j=1}^i\abs{\midx{b}{j}{i}}^2 = \sum_{j=i}^n\abs{\midx{b}{i}{j}}^2
+  \]
+  が分かる．ただし，2つめの等式は\(i>j\implies\midx{b}{i}{j}=0\)による．
+  \(i=1\)とすると，\(\abs{\midx{b}{1}{1}}^2=\sum_{j=1}^n\abs{\midx{b}{1}{j}}^2\)より\(\midx{b}{1}{2}=\dots=\midx{b}{1}{n}=0\)である．
+  次に\(i=2\)とすると，\(\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
+  同様に\(i=n\)まで計算すれば\(i<j\implies\midx{b}{i}{j}=0\)が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
+  つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
+\end{proof}
+
+\section{演習問題}
 
 \begin{enumerate}
   \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{n=0}^\infty\mat{A}^n/(n!)\)で定義する．

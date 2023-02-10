@@ -68,40 +68,10 @@
 \DeclarePairedDelimiter{\vnorm}{\lVert}{\rVert}
 
 % 微分積分
-\ExplSyntaxOn
-\NewDocumentCommand{\diff}{s m t/ m}{
-  \IfBooleanTF{#1}{
-    \IfBooleanTF{#3}{
-      (\symrm{d}/\symrm{d}#4)#2
-    }{
-      \frac{\symrm{d}}{\symrm{d}#4}#2
-    }
-  }{
-    \IfBooleanTF{#3}{
-      \symrm{d}#2/\symrm{d}#4
-    }{
-      \frac{\symrm{d}#2}{\symrm{d}#4}
-    }
-  }
-}
-
-\NewDocumentCommand{\diffp}{s m t/ m}{
-  \IfBooleanTF{#1}{
-    \IfBooleanTF{#3}{
-      (\partial/\partial #4)#2
-    }{
-      \frac{\partial}{\partial #4}#2
-    }
-  }{
-    \IfBooleanTF{#3}{
-      \partial #2/\partial #4
-    }{
-      \frac{\partial #2}{\partial #4}
-    }
-  }
-}
-\ExplSyntaxOff
-
+\NewDocumentCommand{\diff}{s m m}{\IfBooleanTF{#1}{\frac{\symrm{d}}{\symrm{d}#3}#2}{\frac{\symrm{d}#2}{\symrm{d}#3}}}
+\NewDocumentCommand{\difs}{s m m}{\IfBooleanTF{#1}{(\symrm{d}/\symrm{d}#3)#2}{\symrm{d}#2/\symrm{d}#3}}
+\NewDocumentCommand{\diffp}{s m m}{\IfBooleanTF{#1}{\frac{\partial}{\partial #3}#2}{\frac{\partial #2}{\partial #3}}}
+\NewDocumentCommand{\difsp}{s m m}{\IfBooleanTF{#1}{(\partial/\partial #3)#2}{\partial #2/\partial #3}}
 \NewDocumentCommand{\intd}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^#2}{\symrm{d}}#3}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
