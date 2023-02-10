@@ -669,7 +669,7 @@
 \(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
 基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
 \[
-  \mat{H} = \matrice*{h[0] & h[N-1] & h[N-2] & \cdots & h[2] & h[1] \\ h[1] & h[0] & h[N-1] & \cdots & h[3] & h[2] \\ h[2] & h[1] & h[0] & \cdots & h[4] & h[3] \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h[N-2] & h[N-3] & h[N-4] & \cdots & h[0] & h[N-1] \\  h[N-1] & h[N-2] & h[N-3] & \cdots & h[1] & h[0]}
+  \mat{H} = \matrice*{h_0 & h_{N-1} & h_{N-2} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \cdots & h_3 & h_2 \\ h_2 & h_1 & h_0 & \cdots & h_4 & h_3 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h_{N-2} & h_{N-3} & h_{N-4} & \cdots & h_0 & h_{N-1} \\  h_{N-1} & h_{N-2} & h_{N-3} & \cdots & h_1 & h_0}\quad(h_i=h[i])
 \]
 という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}（circulant matrix）という．
 
@@ -769,16 +769,30 @@
 \end{theorem}
 
 \begin{proof}
-  \(E\)を\(\mat{A}\)のある固有値\(\lambda\)に属する固有空間とする．
+  \(n\)に関する帰納法で示す．\(E\)を\(\mat{A}\)のある固有値\(\lambda\)に属する固有空間とする．
   また，集合\(\basis{B}_1=\Set{\vect{u}_1,\dots,\vect{u}_d}\)，\(\basis{B}_2=\Set{\vect{u}_{d+1},\dots,\vect{u}_n}\)をそれぞれ\(E\)，\(\pcomp{E}\)の正規直交基底とする．
-  このとき，集合\(\basis{B}=\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底である．
+  このとき，集合\(\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底だから，行列\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
+
+  \(\numset{C}^n\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)とおくと，\(\htrps{\mat{U}}\mat{A}\vect{u}_i=\lambda\htrps{\mat{U}}\vect{u}_i=\lambda\vect{e}_i\)（\(1\leq i\leq d\)）なので
+  \(\htrps{\mat{U}}\mat{A}\mat{U}=\rowvect{\lambda\vect{e}_1 & \cdots & \lambda\vect{e}_d & \htrps{\mat{U}}\mat{A}\vect{u}_{d+1} & \cdots & \htrps{\mat{U}}\mat{A}\vect{u}_n}\)である．
+  右辺を\(\smallmatrice{\lambda\imat_d & \mat{B} \\ & \mat{C}}\)とおくと，\(\mat{B}\)は\((n-d)\times d\)行列，\(\mat{C}\)は\((n-d)\times(n-d)\)行列である．
+
+  帰納法の仮定により，\(\mat{C}\)はシューア分解できる．\(\mat{C}\)のシューア分解\(\mat{C}=\mat{V}\tilde{\mat{C}}\htrps{\mat{V}}\)から，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{\imat_d & \\ & \mat{V}}\)で定義する．このとき
+  \[
+    \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{C}} = \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{V}\tilde{\mat{C}}\htrps{\mat{V}}}
+    = \matrice*{\imat_d & \\ & \mat{V}}\matrice*{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \tilde{\mat{C}}}\matrice*{\imat_d & \\ & \htrps{\mat{V}}}
+  \]
+  だから，\(\tilde{\mat{A}}=\smallmatrice{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \tilde{\mat{C}}}\)とおくと\(\htrps{\mat{U}}\mat{A}\mat{U}=\mat{W}\tilde{\mat{A}}\htrps{\mat{W}}\)である．
+  よって，\(\mat{U}\mat{W}\)を\(\mat{U}\)と置き直せば\(\mat{A}=\mat{U}\tilde{\mat{A}}\htrps{\mat{U}}\)で，\(\tilde{\mat{A}}\)は上三角行列なので，これは\(\mat{A}\)のシューア分解になっている．
 \end{proof}
 
 \section*{演習問題}
 \addcontentsline{toc}{section}{演習問題}
 
 \begin{enumerate}
-  \item 環\((\cycles{\numset{C}}{N},+,\circconv)\)は\(\numset{C}[x]/\langle x^N-1\rangle\)と同型であることを示せ．
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{n=0}^\infty\mat{A}^n/(n!)\)で定義する．
+    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
+    \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
 \end{enumerate}
 
 \end{document}
