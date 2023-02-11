@@ -23,7 +23,6 @@
 \RequirePackage{luatexja-ruby}
 \RequirePackage{etoolbox}
 \RequirePackage{titletoc}
-\RequirePackage{appendix}
 \RequirePackage{multicol}
 
 % フォント
@@ -91,7 +90,6 @@
 \titlecontents{chapter}[0\zw]{\addvspace{1\zh}\sffamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
 \titlecontents{section}[1\zw]{}{\makebox[3\zw][l]{\thecontentslabel}}{\hspace{3\zw}}{\space\titlerule*[.5\zw]{.}\contentspage}
 \titlecontents*{subsection}[4\zw]{\small}{}{}{}[／]
-\renewcommand{\appendixname}{補遺}
 
 % 索引
 \newlength{\midx@columnseprule}

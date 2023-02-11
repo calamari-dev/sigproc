@@ -282,7 +282,7 @@
 \begin{proposition}{}{}
   実数値関数\(f\)は有界閉区間\(\ccival{a}{b}\)上で定義され有界とする．このとき，\(f\)がリーマン積分できれば\(f\)はルベーグ測度に関して可積分で
   \[
-    \int_a^bf(x)\intd{x} = \int_{\ccival{a}{b}}f(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+    \int_a^bf(x)\intd{x} = \int_{\ccival{a}{b}}f(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)はルベーグ測度)}
   \]
   が成立する．
 \end{proposition}
@@ -359,7 +359,7 @@
 \]
 が成立する．同様に，\(X\)が確率密度関数\(f_X\)を持つとき
 \[
-  (\imgmeasure{X}{\prob})(A) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)は\(\numset{R}\)上のルベーグ測度)}
+  (\imgmeasure{X}{\prob})(A) = \int_Af_X(x)\measured[x]{\lambda}\quad\text{(\(\lambda\)はルベーグ測度)}
 \]
 が成立する．
 
@@ -458,22 +458,14 @@
 
 \begin{note}
   すべての\(\mu\)‐零集合が\(\sigmaalg{F}\)に属するとき，\(\mu\)を\termdef{完備測度}\index{かんびそくど@完備測度}\index{そくど@測度!かんび@完備\texttwoemdash}（complete measure）という．
-  \(\numset{R}\)上のボレル測度は完備測度でないが，ルベーグ測度は完備測度である．
+  \(\borelset{\numset{R}}\)上のボレル測度は完備測度でないが，ルベーグ測度は完備測度である．
 \end{note}
 
-\(1\leq p<+\infty\)とする．\cref{chapter:hilbert_space}で見たように，\(\int\abs{f(x)}^p\measured[x]{\mu}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
-この空間を\(\Lebesgue*{p}=\Lebesgue*{p}(\Omega,\sigmaalg{F},\mu)\)としよう．\(\Lpseminorm{p}{\holder}\)を
-\[
-  \Lpseminorm{p}{f} = \pqty*{\int\abs{f(x)}^p\measured[x]{\mu}}^{1/p}
-\]
-で定義すると，\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）
-\begin{equation}
-  \label{equation:minkowski}
-  \Lpseminorm{p}{f+g} \leq \Lpseminorm{p}{f}+\Lpseminorm{p}{g}
-\end{equation}
-から，\(\Lebesgue*{p}\)はベクトル空間である．また，\(\Lpseminorm{p}{\holder}\)はノルムの条件のうち\(\Lpseminorm{p}{af}=\abs{a}\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+g}\leq\Lpseminorm{p}{f}+\Lpseminorm{p}{g}\)を満たす．
+\(1\leq p<+\infty\)，\(\Lpseminorm{p}{f}=(\int\abs{f(x)}^p\measured[x]{\mu})^{1/p}\)とする．\cref{xr-chapter:hilbert_space}で見たように，\(\Lpseminorm{p}{f}<+\infty\)を満たす可測関数\(f\colon\Omega\to\numset{K}\)からなる空間は，応用的にも非常に重要である．
+この空間を\(\Lebesgue*{p}=\Lebesgue*{p}(\Omega,\sigmaalg{F},\mu)\)としよう．\termdef{ミンコフスキーの不等式}\index{みんこふすきーのふとうしき@ミンコフスキーの不等式}（Minkowski inequality）\(\Lpseminorm{p}{f+g}\leq\Lpseminorm{p}{f}+\Lpseminorm{p}{g}\)から，
+\(\Lebesgue*{p}\)はベクトル空間である．また，\(\Lpseminorm{p}{\holder}\)はノルムの条件のうち\(\Lpseminorm{p}{af}=\abs{a}\Lpseminorm{p}{f}\)，\(\Lpseminorm{p}{f+g}\leq\Lpseminorm{p}{f}+\Lpseminorm{p}{g}\)を満たす．
 
-しかし厄介なことに，\(\Lpseminorm{p}{\holder}\)が任意の\(f\in\Lebesgue*{p}\)に対して\(\Lpseminorm{p}{f}=0\iff f=0\)を満たすのは，\(\mu\)が特殊な測度のときに限られる．一方で，次の事実がある．
+しかし厄介なことに，多くの場合\(\Lpseminorm{p}{f}=0\iff f=0\)は成立しない．一方で，次の事実がある．
 
 \begin{proposition}{}{kernel_of_integration}
   \(f\)を可測関数とする．このとき，\(f\)に関する以下の条件は同値である．
@@ -483,9 +475,9 @@
   \end{enumerate}
 \end{proposition}
 
-\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，すなわち\(f=0\almosteverywhere\)のときだけである．
+\cref{proposition:kernel_of_integration}から，\(\Lpseminorm{p}{f}=0\)となるのは\(\abs{f(x)}^p=0\almosteverywhere[][x]\)，すなわち\(f=0\almosteverywhere\)のときに限られる．
 そのため，ほとんどいたるところで等しい値をとる関数を同じものとみなせば，\(\Lebesgue*{p}\)はノルム空間になる．
-つまり，\(f\)と同一視される可測関数全体を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)とおくと，集合\(\Lebesgue{p}=\Set{[f]\given f\in\Lebesgue*{p}}\)はノルム空間になる．
+つまり，\(f\)と同一視される可測関数全体を\([f]=\Set{\varphi\given\varphi=f\almosteverywhere}\)とおくと，集合\(\Lebesgue{p}=\Set{[f]\given f\in\Lebesgue*{p}}\)はノルム空間である．
 
 実は，\(\Lebesgue{p}\)はバナッハ空間でもある．バナッハ空間\(\Lebesgue{p}\)を\termdef{\(\Lebesgue{p}\)空間}という．
 

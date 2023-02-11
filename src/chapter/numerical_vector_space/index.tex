@@ -372,13 +372,9 @@
   \(\vect{a}_1=\trps{\rowvect{4 & 1 & 2}}\)，\(\vect{a}_2=\trps{\rowvect{0 & 3 & 2}}\)とおくと\(\colsp\mat{A}=\spannedby\Set{\vect{a}_1,\vect{a}_2}\)である．
 
   \(P=\proj_{\colsp\mat{A}}\)とおく．\(\Set{\vect{a}_1,\vect{a}_2}\)に\nameref{xr-proposition:gram_schmidt}を適用すると
-  \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので
-  \[
-    P(\vect{b}) = \innerp{\vect{b}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{b}}{\vect{e}_2}\vect{e}_2
-    = -\frac{2}{3}\matrice*{4 \\ 1 \\ 2}-\frac{2}{3}\matrice*{-1 \\ 2 \\ 1}
-    = \matrice*{-2 \\ -2 \\ -2}
-  \]
-  である．よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
+  \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので，
+  \(P(\vect{b})=\innerp{\vect{b}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{b}}{\vect{e}_2}\vect{e}_2=-2\trps{\rowvect{1 & 1 & 1}}\)である．
+  よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -433,6 +429,8 @@
 
 \subsection{スペクトル分解と特異値分解}
 
+一般に，正規方程式の係数行列\(\htrps{\mat{A}}\mat{A}\)は正規行列である．このことを活用すると，次の定理から正規方程式の解を解析できる．
+
 \begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
   \begin{enumerate}
@@ -440,6 +438,10 @@
     \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
   \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ．
+\end{proof}
 
 ユニタリ行列による対角化は\termdef{スペクトル分解}\index{すぺくとるぶんかい@スペクトル分解}（spectral decomposition）と呼ばれる．
 \cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
@@ -761,6 +763,7 @@
 \section{補遺}
 
 \subsection{スペクトル定理の証明}
+\label{subsection:proof_of_the_spectral_theorem}
 
 \cref{theorem:spectral_theorem}を証明する前に，次の定理を示そう．
 
