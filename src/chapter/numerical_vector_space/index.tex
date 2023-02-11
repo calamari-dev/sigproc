@@ -226,9 +226,9 @@
 \subsection{分析と合成}
 \label{subsection:analysis_and_synthesis}
 
-\cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
-一方で（特に信号解析では），\(\vect{x}\)の性質を調べるのに利用したい\(\numset{C}^n\)の正規直交基底\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)があって，
-そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}\vect{x}\)を作ることも多い．そのような場合，直交射影は3つの操作に分解できる．
+\cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
+一方で，\(\vect{x}\)の性質を調べるのに使いたい\(\numset{C}^n\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)がさきにあって，そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}\vect{x}\)を作ることも多い．
+そのような場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
@@ -404,7 +404,7 @@
   \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})} = \Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
-\(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)の\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
+\(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 \begin{note}
@@ -445,6 +445,16 @@
 
 ユニタリ行列による対角化は\termdef{スペクトル分解}\index{すぺくとるぶんかい@スペクトル分解}（spectral decomposition）と呼ばれる．
 \cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
+
+\begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}
+  任意の\(n\times p\)複素行列\(\mat{A}\)に対して，以下の命題が成立する．
+  \begin{enumerate}
+    \item \(\htrps{\mat{A}}\mat{A}\)の固有値はすべて非負であり，正の固有値は重複度を込めて\(r=\rank(\htrps{\mat{A}}\mat{A})\)個ある．
+    \item \(\htrps{\mat{A}}\mat{A}\)の正の固有値を\(\lambda_1\geq\dots\geq\lambda_r\)とおく．このとき，\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，\(p\)次ユニタリ行列\(\mat{V}\)が存在する．
+      ただし，\(\mat{\Sigma}=\smallmatrice{\diag(\sqrt{\lambda_1},\dots,\sqrt{\lambda_r}) & \\ & \zmat}\)は\(n\times p\)行列である．
+      式\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の\termdef{特異値分解}（singular value decomposition; SVD）という．
+  \end{enumerate}
+\end{corollary}
 
 \subsection{擬似逆行列}
 
@@ -488,21 +498,16 @@
 \end{equation}
 と書ける．
 
-\begin{proposition}{}{dft_plancherel}
-  \(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)（\(\vect{x},\vect{y}\in\numset{C}^N\)）である．
-\end{proposition}
+\cref{proposition:unitary_matrix_property}と\cref{proposition:dft_onb}から，次の系がしたがう．
 
-\begin{proof}
-  標準基底に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．このとき
-  \(\innerp{\vect{\hat{x}}}{\vect{\hat{y}}}=\innerp{\mat{W}\vect{x}}{\vect{\hat{y}}}=\trps{\vect{x}}\trps{\mat{W}}\conj{\vect{\hat{y}}}=\trps{\vect{x}}\conj*{\htrps{\mat{W}}\vect{\hat{y}}}=\innerp{\vect{x}}{\htrps{\mat{W}}\vect{\hat{y}}}\)
-  であり，\(\mat{W}\)はユニタリ行列なので\(\htrps{\mat{W}}\vect{\hat{y}}=\htrps{\mat{W}}\mat{W}\vect{y}=\vect{y}\)，\(\innerp{\vect{x}}{\htrps{\mat{W}}\vect{\hat{y}}}=\innerp{\vect{x}}{\vect{y}}\)となる．
-\end{proof}
+\begin{corollary}{}{dft_plancherel}
+  \(\innerp{\dft{N}\vect{x}}{\dft{N}\vect{y}}=\innerp{\vect{x}}{\vect{y}}\)（\(\vect{x},\vect{y}\in\numset{C}^N\)）である．
+\end{corollary}
 
-\cref{proposition:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
+\cref{corollary:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
 \begin{equation}
   \label{equation:dft_parseval}
-  \vnorm{\dft{N}\vect{x}}^2 = \vnorm{\vect{x}}^2,
-  \quad\sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
+  \sum_{k=0}^{N-1}\abs{(\dft{N}\vect{x})[k]}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2\quad(\vect{x}=\trps{\matrice{x_1 & \cdots & x_n}})
 \end{equation}
 である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
 
