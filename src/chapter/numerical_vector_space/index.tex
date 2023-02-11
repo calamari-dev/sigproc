@@ -431,13 +431,13 @@
 \]
 である．
 
-\subsection{スペクトル定理と特異値分解}
+\subsection{スペクトル分解と特異値分解}
 
 \begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
   \begin{enumerate}
     \item \(\mat{A}\)は正規行列である．
-    \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，行列\(\mat{\Lambda}=\htrps{\mat{U}}\mat{A}\mat{U}\)が対角行列になるユニタリ行列\(\mat{U}\)が存在する．
+    \item \(\mat{A}\)はユニタリ行列で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
   \end{enumerate}
 \end{theorem}
 
@@ -760,9 +760,9 @@
 
 \section{補遺}
 
-\subsection{スペクトル分解の証明}
+\subsection{スペクトル定理の証明}
 
-\nameref{theorem:spectral_theorem}を証明する前に，次の定理を示そう．
+\cref{theorem:spectral_theorem}を証明する前に，次の定理を示そう．
 
 \begin{theorem}{シューア分解}{schur_decomposition}\index{しゅーあぶんかい@シューア分解}\index{うえさんかくぎょうれつ@上三角行列}\index{ぎょうれつ@行列!うえさんかく@上三角\texttwoemdash}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
@@ -774,26 +774,25 @@
 \end{theorem}
 
 \begin{proof}
-  \(n\)に関する帰納法で示す．\(E\)を\(\mat{A}\)のある固有値\(\lambda\)に属する固有空間とする．
-  また，集合\(\basis{B}_1=\Set{\vect{u}_1,\dots,\vect{u}_d}\)，\(\basis{B}_2=\Set{\vect{u}_{d+1},\dots,\vect{u}_n}\)をそれぞれ\(E\)，\(\pcomp{E}\)の正規直交基底とする．
-  このとき，集合\(\basis{B}_1\cup\basis{B}_2\)は\(\numset{C}^n\)の正規直交基底だから\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
+  \(n\)に関する帰納法で示す．\(\vect{u}_1\)を\(\mat{A}\)のある固有値\(\lambda\)に属する，ノルム1の固有ベクトルとする．
+  また，集合\(\Set{\vect{u}_2,\dots,\vect{u}_n}\)を\(\pcomp{(\spannedby\Set{\vect{u}_1})}\)の正規直交基底とする．
+  このとき，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底だから，\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
 
-  \(\numset{C}^n\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)とおくと，\(\htrps{\mat{U}}\mat{A}\vect{u}_i=\lambda\htrps{\mat{U}}\vect{u}_i=\lambda\vect{e}_i\)（\(1\leq i\leq d\)）なので
-  \(\htrps{\mat{U}}\mat{A}\mat{U}=\rowvect{\lambda\vect{e}_1 & \cdots & \lambda\vect{e}_d & \htrps{\mat{U}}\mat{A}\vect{u}_{d+1} & \cdots & \htrps{\mat{U}}\mat{A}\vect{u}_n}\)である．
-  右辺を\(\smallmatrice{\lambda\imat_d & \mat{B} \\ & \mat{C}}\)とおくと，\(\mat{B}\)は\((n-d)\times d\)行列，\(\mat{C}\)は\((n-d)\times(n-d)\)行列である．
-
-  帰納法の仮定により，\(\mat{C}\)はシューア分解できる．\(\mat{C}\)のシューア分解\(\mat{C}=\mat{V}\mat{C}'\htrps{\mat{V}}\)から，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{\imat_d & \\ & \mat{V}}\)で定義する．このとき
+  \(\vect{e}_1=\trps{\rowvect{1 & 0 & \cdots & 0}}\in\numset{C}^n\)とおくと，\(\htrps{\mat{U}}\mat{A}\vect{u}_1=\htrps{\mat{U}}(\lambda\vect{u}_1)=\lambda\vect{e}_1\)なので
+  \(\htrps{\mat{U}}\mat{A}\mat{U}=\rowvect{\lambda\vect{e}_1 & \htrps{\mat{U}}\mat{A}\vect{u}_2 & \cdots & \htrps{\mat{U}}\mat{A}\vect{u}_n}\)である．
+  右辺を\(\smallmatrice{\lambda & \trps{\vect{b}} \\ & \mat{C}}\)とおく（\(\mat{C}\)は\(n-1\)次正方行列，\(\vect{b}\in\numset{C}^{n-1}\)）．
+  帰納法の仮定から\(\mat{C}\)はシューア分解できる．\(\mat{C}=\mat{V}\mat{C}'\htrps{\mat{V}}\)をシューア分解とし，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{1 & \\ & \mat{V}}\)で定義する．このとき
   \[
-    \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{C}} = \matrice*{\lambda\imat_d & \mat{B} \\ & \mat{V}\mat{C}'\htrps{\mat{V}}}
-    = \matrice*{\imat_d & \\ & \mat{V}}\matrice*{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \mat{C}'}\matrice*{\imat_d & \\ & \htrps{\mat{V}}}
+    \matrice*{\lambda & \trps{\vect{b}} \\ & \mat{C}} = \matrice*{\lambda & \trps{\vect{b}} \\ & \mat{V}\mat{C}'\htrps{\mat{V}}}
+    = \matrice*{1 & \\ & \mat{V}}\matrice*{\lambda & \trps{\vect{b}}\mat{V} \\ & \mat{C}'}\matrice*{1 & \\ & \htrps{\mat{V}}}
   \]
-  だから，\(\mat{A}'=\smallmatrice{\lambda\imat_d & \htrps{\mat{V}}\mat{B}\mat{V} \\ & \mat{C}'}\)とおくと\(\htrps{\mat{U}}\mat{A}\mat{U}=\mat{W}\mat{A}'\htrps{\mat{W}}\)である．
-  よって，\(\mat{U}\mat{W}\)を\(\mat{U}\)と置き直せば\(\mat{A}=\mat{U}\mat{A}'\htrps{\mat{U}}\)で，\(\mat{A}'\)は上三角行列なので，これは\(\mat{A}\)のシューア分解になっている．
+  なので，\(\mat{A}'=\smallmatrice{\lambda & \trps{\vect{b}}\mat{V} \\ & \mat{C}'}\)とおくと\(\htrps{\mat{U}}\mat{A}\mat{U}=\mat{W}\mat{A}'\htrps{\mat{W}}\)である．
+  よって，\(\mat{U}\mat{W}\)をあらためて\(\mat{U}\)とすれば\(\mat{A}=\mat{U}\mat{A}'\htrps{\mat{U}}\)で，\(\mat{A}'\)は上三角行列だから，これは\(\mat{A}\)のシューア分解になっている．
 \end{proof}
 
-\cref{theorem:schur_decomposition}を利用すると，\nameref{theorem:spectral_theorem}は次のようにして示せる．
+\cref{theorem:schur_decomposition}を利用すると，\cref{theorem:spectral_theorem}は次のようにして示せる．
 
-\begin{proof}[\nameref{theorem:spectral_theorem}の証明]
+\begin{proof}[スペクトル定理の証明]
   ユニタリ行列で対角化できれば正規行列であることはすぐ分かる．
   \(\mat{A}\)を\(n\)次正規行列とする．\(\mat{A}\)のシューア分解を\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)とおくと，
   \(\htrps{\mat{A}}\mat{A}-\mat{A}\htrps{\mat{A}}=\mat{U}(\htrps{\mat{B}}\mat{B}-\mat{B}\htrps{\mat{B}})\htrps{\mat{U}}=\zmat\)より\(\mat{B}\)も正規行列である．
