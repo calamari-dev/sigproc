@@ -10,7 +10,7 @@ aux_empty_size = 9
 [programs.mendex]
 command = "upmendex"
 target = "%B.idx"
-opts = ["-g", "-s"]
+opts = ["-s"]
 args = ["./index", "%T"]
 generated_target = true
 postprocess = "latex"
