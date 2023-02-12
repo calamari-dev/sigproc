@@ -165,7 +165,7 @@
   より\(-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2=d(-\innerp{\vect{n}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)である．
 \end{proof}
 
-\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\vect{x}\)}
+\begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\)}
   \cref{proposition:finite_projection}の\(\vect{m}\)を\(\vect{x}\)の\(V\)への\termdef{直交射影}（orthogonal projection）といい，\(\proj_V\vect{x}\)と表す．
 \end{definition}
 
@@ -447,14 +447,40 @@
 \cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
 
 \begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}
-  任意の\(n\times p\)複素行列\(\mat{A}\)に対して，以下の命題が成立する．
+  \(\mat{A}\)を\(\zmat\)でない任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)がある．
+  式\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の\termdef{特異値分解}（singular value decomposition; SVD）という．
   \begin{enumerate}
-    \item \(\htrps{\mat{A}}\mat{A}\)の固有値はすべて非負であり，正の固有値は重複度を込めて\(r=\rank(\htrps{\mat{A}}\mat{A})\)個ある．
-    \item \(\htrps{\mat{A}}\mat{A}\)の正の固有値を\(\lambda_1\geq\dots\geq\lambda_r\)とおく．このとき，\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を満たす\(n\)次ユニタリ行列\(\mat{U}\)，\(p\)次ユニタリ行列\(\mat{V}\)が存在する．
-      ただし，\(\mat{\Sigma}=\smallmatrice{\diag(\sqrt{\lambda_1},\dots,\sqrt{\lambda_r}) & \\ & \zmat}\)は\(n\times p\)行列である．
-      式\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の\termdef{特異値分解}（singular value decomposition; SVD）という．
+    \item \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
+    \item \(\mat{U}\)は\(n\)次ユニタリ行列，\(\mat{V}\)は\(p\)次ユニタリ行列である．
+    \item \(\mat{\Sigma}\)は\(n\times p\)行列で\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)と書ける．
+      ただし\(1\leq r\leq\min\Set{n,p}\)，\(\sigma_1\geq\dots\geq\sigma_r>0\)である．
   \end{enumerate}
 \end{corollary}
+
+\begin{proof}
+  \(n\geq p\)のときのみ示す．\(\htrps{\mat{A}}\mat{A}\)は\(p\)次正規行列なので，\cref{theorem:spectral_theorem}よりスペクトル分解\(\htrps{\mat{A}}\mat{A}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)が存在する．
+  \(\mat{V}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_p}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_p)\)とおく．\(\lambda_i\vect{v}_i=(\htrps{\mat{A}}\mat{A})\vect{v}_i\)，\(\kdelta{i}{j}=\trps{(\trps{\vect{v}_i}\conj{\vect{v}}_j)}=\htrps{\vect{v}_j}\vect{v}_i\)より
+  \begin{equation}
+    \label{equation:image_orthogonality}
+    \lambda_i\kdelta{i}{j} = \htrps{\vect{v}_j}(\lambda_i\vect{v}_i)
+    = \htrps{\vect{v}_j}(\htrps{\mat{A}}\mat{A})\vect{v}_i
+    = \innerp{\mat{A}\vect{v}_i}{\mat{A}\vect{v}_j}
+  \end{equation}
+  だから，各\(\lambda_i=\vnorm{\mat{A}\vect{v}_i}^2\)はすべて非負である．また
+  \[
+    \htrps{\mat{A}}\mat{A} = \matrice*{\vect{v}_1 & \cdots & \vect{v}_p}\matrice*{\lambda_1 & & \\ & \ddots & \\ & & \lambda_p}\matrice*{\htrps{\vect{v}_1} \\ \vdots \\ \htrps{\vect{v}_p}}
+    = \sum_{i=1}^p\lambda_i\vect{v}_i\htrps{\vect{v}_i}
+  \]
+  であり，和の順序を変えても値は変わらない．そこで，\(\lambda_1\geq\dots\geq\lambda_p\)が成り立つように\(\lambda_1,\dots,\lambda_p\)と\(\vect{v}_1,\dots,\vect{v}_p\)を並べ替えておく．
+
+  \(r=\max\Set{i\given\mat{A}\vect{v}_i\neq\zvec}\)とおく．\cref{equation:image_orthogonality}より，\(\vect{u}_i=(1/\sigma_i)\mat{A}\vect{v}_i\)（\(\sigma_i=\sqrt{\lambda_i}=\vnorm{\mat{A}\vect{u}_i}\)）とおくと，集合\(\Set{\vect{u}_1,\dots,\vect{u}_r}\)は\(\numset{C}^n\)の正規直交系である．
+  \(r<n\)のときは\(\vect{u}_{r+1},\dots,\vect{u}_n\in\numset{C}^n\)を適切に補うことで，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)を\(\numset{C}^n\)の正規直交基底にできる．すると，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列であり
+  \[
+    \htrps{\mat{U}}(\mat{A}\mat{V}) = \htrps{\mat{U}}\matrice{\sigma_1\vect{u}_1 & \cdots & \sigma_r\vect{u}_r & \zmat}
+    = \matrice*{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}
+  \]
+  が成り立つ．右辺を\(\mat{\Sigma}\)とおくと\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
+\end{proof}
 
 \subsection{擬似逆行列}
 
@@ -507,7 +533,7 @@
 \cref{corollary:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
 \begin{equation}
   \label{equation:dft_parseval}
-  \sum_{k=0}^{N-1}\abs{(\dft{N}\vect{x})[k]}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2\quad(\vect{x}=\trps{\matrice{x_1 & \cdots & x_n}})
+  \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
 \end{equation}
 である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
 
