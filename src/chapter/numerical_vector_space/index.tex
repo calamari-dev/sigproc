@@ -27,7 +27,7 @@
 \section{直交射影}
 
 本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
-\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)とする\indexsymbol{\(\vnorm{\holder}\)}．
+\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
 
 \subsection{直交射影}
 
@@ -401,7 +401,7 @@
 以上の議論から，次の命題が成り立つ．
 
 \begin{proposition}{}{normal_equation}
-  \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})} = \Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}}\)である．
+  \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
 \(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
@@ -429,7 +429,7 @@
 
 \subsection{スペクトル分解と特異値分解}
 
-一般に，正規方程式の係数行列\(\htrps{\mat{A}}\mat{A}\)は正規行列である．このことを活用すると，次の定理から正規方程式の解を解析できる．
+\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
 \begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
@@ -440,30 +440,30 @@
 \end{theorem}
 
 \begin{proof}
-  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ．
+  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ．証明は本筋に絡まないので，ひとまず認めてもかまわない．
 \end{proof}
 
 ユニタリ行列による対角化は\termdef{スペクトル分解}\index{すぺくとるぶんかい@スペクトル分解}（spectral decomposition）と呼ばれる．
 \cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
 
 \begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}
-  \(\mat{A}\)を\(\zmat\)でない任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)がある．
+  \(\mat{A}\)を任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)がある．
   式\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の\termdef{特異値分解}（singular value decomposition; SVD）という．
   \begin{enumerate}
     \item \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
     \item \(\mat{U}\)は\(n\)次ユニタリ行列，\(\mat{V}\)は\(p\)次ユニタリ行列である．
-    \item \(\mat{\Sigma}\)は\(n\times p\)行列で\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)と書ける．
-      ただし\(1\leq r\leq\min\Set{n,p}\)，\(\sigma_1\geq\dots\geq\sigma_r>0\)である．
+    \item \(\mat{\Sigma}\)は\(n\times p\)行列で\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\)と書ける．
+      ただし\(k=\min\Set{n,p}\)，\(\sigma_1\geq\dots\geq\sigma_k\geq 0\)である．
   \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-  \(n\geq p\)のときのみ示す．\(\htrps{\mat{A}}\mat{A}\)は\(p\)次正規行列なので，\cref{theorem:spectral_theorem}よりスペクトル分解\(\htrps{\mat{A}}\mat{A}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)が存在する．
+  \(\mat{A}\neq\zmat\)，\(n\geq p\)のときのみ示す．\(\htrps{\mat{A}}\mat{A}\)は\(p\)次正規行列なので，\cref{theorem:spectral_theorem}よりスペクトル分解\(\htrps{\mat{A}}\mat{A}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)が存在する．
   \(\mat{V}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_p}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_p)\)とおく．\(\lambda_i\vect{v}_i=(\htrps{\mat{A}}\mat{A})\vect{v}_i\)，\(\kdelta{i}{j}=\trps{(\trps{\vect{v}_i}\conj{\vect{v}}_j)}=\htrps{\vect{v}_j}\vect{v}_i\)より
   \begin{equation}
     \label{equation:image_orthogonality}
-    \lambda_i\kdelta{i}{j} = \htrps{\vect{v}_j}(\lambda_i\vect{v}_i)
-    = \htrps{\vect{v}_j}(\htrps{\mat{A}}\mat{A})\vect{v}_i
+    \lambda_i\kdelta{i}{j} = \htrps{\vect{v}_j}(\htrps{\mat{A}}\mat{A})\vect{v}_i
+    = \trps{(\trps{(\mat{A}\vect{v}_i)}\conj*{\mat{A}\vect{v}_j})}
     = \innerp{\mat{A}\vect{v}_i}{\mat{A}\vect{v}_j}
   \end{equation}
   だから，各\(\lambda_i=\vnorm{\mat{A}\vect{v}_i}^2\)はすべて非負である．また
@@ -473,14 +473,44 @@
   \]
   であり，和の順序を変えても値は変わらない．そこで，\(\lambda_1\geq\dots\geq\lambda_p\)が成り立つように\(\lambda_1,\dots,\lambda_p\)と\(\vect{v}_1,\dots,\vect{v}_p\)を並べ替えておく．
 
-  \(r=\max\Set{i\given\mat{A}\vect{v}_i\neq\zvec}\)とおく．\cref{equation:image_orthogonality}より，\(\vect{u}_i=(1/\sigma_i)\mat{A}\vect{v}_i\)（\(\sigma_i=\sqrt{\lambda_i}=\vnorm{\mat{A}\vect{u}_i}\)）とおくと，集合\(\Set{\vect{u}_1,\dots,\vect{u}_r}\)は\(\numset{C}^n\)の正規直交系である．
-  \(r<n\)のときは\(\vect{u}_{r+1},\dots,\vect{u}_n\in\numset{C}^n\)を適切に補うことで，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)を\(\numset{C}^n\)の正規直交基底にできる．すると，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列であり
+  \(\sigma_i=\sqrt{\lambda_i}=\vnorm{\mat{A}\vect{u}_i}\)，\(r=\max\Set{i\given\mat{A}\vect{v}_i\neq\zvec}\)とおく．
+  \cref{equation:image_orthogonality}より，\(\vect{u}_i=(1/\sigma_i)\mat{A}\vect{v}_i\)とおくと集合\(\Set{\vect{u}_1,\dots,\vect{u}_r}\)は\(\numset{C}^n\)の正規直交系である．
+  \(r<n\)のときは\(\vect{u}_{r+1},\dots,\vect{u}_n\in\numset{C}^n\)を適切に補うことで，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)を\(\numset{C}^n\)の正規直交基底にできる．
+  すると，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列であり
   \[
     \htrps{\mat{U}}(\mat{A}\mat{V}) = \htrps{\mat{U}}\matrice{\sigma_1\vect{u}_1 & \cdots & \sigma_r\vect{u}_r & \zmat}
     = \matrice*{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}
   \]
-  が成り立つ．右辺を\(\mat{\Sigma}\)とおくと\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
+  が成り立つ．\(\sigma_{r+1}=\dots=\sigma_k=0\)なので，右辺の行列は\(\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\)と表せる．
+  この行列を\(\mat{\Sigma}\)とおくと\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
 \end{proof}
+
+特異値分解に基づいて\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めよう．
+\(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
+\cref{proposition:unitary_matrix_property}から，ユニタリ行列を乗じてもノルムは変わらないので
+\(\vnorm{\vect{\epsilon}(\vect{x})}^2=\vnorm{(\mat{U}\mat{\Sigma}\htrps{\mat{V}})\vect{x}-\vect{b}}^2=\vnorm{\mat{\Sigma}\htrps{\mat{V}}\vect{x}-\htrps{\mat{U}}\vect{b}}^2\)である．
+よって，\(\vect{x}=\mat{V}\vect{y}\)，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)，\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)（\(\sigma_r>0\)）とすれば
+\[
+  \vnorm{\vect{\epsilon}(\vect{x})}^2 = \vnorm{\mat{\Sigma}\vect{y}-\htrps{\mat{U}}\vect{b}}^2
+  = \sum_{i=1}^r(\sigma_iy_i-\htrps{\vect{u}_i}\vect{b})^2+\sum_{i=r+1}^n(\htrps{\vect{u}_i}\vect{b})^2
+\]
+となる．右辺の値が最も小さくなるのは\(y_i=(1/\sigma_i)\htrps{\vect{u}_i}\vect{b}\)（\(1\leq i\leq r\)）のときであり，\(y_{r+1},\dots,y_n\)の値はなんであっても構わない．
+\(\vect{x}=\mat{V}\vect{y}\)なので，\(\vnorm{\vect{\epsilon}(\vect{x})}\)が最小値をとるのは\(\vect{x}\)が
+\begin{align*}
+  \vect{x} &= \mat{V}\matrice{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} & \cdots & (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} & y_{r+1} & \cdots & y_n} \\
+  &= \mat{V}\matrice*{\diag(1/\sigma_1,\dots,1/\sigma_r,a_{r+1},\dots,a_k) & \\ & \zmat}\htrps{\mat{U}}\vect{b}
+\end{align*}
+の形で表せるときである．ただし，\(a_{r+1},\dots,a_k\)（\(k=\min\Set{n,p}\)）は任意の複素数である．
+
+以上の議論をまとめると，次のことが分かる．
+
+\begin{proposition}{}{}
+  \(k=\min\Set{n,p}\)とする．\(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\htrps{\mat{V}}\)（\(\sigma_r>0\)）とおく．
+  このとき，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は次のように表せる．
+  \[
+    \Set*{\mat{V}\matrice*{\diag(1/\sigma_1,\dots,1/\sigma_r,a_{r+1},\dots,a_k) & \\ & \zmat}\htrps{\mat{U}}\vect{b}\given a_{r+1},\dots,a_k\in\numset{C}}
+  \]
+\end{proposition}
 
 \subsection{擬似逆行列}
 
