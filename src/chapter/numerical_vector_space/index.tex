@@ -897,18 +897,18 @@
 
 \begin{proof}
   \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の特異値分解とすると，\(\mat{B}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)が上の4条件を満たすことはすぐ確かめられる．
-  \(p\times n\)行列\(\mat{B}_1\)，\(\mat{B}_2\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\stackrel{i}{=\joinrel=}\)と書くと
+  \(p\times n\)行列\(\mat{B}_1\)，\(\mat{B}_2\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
   \begin{align*}
-    \mat{B}_1 &\stackrel{2,3}{=\joinrel=} \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}
-    \stackrel{1}{=\joinrel=} \mat{B}_1\htrps{\mat{B}_1}\htrps{(\mat{A}\mat{B}_2\mat{A})}
+    \mat{B}_1 &\overset{2,3}{=\joinrel=} \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}
+    \overset{1}{=\joinrel=} \mat{B}_1\htrps{\mat{B}_1}\htrps{(\mat{A}\mat{B}_2\mat{A})}
     = \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}\htrps{(\mat{A}\mat{B}_2)}
-    \stackrel{2,3}{=\joinrel=} \mat{B}_1\mat{A}\mat{B}_2 \\
-    &\stackrel{2,4}{=\joinrel=} \htrps{(\mat{B}_1\mat{A})}(\mat{B}_2\mat{A}\mat{B}_2)
-    \stackrel{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_1}\htrps{(\mat{B}_2\mat{A})}\mat{B}_2
+    \overset{2,3}{=\joinrel=} \mat{B}_1\mat{A}\mat{B}_2 \\
+    &\overset{2,4}{=\joinrel=} \htrps{(\mat{B}_1\mat{A})}(\mat{B}_2\mat{A}\mat{B}_2)
+    \overset{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_1}\htrps{(\mat{B}_2\mat{A})}\mat{B}_2
     = \htrps{(\mat{A}\mat{B}_1\mat{A})}\htrps{\mat{B}_2}\mat{B}_2 \\
-    &\stackrel{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_2}\mat{B}_2
+    &\overset{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_2}\mat{B}_2
     = \htrps{(\mat{B}_2\mat{A})}\mat{B}_2
-    \stackrel{2}{=\joinrel=} \mat{B}_2
+    \overset{2,4}{=\joinrel=} \mat{B}_2
   \end{align*}
   なので\(\mat{B}_1=\mat{B}_2\)である．
 \end{proof}
