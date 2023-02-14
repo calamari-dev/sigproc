@@ -506,10 +506,11 @@
 と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて\cref{equation:explicit_pseudo_inverse}を整理すると
 \begin{align*}
   \vect{x} &= \mat{V}\matrice*{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} \\ \vdots \\ (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} \\ \zvec_{p-r}}+\mat{V}\matrice*{\zvec_r \\ z_{r+1} \\ \vdots \\ z_p}
-  = \mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\vect{b}+(\imat-\mat{V}\pinv{\mat{\Sigma}}\mat{\Sigma}\htrps{\mat{V}})\mat{V}\vect{z} \\
-  &= \pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\quad(\vect{w}=\mat{V}\vect{z})
+  = \mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\vect{b}+\mat{V}(\imat-\pinv{\mat{\Sigma}}\mat{\Sigma})\vect{z} \\
+  &= \pinv{\mat{A}}\vect{b}+(\imat-\mat{V}\pinv{\mat{\Sigma}}\mat{\Sigma}\htrps{\mat{V}})\mat{V}\vect{z}
+  = \pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}
 \end{align*}
-が得られる．\(\pinv{\mat{A}}\)を\(\mat{A}\)の擬似逆行列という．
+が得られる（ただし\(\vect{w}=\mat{V}\vect{z}\)）．\(\pinv{\mat{A}}\)を\(\mat{A}\)の擬似逆行列という．
 
 \begin{definition}{擬似逆行列}{}\index{むーあぺんろーずぎゃくぎょうれつ@ムーア・ペンローズ逆行列}\index{ぎじぎゃくぎょうれつ@擬似逆行列}\indexsymbol{\(\pinv{\mat{A}}\)}
   \(\mat{A}\)を\(n\times p\)複素行列とし，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
