@@ -88,13 +88,14 @@
 一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせい@生成!ぶぶんくうかん@部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する\texttwoemdash}（generated subspace）といい，
 \(\spannedby S\)\index{span@\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と言い換えられる．
 
-\begin{wrapfigure}[10]{o}{0pt}
+\begin{wrapfigure}[9]{o}{0pt}
   \includegraphics{figures/linear_comb.pdf}
 \end{wrapfigure}
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subset\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
-たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\trps{\rowvect{1 & 1}},\trps{\rowvect{2 & -1}},\trps{\rowvect{-1 & 0}}}\)が生成する部分空間は
-\(\numset{R}^2\)である．しかし，\(\basis{S}_2=\Set{\trps{\rowvect{1 & 0}},\trps{\rowvect{0 & 1}}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない．
+たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\vect{v}_1,\vect{v}_2,\vect{v}_3}\)（\(\vect{v}_1=\smallmatrice{1 \\ 1}\)，\(\vect{v}_2=\smallmatrice{2 \\ -1}\)，\(\vect{v}_3=\smallmatrice{-1 \\ 0}\)）が生成する部分空間は\(\numset{R}^2\)である．
+しかし，\(\basis{S}_2=\Set{\smallmatrice{1 \\ 0},\smallmatrice{0 \\ 1}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ1通りであるのに対して，\(T\)はこの性質を持たない．
+実際，\(\vect{x}=\smallmatrice{3/2 \\ 0}\)とすると\(\vect{x}=(1/2)\vect{v}_1+(1/2)\vect{v}_2=(-3/2)\vect{v}_3\)である．
 
 \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_i,b_i\in\numset{K}\)，\(\vect{v}_i\in S\)について
 \[
@@ -111,7 +112,6 @@
 
 任意の\(a_1,\dots,a_k\in\numset{K}\)に対して\cref{equation:independence}が成立するとき，
 \(\vect{v}_1,\dots,\vect{v}_k\)は線型独立であるという．特に，\(V=\spannedby S\)かつ，\(S\)の元からなる有限個のベクトルの組が常に線型独立であるとき，\(S\)は\(V\)の基底であるという．
-以上を\cref{definition:independence,definition:basis}にまとめておく．
 
 \begin{definition}{生成系・線型独立・線型従属}{independence}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．また，\(\vect{v}_1,\dots,\vect{v}_k\)を\(V\)の元とする．

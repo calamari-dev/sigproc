@@ -27,7 +27,7 @@
 \section{直交射影}
 
 本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
-\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
+\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
 
 \subsection{直交射影}
 
@@ -427,7 +427,7 @@
 \]
 である．
 
-\subsection{スペクトル分解と特異値分解}
+\subsection{擬似逆行列}
 
 \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
@@ -485,6 +485,9 @@
   この行列を\(\mat{\Sigma}\)とおくと\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
 \end{proof}
 
+\(\mat{A}\)の特異値分解が\(\mat{A}=\mat{U}\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\htrps{\mat{V}}\)であるとき，
+各\(\sigma_i\)を\(\mat{A}\)の第\(i\)\termdef{特異値}\index{とくいち@特異値}（singular value）という．
+
 特異値分解に基づいて\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めよう．
 \(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
 \cref{proposition:unitary_matrix_property}から，ユニタリ行列を乗じてもノルムは変わらないので
@@ -492,27 +495,38 @@
 よって，\(\vect{x}=\mat{V}\vect{y}\)，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)，\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)（\(\sigma_r>0\)）とすれば
 \[
   \vnorm{\vect{\epsilon}(\vect{x})}^2 = \vnorm{\mat{\Sigma}\vect{y}-\htrps{\mat{U}}\vect{b}}^2
-  = \sum_{i=1}^r(\sigma_iy_i-\htrps{\vect{u}_i}\vect{b})^2+\sum_{i=r+1}^n(\htrps{\vect{u}_i}\vect{b})^2
+  = \sum_{i=1}^r(\sigma_iy_i-\htrps{\vect{u}_i}\vect{b})^2+\sum_{i=r+1}^p(\htrps{\vect{u}_i}\vect{b})^2
 \]
-となる．右辺の値が最も小さくなるのは\(y_i=(1/\sigma_i)\htrps{\vect{u}_i}\vect{b}\)（\(1\leq i\leq r\)）のときであり，\(y_{r+1},\dots,y_n\)の値はなんであってもかまわない．
+となる．右辺の値が最も小さくなるのは\(y_i=\htrps{\vect{u}_i}\vect{b}/\sigma_i\)（\(1\leq i\leq r\)）のときであり，\(y_{r+1},\dots,y_p\)の値はなんであっても構わない．
 \(\vect{x}=\mat{V}\vect{y}\)なので，\(\vnorm{\vect{\epsilon}(\vect{x})}\)が最小値をとるのは\(\vect{x}\)が
+\begin{equation}
+  \label{equation:explicit_pseudo_inverse}
+  \vect{x} = \mat{V}\trps{\matrice{\htrps{\vect{u}_1}\vect{b}/\sigma_1 & \cdots & \htrps{\vect{u}_r}\vect{b}/\sigma_r & z_{r+1} & \cdots & z_p}}\quad(z_i\in\numset{C})
+\end{equation}
+と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて\cref{equation:explicit_pseudo_inverse}を整理すると
 \begin{align*}
-  \vect{x} &= \mat{V}\matrice{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} & \cdots & (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} & y_{r+1} & \cdots & y_n} \\
-  &= \mat{V}\matrice*{\diag(1/\sigma_1,\dots,1/\sigma_r,a_{r+1},\dots,a_k) & \\ & \zmat}\htrps{\mat{U}}\vect{b}
+  \vect{x} &= \mat{V}\matrice*{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} \\ \vdots \\ (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} \\ \zvec_{p-r}}+\mat{V}\matrice*{\zvec_r \\ z_{r+1} \\ \vdots \\ z_p}
+  = \mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\vect{b}+(\imat-\mat{V}\pinv{\mat{\Sigma}}\mat{\Sigma}\htrps{\mat{V}})\mat{V}\vect{z} \\
+  &= \pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\quad(\vect{w}=\mat{V}\vect{z})
 \end{align*}
-の形で表せるときである．ただし，\(a_{r+1},\dots,a_k\)（\(k=\min\Set{n,p}\)）は任意の複素数である．
+が得られる．\(\pinv{\mat{A}}\)を\(\mat{A}\)の擬似逆行列という．
 
-以上の議論をまとめると，次のことが分かる．
+\begin{definition}{擬似逆行列}{}\index{むーあぺんろーずぎゃくぎょうれつ@ムーア・ペンローズ逆行列}\index{ぎじぎゃくぎょうれつ@擬似逆行列}\indexsymbol{\(\pinv{\mat{A}}\)}
+  \(\mat{A}\)を\(n\times p\)複素行列とし，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
+  \(p\times n\)行列\(\pinv{\mat{\Sigma}}\)を次のように定義する．\(\mat{A}=\zmat\)のときは\(\pinv{\mat{\Sigma}}=\zmat\)とする．
+  \(\mat{A}\neq\zmat\)のときは，\(\mat{\Sigma}=\smallmatrice{\mat{\Lambda} & \\ & \zmat}\)を満たす正則な対角行列\(\mat{\Lambda}\)を用いて\(\pinv{\mat{\Sigma}}=\smallmatrice{\mat{\Lambda}^{-1} & \\ & \zmat}\)とする．
+  \(p\times n\)行列\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{ムーア・ペンローズ逆行列}（Moore–Penrose inverse），あるいは\termdef{擬似逆行列}（pseudoinverse）という．
+\end{definition}
+
+普通，特異値分解はもとの行列に対して一意ではない．しかし，擬似逆行列はもとの行列に対して一意に定まる（証明は\cref{subsection:uniqueness_of_the_pseudoinverse}を参照せよ）．
+さきほどの議論から分かることは，擬似逆行列によって次のようにまとめられる．
 
 \begin{proposition}{}{}
-  \(k=\min\Set{n,p}\)とする．\(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\htrps{\mat{V}}\)（\(\sigma_r>0\)）とおく．
-  このとき，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は次のように表せる．
+  任意の\(n\times p\)複素行列\(\mat{A}\)に対して，次の式が成立する．
   \[
-    \Set*{\mat{V}\matrice*{\diag(1/\sigma_1,\dots,1/\sigma_r,a_{r+1},\dots,a_k) & \\ & \zmat}\htrps{\mat{U}}\vect{b}\given a_{r+1},\dots,a_k\in\numset{C}}
+    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
   \]
 \end{proposition}
-
-\subsection{擬似逆行列}
 
 \section{離散フーリエ変換}
 
@@ -575,8 +589,6 @@
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
-
-\pagebreak
 
 \begin{wrapfigure}[10]{o}{0pt}
   \includegraphics{figures/helix.pdf}
@@ -748,12 +760,7 @@
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
   \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
-  \[
-    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
-    = \hat{h}\cdot x
-    = \hat{H}(x)\quad(x\in\cycles{\numset{C}}{N})
-  \]
-  だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
+  \((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x=\hat{H}(x)\)だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
 \subsection{多次元離散フーリエ変換}
@@ -791,7 +798,7 @@
     \centering
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
-  \caption{\(\cos(3x+4y)\)のグラフと2次元離散フーリエ変換．}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k/64)-\krez\given k=0,\dots,63}\)）のグラフと2次元離散フーリエ変換．}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -871,6 +878,38 @@
   次に\(i=2\)とすると，\(\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
   同様に\(i=n\)まで計算すれば\(i<j\implies\midx{b}{i}{j}=0\)が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
   つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
+\end{proof}
+
+\subsection{擬似逆行列の一意性}
+\label{subsection:uniqueness_of_the_pseudoinverse}
+
+\begin{proposition}{擬似逆行列の特徴づけ}{}
+  以下の条件すべてを満たす\(p\times n\)行列\(\mat{B}\)は，任意の\(n\times p\)行列\(\mat{A}\)に対し一意である．
+  また，\(\mat{A}\)の擬似逆行列は条件を満たす．つまり，以下の条件は\(\mat{B}=\pinv{\mat{A}}\)と同値である．
+  \begin{enumerate}
+    \item \(\mat{A}\mat{B}\mat{A}=\mat{A}\)
+    \item \(\mat{B}\mat{A}\mat{B}=\mat{B}\)
+    \item \(\htrps{(\mat{A}\mat{B})}=\mat{A}\mat{B}\)
+    \item \(\htrps{(\mat{B}\mat{A})}=\mat{B}\mat{A}\)
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の特異値分解とすると，\(\mat{B}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)が上の4条件を満たすことはすぐ確かめられる．
+  \(p\times n\)行列\(\mat{B}_1\)，\(\mat{B}_2\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\stackrel{i}{=\joinrel=}\)と書くと
+  \begin{align*}
+    \mat{B}_1 &\stackrel{2,3}{=\joinrel=} \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}
+    \stackrel{1}{=\joinrel=} \mat{B}_1\htrps{\mat{B}_1}\htrps{(\mat{A}\mat{B}_2\mat{A})}
+    = \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}\htrps{(\mat{A}\mat{B}_2)}
+    \stackrel{2,3}{=\joinrel=} \mat{B}_1\mat{A}\mat{B}_2 \\
+    &\stackrel{2,4}{=\joinrel=} \htrps{(\mat{B}_1\mat{A})}(\mat{B}_2\mat{A}\mat{B}_2)
+    \stackrel{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_1}\htrps{(\mat{B}_2\mat{A})}\mat{B}_2
+    = \htrps{(\mat{A}\mat{B}_1\mat{A})}\htrps{\mat{B}_2}\mat{B}_2 \\
+    &\stackrel{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_2}\mat{B}_2
+    = \htrps{(\mat{B}_2\mat{A})}\mat{B}_2
+    \stackrel{2}{=\joinrel=} \mat{B}_2
+  \end{align*}
+  なので\(\mat{B}_1=\mat{B}_2\)である．
 \end{proof}
 
 \section{演習問題}
