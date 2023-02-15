@@ -105,11 +105,11 @@
   \begin{align*}
     \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm*{\pqty*{\sum z_i\vect{e}_i}-\vect{x}}^2
     = \vnorm*{\sum z_i\vect{e}_i}^2-2\rpart\innerp*{\sum z_i\vect{e}_i}{\vect{x}}+\vnorm{\vect{x}}^2 \\
-    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart[\innerp{z_i\vect{e}_i}{\vect{x}}])
+    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart\innerp{z_i\vect{e}_i}{\vect{x}})
   \end{align*}
   である．よって，\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと，\(\innerp{z_i\vect{e}_i}{\vect{x}}=z_i\conj*{\innerp{\vect{x}}{\vect{e}_i}}\)より
   \begin{align*}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2\rpart[(s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}}]) \\
+    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2\rpart((s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}})) \\
     &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})) \\
     &= \vnorm{\vect{x}}^2+\sum((s_k-\rpart\innerp{\vect{x}}{\vect{e}_k})^2+(t_k-\ipart\innerp{\vect{x}}{\vect{e}_k})^2-\abs{\innerp{\vect{x}}{\vect{e}_k}}^2)
   \end{align*}
@@ -154,15 +154,15 @@
   そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
 
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(d(z)=\vnorm{(\vect{n}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{n}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  \(\vect{n}\)の定義から，関数\(\delta(z)=\vnorm{(\vect{n}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{n}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    d(z) &= \vnorm{(\vect{n}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{n}-\vect{x}}^2
-    = 2\rpart[\conj{z}\innerp{\vect{n}-\vect{x}}{\vect{v}}]+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    \delta(z) &= \vnorm{(\vect{n}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{n}-\vect{x}}^2
+    = 2\rpart(\conj{z}\innerp{\vect{n}-\vect{x}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
     &= 2(x\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}}+y\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})+x^2+y^2 \\
     &= (x+\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2+(y+\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2 \\
     &= \abs{z+\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2
   \end{align*}
-  より\(-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2=d(-\innerp{\vect{n}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)である．
+  より\(-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2=\delta(-\innerp{\vect{n}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)である．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\)}
@@ -188,7 +188,7 @@
 \begin{proof}
   \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{z}=s\vect{x}+t\vect{y}\)，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
   このとき，任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので，
-  \(\vect{m}=\proj_V\vect{z}\)である．よって，\(\proj_V\)は線型写像である．
+  \(\proj_V\vect{z}=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
 \end{proof}
 
 \subsection{直交補空間}
@@ -279,17 +279,18 @@
 \cref{equation:analysis_and_synthesis}より，合成作用素は分析作用素の逆写像である．
 また，分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
 
-\begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}
+\begin{definition}{}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}\index{えるみーとぎょうれつ@エルミート行列}\index{ぎょうれつ@行列!えるみーと@エルミート\texttwoemdash}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
     \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という．
-    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)であるとき（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)であるとき），\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という．
+    \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)）であるとき，\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という．
+    \item \(\htrps{\mat{A}}=\mat{A}\)であるとき，\(\mat{A}\)を\termdef{エルミート行列}（Hermitian matrix）という．
   \end{enumerate}
 \end{definition}
 
 正規行列とユニタリ行列の関係については\cref{section:least_square}で詳述することにして，ここでは次の命題を示す．
 
-\begin{proposition}{ユニタリ行列の特徴づけ}{unitary_matrix_property}
+\begin{proposition}{ユニタリ行列の特徴づけ}{unitary_matrix_characterization}
   \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{U}\)はユニタリ行列である．
@@ -324,7 +325,7 @@
 \begin{proof}
   \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分析作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
   \(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \dots & \vect{u}_n}\)）である．
-  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_property}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
+  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_characterization}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
 \section{最小2乗問題}
@@ -353,10 +354,10 @@
 \begin{proof}
   線型写像\(T\colon\numset{K}^p\to\numset{K}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
   \[
-    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{T(\vect{x})-\vect{b}} = \inv*{T}{\argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{b}}}
+    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \inv*{T}{\argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{b}}}
     = \inv{T}{\Set{\proj_{\img T}\vect{b}}}
   \]
-  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\proj_{\img T}\vect{b}}\)であり，この集合は明らかに空でない．
+  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\Set{\proj_{\img T}\vect{b}}}\)であり，この集合は明らかに空でない．
 \end{proof}
 
 上の証明における\(\img T\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
@@ -374,7 +375,7 @@
   \(P=\proj_{\colsp\mat{A}}\)とおく．\(\Set{\vect{a}_1,\vect{a}_2}\)に\nameref{xr-proposition:gram_schmidt}を適用すると
   \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので，
   \(P(\vect{b})=\innerp{\vect{b}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{b}}{\vect{e}_2}\vect{e}_2=-2\trps{\rowvect{1 & 1 & 1}}\)である．
-  よって\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解全体で，それは\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
+  よって，\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解集合\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -386,23 +387,23 @@
 \cref{example:overdetermined}から分かるように，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めるには\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)を計算して，方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)を解けばよい．
 一方で，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)をより機械的に求める方法もある．
 
-\(\increment\vect{x}\in\numset{K}^p\)とする．\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)とおくと
-\begin{align*}
-  \increment\epsilon(\vect{x}) &= \vnorm{(\mat{A}\vect{x}-\vect{b})+(\mat{A}\increment\vect{x})}^2-\vnorm{\mat{A}\vect{x}-\vect{b}}^2 \\
-  &= 2\rpart\innerp{\mat{A}\vect{x}-\vect{b}}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
-  &= 2\rpart\innerp{\htrps{\mat{A}}\mat{A}\vect{x}-\htrps{\mat{A}}\vect{b}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
-\end{align*}
-である．よって，\(\numset{K}^p\)の元\(\vect{a}\)が\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
-関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
-
-また，\(\increment\vect{x}=-h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{a}-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
-\(\vect{g}=\zvec\)でなければ\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
-
-以上の議論から，次の命題が成り立つ．
-
 \begin{proposition}{}{normal_equation}
   \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\Set{\vect{x}\in\numset{K}^p\given\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}}\)である．
 \end{proposition}
+
+\begin{proof}
+  \(\increment\vect{x}\in\numset{K}^p\)とする．\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)とおくと
+  \begin{align*}
+    \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})+\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
+    = 2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
+    &= 2\rpart\innerp{\htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+  \end{align*}
+  である．よって，\(\numset{K}^p\)の元\(\vect{a}\)が\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
+  関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
+
+  また，\(\increment\vect{x}=-h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{a}-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
+  \(\vect{g}=\zvec\)でなければ\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
+\end{proof}
 
 \(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
@@ -415,7 +416,7 @@
     = \lim_{h\to 0}(2\innerp{\vect{g}}{\vect{e}_i}+h\vnorm{\mat{A}\vect{e}_i}^2)
     = 2g_i\quad(\vect{g}=\trps{\matrice{g_1 & \cdots & g_p}})
   \]
-  である．よって，正規方程式は\(\gradof\epsilon(\vect{x})=\sum_{i=1}^p(\difsp{\epsilon}{x_i})(\vect{x})\vect{e}_i=\zvec\)と等価である．
+  である．つまり，正規方程式は\(\gradof\epsilon(\vect{x})=\sum_{i=1}^p(\difsp{\epsilon}{x_i})(\vect{x})\vect{e}_i=\zvec\)と等価である．
 \end{note}
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
@@ -427,7 +428,7 @@
 \]
 である．
 
-\subsection{擬似逆行列}
+\subsection{スペクトル分解と特異値分解}
 
 \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
@@ -459,11 +460,12 @@
 
 \begin{proof}
   \(\mat{A}\neq\zmat\)，\(n\geq p\)のときのみ示す．\(\htrps{\mat{A}}\mat{A}\)は\(p\)次正規行列なので，\cref{theorem:spectral_theorem}よりスペクトル分解\(\htrps{\mat{A}}\mat{A}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)が存在する．
-  \(\mat{V}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_p}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_p)\)とおく．\(\lambda_i\vect{v}_i=(\htrps{\mat{A}}\mat{A})\vect{v}_i\)，\(\kdelta{i}{j}=\trps{(\trps{\vect{v}_i}\conj{\vect{v}}_j)}=\htrps{\vect{v}_j}\vect{v}_i\)より
+  \(\mat{V}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_p}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_p)\)とおく．\(\kdelta{i}{j}=\innerp{\vect{v}_i}{\vect{v}_j}=\htrps{\vect{v}_j}\vect{v}_i\)，\(\lambda_i\vect{v}_i=(\htrps{\mat{A}}\mat{A})\vect{v}_i\)より
   \begin{equation}
     \label{equation:image_orthogonality}
-    \lambda_i\kdelta{i}{j} = \htrps{\vect{v}_j}(\htrps{\mat{A}}\mat{A})\vect{v}_i
-    = \trps{(\trps{(\mat{A}\vect{v}_i)}\conj*{\mat{A}\vect{v}_j})}
+    \lambda_i\kdelta{i}{j} = \htrps{\vect{v}_j}(\lambda_i\vect{v}_i)
+    = \htrps{\vect{v}_j}(\htrps{\mat{A}}\mat{A})\vect{v}_i
+    = \htrps{(\mat{A}\vect{v}_j)}\mat{A}\vect{v}_i
     = \innerp{\mat{A}\vect{v}_i}{\mat{A}\vect{v}_j}
   \end{equation}
   だから，各\(\lambda_i=\vnorm{\mat{A}\vect{v}_i}^2\)はすべて非負である．また
@@ -488,45 +490,100 @@
 \(\mat{A}\)の特異値分解が\(\mat{A}=\mat{U}\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\htrps{\mat{V}}\)であるとき，
 各\(\sigma_i\)を\(\mat{A}\)の第\(i\)\termdef{特異値}\index{とくいち@特異値}（singular value）という．
 
-特異値分解に基づいて\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めよう．
+特異値分解に基づいて\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めよう．
 \(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
-\cref{proposition:unitary_matrix_property}から，ユニタリ行列を乗じてもノルムは変わらないので
+\cref{proposition:unitary_matrix_characterization}から，ユニタリ行列を掛けてもノルムは変わらないので
 \(\vnorm{\vect{\epsilon}(\vect{x})}^2=\vnorm{(\mat{U}\mat{\Sigma}\htrps{\mat{V}})\vect{x}-\vect{b}}^2=\vnorm{\mat{\Sigma}\htrps{\mat{V}}\vect{x}-\htrps{\mat{U}}\vect{b}}^2\)である．
-よって，\(\vect{x}=\mat{V}\vect{y}\)，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)，\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)（\(\sigma_r>0\)）とすれば
+\(\vect{y}=\trps{\rowvect{y_1 & \cdots & y_p}}=\htrps{\mat{V}}\vect{x}\)，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)，\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)（\(\sigma_r>0\)）とおくと
 \[
   \vnorm{\vect{\epsilon}(\vect{x})}^2 = \vnorm{\mat{\Sigma}\vect{y}-\htrps{\mat{U}}\vect{b}}^2
-  = \sum_{i=1}^r(\sigma_iy_i-\htrps{\vect{u}_i}\vect{b})^2+\sum_{i=r+1}^p(\htrps{\vect{u}_i}\vect{b})^2
+  = \sum_{i=1}^r\abs{\sigma_iy_i-\htrps{\vect{u}_i}\vect{b}}^2+\sum_{i=r+1}^p\abs{\htrps{\vect{u}_i}\vect{b}}^2
 \]
 となる．右辺の値が最も小さくなるのは\(y_i=\htrps{\vect{u}_i}\vect{b}/\sigma_i\)（\(1\leq i\leq r\)）のときであり，\(y_{r+1},\dots,y_p\)の値はなんであっても構わない．
-\(\vect{x}=\mat{V}\vect{y}\)なので，\(\vnorm{\vect{\epsilon}(\vect{x})}\)が最小値をとるのは\(\vect{x}\)が
+\(\vect{x}=\mat{V}\vect{y}\)だから，\(\vnorm{\vect{\epsilon}(\vect{x})}\)が最小値をとるのは\(\vect{x}\)が
 \begin{equation}
-  \label{equation:explicit_pseudo_inverse}
+  \label{equation:pseudoinverse_least_square}
   \vect{x} = \mat{V}\trps{\matrice{\htrps{\vect{u}_1}\vect{b}/\sigma_1 & \cdots & \htrps{\vect{u}_r}\vect{b}/\sigma_r & z_{r+1} & \cdots & z_p}}\quad(z_i\in\numset{C})
 \end{equation}
-と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて\cref{equation:explicit_pseudo_inverse}を整理すると
+と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて\cref{equation:pseudoinverse_least_square}を整理すると，
+\(\pinv{\mat{\Sigma}}\mat{\Sigma}=\smallmatrice{\imat_r & \\ & \zmat_{p-r}}\)なので
 \begin{align*}
   \vect{x} &= \mat{V}\matrice*{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} \\ \vdots \\ (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} \\ \zvec_{p-r}}+\mat{V}\matrice*{\zvec_r \\ z_{r+1} \\ \vdots \\ z_p}
   = \mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\vect{b}+\mat{V}(\imat-\pinv{\mat{\Sigma}}\mat{\Sigma})\vect{z} \\
   &= \pinv{\mat{A}}\vect{b}+(\imat-\mat{V}\pinv{\mat{\Sigma}}\mat{\Sigma}\htrps{\mat{V}})\mat{V}\vect{z}
   = \pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}
 \end{align*}
-が得られる（ただし\(\vect{w}=\mat{V}\vect{z}\)）．\(\pinv{\mat{A}}\)を\(\mat{A}\)の擬似逆行列という．
+である（ただし\(\vect{w}=\mat{V}\vect{z}\)）．\(\pinv{\mat{A}}\)を\(\mat{A}\)の擬似逆行列という．
 
 \begin{definition}{擬似逆行列}{}\index{むーあぺんろーずぎゃくぎょうれつ@ムーア・ペンローズ逆行列}\index{ぎじぎゃくぎょうれつ@擬似逆行列}\indexsymbol{\(\pinv{\mat{A}}\)}
   \(\mat{A}\)を\(n\times p\)複素行列とし，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
   \(p\times n\)行列\(\pinv{\mat{\Sigma}}\)を次のように定義する．\(\mat{A}=\zmat\)のときは\(\pinv{\mat{\Sigma}}=\zmat\)とする．
-  \(\mat{A}\neq\zmat\)のときは，\(\mat{\Sigma}=\smallmatrice{\mat{\Lambda} & \\ & \zmat}\)を満たす正則な対角行列\(\mat{\Lambda}\)を用いて\(\pinv{\mat{\Sigma}}=\smallmatrice{\mat{\Lambda}^{-1} & \\ & \zmat}\)とする．
+  \(\mat{A}\neq\zmat\)のときは，\(\mat{\Sigma}=\smallmatrice{\mat{\Delta} & \\ & \zmat}\)を満たす正則な対角行列\(\mat{\Delta}\)を用いて\(\pinv{\mat{\Sigma}}=\smallmatrice{\mat{\Delta}^{-1} & \\ & \zmat}\)とする．
   \(p\times n\)行列\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{ムーア・ペンローズ逆行列}（Moore–Penrose inverse），あるいは\termdef{擬似逆行列}（pseudoinverse）という．
 \end{definition}
 
-普通，特異値分解はもとの行列に対して一意ではない．しかし，擬似逆行列はもとの行列に対して一意に定まる（証明は\cref{subsection:uniqueness_of_the_pseudoinverse}を参照せよ）．
+\begin{note}
+  普通，特異値分解はもとの行列に対して一意ではない．しかし，擬似逆行列はもとの行列に対して一意に定まる．証明は\cref{subsection:pseudoinverse}を参照せよ．
+\end{note}
+
 さきほどの議論から分かることは，擬似逆行列によって次のようにまとめられる．
 
-\begin{proposition}{}{}
+\begin{proposition}{}{pseudoinverse_least_square}
   任意の\(n\times p\)複素行列\(\mat{A}\)に対して，次の式が成立する．
   \[
-    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
+    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
   \]
+\end{proposition}
+
+\subsection{擬似逆行列}
+\label{subsection:pseudoinverse}
+
+これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列とする．まず，\(\pinv{\mat{A}}\)が\(\mat{A}\)に対して一意に定まることを示そう．
+
+\begin{proposition}{擬似逆行列の特徴づけ}{pseudoinverse_characterization}
+  以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
+  また，\(\mat{A}\)の擬似逆行列は条件を満たす．つまり，以下の条件は\(\mat{X}=\pinv{\mat{A}}\)と同値である．
+  \begin{enumerate}
+    \item \(\mat{A}\mat{X}\mat{A}=\mat{A}\)である．
+    \item \(\mat{X}\mat{A}\mat{X}=\mat{X}\)である．
+    \item \(\mat{A}\mat{X}\)はエルミート行列である．
+    \item \(\mat{X}\mat{A}\)はエルミート行列である．
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の特異値分解とすると，\(\mat{X}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)が上の4条件を満たすことはすぐ確かめられる．
+  \(p\times n\)行列\(\mat{Y}\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
+  \begin{align*}
+    \mat{Y} &\overset{2,3}{=\joinrel=} \mat{Y}\htrps{(\mat{A}\mat{Y})}
+    = \mat{Y}\htrps{\mat{Y}}\htrps{\mat{A}}
+    \overset{1}{=\joinrel=} \mat{Y}\htrps{\mat{Y}}\htrps{(\mat{A}\mat{X}\mat{A})}
+    = \mat{Y}\htrps{(\mat{A}\mat{Y})}\htrps{(\mat{A}\mat{X})} \\
+    &\overset{2,3}{=\joinrel=} \mat{Y}\mat{A}\mat{X}
+    \overset{2,4}{=\joinrel=} \htrps{(\mat{Y}\mat{A})}\mat{X}\mat{A}\mat{X}
+    \overset{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{Y}}\htrps{(\mat{X}\mat{A})}\mat{X}
+    = \htrps{(\mat{A}\mat{Y}\mat{A})}\htrps{\mat{X}}\mat{X} \\
+    &\overset{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{X}}\mat{X}
+    = \htrps{(\mat{X}\mat{A})}\mat{X}
+    \overset{2,4}{=\joinrel=} \mat{X}
+  \end{align*}
+  なので\(\mat{Y}=\mat{X}\)である．
+\end{proof}
+
+\begin{proposition}{}{}
+  \(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)，\(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x}=(\imat-\mat{A}\pinv{\mat{A}})\vect{x}\)である．
+\end{proposition}
+
+\begin{proof}
+  \cref{proposition:pseudoinverse_characterization}より，各\(\vect{y}\in\numset{C}^p\)に対して
+  \(\innerp{\mat{A}\pinv{\mat{A}}\vect{x}-\vect{x}}{\mat{A}\vect{y}}=\innerp{(\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}-\htrps{\mat{A}})\vect{x}}{\vect{y}}=\innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{x}}{\vect{y}}=\innerp{\zmat\vect{x}}{\vect{y}}=0\)
+  である．よって\(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)である．後半は\(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x}=\vect{x}-\proj_{\colsp\mat{A}}\vect{x}\)から分かる．
+\end{proof}
+
+\begin{proposition}{}{}
+  \(\mat{A}\)は\(n\times p\)複素行列で，\(\vect{b}\in\numset{C}^n\)とする．
+  このとき，\(\pinv{\mat{A}}\vect{b}\)は\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さく，同じノルムを持つ元はほかにない．
+  すなわち\(\Set{\vect{w}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
 \end{proposition}
 
 \section{離散フーリエ変換}
@@ -569,7 +626,7 @@
 \end{equation}
 と書ける．
 
-\cref{proposition:unitary_matrix_property}と\cref{proposition:dft_onb}から，次の系がしたがう．
+\cref{proposition:unitary_matrix_characterization}と\cref{proposition:dft_onb}から，次の系がしたがう．
 
 \begin{corollary}{}{dft_plancherel}
   \(\innerp{\dft{N}\vect{x}}{\dft{N}\vect{y}}=\innerp{\vect{x}}{\vect{y}}\)（\(\vect{x},\vect{y}\in\numset{C}^N\)）である．
@@ -590,6 +647,8 @@
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
+
+\pagebreak
 
 \begin{wrapfigure}[10]{o}{0pt}
   \includegraphics{figures/helix.pdf}
@@ -879,38 +938,6 @@
   次に\(i=2\)とすると，\(\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
   同様に\(i=n\)まで計算すれば\(i<j\implies\midx{b}{i}{j}=0\)が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
   つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
-\end{proof}
-
-\subsection{擬似逆行列の一意性}
-\label{subsection:uniqueness_of_the_pseudoinverse}
-
-\begin{proposition}{擬似逆行列の特徴づけ}{}
-  以下の条件すべてを満たす\(p\times n\)行列\(\mat{B}\)は，任意の\(n\times p\)行列\(\mat{A}\)に対し一意である．
-  また，\(\mat{A}\)の擬似逆行列は条件を満たす．つまり，以下の条件は\(\mat{B}=\pinv{\mat{A}}\)と同値である．
-  \begin{enumerate}
-    \item \(\mat{A}\mat{B}\mat{A}=\mat{A}\)
-    \item \(\mat{B}\mat{A}\mat{B}=\mat{B}\)
-    \item \(\htrps{(\mat{A}\mat{B})}=\mat{A}\mat{B}\)
-    \item \(\htrps{(\mat{B}\mat{A})}=\mat{B}\mat{A}\)
-  \end{enumerate}
-\end{proposition}
-
-\begin{proof}
-  \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の特異値分解とすると，\(\mat{B}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)が上の4条件を満たすことはすぐ確かめられる．
-  \(p\times n\)行列\(\mat{B}_1\)，\(\mat{B}_2\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
-  \begin{align*}
-    \mat{B}_1 &\overset{2,3}{=\joinrel=} \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}
-    \overset{1}{=\joinrel=} \mat{B}_1\htrps{\mat{B}_1}\htrps{(\mat{A}\mat{B}_2\mat{A})}
-    = \mat{B}_1\htrps{(\mat{A}\mat{B}_1)}\htrps{(\mat{A}\mat{B}_2)}
-    \overset{2,3}{=\joinrel=} \mat{B}_1\mat{A}\mat{B}_2 \\
-    &\overset{2,4}{=\joinrel=} \htrps{(\mat{B}_1\mat{A})}(\mat{B}_2\mat{A}\mat{B}_2)
-    \overset{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_1}\htrps{(\mat{B}_2\mat{A})}\mat{B}_2
-    = \htrps{(\mat{A}\mat{B}_1\mat{A})}\htrps{\mat{B}_2}\mat{B}_2 \\
-    &\overset{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{B}_2}\mat{B}_2
-    = \htrps{(\mat{B}_2\mat{A})}\mat{B}_2
-    \overset{2,4}{=\joinrel=} \mat{B}_2
-  \end{align*}
-  なので\(\mat{B}_1=\mat{B}_2\)である．
 \end{proof}
 
 \section{演習問題}
