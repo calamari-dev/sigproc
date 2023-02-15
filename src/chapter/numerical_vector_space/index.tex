@@ -523,7 +523,7 @@
 \end{definition}
 
 \begin{note}
-  普通，特異値分解はもとの行列に対して一意ではない．しかし，擬似逆行列はもとの行列に対して一意に定まる．証明は\cref{subsection:pseudoinverse}を参照せよ．
+  普通，特異値分解はもとの行列に対して一意ではない．しかし，擬似逆行列はもとの行列に対して一意に定まる．このことは\cref{subsection:pseudoinverse}で示す．
 \end{note}
 
 さきほどの議論から分かることは，擬似逆行列によって次のようにまとめられる．
@@ -544,10 +544,10 @@
   以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
   また，\(\mat{A}\)の擬似逆行列は条件を満たす．つまり，以下の条件は\(\mat{X}=\pinv{\mat{A}}\)と同値である．
   \begin{enumerate}
-    \item \(\mat{A}\mat{X}\mat{A}=\mat{A}\)である．
-    \item \(\mat{X}\mat{A}\mat{X}=\mat{X}\)である．
-    \item \(\mat{A}\mat{X}\)はエルミート行列である．
-    \item \(\mat{X}\mat{A}\)はエルミート行列である．
+    \item \(\mat{A}\mat{X}\mat{A}=\mat{A}\)
+    \item \(\mat{X}\mat{A}\mat{X}=\mat{X}\)
+    \item \(\htrps{(\mat{A}\mat{X})}=\mat{A}\mat{X}\)
+    \item \(\htrps{(\mat{X}\mat{A})}=\mat{X}\mat{A}\)
   \end{enumerate}
 \end{proposition}
 
@@ -570,21 +570,28 @@
   なので\(\mat{Y}=\mat{X}\)である．
 \end{proof}
 
-\begin{proposition}{}{}
+\begin{proposition}{}{pseudoinverse_projection}
   \(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)，\(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x}=(\imat-\mat{A}\pinv{\mat{A}})\vect{x}\)である．
 \end{proposition}
 
 \begin{proof}
   \cref{proposition:pseudoinverse_characterization}より，各\(\vect{y}\in\numset{C}^p\)に対して
   \(\innerp{\mat{A}\pinv{\mat{A}}\vect{x}-\vect{x}}{\mat{A}\vect{y}}=\innerp{(\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}-\htrps{\mat{A}})\vect{x}}{\vect{y}}=\innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{x}}{\vect{y}}=\innerp{\zmat\vect{x}}{\vect{y}}=0\)
-  である．よって\(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)である．後半は\(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x}=\vect{x}-\proj_{\colsp\mat{A}}\vect{x}\)から分かる．
+  である．よって\(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)である．後半は\(\vect{x}=(\proj_{\colsp\mat{A}}\vect{x})+(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x})\)から分かる．
 \end{proof}
 
 \begin{proposition}{}{}
   \(\mat{A}\)は\(n\times p\)複素行列で，\(\vect{b}\in\numset{C}^n\)とする．
   このとき，\(\pinv{\mat{A}}\vect{b}\)は\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さく，同じノルムを持つ元はほかにない．
-  すなわち\(\Set{\vect{w}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
+  すなわち\(\Set{\pinv{\mat{A}}\vect{b}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
 \end{proposition}
+
+\begin{proof}
+  \cref{proposition:pseudoinverse_characterization}から\(\pinv{(\pinv{\mat{A}})}=\mat{A}\)はすぐ分かる．
+  \cref{proposition:pseudoinverse_least_square}より\(S\)の任意の元は\(\vect{x}=\pinv{\mat{A}}\vect{b}+(\imat-\mat{A}\pinv{\mat{A}})\vect{w}\)と書けて，
+  \cref{proposition:pseudoinverse_projection}から\((\imat-\mat{A}\pinv{\mat{A}})\vect{w}=\proj_{\pcomp{V}}\vect{w}\)（\(V=\colsp\pinv{\mat{A}}\)）なので\(\vnorm{\vect{x}}^2=\vnorm{\pinv{\mat{A}}\vect{b}}^2+\vnorm{\proj_{\pcomp{V}}\vect{w}}^2\)である．
+  よって\(\Set{\pinv{\mat{A}}\vect{b}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
+\end{proof}
 
 \section{離散フーリエ変換}
 
