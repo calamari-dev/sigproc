@@ -197,12 +197,12 @@
 また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
 
 \begin{proposition}{グラム・シュミットの直交化法}{gram_schmidt}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}
-  \(V\)を内積空間とする．\(\vect{v}_1,\dots,\vect{v}_n\in V\)が線型独立なら
+  \(V\)を内積空間とする．\(\vect{a}_1,\dots,\vect{a}_n\in V\)が線型独立なら
   \[
-    \vect{u}_1 = \vect{v}_1,
-    \quad\vect{u}_i = \vect{v}_i-\sum_{j=1}^{n-1}\frac{\innerp{\vect{v}_i}{\vect{u}_j}}{\innerp{\vect{u}_j}{\vect{u}_j}}\vect{u}_j\quad(i=2,\dots,n)
+    \vect{u}_1 = \vect{a}_1,
+    \quad\vect{u}_k = \vect{a}_k-\sum_{i=1}^{n-1}\frac{\innerp{\vect{a}_k}{\vect{u}_i}}{\innerp{\vect{u}_i}{\vect{u}_i}}\vect{u}_i\quad(k\geq 2)
   \]
-  で\(\vect{u}_i\)を定義すると，集合\(\Set{\vect{u}_i/\sqrt{\innerp{\vect{u}_i}{\vect{u}_i}}\given i=1,\dots,n}\)は\(V\)の正規直交系になる．
+  で\(\vect{u}_k\)を定義すると，集合\(\Set{\vect{u}_k/\sqrt{\innerp{\vect{u}_k}{\vect{u}_k}}\given k=1,\dots,n}\)は\(V\)の正規直交系になる．
   正規直交系を作るこの方法を\termdef{グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
 \end{proposition}
 
@@ -239,10 +239,10 @@
   \psi(f(\vect{x})) = \sum_{i=1}^mc_i\psi(f(\vect{v}_i))
   = \matrice{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\matrice*{c_1 \\ \vdots \\ c_m}
 \end{gather*}
-であるから，\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)，\(T(\vect{x})=\mat{A}\vect{x}\)とおくと
+であるから，\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと
 \begin{equation}
   \label{equation:representation_matrix}
-  \psi(f(\vect{x})) = T(\phi(\vect{x}))
+  \psi(f(\vect{x})) = T_A(\phi(\vect{x}))\quad(T_A(\vect{x})=\mat{A}\vect{x})
 \end{equation}
 が成り立つ．
 
@@ -261,8 +261,8 @@
 
 \begin{example}[形式的な微分]
   次数が\(n\)未満の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_{n-1}x^{n-1}\given c_0,\dots,c_{n-1}\in\numset{R}}\)は，\(\numset{R}\)上の\(n\)次元ベクトル空間である．
-  また，写像\(D\colon V_4\to V_3\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線型写像になる．
-  \(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^{n-1}}\)をとったとき，基底\(\basis{B}_4\)と\(\basis{B}_3\)に関する\(D\)の表現行列は\(\smallmatrice{0 & 1 & 0 \\ 0 & 0 & 2}\)である．
+  また，写像\(D\colon V_3\to V_2\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線型写像になる．
+  \(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^{n-1}}\)をとったとき，基底\(\basis{B}_3\)と\(\basis{B}_2\)に関する\(D\)の表現行列は\(\smallmatrice{0 & 1 & 0 \\ 0 & 0 & 2}\)である．
 \end{example}
 
 \subsection{核と像}
@@ -288,9 +288,8 @@
 \end{proposition}
 
 \begin{proof}
-  \(f(\zvec)=f(\zvec+\zvec)=f(\zvec)+f(\zvec)\)なので，\(f(\zvec)=\zvec\)である．よって，\(f\)が単射なら\(\nul f=\Set{\zvec}\)である．
-  また，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たせば\(f(\vect{v}_1-\vect{v}_2)=f(\vect{v}_1)-f(\vect{v}_2)=\zvec\)である．
-  よって，\(\nul f=\Set{\zvec}\)なら\(\vect{v}_1-\vect{v}_2=\zvec\)である．すなわち，\(\nul f=\Set{\zvec}\)なら\(f\)は単射である．
+  \(f\)が単射なら，\(f(\zvec)=f(\zvec+\zvec)=f(\zvec)+f(\zvec)\)より\(f(\zvec)=\zvec\)，\(\nul f=\Set{\zvec}\)である．逆に\(\nul f=\Set{\zvec}\)なら，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たすとき
+  \(f(\vect{v}_1-\vect{v}_2)=f(\vect{v}_1)-f(\vect{v}_2)=\zvec\)，\(\vect{v}_1-\vect{v}_2=\zvec\)である．よって，このとき\(f\)は単射である．
 \end{proof}
 
 \subsection{固有値と固有空間}
@@ -340,7 +339,7 @@
 \(\mat{A}\)の\termdef{対角化}\index{たいかくか@対角化}（diagonalization）という．\(\mat{A}\)が対角化可能である必要十分条件は，次の\cref{proposition:diagonalization}で与えられる．
 
 \begin{proposition}{}{diagonalization}
-  \(\mat{A}\)に関する以下の条件は同値である．
+  \(n\)次正方行列\(\mat{A}\)に関して，以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{A}\)の固有ベクトルのみからなる\(\numset{K}^n\)の基底が存在する．
     \item \(\numset{K}^n=\bigoplus_{\lambda\in\spec\mat{A}}E_\lambda(\mat{A})\)が成立する．

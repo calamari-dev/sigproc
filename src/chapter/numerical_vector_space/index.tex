@@ -42,7 +42,7 @@
 
 一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
-\begin{definition}{argmin，argmax}{argmin_argmax}\index{argmin@\(\argmin f(x)\)}\index{argmax@\(\argmax f(x)\)}
+\begin{definition}{argmin，argmax}{argmin_argmax}\index{argmin@\(\argmin\)}\index{argmax@\(\argmax\)}
   集合\(S\)を定義域に含む実数値関数\(f\)に対して，集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
   \begin{gather*}
     \argmin_{x\in S}f(x) = \Set{x\in S\given\text{任意の\(y\in S\)に対して\(f(y)\geq f(x)\)}}, \\
@@ -305,14 +305,19 @@
     \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
      = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
  \]
-  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\conj*{\innerp{\vect{u}_i}{\vect{u}_j}}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)に対して成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
+  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\innerp{\vect{u}_j}{\vect{u}_i}=\kdelta{j}{i}\)がすべての\(i,j\in\Set{1,\dots,n}\)で成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
 
-  次に，3と1の同値性を示す．\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\trps{(\mat{U}\vect{x})}\conj*{\mat{U}\vect{y}}=\trps{\vect{x}}\conj*{\htrps{\mat{U}}\mat{U}\vect{y}}=\innerp{\vect{x}}{\htrps{\mat{U}}\mat{U}\vect{y}}\)より，
-  \(\mat{E}=\imat-\htrps{\mat{U}}\mat{U}\)とおくと\(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}\)である．
+  次に，3と1の同値性を示す．\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\htrps{(\mat{U}\vect{y})}\mat{U}\vect{x}=\htrps{(\htrps{\mat{U}}\mat{U}\vect{y})}\vect{x}=\innerp{\vect{x}}{\htrps{\mat{U}}\mat{U}\vect{y}}\)なので
+  \(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}\)（\(\mat{E}=\imat-\htrps{\mat{U}}\mat{U}\)）である．
   任意の\(\vect{x}\in\numset{C}^n\)に対し\(\innerp{\vect{x}}{\mat{E}\vect{y}}=0\)なら，\(\vect{x}=\mat{E}\vect{y}\)とすれば\(\vnorm{\mat{E}\vect{y}}^2=0\)，すなわち\(\mat{E}\vect{y}=\zvec\)が得られる．
   \(\mat{E}\vect{y}=\zvec\)がすべての\(\vect{y}\in\numset{C}^n\)で成り立つとき，\(\mat{E}=\zmat\)だから\(\mat{U}\)はユニタリ行列である．
   逆に\(\mat{U}\)がユニタリ行列なら，\(\mat{E}=\zmat\)より\(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}=0\)である．
 \end{proof}
+
+\begin{note}
+  対象が\kenten{ある}条件を満たし，しかも条件を満たす対象が他にないとき，その条件は対象を\termdef{特徴づける}\index{とくちょうづける@特徴づける}（characterize）という．
+  \cref{proposition:unitary_matrix_characterization}から，ユニタリ行列の全体集合は複数の方法で特徴づけられる．しかし，どの方法を採用しても指し示す集合は変わらない．
+\end{note}
 
 \begin{corollary}{}{}
   \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，\(T\)に関する以下の条件は同値である．
@@ -352,15 +357,15 @@
 \end{proposition}
 
 \begin{proof}
-  線型写像\(T\colon\numset{K}^p\to\numset{K}^n\)を\(T(\vect{x})=\mat{A}\vect{x}\)で定義すると
+  線型写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義すると
   \[
-    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \inv*{T}{\argmin_{\vect{z}\in\img T}\vnorm{\vect{z}-\vect{b}}}
-    = \inv{T}{\Set{\proj_{\img T}\vect{b}}}
+    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \inv*{T_A}{\argmin_{\vect{z}\in\img T_A}\vnorm{\vect{z}-\vect{b}}}
+    = \inv{T_A}{\Set{\proj_{\img T_A}\vect{b}}}
   \]
-  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T}{\Set{\proj_{\img T}\vect{b}}}\)であり，この集合は明らかに空でない．
+  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T_A}{\Set{\proj_{\img T_A}\vect{b}}}\)であり，この集合は明らかに空でない．
 \end{proof}
 
-上の証明における\(\img T\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
+上の証明における\(\img T_A\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
 \(\mat{A}=\rowvect{\vect{a}_1 & \cdots & \vect{a}_p}\)とおくと
 \[
   \mat{A}\vect{x} = \matrice{\vect{a}_1 & \cdots & \vect{a}_p}\matrice*{x_1 \\ \vdots \\ x_p}
@@ -535,10 +540,11 @@
   \]
 \end{proposition}
 
-\subsection{擬似逆行列}
+\subsection{擬似逆行列と解の構造}
 \label{subsection:pseudoinverse}
 
-これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列とする．まず，\(\pinv{\mat{A}}\)が\(\mat{A}\)に対して一意に定まることを示そう．
+これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列，\(\vect{b}\)は\(\numset{C}^n\)の任意の元とする．
+ここでは，\cref{proposition:pseudoinverse_least_square}から見えてくる集合\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
 
 \begin{proposition}{擬似逆行列の特徴づけ}{pseudoinverse_characterization}
   以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
@@ -570,6 +576,14 @@
   なので\(\mat{Y}=\mat{X}\)である．
 \end{proof}
 
+\begin{corollary}{}{}
+  \(\pinv{(\pinv{\mat{A}})}=\mat{A}\)である．
+\end{corollary}
+
+\begin{proof}
+  省略する．
+\end{proof}
+
 \begin{proposition}{}{pseudoinverse_projection}
   \(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)，\(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x}=(\imat-\mat{A}\pinv{\mat{A}})\vect{x}\)である．
 \end{proposition}
@@ -580,18 +594,41 @@
   である．よって\(\proj_{\colsp\mat{A}}\vect{x}=\mat{A}\pinv{\mat{A}}\vect{x}\)である．後半は\(\vect{x}=(\proj_{\colsp\mat{A}}\vect{x})+(\proj_{\pcomp{(\colsp\mat{A})}}\vect{x})\)から分かる．
 \end{proof}
 
-\begin{proposition}{}{}
-  \(\mat{A}\)は\(n\times p\)複素行列で，\(\vect{b}\in\numset{C}^n\)とする．
-  このとき，\(\pinv{\mat{A}}\vect{b}\)は\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さく，同じノルムを持つ元はほかにない．
-  すなわち\(\Set{\pinv{\mat{A}}\vect{b}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
+\begin{proposition}{}{pseudoinverse_minimum_norm}
+  \(\pinv{\mat{A}}\vect{b}\)は集合\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さく，同じノルムを持つ元はほかにない．
+  すなわち\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:pseudoinverse_characterization}から\(\pinv{(\pinv{\mat{A}})}=\mat{A}\)はすぐ分かる．
-  \cref{proposition:pseudoinverse_least_square}より\(S\)の任意の元は\(\vect{x}=\pinv{\mat{A}}\vect{b}+(\imat-\mat{A}\pinv{\mat{A}})\vect{w}\)と書けて，
-  \cref{proposition:pseudoinverse_projection}から\((\imat-\mat{A}\pinv{\mat{A}})\vect{w}=\proj_{\pcomp{V}}\vect{w}\)（\(V=\colsp\pinv{\mat{A}}\)）なので\(\vnorm{\vect{x}}^2=\vnorm{\pinv{\mat{A}}\vect{b}}^2+\vnorm{\proj_{\pcomp{V}}\vect{w}}^2\)である．
-  よって\(\Set{\pinv{\mat{A}}\vect{b}}=\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)である．
+  \cref{proposition:pseudoinverse_least_square}より\(S\)の任意の元は\(\vect{x}=\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\)と書けて，
+  \cref{proposition:pseudoinverse_projection}から\((\imat-\pinv{\mat{A}}\mat{A})\vect{w}=(\imat-\mat{X}\pinv{\mat{X}})\vect{w}=\proj_{\pcomp{(\colsp\mat{X})}}\vect{w}\)（\(\mat{X}=\pinv{\mat{A}}\)）である．
+  よって\(\vnorm{\vect{x}}^2=\vnorm{\mat{X}\vect{b}}^2+\vnorm{\proj_{\pcomp{(\colsp\mat{X})}}\vect{w}}^2\)なので，\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\mat{X}\vect{b}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
 \end{proof}
+
+\cref{section:least_square}の冒頭で述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
+この方程式の解を1つ選び\(\tilde{\vect{x}}\)とおく．すると，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\tilde{\vect{x}})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)を満たす．
+つまり，\(\nul\mat{A}=\Set{\vect{y}\in\numset{K}^p\given\mat{A}\vect{y}=\zvec}\)とおくと\(\vect{x}-\tilde{\vect{x}}\in\ker\mat{A}\)である．
+
+逆に，\(\numset{K}^p\)の元\(\vect{x}\)が\(\vect{x}-\tilde{\vect{x}}\in\ker\mat{A}\)を満たせば\(\mat{A}\vect{x}=\tilde{\vect{b}}\)も成立する．
+つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は，部分空間\(\ker\mat{A}\)を\(\tilde{\vect{x}}\)によって平行移動した集合\(\Set{\tilde{\vect{x}}+\vect{y}\given\vect{y}\in\ker\mat{A}}\)である．
+このような集合をアフィン部分空間という．
+
+\begin{definition}{アフィン部分空間}{affine_subspace}\index{あふぃんぶぶんくうかん@アフィン部分空間}\index{ぶぶんくうかん@部分空間!あふぃん@アフィン\texttwoemdash}
+  \(S\)をベクトル空間\(V\)の部分集合とする．ある\(a\in S\)に対して集合\(W=\Set{x-a\given x\in S}\)が\(V\)の部分ベクトル空間であるとき，
+  \(S\)は\(V\)の\termdef{アフィン部分空間}（affine subspace）であるという．このとき\(S\)を\(S=a+W\)と表す．
+\end{definition}
+
+任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，集合\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ1つの元を持つ．
+実際，\(\vect{a}\in S\)を1つ選び\(S=\vect{a}+W\)とおくと
+\[
+  \argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}} = \argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{y}-\vect{a})-(\vect{x}-\vect{a})}
+  = \Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}
+\]
+である．
+
+よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\tilde{\vect{x}}+\ker\mat{A}\)）も元をただ1つ持つ．
+そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．また，\cref{proposition:pseudoinverse_least_square}は集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)がアフィン部分空間であり，
+\(\vect{b}\)を変えると\(\ker\mat{A}\)を平行移動する向きと大きさが変わることを表している．
 
 \section{離散フーリエ変換}
 
