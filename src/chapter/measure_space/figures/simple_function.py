@@ -19,18 +19,18 @@ z = [1, 2, 3]
 ax.bar3d(
     *zip([*xy[0], 1.5, 1.5, z[0]], [*xy[1], 1.5, 1, z[1]], [*xy[2], 2, 1.5, z[2]]),
     color="lightgray",
-    shade=True,
+    shade=True
 )
 
-text = Text3D(xy[0] + np.array([0.5, 0.55, z[0]]), f"$A_1$", size=0.6)
+text = Text3D(xy[0] + np.array([0.5, 0.55, z[0]]), r"$A_1$", size=0.6)
 ax.add_patch(text)
 text.to_3d()
 
-text = Text3D(xy[1] + np.array([0.5, 0.35, z[1]]), f"$A_2$", size=0.6)
+text = Text3D(xy[1] + np.array([0.5, 0.35, z[1]]), r"$A_2$", size=0.6)
 ax.add_patch(text)
 text.to_3d()
 
-text = Text3D(xy[2] + np.array([0.75, 0.55, z[2]]), f"$A_3$", size=0.6)
+text = Text3D(xy[2] + np.array([0.75, 0.55, z[2]]), r"$A_3$", size=0.6)
 ax.add_patch(text)
 text.to_3d()
 

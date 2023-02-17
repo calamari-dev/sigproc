@@ -58,6 +58,7 @@
 
 \crefname{example}{例}{例}
 
+\declaretheorem[style=egstyle,name=問]{answer}
 \declaretheorem[sibling=thcounter,style=egstyle,name=例]{example}
 \declaretheorem[style=egstyle,name=問]{problem}
 \declaretheorem[style=notestyle,name=ノート]{note}
@@ -77,8 +78,8 @@
     theorem style=plain,
     label type={#1},
     fonttitle=\sffamily\bfseries,
-    description delimiters={\inhibitglue（}{）\hspace{-0.5\zw}},
-    terminator sign={\hspace{\zw}},
+    description delimiters={\inhibitglue（}{）\hspace*{-0.5\zw}},
+    terminator sign={\hspace*{\zw}},
     coltitle=black,
     colframe=black,
     opacityback=0.0,

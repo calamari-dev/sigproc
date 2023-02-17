@@ -269,10 +269,10 @@
 
 線型写像に付随して，重要なベクトル空間が2つ定まる．
 
-\begin{definition}{核，像}{nul_img}\index{かく@核}\index{ぞう@像}\index{ker@\(\nul f\)}\index{im@\(\img f\)}
+\begin{definition}{核，像}{nul_img}\index{かく@核}\index{ぞう@像}\index{ker@\(\ker f\)}\index{im@\(\img f\)}
   \(f\colon V\to W\)を線型写像とする．
   \begin{enumerate}
-    \item \(V\)の部分空間\(\inv{f}{\Set{\vect{0}}}\)を\(f\)の\termdef{核}（kernel）といい，\(\nul f\)と表す．
+    \item \(V\)の部分空間\(\inv{f}{\Set{\vect{0}}}\)を\(f\)の\termdef{核}（kernel）といい，\(\ker f\)と表す．
     \item \(W\)の部分空間\(\ran{f}{V}\)を\(f\)の\termdef{像}（image）といい，\(\img f\)と表す．
   \end{enumerate}
 \end{definition}
@@ -284,11 +284,11 @@
 \end{note}
 
 \begin{proposition}{}{nul_and_uniqueness}
-  \(f\colon V\to W\)を線型写像とする．このとき，\(f\)が単射であることと，\(\nul f=\Set{\zvec}\)が成立することは同値である．
+  \(f\colon V\to W\)を線型写像とする．このとき，\(f\)が単射であることと，\(\ker f=\Set{\zvec}\)が成立することは同値である．
 \end{proposition}
 
 \begin{proof}
-  \(f\)が単射なら，\(f(\zvec)=f(\zvec+\zvec)=f(\zvec)+f(\zvec)\)より\(f(\zvec)=\zvec\)，\(\nul f=\Set{\zvec}\)である．逆に\(\nul f=\Set{\zvec}\)なら，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たすとき
+  \(f\)が単射なら，\(f(\zvec)=f(\zvec+\zvec)=f(\zvec)+f(\zvec)\)より\(f(\zvec)=\zvec\)，\(\ker f=\Set{\zvec}\)である．逆に\(\ker f=\Set{\zvec}\)なら，\(\vect{v}_1,\vect{v}_2\in V\)が\(f(\vect{v}_1)=f(\vect{v}_2)\)を満たすとき
   \(f(\vect{v}_1-\vect{v}_2)=f(\vect{v}_1)-f(\vect{v}_2)=\zvec\)，\(\vect{v}_1-\vect{v}_2=\zvec\)である．よって，このとき\(f\)は単射である．
 \end{proof}
 

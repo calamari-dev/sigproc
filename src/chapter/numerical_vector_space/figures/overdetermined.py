@@ -6,32 +6,29 @@ from vector import Vector3D
 
 plt.style.use("sigproc")
 
-xx, yy = np.mgrid[-5:5:10j, -5:5:10j]
-zz = (xx + 2 * yy) / 3
-
-v1 = np.array((4, 1, 2))
-v2 = np.array((0, 3, 2))
-v3 = np.cross(v1, v2) / 2
-ym = np.array((-2, -2, -2))
-y1 = ym + v3
-
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-ax.set(zlim3d=(-3, 7))
+ax.set(zlim3d=(-5, 5))
 
 for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
     axis.set(pane_color=(0.0, 0.0, 0.0, 0.0))
 
-ax.plot_surface(xx, yy, zz, alpha=0.25)
+xx, yy = np.mgrid[-5:5:2j, -6:4:2j]
+ax.plot_surface(xx, yy, (xx + 2 * yy) / 3, alpha=0.25)
 
-for e in (v1, v2, y1, ym):
-    ax.add_artist(Vector3D((0, 0, 0), e))
+a1 = np.array([4, 1, 2])
+a2 = np.array([0, 3, 2])
+Ax = np.array([-2, -2, -2])
+b = np.array([-4, -6, 4])
 
-ax.add_artist(Vector3D(y1, ym, ls="dashed", arrowstyle="->"))
+for v in (a1, a2, b, Ax):
+    ax.add_artist(Vector3D([0, 0, 0], v))
 
-ax.text(*(0.5 * (y1 + ym)), r"$P\,$", ha="right", va="top")
-ax.text(*v1, r"$\vect{a}_1$", ha="left", va="center")
-ax.text(*v2, r"$\vect{a}_2$", ha="left", va="bottom")
-ax.text(*ym, r"$\mat{A}\vect{x}$", ha="right", va="top")
-ax.text(*y1, r"$\vect{b}$", ha="right", va="bottom")
+ax.add_artist(Vector3D(b, Ax, ls="dashed", arrowstyle="->"))
+
+ax.text(*(0.5 * (b + Ax)), r"$P\,$", ha="right", va="top")
+ax.text(*a1, r"$\vect{a}_1$", ha="center", va="bottom")
+ax.text(*a2, r"$\vect{a}_2$", ha="left", va="center")
+ax.text(*Ax, r"$\mat{A}\vect{x}$", ha="center", va="top")
+ax.text(*b, r"$\vect{b}$", ha="right", va="center")
 
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

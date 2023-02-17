@@ -1,0 +1,37 @@
+\documentclass[../../main]{subfiles}
+
+\begin{document}
+\chapter{演習問題の解答}
+\label{chapter:answer_of_exercises}
+\small
+
+\section*{第2章}
+
+\begin{answer}
+  左側を示す．\cref{xr-proposition:pseudoinverse_characterization}より，任意の\(\vect{n}\in\nulsp\mat{A}\)に対して
+  \(
+    \innerp{(\imat-\pinv{\mat{A}}\mat{A})\vect{x}-\vect{x}}{\vect{n}} = -\innerp{\vect{x}}{\htrps{(\pinv{\mat{A}}\mat{A})}\vect{n}}
+    = -\innerp{\vect{x}}{\pinv{\mat{A}}\mat{A}\vect{n}}
+    = 0
+  \)
+  である．よって\(\proj_{\nulsp\mat{A}}\vect{x}=(\imat-\pinv{\mat{A}}\mat{A})\vect{x}\)である．
+  同様に，任意の\(\mat{A}\vect{w}\in\colsp\mat{A}\)に対して
+  \(
+    \innerp{\mat{A}\pinv{\mat{A}}\vect{y}-\vect{y}}{\mat{A}\vect{w}} = \innerp{\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}\vect{y}-\htrps{\mat{A}}\vect{y}}{\vect{w}}
+    = \innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{y}}{\vect{w}}
+    = 0
+  \)
+  である．したがって\(\proj_{\colsp\mat{A}}\vect{y}=\mat{A}\pinv{\mat{A}}\vect{y}\)である．
+\end{answer}
+
+\begin{answer}
+  \(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと，\(\mat{A}^k=(\mat{U}\mat{\Lambda}\htrps{\mat{U}})^k=\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}\)より
+  \[
+    \exp\mat{A} = \sum_{k=0}^\infty\frac{\mat{A}^k}{k!}
+    = \sum_{k=0}^\infty\frac{\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}}{k!}
+    = \mat{U}\pqty*{\sum_{k=0}^\infty\frac{\diag(\lambda_1^k,\dots,\lambda_n^k)}{k!}}\htrps{\mat{U}}
+  \]
+  であり，右辺は\(\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)に等しい．
+\end{answer}
+
+\end{document}

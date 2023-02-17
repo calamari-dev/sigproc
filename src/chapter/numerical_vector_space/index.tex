@@ -357,12 +357,9 @@
 \end{proposition}
 
 \begin{proof}
-  線型写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義すると
-  \[
-    \argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \inv*{T_A}{\argmin_{\vect{z}\in\img T_A}\vnorm{\vect{z}-\vect{b}}}
-    = \inv{T_A}{\Set{\proj_{\img T_A}\vect{b}}}
-  \]
-  が成立する．よって\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}=\inv{T_A}{\Set{\proj_{\img T_A}\vect{b}}}\)であり，この集合は明らかに空でない．
+  線型写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義する．
+  関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)の最小値は\(\min\Set{\vnorm{\mat{A}\vect{x}-\vect{b}}\given\vect{x}\in\numset{K}^p}=\min\Set{\vnorm{\vect{z}-\vect{b}}\given\vect{z}\in\img T_A}\)であり，\(\vnorm{\vect{z}-\vect{b}}\)の値を最小にする\(\vect{z}\in\img T_A\)は\(\proj_{\img T_A}\vect{b}\)ただ一つである．
+  よって，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は方程式\(\mat{A}\vect{x}=\proj_{\img T_A}\vect{b}\)の解集合である．この方程式は明らかに解をもつから，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は空でない．
 \end{proof}
 
 上の証明における\(\img T_A\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
@@ -389,7 +386,7 @@
   \caption{\(\vect{a}_1\)，\(\vect{a}_2\)と\(P(\vect{b})=\mat{A}\vect{x}\)の様子．}
 \end{figure}
 
-\cref{example:overdetermined}から分かるように，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めるには\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)を計算して，方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)を解けばよい．
+\cref{example:overdetermined}からも分かるよう，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めるには\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)を計算して，方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)を解けばよい．
 一方で，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)をより機械的に求める方法もある．
 
 \begin{proposition}{}{normal_equation}
@@ -446,11 +443,15 @@
 \end{theorem}
 
 \begin{proof}
-  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ．証明は本筋に絡まないので，ひとまず認めてもかまわない．
+  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ（ひとまず認めてもかまわない）．
 \end{proof}
 
 ユニタリ行列による対角化は\termdef{スペクトル分解}\index{すぺくとるぶんかい@スペクトル分解}（spectral decomposition）と呼ばれる．
 \cref{theorem:spectral_theorem}から，正規行列であることとスペクトル分解できることは同値である．
+
+\begin{note}
+  正規行列のスペクトル分解を計算するには，固有空間一つ一つの正規直交基底を求め，それらを並べて1つのユニタリ行列を作ればよい．
+\end{note}
 
 \begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}
   \(\mat{A}\)を任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)がある．
@@ -544,7 +545,7 @@
 \label{subsection:pseudoinverse}
 
 これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列，\(\vect{b}\)は\(\numset{C}^n\)の任意の元とする．
-ここでは，\cref{proposition:pseudoinverse_least_square}から見えてくる集合\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
+ここでは擬似逆行列の性質と，\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
 
 \begin{proposition}{擬似逆行列の特徴づけ}{pseudoinverse_characterization}
   以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
@@ -576,55 +577,21 @@
   なので\(\mat{Y}=\mat{X}\)である．
 \end{proof}
 
-\begin{corollary}{}{}
-  \(\pinv{(\pinv{\mat{A}})}=\mat{A}\)である．
-\end{corollary}
-
-\begin{proof}
-  省略する．
-\end{proof}
-
-\begin{proposition}{}{pseudoinverse_projection}\index{nul@\(\nulsp\mat{A}\)}
-  任意の\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立する．
-  ただし\(\nulsp\mat{A}=\Set{\vect{x}\in\numset{C}^p\given\mat{A}\vect{x}=\zvec}\)である．
-  \begin{gather*}
-    \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
-    \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
-    \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
-    \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
-  \end{gather*}
-\end{proposition}
-
-\begin{proof}
-  左側を示す．\cref{proposition:pseudoinverse_characterization}より，任意の\(\vect{v}\in\nulsp\mat{A}\)に対して
-  \(
-    \innerp{(\imat-\pinv{\mat{A}}\mat{A})\vect{x}-\vect{x}}{\vect{v}} = -\innerp{\vect{x}}{\htrps{(\pinv{\mat{A}}\mat{A})}\vect{v}}
-    = -\innerp{\vect{x}}{\pinv{\mat{A}}\mat{A}\vect{v}}
-    = 0
-  \)
-  である．よって\(\proj_{\nulsp\mat{A}}\vect{x}=(\imat-\pinv{\mat{A}}\mat{A})\vect{x}\)である．
-  同様に，任意の\(\mat{A}\vect{w}\in\colsp\mat{A}\)に対して
-  \(
-    \innerp{\mat{A}\pinv{\mat{A}}\vect{y}-\vect{y}}{\mat{A}\vect{w}} = \innerp{\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}\vect{y}-\htrps{\mat{A}}\vect{y}}{\vect{w}}
-    = \innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{y}}{\vect{w}}
-    = 0
-  \)
-  である．したがって\(\proj_{\colsp\mat{A}}\vect{y}=\mat{A}\pinv{\mat{A}}\vect{y}\)である．
-\end{proof}
-
 \begin{proposition}{}{pseudoinverse_minimum_norm}
-  \(\pinv{\mat{A}}\vect{b}\)は集合\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さく，同じノルムを持つ元はほかにない．
+  集合\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さいものは，\(\pinv{\mat{A}}\vect{b}\)ただ一つである．
   すなわち\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:pseudoinverse_least_square}より\(S\)の任意の元は\(\vect{x}=\pinv{\mat{A}}\vect{b}+\increment\vect{x}\)（\(\increment\vect{x}=(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\)）と書けて，
-  \cref{proposition:pseudoinverse_characterization}から\(\innerp{\pinv{\mat{A}}\vect{b}}{\increment\vect{x}}=\innerp{(\imat-\pinv{\mat{A}}\mat{A})\pinv{\mat{A}}\vect{b}}{\vect{w}}=0\)である．
-  よって\(\vnorm{\vect{x}}^2=\vnorm{\pinv{\mat{A}}\vect{b}}^2+\vnorm{\increment\vect{x}}^2\)なので，\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
+  \cref{proposition:pseudoinverse_least_square}より\(S\)の任意の元は\(\vect{x}=\pinv{\mat{A}}\vect{b}+\vect{n}\)（\(\vect{n}=(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\)）と書けて，
+  \cref{proposition:pseudoinverse_characterization}から\(\innerp{\pinv{\mat{A}}\vect{b}}{\vect{n}}=\innerp{(\imat-\pinv{\mat{A}}\mat{A})\pinv{\mat{A}}\vect{b}}{\vect{w}}=0\)である．
+  よって\(\vnorm{\vect{x}}^2=\vnorm{\pinv{\mat{A}}\vect{b}}^2+\vnorm{\vect{n}}^2\)なので，\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
 \end{proof}
 
-\cref{section:least_square}の冒頭で述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
-この方程式の解を1つ選び\(\tilde{\vect{x}}\)とおく．すると，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\tilde{\vect{x}})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)，つまり\(\vect{x}-\tilde{\vect{x}}\in\nulsp\mat{A}\)を満たす．
+実は，\cref{proposition:pseudoinverse_minimum_norm}において\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)の元が唯一であることは擬似逆行列を使わず証明できる．
+\cref{section:least_square}の初めに述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
+この方程式の解を1つ選び\(\tilde{\vect{x}}\)とおく．すると，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\tilde{\vect{x}})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)，
+つまり\(\vect{x}-\tilde{\vect{x}}\in\nulsp\mat{A}\)（\(\nulsp\mat{A}=\Set{\vect{x}\in\numset{C}^p\given\mat{A}\vect{x}=\zvec}\)）\index{nul@\(\nulsp\mat{A}\)}を満たす．
 
 逆に，\(\numset{K}^p\)の元\(\vect{x}\)が\(\vect{x}-\tilde{\vect{x}}\in\nulsp\mat{A}\)を満たせば\(\mat{A}\vect{x}=\tilde{\vect{b}}\)も成立する．
 つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は，部分空間\(\nulsp\mat{A}\)を\(\tilde{\vect{x}}\)によって平行移動した集合\(\Set{\tilde{\vect{x}}+\vect{y}\given\vect{y}\in\nulsp\mat{A}}\)である．
@@ -635,6 +602,12 @@
   \(S\)は\(V\)の\termdef{アフィン部分空間}（affine subspace）であるという．このとき\(S\)を\(S=a+W\)と表す．
 \end{definition}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/affine.pdf}
+  \caption{アフィン部分空間\(\vect{a}+W\)の模式図．}
+\end{figure}
+
 任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，集合\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
 実際，\(\vect{a}\in S\)を1つ選び\(S=\vect{a}+W\)とおくと
 \[
@@ -643,9 +616,11 @@
 \]
 である．
 
-よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\tilde{\vect{x}}+\nulsp\mat{A}\)）も元をただ一つ持つ．
-そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．また，\cref{proposition:pseudoinverse_least_square}は集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)がアフィン部分空間であり，
-\(\vect{b}\)を変えると\(\nulsp\mat{A}\)を平行移動する向きと大きさが変わることを表している．
+よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\tilde{\vect{x}}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．
+
+\subsection{回帰分析}
+
+以上で説明した方法を使うと，実測値を曲線にあてはめられる．
 
 \section{離散フーリエ変換}
 
@@ -1004,7 +979,14 @@
 \section{演習問題}
 
 \begin{enumerate}
-  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{n=0}^\infty\mat{A}^n/(n!)\)で定義する．
+  \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
+    \begin{gather*}
+      \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
+      \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
+      \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
+      \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
+    \end{gather*}
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する．
     \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
     \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
 \end{enumerate}
