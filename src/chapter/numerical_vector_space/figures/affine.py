@@ -22,11 +22,11 @@ w = np.array([4, -2, 0.5])
 
 ax.add_artist(Vector3D([0, 0, 0], a))
 ax.add_artist(Vector3D([0, 0, 0], w))
-ax.add_artist(Vector3D(a, a + w, ls="dashed", arrowstyle="->"))
+ax.add_artist(Vector3D(w, a + w, ls="dashed", arrowstyle="->"))
 
 ax.text(0, 0, 0, r"$O$", ha="right", va="top")
 ax.text(*a, r"$\vect{a}$", ha="right", va="center")
-ax.text(*w, r"$\vect{w}$", ha="left", va="top")
-ax.text(*(a + w), r"$\vect{a}+\vect{w}$", ha="left", va="center")
+ax.text(*w, r"$\vect{w}$", ha="center", va="top")
+ax.text(*(a + w), r"$\vect{a}+\vect{w}$", ha="center", va="center")
 
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

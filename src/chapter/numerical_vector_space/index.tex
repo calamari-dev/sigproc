@@ -236,29 +236,29 @@
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
 
-\(\mat{U}=\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}\)，\(\mat{\Lambda}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
+\(\mat{U}=\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
   \htrps{\mat{U}}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
   = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
-  \quad\mat{\Lambda}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
+  \quad\mat{\Delta}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
   \quad\mat{U}\vect{x} = \mat{U}\matrice*{x_1 \\ \vdots \\ x_n}
   = \sum_{i=1}^nx_i\vect{e}_i
 \]
 であるから
 \[
-  \mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x} = \mat{U}\mat{\Lambda}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
+  \mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x} = \mat{U}\mat{\Delta}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
   = \mat{U}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(\Lambda(\vect{x})=\mat{\Lambda}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}\Lambda T\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
+\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}DT\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
 \(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
-もう1つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
+もう一つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
 \begin{equation}
   \label{equation:analysis_and_synthesis}
   \vect{x} = \proj_{V_n}\vect{x}
@@ -305,7 +305,7 @@
     \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
      = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
  \]
-  なので，\(\htrps{\vect{u}_i}{\vect{u}_j}=\innerp{\vect{u}_j}{\vect{u}_i}=\kdelta{j}{i}\)がすべての\(i,j\in\Set{1,\dots,n}\)で成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
+  なので，\(\innerp{\vect{u}_i}{\vect{u}_j}=\htrps{\vect{u}_j}{\vect{u}_i}=\kdelta{i}{j}\)がすべての\(i,j\in\Set{1,\dots,n}\)で成り立つことは，\(\htrps{\mat{U}}\mat{U}=\imat\)と同値である．
 
   次に，3と1の同値性を示す．\(\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\htrps{(\mat{U}\vect{y})}\mat{U}\vect{x}=\htrps{(\htrps{\mat{U}}\mat{U}\vect{y})}\vect{x}=\innerp{\vect{x}}{\htrps{\mat{U}}\mat{U}\vect{y}}\)なので
   \(\innerp{\vect{x}}{\vect{y}}-\innerp{\mat{U}\vect{x}}{\mat{U}\vect{y}}=\innerp{\vect{x}}{\mat{E}\vect{y}}\)（\(\mat{E}=\imat-\htrps{\mat{U}}\mat{U}\)）である．
@@ -431,6 +431,7 @@
 である．
 
 \subsection{スペクトル分解と特異値分解}
+\label{subsection:sd_and_svd}
 
 \(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
@@ -453,13 +454,13 @@
   正規行列のスペクトル分解を計算するには，固有空間一つ一つの正規直交基底を求め，それらを並べて1つのユニタリ行列を作ればよい．
 \end{note}
 
-\begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}
-  \(\mat{A}\)を任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)がある．
+\begin{corollary}{特異値分解}{singular_value_decomposition}\index{とくいちぶんかい@特異値分解}\index{SVD|see{特異値分解}}
+  \(\mat{A}\)を任意の\(n\times p\)複素行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)が存在する．
   式\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の\termdef{特異値分解}（singular value decomposition; SVD）という．
   \begin{enumerate}
     \item \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)である．
     \item \(\mat{U}\)は\(n\)次ユニタリ行列，\(\mat{V}\)は\(p\)次ユニタリ行列である．
-    \item \(\mat{\Sigma}\)は\(n\times p\)行列で\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\)と書ける．
+    \item \(\mat{\Sigma}\)は\(n\times p\)行列であり\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\)と書ける．
       ただし\(k=\min\Set{n,p}\)，\(\sigma_1\geq\dots\geq\sigma_k\geq 0\)である．
   \end{enumerate}
 \end{corollary}
@@ -481,7 +482,7 @@
   \]
   であり，和の順序を変えても値は変わらない．そこで，\(\lambda_1\geq\dots\geq\lambda_p\)が成り立つように\(\lambda_1,\dots,\lambda_p\)と\(\vect{v}_1,\dots,\vect{v}_p\)を並べ替えておく．
 
-  \(\sigma_i=\sqrt{\lambda_i}=\vnorm{\mat{A}\vect{u}_i}\)，\(r=\max\Set{i\given\mat{A}\vect{v}_i\neq\zvec}\)とおく．
+  \(\sigma_i=\sqrt{\lambda_i}=\vnorm{\mat{A}\vect{v}_i}\)，\(r=\max\Set{i\given\mat{A}\vect{v}_i\neq\zvec}\)とおく．
   \cref{equation:image_orthogonality}より，\(\vect{u}_i=(1/\sigma_i)\mat{A}\vect{v}_i\)とおくと集合\(\Set{\vect{u}_1,\dots,\vect{u}_r}\)は\(\numset{C}^n\)の正規直交系である．
   \(r<n\)のときは\(\vect{u}_{r+1},\dots,\vect{u}_n\in\numset{C}^n\)を適切に補うことで，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)を\(\numset{C}^n\)の正規直交基底にできる．
   すると，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列であり
@@ -545,7 +546,7 @@
 \label{subsection:pseudoinverse}
 
 これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列，\(\vect{b}\)は\(\numset{C}^n\)の任意の元とする．
-ここでは擬似逆行列の性質と，\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
+ここでは擬似逆行列の性質と\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
 
 \begin{proposition}{擬似逆行列の特徴づけ}{pseudoinverse_characterization}
   以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
@@ -590,11 +591,11 @@
 
 実は，\cref{proposition:pseudoinverse_minimum_norm}において\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)の元が唯一であることは擬似逆行列を使わず証明できる．
 \cref{section:least_square}の初めに述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
-この方程式の解を1つ選び\(\tilde{\vect{x}}\)とおく．すると，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\tilde{\vect{x}})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)，
-つまり\(\vect{x}-\tilde{\vect{x}}\in\nulsp\mat{A}\)（\(\nulsp\mat{A}=\Set{\vect{x}\in\numset{C}^p\given\mat{A}\vect{x}=\zvec}\)）\index{nul@\(\nulsp\mat{A}\)}を満たす．
+この方程式の解を1つ選び\(\vect{a}\)とおくと，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\vect{a})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)，
+つまり\(\vect{x}-\vect{a}\in\nulsp\mat{A}\)（\(\nulsp\mat{A}=\Set{\vect{n}\in\numset{C}^p\given\mat{A}\vect{n}=\zvec}\)）\index{nul@\(\nulsp\mat{A}\)}を満たす．
 
-逆に，\(\numset{K}^p\)の元\(\vect{x}\)が\(\vect{x}-\tilde{\vect{x}}\in\nulsp\mat{A}\)を満たせば\(\mat{A}\vect{x}=\tilde{\vect{b}}\)も成立する．
-つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は，部分空間\(\nulsp\mat{A}\)を\(\tilde{\vect{x}}\)によって平行移動した集合\(\Set{\tilde{\vect{x}}+\vect{y}\given\vect{y}\in\nulsp\mat{A}}\)である．
+逆に，\(\numset{K}^p\)の元\(\vect{x}\)が\(\vect{x}-\vect{a}\in\nulsp\mat{A}\)を満たせば\(\mat{A}\vect{x}=\tilde{\vect{b}}\)も成立する．
+つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は，部分空間\(\nulsp\mat{A}\)を\(\vect{a}\)によって平行移動した集合\(\Set{\vect{a}+\vect{n}\given\vect{n}\in\nulsp\mat{A}}\)である．
 このような集合をアフィン部分空間という．
 
 \begin{definition}{アフィン部分空間}{affine_subspace}\index{あふぃんぶぶんくうかん@アフィン部分空間}\index{ぶぶんくうかん@部分空間!あふぃん@アフィン\texttwoemdash}
@@ -608,7 +609,7 @@
   \caption{アフィン部分空間\(\vect{a}+W\)の模式図．}
 \end{figure}
 
-任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，集合\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
+任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
 実際，\(\vect{a}\in S\)を1つ選び\(S=\vect{a}+W\)とおくと
 \[
   \argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}} = \argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{y}-\vect{a})-(\vect{x}-\vect{a})}
@@ -616,11 +617,42 @@
 \]
 である．
 
-よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\tilde{\vect{x}}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．
+よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\vect{a}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．
+
+\subsection{\texorpdfstring{\(\numset{K}=\numset{R}\)}{K=R}の場合}
+
+\cref{subsection:sd_and_svd}から\cref{subsection:pseudoinverse}の結果は，スペクトル分解と特異値分解を次の形で適当に読み替えれば\(\numset{K}=\numset{R}\)のときも適用できる．
+証明は\(\numset{K}=\numset{C}\)のときとほとんど変わらない．
+
+\begin{theorem}{スペクトル定理}{spectral_theorem_in_real}\index{すぺくとるていり@スペクトル定理!じつぎょうれつ@実行列}\index{ちょっこうぎょうれつ@直交行列}\index{ぎょうれつ@行列!ちょっこう@直交\texttwoemdash}
+  \(\mat{A}\)を\(n\)次実正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．
+  \begin{enumerate}
+    \item \(\mat{A}\)は正規行列である．
+    \item \(\mat{A}\)は直交行列\footnotemark で対角化できる．すなわち，\(\mat{A}=\mat{U}\mat{\Lambda}\trps{\mat{U}}\)を満たす\(n\)次直交行列\(\mat{U}\)，対角行列\(\mat{\Lambda}\)が存在する．
+  \end{enumerate}
+\end{theorem}
+
+\begin{corollary}{特異値分解}{singular_value_decomposition_in_real}\index{とくいちぶんかい@特異値分解!じつぎょうれつ@実行列}
+  \(\mat{A}\)を任意の\(n\times p\)実行列とする．このとき，以下の条件すべてを満たす行列\(\mat{U}\)，\(\mat{V}\)，\(\mat{\Sigma}\)が存在する．
+  \begin{enumerate}
+    \item \(\mat{A}=\mat{U}\mat{\Sigma}\trps{\mat{V}}\)である．
+    \item \(\mat{U}\)は\(n\)次直交行列，\(\mat{V}\)は\(p\)次直交行列である．
+    \item \(\mat{\Sigma}\)は\(n\times p\)行列であり\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_k) & \\ & \zmat}\)と書ける．
+      ただし\(k=\min\Set{n,p}\)，\(\sigma_1\geq\dots\geq\sigma_k\geq 0\)である．
+  \end{enumerate}
+\end{corollary}
+
+\footnotetext{\(\mat{Q}\trps{\mat{Q}}=\trps{\mat{Q}}\mat{Q}=\imat\)を満たす実正方行列\(\mat{Q}\)を\termdef{直交行列}（orthogonal matrix）という．}
 
 \subsection{回帰分析}
 
-以上で説明した方法を使うと，実測値を曲線にあてはめられる．
+ここまで説明した\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)に関する理論は，データを曲線にあてはめるとき威力を発揮する．
+
+変数\(X\)と変数\(Y\)の間には，多項式で表される関係\(Y=a_0+a_1X^1+\dots+a_pX^p\)があると仮定する．
+ただし次数\(p\)は既知であり，各\(X^i\)の係数\(a_i\)を\(X\)と\(Y\)の観測値から推定したい．
+
+たとえば，おもりを自由落下させると落下時間\(T\)と移動距離\(Y\)の間には\(Y=(g/2)T^2\)という関係がある（\(g\)は重力加速度と呼ばれる定数である）．
+そこで，\((T,Y)\)の値をくり返し測定し，得られた2次元データを関数\(t\mapsto at^2\)にあてはめれば，\(g=2a\)の値を間接的に測定できる．
 
 \section{離散フーリエ変換}
 
@@ -710,7 +742,7 @@
 \end{figure}
 
 \cref{figure:frequency_domain}を見ると，\SI{350}{Hz}周辺に1つめのピークが現れている．これは\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
-人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．ピッチと基本周波数は多くの場合対応するが，同一視できないケースも存在する\cite{kashino}．}．
+人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．ピッチと基本周波数は多くの場合対応するが，同一視できないケースも存在する．詳しくは柏野\cite{kashino}など．}．
 
 また，\cref{figure:frequency_domain}の破線部\(\hat{h}_k\)は，基本周波数に起因する細かな変動を\(\abs{\hat{x}_k}\)から除いた曲線である．
 この曲線は\termdef{スペクトル包絡}\index{すぺくとるほうらく@スペクトル包絡}（spectral envelope）といい，音声の音色とよく対応する．
@@ -720,14 +752,14 @@
 
 さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
 
-周波数\(f\,\si{Hz}\)の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
-一方，周波数\(f-f_{\symrm{s}}\,\si{Hz}\)の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
+周波数\(f\)\,\si{Hz}の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
+一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
 \[
   \napr^{2\krez\iuni(f-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni fn/f_{\symrm{s}}-2\krez\iuni n}
   = \napr^{2\krez\iuni fn/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
   = \napr^{2\krez\iuni fn/f_{\symrm{s}}}
 \]
-となる．つまり，周波数が\(f\,\si{Hz}\)でも\(f-f_{\symrm{s}}\,\si{Hz}\)でも，できる数列は変わらない．
+となる．つまり，周波数が\(f\)\,\si{Hz}でも(\(f-f_{\symrm{s}}\))\,\si{Hz}でも，できる数列は変わらない．
 
 言い換えると，周波数が\(f_{\symrm{s}}\)だけ異なる波は数列から区別できない．\cref{figure:aliasing}は\(f_{\symrm{s}}=\SI{2.5}{Hz}\)のとき，
 周波数\SI{2}{Hz}の波\(\sin(4\krez t)\)と\SI{-0.5}{Hz}の波\(\sin(-\krez t)\)が，時刻\(n/f_{\symrm{s}}\)秒（\(n\in\numset{Z}\)）では同じ瞬時値を持つことを示している．
@@ -979,6 +1011,7 @@
 \section{演習問題}
 
 \begin{enumerate}
+  \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
   \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
     \begin{gather*}
       \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
@@ -986,7 +1019,8 @@
       \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
       \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
     \end{gather*}
-  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する．
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する
+    （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
     \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
     \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
 \end{enumerate}

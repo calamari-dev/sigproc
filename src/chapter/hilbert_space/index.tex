@@ -26,7 +26,7 @@
   \(S\)を集合とする．\(d\)が\(S\)上の\termdef{距離}（metric）であるとは，
   任意の\(x,y,z\in S\)に対して，\(d\)が以下の条件を満たすことをいう．
   \begin{enumerate}
-    \item \(d(x,y)\geq 0\)，\([d(x,y)=0\iff x=y]\)
+    \item \(d(x,y)\geq 0\)，(\(d(x,y)=0\iff x=y\))
     \item \(d(x,y)=d(y,x)\)
     \item \(d(x,y)+d(y,z)\geq d(x,z)\)
   \end{enumerate}
@@ -76,7 +76,7 @@
 
 \begin{example}[一様収束]
   \label{example:uniform_converge}
-  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(t)-g(t)}\given x\in I}\)は\(\cont{0}(I)\)上の距離になる．
+  閉区間\(I\)は有界とする．連続関数\(f\colon I\to\numset{R}\)の全体集合を\(\cont{0}(I)\)とおくと，\(d(f,g)=\max\Set{\abs{f(t)-g(t)}\given t\in I}\)は\(\cont{0}(I)\)上の距離になる．
   \(\cont{0}(I)\)上の関数列\(\seq{f_n}_{n\in\numset{N}}\)が\cref{definition:sequence_converge}の意味で\(f\in\cont{0}(I)\)に収束するとき，
   \(\seq{f_n}_{n\in\numset{N}}\)は\(f\)に\termdef{一様収束する}\index{いちようしゅうそく@一様収束}（converge uniformly）という．
 
@@ -156,7 +156,7 @@
   \(V\)を\(\numset{K}\)上のベクトル空間とする．\(\vnorm{\holder}\)が\(V\)の\termdef{ノルム}（norm）であるとは，
   任意の\(\lambda\in\numset{K}\)，\(x,y\in V\)に対して，\(\vnorm{\holder}\)が以下の条件を満たすことをいう．
   \begin{enumerate}
-    \item \(\vnorm{x}\geq 0\)，\([\vnorm{x}=0\iff x=0]\)
+    \item \(\vnorm{x}\geq 0\)，(\(\vnorm{x}=0\iff x=0\))
     \item \(\vnorm{\lambda x}=\abs{\lambda}\vnorm{x}\)
     \item \(\vnorm{x+y}\leq\vnorm{x}+\vnorm{y}\)
   \end{enumerate}
