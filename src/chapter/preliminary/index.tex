@@ -316,8 +316,8 @@
 
 以下，\(\mat{A}\)を任意の\(n\)次正方行列，\(\spec\mat{A}\)\index{spec@\(\spec\mat{A}\)}を\(\mat{A}\)の固有値の全体集合とする．
 
-\(n\)次多項式\(P(\lambda)=\det(\lambda\imat-\mat{A})\)を\(\mat{A}\)の\termdef{固有多項式}\index{こゆうたこうしき@固有多項式}（characteristic polynomial）という．
-\cref{proposition:characteristic_polynomial}から，\(\mat{A}\)の固有値を求めることは，方程式\(P(\lambda)=0\)を解くことと同義である．
+\(n\)次多項式\(p(\lambda)=\det(\lambda\imat-\mat{A})\)を\(\mat{A}\)の\termdef{固有多項式}\index{こゆうたこうしき@固有多項式}（characteristic polynomial）という．
+\cref{proposition:characteristic_polynomial}から，\(\mat{A}\)の固有値を求めるには方程式\(p(\lambda)=0\)を解けばよい．
 
 \begin{proposition}{}{characteristic_polynomial}
   \(\spec\mat{A}=\Set{\lambda\in\numset{C}\given\det(\lambda\imat-\mat{A})=0}\)である．
@@ -426,8 +426,8 @@
   \(\liminf_{n\to\infty}a_n\)を数列\(\seq{a_n}_{n\in\numset{N}}\)の\termdef{下極限}（limit inferior）という．
 \end{definition}
 
-\cref{proposition:monotone_converge}より\(\limsup_{n\to\infty}a_n<+\infty\iff\sup\Set{a_1,a_2,\dotsc}<+\infty\)であり，
-同様のことが\(\liminf_{n\to\infty}a_n\)についても成り立つ．また，次のことが知られている．
+\cref{proposition:monotone_converge}より\(\liminf_{n\to\infty}a_n<+\infty\iff\sup\Set{a_1,a_2,\dotsc}<+\infty\)であり，
+同様のことが\(\limsup_{n\to\infty}a_n\)についても成り立つ．また，次のことが知られている．
 
 \begin{proposition}{}{}
   \(\seq{a_n}_{n\in\numset{N}}\)を実数列とする．このとき，実数\(\alpha\)に関する以下の条件は同値である．
@@ -459,8 +459,11 @@
     = \sum_{i=n+1}^m\pqty*{\frac{1}{i-1}-\frac{1}{i}}
     = \frac{1}{n}-\frac{1}{m}
   \]
-  であり，\(1/n-1/m\leq 1/N\to 0\)（\(N\to\infty\)）だから\(\seq{a_n}_{n\in\numset{N}}\)はコーシー列である．
-  よって，級数\(\sum(-1)^n/(n!)\)は収束する（よく知られているように，この値は\(1/\napr\)である）．
+  であり，\(1/n-1/m\leq 1/N\to 0\)（\(N\to\infty\)）だから\(\seq{a_n}_{n\in\numset{N}}\)はコーシー列である．よって，級数\(\sum(-1)^n/(n!)\)は収束する．
 \end{example}
+
+\begin{note}
+  実は\(a_n\to 1/\napr\)（\(n\to\infty\)）である．しかし，\(a_n\to 1/\napr\)（\(n\to\infty\)）を示すよりも\(\abs{a_m-a_n}\to 0\)（\(m,n\to\infty\)）を示すほうがずっとやさしい．
+\end{note}
 
 \end{document}

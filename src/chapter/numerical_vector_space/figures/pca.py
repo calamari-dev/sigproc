@@ -9,7 +9,7 @@ from vector import Vector2D
 
 plt.style.use("sigproc")
 
-csv = pd.read_csv("pca.csv", sep=",")
+csv = pd.read_csv(str(PurePath(__file__).parent / "pca.csv"), sep=",")
 pca = PCA(n_components=2)
 pca.fit(csv)
 v1, v2 = np.transpose(pca.components_ * np.sqrt(pca.explained_variance_).T)

@@ -123,7 +123,9 @@
   \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
 \end{proof}
 
-なお，\cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．
+\begin{note}
+  \cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．  
+\end{note}
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
@@ -132,9 +134,9 @@
 \end{proposition}
 
 \begin{proof}
-  任意に\(\vect{y}\in V\)をとり，\(\vect{\epsilon}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{m}-\vect{x}}{\vect{\epsilon}}=0\)より
-  \(\vnorm{\vect{y}-\vect{x}}^2=\vnorm{\vect{m}-\vect{x}+\vect{\epsilon}}^2=\vnorm{\vect{m}-\vect{x}}^2+2\rpart\innerp{\vect{m}-\vect{x}}{\vect{\epsilon}}+\vnorm{\vect{\epsilon}}^2=\vnorm{\vect{m}-\vect{x}}^2+\vnorm{\vect{\epsilon}}^2\)
-  が成立する．よって\(\vnorm{\vect{y}-\vect{x}}\geq\vnorm{\vect{m}-\vect{x}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
+  任意に\(\vect{y}\in V\)をとり，\(\increment\vect{y}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{m}-\vect{x}}{\increment\vect{y}}=0\)より
+  \(\vnorm{\vect{y}-\vect{x}}^2=\vnorm{(\vect{m}-\vect{x})+\increment\vect{y}}^2=\vnorm{\vect{m}-\vect{x}}^2+\vnorm{\increment\vect{y}}^2\)が成立する．
+  よって\(\vnorm{\vect{y}-\vect{x}}\geq\vnorm{\vect{m}-\vect{x}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
 \end{proof}
 
 \cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
@@ -648,39 +650,50 @@
 
 ここまで説明した\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)に関する理論は，データを曲線にあてはめるとき威力を発揮する．
 
-変数\(X\)と変数\(Y\)の間には，多項式で表される関係\(Y=c_0+c_1X+\dots+c_pX^p\)があると仮定する．
-ただし次数\(p\)は既知であり，各\(X^k\)の係数\(c_k\)を\(X\)と\(Y\)の観測値から推定したい．
+変数\(x\)と変数\(Y\)の間には，多項式で表される関係\(Y=c_0+c_1x+\dots+c_px^p\)があると仮定する．
+次数\(p\)は既知であり，各\(x^k\)の係数\(c_k\)を\(Y\)の観測値から推定したい．
 
-たとえば，おもりを自由落下させると落下時間\(T\)と移動距離\(Y\)の間には\(Y=(g/2)T^2\)という関係がある（\(g\)は重力加速度と呼ばれる定数である）．
-そこで，\(T\)と\(Y\)の値をくり返し測定し，得られたデータを式\(y=at^2\)にあてはめれば，\(g=2a\)の値を間接的に測定できる．
+たとえば，おもりを自由落下させると落下時間\(t\)と移動距離\(Y\)の間には\(Y=(g/2)t^2\)という関係がある（\(g\)は重力加速度と呼ばれる定数である）．
+そこで，\(t\)の値を変えながら\(Y\)の値をくり返し測定し，得られたデータを式\(y=at^2\)にあてはめれば，\(g=2a\)の値を間接的に測定できる．
 
-以下では観測値の系列\(\trps{\rowvect{x_1 & y_1}},\dots,\trps{\rowvect{x_n & y_n}}\)を\(\trps{\rowvect{X & Y}}\)の標本と呼ぶ．
+以下では，\(x=x_i\)に対応する観測値\(y_i\)の系列\(y_1,\dots,y_n\)を\(Y\)の標本と呼ぶ．
 次の定理から，\(c_0,\dots,c_p\)を決定するには最低限\(p+1\)個の標本があればよい．
 
 \begin{theorem}{}{}\index{ほかんたこうしき@補間多項式}
   点列\(\trps{\rowvect{x_1 & y_1}},\dots,\trps{\rowvect{x_{p+1} & y_{p+1}}}\in\numset{K}^2\)は，相異なる任意の\(i,j\in\Set{1,\dots,p+1}\)に対して\(x_i\neq x_j\)を満たすとする．
-  このとき，すべての\(i\)で\(y_i=P(x_i)\)を満たす，次数が\(p\)以下の\(\numset{K}\)係数多項式\(P(x)\)がただ一つ存在する\footnotemark ．
+  このとき，すべての\(i\)で\(y_i=f(x_i)\)を満たす，次数が\(p\)以下の\(\numset{K}\)係数多項式\(f(x)\)がただ一つ存在する\footnotemark ．
 \end{theorem}
 
 \begin{proof}
-  まず\(P(x)\)が存在することを示す．
+  まず\(f(x)\)が存在することを示す．
   \[
-    L_k(x) = \frac{x-x_1}{x_k-x_1}\frac{x-x_2}{x_k-x_2}\dotsm\frac{x-x_{k-1}}{x_k-x_{k-1}}\frac{x-x_{k+1}}{x_k-x_{k+1}}\dotsm\frac{x-x_{p+1}}{x_k-x_{p+1}}
+    l_k(x) = \frac{(x-x_1)(x-x_2)\dotsm(x-x_{k-1})(x-x_{k+1})\dotsm(x-x_{p+1})}{(x_k-x_1)(x_k-x_2)\dotsm(x_k-x_{k-1})(x_k-x_{k+1})\dotsm(x_k-x_{p+1})}
   \]
-  とおくと，\(L_k(x_i)=\kdelta{i}{k}\)だから\(P(x)=\sum_{k=1}^{p+1}y_kL_k(x)\)は条件を満たす．
+  とおくと\(l_k(x_i)=\kdelta{i}{k}\)だから，\(f(x)=\sum_{k=1}^{p+1}y_kl_k(x)\)は条件を満たす．
 
-  次に\(P(x)\)が一意であることを示す．多項式\(P_1(x)\)と\(P_2(x)\)はどちらも条件を満たすとする．
-  このとき，多項式\(D(x)=P_1(x)-P_2(x)\)は\(D(x_i)=y_i-y_i=0\)を満たすので，\(D(x)=Q(x)(x-x_1)\dotsm(x-x_{p+1})\)と因数分解できる．
-  \(D(x)\)の次数は最大でも\(p\)だから\(Q(x)=0\)，すなわち\(P_1(x)=P_2(x)\)である．
+  次に\(f(x)\)が一意であることを示す．多項式\(f_1(x)\)と\(f_2(x)\)はどちらも条件を満たすとする．
+  このとき，多項式\(\delta(x)=f_1(x)-f_2(x)\)は\(\delta(x_i)=y_i-y_i=0\)を満たすので，\(\delta(x)=q(x)(x-x_1)\dotsm(x-x_{p+1})\)と因数分解できる．
+  \(\delta(x)\)の次数は最大でも\(p\)だから\(q(x)=0\)，すなわち\(f_1(x)=f_2(x)\)である．
 \end{proof}
 
+\begin{wrapfigure}[8]{o}{0pt}
+  \includegraphics{figures/regression.pdf}
+\end{wrapfigure}
+
 \footnotetext{この多項式を\termdef{補間多項式}（interpolating polynomial）という．}
-実験で得られるデータは誤差を含むものだから，普通は標本を\(p+1\)個より多く測定し，平均的にもっともあてはまりがよい\(c_0,\dots,c_p\)の組を求める．
-あてはまりのよさを表現する指標はいろいろあるが，ここでは関数
+実験で得られるデータは誤差を含むものだから，普通は標本を\(p+1\)個より多く測定し，多項式関数\(f(\vect{c};x)=c_0+c_1x+\dots+c_px^p\)のあてはまりが平均的によくなる組\(\vect{c}=\trps{\rowvect{c_0 & \cdots & c_p}}\)を求める（図は標本と\(f(\vect{c};x)\)の一例である）．
+
+あてはまりのよさを表現する指標はいろいろ考えられるが，ここでは関数
 \[
-  \epsilon(c_0,\dots,c_p) = \frac{1}{n}\sum_{i=1}^n\abs*{y_i-\sum_{k=0}^pc_kx_i^k}^2
+  \epsilon(\vect{c}) = \frac{1}{n}\sum_{i=1}^n\abs*{y_i-f(\vect{c};x_i)}^2
 \]
 を採用する．
+
+\begin{note}
+  差の2乗であてはまりのよさを測るのが妥当かどうかは，データの性質や分析する目的にもよる．
+  しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash それ以前に，空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．
+  そのため，まずは差の2乗が使えないか考えてみるべきだろう．
+\end{note}
 
 \section{離散フーリエ変換}
 
