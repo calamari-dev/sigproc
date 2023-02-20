@@ -35,10 +35,10 @@
   \includegraphics{figures/proj2d.pdf}
 \end{wrapfigure}
 
-\(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
+\(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{m}-\vect{x}}\)を最小にする\(\vect{m}\in V\)について考えよう．
 
 \(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合，\(\vect{m}\)は図の位置にある．
-図を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
+図を見ると，\(\vect{m}-\vect{x}\)は\(\vect{v}\)と直交しているのが分かる．
 
 一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
@@ -646,7 +646,7 @@
 
 \footnotetext{\(\mat{Q}\trps{\mat{Q}}=\trps{\mat{Q}}\mat{Q}=\imat\)を満たす実正方行列\(\mat{Q}\)を\termdef{直交行列}（orthogonal matrix）という．}
 
-\subsection{回帰分析}
+\subsection{曲線あてはめ}
 
 ここまで説明した\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)に関する理論は，データを曲線にあてはめるとき威力を発揮する．
 
@@ -684,16 +684,41 @@
 実験で得られるデータは誤差を含むものだから，普通は標本を\(p+1\)個より多く測定し，多項式関数\(f(\vect{c};x)=c_0+c_1x+\dots+c_px^p\)のあてはまりが平均的によくなる係数\(\vect{c}=\trps{\rowvect{c_0 & \cdots & c_p}}\)を求める．
 図は\(p=2\)における標本と\(f(\vect{c};x)=f(c_0,c_1,c_2;x)\)の例である．
 
-あてはまりのよさを表現する指標はいろいろ考えられるが，ここでは関数
-\[
-  \epsilon(\vect{c}) = \frac{1}{n}\sum_{i=1}^n\abs*{y_i-f(\vect{c};x_i)}^2
-\]
-を採用する．
+あてはまりのよさを評価する指標はいろいろ考えられるが，ここでは関数
+\begin{equation}
+  \label{equation:mean_square}
+  \epsilon(\vect{c}) = \sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2
+\end{equation}
+を採用する．各\(f(\vect{c};x_i)\)の値が\(y_i\)の値に近いほど\(\epsilon(\vect{c})\)の値は小さくなるので，\(\epsilon(\vect{c})\)の値が小さいほど\(f(\vect{c};x)\)は標本によくあてはまっているといえる．
 
 \begin{note}
-  差の2乗であてはまりのよさを測るのが妥当かどうかは，データの性質や分析する目的にもよる．
-  しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash それ以前に，空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．まずは差の2乗が使えないか考えるべきだろう．
+  \cref{equation:mean_square}の指標を\termdef{残差平方和}\index{ざんさへいほうわ@残差平方和}\index{RSS|see{残差平方和}}（residual sum of squares; RSS）という．
+  RSSであてはまりのよさを測るのが妥当かどうかは，データの性質や分析する目的にもよる．
+  しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash 空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．まずはRSSが使えないか考えるべきだろう．
 \end{note}
+
+\(\vect{x}_i=\trps{\rowvect{1 & x_i & \cdots x_i^p}}\)，\(\mat{X}=\trps{\rowvect{\vect{x}_1 & \cdots & \vect{x}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{x}_i}\vect{c}\)だから
+\[
+  \epsilon(\vect{c}) = \vnorm*{\matrice*{\trps{\vect{x}_1} \\ \vdots \\ \trps{\vect{x}_n}}\vect{c}-\matrice*{y_1 \\ \vdots \\ y_n}}^2
+  = \vnorm{\mat{X}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots y_n}})
+\]
+である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど扱った方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{X}\vect{c}-\vect{y}}\)を計算すればよい．
+
+同じ考え方は，\(y\)が\(x\)の多項式でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\phi_1,\dots,\phi_p\)で写像した線型結合によって
+\begin{equation}
+  \label{equation:linear_combination_of_functions}
+  y = c_1\phi_1(x)+\dots+c_p\phi_p(x)\quad(c_1,\dots,c_p\in\numset{K})
+\end{equation}
+と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）の値を最小にする\(\vect{c}\in\numset{K}^p\)全体は，
+集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\mat{X}\vect{c}-\vect{y}}\)である．ただし，\(\mat{X}\)は\(n\times p\)行列
+\[
+  \mat{X} = \matfence{\phi_k(x_i)}
+  = \matrice*{\phi_1(x_1) & \cdots & \phi_p(x_1) \\ \vdots & \ddots & \vdots \\ \phi_1(x_n) & \cdots & \phi_p(x_n)}
+\]
+である．
+
+なお，ある\(\phi_k\)が他の\(\phi_1,\dots,\phi_p\)の線型結合で書ける場合，\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
+そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう選ばれる．
 
 \section{離散フーリエ変換}
 

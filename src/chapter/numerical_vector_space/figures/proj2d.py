@@ -16,12 +16,12 @@ m = np.array((x[0], 0))
 for p in (v, x, m):
     ax.add_artist(Vector2D((0, 0), p))
 
-ax.add_artist(Vector2D(m, x, ls="dashed", arrowstyle="->"))
+ax.add_artist(Vector2D(x, m, ls="dashed", arrowstyle="->"))
 
 ax.text(*v, r"$\vect{v}$", ha="left", va="center")
 ax.text(*x, r"$\vect{x}$", ha="right", va="bottom")
-ax.text(*(m + (0, 0.03)), r"$\,\vect{m}$", ha="left", va="bottom")
-ax.text(*((x + m) / 2), r"$\,\vect{x}-\vect{m}$", ha="left", va="center")
+ax.text(*(m + (0, 0.05)), r"$\vect{m}\,$", ha="right", va="bottom")
+ax.text(*((x + m) / 2), r"$\,\vect{m}-\vect{x}$", ha="left", va="center")
 
 ax.axis("square")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))
