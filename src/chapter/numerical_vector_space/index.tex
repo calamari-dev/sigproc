@@ -335,12 +335,12 @@
   また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_characterization}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
-\section{最小2乗問題}
+\section{最小2乗法}
 \label{section:least_square}
 
 本節では，直交射影の理論を近似へと応用する．
 
-\subsection{最小2乗問題}
+\subsection{最小2乗法}
 
 いまから考えるのは，変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)に関する連立1次方程式
 \begin{equation}
@@ -352,7 +352,7 @@
 
 \(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{b}\)次第である．
 そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
-次の命題から，\(\vnorm{\vect{\epsilon}(\vect{x})}\)の値を最小にする\(\vect{x}\)は常に存在する．
+この手法を\termdef{最小2乗法}\index{さいしょうにじょうほう@最小2乗法}（least squares method）という．次の命題から，所望の\(\vect{x}\)は常に存在する．
 
 \begin{proposition}{}{least_square_existence}
   \(\vect{b}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)）は空でない．
@@ -648,7 +648,7 @@
 
 \subsection{曲線あてはめ}
 
-ここまで説明した\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)に関する理論は，データを曲線にあてはめるとき威力を発揮する．
+ここまで説明した最小2乗法の理論は，データを曲線にあてはめるとき威力を発揮する．
 
 変数\(x\)と変数\(y\)の間には，多項式で表される関係\(y=c_0+c_1x+\dots+c_px^p\)があると仮定する．
 次数\(p\)は既知であり，各\(x^k\)の係数\(c_k\)を\(y\)の観測値から推定したい．
@@ -697,28 +697,47 @@
   しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash 空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．まずはRSSが使えないか考えるべきだろう．
 \end{note}
 
-\(\vect{x}_i=\trps{\rowvect{1 & x_i & \cdots x_i^p}}\)，\(\mat{X}=\trps{\rowvect{\vect{x}_1 & \cdots & \vect{x}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{x}_i}\vect{c}\)だから
+\(\vect{x}_i=\trps{\rowvect{x_i^0 & \cdots & x_i^p}}\)，\(\mat{X}=\trps{\rowvect{\vect{x}_1 & \cdots & \vect{x}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{x}_i}\vect{c}\)だから
 \[
   \epsilon(\vect{c}) = \vnorm*{\matrice*{\trps{\vect{x}_1} \\ \vdots \\ \trps{\vect{x}_n}}\vect{c}-\matrice*{y_1 \\ \vdots \\ y_n}}^2
-  = \vnorm{\mat{X}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots y_n}})
+  = \vnorm{\mat{X}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_n}})
 \]
-である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど扱った方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{X}\vect{c}-\vect{y}}\)を計算すればよい．
+である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど示した方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{X}\vect{c}-\vect{y}}\)を計算すればよい．
 
-同じ考え方は，\(y\)が\(x\)の多項式でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\phi_1,\dots,\phi_p\)で写像した線型結合によって
+同じ考え方は，\(y\)が\(x\)の多項式関数でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\phi_1,\dots,\phi_p\)で写像した線型結合によって
 \begin{equation}
   \label{equation:linear_combination_of_functions}
   y = c_1\phi_1(x)+\dots+c_p\phi_p(x)\quad(c_1,\dots,c_p\in\numset{K})
 \end{equation}
-と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）の値を最小にする\(\vect{c}\in\numset{K}^p\)全体は，
+と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，
 集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\mat{X}\vect{c}-\vect{y}}\)である．ただし，\(\mat{X}\)は\(n\times p\)行列
 \[
-  \mat{X} = \matfence{\phi_k(x_i)}
+  \mat{X} = \matfence{\phi_i(x_j)}
   = \matrice*{\phi_1(x_1) & \cdots & \phi_p(x_1) \\ \vdots & \ddots & \vdots \\ \phi_1(x_n) & \cdots & \phi_p(x_n)}
 \]
 である．
 
 なお，ある\(\phi_k\)が他の\(\phi_1,\dots,\phi_p\)の線型結合で書ける場合，\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
 そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう選ばれる．
+
+\subsection{主成分分析}
+
+最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
+
+変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\index{じげんさくげん@次元削減}
+\footnote{\(p\)の値が非常に大きいこと．次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}だとその特徴が分かりにくいことがある．
+主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/scatter.pdf}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/pca.pdf}
+  \end{minipage}
+\end{figure}
 
 \section{離散フーリエ変換}
 
@@ -1008,19 +1027,6 @@
 \end{figure}
 
 \section{多重解像度解析}
-
-\section{主成分分析}
-
-\begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/scatter.pdf}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/pca.pdf}
-  \end{minipage}
-\end{figure}
 
 \section{補遺}
 
