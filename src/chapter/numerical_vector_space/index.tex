@@ -17,7 +17,7 @@
 
 音声信号処理は前者の主要な例である．音声信号を計算機で処理するには，時々刻々と値が変わる信号を有限長のデータで表現しなければならない．
 たとえば，CDでは音声信号の瞬時値を1秒あたり44100個記録している．すなわち，時刻\(t\)秒における瞬時値を\(x(t)\)，収録時間を\(T\)秒とおくと，CDには数列\(\seq{x(n/44100)}_{n=0}^{44100T-1}\)が記録されている．
-そこで，収録されたデータを\(\numset{R}^{44100T}\)の元とみなせば，\(\numset{R}^n\)に関する理論に基づいて音声を解析できる．
+そこで，収録されたデータを\(\numset{K}^{44100T}\)の元とみなせば，\(\numset{K}^n\)に関する理論に基づいて音声を解析できる．
 
 後者の主要な例は最小2乗法である．実験で得られた標本を理論と見比べるとき，理論から得られる式へのあてはめ（回帰）がしばしば試される．
 あてはまりのよさを示す指標はいろいろあるが，最もポピュラーなのは2乗誤差を指標にする最小2乗法である．本書ではこの最小2乗法を，内積と関連づけ幾何的に説明する．
@@ -602,7 +602,7 @@
 このような集合をアフィン部分空間という．
 
 \begin{definition}{アフィン部分空間}{affine_subspace}\index{あふぃんぶぶんくうかん@アフィン部分空間}\index{ぶぶんくうかん@部分空間!あふぃん@アフィン\texttwoemdash}
-  \(S\)をベクトル空間\(V\)の部分集合とする．ある\(\vect{a}\in S\)に対して集合\(W=\Set{\vect{x}-\vect{a}\given x\in S}\)が\(V\)の部分ベクトル空間であるとき，
+  \(S\)をベクトル空間\(V\)の部分集合とする．ある\(\vect{a}\in S\)に対して集合\(W=\Set{\vect{x}-\vect{a}\given\vect{x}\in S}\)が\(V\)の部分ベクトル空間であるとき，
   \(S\)は\(V\)の\termdef{アフィン部分空間}（affine subspace）であるという．このとき\(S\)を\(S=\vect{a}+W\)と表す．
 \end{definition}
 
@@ -680,7 +680,7 @@
 \footnotetext{この多項式を\termdef{補間多項式}（interpolating polynomial）という．}
 実験で得られるデータは誤差を含むものだから，普通は標本数\(n\)を\(p+1\)より十分に大きくとり，
 多項式関数\(f(\vect{c};x)=\sum_{k=0}^pc_kx^k\)のあてはまりが平均的によくなる係数\(\vect{c}=\trps{\rowvect{c_0 & \cdots & c_p}}\)を求める．
-図は\(p=2\)における標本と\(f(\vect{c};x)=f(c_0,c_1,c_2;x)\)の例である．
+図は\(p=2\)における標本と\(f(\vect{c};x)=c_0+c_1x+c_2x^2\)の例である．
 
 あてはまりのよさを評価する指標はいろいろ考えられるが，ここでは関数
 \begin{equation}
@@ -794,7 +794,7 @@
 \end{wrapfigure}
 
 \cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音 Ver1.5.1を使用した．}．
-\cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{R}^N\)と見なせる．
+\cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
 そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
 つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
 \[
