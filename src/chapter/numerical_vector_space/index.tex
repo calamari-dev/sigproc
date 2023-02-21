@@ -726,7 +726,7 @@
 ただし，\(\mat{\Phi}\)は\(n\times p\)行列\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}(x_1) & \cdots & \vect{\phi}(x_n)}}\)である．
 
 なお，\(\phi_1,\dots,\phi_p\)が線型従属だと\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
-そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう選ばれる．
+そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう設計される．
 
 \section{離散フーリエ変換}
 
@@ -735,12 +735,11 @@
 \subsection{離散フーリエ変換}
 
 \begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\)}
-  各\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)に対して，\(\numset{C}^N\)の元
   \[
-    \vect{\hat{x}} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
+    \dft{N}\vect{x} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
     \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
   \]
-  を対応づける線型写像\(\dft{N}\colon\numset{C}^N\to\numset{C}^N\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
+  で定義される線型写像\(\dft{N}\colon\numset{C}^N\to\numset{C}^N\)を\termdef{離散フーリエ変換}（Discrete Fourier transform; DFT）という．
 \end{definition}
 
 以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を単に\(\zeta\)と書く．
@@ -794,7 +793,7 @@
   \includegraphics{figures/helix.pdf}
 \end{wrapfigure}
 
-\cref{figure:time_domain}は「あ」という音声の波形である\footnote{出典は波音リツ単独音 Ver1.5.1 \cite{canon}．}．
+\cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音 Ver1.5.1を使用した．}．
 \cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{R}^N\)と見なせる．
 そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
 つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
@@ -814,7 +813,7 @@
 \end{figure}
 
 \cref{figure:frequency_domain}を見ると，\SI{350}{Hz}周辺に1つめのピークが現れている．これは\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
-人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．ピッチと基本周波数は多くの場合対応するが，同一視できないケースも存在する．詳しくは柏野\cite{kashino}など．}．
+人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．基本周波数とピッチはしばしば同一視されるが，厳密には定義からして異なる量である．詳しくは柏野\cite{kashino}など．}．
 
 また，\cref{figure:frequency_domain}の破線部\(\hat{h}_k\)は，基本周波数に起因する細かな変動を\(\abs{\hat{x}_k}\)から除いた曲線である．
 この曲線は\termdef{スペクトル包絡}\index{すぺくとるほうらく@スペクトル包絡}（spectral envelope）といい，音声の音色とよく対応する．
@@ -1015,23 +1014,6 @@
 
 \section{多重解像度解析}
 
-\section{演習問題}
-
-\begin{enumerate}
-  \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
-  \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
-    \begin{gather*}
-      \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
-      \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
-      \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
-      \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
-    \end{gather*}
-  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する
-    （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
-    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
-    \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
-\end{enumerate}
-
 \section{補遺}
 
 \subsection{スペクトル定理の証明}
@@ -1088,9 +1070,8 @@
 
 最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
 
-変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\index{じげんさくげん@次元削減}
-\footnote{\(p\)の値が非常に大きいこと．次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}だとその特徴が分かりにくいことがある．
-主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
+変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\footnote{\(p\)の値が非常に大きいこと．}だとその特徴が分かりにくいことがある．
+主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らす\index{じげんさくげん@次元削減}\footnote{次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}ことである．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1102,5 +1083,22 @@
     \includegraphics{figures/pca.pdf}
   \end{minipage}
 \end{figure}
+
+\section{演習問題}
+
+\begin{enumerate}
+  \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
+  \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
+    \begin{gather*}
+      \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
+      \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
+      \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
+      \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
+    \end{gather*}
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する
+    （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
+    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
+    \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
+\end{enumerate}
 
 \end{document}
