@@ -64,7 +64,7 @@
   \includegraphics{figures/argmin.pdf}
 \end{wrapfigure}
 
-図は\(\napr^{-x}\)と\(\abs{\sin x}\)のグラフである．\(\napr^{-x}\to 0\)（\(x\to\infty\)）であるが，\(\napr^{-x}=0\)となる実数\(x\)は存在しない．そのため
+図は\(\napr^{-x}\)と\(\abs{\sin x}\)のグラフである．\(\napr^{-x}\to 0\)（\(x\to\infty\)）であるが，\(\napr^{-x}=0\)となる実数\(x\)は存在しない．そのため\indexsymbol{\(\emptyset\)}
 \begin{gather*}
   \argmin_{x\in\coival{0}{+\infty}}\napr^{-x} = \emptyset\quad\text{(空集合)}, \\
   \argmin_{x\in\coival{0}{+\infty}}\abs{\sin x} = \Set{0,\krez,2\krez,\dotsc}
@@ -88,11 +88,12 @@
 
 \begin{proof}
   本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
-  このとき\(V=\Set{\sum z_i\vect{e}_i\given z_1,\dots,z_m\in\numset{C}}\)なので，\(\vect{\epsilon}(z_1,\dots,z_m)=(\sum z_i\vect{e}_i)-\vect{x}\)とおくと
+  \(\vect{\epsilon}(z_1,\dots,z_m)=(\sum z_i\vect{e}_i)-\vect{x}\)とおくと
   \[
-    \argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}} = \Set*{\sum z_i\vect{e}_i\given\trps{\matrice{z_1 & \cdots & z_m}}\in\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}}
+    \sum z_i\vect{e}_i \in \argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}
+    \iff \trps{\matrice{z_1 & \cdots & z_m}} \in \argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}
   \]
-  である．
+  である．また\(V=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)なので，\(V\)の元はすべて\(\sum z_i\vect{e}_i\)と表せる．
 
   \(\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
@@ -601,8 +602,8 @@
 このような集合をアフィン部分空間という．
 
 \begin{definition}{アフィン部分空間}{affine_subspace}\index{あふぃんぶぶんくうかん@アフィン部分空間}\index{ぶぶんくうかん@部分空間!あふぃん@アフィン\texttwoemdash}
-  \(S\)をベクトル空間\(V\)の部分集合とする．ある\(a\in S\)に対して集合\(W=\Set{x-a\given x\in S}\)が\(V\)の部分ベクトル空間であるとき，
-  \(S\)は\(V\)の\termdef{アフィン部分空間}（affine subspace）であるという．このとき\(S\)を\(S=a+W\)と表す．
+  \(S\)をベクトル空間\(V\)の部分集合とする．ある\(\vect{a}\in S\)に対して集合\(W=\Set{\vect{x}-\vect{a}\given x\in S}\)が\(V\)の部分ベクトル空間であるとき，
+  \(S\)は\(V\)の\termdef{アフィン部分空間}（affine subspace）であるという．このとき\(S\)を\(S=\vect{a}+W\)と表す．
 \end{definition}
 
 \begin{figure}[htbp]
@@ -612,12 +613,7 @@
 \end{figure}
 
 任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
-実際，\(\vect{a}\in S\)を1つ選び\(S=\vect{a}+W\)とおくと
-\[
-  \argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}} = \argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{y}-\vect{a})-(\vect{x}-\vect{a})}
-  = \Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}
-\]
-である．
+実際，\(S=\vect{a}+W\)（\(\vect{a}\in S\)）とおくと\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}=\argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{y}-\vect{a})-(\vect{x}-\vect{a})}=\Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}\)である．
 
 よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\vect{a}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．
 
@@ -660,16 +656,17 @@
 次の定理から，\(c_0,\dots,c_p\)を決定するには最低限\(p+1\)個の標本があればよい．
 
 \begin{theorem}{}{}\index{ほかんたこうしき@補間多項式}
-  点列\(\trps{\rowvect{x_1 & y_1}},\dots,\trps{\rowvect{x_{p+1} & y_{p+1}}}\in\numset{K}^2\)は，相異なる任意の\(i,j\in\Set{1,\dots,p+1}\)に対して\(x_i\neq x_j\)を満たすとする．
-  このとき，すべての\(i\)で\(y_i=f(x_i)\)を満たす，次数が\(p\)以下の\(\numset{K}\)係数多項式\(f(x)\)がただ一つ存在する\footnotemark ．
+  点列\((x_1,y_1),\dots,(x_{p+1},y_{p+1})\in\numset{K}^2\)は，相異なる任意の\(i,j\in\Set{1,\dots,p+1}\)に対して\(x_i\neq x_j\)を満たすとする．
+  このとき，すべての\(i\)で\(f(x_i)=y_i\)を満たす，次数が\(p\)以下の\(\numset{K}\)係数多項式\(f(x)\)がただ一つ存在する\footnotemark ．
 \end{theorem}
 
 \begin{proof}
   まず\(f(x)\)が存在することを示す．
   \[
-    l_k(x) = \frac{(x-x_1)(x-x_2)\dotsm(x-x_{k-1})(x-x_{k+1})\dotsm(x-x_{p+1})}{(x_k-x_1)(x_k-x_2)\dotsm(x_k-x_{k-1})(x_k-x_{k+1})\dotsm(x_k-x_{p+1})}
+    l_k(x) = (x-x_1)(x-x_2)\dotsm(x-x_{k-1})(x-x_{k+1})\dotsm(x-x_{p+1})
   \]
-  とおくと\(l_k(x_i)=\kdelta{i}{k}\)だから，\(f(x)=\sum_{k=1}^{p+1}y_kl_k(x)\)は条件を満たす．
+  とおくと\(l_k(x_k)\neq 0\)，\(l_k(x_i)=0\)（\(i\neq k\)）より\(l_k(x_i)/l_k(x_k)=\kdelta{k}{i}\)である．
+  よって，\(f(x)=\sum_{k=1}^{p+1}y_kl_k(x)/l_k(x_k)\)は条件を満たす\(\numset{K}\)係数多項式である．
 
   次に\(f(x)\)が一意であることを示す．多項式\(f_1(x)\)と\(f_2(x)\)はどちらも条件を満たすとする．
   このとき，多項式\(\delta(x)=f_1(x)-f_2(x)\)は\(\delta(x_i)=y_i-y_i=0\)を満たすので，\(\delta(x)=q(x)(x-x_1)\dotsm(x-x_{p+1})\)と因数分解できる．
@@ -681,7 +678,8 @@
 \end{wrapfigure}
 
 \footnotetext{この多項式を\termdef{補間多項式}（interpolating polynomial）という．}
-実験で得られるデータは誤差を含むものだから，普通は標本を\(p+1\)個より多く測定し，多項式関数\(f(\vect{c};x)=c_0+c_1x+\dots+c_px^p\)のあてはまりが平均的によくなる係数\(\vect{c}=\trps{\rowvect{c_0 & \cdots & c_p}}\)を求める．
+実験で得られるデータは誤差を含むものだから，普通は標本数\(n\)を\(p+1\)より十分に大きくとり，
+多項式関数\(f(\vect{c};x)=\sum_{k=0}^pc_kx^k\)のあてはまりが平均的によくなる係数\(\vect{c}=\trps{\rowvect{c_0 & \cdots & c_p}}\)を求める．
 図は\(p=2\)における標本と\(f(\vect{c};x)=f(c_0,c_1,c_2;x)\)の例である．
 
 あてはまりのよさを評価する指標はいろいろ考えられるが，ここでは関数
@@ -697,47 +695,38 @@
   しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash 空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．まずはRSSが使えないか考えるべきだろう．
 \end{note}
 
-\(\vect{x}_i=\trps{\rowvect{x_i^0 & \cdots & x_i^p}}\)，\(\mat{X}=\trps{\rowvect{\vect{x}_1 & \cdots & \vect{x}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{x}_i}\vect{c}\)だから
+\(\vect{\phi}_i=\trps{\rowvect{x_i^0 & \cdots & x_i^p}}\)，\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}_1 & \cdots & \vect{\phi}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{\phi}_i}\vect{c}\)だから
 \[
-  \epsilon(\vect{c}) = \vnorm*{\matrice*{\trps{\vect{x}_1} \\ \vdots \\ \trps{\vect{x}_n}}\vect{c}-\matrice*{y_1 \\ \vdots \\ y_n}}^2
-  = \vnorm{\mat{X}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_n}})
+  \epsilon(\vect{c}) = \vnorm*{\matrice*{\trps{\vect{\phi}_1} \\ \vdots \\ \trps{\vect{\phi}_n}}\vect{c}-\matrice*{y_1 \\ \vdots \\ y_n}}^2
+  = \vnorm{\mat{\Phi}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_n}})
 \]
-である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど示した方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{X}\vect{c}-\vect{y}}\)を計算すればよい．
+である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど示した方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{\Phi}\vect{c}-\vect{y}}\)を計算すればよい．
 
-同じ考え方は，\(y\)が\(x\)の多項式関数でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\phi_1,\dots,\phi_p\)で写像した線型結合によって
-\begin{equation}
-  \label{equation:linear_combination_of_functions}
-  y = c_1\phi_1(x)+\dots+c_p\phi_p(x)\quad(c_1,\dots,c_p\in\numset{K})
-\end{equation}
-と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，
-集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\mat{X}\vect{c}-\vect{y}}\)である．ただし，\(\mat{X}\)は\(n\times p\)行列
-\[
-  \mat{X} = \matfence{\phi_i(x_j)}
-  = \matrice*{\phi_1(x_1) & \cdots & \phi_p(x_1) \\ \vdots & \ddots & \vdots \\ \phi_1(x_n) & \cdots & \phi_p(x_n)}
-\]
-である．
-
-なお，ある\(\phi_k\)が他の\(\phi_1,\dots,\phi_p\)の線型結合で書ける場合，\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
-そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう選ばれる．
-
-\subsection{主成分分析}
-
-最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
-
-変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\index{じげんさくげん@次元削減}
-\footnote{\(p\)の値が非常に大きいこと．次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}だとその特徴が分かりにくいことがある．
-主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
+\begin{example}
+  \label{example:linear_regression}
+  \(p=1\)，\(n=3\)，\((x_1,y_1)=(1,0)\)，\((x_2,y_2)=(2,3)\)，\((x_3,y_3)=(3,1)\)とする．
+  \(\mat{\Phi}=\trps{\smallmatrice{1 & 1 & 1 \\ 1 & 2 & 3}}\)とおくと，方程式\(\mat{\Phi}\vect{c}=\vect{y}\)（\(\vect{y}=\trps{\rowvect{0 & 3 & 1}}\)）に関する正規方程式は
+  \(\trps{\mat{\Phi}}\mat{\Phi}\vect{c}=\trps{\mat{\Phi}}\vect{y}\)，\(\smallmatrice{3 & 6 \\ 6 & 14}\vect{c}=\smallmatrice{4 \\ 9}\)である．
+  この解は\(\vect{c}=\smallmatrice{1/3 \\ 1/2}\)なので，\(f(\vect{c};x)=1/3+(1/2)x\)のとき\(f(\vect{c};x)\)は標本に最もよくあてはまる．
+\end{example}
 
 \begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/scatter.pdf}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/pca.pdf}
-  \end{minipage}
+  \centering
+  \includegraphics{figures/linear_regression.pdf}
+  \caption{\cref{example:linear_regression}の標本と\(f(\vect{c};x)\)の様子．\(\epsilon(\vect{c})\)は破線の長さの平方和である．}
 \end{figure}
+
+同じ考え方は，\(y\)が\(x\)の多項式関数でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\vect{\phi}(x)=\trps{\rowvect{\phi_1(x) & \cdots & \phi_p(x)}}\)で写像した線型結合によって
+\begin{equation}
+  \label{equation:linear_combination_of_functions}
+  y = c_1\phi_1(x)+\dots+c_p\phi_p(x)
+  = \trps{\vect{c}}\vect{\phi}(x)
+\end{equation}
+と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\mat{\Phi}\vect{c}-\vect{y}}\)である．
+ただし，\(\mat{\Phi}\)は\(n\times p\)行列\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}(x_1) & \cdots & \vect{\phi}(x_n)}}\)である．
+
+なお，\(\phi_1,\dots,\phi_p\)が線型従属だと\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
+そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう選ばれる．
 
 \section{離散フーリエ変換}
 
@@ -800,8 +789,6 @@
   \caption{「あ」の波形．}
   \label{figure:time_domain}
 \end{figure}
-
-\pagebreak
 
 \begin{wrapfigure}[10]{o}{0pt}
   \includegraphics{figures/helix.pdf}
@@ -1028,6 +1015,23 @@
 
 \section{多重解像度解析}
 
+\section{演習問題}
+
+\begin{enumerate}
+  \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
+  \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
+    \begin{gather*}
+      \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
+      \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
+      \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
+      \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
+    \end{gather*}
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する
+    （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
+    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
+    \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
+\end{enumerate}
+
 \section{補遺}
 
 \subsection{スペクトル定理の証明}
@@ -1080,21 +1084,23 @@
   つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
 \end{proof}
 
-\section{演習問題}
+\subsection{主成分分析}
 
-\begin{enumerate}
-  \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
-  \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
-    \begin{gather*}
-      \proj_{\nulsp\mat{A}}\vect{x} = (\imat-\pinv{\mat{A}}\mat{A})\vect{x},
-      \quad\proj_{\pcomp{(\nulsp\mat{A})}}\vect{x} = \pinv{\mat{A}}\mat{A}\vect{x}, \\
-      \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
-      \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
-    \end{gather*}
-  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する
-    （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
-    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
-    \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
-\end{enumerate}
+最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
+
+変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\index{じげんさくげん@次元削減}
+\footnote{\(p\)の値が非常に大きいこと．次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}だとその特徴が分かりにくいことがある．
+主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/scatter.pdf}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/pca.pdf}
+  \end{minipage}
+\end{figure}
 
 \end{document}
