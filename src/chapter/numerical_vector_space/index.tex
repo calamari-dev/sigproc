@@ -87,46 +87,32 @@
 \end{proposition}
 
 \begin{proof}
-  本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とする．
-  \(\vect{\epsilon}(z_1,\dots,z_m)=(\sum z_i\vect{e}_i)-\vect{x}\)とおくと
-  \[
-    \sum z_i\vect{e}_i \in \argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}
-    \iff \trps{\matrice{z_1 & \cdots & z_m}} \in \argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}
-  \]
-  である．また\(V=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)なので，\(V\)の元はすべて\(\sum z_i\vect{e}_i\)と表せる．
-
-  \(\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}\)を求める．\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
+  本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．
+  任意に\(\vect{y}\in V\)をとる．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，\(\vect{y}\)は\(\basis{B}\)の元の線型結合で\(\vect{y}=\sum z_i\vect{e}_i\)と書ける．
+  また\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
     \vnorm*{\sum z_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
     = \sum_{i=1}^mz_i\sum_{j=1}^m\conj{z}_j\innerp{\vect{e}_i}{\vect{e}_j}
     = \sum z_i\conj{z}_i
     = \sum\abs{z_i}^2
   \]
-  である．したがって，\cref{lemma:binomial_square}から
+  である．よって，\cref{lemma:binomial_square}より\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと
   \begin{align*}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm*{\pqty*{\sum z_i\vect{e}_i}-\vect{x}}^2
+    \vnorm{\vect{y}-\vect{x}}^2 &= \vnorm*{\pqty*{\sum z_i\vect{e}_i}-\vect{x}}^2
     = \vnorm*{\sum z_i\vect{e}_i}^2-2\rpart\innerp*{\sum z_i\vect{e}_i}{\vect{x}}+\vnorm{\vect{x}}^2 \\
-    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart\innerp{z_i\vect{e}_i}{\vect{x}})
+    &= \sum(\abs{z_i}^2-2\rpart(z_i\conj*{\innerp{\vect{x}}{\vect{e}_i}}))+\vnorm{\vect{x}}^2 \\
+    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2\rpart((s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}})) \\
+    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2(s_i\rpart\innerp{\vect{x}}{\vect{e}_i}+t_i\ipart\innerp{\vect{x}}{\vect{e}_i})) \\
+    &= \vnorm{\vect{x}}^2+\sum((s_i-\rpart\innerp{\vect{x}}{\vect{e}_i})^2+(t_i-\ipart\innerp{\vect{x}}{\vect{e}_i})^2-\abs{\innerp{\vect{x}}{\vect{e}_i}}^2)
   \end{align*}
-  である．よって，\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと，\(\innerp{z_i\vect{e}_i}{\vect{x}}=z_i\conj*{\innerp{\vect{x}}{\vect{e}_i}}\)より
-  \begin{align*}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2\rpart((s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}})) \\
-    &= \vnorm{\vect{x}}^2+\sum(s_k^2+t_k^2-2(s_k\rpart\innerp{\vect{x}}{\vect{e}_k}+t_k\ipart\innerp{\vect{x}}{\vect{e}_k})) \\
-    &= \vnorm{\vect{x}}^2+\sum((s_k-\rpart\innerp{\vect{x}}{\vect{e}_k})^2+(t_k-\ipart\innerp{\vect{x}}{\vect{e}_k})^2-\abs{\innerp{\vect{x}}{\vect{e}_k}}^2)
-  \end{align*}
-  と書けるので，次式が成立する．
+  なので，次式が成立する．
   \begin{equation}
     \label{equation:pre_bessels_inequality}
-    \vnorm{\vect{\epsilon}(\vect{z})}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
+    \vnorm{\vect{y}-\vect{x}}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
   \end{equation}
 
-  \cref{equation:pre_bessels_inequality}より\(\argmin_{\vect{z}\in\numset{C}^m}\vnorm{\vect{\epsilon}(\vect{z})}=\Set{\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_m}}}}\)であるから，
-  \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
+  右辺の値が最も小さくなるのは\(z_i=\innerp{\vect{x}}{\vect{e}_i}\)のときであり，そのとき\(\vect{y}=\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)だから\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
 \end{proof}
-
-\begin{note}
-  \cref{proposition:finite_convex_projection}は部分空間よりも少し広い対象（閉凸集合）へと一般化できるのだが，そのことは\cref{xr-chapter:hilbert_space}であらためて扱う．  
-\end{note}
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
@@ -140,9 +126,6 @@
   よって\(\vnorm{\vect{y}-\vect{x}}\geq\vnorm{\vect{m}-\vect{x}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
 \end{proof}
 
-\cref{proposition:weak_finite_projection}からは，仮定「任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)」を満たす\(\vect{m}\in V\)が存在するかどうかは分からない．
-しかし実は，仮定を満たす\(\vect{m}\)は一意に存在し，それは\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)のただ一つの元である．
-
 \begin{proposition}{}{finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ一つ存在する．
@@ -154,8 +137,7 @@
 
 \begin{proof}
   \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)を満たす\(\vect{n}\)がただ一つ存在する．
-  そして\cref{proposition:weak_finite_projection}より，\(\vect{m}\in V\)が任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
-
+  そして\cref{proposition:weak_finite_projection}より，\(V\)の元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
   したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
   \(\vect{n}\)の定義から，関数\(\delta(z)=\vnorm{(\vect{n}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{n}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
@@ -178,10 +160,9 @@
   \caption{\(\vect{x}\)の\(V=\spannedby\Set{\vect{v}_1,\vect{v}_2}\)への直交射影\(\vect{m}=\proj_V\vect{x}\)の模式図．}
 \end{figure}
 
-\begin{example}[\(xy\)平面への直交射影]
-  \(\vect{e}_x=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{e}_y=\trps{\rowvect{0 & 1 & 0}}\)とし，
-  \(\numset{R}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{e}_x,\vect{e}_y}\)で定義する．
-  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\in\numset{R}^3\)）である．
+\begin{example}
+  \(\numset{R}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{e}_x,\vect{e}_y}\)（\(\vect{e}_x=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{e}_y=\trps{\rowvect{0 & 1 & 0}}\)）で定義する．
+  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\)）である．
 \end{example}
 
 \begin{proposition}{}{}
@@ -189,25 +170,23 @@
 \end{proposition}
 
 \begin{proof}
-  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{z}=s\vect{x}+t\vect{y}\)，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)とおく．
-  このとき，任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので，
-  \(\proj_V\vect{z}=\vect{m}\)である．よって，\(\proj_V\)は線型写像である．
+  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)，\(\vect{z}=s\vect{x}+t\vect{y}\)とおく．
+  このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
 \end{proof}
-
-\subsection{直交補空間}
 
 \begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp{V}\)}\indexsymbol{\(\pcomp[V]{W}\)}
   \(V\)を\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
   \[
-    \pcomp[V]{W} = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
+    \pcomp{W} = \pcomp[V]{W}
+    = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
   \]
-  も\(V\)の部分空間になる．\(\pcomp[V]{W}\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）という．誤解のおそれがなければ，\(\pcomp[V]{W}\)を\(\pcomp{W}\)とも書く．
+  も\(V\)の部分空間になる．\(\pcomp{W}\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）という．
 \end{definition}
 
 \begin{example}
   \(W=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
-  このとき，\(\numset{R}^3\)における\(W\)の直交補空間は，\(\vect{e}_1\)と\(\vect{e}_2\)に直交する\(\zvec\)でないベクトル\(\vect{e}_3\)で生成される直線\(\spannedby\Set{\vect{e}_3}\)である．
-  特に\(\vect{e}_1\)と\(\vect{e}_2\)が直交するとき，集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
+  このとき，\(\pcomp{W}\)は\(\vect{e}_1\)と\(\vect{e}_2\)に直交し\(\zvec\)でないベクトル\(\vect{e}_3\)が生成する直線\(\spannedby\Set{\vect{e}_3}\)である．
+  \(\innerp{\vect{e}_1}{\vect{e}_2}=0\)なら，集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -221,9 +200,8 @@
 \end{proposition}
 
 \begin{proof}
-  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)なので\(\vect{x}=\zvec\)，よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
-  また\cref{proposition:finite_projection}より，任意の\(\vect{x}\in V\)に対して\(\vect{x}-\proj_W\vect{x}\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W\vect{x})\in W+\pcomp{W}\)である．
-  したがって\(V=W\oplus\pcomp{W}\)である．
+  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)，\(\vect{x}=\zvec\)である．よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
+  また，任意の\(\vect{x}\in W\)に対して\(\vect{x}-\proj_W\vect{x}\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W\vect{x})\in W+\pcomp{W}\)である．よって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
 
 \subsection{分析と合成}
@@ -234,11 +212,10 @@
 そのような場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
-  \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す\footnotemark ．
+  \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい\footnotemark ，\(\htrps{\mat{A}}\)と表す．
 \end{definition}
 
-\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多いが，別の行列を随伴行列と呼ぶ流儀もあり，まぎらわしい．そのため，本書ではエルミート転置で統一する．}
-
+\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．}
 \(\mat{U}=\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
@@ -255,8 +232,7 @@
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．言い換えれば，\(\proj_{V_m}\)は\(\numset{C}^n\)から\(\numset{C}^n\)への3つの線型写像
-\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて，\(\proj_{V_m}=\synth{T}DT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線型写像\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
@@ -282,16 +258,15 @@
 \cref{equation:analysis_and_synthesis}より，合成作用素は分析作用素の逆写像である．
 また，分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
 
-\begin{definition}{}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}\index{えるみーとぎょうれつ@エルミート行列}\index{ぎょうれつ@行列!えるみーと@エルミート\texttwoemdash}
+\begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
   \begin{enumerate}
     \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}\)であるとき，\(\mat{A}\)を\termdef{正規行列}（normal matrix）という．
     \item \(\htrps{\mat{A}}\mat{A}=\mat{A}\htrps{\mat{A}}=\imat\)（つまり\(\htrps{\mat{A}}=\mat{A}^{-1}\)）であるとき，\(\mat{A}\)を\termdef{ユニタリ行列}（unitary matrix）という．
-    \item \(\htrps{\mat{A}}=\mat{A}\)であるとき，\(\mat{A}\)を\termdef{エルミート行列}（Hermitian matrix）という．
   \end{enumerate}
 \end{definition}
 
-正規行列とユニタリ行列の関係については\cref{section:least_square}で詳述することにして，ここでは次の命題を示す．
+正規行列については\cref{section:least_square}で詳述するとして，ここでは次の命題を示す．
 
 \begin{proposition}{ユニタリ行列の特徴づけ}{unitary_matrix_characterization}
   \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)を\(n\)次複素正方行列とする．このとき，\(\mat{U}\)に関する以下の条件は同値である．
