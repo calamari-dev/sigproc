@@ -98,10 +98,10 @@
   \]
   である．よって，\cref{lemma:binomial_square}より\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと
   \begin{align*}
-    \vnorm{\vect{y}-\vect{x}}^2 &= \vnorm*{\pqty*{\sum z_i\vect{e}_i}-\vect{x}}^2
-    = \vnorm*{\sum z_i\vect{e}_i}^2-2\rpart\innerp*{\sum z_i\vect{e}_i}{\vect{x}}+\vnorm{\vect{x}}^2 \\
-    &= \sum(\abs{z_i}^2-2\rpart(z_i\conj*{\innerp{\vect{x}}{\vect{e}_i}}))+\vnorm{\vect{x}}^2 \\
-    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2\rpart((s_i+\iuni t_i)\conj*{\innerp{\vect{x}}{\vect{e}_i}})) \\
+    \vnorm{\vect{y}-\vect{x}}^2 &= \vnorm*{\vect{x}-\sum z_i\vect{e}_i}^2
+    = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_i\vect{e}_i}+\vnorm*{\sum z_i\vect{e}_i}^2 \\
+    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart(\conj{z}_i\innerp{\vect{x}}{\vect{e}_i})) \\
+    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2\rpart((s_i-\iuni t_i)\innerp{\vect{x}}{\vect{e}_i})) \\
     &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2(s_i\rpart\innerp{\vect{x}}{\vect{e}_i}+t_i\ipart\innerp{\vect{x}}{\vect{e}_i})) \\
     &= \vnorm{\vect{x}}^2+\sum((s_i-\rpart\innerp{\vect{x}}{\vect{e}_i})^2+(t_i-\ipart\innerp{\vect{x}}{\vect{e}_i})^2-\abs{\innerp{\vect{x}}{\vect{e}_i}}^2)
   \end{align*}
@@ -111,7 +111,8 @@
     \vnorm{\vect{y}-\vect{x}}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
   \end{equation}
 
-  右辺の値が最も小さくなるのは\(z_i=\innerp{\vect{x}}{\vect{e}_i}\)のときであり，そのとき\(\vect{y}=\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)だから\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_k}\vect{e}_k}\)である．
+  右辺の値が最も小さくなるのは\(z_i=\innerp{\vect{x}}{\vect{e}_i}\)のときであり，そのとき\(\vect{y}=\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)だから
+  \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}\)である．
 \end{proof}
 
 \begin{proposition}{}{weak_finite_projection}
@@ -136,18 +137,19 @@
 \end{proposition}
 
 \begin{proof}
-  \cref{proposition:finite_convex_projection}より，\(\vect{n}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)を満たす\(\vect{n}\)がただ一つ存在する．
-  そして\cref{proposition:weak_finite_projection}より，\(V\)の元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすなら\(\vect{m}=\vect{n}\)である．
-  したがって，\(\vect{n}\)がすべての\(\vect{v}\in V\)に対して\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)を満たすことを示せばよい．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{n}\)の定義から，関数\(\delta(z)=\vnorm{(\vect{n}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{n}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
+  「2ならば1」は\cref{proposition:weak_finite_projection}で示した．
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)のとき，すべての\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)が成り立つことを示す．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)なので，関数\(\delta(z)=\vnorm{(\vect{m}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{m}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．
+  一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    \delta(z) &= \vnorm{(\vect{n}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{n}-\vect{x}}^2
-    = 2\rpart(\conj{z}\innerp{\vect{n}-\vect{x}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
-    &= 2(x\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}}+y\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})+x^2+y^2 \\
-    &= (x+\rpart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2+(y+\ipart\innerp{\vect{n}-\vect{x}}{\vect{v}})^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2 \\
-    &= \abs{z+\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2
+    \delta(z) &= \vnorm{(\vect{m}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{m}-\vect{x}}^2
+    = 2\rpart(\conj{z}\innerp{\vect{m}-\vect{x}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    &= 2(x\rpart\innerp{\vect{m}-\vect{x}}{\vect{v}}+y\ipart\innerp{\vect{m}-\vect{x}}{\vect{v}})+x^2+y^2 \\
+    &= (x+\rpart\innerp{\vect{m}-\vect{x}}{\vect{v}})^2+(y+\ipart\innerp{\vect{m}-\vect{x}}{\vect{v}})^2-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2 \\
+    &= \abs{z+\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2
   \end{align*}
-  より\(-\abs{\innerp{\vect{n}-\vect{x}}{\vect{v}}}^2=\delta(-\innerp{\vect{n}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{n}-\vect{x}}{\vect{v}}=0\)である．
+  より\(-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2=\delta(-\innerp{\vect{m}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)である．
+  \(\vect{m}\)が1つしかないことは\cref{proposition:finite_convex_projection}による．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\)}
@@ -326,9 +328,9 @@
 \end{equation}
 の解き方である．\(\mat{A}=\matfence{\midx{a}{i}{j}}\)，\(\vect{b}=\trps{\rowvect{b_1 & \cdots & b_n}}\)とおくと，\cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{b}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，解は\(\vect{x}=\mat{A}^{-1}\vect{b}\)ただ一つである．
 
-\(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の解があるかどうかは\(\vect{b}\)次第である．
-そこで代わりに，\cref{equation:linear_equation}から条件を弱めて，\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする\(\vect{x}\)を見つけよう．
-この手法を\termdef{最小2乗法}\index{さいしょうにじょうほう@最小2乗法}（least squares method）という．次の命題から，所望の\(\vect{x}\)は常に存在する．
+\(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の厳密解があるかどうかは\(\vect{b}\)次第である．
+\termdef{最小2乗法}\index{さいしょうにじょうほう@最小2乗法}（least squares method）は，厳密解の代わりに\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする近似解\(\vect{x}\)を見つける手法である．
+次の命題から，所望の近似解\(\vect{x}\)は常に存在する．
 
 \begin{proposition}{}{least_square_existence}
   \(\vect{b}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)）は空でない．
@@ -340,7 +342,7 @@
   よって，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は方程式\(\mat{A}\vect{x}=\proj_{\img T_A}\vect{b}\)の解集合である．この方程式は明らかに解をもつから，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は空でない．
 \end{proof}
 
-上の証明における\(\img T_A\)，つまり\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
+上の証明における\(\img T_A\)，つまり部分空間\(\Set{\mat{A}\vect{x}\given\vect{x}\in\numset{K}^p}\)を\(\mat{A}\)の\termdef{列空間}\index{れつくうかん@列空間}\index{col@\(\colsp\mat{A}\)}（column space）といい，\(\colsp\mat{A}\)と表す．
 \(\mat{A}=\rowvect{\vect{a}_1 & \cdots & \vect{a}_p}\)とおくと
 \[
   \mat{A}\vect{x} = \matrice{\vect{a}_1 & \cdots & \vect{a}_p}\matrice*{x_1 \\ \vdots \\ x_p}
@@ -388,25 +390,9 @@
 \(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
-\begin{note}
-  \(\numset{K}=\numset{R}\)のとき\(\increment\epsilon(\vect{a})=2\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2\)だから，
-  \(\increment\vect{x}\)を\(x_i\)方向の単位ベクトル\(\vect{e}_i\)に沿って動かすとき\(\increment\vect{x}=h\vect{e}_i\)（\(h\in\numset{R}\)）とおけて
-  \[
-    \diffp{\epsilon}{x_i}(\vect{a}) = \lim_{h\to 0}\frac{\increment\epsilon(\vect{a})}{h}
-    = \lim_{h\to 0}(2\innerp{\vect{g}}{\vect{e}_i}+h\vnorm{\mat{A}\vect{e}_i}^2)
-    = 2g_i\quad(\vect{g}=\trps{\matrice{g_1 & \cdots & g_p}})
-  \]
-  である．つまり，正規方程式は\(\gradof\epsilon(\vect{x})=\sum_{i=1}^p(\difsp{\epsilon}{x_i})(\vect{x})\vect{e}_i=\zvec\)と等価である．
-\end{note}
-
-正規方程式は\cref{proposition:finite_projection}からも導ける．\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，任意の\(\vect{v}\in\colsp\mat{A}\)に対し\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{v}}=0\)である．
-よって，\(\vect{v}=\vect{a}_j\)とすれば\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{a}_j}=\htrps{\vect{a}_j}(\mat{A}\vect{x}-\vect{b})=0\)だから
-\[
-  \htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b}) = \matrice*{\htrps{\vect{a}_1} \\ \vdots \\ \htrps{\vect{a}_p}}(\mat{A}\vect{x}-\vect{b})
-  = \matrice*{\htrps{\vect{a}_1}(\mat{A}\vect{x}-\vect{b}) \\ \vdots \\ \htrps{\vect{a}_p}(\mat{A}\vect{x}-\vect{b})}
-  = \zvec
-\]
-である．
+正規方程式は\cref{proposition:finite_projection}からも導ける．
+\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，\(\vect{a}_j\in\colsp\mat{A}\)なので\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{a}_j}=\htrps{\vect{a}_j}(\mat{A}\vect{x}-\vect{b})=0\)である．
+よって\(\htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b})=\zvec\)である．
 
 \subsection{スペクトル分解と特異値分解}
 \label{subsection:sd_and_svd}
@@ -834,7 +820,7 @@
 \]
 
 \cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
-しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる\footnote{信号処理では，数列の添字\texttwoemdash すなわち，離散的な集合で定義された関数の引数\texttwoemdash を大かっこで表す慣例がある．}．
+しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる\footnote{信号処理では，数列の添字を大かっこで表す慣例がある．}．
 そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
@@ -1010,7 +996,7 @@
   また，集合\(\Set{\vect{u}_2,\dots,\vect{u}_n}\)を\(\pcomp{(\spannedby\Set{\vect{u}_1})}\)の正規直交基底とする．
   このとき，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底だから，\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
 
-  \(\vect{e}_1=\trps{\rowvect{1 & 0 & \cdots & 0}}\in\numset{C}^n\)とおくと，\(\htrps{\mat{U}}\mat{A}\vect{u}_1=\htrps{\mat{U}}(\lambda\vect{u}_1)=\lambda\vect{e}_1\)なので
+  \(\numset{C}^n\)の元\(\vect{e}_1\)を\(\vect{e}_1=\trps{\rowvect{1 & 0 & \cdots & 0}}\)で定めると，\(\htrps{\mat{U}}\mat{A}\vect{u}_1=\htrps{\mat{U}}(\lambda\vect{u}_1)=\lambda\vect{e}_1\)なので
   \(\htrps{\mat{U}}\mat{A}\mat{U}=\rowvect{\lambda\vect{e}_1 & \htrps{\mat{U}}\mat{A}\vect{u}_2 & \cdots & \htrps{\mat{U}}\mat{A}\vect{u}_n}\)である．
   右辺を\(\smallmatrice{\lambda & \trps{\vect{b}} \\ & \mat{C}}\)とおく（\(\mat{C}\)は\(n-1\)次正方行列，\(\vect{b}\in\numset{C}^{n-1}\)）．
   帰納法の仮定から\(\mat{C}\)はシューア分解できる．\(\mat{C}=\mat{V}\mat{C}'\htrps{\mat{V}}\)をシューア分解とし，\(n\)次ユニタリ行列\(\mat{W}\)を\(\mat{W}=\smallmatrice{1 & \\ & \mat{V}}\)で定義する．このとき
