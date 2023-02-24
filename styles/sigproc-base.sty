@@ -6,7 +6,7 @@
 \RequirePackage{wrapfig}
 \RequirePackage{tcolorbox}
 \RequirePackage{cleveref}
-\tcbuselibrary{minted,breakable,skins,theorems}
+\tcbuselibrary{breakable,skins,theorems}
 
 % 参照
 \crefname{appendix}{付録}{付録}
@@ -103,33 +103,3 @@
 \base@declareframedtheorem{lemma}{補題}
 \base@declareframedtheorem{proposition}{命題}
 \base@declareframedtheorem{theorem}{定理}
-
-% コードブロック
-\def\base@codeblockoptions{
-  listing only,
-  listing engine=minted,
-  minted style=bw,
-  minted options={fontsize=\small,baselinestretch=0.9},
-  enhanced jigsaw,
-  breakable,
-  beforeafter skip balanced={0.5\baselineskip},
-  colframe=black,
-  colback=white!97!black,
-  top=0.5\zh,
-  bottom=0.5\zh,
-  left=0.5\zw,
-  right=0.5\zw,
-  arc=0pt,
-  boxrule=0.4pt
-}
-
-\newtcblisting{codeblock}[1]{
-  minted language=#1,
-  code={\pgfkeysalsofrom{\base@codeblockoptions}}
-}
-
-\newtcbinputlisting{\inputcodeblock}[2]{
-  listing file={#2},
-  minted language=#1,
-  code={\pgfkeysalsofrom{\base@codeblockoptions}}
-}

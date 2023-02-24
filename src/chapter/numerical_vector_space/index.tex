@@ -100,9 +100,9 @@
   \begin{align*}
     \vnorm{\vect{y}-\vect{x}}^2 &= \vnorm*{\vect{x}-\sum z_i\vect{e}_i}^2
     = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_i\vect{e}_i}+\vnorm*{\sum z_i\vect{e}_i}^2 \\
-    &= \vnorm{\vect{x}}^2+\sum(\abs{z_i}^2-2\rpart(\conj{z}_i\innerp{\vect{x}}{\vect{e}_i})) \\
-    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2\rpart((s_i-\iuni t_i)\innerp{\vect{x}}{\vect{e}_i})) \\
-    &= \vnorm{\vect{x}}^2+\sum(s_i^2+t_i^2-2(s_i\rpart\innerp{\vect{x}}{\vect{e}_i}+t_i\ipart\innerp{\vect{x}}{\vect{e}_i})) \\
+    &= \vnorm{\vect{x}}^2+\sum(-2\rpart(\conj{z}_i\innerp{\vect{x}}{\vect{e}_i})+\abs{z_i}^2) \\
+    &= \vnorm{\vect{x}}^2+\sum(-2\rpart((s_i-\iuni t_i)\innerp{\vect{x}}{\vect{e}_i})+s_i^2+t_i^2) \\
+    &= \vnorm{\vect{x}}^2+\sum(-2(s_i\rpart\innerp{\vect{x}}{\vect{e}_i}+t_i\ipart\innerp{\vect{x}}{\vect{e}_i})+s_i^2+t_i^2) \\
     &= \vnorm{\vect{x}}^2+\sum((s_i-\rpart\innerp{\vect{x}}{\vect{e}_i})^2+(t_i-\ipart\innerp{\vect{x}}{\vect{e}_i})^2-\abs{\innerp{\vect{x}}{\vect{e}_i}}^2)
   \end{align*}
   なので，次式が成立する．

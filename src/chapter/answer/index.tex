@@ -1,7 +1,7 @@
 \documentclass[../../main]{subfiles}
 
 \begin{document}
-\chapter{演習問題の解答}
+\chapter{演習問題の略解}
 \label{chapter:answer_of_exercises}
 \small
 
@@ -27,9 +27,9 @@
     である．したがって\(\proj_{\colsp\mat{A}}\vect{y}=\mat{A}\pinv{\mat{A}}\vect{y}\)である．
   \item \(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと，\(\mat{A}^k=(\mat{U}\mat{\Lambda}\htrps{\mat{U}})^k=\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}\)より
     \[
-      \exp\mat{A} = \sum_{k=0}^\infty\frac{\mat{A}^k}{k!}
-      = \sum_{k=0}^\infty\frac{\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}}{k!}
-      = \mat{U}\pqty*{\sum_{k=0}^\infty\frac{\diag(\lambda_1^k,\dots,\lambda_n^k)}{k!}}\htrps{\mat{U}}
+      \exp\mat{A} = \sum\frac{\mat{A}^k}{k!}
+      = \sum\frac{\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}}{k!}
+      = \mat{U}\pqty*{\sum\frac{\diag(\lambda_1^k,\dots,\lambda_n^k)}{k!}}\htrps{\mat{U}}
     \]
     であり，右辺は\(\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)に等しい．
 \end{enumerate}
