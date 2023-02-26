@@ -176,19 +176,18 @@
   このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
 \end{proof}
 
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp{V}\)}\indexsymbol{\(\pcomp[V]{W}\)}
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp[V]{W}\)}\indexsymbol{\(\pcomp{V}\)}
   \(V\)を\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
   \[
-    \pcomp{W} = \pcomp[V]{W}
-    = \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
+    \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
   \]
-  も\(V\)の部分空間になる．\(\pcomp{W}\)を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）という．
+  も\(V\)の部分空間になる．この集合を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)，\(\pcomp{W}\)などと書く．
 \end{definition}
 
 \begin{example}
   \(W=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
   このとき，\(\pcomp{W}\)は\(\vect{e}_1\)と\(\vect{e}_2\)に直交し\(\zvec\)でないベクトル\(\vect{e}_3\)が生成する直線\(\spannedby\Set{\vect{e}_3}\)である．
-  \(\innerp{\vect{e}_1}{\vect{e}_2}=0\)なら，集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
+  \(\innerp{\vect{e}_1}{\vect{e}_2}=0\)なら集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -202,7 +201,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)，\(\vect{x}=\zvec\)である．よって\(W\cap\pcomp{W}=\Set{\zvec}\)である．
+  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)より\(\vect{x}=\zvec\)である．
   また，任意の\(\vect{x}\in W\)に対して\(\vect{x}-\proj_W\vect{x}\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W\vect{x})\in W+\pcomp{W}\)である．よって\(V=W\oplus\pcomp{W}\)である．
 \end{proof}
 
@@ -374,7 +373,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\increment\vect{x}\in\numset{K}^p\)とする．\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)とおくと
+  \(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)（\(\increment\vect{x}\in\numset{K}^p\)）とおくと
   \begin{align*}
     \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})+\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
     = 2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
@@ -815,28 +814,28 @@
 
 \subsection{曲線あてはめとDFT}
 
-離散フーリエ変換は曲線あてはめともみなせる．区間\(\torus=\ccival{0}{2\krez}\)上で定義された関数\(x\)を，関数\(\phi_k(t)=\exp(\iuni kt)\)の線型結合\(x(\vect{c};t)=\sum_{k=0}^{N-1}c_k\phi_k(t)\)で近似しよう．
-\(t_n=2\krez n/N\)（\(0\leq n<N\)）における\(x\)の値を用いた曲線あてはめ\texttwoemdash すなわち，残差平方和
+離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線型結合
 \[
-  \epsilon(\vect{c}) = \sum_{n=0}^{M-1}\abs{x(\vect{c};t_n)-x(t_n)}^2
-  = \sum_{n=0}^{N-1}\abs*{x\pqty*{\vect{c};\frac{2\krez n}{N}}-x\pqty*{\frac{2\krez n}{N}}}^2
+  f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\exp(\iuni kt))
 \]
-の最小化\texttwoemdash を行うには，正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{y}\)を解けばよい．ただし
-\[
-  \mat{\Phi} = \matfence{\phi_{i-1}(t_{j-1})}
-  = \matrice*{\napr^{\iuni\cdot 0(2\krez\cdot 0/N)} & \cdots & \napr^{\iuni(N-1)(2\krez\cdot 0/N)} \\ \vdots & \ddots & \vdots \\ \napr^{\iuni\cdot 0(2\krez(N-1)/N)} & \cdots & \napr^{\iuni(N-1)(2\krez(N-1)/N)}}
-\]
-である．ところが，右辺の行列は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるから，
-正規方程式の係数行列は\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
-つまり，正規方程式は立てた時点で解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{y}=(1/\sqrt{N})\htrps{\mat{W}}\vect{y}=(1/\sqrt{N})\dft{N}\vect{y}\)である．
+で近似しよう．標本化周波数\(1/N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，時刻を表す添字を大かっこで書く．}．
 
-まとめると，\(\torus\)を\(N\)等分した左端における\(x\)の値を標本とし，線型結合
+\(n=0,\dots,N-1\)における\(f(t_n)=x[n]\)の値を用いて\(f\)を\(f(\vect{c};t)\)にあてはめよう．
+\(K\)の値を\(N\)より大きくすると，関数\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
-  x(\vect{c};t) = \sum_{k=0}^{N-1}c_k\phi_k(t)
-  = \sum_{k=0}^{N-1}c_k\napr^{\iuni kt}
+  \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{f(\vect{c};t_n)-x[n]}^2\quad(t_n=2\krez n/N)
 \]
-で\(x\)を最もよく近似しようとすると，各係数\(c_k\)は\(\dft{N}\vect{y}\)の定数倍になる．
-また，\(\phi_k\)をあらかじめ\(\sqrt{N}\)で割っておけば，\(c_k\)は完全に\(\dft{N}\vect{y}\)と等しくなる．
+の値を最も小さくする\(\vect{c}\in\numset{C}^N\)を求める．それには正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{x}\)を解けばよい．ただし
+\begin{gather*}
+  \vect{x} = \trps{\matrice{x[0] & \cdots & x[N-1]}}, \\
+  \mat{\Phi} = \trps{\matfence{\phi_{i-1}(t_{j-1})}}
+  = \matrice*{\napr^{\iuni\cdot 0(2\krez\cdot 0/N)} & \cdots & \napr^{\iuni(N-1)(2\krez\cdot 0/N)} \\ \vdots & \ddots & \vdots \\ \napr^{\iuni\cdot 0(2\krez(N-1)/N)} & \cdots & \napr^{\iuni(N-1)(2\krez(N-1)/N)}}
+\end{gather*}
+である．ところが，\(\mat{\Phi}\)は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるので\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
+つまり，正規方程式は初めから解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{x}=(1/\sqrt{N})\htrps{\mat{W}}\vect{x}=(1/\sqrt{N})\dft{N}\vect{x}\)である．
+
+まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(f(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
+また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
 \subsection{巡回畳み込み}
 
@@ -846,7 +845,7 @@
 \]
 
 \cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
-しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる\footnote{信号処理では，数列の添字を大かっこで表す慣例がある．}．
+しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
 そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
