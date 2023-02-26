@@ -818,10 +818,9 @@
 \[
   f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\exp(\iuni kt))
 \]
-で近似しよう．標本化周波数\(1/N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，時刻を表す添字を大かっこで書く．}．
+で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，時刻を表す添字を大かっこで書く．}．
 
-\(n=0,\dots,N-1\)における\(f(t_n)=x[n]\)の値を用いて\(f\)を\(f(\vect{c};t)\)にあてはめよう．
-\(K\)の値を\(N\)より大きくすると，関数\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
+\(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(f(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
   \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{f(\vect{c};t_n)-x[n]}^2\quad(t_n=2\krez n/N)
 \]
@@ -837,6 +836,20 @@
 まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(f(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
 また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
+\begin{note}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
+  標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．
+  では，\(N\to\infty\)の極限をとると何が起こるだろう\？ エイリアシングを考慮して極限をとると
+  \begin{gather*}
+    f(\vect{c};t) = \sum_{k=-N/2}^{N/2-1}c_k\napr^{\iuni kt}
+    \to \sum_{k=-\infty}^\infty c_k\napr^{\iuni kt}, \\
+    c_k = \frac{1}{N}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}
+    = \frac{1}{2\krez}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}\frac{2\krez}{N}
+    \to \frac{1}{2\krez}\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}
+  \end{gather*}
+  となる．標本を限りなく多くとったのだから，\(c_k=(2\krez)^{-1}\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}\)のとき\(f(t)=\sum c_k\napr^{\iuni kt}\)が成り立つと期待するのは自然だろう．
+  詳しくは\cref{xr-chapter:hilbert_space}で説明するが，式\(f(t)=\sum c_k\napr^{\iuni kt}\)を\(f\)のフーリエ級数展開といい，\(f\)に適切な仮定を課せば実際に等式が成り立つことを証明できる．
+\end{note}
+
 \subsection{巡回畳み込み}
 
 以下に\cref{equation:idft}を再掲する．
@@ -844,7 +857,7 @@
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
 \]
 
-\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\vect{\hat{x}}=\dft{N}\vect{x}\)によって表す式である．
+\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\dft{N}\vect{x}\)によって表す式である．
 しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
 そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
