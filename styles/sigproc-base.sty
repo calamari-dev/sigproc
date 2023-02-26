@@ -6,7 +6,7 @@
 \RequirePackage{wrapfig}
 \RequirePackage{tcolorbox}
 \RequirePackage{cleveref}
-\tcbuselibrary{breakable,skins,theorems}
+\tcbuselibrary{skins,theorems}
 
 % 参照
 \crefname{appendix}{付録}{付録}
@@ -65,14 +65,12 @@
 \tcolorboxenvironment{note}{
   blanker,
   borderline west={0.45\zw}{0pt}{lightgray},
-  breakable,
   left=0.9\zw
 }
 
 \tcbset{
   mytheorem/.style={
-    enhanced jigsaw,
-    breakable,
+    standard jigsaw,
     beforeafter skip balanced={0.5\baselineskip},
     theorem style=plain,
     label type={#1},

@@ -604,6 +604,7 @@
 \footnotetext{\(\mat{Q}\trps{\mat{Q}}=\trps{\mat{Q}}\mat{Q}=\imat\)を満たす実正方行列\(\mat{Q}\)を\termdef{直交行列}（orthogonal matrix）という．}
 
 \subsection{曲線あてはめ}
+\label{subsection:curve_fitting}
 
 ここまで説明した最小2乗法の理論は，データを曲線にあてはめるとき威力を発揮する．
 
@@ -812,6 +813,31 @@
 話を離散フーリエ変換に戻すと，\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は\(f=k\)の波が\(f_{\symrm{s}}=N\)で標本化されたものとみなせる．
 そのため，\(k\geq N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
 
+\subsection{曲線あてはめとDFT}
+
+離散フーリエ変換は曲線あてはめともみなせる．区間\(\torus=\ccival{0}{2\krez}\)上で定義された関数\(x\)を，関数\(\phi_k(t)=\exp(\iuni kt)\)の線型結合\(x(\vect{c};t)=\sum_{k=0}^{N-1}c_k\phi_k(t)\)で近似しよう．
+\(t_n=2\krez n/N\)（\(0\leq n<N\)）における\(x\)の値を用いた曲線あてはめ\texttwoemdash すなわち，残差平方和
+\[
+  \epsilon(\vect{c}) = \sum_{n=0}^{M-1}\abs{x(\vect{c};t_n)-x(t_n)}^2
+  = \sum_{n=0}^{N-1}\abs*{x\pqty*{\vect{c};\frac{2\krez n}{N}}-x\pqty*{\frac{2\krez n}{N}}}^2
+\]
+の最小化\texttwoemdash を行うには，正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{y}\)を解けばよい．ただし
+\[
+  \mat{\Phi} = \matfence{\phi_{i-1}(t_{j-1})}
+  = \matrice*{\napr^{\iuni\cdot 0(2\krez\cdot 0/N)} & \cdots & \napr^{\iuni(N-1)(2\krez\cdot 0/N)} \\ \vdots & \ddots & \vdots \\ \napr^{\iuni\cdot 0(2\krez(N-1)/N)} & \cdots & \napr^{\iuni(N-1)(2\krez(N-1)/N)}}
+\]
+である．ところが，右辺の行列は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるから，
+正規方程式の係数行列は\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
+つまり，正規方程式は立てた時点で解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{y}=(1/\sqrt{N})\htrps{\mat{W}}\vect{y}=(1/\sqrt{N})\dft{N}\vect{y}\)である．
+
+まとめると，\(\torus\)を\(N\)等分した左端における\(x\)の値を標本とし，線型結合
+\[
+  x(\vect{c};t) = \sum_{k=0}^{N-1}c_k\phi_k(t)
+  = \sum_{k=0}^{N-1}c_k\napr^{\iuni kt}
+\]
+で\(x\)を最もよく近似しようとすると，各係数\(c_k\)は\(\dft{N}\vect{y}\)の定数倍になる．
+また，\(\phi_k\)をあらかじめ\(\sqrt{N}\)で割っておけば，\(c_k\)は完全に\(\dft{N}\vect{y}\)と等しくなる．
+
 \subsection{巡回畳み込み}
 
 以下に\cref{equation:idft}を再掲する．
@@ -1015,15 +1041,14 @@
   \(\mat{A}\)を\(n\)次正規行列とする．\(\mat{A}\)のシューア分解を\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)とおくと，
   \(\htrps{\mat{A}}\mat{A}-\mat{A}\htrps{\mat{A}}=\mat{U}(\htrps{\mat{B}}\mat{B}-\mat{B}\htrps{\mat{B}})\htrps{\mat{U}}=\zmat\)より\(\mat{B}\)も正規行列である．
 
-  \(\mat{B}=\matfence{\midx{b}{i}{j}}\)とおく．\(\htrps{\mat{B}}=\matfence{\midx{\conj{b}}{j}{i}}\)なので，\(\htrps{\mat{B}}\mat{B}=\mat{B}\htrps{\mat{B}}\)の\(i\)行\(i\)列にある成分を比較すれば
+  \(\mat{B}=\matfence{\midx{b}{i}{j}}\)とおく．\(\htrps{\mat{B}}=\matfence{\midx{\conj{b}}{j}{i}}\)，(\(i>j\implies\midx{b}{i}{j}=0\))なので，\(\htrps{\mat{B}}\mat{B}=\mat{B}\htrps{\mat{B}}\)の\(d\)行\(d\)列にある成分を比較すれば
   \[
-    \sum_{j=1}^n\midx{\conj{b}}{j}{i}\midx{b}{j}{i} = \sum_{j=1}^n\midx{b}{i}{j}\midx{\conj{b}}{i}{j},
-    \quad\sum_{j=1}^i\abs{\midx{b}{j}{i}}^2 = \sum_{j=i}^n\abs{\midx{b}{i}{j}}^2
+    \sum_{i=1}^n\midx{\conj{b}}{i}{d}\midx{b}{i}{d} = \sum_{j=1}^n\midx{b}{d}{j}\midx{\conj{b}}{d}{j},
+    \quad\sum_{i=1}^d\abs{\midx{b}{i}{d}}^2 = \sum_{j=d}^n\abs{\midx{b}{d}{j}}^2
   \]
-  が分かる．ただし，2つめの等式は\(i>j\implies\midx{b}{i}{j}=0\)による．
-  \(i=1\)とすると，\(\abs{\midx{b}{1}{1}}^2=\sum_{j=1}^n\abs{\midx{b}{1}{j}}^2\)より\(\midx{b}{1}{2}=\dots=\midx{b}{1}{n}=0\)である．
-  次に\(i=2\)とすると，\(\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
-  同様に\(i=n\)まで計算すれば\(i<j\implies\midx{b}{i}{j}=0\)が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
+  が分かる．\(d=1\)とすると，\(\abs{\midx{b}{1}{1}}^2=\sum_{j=1}^n\abs{\midx{b}{1}{j}}^2\)より\(\midx{b}{1}{2}=\dots=\midx{b}{1}{n}=0\)である．
+  次に\(d=2\)とすると，\(\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
+  同様に\(d=n\)まで計算すれば(\(i<j\implies\midx{b}{i}{j}=0\))が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
   つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
 \end{proof}
 
@@ -1032,7 +1057,7 @@
 最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
 
 変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\footnote{\(p\)の値が非常に大きいこと．}だとその特徴が分かりにくいことがある．
-主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らす\index{じげんさくげん@次元削減}\footnote{次元を減らす手法を一般に\termdef{次元削減}（dimensionality reduction）という．}ことである．
+主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
