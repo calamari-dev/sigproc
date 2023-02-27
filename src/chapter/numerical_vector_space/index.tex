@@ -181,7 +181,7 @@
   \[
     \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
   \]
-  も\(V\)の部分空間になる．この集合を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)，\(\pcomp{W}\)などと書く．
+  も\(V\)の部分空間になる．この部分空間を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)，\(\pcomp{W}\)などと書く．
 \end{definition}
 
 \begin{example}
@@ -773,12 +773,15 @@
   \label{figure:frequency_domain}
 \end{figure}
 
-\cref{figure:frequency_domain}を見ると，\SI{350}{Hz}周辺に1つめのピークが現れている．これは\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，
-人間が知覚する声の高さとかなりよく対応する\index{ピッチ}\footnote{人間が知覚する声の高さを\termdef{ピッチ}（pitch）という．基本周波数とピッチはしばしば同一視されるが，厳密には定義からして異なる量である．詳しくは柏野\cite{kashino}など．}．
+\cref{figure:frequency_domain}を見ると，\SI{350}{Hz}周辺に1つめのピークが現れている．これは\termdef{基本周波数}\index{きほんしゅうはすう@基本周波数}（fundamental frequency）と呼ばれる量で，人間が知覚する声の高さとかなりよく対応する．
+
+\begin{note}
+  人間が知覚する声の高さを\termdef{ピッチ}\index{ピッチ}（pitch）という．基本周波数とピッチはしばしば同一視されるが，厳密には定義からして異なる．詳しくは柏野\cite{kashino}など．
+\end{note}
 
 また，\cref{figure:frequency_domain}の破線部\(\hat{h}_k\)は，基本周波数に起因する細かな変動を\(\abs{\hat{x}_k}\)から除いた曲線である．
 この曲線は\termdef{スペクトル包絡}\index{すぺくとるほうらく@スペクトル包絡}（spectral envelope）といい，音声の音色とよく対応する．
-つまり，離散フーリエ変換を使うことで，音声が持つ基本周波数（\(\mathord{\fallingdotseq}\text{声の高さ}\)）由来の性質と，スペクトル包絡（\(\mathord{\fallingdotseq}\text{音色}\)）由来の性質を分離して解析できる．
+つまり，離散フーリエ変換を使うことで，音声が持つ基本周波数（≒声の高さ）由来の性質と，スペクトル包絡（≒音色）由来の性質を分離して解析できる．
 
 \subsection{エイリアシング}
 
@@ -818,7 +821,7 @@
 \[
   f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\exp(\iuni kt))
 \]
-で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，時刻を表す添字を大かっこで書く．}．
+で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，離散時間の時刻を表す引数を大かっこで書く．}．
 
 \(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(f(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
@@ -836,7 +839,7 @@
 まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(f(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
 また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
-\begin{note}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
+\begin{note}
   標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．
   では，\(N\to\infty\)の極限をとると何が起こるだろう\？ エイリアシングを考慮して極限をとると
   \begin{gather*}
@@ -846,8 +849,8 @@
     = \frac{1}{2\krez}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}\frac{2\krez}{N}
     \to \frac{1}{2\krez}\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}
   \end{gather*}
-  となる．標本を限りなく多くとったのだから，\(c_k=(2\krez)^{-1}\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}\)のとき\(f(t)=\sum c_k\napr^{\iuni kt}\)が成り立つと期待するのは自然だろう．
-  詳しくは\cref{xr-chapter:hilbert_space}で説明するが，式\(f(t)=\sum c_k\napr^{\iuni kt}\)を\(f\)のフーリエ級数展開といい，\(f\)に適切な仮定を課せば実際に等式が成り立つことを証明できる．
+  となる．標本を限りなく多くとったのだから，\(c_k=(1/(2\krez))\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}\)のとき\(f(t)=\sum c_k\napr^{\iuni kt}\)が成り立つと期待するのは自然だろう．
+  詳しくは\cref{xr-chapter:hilbert_space}で説明するが，式\(f(t)=\sum c_k\napr^{\iuni kt}\)を\(f\)のフーリエ級数展開\index{ふーりえきゅうすうてんかい@フーリエ級数展開}といい，\(f\)に適切な仮定を課せば実際に等式が成り立つことを証明できる．
 \end{note}
 
 \subsection{巡回畳み込み}

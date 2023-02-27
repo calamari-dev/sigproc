@@ -280,7 +280,7 @@
 
 \begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}\index{しゃえいていり@射影定理!とつ@凸\texttwoemdash}
   \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
-  このとき，\(\argmin_{y\in C}\vnorm{y-x}\)はただ1つの元からなる集合である．
+  このとき，\(\argmin_{y\in C}\vnorm{y-x}\)はただ一つの元からなる集合である．
 \end{theorem}
 
 \begin{proof}
@@ -307,7 +307,7 @@
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}
   \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，\(V\)は\(H\)の閉部分空間とする．
-  このとき，\(V\)の元\(m\)に関する以下の条件は同値であり，条件を満たす\(m\)はただ1つ存在する．
+  このとき，\(V\)の元\(m\)に関する以下の条件は同値であり，条件を満たす\(m\)はただ一つ存在する．
   \begin{enumerate}
     \item \(m\in\argmin_{y\in V}\vnorm{y-x}\)である．
     \item 任意の\(v\in V\)に対して\(\innerp{m-x}{v}=0\)である．
@@ -376,14 +376,14 @@
 \end{proposition}
 
 \begin{proof}
-  \(v\in\clsr V\)を任意にとる．\(\epsilon=(\sum\innerp{x}{\phi_n}\phi_n)-x\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
+  \(v\in\clsr V\)を任意にとる．\(\epsilon=\sum\innerp{x}{\phi_n}\phi_n-x\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
   \nameref{theorem:projection_theorem}から\(\proj_{\clsr V}x=\sum\innerp{x}{\phi_n}\phi_n\)といえる．
 
   \(v\in\clsr V\)なので，\(\tilde{v}_n\to v\)（\(n\to\infty\)）を満たす\(V\)上の点列\(\seq{\tilde{v}_n}\)がある．
   また，\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
   \[
-    \innerp{\epsilon}{\phi_j} = -\innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
-    = -\innerp{x}{\phi_j}+\sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}
+    \innerp{\epsilon}{\phi_j} = \innerp*{\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i-x}{\phi_j}
+    = \sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}-\innerp{x}{\phi_j}
     = 0
   \]
   だから，\(V=\spannedby\Set{\phi_1,\phi_2,\dotsc}\)の元はすべて\(\epsilon\)と直交する．よって\(\innerp{\epsilon}{\tilde{v}_n}=0\)，\(\innerp{\epsilon}{v}=\innerp{\epsilon}{v-\tilde{v}_n}\)である．

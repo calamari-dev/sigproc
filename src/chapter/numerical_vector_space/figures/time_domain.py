@@ -16,5 +16,5 @@ data = data / 32767
 
 fig, ax = plt.subplots()
 ax.plot(t, data, lw=constants.observation_linewidth)
-ax.set_xlabel("時刻 [s]")
+ax.set_xlabel("時刻[s]")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

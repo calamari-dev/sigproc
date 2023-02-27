@@ -28,7 +28,7 @@ y[0] = np.nan
 h[0] = np.nan
 
 fig, ax = plt.subplots()
-ax.set_xlabel("周波数 [Hz]")
+ax.set_xlabel("周波数[Hz]")
 ax.set_yscale("log")
 ax.plot(
     x,
