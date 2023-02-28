@@ -8,14 +8,14 @@
   \skip_new:N\l_nbl_abovedisplayshort_skip
   \skip_new:N\l_nbl_belowdisplayshort_skip
 
-  \cs_new:Nn{\nbl_restore_skip:}{
+  \cs_new:Nn\nbl_restore_skip:{
     \skip_set:Nn\l_nbl_abovedisplay_skip{\abovedisplayskip}
     \skip_set:Nn\l_nbl_belowdisplay_skip{\belowdisplayskip}
     \skip_set:Nn\l_nbl_abovedisplayshort_skip{\abovedisplayshortskip}
     \skip_set:Nn\l_nbl_belowdisplayshort_skip{\belowdisplayshortskip}
   }
 
-  \cs_new:Nn{\nbl_recover_skip:}{
+  \cs_new:Nn\nbl_recover_skip:{
     \setlength\abovedisplayskip{\skip_use:N\l_nbl_abovedisplay_skip}
     \setlength\belowdisplayskip{\skip_use:N\l_nbl_belowdisplay_skip}
     \setlength\abovedisplayshortskip{\skip_use:N\l_nbl_abovedisplayshort_skip}

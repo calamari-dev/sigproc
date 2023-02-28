@@ -1,12 +1,14 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{sigproc-base}[2022/04/29 sigproc-base]
+\RequirePackage{expl3}
+\ProvidesExplPackage{sigproc-base}{2023-02-28}{1.0}{sigproc-base}
+\ExplSyntaxOff
 
 \RequirePackage{xcolor}
 \RequirePackage{amsthm,thmtools}
 \RequirePackage{wrapfig}
 \RequirePackage{tcolorbox}
 \RequirePackage{cleveref}
-\tcbuselibrary{skins,theorems}
+\tcbuselibrary{breakable,skins,theorems}
 
 % 参照
 \crefname{appendix}{付録}{付録}
@@ -18,14 +20,21 @@
 \crefname{subsection}{}{}
 \crefname{table}{表}{表}
 
+\crefname{corollary}{系}{系}
+\crefname{definition}{定義}{定義}
+\crefname{example}{例}{例}
+\crefname{lemma}{補題}{補題}
+\crefname{proposition}{命題}{命題}
+\crefname{theorem}{定理}{定理}
+
 \creflabelformat{chapter}{第#2#1#3章}
 \creflabelformat{section}{第#2#1#3節}
 \creflabelformat{subsection}{第#2#1#3小節}
 
-\newcommand{\crefrangeconjunction}{から}
-\newcommand{\crefpairconjunction}{，}
-\newcommand{\crefmiddleconjunction}{，}
 \newcommand{\creflastconjunction}{，および}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\crefpairconjunction}{，}
+\newcommand{\crefrangeconjunction}{から}
 
 % 約物・論理構造
 \newcommand{\alert}[1]{{\gtfamily\bfseries #1}}
@@ -37,12 +46,34 @@
 \newcounter{thcounter}
 \numberwithin{thcounter}{section}
 
+\tcbset{
+  mytheorem/.style={
+    skin=standard jigsaw,
+    beforeafter skip balanced={0.5\baselineskip},
+    theorem style=plain,
+    description delimiters={\inhibitglue（}{）\hspace*{-0.5\zw}},
+    terminator sign={\hspace*{\zw}},
+    label type={#1},
+    fonttitle=\sffamily\bfseries,
+    opacityback=0.0,
+    opacitybacktitle=0.0,
+    colframe=black,
+    coltitle=black,
+    arc=0pt,
+    boxrule=0.4pt,
+    top=0.5\zh,
+    right=0.5\zw,
+    bottom=0.5\zh,
+    left=0.5\zw
+  }
+}
+
 \declaretheoremstyle[
   headfont=\sffamily\bfseries,
   headpunct={},
   notebraces={\inhibitglue（}{）\hspace{-0.5\zw}},
   notefont=\sffamily\bfseries,
-  postheadspace=1\zw,
+  postheadspace=\zw,
   qed=\diamondsuit
 ]{egstyle}
 
@@ -53,10 +84,14 @@
   notebraces={\inhibitglue（}{）\hspace{-0.5\zw}},
   notefont=\sffamily\bfseries\small,
   numbered=no,
-  postheadspace=1\zw
+  postheadspace=\zw
 ]{notestyle}
 
-\crefname{example}{例}{例}
+\NewTcbTheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{corollary}{系}{mytheorem=corollary}{corollary}
+\NewTcbTheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{definition}{定義}{mytheorem=definition}{definition}
+\NewTcbTheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{lemma}{補題}{mytheorem=lemma}{lemma}
+\NewTcbTheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{proposition}{命題}{mytheorem=proposition}{proposition}
+\NewTcbTheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{theorem}{定理}{mytheorem=theorem}{theorem}
 
 \declaretheorem[sibling=thcounter,style=egstyle,name=例]{example}
 \declaretheorem[style=egstyle,name=問]{problem}
@@ -64,40 +99,9 @@
 
 \tcolorboxenvironment{note}{
   blanker,
+  breakable,
   borderline west={0.45\zw}{0pt}{lightgray},
+  top=0.2\zh,
+  bottom=0.2\zh,
   left=0.9\zw
 }
-
-\tcbset{
-  mytheorem/.style={
-    standard jigsaw,
-    beforeafter skip balanced={0.5\baselineskip},
-    theorem style=plain,
-    label type={#1},
-    fonttitle=\sffamily\bfseries,
-    description delimiters={\inhibitglue（}{）\hspace*{-0.5\zw}},
-    terminator sign={\hspace*{\zw}},
-    coltitle=black,
-    colframe=black,
-    opacityback=0.0,
-    opacitybacktitle=0.0,
-    top=0.5\zh,
-    right=0.5\zw,
-    bottom=0.5\zh,
-    left=0.5\zw,
-    arc=0pt,
-    boxrule=0.4pt
-  }
-}
-
-\newcommand{\base@declareframedtheorem}[2]{%
-  \crefname{#1}{#2}{#2}%
-  \newtcbtheorem[use counter=thcounter,number freestyle={\noexpand\thesection.\noexpand\arabic{\tcbcounter}}]{#1}{#2}{mytheorem=#1}{#1}%
-}
-
-\base@declareframedtheorem{corollary}{系}
-\base@declareframedtheorem{definition}{定義}
-\base@declareframedtheorem{exercise}{例題}
-\base@declareframedtheorem{lemma}{補題}
-\base@declareframedtheorem{proposition}{命題}
-\base@declareframedtheorem{theorem}{定理}
