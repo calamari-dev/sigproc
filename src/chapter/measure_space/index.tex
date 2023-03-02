@@ -408,7 +408,7 @@
   \condexpval{X\given\sigmaalg{G}}(\omega) \questeq \lim_{\increment y\to 0}\condexpval{X\given\sigmaalg{G}_{\increment y}}(\omega)
   = \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\condexpval{X\given\delta Y_n}\indicator_{\delta Y_n}(\omega)
 \]
-と「定義」してみよう．任意の\(B\in\borelset{\numset{R}}\)に対し，\(\expval\)と\(\lim\sum\)が交換できれば
+と“定義”してみよう．任意の\(B\in\borelset{\numset{R}}\)に対し，\(\expval\)と\(\lim\sum\)が交換できれば
 \begin{align}
   \expval[\condexpval{X\given\sigmaalg{G}},Y\in B] &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\frac{\expval[X,\delta Y_n]}{\prob(\delta Y_n)}\expval[\indicator_{\delta Y_n},Y\in B] \\
   &= \lim_{\increment y\to 0}\sum_{n\in\numset{Z}}\expval[X,\delta Y_n]\frac{\prob(\Set{Y\in B}\cap\delta Y_n)}{\prob(\delta Y_n)} \\
