@@ -1,12 +1,6 @@
 source = "main.tex"
 sequence = ["latex", "mendex"]
 
-[programs.latex]
-command = "lualatex"
-opts = ["-interaction=nonstopmode", "-file-line-error", "--shell-escape"]
-aux_file = "%B.aux"
-aux_empty_size = 9
-
 [programs.mendex]
 command = "upmendex"
 target = "%B.idx"

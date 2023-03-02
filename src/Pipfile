@@ -5,7 +5,7 @@ name = "pypi"
 
 [scripts]
 figure = "python figure.py"
-chapter = "bash -c \"MODE=production lualatex --shell-escape index\""
+chapter = "bash -c \"MODE=production lualatex index\""
 preview = "bash -c \"llmk -C && llmk\""
 publish = "bash -c \"llmk -C && MODE=production llmk && mkdir dist; mv --force main.pdf dist/\""
 

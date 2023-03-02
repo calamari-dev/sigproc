@@ -50,7 +50,7 @@
 
 \begin{definition}{点列の収束}{sequence_converge}\index{しゅうそくてんれつの@収束，点列の}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\(\alpha\in S\)に\termdef{収束する}（converge）とは，
-  任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(n>N\implies d(x_n,\alpha)<\varepsilon\)を満たすことをいう．
+  任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して(\(n>N\implies d(x_n,\alpha)<\varepsilon\))を満たすことをいう．
   このことを次のように表す．
   \[
     x_n\to\alpha\quad(n\to\infty)
@@ -136,7 +136,7 @@
 
 \begin{definition}{コーシー列}{cauchy_sequence}\index{こーしーれつ@コーシー列}
   \((S,d)\)を距離空間とする．\(S\)上の点列\(\seq{x_n}_{n\in\numset{N}}\)が\termdef{コーシー列}（Cauchy sequence）であるとは，
-  任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して\(m,n>N\implies d(x_m,x_n)<\varepsilon\)を満たすことをいう．このことを次のように表す．
+  任意の\(\varepsilon>0\)に対し，\(N\in\numset{N}\)が存在して(\(m,n>N\implies d(x_m,x_n)<\varepsilon\))を満たすことをいう．このことを次のように表す．
   \[
     d(x_m,x_n) \to 0\quad(m,n\to\infty),
     \quad\lim_{m,n\to\infty}d(x_m,x_n) = 0
@@ -176,7 +176,7 @@
   \[
     \lpnorm{p}{\seq{x_n}_{n\in\numset{N}}} = \pqty*{\sum_{n=1}^\infty\abs{x_n}^p}^{1/p}
   \]
-  で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set*{\seq{x_n}_{n\in\numset{N}}\given\lpnorm{p}{\seq{x_n}_{n\in\numset{N}}}<+\infty}\)
+  で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set{\seq{x_n}_{n\in\numset{N}}\given\lpnorm{p}{\seq{x_n}_{n\in\numset{N}}}<+\infty}\)
   で定義すると，\(\lpnorm{p}{\holder}\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}(\numset{N})\)はこのノルムについてバナッハ空間になる．
   バナッハ空間\(\lebesgue{p}(\numset{N})\)を\termdef{\(\lebesgue{p}\)空間}\index{lpkukan@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
 \end{example}
@@ -280,42 +280,42 @@
 
 \begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}\index{しゃえいていり@射影定理!とつ@凸\texttwoemdash}
   \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
-  このとき，\(\argmin_{y\in C}\vnorm{y-x}\)はただ一つの元からなる集合である．
+  このとき，\(\argmin_{y\in C}\vnorm{x-y}\)はただ一つの元からなる集合である．
 \end{theorem}
 
 \begin{proof}
-  \(\delta=\inf\Set{\vnorm{y-x}\given y\in C}\)とおくと，集合\(A_n=\Set{y\in C\given\vnorm{y-x}\leq\delta+1/n}\)（\(n\in\numset{N}\)）は\(n\)の値によらず空でない．そこで，各\(n\)に対して\(A_n\)の元\(a_n\)を1つずつ選べる．
-  \(\delta\leq\vnorm{a_n-x}\leq\delta+1/n\)なので，\(\seq{a_n}\)の極限点\(a_\infty\)が存在すれば\(\vnorm{a_\infty-x}=\lim_{n\to\infty}\vnorm{a_n-x}=\delta\)である．
-  また，\(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{y-x}\)である．
+  \(\delta=\inf\Set{\vnorm{x-y}\given y\in C}\)とおくと，集合\(A_n=\Set{y\in C\given\vnorm{x-y}\leq\delta+1/n}\)（\(n\in\numset{N}\)）は\(n\)の値によらず空でない．そこで，各\(n\)に対して\(A_n\)の元\(a_n\)を1つずつ選べる．
+  \(\delta\leq\vnorm{x-a_n}\leq\delta+1/n\)なので，\(\seq{a_n}\)の極限点\(a_\infty\)が存在すれば\(\vnorm{x-a_\infty}=\lim_{n\to\infty}\vnorm{x-a_n}=\delta\)である．
+  また，\(C\)は閉集合だから\(a_\infty\in C\)，よって\(a_\infty\in\argmin_{y\in C}\vnorm{x-y}\)である．
 
-  要するに，\(a_\infty\)が存在する\texttwoemdash つまり\(\seq{a_n}\)がコーシー列である\texttwoemdash ならば，\(\argmin_{y\in C}\vnorm{y-x}\)は空でない．
+  要するに，\(a_\infty\)が存在する\texttwoemdash つまり\(\seq{a_n}\)がコーシー列である\texttwoemdash ならば，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
   \(m,n\in\numset{N}\)を任意にとる．\nameref{theorem:median_theorem}より
   \begin{gather*}
-    \vnorm{(a_m-x)+(a_n-x)}^2+\vnorm{a_m-a_n}^2 = 2(\vnorm{a_m-x}^2+\vnorm{a_n-x}^2), \\
-    \vnorm{a_m-a_n}^2 = 2\vnorm{a_m-x}^2+2\vnorm{a_n-x}^2-4\vnorm*{\frac{a_m+a_n}{2}-x}^2
+    \vnorm{(x-a_m)+(x-a_n)}^2+\vnorm{a_m-a_n}^2 = 2(\vnorm{x-a_m}^2+\vnorm{x-a_n}^2), \\
+    \vnorm{a_m-a_n}^2 = 2\vnorm{x-a_m}^2+2\vnorm{x-a_n}^2-4\vnorm*{x-\frac{a_m+a_n}{2}}^2
   \end{gather*}
   である．\(a_m\in A_m\)，\(a_n\in A_n\)かつ，\(C\)は凸集合だから\((a_m+a_n)/2\in C\)で
   \[
     \vnorm{a_m-a_n}^2 \leq 2\pqty*{\delta+\frac{1}{m}}^2+2\pqty*{\delta+\frac{1}{n}}^2-4\delta^2
     \to 0\quad(m,n\to\infty)
   \]
-  である．よって\(\seq{a_n}\)はコーシー列なので，\(\argmin_{y\in C}\vnorm{y-x}\)は空でない．
+  である．よって\(\seq{a_n}\)はコーシー列なので，\(\argmin_{y\in C}\vnorm{x-y}\)は空でない．
 
-  次に，\(\argmin_{y\in C}\vnorm{y-x}\)の元は1つしかないことを示す．\(y_1,y_2\in\argmin_{y\in C}\vnorm{y-x}\)とする．
-  このとき\(\vnorm{y_1-x}=\vnorm{y_2-x}=\delta\)，\((y_1+y_2)/2\in C\)だから\(\vnorm{y_1-y_2}^2=2\delta^2+2\delta^2-4\vnorm{(1/2)(y_1+y_2)-x}^2\leq 0\)，したがって\(y_1=y_2\)である．
+  次に，\(\argmin_{y\in C}\vnorm{x-y}\)の元は1つしかないことを示す．\(y_1,y_2\in\argmin_{y\in C}\vnorm{x-y}\)とする．
+  このとき\(\vnorm{x-y_1}=\vnorm{x-y_2}=\delta\)，\((y_1+y_2)/2\in C\)だから\(\vnorm{y_1-y_2}^2=2\delta^2+2\delta^2-4\vnorm{x-(y_1+y_2)/2}^2\leq 0\)，したがって\(y_1=y_2\)である．
 \end{proof}
 
 \begin{theorem}{射影定理}{projection_theorem}\index{しゃえいていり@射影定理}
   \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，\(V\)は\(H\)の閉部分空間とする．
   このとき，\(V\)の元\(m\)に関する以下の条件は同値であり，条件を満たす\(m\)はただ一つ存在する．
   \begin{enumerate}
-    \item \(m\in\argmin_{y\in V}\vnorm{y-x}\)である．
-    \item 任意の\(v\in V\)に対して\(\innerp{m-x}{v}=0\)である．
+    \item \(m\in\argmin_{y\in V}\vnorm{x-y}\)である．
+    \item 任意の\(v\in V\)に対して\(\innerp{x-m}{v}=0\)である．
   \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(n\in\argmin_{y\in V}\vnorm{y-x}\)を満たす\(n\)が一意に定まる．あとは\cref{xr-proposition:finite_projection}と同様に示せる．
+  閉部分空間は閉凸集合だから，\nameref{theorem:convex_projection_theorem}より\(m\in\argmin_{y\in V}\vnorm{x-y}\)を満たす\(m\)が一意に定まる．あとは\cref{xr-proposition:finite_projection}と同様に示せる．
 \end{proof}
 
 \begin{definition}{直交射影}{hilbert_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\)}
@@ -376,14 +376,14 @@
 \end{proposition}
 
 \begin{proof}
-  \(v\in\clsr V\)を任意にとる．\(\epsilon=\sum\innerp{x}{\phi_n}\phi_n-x\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
+  \(v\in\clsr V\)を任意にとる．\(\epsilon=x-\sum\innerp{x}{\phi_n}\phi_n\)が\(\innerp{\epsilon}{v}=0\)を満たせば，
   \nameref{theorem:projection_theorem}から\(\proj_{\clsr V}x=\sum\innerp{x}{\phi_n}\phi_n\)といえる．
 
   \(v\in\clsr V\)なので，\(\tilde{v}_n\to v\)（\(n\to\infty\)）を満たす\(V\)上の点列\(\seq{\tilde{v}_n}\)がある．
   また，\(\innerp{\phi_i}{\phi_j}=\kdelta{i}{j}\)より
   \[
-    \innerp{\epsilon}{\phi_j} = \innerp*{\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i-x}{\phi_j}
-    = \sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}-\innerp{x}{\phi_j}
+    \innerp{\epsilon}{\phi_j} = \innerp*{x-\sum_{i=1}^\infty\innerp{x}{\phi_i}\phi_i}{\phi_j}
+    = \innerp{x}{\phi_j}-\sum_{i=1}^\infty\innerp{x}{\phi_i}\innerp{\phi_i}{\phi_j}
     = 0
   \]
   だから，\(V=\spannedby\Set{\phi_1,\phi_2,\dotsc}\)の元はすべて\(\epsilon\)と直交する．よって\(\innerp{\epsilon}{\tilde{v}_n}=0\)，\(\innerp{\epsilon}{v}=\innerp{\epsilon}{v-\tilde{v}_n}\)である．

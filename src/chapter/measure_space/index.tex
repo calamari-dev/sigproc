@@ -333,7 +333,7 @@
 本節では，確率空間\((\Omega,\sigmaalg{F},\prob)\)上で定義される諸概念を見ていく．
 
 確率論ではしばしば，実数\(x\)に関する条件\(C(x)\)と確率変数\(X\)に対して，集合\(\Set{\omega\in\Omega\given C(X(\omega))}\)を\(\Set{C(X)}\)と書く．
-たとえば\(\Set{X=1}=\Set{\omega\in\Omega\given X(\omega)=1}=\inv{X}{1}\)，\(\prob(X=Y)=\prob(\Set{\omega\in\Omega\given X(\omega)=Y(\omega)})\)である．
+たとえば\(\Set{X=1}=\inv{X}{\Set{1}}\)，\(\prob(X=Y)=\prob(\Set{\omega\in\Omega\given X(\omega)=Y(\omega)})\)である．
 
 \subsection{確率変数が定める量}
 
@@ -393,11 +393,7 @@
 で定義できる．
 
 以下では，一般のσ‐加法族\(\sigmaalg{G}\)に対して通用する\(\condexpval{X\given\sigmaalg{G}}\)の定義を考える．
-\(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい．
-
-\begin{note}
-  たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．  
-\end{note}
+\(X\)と\(Y\)を実数値確率変数とする．\(X\)と\(Y\)の値にはなんらかの関係があり，\(Y\)の値に関する条件の下で，\(X\)の期待値が持つ性質を解析したい\footnote{たとえば，\(Y\)は気温，\(X\)はアイスクリームの売上と考えるとよい．}．
 
 \(Y\)の値に関する事象全体は，σ‐加法族\(\sigmaalg{G}=\Set{\inv{Y}{A}\given A\in\borelset{\numset{R}}}\)である．
 また，\(y\fallingdotseq n\increment y\)，\(0<\increment y\ll 1\)なら\(\condexpval{X\given\delta Y_n}\)（\(\delta Y_n=\Set{(n-1)\increment y<Y\leq n\increment y}\)）はおおむね，条件\(Y=y\)の下での\(X\)の期待値を表すとみられる．
@@ -498,7 +494,7 @@
 
 \begin{example}
   \(\lebesgue{p}(\numset{N})\)は計数測度\(\mu\colon\powerset{\numset{N}}\to\ccival{0}{+\infty}\)に関する\(\Lebesgue{p}\)空間である．
-  実際，関数\(f\colon\numset{N}\to\numset{K}\)が\(\sigmaalg{F}\)‐可測なら，関数\(\phi^{\mathord{+}}_n=\sum_{k=1}^nf^{\mathord{+}}(k)\indicator_{\Set{k}}\)は非負値単関数であり，\nameref{theorem:monotone_convergence}から
+  実際，関数\(f\colon\numset{N}\to\numset{R}\)が\(\sigmaalg{F}\)‐可測なら，関数\(\phi^{\mathord{+}}_n=\sum_{k=1}^nf^{\mathord{+}}(k)\indicator_{\Set{k}}\)は非負値単関数であり，\nameref{theorem:monotone_convergence}から
   \[
     \int f^{\mathord{+}}\measured{\mu} = \lim_{n\to\infty}\int\phi_n^{\mathord{+}}\measured{\mu}
     = \lim_{n\to\infty}\sum_{k=1}^nf^{\mathord{+}}(k)\mu(\Set{k})

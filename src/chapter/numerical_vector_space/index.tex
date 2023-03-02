@@ -35,10 +35,10 @@
   \includegraphics{figures/proj2d.pdf}
 \end{wrapfigure}
 
-\(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{m}-\vect{x}}\)を最小にする\(\vect{m}\in V\)について考えよう．
+\(\numset{K}^n\)のベクトル\(\vect{x}\)，部分空間\(V\)が与えられたとき，\(V\)の元で\(\vect{x}\)に最も近いベクトル，すなわち，距離\(\vnorm{\vect{x}-\vect{m}}\)を最小にする\(\vect{m}\in V\)について考えよう．
 
 \(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合，\(\vect{m}\)は図の位置にある．
-図を見ると，\(\vect{m}-\vect{x}\)は\(\vect{v}\)と直交しているのが分かる．
+図を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
 
 一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
@@ -83,7 +83,7 @@
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)はただ一つの元からなる集合である．
+  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ一つの元からなる集合である．
 \end{proposition}
 
 \begin{proof}
@@ -98,7 +98,7 @@
   \]
   である．よって，\cref{lemma:binomial_square}より\(s_i=\rpart z_i\)，\(t_i=\ipart z_i\)とおくと
   \begin{align*}
-    \vnorm{\vect{y}-\vect{x}}^2 &= \vnorm*{\vect{x}-\sum z_i\vect{e}_i}^2
+    \vnorm{\vect{x}-\vect{y}}^2 &= \vnorm*{\vect{x}-\sum z_i\vect{e}_i}^2
     = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_i\vect{e}_i}+\vnorm*{\sum z_i\vect{e}_i}^2 \\
     &= \vnorm{\vect{x}}^2+\sum(-2\rpart(\conj{z}_i\innerp{\vect{x}}{\vect{e}_i})+\abs{z_i}^2) \\
     &= \vnorm{\vect{x}}^2+\sum(-2\rpart((s_i-\iuni t_i)\innerp{\vect{x}}{\vect{e}_i})+s_i^2+t_i^2) \\
@@ -108,47 +108,47 @@
   なので，次式が成立する．
   \begin{equation}
     \label{equation:pre_bessels_inequality}
-    \vnorm{\vect{y}-\vect{x}}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
+    \vnorm{\vect{x}-\vect{y}}^2 = \vnorm{\vect{x}}^2+\sum_{i=1}^m\abs{z_i-\innerp{\vect{x}}{\vect{e}_i}}^2-\sum_{i=1}^m\abs{\innerp{\vect{x}}{\vect{e}_i}}^2
   \end{equation}
 
   右辺の値が最も小さくなるのは\(z_i=\innerp{\vect{x}}{\vect{e}_i}\)のときであり，そのとき\(\vect{y}=\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)だから
-  \(\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}\)である．
+  \(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}=\Set{\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}\)である．
 \end{proof}
 
 \begin{proposition}{}{weak_finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
-  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)を満たすとき，
-  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
+  \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
 
 \begin{proof}
-  任意に\(\vect{y}\in V\)をとり，\(\increment\vect{y}=\vect{y}-\vect{m}\)とおく．すると，\(\innerp{\vect{m}-\vect{x}}{\increment\vect{y}}=0\)より
-  \(\vnorm{\vect{y}-\vect{x}}^2=\vnorm{(\vect{m}-\vect{x})+\increment\vect{y}}^2=\vnorm{\vect{m}-\vect{x}}^2+\vnorm{\increment\vect{y}}^2\)が成立する．
-  よって\(\vnorm{\vect{y}-\vect{x}}\geq\vnorm{\vect{m}-\vect{x}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
+  任意に\(\vect{y}\in V\)をとり，\(\increment\vect{y}=\vect{m}-\vect{y}\)とおく．すると，\(\innerp{\vect{x}-\vect{m}}{\increment\vect{y}}=0\)より
+  \(\vnorm{\vect{x}-\vect{y}}^2=\vnorm{(\vect{x}-\vect{m})+\increment\vect{y}}^2=\vnorm{\vect{x}-\vect{m}}^2+\vnorm{\increment\vect{y}}^2\)が成立する．
+  よって\(\vnorm{\vect{x}-\vect{y}}\geq\vnorm{\vect{x}-\vect{m}}\)だから，\(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proof}
 
 \begin{proposition}{}{finite_projection}
   \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ一つ存在する．
   \begin{enumerate}
-    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)である．
-    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)である．
+    \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
+    \item 任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
   \end{enumerate}
 \end{proposition}
 
 \begin{proof}
   「2ならば1」は\cref{proposition:weak_finite_projection}で示した．
-  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)のとき，すべての\(\vect{v}\in V\)に対して\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)が成り立つことを示す．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
-  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{y}-\vect{x}}\)なので，関数\(\delta(z)=\vnorm{(\vect{m}+z\vect{v})-\vect{x}}^2-\vnorm{\vect{m}-\vect{x}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)のとき，すべての\(\vect{v}\in V\)に対して\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)が成り立つことを示す．それには\(\vnorm{\vect{v}}=1\)のときについて示せば十分である．
+  \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)なので，関数\(\delta(z)=\vnorm{\vect{x}-(\vect{m}+z\vect{v})}^2-\vnorm{\vect{x}-\vect{m}}^2\)（\(z\in\numset{C}\)）は負の値をとらない．
   一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
-    \delta(z) &= \vnorm{(\vect{m}-\vect{x})+z\vect{v}}^2-\vnorm{\vect{m}-\vect{x}}^2
-    = 2\rpart(\conj{z}\innerp{\vect{m}-\vect{x}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
-    &= 2(x\rpart\innerp{\vect{m}-\vect{x}}{\vect{v}}+y\ipart\innerp{\vect{m}-\vect{x}}{\vect{v}})+x^2+y^2 \\
-    &= (x+\rpart\innerp{\vect{m}-\vect{x}}{\vect{v}})^2+(y+\ipart\innerp{\vect{m}-\vect{x}}{\vect{v}})^2-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2 \\
-    &= \abs{z+\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2
+    \delta(z) &= \vnorm{(\vect{x}-\vect{m})-z\vect{v}}^2-\vnorm{\vect{x}-\vect{m}}^2
+    = -2\rpart(\conj{z}\innerp{\vect{x}-\vect{m}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    &= -2(x\rpart\innerp{\vect{x}-\vect{m}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{m}}{\vect{v}})+x^2+y^2 \\
+    &= (x-\rpart\innerp{\vect{x}-\vect{m}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{m}}{\vect{v}})^2-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2 \\
+    &= \abs{z-\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2
   \end{align*}
-  より\(-\abs{\innerp{\vect{m}-\vect{x}}{\vect{v}}}^2=\delta(-\innerp{\vect{m}-\vect{x}}{\vect{v}})\geq 0\)，よって\(\innerp{\vect{m}-\vect{x}}{\vect{v}}=0\)である．
+  より\(\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2=-\delta(\innerp{\vect{x}-\vect{m}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
   \(\vect{m}\)が1つしかないことは\cref{proposition:finite_convex_projection}による．
 \end{proof}
 
@@ -163,8 +163,8 @@
 \end{figure}
 
 \begin{example}
-  \(\numset{R}^3\)の部分空間\(V\)を\(V=\spannedby\Set{\vect{e}_x,\vect{e}_y}\)（\(\vect{e}_x=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{e}_y=\trps{\rowvect{0 & 1 & 0}}\)）で定義する．
-  このとき，集合\(\Set{\vect{e}_x,\vect{e}_y}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{e}_x}\vect{e}_x+\innerp{\vect{r}}{\vect{e}_y}\vect{e}_y=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\)）である．
+  部分空間\(V\subset\numset{R}^3\)を\(V=\spannedby\Set{\vect{i},\vect{j}}\)（\(\vect{i}=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{j}=\trps{\rowvect{0 & 1 & 0}}\)）で定義する．
+  このとき，集合\(\Set{\vect{i},\vect{j}}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{i}}\vect{i}+\innerp{\vect{r}}{\vect{j}}\vect{j}=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\)）である．
 \end{example}
 
 \begin{proposition}{}{}
@@ -173,7 +173,7 @@
 
 \begin{proof}
   \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)，\(\vect{z}=s\vect{x}+t\vect{y}\)とおく．
-  このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{m}-\vect{z}}{\vect{v}}=s\innerp{\proj_V(\vect{x})-\vect{x}}{\vect{v}}+t\innerp{\proj_V(\vect{y})-\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
+  このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V\vect{x}}{\vect{v}}+t\innerp{\vect{y}-\proj_V\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
 \end{proof}
 
 \begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp[V]{W}\)}\indexsymbol{\(\pcomp{V}\)}
@@ -328,16 +328,16 @@
 の解き方である．\(\mat{A}=\matfence{\midx{a}{i}{j}}\)，\(\vect{b}=\trps{\rowvect{b_1 & \cdots & b_n}}\)とおくと，\cref{equation:linear_equation}は\(\mat{A}\vect{x}=\vect{b}\)と書ける．もし\(n=p\)で\(\mat{A}\)が正則なら，解は\(\vect{x}=\mat{A}^{-1}\vect{b}\)ただ一つである．
 
 \(\mat{A}\)が正則でないとき，\cref{equation:linear_equation}の厳密解があるかどうかは\(\vect{b}\)次第である．
-\termdef{最小2乗法}\index{さいしょうにじょうほう@最小2乗法}（least squares method）は，厳密解の代わりに\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする近似解\(\vect{x}\)を見つける手法である．
+\termdef{最小2乗法}\index{さいしょうにじょうほう@最小2乗法}（least squares method）は，厳密解の代わりに\termdef{残差}\index{ざんさ@残差}（residual）\(\vect{\epsilon}(\vect{x})=\vect{b}-\mat{A}\vect{x}\)のノルム\(\vnorm{\vect{\epsilon(\vect{x})}}\)を最小にする近似解\(\vect{x}\)を見つける手法である．
 次の命題から，所望の近似解\(\vect{x}\)は常に存在する．
 
 \begin{proposition}{}{least_square_existence}
-  \(\vect{b}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\mat{A}\vect{x}-\vect{b}\)）は空でない．
+  \(\vect{b}\in\numset{K}^n\)かつ，\(\mat{A}\)は\(\numset{K}\)上の\(n\times p\)行列とする．このとき，集合\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)（\(\vect{\epsilon}(\vect{x})=\vect{b}-\mat{A}\vect{x}\)）は空でない．
 \end{proposition}
 
 \begin{proof}
   線型写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義する．
-  関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)の最小値は\(\min\Set{\vnorm{\mat{A}\vect{x}-\vect{b}}\given\vect{x}\in\numset{K}^p}=\min\Set{\vnorm{\vect{z}-\vect{b}}\given\vect{z}\in\img T_A}\)であり，\(\vnorm{\vect{z}-\vect{b}}\)の値を最小にする\(\vect{z}\in\img T_A\)は\(\proj_{\img T_A}\vect{b}\)ただ一つである．
+  関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)の最小値は\(\min\Set{\vnorm{\vect{b}-\mat{A}\vect{x}}\given\vect{x}\in\numset{K}^p}=\min\Set{\vnorm{\vect{b}-\vect{z}}\given\vect{z}\in\img T_A}\)であり，\(\vnorm{\vect{b}-\vect{z}}\)の値を最小にする\(\vect{z}\in\img T_A\)は\(\proj_{\img T_A}\vect{b}\)ただ一つである．
   よって，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は方程式\(\mat{A}\vect{x}=\proj_{\img T_A}\vect{b}\)の解集合である．この方程式は明らかに解をもつから，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は空でない．
 \end{proof}
 
@@ -356,7 +356,7 @@
   \(P=\proj_{\colsp\mat{A}}\)とおく．\(\Set{\vect{a}_1,\vect{a}_2}\)に\nameref{xr-proposition:gram_schmidt}を適用すると
   \(\vect{e}_1=\trps{\rowvect{4 & 1 & 2}}/\sqrt{21}\)，\(\vect{e}_2=\trps{\rowvect{-1 & 2 & 1}}/\sqrt{6}\)が得られるので，
   \(P(\vect{b})=\innerp{\vect{b}}{\vect{e}_1}\vect{e}_1+\innerp{\vect{b}}{\vect{e}_2}\vect{e}_2=-2\trps{\rowvect{1 & 1 & 1}}\)である．
-  よって，\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解集合\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
+  よって，\(\argmin_{\vect{x}\in\numset{R}^2}\vnorm{\vect{b}-\mat{A}\vect{x}}\)は方程式\(\mat{A}\vect{x}=-2\trps{\rowvect{1 & 1 & 1}}\)の解集合\(\Set{\trps{\rowvect{-1/2 & -1/2}}}\)である．
 \end{example}
 
 \begin{figure}[htbp]
@@ -375,14 +375,14 @@
 \begin{proof}
   \(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)（\(\increment\vect{x}\in\numset{K}^p\)）とおくと
   \begin{align*}
-    \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})+\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
-    = 2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
-    &= 2\rpart\innerp{\htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+    \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})-\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
+    = -2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
+    &= -2\rpart\innerp{\htrps{\mat{A}}(\vect{b}-\mat{A}\vect{x})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
   \end{align*}
   である．よって，\(\numset{K}^p\)の元\(\vect{a}\)が\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
   関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
 
-  また，\(\increment\vect{x}=-h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\mat{A}\vect{a}-\htrps{\mat{A}}\vect{b}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
+  また，\(\increment\vect{x}=h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
   \(\vect{g}=\zvec\)でなければ\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
 \end{proof}
 
@@ -390,8 +390,8 @@
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．
-\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，\(\vect{a}_j\in\colsp\mat{A}\)なので\(\innerp{\mat{A}\vect{x}-\vect{b}}{\vect{a}_j}=\htrps{\vect{a}_j}(\mat{A}\vect{x}-\vect{b})=0\)である．
-よって\(\htrps{\mat{A}}(\mat{A}\vect{x}-\vect{b})=\zvec\)である．
+\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，\(\vect{a}_j\in\colsp\mat{A}\)なので\(\innerp{\vect{b}-\mat{A}\vect{x}}{\vect{a}_j}=\htrps{\vect{a}_j}(\vect{b}-\mat{A}\vect{x})=0\)である．
+よって\(\htrps{\mat{A}}(\vect{b}-\mat{A}\vect{x})=\zvec\)である．
 
 \subsection{スペクトル分解と特異値分解}
 \label{subsection:sd_and_svd}
@@ -463,19 +463,18 @@
 特異値分解に基づいて\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)を求めよう．
 \(\mat{A}\neq\zmat\)を仮定し，\(\mat{A}\)の特異値分解を\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)とおく．
 \cref{proposition:unitary_matrix_characterization}から，ユニタリ行列を掛けてもノルムは変わらないので
-\(\vnorm{\vect{\epsilon}(\vect{x})}^2=\vnorm{(\mat{U}\mat{\Sigma}\htrps{\mat{V}})\vect{x}-\vect{b}}^2=\vnorm{\mat{\Sigma}\htrps{\mat{V}}\vect{x}-\htrps{\mat{U}}\vect{b}}^2\)である．
+\(\vnorm{\vect{\epsilon}(\vect{x})}^2=\vnorm{\vect{b}-\mat{U}\mat{\Sigma}\htrps{\mat{V}}\vect{x}}^2=\vnorm{\htrps{\mat{U}}\vect{b}-\mat{\Sigma}\htrps{\mat{V}}\vect{x}}^2\)である．
 \(\vect{y}=\trps{\rowvect{y_1 & \cdots & y_p}}=\htrps{\mat{V}}\vect{x}\)，\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)，\(\mat{\Sigma}=\smallmatrice{\diag(\sigma_1,\dots,\sigma_r) & \\ & \zmat}\)（\(\sigma_r>0\)）とおくと
 \[
-  \vnorm{\vect{\epsilon}(\vect{x})}^2 = \vnorm{\mat{\Sigma}\vect{y}-\htrps{\mat{U}}\vect{b}}^2
-  = \sum_{i=1}^r\abs{\sigma_iy_i-\htrps{\vect{u}_i}\vect{b}}^2+\sum_{i=r+1}^p\abs{\htrps{\vect{u}_i}\vect{b}}^2
+  \vnorm{\vect{\epsilon}(\vect{x})}^2 = \vnorm{\htrps{\mat{U}}\vect{b}-\mat{\Sigma}\vect{y}}^2
+  = \sum_{i=1}^r\abs{\htrps{\vect{u}_i}\vect{b}-\sigma_iy_i}^2+\sum_{i=r+1}^p\abs{\htrps{\vect{u}_i}\vect{b}}^2
 \]
 となる．右辺の値が最も小さくなるのは\(y_i=\htrps{\vect{u}_i}\vect{b}/\sigma_i\)（\(1\leq i\leq r\)）のときであり，\(y_{r+1},\dots,y_p\)の値はなんであっても構わない．
 \(\vect{x}=\mat{V}\vect{y}\)だから，\(\vnorm{\vect{\epsilon}(\vect{x})}\)が最小値をとるのは\(\vect{x}\)が
-\begin{equation}
-  \label{equation:pseudoinverse_least_square}
+\[
   \vect{x} = \mat{V}\trps{\matrice{\htrps{\vect{u}_1}\vect{b}/\sigma_1 & \cdots & \htrps{\vect{u}_r}\vect{b}/\sigma_r & z_{r+1} & \cdots & z_p}}\quad(z_i\in\numset{C})
-\end{equation}
-と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて\cref{equation:pseudoinverse_least_square}を整理すると，
+\]
+と表せるときである．\(\vect{z}=\trps{\rowvect{z_1 & \cdots & z_p}}\)，\(\pinv{\mat{\Sigma}}=\smallmatrice{\diag(1/\sigma_1,\dots,1/\sigma_r) & \\ & \zmat}\)，\(\pinv{\mat{A}}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)とおいて整理すると，
 \(\pinv{\mat{\Sigma}}\mat{\Sigma}=\smallmatrice{\imat_r & \\ & \zmat_{p-r}}\)なので
 \begin{align*}
   \vect{x} &= \mat{V}\matrice*{(1/\sigma_1)\htrps{\vect{u}_1}\vect{b} \\ \vdots \\ (1/\sigma_r)\htrps{\vect{u}_r}\vect{b} \\ \zvec_{p-r}}+\mat{V}\matrice*{\zvec_r \\ z_{r+1} \\ \vdots \\ z_p}
@@ -501,7 +500,7 @@
 \begin{proposition}{}{pseudoinverse_least_square}
   任意の\(n\times p\)複素行列\(\mat{A}\)に対して，次の式が成立する．
   \[
-    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
+    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{b}-\mat{A}\vect{x}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
   \]
 \end{proposition}
 
@@ -509,7 +508,7 @@
 \label{subsection:pseudoinverse}
 
 これまでと同様，\(\mat{A}\)は任意の\(n\times p\)複素行列，\(\vect{b}\)は\(\numset{C}^n\)の任意の元とする．
-ここでは擬似逆行列の性質と\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の構造について説明する．
+ここでは擬似逆行列の性質と\(\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{b}-\mat{A}\vect{x}}\)の構造について説明する．
 
 \begin{proposition}{擬似逆行列の特徴づけ}{pseudoinverse_characterization}
   以下の条件すべてを満たす\(p\times n\)行列\(\mat{X}\)は，\(\mat{A}\)に対し一意である．
@@ -542,7 +541,7 @@
 \end{proof}
 
 \begin{proposition}{}{pseudoinverse_minimum_norm}
-  集合\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)の元でノルムが最も小さいものは，\(\pinv{\mat{A}}\vect{b}\)ただ一つである．
+  集合\(S=\argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{b}-\mat{A}\vect{x}}\)の元でノルムが最も小さいものは，\(\pinv{\mat{A}}\vect{b}\)ただ一つである．
   すなわち\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}=\Set{\pinv{\mat{A}}\vect{b}}\)である．
 \end{proposition}
 
@@ -553,12 +552,12 @@
 \end{proof}
 
 実は，\cref{proposition:pseudoinverse_minimum_norm}において\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)の元が唯一であることは擬似逆行列を使わず証明できる．
-\cref{section:least_square}の初めに述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
+\cref{section:least_square}の初めに述べた通り，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{b}-\mat{A}\vect{x}}\)は方程式\(\mat{A}\vect{x}=\tilde{\vect{b}}\)（\(\tilde{\vect{b}}=\proj_{\colsp\mat{A}}\vect{b}\)）の解集合である．
 この方程式の解を1つ選び\(\vect{a}\)とおくと，他の解\(\vect{x}\)は\(\mat{A}(\vect{x}-\vect{a})=\tilde{\vect{b}}-\tilde{\vect{b}}=\zvec\)，
 つまり\(\vect{x}-\vect{a}\in\nulsp\mat{A}\)（\(\nulsp\mat{A}=\Set{\vect{n}\in\numset{C}^p\given\mat{A}\vect{n}=\zvec}\)）\index{nul@\(\nulsp\mat{A}\)}を満たす．
 
 逆に，\(\numset{K}^p\)の元\(\vect{x}\)が\(\vect{x}-\vect{a}\in\nulsp\mat{A}\)を満たせば\(\mat{A}\vect{x}=\tilde{\vect{b}}\)も成立する．
-つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\mat{A}\vect{x}-\vect{b}}\)は，部分空間\(\nulsp\mat{A}\)を\(\vect{a}\)によって平行移動した集合\(\Set{\vect{a}+\vect{n}\given\vect{n}\in\nulsp\mat{A}}\)である．
+つまり\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{b}-\mat{A}\vect{x}}\)は，部分空間\(\nulsp\mat{A}\)を\(\vect{a}\)によって平行移動した集合\(\Set{\vect{a}+\vect{n}\given\vect{n}\in\nulsp\mat{A}}\)である．
 このような集合をアフィン部分空間という．
 
 \begin{definition}{アフィン部分空間}{affine_subspace}\index{あふぃんぶぶんくうかん@アフィン部分空間}\index{ぶぶんくうかん@部分空間!あふぃん@アフィン\texttwoemdash}
@@ -572,8 +571,8 @@
   \caption{アフィン部分空間\(\vect{a}+W\)の模式図．}
 \end{figure}
 
-任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
-実際，\(S=\vect{a}+W\)（\(\vect{a}\in S\)）とおくと\(\argmin_{\vect{y}\in S}\vnorm{\vect{y}-\vect{x}}=\argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{y}-\vect{a})-(\vect{x}-\vect{a})}=\Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}\)である．
+任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{x}-\vect{y}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
+実際，\(S=\vect{a}+W\)（\(\vect{a}\in S\)）とおくと\(\argmin_{\vect{y}\in S}\vnorm{\vect{x}-\vect{y}}=\argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{x}-\vect{a})-(\vect{y}-\vect{a})}=\Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}\)である．
 
 よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\vect{a}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．
 
@@ -646,7 +645,7 @@
 あてはまりのよさを評価する指標はいろいろ考えられるが，ここでは関数
 \begin{equation}
   \label{equation:mean_square}
-  \epsilon(\vect{c}) = \sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2
+  \epsilon(\vect{c}) = \sum_{i=1}^n\abs{y_i-f(\vect{c};x_i)}^2
 \end{equation}
 を採用する．各\(f(\vect{c};x_i)\)の値が\(y_i\)の値に近いほど\(\epsilon(\vect{c})\)の値は小さくなるので，\(\epsilon(\vect{c})\)の値が小さいほど\(f(\vect{c};x)\)は標本によくあてはまっているといえる．
 
@@ -658,10 +657,10 @@
 
 \(\vect{\phi}_i=\trps{\rowvect{x_i^0 & \cdots & x_i^p}}\)，\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}_1 & \cdots & \vect{\phi}_n}}\)とおくと，\(f(\vect{c};x_i)=\trps{\vect{\phi}_i}\vect{c}\)だから
 \[
-  \epsilon(\vect{c}) = \vnorm*{\matrice*{\trps{\vect{\phi}_1} \\ \vdots \\ \trps{\vect{\phi}_n}}\vect{c}-\matrice*{y_1 \\ \vdots \\ y_n}}^2
-  = \vnorm{\mat{\Phi}\vect{c}-\vect{y}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_n}})
+  \epsilon(\vect{c}) = \vnorm*{\matrice*{y_1 \\ \vdots \\ y_n}-\matrice*{\trps{\vect{\phi}_1} \\ \vdots \\ \trps{\vect{\phi}_n}}\vect{c}}^2
+  = \vnorm{\vect{y}-\mat{\Phi}\vect{c}}^2\quad(\vect{y}=\trps{\matrice{y_1 & \cdots & y_n}})
 \]
-である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど示した方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\mat{\Phi}\vect{c}-\vect{y}}\)を計算すればよい．
+である．よって，\(f(\vect{c};x)\)が標本に最もよくあてはまる\(\vect{c}\)を求めるには，さきほど示した方法で\(\argmin_{\vect{c}\in\numset{K}^{p+1}}\vnorm{\vect{y}-\mat{\Phi}\vect{c}}\)を計算すればよい．
 
 \begin{example}
   \label{example:linear_regression}
@@ -683,7 +682,7 @@
   y = c_1\phi_1(x)+\dots+c_p\phi_p(x)
   = \trps{\vect{c}}\vect{\phi}(x)
 \end{equation}
-と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{f(\vect{c};x_i)-y_i}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\mat{\Phi}\vect{c}-\vect{y}}\)である．
+と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{y_i-f(\vect{c};x_i)}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\vect{y}-\mat{\Phi}\vect{c}}\)である．
 ただし，\(\mat{\Phi}\)は\(n\times p\)行列\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}(x_1) & \cdots & \vect{\phi}(x_n)}}\)である．
 
 なお，\(\phi_1,\dots,\phi_p\)が線型従属だと\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
@@ -825,7 +824,7 @@
 
 \(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(f(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
-  \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{f(\vect{c};t_n)-x[n]}^2\quad(t_n=2\krez n/N)
+  \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{x[n]-f(\vect{c};t_n)}^2\quad(t_n=2\krez n/N)
 \]
 の値を最も小さくする\(\vect{c}\in\numset{C}^N\)を求める．それには正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{x}\)を解けばよい．ただし
 \begin{gather*}
