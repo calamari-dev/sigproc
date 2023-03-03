@@ -691,30 +691,23 @@
 \section{離散フーリエ変換}
 \label{section:dft}
 
-\cref{section:dft}から，本書の主題である信号解析に入っていく．
-
-\subsection{信号の空間}
-
-手始めに，いまから扱う信号とは何か明確にしておく．
+\cref{section:dft}から，本書の主題である信号解析に入っていく．その手始めに，いまから扱う信号とは何か明確にしておく．
 
 ごくごく一般的に言うと，信号とは入力に対して出力が観測されるもの全般を指し，入力全体\(I\)から出力全体\(O\)への写像でモデル化できる．
 たとえば，対象が音声信号なら\(I\)は時刻全体，\(O\)は瞬時値全体である．また，対象がモノクロ画像なら\(I\)は画素の位置全体，\(O\)は白黒の階調全体である．
 
 始域が\(X\)，終域が\(Y\)である写像の全体集合は通常\(\mapset{X}{Y}\)\indexsymbol{\(\mapset{X}{Y}\)}と書かれる．
-\(I\)と\(O\)を決めたとき，考えられる信号の最も広い枠組みは集合\(\mapset{I}{O}\)であろう．
-しかし，\(\mapset{I}{O}\)の元すべてに共通する性質は普通そう多くないし，\(\mapset{I}{O}\)には現実の系でまず見ない，扱いにくい（病的な）写像まで属していることが多い．
-そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが有する性質を解析する．言い換えると，適当な条件を満たす信号全体\(S\subset\mapset{I}{O}\)が持つ性質を調べる．
+\(I\)と\(O\)を決めたとき，考えられる信号の最も広い枠組みは\(\mapset{I}{O}\)であろう．
+しかし，\(\mapset{I}{O}\)の元すべてに共通する性質は普通そう多くない．
+そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが持つ特徴を調べる．
 
 \cref{section:dft}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
 こうした信号は\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）と呼ばれる．
 反対に，\(I\)が区間や実数全体のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
 
-時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．これは
-\[
-  x = \seq{x_n}_{n=0}^{N-1}\longleftrightarrow
-  \vect{x} = \trps{\matrice{x_0 & \cdots & x_{N-1}}}
-\]
-という対応づけを考えれば明らかであろう．また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
+時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
+これは対応づけ\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\matrice{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
+また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
 \[
   \seq{x_n}+\seq{y_n} = \seq{x_n+y_n},
   \quad\lambda\seq{x_n} = \seq{\lambda x_n}\quad\text{(\(\seq{x_n},\seq{y_n}\in\mapset{\numset{Z}}{\numset{K}}\)，\(\lambda\in\numset{K})\)}
@@ -757,31 +750,22 @@
 \end{equation}
 と書ける．
 
-\cref{proposition:unitary_matrix_characterization}と\cref{proposition:dft_onb}から，次の系がしたがう．
-
-\begin{corollary}{}{dft_plancherel}
-  \(\innerp{\dft{N}\vect{x}}{\dft{N}\vect{y}}=\innerp{\vect{x}}{\vect{y}}\)（\(\vect{x},\vect{y}\in\numset{C}^N\)）である．
-\end{corollary}
-
-\cref{corollary:dft_plancherel}に関して，特に\(\vect{x}=\vect{y}\)のとき
-\begin{equation}
-  \label{equation:dft_parseval}
-  \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
-\end{equation}
-である．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．
-
 他の諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/time_domain.pdf}
-  \caption{「あ」の波形．}
-  \label{figure:time_domain}
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/time_domain.pdf}
+    \caption{「あ」の波形．}
+    \label{figure:time_domain}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/helix.pdf}
+    \caption{複素指数関数のグラフ．}
+    \label{figure:complex_sinusoid}
+  \end{minipage}
 \end{figure}
-
-\begin{wrapfigure}[10]{o}{0pt}
-  \includegraphics{figures/helix.pdf}
-\end{wrapfigure}
 
 \cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音 Ver1.5.1を使用した．}．
 \cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
@@ -791,7 +775,7 @@
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
   = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\abs{\hat{x}_k}\napr^{\iuni(2\krez kn/N+\arg\hat{x}_k)}
 \]
-となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は図のような螺旋形を描く（矢印は時間軸）．
+となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は\cref{figure:complex_sinusoid}のような螺旋形を描く（矢印は時間軸）．
 
 実際に\(\abs{\hat{x}_k}\)を計算すると，\cref{figure:frequency_domain}実線部のようになる．
 
@@ -1126,6 +1110,12 @@
     （この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている）．
     \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると
     \(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
+  \item \(\dft{N}\vect{x}=\trps{\rowvect{\hat{x}_0 & \cdots & \hat{x}_{N-1}}}\)（\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)）のとき
+  \begin{equation}
+    \label{equation:dft_parseval}
+    \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
+  \end{equation}
+  であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
 \end{enumerate}
 
 \end{document}
