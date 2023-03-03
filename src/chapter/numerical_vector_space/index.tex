@@ -698,15 +698,15 @@
 
 始域が\(X\)，終域が\(Y\)である写像の全体集合は通常\(\mapset{X}{Y}\)\indexsymbol{\(\mapset{X}{Y}\)}と書かれる．
 \(I\)と\(O\)を決めたとき，考えられる信号の最も広い枠組みは\(\mapset{I}{O}\)であろう．
-しかし，\(\mapset{I}{O}\)の元すべてに共通する性質は普通そう多くない．
+しかし，\(\mapset{I}{O}\)の元すべてに共通する特徴は普通そう多くない．
 そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが持つ特徴を調べる．
 
 \cref{section:dft}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
 こうした信号は\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）と呼ばれる．
-反対に，\(I\)が区間や実数全体のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
+反対に，\(I\)が\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
 
 時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
-これは対応づけ\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\matrice{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
+これは対応づけ\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
 また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
 \[
   \seq{x_n}+\seq{y_n} = \seq{x_n+y_n},
@@ -755,7 +755,10 @@
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
-    \includegraphics{figures/time_domain.pdf}
+    \begin{minipage}[t][45mm][c]{\linewidth}
+      \centering
+      \includegraphics{figures/time_domain.pdf}
+    \end{minipage}
     \caption{「あ」の波形．}
     \label{figure:time_domain}
   \end{minipage}%
@@ -768,7 +771,7 @@
 \end{figure}
 
 \cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音 Ver1.5.1を使用した．}．
-\cref{section:numerical_vector_space_introduction}で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
+冒頭で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
 そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
 つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
 \[
