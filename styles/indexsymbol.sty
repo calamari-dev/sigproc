@@ -2,5 +2,5 @@
 \RequirePackage{expl3}
 \ProvidesExplPackage{indexsymbol}{2023-02-01}{1.0}{indexsymbol}
 
-\lua_now:e{require("indexsymbol.lua")}
+\lua_now:e{indexsymbol = require "indexsymbol"}
 \NewDocumentCommand{\indexsymbol}{m}{\lua_now:e{indexsymbol.run("\lua_escape:n{#1}")}}

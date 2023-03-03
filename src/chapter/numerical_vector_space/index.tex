@@ -689,8 +689,38 @@
 そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう設計される．
 
 \section{離散フーリエ変換}
+\label{section:dft}
 
-この節から，本書の主題である信号解析に入っていく．
+\cref{section:dft}から，本書の主題である信号解析に入っていく．
+
+\subsection{信号の空間}
+
+手始めに，いまから扱う信号とは何か明確にしておく．
+
+ごくごく一般的に言うと，信号とは入力に対して出力が観測されるもの全般を指し，入力全体\(I\)から出力全体\(O\)への写像でモデル化できる．
+たとえば，対象が音声信号なら\(I\)は時刻全体，\(O\)は瞬時値全体である．また，対象がモノクロ画像なら\(I\)は画素の位置全体，\(O\)は白黒の階調全体である．
+
+始域が\(X\)，終域が\(Y\)である写像の全体集合は通常\(\mapset{X}{Y}\)\indexsymbol{\(\mapset{X}{Y}\)}と書かれる．
+\(I\)と\(O\)を決めたとき，考えられる信号の最も広い枠組みは集合\(\mapset{I}{O}\)であろう．
+しかし，\(\mapset{I}{O}\)の元すべてに共通する性質は普通そう多くないし，\(\mapset{I}{O}\)には現実の系でまず見ない，扱いにくい（病的な）写像まで属していることが多い．
+そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが有する性質を解析する．言い換えると，適当な条件を満たす信号全体\(S\subset\mapset{I}{O}\)が持つ性質を調べる．
+
+\cref{section:dft}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
+こうした信号は\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）と呼ばれる．
+反対に，\(I\)が区間や実数全体のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
+
+時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．これは
+\[
+  x = \seq{x_n}_{n=0}^{N-1}\longleftrightarrow
+  \vect{x} = \trps{\matrice{x_0 & \cdots & x_{N-1}}}
+\]
+という対応づけを考えれば明らかであろう．また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
+\[
+  \seq{x_n}+\seq{y_n} = \seq{x_n+y_n},
+  \quad\lambda\seq{x_n} = \seq{\lambda x_n}\quad\text{(\(\seq{x_n},\seq{y_n}\in\mapset{\numset{Z}}{\numset{K}}\)，\(\lambda\in\numset{K})\)}
+\]
+
+以上を踏まえて，まずは\(\numset{C}^N\)に属する信号の理論を構成しよう．
 
 \subsection{離散フーリエ変換}
 
@@ -787,7 +817,7 @@
 さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
 
 周波数\(f\)\,\si{Hz}の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
-一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について，同じ方法で数列を作ると，その一般項は
+一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について同じ方法で数列を作ると，その一般項は
 \[
   \napr^{2\krez\iuni(f-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni fn/f_{\symrm{s}}-2\krez\iuni n}
   = \napr^{2\krez\iuni fn/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
@@ -805,7 +835,7 @@
   \label{figure:aliasing}
 \end{figure}
 
-一般に，連続時間の信号から離散時間の信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}\index{サンプリング|see{標本化}}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
+一般に，連続時間信号から離散時間信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}\index{サンプリング|see{標本化}}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
 また，\(f_{\symrm{s}}\)を\termdef{標本化周波数}\index{ひょうほんかしゅうはすう@標本化周波数}（sampling frequency）という．
 
 \cref{figure:aliasing}の場合，標本化後の信号は周波数の絶対値が小さい（つまり低周波である）\SI{-0.5}{Hz}の波を表すと考えるほうが自然だろう．
@@ -847,7 +877,7 @@
     = \frac{1}{2\krez}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}\frac{2\krez}{N}
     \to \frac{1}{2\krez}\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}
   \end{gather*}
-  となる．標本を限りなく多くとったのだから，\(c_k=(1/(2\krez))\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}\)のとき\(f(t)=\sum c_k\napr^{\iuni kt}\)が成り立つと期待するのは自然だろう．
+  となる．無限に高い周波数まで近似に含めたのだから，\(c_k=(1/(2\krez))\int_0^{2\krez}f(t)\napr^{-\iuni kt}\intd{t}\)のとき\(f(t)=\sum c_k\napr^{\iuni kt}\)が成り立つと期待するのは自然だろう．
   詳しくは\cref{xr-chapter:hilbert_space}で説明するが，式\(f(t)=\sum c_k\napr^{\iuni kt}\)を\(f\)のフーリエ級数展開\index{ふーりえきゅうすうてんかい@フーリエ級数展開}といい，\(f\)に適切な仮定を課せば実際に等式が成り立つことを証明できる．
 \end{note}
 
@@ -863,26 +893,24 @@
 そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
-  周期\(N\)の複素数列全体\(\Set{\seq{u[i]}_{i\in\numset{Z}}\given u[i]=u[i+N]\in\numset{C}}\)を\(\cycles{\numset{C}}{N}\)と表記する．
-  線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
+  \(N\)を周期に持つ複素数列の全体集合を\(\cycles{\numset{C}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
     (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
   \]
 \end{definition}
 
-\(\cycles{\numset{C}}{N}\)は加法\(x+y=\seq{x[n]+y[n]}\)，スカラー乗法\(\lambda x=\seq{\lambda x[n]}\)に関する\(N\)次元ベクトル空間である．
-ベクトル空間\(\cycles{\numset{C}}{N}\)において，\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\delta\in\cycles{\numset{C}}{N}\)を
+明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\delta\in\cycles{\numset{C}}{N}\)を
 \[
   \delta[n] = \sum_{m\in\numset{Z}}\kdelta{n}{mN}
-  = \begin{cases}1 & (n\equiv 0\pmod{N}),\\ 0 & \text{(otherwise)}\end{cases}
+  = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める．このとき，集合\(\basis{D}=\Set{\lagop^0\delta,\lagop^1\delta,\dots,\lagop^{N-1}\delta}\)は\(\cycles{\numset{C}}{N}\)の基底である．
-実際，任意の\(x\in\cycles{\numset{C}}{N}\)に対して
+と定める．すると，任意の\(x\in\cycles{\numset{C}}{N}\)，\(n\in\Set{0,\dots,N-1}\)に対して
 \[
   \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = \sum_{m=0}^{N-1}x[m]\delta[n-m]
-  = x[n]\quad(0\leq n<N)
+  = \sum_{m=0}^{N-1}x[m]\kdelta{n}{m}
+  = x[n]
 \]
-なので，\(x\)は\(\basis{D}\)の元の線型結合で\(x=\sum_{m=0}^{N-1}x[m](\lagop^m\delta)\)と表せる．
+が成立する．よって，集合\(\basis{D}=\Set{\lagop^0\delta,\lagop^1\delta,\dots,\lagop^{N-1}\delta}\)は\(\cycles{\numset{C}}{N}\)の基底である．
 
 \begin{proposition}{}{dft_shift_theorem}
   任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
