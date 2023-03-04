@@ -691,7 +691,7 @@
 \section{離散フーリエ変換}
 \label{section:dft}
 
-\cref{section:dft}から，本書の主題である信号解析に入っていく．その手始めに，いまから扱う信号とは何か明確にしておく．
+\cref{section:dft}から，本書の主題である信号解析に入る．その手始めに，いまから扱う信号とは何か明確にしておく．
 
 ごくごく一般的に言うと，信号とは入力に対して出力が観測されるもの全般を指し，入力全体\(I\)から出力全体\(O\)への写像でモデル化できる．
 たとえば，対象が音声信号なら\(I\)は時刻全体，\(O\)は瞬時値全体である．また，対象がモノクロ画像なら\(I\)は画素の位置全体，\(O\)は白黒の階調全体である．
@@ -701,12 +701,12 @@
 しかし，\(\mapset{I}{O}\)の元すべてに共通する特徴は普通そう多くない．
 そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが持つ特徴を調べる．
 
-\cref{section:dft}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
+\cref{chapter:numerical_vector_space}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
 こうした信号は\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）と呼ばれる．
-反対に，\(I\)が\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
+反対に，\(I\)が区間\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
 
 時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
-これは対応づけ\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
+これは対応\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
 また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
 \[
   \seq{x_n}+\seq{y_n} = \seq{x_n+y_n},
@@ -770,7 +770,7 @@
   \end{minipage}
 \end{figure}
 
-\cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音 Ver1.5.1を使用した．}．
+\cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音バージョン1.5.1を使用した．}．
 冒頭で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
 そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
 つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
@@ -856,7 +856,7 @@
 また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
 \begin{note}
-  標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．そこで\(N\to\infty\)の極限をとってみよう．エイリアシングを考慮すると
+  標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．そこで\(N\to\infty\)の極限をとってみよう．エイリアシングを考慮すると，形式的には
   \begin{gather*}
     f(\vect{c};t) = \sum_{k=-N/2}^{N/2-1}c_k\napr^{\iuni kt}
     \to \sum_{k=-\infty}^\infty c_k\napr^{\iuni kt}, \\
@@ -888,8 +888,7 @@
 
 明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\delta\in\cycles{\numset{C}}{N}\)を
 \[
-  \delta[n] = \sum_{m\in\numset{Z}}\kdelta{n}{mN}
-  = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
+  \delta[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
 と定める．すると，任意の\(x\in\cycles{\numset{C}}{N}\)，\(n\in\Set{0,\dots,N-1}\)に対して
 \[
@@ -897,7 +896,13 @@
   = \sum_{m=0}^{N-1}x[m]\kdelta{n}{m}
   = x[n]
 \]
-が成立する．よって，集合\(\basis{D}=\Set{\lagop^0\delta,\lagop^1\delta,\dots,\lagop^{N-1}\delta}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)だから，集合\(\basis{D}=\Set{\lagop^m\delta\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/comb.pdf}
+  \caption{\(N=5\)のときの\(\delta\)と\(\lagop\delta\)の様子．}
+\end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
   任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
@@ -935,7 +940,7 @@
     (\dft{N}z)[k] &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x[m]y[n-m]}\zeta^{-kn} \\
     &= \sum_{m=0}^{N-1}x[m]\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y[n-m]\zeta^{-kn}}
   \end{align*}
-  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=\zeta^{-mk}\hat{y}[k]\)なので
+  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=(\zeta^{-k})^m\hat{y}[k]\)なので
   \[
     (\dft{N}z)[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-mk}\hat{y}[k])
     = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
@@ -977,7 +982,7 @@
   \((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x=\hat{H}(x)\)だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
-\subsection{多次元離散フーリエ変換}
+\subsection{多次元DFT}
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
   \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_i\in\numset{Z}\)，\(0\leq u_i<N_i\)（\(1\leq i\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．

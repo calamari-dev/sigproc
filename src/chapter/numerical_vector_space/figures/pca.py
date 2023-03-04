@@ -17,7 +17,7 @@ v1, v2 = np.transpose(pca.components_ * np.sqrt(pca.explained_variance_).T)
 fig, ax = plt.subplots()
 ax.set(xlim=(-17, 17), ylim=(-17, 17))
 
-ax.scatter(csv[0], csv[1], color="lightgray", linewidths=constants.scatter_linewidth)
+ax.plot(csv[0], csv[1], "o", c="lightgray", ms=constants.scatter_markersize)
 ax.add_artist(Vector2D((0, 0), v1))
 ax.add_artist(Vector2D((0, 0), v2))
 

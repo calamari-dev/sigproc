@@ -12,12 +12,12 @@ publish = "bash -c \"llmk -C && MODE=production llmk && mkdir dist; mv --force m
 [packages]
 requests = "*"
 numpy = "*"
-matplotlib = "*"
 pandas = "*"
 scipy = "*"
 scikit-learn = "*"
 pywavelets = "*"
 pillow = "*"
+matplotlib = "*"
 
 [dev-packages]
 black = "*"

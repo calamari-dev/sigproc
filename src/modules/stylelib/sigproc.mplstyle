@@ -1,6 +1,6 @@
 # LINES
 lines.linewidth: 0.8
-lines.markersize: 2
+lines.markersize: 3
 lines.markeredgewidth: 0.4
 markers.fillstyle: none
 
@@ -18,6 +18,9 @@ mathtext.fontset: stix
 # AXES
 axes.linewidth: 0.6
 axes.prop_cycle: cycler(linestyle=["-", "--", ":", "-."])
+axes3d.xaxis.panecolor: (0.0, 0.0, 0.0, 0.0)
+axes3d.yaxis.panecolor: (0.0, 0.0, 0.0, 0.0)
+axes3d.zaxis.panecolor: (0.0, 0.0, 0.0, 0.0)
 
 # TICKS
 xtick.major.width: 0.4

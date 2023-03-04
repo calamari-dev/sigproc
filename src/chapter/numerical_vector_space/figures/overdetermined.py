@@ -9,9 +9,6 @@ plt.style.use("sigproc")
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 ax.set(zlim3d=(-5, 5))
 
-for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
-    axis.set(pane_color=(0.0, 0.0, 0.0, 0.0))
-
 xx, yy = np.mgrid[-5:5:2j, -6:4:2j]
 ax.plot_surface(xx, yy, (xx + 2 * yy) / 3, alpha=0.25)
 

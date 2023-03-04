@@ -14,9 +14,6 @@ xm = np.array((0, -0.8, 0))
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 ax.set(xlim=(-1, 1), ylim=(-2, 0), zlim3d=(0, 2))
 
-for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
-    axis.set(pane_color=(0.0, 0.0, 0.0, 0.0))
-
 for x in (v1, v2, x1, xm):
     ax.add_artist(Vector3D((0, 0, 0), x))
 
