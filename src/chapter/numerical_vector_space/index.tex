@@ -882,7 +882,7 @@
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
   \(N\)を周期に持つ複素数列の全体集合を\(\cycles{\numset{C}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
-    (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(x\in\cycles{\numset{C}}{N})
+    (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
 \end{definition}
 
@@ -890,13 +890,22 @@
 \[
   \delta[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める．すると，任意の\(x\in\cycles{\numset{C}}{N}\)，\(n\in\Set{0,\dots,N-1}\)に対して
-\[
-  \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = \sum_{m=0}^{N-1}x[m]\delta[n-m]
-  = \sum_{m=0}^{N-1}x[m]\kdelta{n}{m}
-  = x[n]
-\]
-である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)だから，集合\(\basis{D}=\Set{\lagop^m\delta\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+と定める．
+
+\begin{proposition}{}{}
+  集合\(\basis{D}=\Set{\lagop^m\delta\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0\delta=\delta\)とする．
+\end{proposition}
+
+\begin{proof}
+  \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
+  よって\(x[m](\lagop^m\delta)[n]=x[m]\delta[n-m]=x[n]\kdelta{m}{n}\)であり，\(m\)に関して和をとると
+  \[
+    \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = \sum_{m=0}^{N-1}x[n]\kdelta{m}{n}
+    = x[n]
+  \]
+  となる．\(x\)は\(N\)を周期に持つから，この式は\(n\notin\Set{0,\dots,N-1}\)のときも成り立つ．
+  よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)なので，\(\basis{D}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+\end{proof}
 
 \begin{figure}[htbp]
   \centering
@@ -920,11 +929,19 @@
 \cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x[n]y[n]}\)と離散フーリエ変換の間にある関係を示せる．積は\(\dft{N}\)で，次の2項演算へと写される．
 
 \begin{definition}{巡回畳み込み}{}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(x\circconv y\)}
-  \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(z\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）といい，\(x\circconv y\)と表記する．
+  \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(x\circconv y\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）という．
   \[
-    z[n] = \sum_{m=0}^{N-1}x[m]y[n-m]\quad(n\in\numset{Z})
+    (x\circconv y)[n] = \sum_{m=0}^{N-1}x[m]y[n-m]\quad(n\in\numset{Z})
   \]
 \end{definition}
+
+巡回畳み込みは
+\begin{equation}
+  \label{equation:discrete_impulse_response}
+  x\circconv y = \sum_{m=0}^{N-1}x[m]\lagop^my
+  = \pqty*{\sum_{m=0}^{N-1}x[m]\lagop^m}y
+\end{equation}
+とも表せる．
 
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
@@ -935,17 +952,18 @@
 \end{proposition}
 
 \begin{proof}
-  1つめのみ示す．\(z=x\circconv y\)とし，\(\sum_n\)と\(\sum_m\)を交換すると
-  \begin{align*}
-    (\dft{N}z)[k] &= \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\pqty*{\sum_{m=0}^{N-1}x[m]y[n-m]}\zeta^{-kn} \\
-    &= \sum_{m=0}^{N-1}x[m]\pqty*{\frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}y[n-m]\zeta^{-kn}}
-  \end{align*}
-  となる．\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=(\zeta^{-k})^m\hat{y}[k]\)なので
+  1つめのみ示す．\(z=x\circconv y\)とすると，\cref{equation:discrete_impulse_response}から
   \[
-    (\dft{N}z)[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-mk}\hat{y}[k])
-    = \sqrt{N}\pqty*{\frac{1}{\sqrt{N}}\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
+    \hat{z} = \dft{N}\pqty*{\sum_{m=0}^{N-1}x[m]\lagop^my}
+    = \sum_{m=0}^{N-1}x[m]\dft{N}\lagop^my
   \]
-  である．よって\((\dft{N}z)[k]=\sqrt{N}\hat{x}[k]\hat{y}[k]\)である．
+  であり，\cref{proposition:dft_shift_theorem}より\((\dft{N}\lagop^my)[k]=(\zeta^{-k})^m\hat{y}[k]\)なので
+  \[
+    \hat{z}[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-km}\hat{y}[k])
+    = \pqty*{\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
+    = \sqrt{N}\hat{x}[k]\hat{y}[k]
+  \]
+  となる．よって\(\hat{z}=\sqrt{N}\hat{x}\cdot\hat{y}\)である．
 \end{proof}
 
 \begin{corollary}{}{circular_convolution_properties}
@@ -963,14 +981,28 @@
 \end{proof}
 
 最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
-基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
+\(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対し
 \[
-  \mat{H} = \matrice*{h_0 & h_{N-1} & h_{N-2} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \cdots & h_3 & h_2 \\ h_2 & h_1 & h_0 & \cdots & h_4 & h_3 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ h_{N-2} & h_{N-3} & h_{N-4} & \cdots & h_0 & h_{N-1} \\  h_{N-1} & h_{N-2} & h_{N-3} & \cdots & h_1 & h_0}\quad(h_i=h[i])
+  \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}
+  = \matrice{x[-1] & x[0] & \cdots & x[N-2]}
 \]
+なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}\)と書ける．
+同様に計算すれば，\(0\leq m<N\)のとき\(\lagop^m\)の表現行列\(\mat{L}^m\)は
+\[
+  \mat{L}^m = \trps{\matrice{\vect{e}_{N-m+1} & \cdots & \vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-m}}}
+\]
+であることも分かる．
+
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
+\cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)なので，基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
+\begin{align*}
+  \mat{H} &= \sum_{m=0}^{N-1}h_m\mat{L}^m
+  = h_0\imat+h_1\matrice*{\trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}}}+h_2\matrice*{\trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \vdots \\ \trps{\vect{e}_{N-2}}}+\dots+h_{N-1}\matrice*{\trps{\vect{e}_2} \\ \trps{\vect{e}_3} \\ \vdots \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1}} \\
+  &= \matrice*{h_0 & h_{N-1} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \ddots & h_2 \\ h_2 & h_1 & \ddots & \ddots & \vdots \\ \vdots & \ddots & \ddots & h_0 & h_{N-1} \\ h_{N-1} &\cdots & h_2 & h_1 & h_0}
+\end{align*}
 という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
 
-同様に，基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
+基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
 
 \begin{proposition}{}{}
   巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}\mat{H}\mat{W}^{-1}\)は対角行列である．
