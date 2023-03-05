@@ -149,7 +149,7 @@
     &= \abs{z-\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2
   \end{align*}
   より\(\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2=-\delta(\innerp{\vect{x}-\vect{m}}{\vect{v}})\leq 0\)，よって\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)である．
-  \(\vect{m}\)が1つしかないことは\cref{proposition:finite_convex_projection}による．
+  \(\vect{m}\)が存在し一意であることは\cref{proposition:finite_convex_projection}による．
 \end{proof}
 
 \begin{definition}{直交射影}{finite_projection}\index{ちょっこうしゃえい@直交射影}\index{proj@\(\proj_V\)}
@@ -163,7 +163,7 @@
 \end{figure}
 
 \begin{example}
-  部分空間\(V\subset\numset{R}^3\)を\(V=\spannedby\Set{\vect{i},\vect{j}}\)（\(\vect{i}=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{j}=\trps{\rowvect{0 & 1 & 0}}\)）で定義する．
+  \(V=\spannedby\Set{\vect{i},\vect{j}}\)（\(\vect{i}=\trps{\rowvect{1 & 0 & 0}}\)，\(\vect{j}=\trps{\rowvect{0 & 1 & 0}}\)）で\(\numset{R}^3\)の部分空間\(V\)を定める．
   このとき，集合\(\Set{\vect{i},\vect{j}}\)は\(V\)の正規直交基底なので\(\proj_V\vect{r}=\innerp{\vect{r}}{\vect{i}}\vect{i}+\innerp{\vect{r}}{\vect{j}}\vect{j}=\trps{\rowvect{x & y & 0}}\)（\(\vect{r}=\trps{\rowvect{x & y & z}}\)）である．
 \end{example}
 
@@ -522,8 +522,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)を\(\mat{A}\)の特異値分解とすると，\(\mat{X}=\mat{V}\pinv{\mat{\Sigma}}\htrps{\mat{U}}\)が上の4条件を満たすことはすぐ確かめられる．
-  \(p\times n\)行列\(\mat{Y}\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
+  一意性のみ示す．\(p\times n\)行列\(\mat{X}\)，\(\mat{Y}\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
   \begin{align*}
     \mat{Y} &\overset{2,3}{=\joinrel=} \mat{Y}\htrps{(\mat{A}\mat{Y})}
     = \mat{Y}\htrps{\mat{Y}}\htrps{\mat{A}}
@@ -900,11 +899,10 @@
   \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
   よって\(x[m](\lagop^m\delta)[n]=x[m]\delta[n-m]=x[n]\kdelta{m}{n}\)であり，\(m\)に関して和をとると
   \[
-    \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = \sum_{m=0}^{N-1}x[n]\kdelta{m}{n}
+    \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
   \]
-  となる．\(x\)は\(N\)を周期に持つから，この式は\(n\notin\Set{0,\dots,N-1}\)のときも成り立つ．
-  よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)なので，\(\basis{D}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+  となる．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)なので，\(\basis{D}\)は\(\cycles{\numset{C}}{N}\)の基底である．
 \end{proof}
 
 \begin{figure}[htbp]
@@ -935,13 +933,12 @@
   \]
 \end{definition}
 
-巡回畳み込みは
+\(y[n-m]=(\lagop^my)[n]\)だから，巡回畳み込みは次のように表せる．
 \begin{equation}
   \label{equation:discrete_impulse_response}
   x\circconv y = \sum_{m=0}^{N-1}x[m]\lagop^my
   = \pqty*{\sum_{m=0}^{N-1}x[m]\lagop^m}y
 \end{equation}
-とも表せる．
 
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
@@ -990,14 +987,14 @@
 同様に計算すれば，\(0\leq m<N\)のとき\(\lagop^m\)の表現行列\(\mat{L}^m\)は
 \[
   \mat{L}^m = \trps{\matrice{\vect{e}_{N-m+1} & \cdots & \vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-m}}}
+  = \matrice*{ & \imat_m \\ \imat_{N-m} & }
 \]
 であることも分かる．
 
 \(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
-\cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)なので，基底\(\basis{D}\)に関する\(H\)の表現行列\(\mat{H}\)は
+\cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)なので，\(H\)の表現行列\(\mat{H}\)は
 \begin{align*}
-  \mat{H} &= \sum_{m=0}^{N-1}h_m\mat{L}^m
-  = h_0\imat+h_1\matrice*{\trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}}}+h_2\matrice*{\trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \vdots \\ \trps{\vect{e}_{N-2}}}+\dots+h_{N-1}\matrice*{\trps{\vect{e}_2} \\ \trps{\vect{e}_3} \\ \vdots \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1}} \\
+  \mat{H} &= h_0\matrice*{\trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N}}+h_1\matrice*{\trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}}}+h_2\matrice*{\trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \vdots \\ \trps{\vect{e}_{N-2}}}+\dots+h_{N-1}\matrice*{\trps{\vect{e}_2} \\ \trps{\vect{e}_3} \\ \vdots \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1}} \\
   &= \matrice*{h_0 & h_{N-1} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \ddots & h_2 \\ h_2 & h_1 & \ddots & \ddots & \vdots \\ \vdots & \ddots & \ddots & h_0 & h_{N-1} \\ h_{N-1} &\cdots & h_2 & h_1 & h_0}
 \end{align*}
 という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
@@ -1011,7 +1008,7 @@
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
   \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
-  \((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x=\hat{H}(x)\)だから，基底\(\basis{D}\)に関する\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は，\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
+  \((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x=\hat{H}(x)\)だから，\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
 \end{proof}
 
 \subsection{多次元DFT}
