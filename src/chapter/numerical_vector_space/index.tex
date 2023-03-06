@@ -977,39 +977,66 @@
   \(x\circconv(y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
-最後に，\(\cycles{\numset{C}}{N}\)上で得られた結果を\(\numset{C}^N\)上のものに変換しよう．
-\(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対し
+\(\cycles{\numset{C}}{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
+\(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対して
 \[
   \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}
   = \matrice{x[-1] & x[0] & \cdots & x[N-2]}
 \]
 なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}\)と書ける．
-同様に計算すれば，\(0\leq m<N\)のとき\(\lagop^m\)の表現行列\(\mat{L}^m\)は
+同様に計算すれば，\(0\leq m<N\)のとき\(\lagop^m\)の表現行列は
 \[
   \mat{L}^m = \trps{\matrice{\vect{e}_{N-m+1} & \cdots & \vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-m}}}
   = \matrice*{ & \imat_m \\ \imat_{N-m} & }
 \]
 であることも分かる．
 
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，線型写像\(H\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を\(H(x)=h\circconv x\)で定義する．
-\cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)なので，\(H\)の表現行列\(\mat{H}\)は
-\begin{align*}
-  \mat{H} &= h_0\matrice*{\trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N}}+h_1\matrice*{\trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \trps{\vect{e}_2} \\ \vdots \\ \trps{\vect{e}_{N-1}}}+h_2\matrice*{\trps{\vect{e}_{N-1}} \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1} \\ \vdots \\ \trps{\vect{e}_{N-2}}}+\dots+h_{N-1}\matrice*{\trps{\vect{e}_2} \\ \trps{\vect{e}_3} \\ \vdots \\ \trps{\vect{e}_N} \\ \trps{\vect{e}_1}} \\
-  &= \matrice*{h_0 & h_{N-1} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \ddots & h_2 \\ h_2 & h_1 & \ddots & \ddots & \vdots \\ \vdots & \ddots & \ddots & h_0 & h_{N-1} \\ h_{N-1} &\cdots & h_2 & h_1 & h_0}
-\end{align*}
-という形をしている．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
+\(h\in\cycles{\numset{C}}{N}\)を任意にとり，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義する．
+\cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)（\(h_m=h[m]\)）なので，\(H\)の表現行列\(\mat{H}\)は
+\[
+  \mat{H} = \sum_{m=0}^{N-1}h_m\matrice*{ & \imat_m \\ \imat_{N-m} & }
+  = \matrice*{h_0 & h_{N-1} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \ddots & h_2 \\ h_2 & h_1 & \ddots & \ddots & \vdots \\ \vdots & \ddots & \ddots & h_0 & h_{N-1} \\ h_{N-1} &\cdots & h_2 & h_1 & h_0}
+\]
+である．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
 
-基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
+基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\htrps{\mat{W}}\)とおく．\(\htrps{\mat{W}}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
 
-\begin{proposition}{}{}
-  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}\mat{H}\mat{W}^{-1}\)は対角行列である．
-\end{proposition}
+\begin{corollary}{}{dft_convolution_matrix}
+  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
+\end{corollary}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)，\(\hat{H}\)をそれぞれ
-  \(H(x)=h\circconv x\)，\(\hat{H}(x)=\hat{h}\cdot x\)（\(h=\sum_{m=0}^{N-1}h_m\lagop^m\delta\)）で定義する．\cref{proposition:dft_convolution_theorem}より
-  \((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x=\hat{H}(x)\)だから，\(\hat{H}\)の表現行列\(\mat{\hat{H}}=\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)は\(\dft{N}H\dft{N}^{-1}\)の表現行列\(\mat{W}\mat{H}\mat{W}^{-1}\)に一致する．
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{\numset{C}}{N}\)の元\(h\)を定める．
+  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より
+  \[
+    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
+    = \hat{h}\cdot x\quad(\hat{h}=\dft{N}h)
+  \]
+  となる．よって，\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+  一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
+  したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
 \end{proof}
+
+\cref{proposition:dft_convolution_theorem,corollary:dft_convolution_matrix}が成り立つ理屈は，大雑把に言うと次のようになる．
+議論を簡単にするため，\(N\)の値は十分に大きいとする．\(h\in\cycles{\numset{C}}{N}\)を
+\[
+  h[n] = \begin{cases}1/3 & (n=0,1,2), \\ 0 & \text{(otherwise)}\end{cases}\quad(0\leq n<N)
+\]
+で定義する．このとき
+\[
+  (h\circconv x)[n] = \sum_{m=0}^{N-1}h[m]x[n-m]
+  = \frac{x[n]+x[n-1]+x[n-2]}{3}
+\]
+だから，\((h\circconv x)[n]\)は時刻\(n,n-1,n-2\)における\(x\)の値の平均である．
+
+平均をとると細かい変動が消えてなめらかになるので，\(x\)に含まれる高周波の成分は\(h\)を畳み込むと減るだろう．
+実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは次のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/filter_characteristics.pdf}
+  \caption{\(N=32\)のときの\(\abs{\hat{h}[k]}\)の様子．エイリアシングを考慮し\(0\leq k\leq 16\)で図示した．}
+\end{figure}
 
 \subsection{多次元DFT}
 
@@ -1019,7 +1046,7 @@
   \[
     \hat{x}[\vect{k}] = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x[\vect{r}]\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
   \]
-  を対応づける線型写像\(\dft[d]{\vect{n}}\colon\numset{C}^\Omega\to\numset{C}^\Omega\)を\termdef{\(d\)次元離散フーリエ変換}という．
+  を対応づける線型写像\(\dft[d]{\vect{n}}\colon\mapset{\Omega}{\numset{C}}\to\mapset{\Omega}{\numset{C}}\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
 特に\(d=2\)のとき
@@ -1031,10 +1058,10 @@
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
 次の命題は，一般の次元で離散フーリエ変換が分析作用素であることを示している．
-ただし，\(\numset{C}^\Omega\)の内積は1変数のときと同様\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
+ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は1変数のときと同様\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
 
 \begin{proposition}{}{}
-  \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\numset{C}^\Omega\)の正規直交基底である．
+  \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\mapset{\Omega}{\numset{C}}\)の正規直交基底である．
 \end{proposition}
 
 \begin{figure}[htbp]
