@@ -1017,25 +1017,22 @@
   したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
 \end{proof}
 
-\cref{proposition:dft_convolution_theorem,corollary:dft_convolution_matrix}が成り立つ理屈は，大雑把に言うと次のようになる．
-議論を簡単にするため，\(N\)の値は十分に大きいとする．\(h\in\cycles{\numset{C}}{N}\)を
-\[
-  h[n] = \begin{cases}1/3 & (n=0,1,2), \\ 0 & \text{(otherwise)}\end{cases}\quad(0\leq n<N)
-\]
-で定義する．このとき
-\[
-  (h\circconv x)[n] = \sum_{m=0}^{N-1}h[m]x[n-m]
-  = \frac{x[n]+x[n-1]+x[n-2]}{3}
-\]
-だから，\((h\circconv x)[n]\)は時刻\(n,n-1,n-2\)における\(x\)の値の平均である．
-
-平均をとると細かい変動が消えてなめらかになるので，\(x\)に含まれる高周波の成分は\(h\)を畳み込むと減るだろう．
-実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは次のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
+\begin{example}
+  \(N=32\)とする．\(\cycles{\numset{C}}{N}\)の元\(h\)を\(h[n]=1/3\)（\(0\leq n<3\)），\(h[n]=0\)（\(3\leq n<N\)）で定義する．このとき
+  \[
+    (h\circconv x)[n] = \sum_{m=0}^{N-1}h[m]x[n-m]
+    = \frac{x[n]+x[n-1]+x[n-2]}{3}
+  \]
+  だから，\((h\circconv x)[n]\)は時刻\(n,n-1,n-2\)における\(x\)の値の平均である．
+  平均をとると細かい変動が消えてなめらかになるので，\(x\)に含まれる高周波の成分は\(h\)を畳み込むと減るだろう．
+  実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは\cref{figure:filter_characteristics}のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
+\end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/filter_characteristics.pdf}
-  \caption{\(N=32\)のときの\(\abs{\hat{h}[k]}\)の様子．エイリアシングを考慮し\(0\leq k\leq 16\)で図示した．}
+  \caption{\(\abs{\hat{h}[k]}\)の様子．エイリアシングを考慮し\(0\leq k\leq 16\)で図示した．}
+  \label{figure:filter_characteristics}
 \end{figure}
 
 \subsection{多次元DFT}
