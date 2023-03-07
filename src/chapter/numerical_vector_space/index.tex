@@ -701,8 +701,8 @@
 そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが持つ特徴を調べる．
 
 \cref{chapter:numerical_vector_space}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
-こうした信号は\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）と呼ばれる．
-反対に，\(I\)が区間\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）と呼ばれる．
+こうした信号を\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）という．
+反対に，\(I\)が区間\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）という．
 
 時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
 これは対応\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
@@ -717,6 +717,7 @@
 \subsection{離散フーリエ変換}
 
 \begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\)}
+  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)とする．
   \[
     \dft{N}\vect{x} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
     \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
@@ -1063,14 +1064,19 @@
 \end{proposition}
 
 \begin{proof}
-  \(\Omega\)の2元\(\vect{i}=\trps{\rowvect{i_1 & \cdots & i_d}}\)，\(\vect{j}=\trps{\rowvect{j_1 & \cdots & j_d}}\)を任意にとると
-  \begin{gather*}
-    w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \frac{\napr^{2\krez\iuni\trps{(\vect{i}-\vect{j})}\mat{N}^{-1}\vect{r}}}{\det\mat{N}}
-    = \prod_{k=1}^d\frac{\napr^{2\krez\iuni(i_k-j_k)r_k/N_k}}{N_k}\quad(\vect{r}=\trps{\matrice{r_1 & \cdots & r_d}}), \\
-    \innerp{w_{\vect{i}}}{w_{\!\vect{j}}} = \sum_{r_1}\dotsm\sum_{r_d}\prod_{k=1}^d\frac{\napr^{2\krez\iuni(i_k-j_k)r_k/N_k}}{N_k}
-    = \prod_{k=1}^d\sum_{r_k}\frac{\napr^{2\krez\iuni(i_k-j_k)r_k/N_k}}{N_k}
-  \end{gather*}
-  であるから，\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)となる\indexsymbol{\(\prod\)}\footnote{\(\prod\)は総乗\(\prod_{i=1}^na_i=a_1\times\dots\times a_n\)を意味する．\(\sum\)の乗法バージョン．}．
+  \(\vect{i}=\trps{\rowvect{i_1 & \cdots & i_d}}\)，\(\vect{j}=\trps{\rowvect{j_1 & \cdots & j_d}}\)を\(\Omega\)の勝手な2元とする．
+  各\(\vect{r}=\trps{\rowvect{r_1 & \cdots & r_d}}\in\Omega\)に対して
+  \begin{align*}
+    w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} &= \frac{\napr^{2\krez\iuni\trps{(\vect{i}-\vect{j})}\mat{N}^{-1}\vect{r}}}{\det\mat{N}}
+    = \frac{1}{N_1\dotsm N_d}\exp\pqty*{\sum_{k=1}^d\frac{2\krez\iuni(i_k-j_k)r_k}{N_k}} \\
+    &= \prod_{k=1}^d\pqty*{\frac{1}{N_k}\exp\pqty*{\frac{2\krez\iuni(i_k-j_k)r_k}{N_k}}}
+  \end{align*}
+  だから\indexsymbol{\(\prod\)}\footnote{\(\prod\)は総乗\(\prod_{i=1}^na_i=a_1\times\dots\times a_n\)を意味する．\(\sum\)の乗法バージョン．}，\(\zeta_k=\napr^{2\krez\iuni/N_k}\)とおくと
+  \[
+    \sum_{\vect{r}\in\Omega}w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \sum_{r_1}\dotsm\sum_{r_d}\prod_{k=1}^d\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
+    = \prod_{k=1}^d\sum_{r_k}\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
+  \]
+  となる．よって\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)である．
 \end{proof}
 
 \begin{figure}[htbp]
