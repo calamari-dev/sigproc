@@ -18,8 +18,8 @@ fig, ax = plt.subplots()
 ax.set(xlim=(-17, 17), ylim=(-17, 17))
 
 ax.plot(csv[0], csv[1], "o", c="lightgray", ms=constants.scatter_markersize)
-ax.add_artist(Vector2D((0, 0), v1))
-ax.add_artist(Vector2D((0, 0), v2))
+ax.add_artist(Vector2D((0, 0), v1, zorder=2))
+ax.add_artist(Vector2D((0, 0), v2, zorder=2))
 
 ax.text(*v1, r"$\sigma_1\vect{v}_1$", ha="right", va="top")
 ax.text(*v2, r"$\sigma_2\vect{v}_2$", ha="right", va="bottom")

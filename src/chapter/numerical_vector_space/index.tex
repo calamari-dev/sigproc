@@ -701,10 +701,10 @@
 そこで我々は，\(\mapset{I}{O}\)の中でも性質がよい元に限って，それらが持つ特徴を調べる．
 
 \cref{chapter:numerical_vector_space}で扱うのは，\(I\)が整数か\kenten{その}組からなる信号である．
-こうした信号を\termdef{離散時間信号}\index{りさんじかんしんごう@離散時間信号}\index{しんごう@信号!りさんじかん@離散時間\texttwoemdash}（discrete‐time signal）という．
-反対に，\(I\)が区間\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続時間信号}\index{れんぞくじかんしんごう@連続時間信号}\index{しんごう@信号!れんぞくじかん@連続時間\texttwoemdash}（continuous‐time signal）という．
+こうした信号を\termdef{離散信号}\index{りさんしんごう@離散信号}\index{しんごう@信号!りさん@離散\texttwoemdash}（discrete signal）という．
+反対に，\(I\)が区間\(\ccival{-\krez}{\krez}\)や\(\numset{R}\)のように連続的である信号は\termdef{連続信号}\index{れんぞくしんごう@連続信号}\index{しんごう@信号!れんぞく@連続\texttwoemdash}（continuous signal）という．
 
-時間\(N\)が有限な離散時間信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
+時間\(N\)が有限な離散信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
 これは対応\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
 また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
 \[
@@ -822,7 +822,7 @@
   \label{figure:aliasing}
 \end{figure}
 
-一般に，連続時間信号から離散時間信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}\index{サンプリング|see{標本化}}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
+一般に，連続信号から離散信号を得る操作を\termdef{標本化}\index{ひょうほんか@標本化}\index{サンプリング|see{標本化}}（sampling）といい，標本化によって信号が区別できなくなる現象を\termdef{エイリアシング}\index{エイリアシング}（aliasing）という．
 また，\(f_{\symrm{s}}\)を\termdef{標本化周波数}\index{ひょうほんかしゅうはすう@標本化周波数}（sampling frequency）という．
 
 \cref{figure:aliasing}の場合，標本化後の信号は周波数の絶対値が小さい（つまり低周波である）\SI{-0.5}{Hz}の波を表すと考えるほうが自然だろう．
@@ -837,7 +837,7 @@
 \[
   f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\exp(\iuni kt))
 \]
-で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散時間信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，離散時間の時刻を表す引数を大かっこで書く．}．
+で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，整数値などの離散的な引数を大かっこで書く．}．
 
 \(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(f(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
@@ -984,18 +984,13 @@
   \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}
   = \matrice{x[-1] & x[0] & \cdots & x[N-2]}
 \]
-なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}\)と書ける．
-同様に計算すれば，\(0\leq m<N\)のとき\(\lagop^m\)の表現行列は
-\[
-  \mat{L}^m = \trps{\matrice{\vect{e}_{N-m+1} & \cdots & \vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-m}}}
-  = \matrice*{ & \imat_m \\ \imat_{N-m} & }
-\]
-であることも分かる．
+なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}=\smallmatrice{ & 1 \\ \imat_{N-1} & }\)と書ける．
+同様に計算すれば，\(0<m<N\)のとき\(\lagop^m\)の表現行列は\(\mat{L}^m=\smallmatrice{ & \imat_m \\ \imat_{N-m} & }\)であることも分かる．
 
 \(h\in\cycles{\numset{C}}{N}\)を任意にとり，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義する．
 \cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)（\(h_m=h[m]\)）なので，\(H\)の表現行列\(\mat{H}\)は
 \[
-  \mat{H} = \sum_{m=0}^{N-1}h_m\matrice*{ & \imat_m \\ \imat_{N-m} & }
+  \mat{H} = h_0\imat+\sum_{m=1}^{N-1}h_m\matrice*{ & \imat_m \\ \imat_{N-m} & }
   = \matrice*{h_0 & h_{N-1} & \cdots & h_2 & h_1 \\ h_1 & h_0 & h_{N-1} & \ddots & h_2 \\ h_2 & h_1 & \ddots & \ddots & \vdots \\ \vdots & \ddots & \ddots & h_0 & h_{N-1} \\ h_{N-1} &\cdots & h_2 & h_1 & h_0}
 \]
 である．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
@@ -1008,12 +1003,8 @@
 
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{\numset{C}}{N}\)の元\(h\)を定める．
-  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より
-  \[
-    (\dft{N}H\dft{N}^{-1})x = \dft{N}(h\circconv\dft{N}^{-1}x)
-    = \hat{h}\cdot x\quad(\hat{h}=\dft{N}h)
-  \]
-  となる．よって，\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+
   一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
   したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
 \end{proof}
@@ -1026,8 +1017,8 @@
     = \frac{x[n]+x[n-1]+x[n-2]}{3}
   \]
   だから，\((h\circconv x)[n]\)は時刻\(n,n-1,n-2\)における\(x\)の値の平均である．
-  平均をとると細かい変動が均されるので，高周波の成分は減るだろう．
-  実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは\cref{figure:filter_characteristics}のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
+
+  平均をとると細かい変動が均されるので，高周波の成分は減るだろう．実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは\cref{figure:filter_characteristics}のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
 \end{example}
 
 \begin{figure}[htbp]
@@ -1041,7 +1032,7 @@
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
   \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_i\in\numset{Z}\)，\(0\leq u_i<N_i\)（\(1\leq i\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
-  関数\(x\colon\Omega\to\numset{C}\)に対して，関数
+  関数\(x\in\mapset{\Omega}{\numset{C}}\)に対して，関数
   \[
     \hat{x}[\vect{k}] = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x[\vect{r}]\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
   \]
@@ -1057,39 +1048,35 @@
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
 次の命題は，一般の次元で離散フーリエ変換が分析作用素であることを示している．
-ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は1変数のときと同様\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
+ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
 
-\begin{proposition}{}{}
+\begin{proposition}{}{ddimdft_onb}
   \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\mapset{\Omega}{\numset{C}}\)の正規直交基底である．
 \end{proposition}
 
 \begin{proof}
-  \(\vect{i}=\trps{\rowvect{i_1 & \cdots & i_d}}\)，\(\vect{j}=\trps{\rowvect{j_1 & \cdots & j_d}}\)を\(\Omega\)の勝手な2元とする．
-  各\(\vect{r}=\trps{\rowvect{r_1 & \cdots & r_d}}\in\Omega\)に対して
-  \begin{align*}
-    w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} &= \frac{\napr^{2\krez\iuni\trps{(\vect{i}-\vect{j})}\mat{N}^{-1}\vect{r}}}{\det\mat{N}}
-    = \frac{1}{N_1\dotsm N_d}\exp\pqty*{\sum_{k=1}^d\frac{2\krez\iuni(i_k-j_k)r_k}{N_k}} \\
-    &= \prod_{k=1}^d\pqty*{\frac{1}{N_k}\exp\pqty*{\frac{2\krez\iuni(i_k-j_k)r_k}{N_k}}}
-  \end{align*}
-  だから\indexsymbol{\(\prod\)}\footnote{\(\prod\)は総乗\(\prod_{i=1}^na_i=a_1\times\dots\times a_n\)を意味する．\(\sum\)の乗法バージョン．}，\(\zeta_k=\napr^{2\krez\iuni/N_k}\)とおくと
+  \(\Omega\)から2元\(\vect{i}=\trps{\rowvect{i_1 & \cdots & i_d}}\)，\(\vect{j}=\trps{\rowvect{j_1 & \cdots & j_d}}\)を任意にとる．
+  \(w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]}=(1/\det\mat{N})\exp(2\krez\iuni\trps{(\vect{i}-\vect{j})}\mat{N}^{-1}\vect{r})\)（\(\vect{r}=\trps{\rowvect{r_1 & \cdots & r_d}}\)）は
+  \[
+    w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \frac{1}{N_1\dotsm N_d}\exp\pqty*{\sum_{k=1}^d\frac{2\krez\iuni(i_k-j_k)r_k}{N_k}}
+    = \prod_{k=1}^d\frac{\napr^{2\krez\iuni(i_k-j_k)r_k/N_k}}{N_k}
+  \]
+  と計算できるので，\(\zeta_k=\napr^{2\krez\iuni/N_k}\)とおくと
   \[
     \sum_{\vect{r}\in\Omega}w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \sum_{r_1}\dotsm\sum_{r_d}\prod_{k=1}^d\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
     = \prod_{k=1}^d\sum_{r_k}\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
   \]
-  となる．よって\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)である．
+  である．よって\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)である．
 \end{proof}
 
-\begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/2dcos.pdf}
-    \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/2dcos_dft.pdf}
-  \end{minipage}
-  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k/64)-\krez\given k=0,\dots,63}\)）のグラフと2次元離散フーリエ変換．}
-\end{figure}
+\cref{proposition:ddimdft_onb}と\(\hat{x}[\vect{k}]=\innerp{x}{w_{\vect{k}}}\)より，\(\dft[d]{N}\)の逆変換は
+\[
+  x[\vect{r}] = \sum_{\vect{k}\in\Omega}\innerp{x}{w_{\vect{k}}}w_{\vect{k}}
+  = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{k}\in\Omega}\hat{x}[\vect{k}]\napr^{2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}
+\]
+である．
+
+2次元離散フーリエ変換は画像処理に応用されている．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1100,7 +1087,23 @@
     \centering
     \includegraphics{figures/pudding_dft.pdf}
   \end{minipage}
-  \caption{画像の2次元離散フーリエ変換．}
+  \caption{画像とその2次元離散フーリエ変換．}
+  \label{figure:pudding_dft}
+\end{figure}
+
+\cref{figure:pudding_dft}は，モノクロ画像を離散信号\(x=x[r_1,r_2]\)とみなし\(\abs{\dft[2]{\vect{n}}x}\)を計算した様子である．
+ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\trps{\rowvect{1024 & 1024}}\)である．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/2dcos.pdf}
+    \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/2dcos_dft.pdf}
+  \end{minipage}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given 0\leq k<64}\)）のグラフと2次元離散フーリエ変換．}
 \end{figure}
 
 \section{多重解像度解析}
@@ -1114,14 +1117,12 @@
 
 \begin{theorem}{シューア分解}{schur_decomposition}\index{しゅーあぶんかい@シューア分解}\index{うえさんかくぎょうれつ@上三角行列}\index{ぎょうれつ@行列!うえさんかく@上三角\texttwoemdash}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
-  \(n\)次ユニタリ行列\(\mat{U}\)が存在して，行列\(\mat{A}'=\htrps{\mat{U}}\mat{A}\mat{U}\)は以下の形になる．
+  \(n\)次ユニタリ行列\(\mat{U}\)が存在して，\(\mat{A}'=\htrps{\mat{U}}\mat{A}\mat{U}\)は上三角行列\footnotemark になる．
   式\(\mat{A}=\mat{U}\mat{A}'\htrps{\mat{U}}\)を\(\mat{A}\)の\termdef{シューア分解}（Schur decomposition）という．
-  \[
-    \mat{A}' = \matrice*{\midx{a'}{1}{1} & \midx{a'}{1}{2} & \cdots & \midx{a'}{1}{n} \\ & \midx{a'}{2}{2} & \cdots & \midx{a'}{2}{n} \\ & & \ddots & \vdots \\ 0 & & & \midx{a'}{n}{n}}
-  \]
 \end{theorem}
 
 \begin{proof}
+  \footnotetext{\(\midx{a}{i}{j}=0\)（\(i>j\)）である正方行列\(\matfence{\midx{a}{i}{j}}\)を\termdef{上三角行列}（upper triangular matrix）という．}
   \(n\)に関する帰納法で示す．\(\vect{u}_1\)を\(\mat{A}\)のある固有値\(\lambda\)に属する，ノルム1の固有ベクトルとする．
   また，集合\(\Set{\vect{u}_2,\dots,\vect{u}_n}\)を\(\pcomp{(\spannedby\Set{\vect{u}_1})}\)の正規直交基底とする．
   このとき，集合\(\Set{\vect{u}_1,\dots,\vect{u}_n}\)は\(\numset{C}^n\)の正規直交基底だから，\(\vect{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)はユニタリ行列である．
