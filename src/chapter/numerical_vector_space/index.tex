@@ -804,13 +804,13 @@
 さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
 
 周波数\(f\)\,\si{Hz}の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
-一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について同じ方法で数列を作ると，その一般項は
-\[
-  \napr^{2\krez\iuni(f-f_{\symrm{s}})n/f_{\symrm{s}}} = \napr^{2\krez\iuni fn/f_{\symrm{s}}-2\krez\iuni n}
-  = \napr^{2\krez\iuni fn/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n
-  = \napr^{2\krez\iuni fn/f_{\symrm{s}}}
-\]
-となる．つまり，周波数が\(f\)\,\si{Hz}でも(\(f-f_{\symrm{s}}\))\,\si{Hz}でも，できる数列は変わらない．
+一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について同じ方法で数列を作ると，
+その一般項は\(\napr^{2\krez\iuni(f-f_{\symrm{s}})n/f_{\symrm{s}}}=\napr^{2\krez\iuni fn/f_{\symrm{s}}}(\napr^{-2\krez\iuni})^n=\napr^{2\krez\iuni fn/f_{\symrm{s}}}\)となる．
+つまり，周波数が\(f\)\,\si{Hz}でも(\(f-f_{\symrm{s}}\))\,\si{Hz}でも，できる数列は変わらない．
+
+\begin{note}
+  波が普通と逆向きに進むのを，周波数に負号をつけて表すことがある．特に，複素指数関数\(\napr^{-2\krez\iuni ft}\)（\(f>0\)）は周波数\(-f\)の波とみなされる．
+\end{note}
 
 言い換えると，周波数が\(f_{\symrm{s}}\)だけ異なる波は数列から区別できない．\cref{figure:aliasing}は\(f_{\symrm{s}}=\SI{2.5}{Hz}\)のとき，
 周波数\SI{2}{Hz}の波\(\sin(4\krez t)\)と\SI{-0.5}{Hz}の波\(\sin(-\krez t)\)が，時刻\(n/f_{\symrm{s}}\)秒（\(n\in\numset{Z}\)）では同じ瞬時値を持つことを示している．
@@ -843,12 +843,11 @@
 \[
   \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{x[n]-f(\vect{c};t_n)}^2\quad(t_n=2\krez n/N)
 \]
-の値を最も小さくする\(\vect{c}\in\numset{C}^N\)を求める．それには正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{x}\)を解けばよい．ただし
-\begin{gather*}
-  \vect{x} = \trps{\matrice{x[0] & \cdots & x[N-1]}}, \\
+の値を最も小さくする\(\vect{c}\in\numset{C}^N\)を求める．それには正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{x}\)を解けばよい．ただし\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)かつ
+\[
   \mat{\Phi} = \trps{\matfence{\phi_{i-1}(t_{j-1})}}
   = \matrice*{\napr^{\iuni\cdot 0(2\krez\cdot 0/N)} & \cdots & \napr^{\iuni(N-1)(2\krez\cdot 0/N)} \\ \vdots & \ddots & \vdots \\ \napr^{\iuni\cdot 0(2\krez(N-1)/N)} & \cdots & \napr^{\iuni(N-1)(2\krez(N-1)/N)}}
-\end{gather*}
+\]
 である．ところが，\(\mat{\Phi}\)は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるので\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
 つまり，正規方程式は初めから解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{x}=(1/\sqrt{N})\htrps{\mat{W}}\vect{x}=(1/\sqrt{N})\dft{N}\vect{x}\)である．
 
@@ -1087,12 +1086,24 @@
     \centering
     \includegraphics{figures/pudding_dft.pdf}
   \end{minipage}
-  \caption{画像とその2次元離散フーリエ変換．}
+  \caption{画像とその2次元DFT．}
   \label{figure:pudding_dft}
 \end{figure}
 
-\cref{figure:pudding_dft}は，モノクロ画像を離散信号\(x=x[r_1,r_2]\)とみなし\(\abs{\dft[2]{\vect{n}}x}\)を計算した様子である．
-ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\trps{\rowvect{1024 & 1024}}\)である．
+\cref{figure:pudding_dft}は，画像を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した様子である．
+ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
+
+\(\hat{s}[u,v]\)は\(x\)と\(y\)に関して\(s[x,y]\)を離散フーリエ変換したものだから，\(u\geq N/2\)か\(v\geq N/2\)のときはエイリアシングが起きている．
+つまり，低周波にもかかわらず原点から遠いところにプロットされている領域がある．
+低周波ほど原点の近くにプロットするには，\(u\geq N/2\)のとき\(u\)を\(u-N\)に，\(v\geq N/2\)のとき\(v\)を\(v-N\)に置き換えてプロットしなおせばよい．
+そのとき\cref{figure:pudding_dft}は次のように変化する．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/pudding_shift.pdf}
+  \caption{エイリアシングを補正した2次元DFTの様子．}
+  \label{figure:pudding_shift}
+\end{figure}
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1103,7 +1114,7 @@
     \centering
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
-  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given 0\leq k<64}\)）のグラフと2次元離散フーリエ変換．}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given\text{\(k\in\numset{Z}\)，\(0\leq k<64\)}}\)）のグラフと2次元離散フーリエ変換．}
 \end{figure}
 
 \section{多重解像度解析}
