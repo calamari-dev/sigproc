@@ -40,7 +40,7 @@
 \(\numset{K}^n\)が平面\(\numset{R}^2\)で，\(V\)があるベクトル\(\vect{v}\neq\zvec\)により生成される直線\(\spannedby\Set{\vect{v}}\)の場合，\(\vect{m}\)は図の位置にある．
 図を見ると，\(\vect{x}-\vect{m}\)は\(\vect{v}\)と直交しているのが分かる．
 
-一般の部分空間\(V\subset\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
+一般の部分空間\(V\subseteq\numset{K}^n\)においても，直交性と最良近似には密接な関係がある．その証明へと入る前に，便利な記法を2つ定義しておく．
 
 \begin{definition}{argmin，argmax}{argmin_argmax}\index{argmin@\(\argmin\)}\index{argmax@\(\argmax\)}
   集合\(S\)を定義域に含む実数値関数\(f\)に対して，集合\(\argmin_{x\in S}f(x)\)，\(\argmax_{x\in S}f(x)\)を以下の通り定義する．
@@ -570,7 +570,7 @@
   \caption{アフィン部分空間\(\vect{a}+W\)の模式図．}
 \end{figure}
 
-任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subset\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{x}-\vect{y}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
+任意の\(\vect{x}\in\numset{K}^p\)とアフィン部分空間\(S\subseteq\numset{K}^p\)に対し，\(\argmin_{\vect{y}\in S}\vnorm{\vect{x}-\vect{y}}\)は\(S\)が部分ベクトル空間のときと同様，ただ一つの元を持つ．
 実際，\(S=\vect{a}+W\)（\(\vect{a}\in S\)）とおくと\(\argmin_{\vect{y}\in S}\vnorm{\vect{x}-\vect{y}}=\argmin_{\vect{y}-\vect{a}\in W}\vnorm{(\vect{x}-\vect{a})-(\vect{y}-\vect{a})}=\Set{\vect{a}+\proj_W(\vect{x}-\vect{a})}\)である．
 
 よって，集合\(\argmin_{\vect{x}\in S}\vnorm{\vect{x}}\)（\(S=\vect{a}+\nulsp\mat{A}\)）も元をただ一つ持つ．そして\cref{proposition:pseudoinverse_minimum_norm}から，その元とは\(\pinv{\mat{A}}\vect{b}\)のことである．

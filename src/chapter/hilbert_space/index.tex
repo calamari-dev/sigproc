@@ -124,7 +124,7 @@
   \begin{enumerate}
     \item \(A\)上の収束列すべての極限点からなる集合を\(A\)の\termdef{閉包}（closure）といい，\(\clsr A\)と書く\footnotemark ．
     \item \(A=\clsr A\)であるとき，\(A\)は\termdef{閉集合}（closed set）であるという．
-    \item 集合\(B\subset A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\termdef{\ltjruby{稠密}{ちゆうみつ}}（dense）であるという．
+    \item 集合\(B\subseteq A\)が\(\clsr B=A\)を満たすとき，\(B\)は\(A\)において\termdef{\ltjruby{稠密}{ちゆうみつ}}（dense）であるという．
   \end{enumerate}
 \end{definition}
 
@@ -262,7 +262,7 @@
 
 \begin{definition}{線分，凸集合}{convex_set}\index{せんぶん@線分}\index{とつしゅうごう@凸集合}
   \(V\)をベクトル空間とする．2点\(x,y\in V\)に対し，集合\(\Set{(1-t)x+ty\given t\in\ccival{0}{1}}\)を\(x\)と\(y\)を結ぶ\termdef{線分}（line segment）という．
-  また，集合\(S\subset V\)に属する任意の2点を結ぶ線分が\(S\)に含まれるとき，\(S\)は\termdef{凸集合}（convex set）であるという．
+  また，集合\(S\subseteq V\)に属する任意の2点を結ぶ線分が\(S\)に含まれるとき，\(S\)は\termdef{凸集合}（convex set）であるという．
 \end{definition}
 
 \begin{figure}[htbp]
@@ -279,7 +279,7 @@
 \end{figure}
 
 \begin{theorem}{凸射影定理}{convex_projection_theorem}\index{とつしゃえいていり@凸射影定理}\index{しゃえいていり@射影定理!とつ@凸\texttwoemdash}
-  \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，集合\(C\subset H\)は空でない閉凸集合とする．
+  \(H\)をヒルベルト空間とする．また，\(x\in H\)かつ，集合\(C\subseteq H\)は空でない閉凸集合とする．
   このとき，\(\argmin_{y\in C}\vnorm{x-y}\)はただ一つの元からなる集合である．
 \end{theorem}
 
@@ -405,7 +405,7 @@
 \label{section:lp_space}
 
 \begin{definition}{\(\Lebesgue{p}\)空間}{Lp_space}\index{Lpkukan@\(\Lebesgue{p}\)空間}
-  集合\(\Omega\subset\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{K}\)で
+  集合\(\Omega\subseteq\numset{R}\)はルベーグ可測とする．各\(p\in\coival{1}{+\infty}\)に対し，可測関数\(f\colon\Omega\to\numset{K}\)で
   \[
     \Lpnorm{p}{f} = \pqty*{\int_\Omega\abs{f(t)}^p\intd{t}}^{1/p}
   \]
@@ -466,7 +466,7 @@
   \(\Lebesgue{2}(\numset{R})\)の閉部分空間の列\(\seq{V_n}_{n\in\numset{Z}}\)が以下の条件を満たすとき，
   \(\seq{V_n}_{n\in\numset{Z}}\)は\termdef{多重解像度解析}（multiresolution analysis; MRA）をなすという．
   \begin{enumerate}
-    \item \(\dotsb\subset V_{-1}\subset V_0\subset V_1\subset\dotsb\)
+    \item \(\dotsb\subseteq V_{-1}\subseteq V_0\subseteq V_1\subseteq\dotsb\)
     \item \(\bigcap_{n\in\numset{Z}}V_n=\Set{0}\)，\(\clsr(\bigcup_{n\in\numset{Z}}V_n)=\Lebesgue{2}(\numset{R})\)
     \item \(f(\holder)\in V_n\iff f(2\holder)\in V_{n+1}\)，ただし\(n\)は任意の整数．
     \item \(\seq{\phi(\holder-n)}_{n\in\numset{Z}}\)が\(V_0\)の完全正規直交系となる\(\phi\in V_0\)が存在する．

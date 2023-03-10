@@ -70,7 +70,7 @@
 
 \begin{example}
   \cref{example:dice}のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}=\sigmagen{\Set{O}}\)と書ける．
-  実際，\(\sigmaalg{F}\)が\(\Set{O}\)を包含するσ‐加法族なら\(\scomp{O}\in\sigmaalg{F}\)，\(\sigmaalg{G}\subset\sigmaalg{F}\)である．
+  実際，\(\sigmaalg{F}\)が\(\Set{O}\)を包含するσ‐加法族なら\(\scomp{O}\in\sigmaalg{F}\)，\(\sigmaalg{G}\subseteq\sigmaalg{F}\)である．
   つまり，\(\sigmaalg{G}\)は\(\Set{O}\)を包含する最小のσ‐加法族だから，\(\sigmaalg{G}=\sigmagen{\Set{O}}\)である．
 \end{example}
 
@@ -161,7 +161,7 @@
 \end{theorem}
 
 \begin{proof}[略証]
-各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subset\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
+各\(S\in\powerset{\Omega}\)に対し，\(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(S\subseteq\bigcup_{n\in\numset{N}}A_n\)を満たすもの全体を\(\operatornamewithlimits{cover}_{\sigmaalg{A}}S\)とおく．
 そして，写像\(\mu^{\mathord{\ast}}\colon\powerset{\Omega}\to\ccival{0}{+\infty}\)を
 \[
   \mu^{\mathord{\ast}}(S) = \inf\Set*{\sum_{n=1}^\infty m(A_n)\given\seq{A_n}_{n\in\numset{N}}\in\operatornamewithlimits{cover}_{\sigmaalg{A}}S}
@@ -178,7 +178,7 @@
 \begin{note}
   \(\sigmaalg{A}\)上の集合列\(\seq{A_n}_{n\in\numset{N}}\)で\(m(A_n)<+\infty\)，\(\bigcup_{n\in\numset{N}}A_n=\Omega\)を満たすものが存在するとき，\(m\)は\termdef{σ‐有限}\index{しぐまゆうげん@σ‐有限}（σ‐finite）であるという．
   本書が扱う（有限加法的）測度はすべてσ‐有限なので，\cref{theorem:hopf_extension}から定まる拡張された測度は常に一意である．
-  また，集合\(A\subset\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属する\texttwoemdash つまり，任意の\(E\in\powerset{\Omega}\)に対して\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)である\texttwoemdash とき，
+  また，集合\(A\subseteq\Omega\)が\cref{equation:caratheodory_measurable}の\(\sigmaalg{F}\)に属する\texttwoemdash つまり，任意の\(E\in\powerset{\Omega}\)に対して\(\mu^{\mathord{\ast}}(A)=\mu^{\mathord{\ast}}(A\cap E)+\mu^{\mathord{\ast}}(A\setminus E)\)である\texttwoemdash とき，
   \(A\)は\(\mu^{\mathord{\ast}}\)に関して\termdef{カラテオドリ可測}\index{からておどりかそく@カラテオドリ可測}（Carathéodory‐measurable）であるという．
 \end{note}
 
@@ -205,12 +205,12 @@
 特に，確率空間における可測関数は（実数値）\termdef{確率変数}\index{かくりつへんすう@確率変数}（random variable）とも呼ばれる．
 
 \begin{proposition}{}{sigmagen_and_measurable}
-  集合\(\symscr{S}\subset\powerset{\numset{R}}\)が\(\sigmagen{\symscr{S}}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in\symscr{S}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
+  集合\(\symscr{S}\subseteq\powerset{\numset{R}}\)が\(\sigmagen{\symscr{S}}=\borelset{\numset{R}}\)を満たすとき，任意の\(A\in\symscr{S}\)に対して\(\inv{f}{A}\in\sigmaalg{F}\)が成立すれば，\(f\)は可測関数である．
   特に，任意の\(a\in\numset{R}\)に対して\(\inv{f}{\ocival{-\infty}{a}}\in\sigmaalg{F}\)なら，\(f\)は可測関数である．
 \end{proposition}
 
 \begin{proof}
-  集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(\symscr{S}\subset\sigmaalg{G}\)なので\(\sigmagen{\symscr{S}}\subset\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
+  集合\(\sigmaalg{G}=\Set{A\in\powerset{\numset{R}}\given\inv{f}{A}\in\sigmaalg{F}}\)はσ‐加法族であり，仮定から\(\symscr{S}\subseteq\sigmaalg{G}\)なので\(\sigmagen{\symscr{S}}\subseteq\sigmaalg{G}\)である．よって，\(f\)は可測関数である．
 \end{proof}
 
 \begin{definition}{単関数}{}\index{しじかんすう@指示関数}\index{たんかんすう@単関数}\indexsymbol{\(\indicator_A\)}
@@ -424,7 +424,7 @@
 実は逆に，\(\condexpval{X\given\sigmaalg{G}}\)は「任意の\(A\in\sigmaalg{G}\)に対し\(\expval[\condexpval{X\given\sigmaalg{G}},A]=\expval[X,A]\)を満たす」確率変数として定義される．
 
 \begin{definition}{条件つき期待値}{conditional_expectation}\index{じょうけんつききたいち@条件つき期待値}\index{きたいち@期待値!じょうけんつき@条件つき\texttwoemdash}\index{らどんにこでぃむのていり@ラドン・ニコディムの定理}\index{E@\(\condexpval{X\given\sigmaalg{G}}\)}
-  \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subset\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
+  \((\Omega,\sigmaalg{F},\prob)\)は確率空間で，\(\Omega\)上のσ‐加法族\(\sigmaalg{G}\)は\(\sigmaalg{G}\subseteq\sigmaalg{F}\)を満たすとする．また，\(X\)は\((\Omega,\sigmaalg{F},\prob)\)上の確率変数とする．
   このとき，\(\sigmaalg{G}\)‐可測な確率変数\(Y\)で，任意の\(A\in\sigmaalg{G}\)に対し\(\expval[Y,A]=\expval[X,A]\)を満たすものが存在する\footnotemark ．
   \(Y\)を\(\sigmaalg{G}\)の下での\(X\)の\termdef{条件つき期待値}（conditional expectation）といい，\(\condexpval{X\given\sigmaalg{G}}\)と書く．
 \end{definition}
@@ -439,7 +439,7 @@
 以下，\((\Omega,\sigmaalg{F},\mu)\)を測度空間，\(\numset{K}\)を\(\numset{R}\)または\(\numset{C}\)とする．
 
 \begin{definition}{零集合}{}\index{ぜろしゅうごう@零集合}
-  \(A\)を\(\Omega\)の部分集合とする．\(\mu(N)=0\)，\(A\subset N\)を満たす集合\(N\in\sigmaalg{F}\)があるとき，\(A\)は\termdef{\(\mu\)‐零集合}（\(\mu\)‐null set）であるという．
+  \(A\)を\(\Omega\)の部分集合とする．\(\mu(N)=0\)，\(A\subseteq N\)を満たす集合\(N\in\sigmaalg{F}\)があるとき，\(A\)は\termdef{\(\mu\)‐零集合}（\(\mu\)‐null set）であるという．
 \end{definition}
 
 \begin{definition}{ほとんどいたるところ}{}\index{ほとんどいたるところ}\index{ae@a{.}e{.}}
@@ -516,7 +516,7 @@
 \end{proposition}
 
 \begin{proposition}{}{}
-  \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subset\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，\(\expval[\abs{X}^2]<+\infty\)を満たす任意の確率変数\(X\)に対して，次の式が成立する．
+  \((\Omega,\sigmaalg{F},\prob)\)を確率空間，\(\sigmaalg{G}\subseteq\sigmaalg{F}\)を\(\Omega\)上のσ‐加法族とする．このとき，\(\expval[\abs{X}^2]<+\infty\)を満たす任意の確率変数\(X\)に対して，次の式が成立する．
   \[
     \condexpval{X\given\sigmaalg{G}} = \proj_VX\almostsurely\quad(V=\Lebesgue{2}(\Omega,\sigmaalg{G},\prob))
   \]
