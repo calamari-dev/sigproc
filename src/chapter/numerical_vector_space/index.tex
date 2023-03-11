@@ -246,18 +246,18 @@
 \end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
-以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分析作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
 
-\begin{definition}{分析作用素，合成作用素}{analysis_and_synthesis}\index{ぶんせきさようそ@分析作用素}\index{ごうせいさようそ@合成作用素}
+\begin{definition}{分解作用素，合成作用素}{analysis_and_synthesis}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
   \begin{enumerate}
-    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分析作用素}（analysis operator）という．
+    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分解作用素}（analysis operator）という．
     \item 線型写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
   \end{enumerate}
 \end{definition}
 
-\cref{equation:analysis_and_synthesis}より，合成作用素は分析作用素の逆写像である．
-また，分析作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
+\cref{equation:analysis_and_synthesis}より，合成作用素は分解作用素の逆写像である．
+また，分解作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
 
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
@@ -301,14 +301,14 @@
 \begin{corollary}{}{}
   \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，\(T\)に関する以下の条件は同値である．
   \begin{enumerate}
-    \item \(T\)は\(\numset{C}^n\)のある正規直交基底に関する分析作用素である．
+    \item \(T\)は\(\numset{C}^n\)のある正規直交基底に関する分解作用素である．
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
   \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-  \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分析作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
-  \(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \dots & \vect{u}_n}\)）である．
+  \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分解作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
+  \(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)）である．
   また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_characterization}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
@@ -383,7 +383,7 @@
   関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
 
   また，\(\increment\vect{x}=h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
-  \(\vect{g}=\zvec\)でなければ\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)でなければ\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
+  \(\vect{g}\neq\zvec\)ならば\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}\neq\htrps{\mat{A}}\vect{b}\)ならば\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
 \end{proof}
 
 \(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
@@ -741,8 +741,8 @@
   と変形できる．\(\zeta^N=1\)なので\(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)である．
 \end{proof}
 
-\cref{proposition:dft_onb}から，\(\dft{N}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)に関する分析作用素である．
-分析作用素の逆写像は合成作用素なので，\(\dft{N}\)の逆変換は
+\cref{proposition:dft_onb}から，\(\dft{N}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)に関する分解作用素である．
+分解作用素の逆写像は合成作用素なので，\(\dft{N}\)の逆変換は
 \begin{equation}
   \label{equation:idft}
   \vect{x} = \sum_{k=0}^{N-1}\hat{x}_k\vect{w}_k,
@@ -772,7 +772,7 @@
 
 \cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音バージョン1.5.1を使用した．}．
 冒頭で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
-そして，分析作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
+そして，分解作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
 つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
 \[
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
@@ -1046,7 +1046,7 @@
 であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
-次の命題は，一般の次元で離散フーリエ変換が分析作用素であることを示している．
+次の命題は，一般の次元で離散フーリエ変換が分解作用素であることを示している．
 ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
 
 \begin{proposition}{}{ddimdft_onb}
@@ -1114,7 +1114,7 @@
     \centering
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
-  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given\text{\(k\in\numset{Z}\)，\(0\leq k<64\)}}\)）のグラフと2次元離散フーリエ変換．}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given\text{\(k\in\numset{Z}\)，\(0\leq k<64\)}}\)）のグラフと2次元DFT．}
 \end{figure}
 
 \section{多重解像度解析}
