@@ -374,11 +374,11 @@
 
 \begin{proof}
   関数\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)が点\(\vect{a}\)で最小値をとることと，\(\vect{g}=\htrps{\mat{A}}\vect{\epsilon}(\vect{a})=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)が\(\zvec\)であることが同値なのを示す．
-  \(\vect{x}\)を\(\increment\vect{x}\)だけ動かしたとき，\(\epsilon(\vect{x})\)の増分\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)は
+  \(\vect{a}\)を\(\increment\vect{x}\)だけ動かしたとき，\(\epsilon\)の増分\(\increment\epsilon(\vect{a})=\epsilon(\vect{a}+\increment\vect{x})-\epsilon(\vect{a})\)は
   \begin{align*}
-    \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})-\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
-    = -2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
-    &= -2\rpart\innerp{\htrps{\mat{A}}\vect{\epsilon}(\vect{x})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+    \increment\epsilon(\vect{a}) &= \vnorm{\vect{\epsilon}(\vect{a})-\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{a})}^2
+    = -2\rpart\innerp{\vect{\epsilon}(\vect{a})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
+    &= -2\rpart\innerp{\htrps{\mat{A}}\vect{\epsilon}(\vect{a})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
     = -2\rpart\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
   \end{align*}
   である．よって，\(\vect{g}=\zvec\)ならば\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，\(\epsilon\)は点\(\vect{a}\)で最小値をとる．

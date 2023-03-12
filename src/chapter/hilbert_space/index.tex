@@ -172,13 +172,12 @@
 \end{example}
 
 \begin{example}[\(\lebesgue{p}\)空間]
-  複素数列\(\seq{x_n}_{n\in\numset{N}}\)に対して，\(\vnorm{\seq{x_n}_{n\in\numset{N}}}_p\in\ccival{0}{+\infty}\)（\(p\geq 1\)）を
+  各\(x=\seq{x[n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)に対して\(\vnorm{x}_p\in\ccival{0}{+\infty}\)（\(p\geq 1\)）を
   \[
-    \lpnorm{p}{\seq{x_n}_{n\in\numset{N}}} = \pqty*{\sum_{n=1}^\infty\abs{x_n}^p}^{1/p}
+    \lpnorm{p}{x} = \pqty*{\sum_{n=-\infty}^\infty\abs{x[n]}^p}^{1/p}
   \]
-  で定義する．\(\numset{C}^{\numset{N}}\)の部分空間\(\lebesgue{p}(\numset{N})\)を\(\lebesgue{p}(\numset{N})=\Set{\seq{x_n}_{n\in\numset{N}}\given\lpnorm{p}{\seq{x_n}_{n\in\numset{N}}}<+\infty}\)
-  で定義すると，\(\lpnorm{p}{\holder}\)は\(\lebesgue{p}\)のノルムになり，しかも，\(\lebesgue{p}(\numset{N})\)はこのノルムについてバナッハ空間になる．
-  バナッハ空間\(\lebesgue{p}(\numset{N})\)を\termdef{\(\lebesgue{p}\)空間}\index{lpkukan@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
+  で定義する．このとき，集合\(\lebesgue{p}(\numset{Z})=\Set{x\in\mapset{\numset{Z}}{\numset{K}}\given\lpnorm{p}{x}<+\infty}\)は\(\mapset{\numset{Z}}{\numset{K}}\)の部分空間かつ，\(\lpnorm{p}{\holder}\)をノルムとするバナッハ空間である．
+  バナッハ空間\(\lebesgue{p}(\numset{Z})\)を\termdef{\(\lebesgue{p}\)空間}\index{lpkukan@\(\lebesgue{p}\)空間}（\(\lebesgue{p}\) space）という．
 \end{example}
 
 \begin{example}
