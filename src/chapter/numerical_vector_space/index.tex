@@ -373,17 +373,17 @@
 \end{proposition}
 
 \begin{proof}
-  \(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)，\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)（\(\increment\vect{x}\in\numset{K}^p\)）とおくと
+  関数\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)が点\(\vect{a}\)で最小値をとることと，\(\vect{g}=\htrps{\mat{A}}\vect{\epsilon}(\vect{a})=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)が\(\zvec\)であることが同値なのを示す．
+  \(\vect{x}\)を\(\increment\vect{x}\)だけ動かしたとき，\(\epsilon(\vect{x})\)の増分\(\increment\epsilon(\vect{x})=\epsilon(\vect{x}+\increment\vect{x})-\epsilon(\vect{x})\)は
   \begin{align*}
     \increment\epsilon(\vect{x}) &= \vnorm{\vect{\epsilon}(\vect{x})-\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{x})}^2
     = -2\rpart\innerp{\vect{\epsilon}(\vect{x})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
-    &= -2\rpart\innerp{\htrps{\mat{A}}(\vect{b}-\mat{A}\vect{x})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+    &= -2\rpart\innerp{\htrps{\mat{A}}\vect{\epsilon}(\vect{x})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
+    = -2\rpart\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
   \end{align*}
-  である．よって，\(\numset{K}^p\)の元\(\vect{a}\)が\(\htrps{\mat{A}}\mat{A}\vect{a}=\htrps{\mat{A}}\vect{b}\)を満たすとき，\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，
-  関数\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
-
-  また，\(\increment\vect{x}=h\vect{g}\)（\(h>0\)，\(\vect{g}=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，
-  \(\vect{g}\neq\zvec\)ならば\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．つまり，\(\htrps{\mat{A}}\mat{A}\vect{a}\neq\htrps{\mat{A}}\vect{b}\)ならば\(\epsilon(\vect{a})\)は関数\(\epsilon\)の最小値ではない．
+  である．よって，\(\vect{g}=\zvec\)ならば\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
+  また，\(\increment\vect{x}=h\vect{g}\)（\(h>0\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，\(\vnorm{\vect{g}}\neq 0\)なら\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．
+  つまり，\(\vect{g}\neq\zvec\)ならば\(\epsilon(\vect{a})\)は\(\epsilon\)の最小値ではない．
 \end{proof}
 
 \(\numset{K}^p\)の元\(\vect{x}\)に関する方程式\(\htrps{\mat{A}}\mat{A}\vect{x}=\htrps{\mat{A}}\vect{b}\)を，方程式\(\mat{A}\vect{x}=\vect{b}\)に関する\termdef{正規方程式}\index{せいきほうていしき@正規方程式}（normal equation）という．
@@ -396,7 +396,7 @@
 \subsection{スペクトル分解と特異値分解}
 \label{subsection:sd_and_svd}
 
-\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
+\(\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
 \begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
@@ -765,7 +765,7 @@
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/helix.pdf}
-    \caption{複素指数関数のグラフ．}
+    \caption{\(\napr^{2\krez\iuni ft}\)のグラフ．}
     \label{figure:complex_sinusoid}
   \end{minipage}
 \end{figure}
@@ -835,7 +835,7 @@
 
 離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線型結合
 \[
-  f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\exp(\iuni kt))
+  f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\napr^{\iuni kt})
 \]
 で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，整数値などの離散的な引数を大かっこで書く．}．
 
@@ -1090,7 +1090,7 @@
   \label{figure:pudding_dft}
 \end{figure}
 
-\cref{figure:pudding_dft}は，画像を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した様子である．
+\cref{figure:pudding_dft}は，画像を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した結果である．
 ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
 
 \(\hat{s}[u,v]\)は\(x\)と\(y\)に関して\(s[x,y]\)を離散フーリエ変換したものだから，\(u\geq N/2\)か\(v\geq N/2\)のときはエイリアシングが起きている．
@@ -1105,6 +1105,9 @@
   \label{figure:pudding_shift}
 \end{figure}
 
+\cref{figure:pudding_shift}を見ると，斜めに光の筋が現れている．
+この筋は\cref{figure:pudding_dft}のプリンの画像が，その方向に関して周期性を持つことを示している．
+
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
@@ -1114,8 +1117,16 @@
     \centering
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
-  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez(k-32)/64\given\text{\(k\in\numset{Z}\)，\(0\leq k<64\)}}\)）のグラフと2次元DFT．}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez k/64\given k=0,\dots,63}\)）のグラフと2次元DFT．左図を座標空間で描くとトタン屋根のような形になる．また，右図の2点は\(\pm\smallmatrice{3 \\ 4}\)にある．}
+  \label{figure:2dcos_dft}
 \end{figure}
+
+\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{64 \\ 64}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元DFTである．
+\cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
+つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
+
+\cref{figure:pudding_shift,figure:2dcos_dft}を見比べると，最も長い光の筋はだいたい\(\smallmatrice{3 \\ 4}\)方向を向いている．
+よって，プリンの画像には\cref{figure:2dcos_dft}の左側のような波が多く含まれる．そう思ってプリンの画像を見返すと，クリーム部分によく似た周期性を見つけられる．
 
 \section{多重解像度解析}
 
