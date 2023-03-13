@@ -374,14 +374,14 @@
 
 \begin{proof}
   関数\(\epsilon(\vect{x})=\vnorm{\vect{\epsilon}(\vect{x})}^2\)が点\(\vect{a}\)で最小値をとることと，\(\vect{g}=\htrps{\mat{A}}\vect{\epsilon}(\vect{a})=\htrps{\mat{A}}\vect{b}-\htrps{\mat{A}}\mat{A}\vect{a}\)が\(\zvec\)であることが同値なのを示す．
-  \(\vect{a}\)を\(\increment\vect{x}\)だけ動かしたとき，\(\epsilon\)の増分\(\increment\epsilon(\vect{a})=\epsilon(\vect{a}+\increment\vect{x})-\epsilon(\vect{a})\)は
+  \(\vect{x}\)を\(\vect{a}\)から\(\increment\vect{x}\)だけ動かしたとき，\(\epsilon(\vect{x})\)の増分\(\increment\epsilon(\vect{a})=\epsilon(\vect{a}+\increment\vect{x})-\epsilon(\vect{a})\)は
   \begin{align*}
     \increment\epsilon(\vect{a}) &= \vnorm{\vect{\epsilon}(\vect{a})-\mat{A}\increment\vect{x}}^2-\vnorm{\vect{\epsilon}(\vect{a})}^2
     = -2\rpart\innerp{\vect{\epsilon}(\vect{a})}{\mat{A}\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2 \\
     &= -2\rpart\innerp{\htrps{\mat{A}}\vect{\epsilon}(\vect{a})}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
     = -2\rpart\innerp{\vect{g}}{\increment\vect{x}}+\vnorm{\mat{A}\increment\vect{x}}^2
   \end{align*}
-  である．よって，\(\vect{g}=\zvec\)ならば\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，\(\epsilon\)は点\(\vect{a}\)で最小値をとる．
+  である．よって，\(\vect{g}=\zvec\)ならば\(\increment\vect{x}\)の値によらず\(\increment\epsilon(\vect{a})=\vnorm{\mat{A}\increment\vect{x}}^2\geq 0\)だから，\(\epsilon\)は\(\vect{a}\)で最小値をとる．
   また，\(\increment\vect{x}=h\vect{g}\)（\(h>0\)）のとき\(\increment\epsilon(\vect{a})=-2h\vnorm{\vect{g}}^2+h^2\vnorm{\mat{A}\vect{g}}^2\)なので，\(\vnorm{\vect{g}}\neq 0\)なら\(h\)の値が十分小さいとき\(\increment\epsilon(\vect{a})<0\)である．
   つまり，\(\vect{g}\neq\zvec\)ならば\(\epsilon(\vect{a})\)は\(\epsilon\)の最小値ではない．
 \end{proof}
@@ -390,7 +390,7 @@
 \cref{proposition:least_square_existence,proposition:normal_equation}より，もとの方程式が解をもつかどうかによらず，正規方程式の解は存在する．
 
 正規方程式は\cref{proposition:finite_projection}からも導ける．
-\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，\(\vect{a}_j\in\colsp\mat{A}\)なので\(\innerp{\vect{b}-\mat{A}\vect{x}}{\vect{a}_j}=\htrps{\vect{a}_j}(\vect{b}-\mat{A}\vect{x})=0\)である．
+\(\numset{K}^p\)の元\(\vect{x}\)が\(\mat{A}\vect{x}=\proj_{\colsp\mat{A}}\vect{b}\)を満たすとき，\(\vect{a}_j\in\colsp\mat{A}\)なので\(\innerp{\vect{b}-\proj_{\colsp\mat{A}}\vect{b}}{\vect{a}_j}=\htrps{\vect{a}_j}(\vect{b}-\mat{A}\vect{x})=0\)である．
 よって\(\htrps{\mat{A}}(\vect{b}-\mat{A}\vect{x})=\zvec\)である．
 
 \subsection{スペクトル分解と特異値分解}
@@ -879,9 +879,9 @@
 そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
-  \(N\)を周期に持つ複素数列の全体集合を\(\cycles{\numset{C}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
+  \(N\)を周期に持つ\(\numset{K}\)上の数列の全体集合を\(\cycles{\numset{K}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
-    (\dft{N}x)[k] =  \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
+    (\dft{N}x)[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
 \end{definition}
 
@@ -977,6 +977,12 @@
   \(x\circconv(y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
+\begin{note}
+  \cref{equation:discrete_impulse_response}より，\(T\)の多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)y=X(\lagop)Y(\lagop)\delta\)が成立する．
+  実は，\(0\leq n<N\)のとき\((x\circconv y)[n]\)は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりの\(T^n\)の係数である．
+  実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=\lagop^0\)から\(X(\lagop)Y(\lagop)\delta=R(\lagop)\delta=\sum r_m\lagop^m\delta\)が分かる．
+\end{note}
+
 \(\cycles{\numset{C}}{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
 \(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対して
 \[
@@ -1027,6 +1033,31 @@
   \label{figure:filter_characteristics}
 \end{figure}
 
+なお，エイリアシングが起きている\(k>16\)でグラフはどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
+
+\begin{proposition}{}{dft_mirroring_property}
+  \(x\in\cycles{\numset{R}}{N}\)ならば\(\hat{x}[-k]=\conj*{\hat{x}[k]}\)である．
+\end{proposition}
+
+\begin{proof}
+  実際\(x[n]=\conj*{x[n]}\)，\(\conj{\zeta}=\zeta^{-1}\)より
+  \[
+    \hat{x}[-k]\sqrt{N} = \sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
+    = \sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
+    = \conj*{\hat{x}[k]}\sqrt{N}
+  \]
+  である．
+\end{proof}
+
+\begin{corollary}{}{}
+  \(\vect{x}\in\numset{R}^N\)ならば\(\hat{x}_{N-k}=\conj{\hat{x}}_k\)（\(0<k<N\)）である．
+\end{corollary}
+
+\begin{proof}
+  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\delta\)とおくと，
+  \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{\numset{C}}{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
+\end{proof}
+
 \subsection{多次元DFT}
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
@@ -1038,10 +1069,10 @@
   を対応づける線型写像\(\dft[d]{\vect{n}}\colon\mapset{\Omega}{\numset{C}}\to\mapset{\Omega}{\numset{C}}\)を\termdef{\(d\)次元離散フーリエ変換}という．
 \end{definition}
 
-特に\(d=2\)のとき（\(\sum\)の添字\(r_i\)は集合\(\Set{0,\dots,N_i-1}\)上を動くとして）
+特に\(d=2\)のとき
 \begin{align*}
-  \hat{x}[k_1,k_2] &= \frac{1}{\sqrt{N_1N_2}}\sum_{r_2}\sum_{r_1}x[r_1,r_2]\napr^{-2\krez\iuni(k_1r_1/N_1+k_2r_2/N_2)} \\
-  &= \frac{1}{\sqrt{N_2}}\sum_{r_2}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{r_1}x[r_1,r_2]\napr^{-2\krez\iuni k_1r_1/N_1}}\napr^{-2\krez\iuni k_2r_2/N_2}
+  \hat{x}[k_1,k_2] &= \frac{1}{\sqrt{N_1N_2}}\sum_{r_2=0}^{N_2-1}\sum_{r_1=0}^{N_1-1}x[r_1,r_2]\napr^{-2\krez\iuni(k_1r_1/N_1+k_2r_2/N_2)} \\
+  &= \frac{1}{\sqrt{N_2}}\sum_{r_2=0}^{N_2-1}\pqty*{\frac{1}{\sqrt{N_1}}\sum_{r_1=0}^{N_1-1}x[r_1,r_2]\napr^{-2\krez\iuni k_1r_1/N_1}}\napr^{-2\krez\iuni k_2r_2/N_2}
 \end{align*}
 であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
@@ -1062,8 +1093,8 @@
   \]
   と計算できるので，\(\zeta_k=\napr^{2\krez\iuni/N_k}\)とおくと
   \[
-    \sum_{\vect{r}\in\Omega}w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \sum_{r_1}\dotsm\sum_{r_d}\prod_{k=1}^d\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
-    = \prod_{k=1}^d\sum_{r_k}\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
+    \sum_{\vect{r}\in\Omega}w_{\vect{i}}[\vect{r}]\conj*{w_{\!\vect{j}}[\vect{r}]} = \sum_{r_1=0}^{N_1-1}\dotsm\sum_{r_d=0}^{N_d-1}\prod_{k=1}^d\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
+    = \prod_{k=1}^d\sum_{r_k=0}^{N_k-1}\frac{\zeta_k^{(i_k-j_k)r_k}}{N_k}
   \]
   である．よって\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)である．
 \end{proof}
@@ -1093,17 +1124,17 @@
 \cref{figure:pudding_dft}は，画像を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した結果である．
 ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
 
+\begin{wrapfigure}[10]{o}{0pt}
+  \centering
+  \includegraphics{figures/pudding_shift.pdf}
+  \caption{補正後の様子．}
+  \label{figure:pudding_shift}
+\end{wrapfigure}
+
 \(\hat{s}[u,v]\)は\(x\)と\(y\)に関して\(s[x,y]\)を離散フーリエ変換したものだから，\(u\geq N/2\)か\(v\geq N/2\)のときはエイリアシングが起きている．
 つまり，低周波にもかかわらず原点から遠いところにプロットされている領域がある．
 低周波ほど原点の近くにプロットするには，\(u\geq N/2\)のとき\(u\)を\(u-N\)に，\(v\geq N/2\)のとき\(v\)を\(v-N\)に置き換えてプロットしなおせばよい．
-そのとき\cref{figure:pudding_dft}は次のように変化する．
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/pudding_shift.pdf}
-  \caption{エイリアシングを補正した2次元DFTの様子．}
-  \label{figure:pudding_shift}
-\end{figure}
+この補正により，\cref{figure:pudding_dft}は\cref{figure:pudding_shift}に変化する．
 
 \cref{figure:pudding_shift}を見ると，斜めに光の筋が現れている．
 この筋は\cref{figure:pudding_dft}のプリンの画像が，その方向に関して周期性を持つことを示している．
@@ -1121,7 +1152,7 @@
   \label{figure:2dcos_dft}
 \end{figure}
 
-\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{64 \\ 64}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元DFTである．
+\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{64 \\ 64}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
 \cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
 つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
 

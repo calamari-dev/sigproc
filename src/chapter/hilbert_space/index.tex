@@ -445,7 +445,7 @@
 \begin{definition}{フーリエ級数展開}{fourier_series_expansion}\index{ふーりえきゅうすうてんかい@フーリエ級数展開}
   各\(f\in\Lebesgue{2}(\torus)\)に対して，次式を\(f\)の\termdef{フーリエ級数展開}（Fourier series expansion）という．
   \[
-    f(t) = \sqlim_{N\to\infty}\sum_{n=-N}^N\hat{f}_n\napr^{\iuni nt}\quad(t\in\torus)
+    f(t) = \sqlim_{K\to\infty}\sum_{k=-K}^K\hat{f}_k\napr^{\iuni kt}\quad(t\in\torus)
   \]
 \end{definition}
 
@@ -458,6 +458,14 @@
   \]
   で定義される．
 \end{note}
+
+\begin{theorem}{カールソンの定理}{carlesons_theorem}\index{かーるそんのていり@カールソンの定理}
+  \(f\in\Lebesgue{2}(\torus)\)とする．このとき
+  \[
+    \lim_{K\to\infty}\sum_{k=-K}^K\hat{f}_k\napr^{\iuni kt} = f(t)\almosteverywhere[][t\in\torus]
+  \]
+  である．これを\termdef{カールソンの定理}（Carleson’s theorem）という．
+\end{theorem}
 
 \section{多重解像度解析}
 
