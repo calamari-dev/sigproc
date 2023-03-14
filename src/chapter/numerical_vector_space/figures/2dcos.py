@@ -5,9 +5,9 @@ import numpy as np
 
 plt.style.use("sigproc")
 
-t = np.linspace(0, 2 * np.pi, num=64, endpoint=False)
+t = np.linspace(0, 2 * np.pi, num=50, endpoint=False)
 xx, yy = np.meshgrid(t, t)
-zz = np.cos(3 * xx + 4 * yy)
+zz = np.cos(3 * xx + 5 * yy)
 
 mm = 1 / 25.4
 fig, ax = plt.subplots(figsize=(55 * mm, 40 * mm))

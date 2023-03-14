@@ -898,10 +898,11 @@
 \begin{proof}
   \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
   よって\(x[m](\lagop^m\delta)[n]=x[m]\delta[n-m]=x[n]\kdelta{m}{n}\)であり，\(m\)に関して和をとると
-  \[
+  \begin{equation}
+    \label{equation:lagop_expansion}
     \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
-  \]
+  \end{equation}
   となる．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)なので，\(\basis{D}\)は\(\cycles{\numset{C}}{N}\)の基底である．
 \end{proof}
 
@@ -978,9 +979,8 @@
 \end{proof}
 
 \begin{note}
-  \cref{equation:discrete_impulse_response}より，\(T\)の多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)y=X(\lagop)Y(\lagop)\delta\)が成立する．
-  実は，\(0\leq n<N\)のとき\((x\circconv y)[n]\)は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりの\(T^n\)の係数である．
-  実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=\lagop^0\)から\(X(\lagop)Y(\lagop)\delta=R(\lagop)\delta=\sum r_m\lagop^m\delta\)が分かる．
+  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，\(T\)の多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\delta\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
+  実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=1\)から\(X(\lagop)Y(\lagop)=R(\lagop)=\sum r_m\lagop^m\)であり，\((x\circconv y)[n]=r_n\)（\(0\leq n<N\)）が分かる．
 \end{note}
 
 \(\cycles{\numset{C}}{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
@@ -1033,7 +1033,7 @@
   \label{figure:filter_characteristics}
 \end{figure}
 
-なお，エイリアシングが起きている\(k>16\)でグラフはどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
+なお，エイリアシングが起きている\(k\geq 16\)でグラフはどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
 
 \begin{proposition}{}{dft_mirroring_property}
   \(x\in\cycles{\numset{R}}{N}\)ならば\(\hat{x}[-k]=\conj*{\hat{x}[k]}\)である．
@@ -1061,7 +1061,7 @@
 \subsection{多次元DFT}
 
 \begin{definition}{多次元離散フーリエ変換}{multidimensional_discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!たじげん@多次元}\index{FZdn@\(\dft[d]{\vect{n}}\)}
-  \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\given\text{\(u_i\in\numset{Z}\)，\(0\leq u_i<N_i\)（\(1\leq i\leq d\)）}}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
+  \(\vect{n}=\trps{\rowvect{N_1 & \cdots & N_d}}\)を自然数の組とし，\(\Omega=\Set{\trps{\rowvect{u_1 & \cdots & u_d}}\in\numset{Z}^d\given 0\leq u_i<N_i}\)，\(\mat{N}=\diag(N_1,\dots,N_d)\)とおく．
   関数\(x\in\mapset{\Omega}{\numset{C}}\)に対して，関数
   \[
     \hat{x}[\vect{k}] = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{r}\in\Omega}x[\vect{r}]\napr^{-2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}\quad(\vect{k}\in\Omega)
@@ -1112,17 +1112,19 @@
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/pudding.pdf}
+    \caption{プリンの画像．}
+    \label{figure:pudding}
   \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/pudding_dft.pdf}
+    \caption{左図の2次元DFT．}
+    \label{figure:pudding_dft}
   \end{minipage}
-  \caption{画像とその2次元DFT．}
-  \label{figure:pudding_dft}
 \end{figure}
 
-\cref{figure:pudding_dft}は，画像を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した結果である．
-ただし\(\vect{n}\)は，この画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
+\cref{figure:pudding_dft}は，\cref{figure:pudding}を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した結果である．
+ただし\(\vect{n}\)は，画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
 
 \begin{wrapfigure}[10]{o}{0pt}
   \centering
@@ -1148,15 +1150,15 @@
     \centering
     \includegraphics{figures/2dcos_dft.pdf}
   \end{minipage}
-  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez k/64\given k=0,\dots,63}\)）のグラフと2次元DFT．左図を座標空間で描くとトタン屋根のような形になる．また，右図の2点は\(\pm\smallmatrice{3 \\ 4}\)にある．}
+  \caption{\(\cos(3x+5y)\)（\(x,y\in\Set{2\krez k/50\given k=0,\dots,49}\)）のグラフと2次元DFT．左図を3次元空間で描くとトタン屋根に似た形になる．また，右図の白点は\(\pm\smallmatrice{3 \\ 5}\)にある．}
   \label{figure:2dcos_dft}
 \end{figure}
 
-\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{64 \\ 64}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
+\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{50 \\ 50}\)，\(\vect{k}=\smallmatrice{3 \\ 5}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
 \cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
 つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
 
-\cref{figure:pudding_shift,figure:2dcos_dft}を見比べると，最も長い光の筋はだいたい\(\smallmatrice{3 \\ 4}\)方向を向いている．
+\cref{figure:pudding_shift,figure:2dcos_dft}を見比べると，光の筋はだいたい\(\smallmatrice{3 \\ 5}\)方向を向いている．
 よって，プリンの画像には\cref{figure:2dcos_dft}の左側のような波が多く含まれる．そう思ってプリンの画像を見返すと，クリーム部分によく似た周期性を見つけられる．
 
 \section{多重解像度解析}
