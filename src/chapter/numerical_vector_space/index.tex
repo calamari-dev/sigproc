@@ -498,9 +498,9 @@
 さきほどの議論から分かることは，擬似逆行列によって次のようにまとめられる．
 
 \begin{proposition}{}{pseudoinverse_least_square}
-  任意の\(n\times p\)複素行列\(\mat{A}\)に対して，次の式が成立する．
+  任意の\(\vect{b}\in\numset{C}^n\)，\(n\times p\)複素行列\(\mat{A}\)に対して，次の式が成り立つ．
   \[
-    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{b}-\mat{A}\vect{x}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}\quad(\vect{b}\in\numset{C}^n)
+    \argmin_{\vect{x}\in\numset{C}^p}\vnorm{\vect{b}-\mat{A}\vect{x}} = \Set{\pinv{\mat{A}}\vect{b}+(\imat-\pinv{\mat{A}}\mat{A})\vect{w}\given\vect{w}\in\numset{C}^p}
   \]
 \end{proposition}
 
@@ -1040,11 +1040,11 @@
 \end{proposition}
 
 \begin{proof}
-  実際\(x[n]=\conj*{x[n]}\)，\(\conj{\zeta}=\zeta^{-1}\)より
+  実際
   \[
-    \hat{x}[-k]\sqrt{N} = \sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
-    = \sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
-    = \conj*{\hat{x}[k]}\sqrt{N}
+    \hat{x}[-k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
+    = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
+    = \conj*{\hat{x}[k]}
   \]
   である．
 \end{proof}
