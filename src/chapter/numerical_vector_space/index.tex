@@ -525,15 +525,15 @@
   一意性のみ示す．\(p\times n\)行列\(\mat{X}\)，\(\mat{Y}\)が条件をすべて満たすとき，\(i\)番目の条件から分かる等号を\(\overset{i}{=\joinrel=}\)と書くと
   \begin{align*}
     \mat{Y} &\overset{2,3}{=\joinrel=} \mat{Y}\htrps{(\mat{A}\mat{Y})}
-    = \mat{Y}\htrps{\mat{Y}}\htrps{\mat{A}}
+    =\joinrel= \mat{Y}\htrps{\mat{Y}}\htrps{\mat{A}}
     \overset{1}{=\joinrel=} \mat{Y}\htrps{\mat{Y}}\htrps{(\mat{A}\mat{X}\mat{A})}
-    = \mat{Y}\htrps{(\mat{A}\mat{Y})}\htrps{(\mat{A}\mat{X})} \\
+    =\joinrel= \mat{Y}\htrps{(\mat{A}\mat{Y})}\htrps{(\mat{A}\mat{X})} \\
     &\overset{2,3}{=\joinrel=} \mat{Y}\mat{A}\mat{X}
     \overset{2,4}{=\joinrel=} \htrps{(\mat{Y}\mat{A})}\mat{X}\mat{A}\mat{X}
     \overset{4}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{Y}}\htrps{(\mat{X}\mat{A})}\mat{X}
-    = \htrps{(\mat{A}\mat{Y}\mat{A})}\htrps{\mat{X}}\mat{X} \\
+    =\joinrel= \htrps{(\mat{A}\mat{Y}\mat{A})}\htrps{\mat{X}}\mat{X} \\
     &\overset{1}{=\joinrel=} \htrps{\mat{A}}\htrps{\mat{X}}\mat{X}
-    = \htrps{(\mat{X}\mat{A})}\mat{X}
+    =\joinrel= \htrps{(\mat{X}\mat{A})}\mat{X}
     \overset{2,4}{=\joinrel=} \mat{X}
   \end{align*}
   なので\(\mat{Y}=\mat{X}\)である．
@@ -765,7 +765,7 @@
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/helix.pdf}
-    \caption{\(\napr^{2\krez\iuni ft}\)のグラフ．}
+    \caption{\(\napr^{\iuni t}\)のグラフ．}
     \label{figure:complex_sinusoid}
   \end{minipage}
 \end{figure}
@@ -1161,7 +1161,14 @@
 \cref{figure:pudding_shift,figure:2dcos_dft}を見比べると，光の筋はだいたい\(\smallmatrice{3 \\ 5}\)方向を向いている．
 よって，プリンの画像には\cref{figure:2dcos_dft}の左側のような波が多く含まれる．そう思ってプリンの画像を見返すと，クリーム部分によく似た周期性を見つけられる．
 
+\section{短時間フーリエ変換}
+\label{section:stft}
+
+\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
+この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
+
 \section{多重解像度解析}
+\label{section:discrete_mra}
 
 \section{補遺}
 

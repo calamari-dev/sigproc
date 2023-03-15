@@ -32,8 +32,8 @@
 \setmathfont{STIX Two Math}[Scale=1.1]
 \setmainfont{STIX Two Text}[Scale=1.1]
 \setsansfont{Liberation Sans}[Scale=1.1]
-\setmonofont{PlemolJP}
-\setmonojfont{PlemolJP}
+\setmonofont{HackGen}
+\setmonojfont{HackGen}
 
 % 版面
 \ModifyPageStyle{plain}{
