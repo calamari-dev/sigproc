@@ -1084,11 +1084,7 @@
 であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
-次の命題は，一般の次元で離散フーリエ変換が分解作用素であることを示している．ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は
-\[
-  \innerp{x}{y} = \sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}
-\]
-で定義する．
+次の命題は，一般の次元で離散フーリエ変換が分解作用素であることを示している．ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
 
 \begin{proposition}{}{ddimdft_onb}
   \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\mapset{\Omega}{\numset{C}}\)の正規直交基底である．
@@ -1130,9 +1126,21 @@
   \label{figure:2dcos_dft}
 \end{figure}
 
-\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{50 \\ 50}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
+\cref{figure:2dcos_dft}は，\(\vect{n}=\smallmatrice{50 \\ 50}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
 \cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
 つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
+
+\begin{wrapfigure}[10]{o}{0pt}
+  \centering
+  \includegraphics{figures/2dcos_shift.pdf}
+  \caption{補正後の様子．}
+  \label{figure:2dcos_shift}
+\end{wrapfigure}
+
+\(\hat{w}_{\vect{k}}[u,v]\)は\(x\)と\(y\)に関して\(w_{\vect{k}}[x,y]\)を離散フーリエ変換したものだから，\(u\geq N/2\)か\(v\geq N/2\)のときはエイリアシングが起きている．
+つまり，低周波にもかかわらず原点から遠いところにプロットされている領域がある．
+低周波ほど原点の近くにプロットするには，\(u\geq N/2\)のとき\(u\)を\(u-N\)に，\(v\geq N/2\)のとき\(v\)を\(v-N\)に置き換えてプロットしなおせばよい．
+この補正により，\cref{figure:2dcos_dft}は\cref{figure:2dcos_shift}に変化する．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1149,41 +1157,9 @@
   \end{minipage}
 \end{figure}
 
-\cref{figure:pudding_dft}は，\cref{figure:pudding}を離散信号\(s=\seq{s[x,y]}\)とみなし\(\abs{\hat{s}[u,v]}\)を計算した結果である．
-ただし\(\vect{n}\)は，画像が\(1024\times 1024\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1024\)）である．
+\cref{figure:pudding_dft}は，\cref{figure:pudding}の離散信号\(s=\seq{s[x,y]}\)に関する\(\abs{\hat{s}[u,v]}\)のグラフである．
+ただし\(\vect{n}\)は，画像が\(1063\times 1063\)の画素からなるので\(\vect{n}=\smallmatrice{N \\ N}\)（\(N=1063\)）である．
 
-\begin{wrapfigure}[10]{o}{0pt}
-  \centering
-  \includegraphics{figures/pudding_shift.pdf}
-  \caption{補正後の様子．}
-  \label{figure:pudding_shift}
-\end{wrapfigure}
-
-\(\hat{s}[u,v]\)は\(x\)と\(y\)に関して\(s[x,y]\)を離散フーリエ変換したものだから，\(u\geq N/2\)か\(v\geq N/2\)のときはエイリアシングが起きている．
-つまり，低周波にもかかわらず原点から遠いところにプロットされている領域がある．
-低周波ほど原点の近くにプロットするには，\(u\geq N/2\)のとき\(u\)を\(u-N\)に，\(v\geq N/2\)のとき\(v\)を\(v-N\)に置き換えてプロットしなおせばよい．
-この補正により，\cref{figure:pudding_dft}は\cref{figure:pudding_shift}に変化する．
-
-\cref{figure:pudding_shift}から光の筋を消して逆変換すると，\cref{figure:flatten}が得られる．
-元の画像と\cref{figure:flatten}を見比べれば，光の筋はさくらんぼの枝によるものだと分かる．
-
-\begin{figure}
-  \begin{minipage}{\linewidth/2}
-    \begin{minipage}[t][40mm][c]{\linewidth}
-      \centering
-      \includegraphics{figures/flatten_shift.pdf}
-    \end{minipage}
-    \caption{光の筋を削除した様子．}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \begin{minipage}[t][40mm][c]{\linewidth}
-      \centering
-      \includegraphics{figures/flatten.pdf}
-    \end{minipage}
-    \caption{左図の逆変換．}
-    \label{figure:flatten}
-  \end{minipage}
-\end{figure}
 
 \section{短時間フーリエ変換}
 \label{section:stft}
