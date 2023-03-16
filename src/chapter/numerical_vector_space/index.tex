@@ -1027,13 +1027,20 @@
 \end{example}
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/filter_characteristics.pdf}
-  \caption{\(\abs{\hat{h}[k]}\)の様子．エイリアシングを考慮し\(0\leq k\leq 16\)で図示した．}
-  \label{figure:filter_characteristics}
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/filter_characteristics.pdf}
+    \caption{\(\abs{\hat{h}[k]}\)の様子．}
+    \label{figure:filter_characteristics}
+    \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/filtering.pdf}
+    \caption{\(x\)と\(y=h\circconv x\)の一例．}
+  \end{minipage}
 \end{figure}
 
-なお，エイリアシングが起きている\(k\geq 16\)でグラフはどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
+なお，\(k\geq 16\)で\cref{figure:filter_characteristics}がどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
 
 \begin{proposition}{}{dft_mirroring_property}
   \(x\in\cycles{\numset{R}}{N}\)ならば\(\hat{x}[-k]=\conj*{\hat{x}[k]}\)である．
@@ -1077,8 +1084,11 @@
 であり，右辺は\(x[r_1,r_2]\)を各変数に関して離散フーリエ変換した形になっている．
 より一般に，\(x[r_1,\dots,r_d]\)の\(d\)次元離散フーリエ変換は，\(x[r_1,\dots,r_d]\)を各変数に関して離散フーリエ変換したものと一致する．
 
-次の命題は，一般の次元で離散フーリエ変換が分解作用素であることを示している．
-ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は\(\innerp{x}{y}=\sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}\)で定義する．
+次の命題は，一般の次元で離散フーリエ変換が分解作用素であることを示している．ただし，\(\mapset{\Omega}{\numset{C}}\)の内積は
+\[
+  \innerp{x}{y} = \sum_{\vect{r}\in\Omega}x[\vect{r}]\conj*{y[\vect{r}]}
+\]
+で定義する．
 
 \begin{proposition}{}{ddimdft_onb}
   \(w_{\vect{k}}[\vect{r}]=(\det\mat{N})^{-1/2}\exp(2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r})\)とする．このとき，集合\(\Set{w_{\vect{k}}\given\vect{k}\in\Omega}\)は\(\mapset{\Omega}{\numset{C}}\)の正規直交基底である．
@@ -1099,14 +1109,30 @@
   である．よって\cref{proposition:dft_onb}より\(\innerp{w_{\vect{i}}}{w_{\!\vect{j}}}=\prod_{k=1}^d\kdelta{i_k}{j_k}=\kdelta{\vect{i}}{\vect{j}}\)である．
 \end{proof}
 
-\cref{proposition:ddimdft_onb}と\(\hat{x}[\vect{k}]=\innerp{x}{w_{\vect{k}}}\)より，\(\dft[d]{N}\)の逆変換は
+\cref{proposition:ddimdft_onb}と\(\hat{x}[\vect{k}]=\innerp{x}{w_{\vect{k}}}\)より，\(\dft[d]{N}\)の逆変換は次のようになる．
 \[
   x[\vect{r}] = \sum_{\vect{k}\in\Omega}\innerp{x}{w_{\vect{k}}}w_{\vect{k}}
   = \frac{1}{\sqrt{\det\mat{N}}}\sum_{\vect{k}\in\Omega}\hat{x}[\vect{k}]\napr^{2\krez\iuni\trps{\vect{k}}\mat{N}^{-1}\vect{r}}
 \]
-である．
 
-2次元離散フーリエ変換は画像処理に応用されている．
+いくつかの具体例を通して，2次元離散フーリエ変換を体感しよう．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/2dcos.pdf}
+    \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/2dcos_dft.pdf}
+  \end{minipage}
+  \caption{\(\cos(3x+4y)\)（\(x,y\in\Set{2\krez k/50\given k=0,\dots,49}\)）のグラフと2次元DFT．}
+  \label{figure:2dcos_dft}
+\end{figure}
+
+\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{50 \\ 50}\)，\(\vect{k}=\smallmatrice{3 \\ 4}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
+\cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
+つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1138,28 +1164,26 @@
 低周波ほど原点の近くにプロットするには，\(u\geq N/2\)のとき\(u\)を\(u-N\)に，\(v\geq N/2\)のとき\(v\)を\(v-N\)に置き換えてプロットしなおせばよい．
 この補正により，\cref{figure:pudding_dft}は\cref{figure:pudding_shift}に変化する．
 
-\cref{figure:pudding_shift}を見ると，斜めに光の筋が現れている．
-この筋は\cref{figure:pudding}のプリンの画像が，その方向に関して周期性を持つことを示している．
+\cref{figure:pudding_shift}から光の筋を消して逆変換すると，\cref{figure:flatten}が得られる．
+元の画像と\cref{figure:flatten}を見比べれば，光の筋はさくらんぼの枝によるものだと分かる．
 
-\begin{figure}[htbp]
+\begin{figure}
   \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/2dcos.pdf}
-    \end{minipage}%
+    \begin{minipage}[t][40mm][c]{\linewidth}
+      \centering
+      \includegraphics{figures/flatten_shift.pdf}
+    \end{minipage}
+    \caption{光の筋を削除した様子．}
+  \end{minipage}%
   \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/2dcos_dft.pdf}
+    \begin{minipage}[t][40mm][c]{\linewidth}
+      \centering
+      \includegraphics{figures/flatten.pdf}
+    \end{minipage}
+    \caption{左図の逆変換．}
+    \label{figure:flatten}
   \end{minipage}
-  \caption{\(\cos(3x+5y)\)（\(x,y\in\Set{2\krez k/50\given k=0,\dots,49}\)）のグラフと2次元DFT．左図を3次元空間で描くとトタン屋根に似た形になる．また，右図の白点は\(\pm\smallmatrice{3 \\ 5}\)にある．}
-  \label{figure:2dcos_dft}
 \end{figure}
-
-\cref{figure:2dcos_dft}は\(\vect{n}=\smallmatrice{50 \\ 50}\)，\(\vect{k}=\smallmatrice{3 \\ 5}\)のときの\(\cos(\trps{\vect{k}}\mat{N}^{-1}\vect{r})=\sqrt{\det\mat{N}}\rpart w_{\vect{k}}[\vect{r}]\)のグラフと，その2次元離散フーリエ変換である．
-\cref{figure:2dcos_dft}から，\(\rpart w_{\vect{k}}[\vect{r}]\)の値は\(\vect{r}\)を\(\vect{k}\)方向に動かすと激しく変化し，\(\vect{k}\)と直交する方向に動かしても変化しないことが分かる．
-つまり\(w_{\vect{k}}[\vect{r}]\)は「\(\vect{k}\)方向に最も激しく変化する，周波数の大きさ\(\vnorm{\vect{k}}\)の複素指数関数」を表している．
-
-\cref{figure:pudding_shift,figure:2dcos_dft}を見比べると，光の筋はだいたい\(\smallmatrice{3 \\ 5}\)方向を向いている．
-よって，プリンの画像には\cref{figure:2dcos_dft}の左側のような波が多く含まれる．そう思ってプリンの画像を見返すと，クリーム部分によく似た周期性を見つけられる．
 
 \section{短時間フーリエ変換}
 \label{section:stft}
