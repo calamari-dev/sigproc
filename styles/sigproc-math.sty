@@ -108,14 +108,15 @@
 % フーリエ解析
 \newcommand{\circconv}{\ast}
 \newcommand{\cycles}[2]{#1^{\numset{Z}/#2}}
-\newcommand{\dtft}{\operatorname{\symscr{F}}_{\numset{Z}}}
-\newcommand{\fseries}{\operatorname{\symscr{F}}_{\torus}}
-\newcommand{\stft}[2]{def}
+\newcommand{\dtft}{\operateur{\symscr{F}}_{\numset{Z}}}
+\newcommand{\fseries}{\operateur{\symscr{F}}_{\torus}}
 
 \NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
+\NewDocumentCommand{\dgt}{o m}{\operateur{\symcal{G}}_{#2}\IfValueT{#1}{^{(#1)}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
 \NewDocumentCommand{\ltrans}{}{\operateur{\symscr{L}}}
+\NewDocumentCommand{\stft}{o m}{\operateur{\symcal{S}}_{#2\IfValueT{#1}{\,#1}}}
 \NewDocumentCommand{\ztrans}{}{\operateur{\symscr{Z}}}
 
 % 測度論
