@@ -105,7 +105,7 @@
 % フレーム理論
 \newcommand{\synth}[1]{#1^{\mathord{\ast}}}
 
-% フーリエ解析
+% 時間周波数解析
 \newcommand{\circconv}{\ast}
 \newcommand{\cycles}[2]{#1^{\numset{Z}/#2}}
 \newcommand{\dtft}{\operateur{\symscr{F}}_{\numset{Z}}}
@@ -115,9 +115,7 @@
 \NewDocumentCommand{\dgt}{o m}{\operateur{\symcal{G}}_{#2}\IfValueT{#1}{^{(#1)}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
-\NewDocumentCommand{\ltrans}{}{\operateur{\symscr{L}}}
-\NewDocumentCommand{\stft}{o m}{\operateur{\symcal{S}}_{#2\IfValueT{#1}{\,#1}}}
-\NewDocumentCommand{\ztrans}{}{\operateur{\symscr{Z}}}
+\NewDocumentCommand{\stft}{o m}{\operateur{\symcal{V}}_{#2}\IfValueT{#1}{^{(#1)}}}
 
 % 測度論
 \newcommand{\borelset}[1]{\symscr{B}(#1)}

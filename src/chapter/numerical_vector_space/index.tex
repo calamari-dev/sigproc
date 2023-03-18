@@ -1071,13 +1071,13 @@
 \cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
 この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
 
-\begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{まどかんすう@窓関数}\index{STFT|see{短時間フーリエ変換}}\index{Sw@\(\stft{w}\)}
+\begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{まどかんすう@窓関数}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
   \(L\)を自然数，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を
   \[
     (\stft[L]{w}x)[k,n] = \frac{1}{\sqrt{L}}\sum_{m=0}^{L-1}x[m+n]\conj*{w[m]}\napr^{-2\krez\iuni km/L}
   \]
   に写す線型写像\(\stft[L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
-  また，\(w\)を\(\stft[L]{w}x\)の\termdef{窓関数}（window function）という．
+  また，\(w\)を\(\stft[L]{w}\)の\termdef{窓関数}（window function）という．
 \end{definition}
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
