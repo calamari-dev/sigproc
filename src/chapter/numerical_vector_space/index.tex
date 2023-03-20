@@ -1089,6 +1089,14 @@
   に写す線型写像\(\dgt[K,N,L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
+\begin{theorem}{Donoho‐Starkの不確定性原理}{discrete_donoho_stark}\index{Donoho‐Starkの不確定性原理}\index{ふかくていせいげんり@不確定性原理!Donoho‐Stark}
+  \(\vect{x}\in\numset{C}^N\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}\vect{x}\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
+  \[
+    (\sizeof{T})(\sizeof{F}) \geq N(1-\varepsilon_{\symrm{T}}-\varepsilon_{\symrm{F}})^2
+  \]
+  である．これを\termdef{Donoho‐Starkの不確定性原理}（Donoho‐Stark uncertainity principle）という．
+\end{theorem}
+
 \section{多重解像度解析}
 \label{section:discrete_mra}
 
