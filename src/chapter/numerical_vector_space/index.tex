@@ -874,42 +874,41 @@
   x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
 \]
 
-\cref{equation:idft}は本来，\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を\(\dft{N}\vect{x}\)によって表す式である．
-しかし，それをひとまず忘れて\(n\)に任意の整数を代入すれば，\(\vect{x}\)を周期\(N\)の数列\(\seq{x[n]}_{n\in\numset{Z}}\)へと拡張できる．
-そこで，周期\(N\)の複素数列\(x=\seq{x[n]}_{n\in\numset{Z}}\)に対して\(\hat{x}=\dft{N}x\)を次のように定義する．
+本来なら，\cref{equation:idft}は\(0\leq n<N\)でしか意味をなさない．しかし，そのことを忘れて\(n\)が\(\numset{Z}\)全体を動くとすると，\(x_n\)は周期\(N\)の無限数列に拡張される．
+そこで，周期\(N\)の数列\(x=\seq{x[n]}\)に対し\(\hat{x}=\dft{N}x\)を次のように定義する．
 
-\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{C}}{N}\)}\index{FZN@\(\dft{N}\)}
-  \(N\)を周期に持つ\(\numset{K}\)上の数列の全体集合を\(\cycles{\numset{K}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
+\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{K}}{N}\)}\index{FZN@\(\dft{N}\)}
+  \(N\)を周期に持つ\(\numset{K}\)上の数列全体を\(\cycles{\numset{K}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
   \[
     (\dft{N}x)[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
 \end{definition}
 
-明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\delta\in\cycles{\numset{C}}{N}\)を
+明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\Shah\in\cycles{\numset{C}}{N}\)を
 \[
-  \delta[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
+  \Shah[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める．
+と定める\indexsymbol{\(\Shah\)}\footnote{\(\Shah\)（Sha）はキリル文字である．}．
 
 \begin{proposition}{}{}
-  集合\(\basis{D}=\Set{\lagop^m\delta\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0\delta=\delta\)とする．
+  集合\(\basis{D}=\Set{\lagop^m\Shah\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
 \end{proposition}
 
 \begin{proof}
   \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
-  よって\(x[m](\lagop^m\delta)[n]=x[m]\delta[n-m]=x[n]\kdelta{m}{n}\)であり，\(m\)に関して和をとると
+  よって\(x[m](\lagop^m\Shah)[n]=x[m]\Shah[n-m]=x[n]\kdelta{m}{n}\)だから
   \begin{equation}
     \label{equation:lagop_expansion}
-    \sum_{m=0}^{N-1}x[m](\lagop^m\delta)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
+    \sum_{m=0}^{N-1}x[m](\lagop^m\Shah)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
   \end{equation}
-  となる．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\delta\)なので，\(\basis{D}\)は\(\cycles{\numset{C}}{N}\)の基底である．
+  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\Shah\)なので，\(\basis{D}\)は基底である．
 \end{proof}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figures/comb.pdf}
-  \caption{\(N=5\)のときの\(\delta\)と\(\lagop\delta\)の様子．}
+  \includegraphics{figures/shah.pdf}
+  \caption{\(N=5\)のときの\(\Shah\)と\(\lagop\Shah\)の様子．}
 \end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
@@ -979,7 +978,7 @@
 \end{proof}
 
 \begin{note}
-  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，\(T\)の多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\delta\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
+  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\Shah\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
   実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=1\)から\(X(\lagop)Y(\lagop)=R(\lagop)=\sum r_m\lagop^m\)であり，\((x\circconv y)[n]=r_n\)（\(0\leq n<N\)）が分かる．
 \end{note}
 
@@ -1061,7 +1060,7 @@
 \end{corollary}
 
 \begin{proof}
-  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\delta\)とおくと，
+  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\Shah\)とおくと，
   \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{\numset{C}}{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
 \end{proof}
 
@@ -1089,8 +1088,16 @@
   に写す線型写像\(\dgt[K,N,L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
+\begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
+  \(\varepsilon>0\)，\(x\in\cycles{\numset{C}}{N}\)とする．条件
+  \[
+    \sum_{n\in I\setminus A}\abs{x[n]}^2 \leq \varepsilon^2\sum_{n\in I}\abs{x[n]}^2\quad(I=\Set{0,\dots,N-1})
+  \]
+  を満たすとき，\(x\)は集合\(A\subseteq I\)に\termdef{\(\varepsilon\)‐集中}（\(\varepsilon\)‐concentrated）であるという．
+\end{definition}
+
 \begin{theorem}{Donoho‐Starkの不確定性原理}{discrete_donoho_stark}\index{Donoho‐Starkの不確定性原理}\index{ふかくていせいげんり@不確定性原理!Donoho‐Stark}
-  \(\vect{x}\in\numset{C}^N\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}\vect{x}\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
+  \(\varepsilon_{\symrm{T}},\varepsilon_{\symrm{F}}>0\)とする．\(\cycles{\numset{C}}{N}\)の元\(x\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}x\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
   \[
     (\sizeof{T})(\sizeof{F}) \geq N(1-\varepsilon_{\symrm{T}}-\varepsilon_{\symrm{F}})^2
   \]
