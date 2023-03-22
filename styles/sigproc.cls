@@ -70,7 +70,7 @@
   appendix_heading={chapter={label_format={付録{\bfseries\thechapter}}}},
   backmatter_pagebreak=clearpage,
   caption_font=\small,
-  caption_label_font=\sffamily\bfseries\small,
+  caption_label_font=\gtfamily\bfseries\small,
   frontmatter_pagestyle=frontmatter
 }
 

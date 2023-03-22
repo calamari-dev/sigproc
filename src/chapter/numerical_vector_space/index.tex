@@ -755,10 +755,7 @@
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
-    \begin{minipage}[t][45mm][c]{\linewidth}
-      \centering
-      \includegraphics{figures/time_domain.pdf}
-    \end{minipage}
+    \includegraphics{figures/time_domain.pdf}
     \caption{「あ」の波形．}
     \label{figure:time_domain}
   \end{minipage}%
@@ -832,6 +829,7 @@
 そのため，\(k\geq N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
 
 \subsection{曲線あてはめとDFT}
+\label{subsection:dft_as_curve_fitting}
 
 離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線型結合
 \[
@@ -884,31 +882,31 @@
   \]
 \end{definition}
 
-明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\Shah\in\cycles{\numset{C}}{N}\)を
+明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\shah\in\cycles{\numset{C}}{N}\)を
 \[
-  \Shah[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
+  \shah[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める\indexsymbol{\(\Shah\)}\footnote{\(\Shah\)（Sha）はキリル文字である．}．
+と定める\indexsymbol{\(\shah\)}\footnote{\(\shah\)（sha）はキリル文字．}．
 
 \begin{proposition}{}{}
-  集合\(\basis{D}=\Set{\lagop^m\Shah\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
+  集合\(\basis{D}=\Set{\lagop^m\shah\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
 \end{proposition}
 
 \begin{proof}
   \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
-  よって\(x[m](\lagop^m\Shah)[n]=x[m]\Shah[n-m]=x[n]\kdelta{m}{n}\)だから
+  よって\(x[m](\lagop^m\shah)[n]=x[m]\shah[n-m]=x[n]\kdelta{m}{n}\)だから
   \begin{equation}
     \label{equation:lagop_expansion}
-    \sum_{m=0}^{N-1}x[m](\lagop^m\Shah)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
+    \sum_{m=0}^{N-1}x[m](\lagop^m\shah)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
   \end{equation}
-  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\Shah\)なので，\(\basis{D}\)は基底である．
+  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\shah\)なので，\(\basis{D}\)は基底である．
 \end{proof}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/shah.pdf}
-  \caption{\(N=5\)のときの\(\Shah\)と\(\lagop\Shah\)の様子．}
+  \caption{\(N=5\)のときの\(\shah\)と\(\lagop\shah\)の様子．}
 \end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
@@ -978,16 +976,16 @@
 \end{proof}
 
 \begin{note}
-  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\Shah\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
+  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\shah\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
   実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=1\)から\(X(\lagop)Y(\lagop)=R(\lagop)=\sum r_m\lagop^m\)であり，\((x\circconv y)[n]=r_n\)（\(0\leq n<N\)）が分かる．
 \end{note}
 
 \(\cycles{\numset{C}}{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
 \(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対して
-\[
-  \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}
-  = \matrice{x[-1] & x[0] & \cdots & x[N-2]}
-\]
+\begin{align*}
+  \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}} &= \matrice{x[N-1] & x[0] & \cdots & x[N-2]} \\
+  &= \matrice{x[-1] & x[0] & \cdots & x[N-2]}
+\end{align*}
 なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}=\smallmatrice{ & 1 \\ \imat_{N-1} & }\)と書ける．
 同様に計算すれば，\(0<m<N\)のとき\(\lagop^m\)の表現行列は\(\mat{L}^m=\smallmatrice{ & \imat_m \\ \imat_{N-m} & }\)であることも分かる．
 
@@ -1060,7 +1058,7 @@
 \end{corollary}
 
 \begin{proof}
-  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\Shah\)とおくと，
+  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\shah\)とおくと，
   \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{\numset{C}}{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
 \end{proof}
 
@@ -1069,6 +1067,19 @@
 
 \cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
 この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/stationary.pdf}
+    \caption{定常信号の例．}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/non_stationary.pdf}
+    \caption{非定常信号の例．}
+  \end{minipage}
+\end{figure}
 
 \begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{まどかんすう@窓関数}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
   \(L\)を自然数，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を
@@ -1091,7 +1102,7 @@
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
   \(\varepsilon>0\)，\(x\in\cycles{\numset{C}}{N}\)とする．条件
   \[
-    \sum_{n\in I\setminus A}\abs{x[n]}^2 \leq \varepsilon^2\sum_{n\in I}\abs{x[n]}^2\quad(I=\Set{0,\dots,N-1})
+    \sqrt{\sum_{n\in I\setminus A}\abs{x[n]}^2} \leq \varepsilon\sqrt{\sum_{n\in I}\abs{x[n]}^2}\quad(I=\Set{0,\dots,N-1})
   \]
   を満たすとき，\(x\)は集合\(A\subseteq I\)に\termdef{\(\varepsilon\)‐集中}（\(\varepsilon\)‐concentrated）であるという．
 \end{definition}
