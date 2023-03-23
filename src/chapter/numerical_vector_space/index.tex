@@ -882,31 +882,31 @@
   \]
 \end{definition}
 
-明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\shah\in\cycles{\numset{C}}{N}\)を
+明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\comb\in\cycles{\numset{C}}{N}\)を
 \[
-  \shah[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
+  \comb[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める\indexsymbol{\(\shah\)}\footnote{\(\shah\)（sha）はキリル文字．}．
+と定める\indexsymbol{\(\comb\)}\footnote{\(\comb\)（sha）はキリル文字．}．
 
 \begin{proposition}{}{}
-  集合\(\basis{D}=\Set{\lagop^m\shah\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
+  集合\(\basis{D}=\Set{\lagop^m\comb\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
 \end{proposition}
 
 \begin{proof}
   \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
-  よって\(x[m](\lagop^m\shah)[n]=x[m]\shah[n-m]=x[n]\kdelta{m}{n}\)だから
+  よって\(x[m](\lagop^m\comb)[n]=x[m]\comb[n-m]=x[n]\kdelta{m}{n}\)だから
   \begin{equation}
     \label{equation:lagop_expansion}
-    \sum_{m=0}^{N-1}x[m](\lagop^m\shah)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
+    \sum_{m=0}^{N-1}x[m](\lagop^m\comb)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
   \end{equation}
-  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\shah\)なので，\(\basis{D}\)は基底である．
+  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\comb\)なので，\(\basis{D}\)は基底である．
 \end{proof}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/shah.pdf}
-  \caption{\(N=5\)のときの\(\shah\)と\(\lagop\shah\)の様子．}
+  \caption{\(N=5\)のときの\(\comb\)と\(\lagop\comb\)の様子．}
 \end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
@@ -976,7 +976,7 @@
 \end{proof}
 
 \begin{note}
-  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\shah\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
+  \cref{equation:lagop_expansion,equation:discrete_impulse_response}より，多項式\(X(T)=\sum x[m]T^m\)，\(Y(T)=\sum y[m]T^m\)に関して\(x\circconv y=X(\lagop)Y(\lagop)\comb\)が成立する．実は，\(X(T)Y(T)\)を\(T^N-1\)で割ったあまりは\(\sum(x\circconv y)[m]T^m\)である．
   実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=1\)から\(X(\lagop)Y(\lagop)=R(\lagop)=\sum r_m\lagop^m\)であり，\((x\circconv y)[n]=r_n\)（\(0\leq n<N\)）が分かる．
 \end{note}
 
@@ -1058,37 +1058,38 @@
 \end{corollary}
 
 \begin{proof}
-  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\shah\)とおくと，
+  \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\comb\)とおくと，
   \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{\numset{C}}{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
 \end{proof}
 
 \section{短時間フーリエ変換}
 \label{section:stft}
 
-\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
-この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
+\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．この理論は旋律・地震動・景気などを解析する分野で活用されている．
 
 \begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/stationary.pdf}
-    \caption{定常信号の例．}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/non_stationary.pdf}
-    \caption{非定常信号の例．}
-  \end{minipage}
+  \centering
+  \includegraphics{figures/time_variant.pdf}
+  \caption{周波数が時間変化して見える信号の例．}
+  \label{figure:time_variant}
 \end{figure}
 
-\begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{まどかんすう@窓関数}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
+たとえば，\cref{figure:time_variant}の信号を見て「周波数が時とともに変化している」と感じるのは自然なことだろう．
+時間周波数解析の技法を用いれば，周波数成分の時間変化をより定量的に追いかけられる．
+
+\subsection{短時間フーリエ変換}
+
+短時間フーリエ変換は，数列（信号）\(x\)を各時刻の周りで長さ\(L\)だけ切り出し，重み\(w\)を掛けて離散フーリエ変換する手法である．
+
+\begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
   \(L\)を自然数，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を
   \[
     (\stft[L]{w}x)[k,n] = \frac{1}{\sqrt{L}}\sum_{m=0}^{L-1}x[m+n]\conj*{w[m]}\napr^{-2\krez\iuni km/L}
   \]
   に写す線型写像\(\stft[L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
-  また，\(w\)を\(\stft[L]{w}\)の\termdef{窓関数}（window function）という．
 \end{definition}
+
+誤解する余地がなければ，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．また，\(w\)を\(\stft{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
   \((K,N,L)\)を自然数の3つ組，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を

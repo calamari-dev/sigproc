@@ -85,9 +85,12 @@
   pagestyle=empty
 }
 
+\ModifyHeading{section}{font={\Large\gtfamily\bfseries}}
+\ModifyHeading{subsection}{font={\large\gtfamily\bfseries}}
+
 % 目次・補遺
 \patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{empty}\@starttoc}{}{}
-\titlecontents{chapter}[0\zw]{\addvspace{1\zh}\sffamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
+\titlecontents{chapter}[0\zw]{\addvspace{1\zh}\gtfamily\bfseries}{\makebox[4\zw][l]{\thecontentslabel}}{}{\hfill\contentspage}
 \titlecontents{section}[1\zw]{}{\makebox[3\zw][l]{\thecontentslabel}}{\hspace{3\zw}}{\space\titlerule*[.5\zw]{.}\contentspage}
 \titlecontents*{subsection}[4\zw]{\small}{}{}{}[／]
 

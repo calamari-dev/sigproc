@@ -12,7 +12,7 @@ d0[n % 5 == 0] = 1
 d1[n % 5 == 1] = 1
 
 fig, ax = plt.subplots()
-ax.stem(n, d0, label=r"$\shah[n]$")
-ax.stem(n, d1, label=r"$(\lagop\shah)[n]$", linefmt="--", markerfmt="x")
+ax.stem(n, d0, label=r"$\comb[n]$")
+ax.stem(n, d1, label=r"$(\lagop\comb)[n]$", linefmt="--", markerfmt="x")
 ax.legend()
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))
