@@ -1065,7 +1065,8 @@
 \section{短時間フーリエ変換}
 \label{section:stft}
 
-\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．この理論は旋律・地震動・景気などを解析する分野で活用されている．
+\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
+この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
 
 \begin{figure}[htbp]
   \centering
@@ -1075,35 +1076,75 @@
 \end{figure}
 
 たとえば，\cref{figure:time_variant}の信号を見て「周波数が時とともに変化している」と感じるのは自然なことだろう．
-時間周波数解析の技法を用いれば，周波数成分の時間変化をより定量的に追いかけられる．
+時間周波数解析の技法を用いると，周波数成分の時間変化をより定量的に追いかけられる．
 
 \subsection{短時間フーリエ変換}
 
-短時間フーリエ変換は，数列（信号）\(x\)を各時刻の周りで長さ\(L\)だけ切り出し，重み\(w\)を掛けて離散フーリエ変換する手法である．
+まず，記号をいくつか定義する．
+
+2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}^2}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}^2}{\numset{K}}\)}と書く．
+また，\(\mapset{\numset{Z}^2}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と表す．
+\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{M,N}\)は
+\[
+  \cycles[2]{\numset{K}}{M,N} = \Set{x\in\mapset{\numset{Z}^2}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)（\(m,n\in\numset{Z}\)）}}
+\]
+と書ける．
+
+短時間フーリエ変換は，数列（信号）\(x\)に重みを掛けて離散フーリエ変換する手法である．
 
 \begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
-  \(L\)を自然数，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を
+  \(L\)を自然数，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
   \[
-    (\stft[L]{w}x)[k,n] = \frac{1}{\sqrt{L}}\sum_{m=0}^{L-1}x[m+n]\conj*{w[m]}\napr^{-2\krez\iuni km/L}
+    (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}
   \]
-  に写す線型写像\(\stft[L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
+  に写す写像\(\stft[L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{L,L}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
 
-誤解する余地がなければ，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．また，\(w\)を\(\stft{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．
+\(w\)を\(\stft[L]{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．文脈から\(L\)の値が明らかであれば，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．
+
+\(x,y\in\cycles{\numset{C}}{L}\)の内積を\(\innerp{x}{y}=\sum_{n=0}^{L-1}x[n]\conj*{y[n]}\)で定義する．
+
+\begin{proposition}{}{stft_and_shift}
+  \(\cycles{\numset{C}}{L}\)上の写像\(\tshift{m}\)，\(\fshift[L]{k}\)を
+  \[
+    (\tshift{m}x)[n] = x[n-m],
+    \quad(\fshift[L]{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
+  \]
+  で定義する．このとき，任意の\(w,x\in\cycles{\numset{C}}{L}\)に対して次式が成立する．
+  \[
+    (\stft[L]{w}x)[k,n] = \innerp{x}{\fshift[L]{k}\tshift{n}w}\quad(k,n\in\numset{Z})
+  \]
+\end{proposition}
+
+\begin{proof}
+  実際
+  \begin{align*}
+    \innerp{x}{\fshift[L]{k}\tshift{n}w} &= \sum_{m=0}^{L-1}x[m]\conj*{\napr^{2\krez\iuni km/L}(\tshift{n}w)[m]} \\
+    &= \sum_{m=0}^{L-1}x[m]\napr^{-2\krez\iuni km/L}\conj*{w[m-n]}
+    = (\stft[L]{w})[k,n]
+  \end{align*}
+  である．
+\end{proof}
+
+\cref{proposition:stft_and_shift}から，次の系が得られる．
+
+\begin{corollary}{}{}
+  \(\stft{w}\)は線型写像である．
+\end{corollary}
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
-  \((K,N,L)\)を自然数の3つ組，\(w=\seq{w[n]}\)を複素数列とする．各\(x\in\mapset{\numset{Z}}{\numset{C}}\)を
+  \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
   \begin{align*}
     (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
-    &= \frac{1}{\sqrt{L}}\sum_{m=0}^{L-1}x[m+jN]\conj*{w[m]}\napr^{-2\krez\iuni(iK)m/L}
+    &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
   \end{align*}
-  に写す線型写像\(\dgt[K,N,L]{w}\colon\mapset{\numset{Z}}{\numset{C}}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{L/K,L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
   \(\varepsilon>0\)，\(x\in\cycles{\numset{C}}{N}\)とする．条件
   \[
-    \sqrt{\sum_{n\in I\setminus A}\abs{x[n]}^2} \leq \varepsilon\sqrt{\sum_{n\in I}\abs{x[n]}^2}\quad(I=\Set{0,\dots,N-1})
+    \sum_{n\in I\setminus A}\abs{x[n]}^2 \leq \varepsilon^2\sum_{n\in I}\abs{x[n]}^2\quad(I=\Set{0,\dots,N-1})
   \]
   を満たすとき，\(x\)は集合\(A\subseteq I\)に\termdef{\(\varepsilon\)‐集中}（\(\varepsilon\)‐concentrated）であるという．
 \end{definition}

@@ -108,15 +108,17 @@
 % 時間周波数解析
 \newcommand{\circconv}{\ast}
 \newcommand{\comb}{\mathord{\mathrm{Ш}}}
-\newcommand{\cycles}[2]{#1^{\numset{Z}/#2}}
 \newcommand{\dtft}{\operateur{\symscr{F}}_{\numset{Z}}}
 \newcommand{\fseries}{\operateur{\symscr{F}}_{\torus}}
 
+\NewDocumentCommand{\cycles}{o m m}{\IfValueTF{#1}{#2^{\numset{Z}^{#1}/(#3)}}{#2^{\numset{Z}/#3}}}
 \NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
-\NewDocumentCommand{\dgt}{o m}{\operateur{\symcal{G}}_{#2}\IfValueT{#1}{^{(#1)}}}
+\NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}}_{#2}\IfValueT{#1}{^{(#1)}}}
+\NewDocumentCommand{\fshift}{o m}{\operateur{\symit{M}}_{#2}\IfValueT{#1}{^{(#1)}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
-\NewDocumentCommand{\stft}{o m}{\operateur{\symcal{V}}_{#2}\IfValueT{#1}{^{(#1)}}}
+\NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}}_{#2}\IfValueT{#1}{^{(#1)}}}
+\NewDocumentCommand{\tshift}{m}{\operateur{\symit{T}}_{#1}}
 
 % 測度論
 \newcommand{\borelset}[1]{\symscr{B}(#1)}
