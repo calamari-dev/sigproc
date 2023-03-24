@@ -1082,11 +1082,11 @@
 
 まず，記号をいくつか定義する．
 
-2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}^2}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}^2}{\numset{K}}\)}と書く．
-また，\(\mapset{\numset{Z}^2}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と表す．
+2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}^2}{\numset{K}}\)}と書く．
+また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と表す．
 \(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{M,N}\)は
 \[
-  \cycles[2]{\numset{K}}{M,N} = \Set{x\in\mapset{\numset{Z}^2}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)（\(m,n\in\numset{Z}\)）}}
+  \cycles[2]{\numset{K}}{M,N} = \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)}}
 \]
 と書ける．
 
@@ -1105,23 +1105,23 @@
 \(x,y\in\cycles{\numset{C}}{L}\)の内積を\(\innerp{x}{y}=\sum_{n=0}^{L-1}x[n]\conj*{y[n]}\)で定義する．
 
 \begin{proposition}{}{stft_and_shift}
-  \(\cycles{\numset{C}}{L}\)上の写像\(\tshift{m}\)，\(\fshift[L]{k}\)を
+  \(\cycles{\numset{C}}{L}\)上の写像\(\tshift{m}\)，\(\fshift{k}\)を
   \[
     (\tshift{m}x)[n] = x[n-m],
-    \quad(\fshift[L]{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
+    \quad(\fshift{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
   \]
   で定義する．このとき，任意の\(w,x\in\cycles{\numset{C}}{L}\)に対して次式が成立する．
   \[
-    (\stft[L]{w}x)[k,n] = \innerp{x}{\fshift[L]{k}\tshift{n}w}\quad(k,n\in\numset{Z})
+    (\stft{w}x)[k,n] = \innerp{x}{\fshift{k}\tshift{n}w}\quad(k,n\in\numset{Z})
   \]
 \end{proposition}
 
 \begin{proof}
   実際
   \begin{align*}
-    \innerp{x}{\fshift[L]{k}\tshift{n}w} &= \sum_{m=0}^{L-1}x[m]\conj*{\napr^{2\krez\iuni km/L}(\tshift{n}w)[m]} \\
+    \innerp{x}{\fshift{k}\tshift{n}w} &= \sum_{m=0}^{L-1}x[m]\conj*{\napr^{2\krez\iuni km/L}(\tshift{n}w)[m]} \\
     &= \sum_{m=0}^{L-1}x[m]\napr^{-2\krez\iuni km/L}\conj*{w[m-n]}
-    = (\stft[L]{w})[k,n]
+    = (\stft{w})[k,n]
   \end{align*}
   である．
 \end{proof}
