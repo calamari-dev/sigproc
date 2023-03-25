@@ -5,12 +5,12 @@ import numpy as np
 from constant import constants
 from scipy.io import wavfile
 
-plt.style.use("sigproc")
+plt.style.use(["sigproc", "sigproc-wide"])
 
-filename = "time_domain.wav"
+filename = "stft.wav"
 samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
-x = data[:round(data.shape[0] / 2)] / 32767
+x = (data.astype(np.double) - 128) / 127
 t = np.linspace(0, 1000 * len(x) / samplerate, num=len(x))
 
 fig, ax = plt.subplots()

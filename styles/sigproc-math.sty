@@ -75,7 +75,7 @@
 \NewDocumentCommand{\difs}{s m m}{\IfBooleanTF{#1}{(\symrm{d}/\symrm{d}#3)#2}{\symrm{d}#2/\symrm{d}#3}}
 \NewDocumentCommand{\diffp}{s m m}{\IfBooleanTF{#1}{\frac{\partial}{\partial #3}#2}{\frac{\partial #2}{\partial #3}}}
 \NewDocumentCommand{\difsp}{s m m}{\IfBooleanTF{#1}{(\partial/\partial #3)#2}{\partial #2/\partial #3}}
-\NewDocumentCommand{\intd}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^#2}{\symrm{d}}#3}
+\NewDocumentCommand{\intd}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{\symrm{d}^{#2}}{\symrm{d}}#3}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -89,11 +89,11 @@
 \DeclarePairedDelimiterX{\ooival}[2]{\lparen}{\rparen}{#1,#2}
 
 % 関数解析
-\newcommand{\cont}[1]{C^#1}
-\newcommand{\lebesgue}[1]{\ell^#1}
+\newcommand{\cont}[1]{C^{#1}}
+\newcommand{\lebesgue}[1]{\ell^{#1}}
 \newcommand{\torus}{\symbb{T}}
 
-\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symscr{L}}{L}^#2}
+\NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symscr{L}}{L}^{#2}}
 
 \DeclareMathOperator{\clsr}{cl}
 \DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
@@ -108,17 +108,17 @@
 % 時間周波数解析
 \newcommand{\circconv}{\ast}
 \newcommand{\comb}{\mathord{\mathrm{Ш}}}
-\newcommand{\dtft}{\operateur{\symscr{F}}_{\numset{Z}}}
-\newcommand{\fseries}{\operateur{\symscr{F}}_{\torus}}
+\newcommand{\dtft}{\operateur{\symscr{F}_{\:\numset{Z}}}}
+\newcommand{\fseries}{\operateur{\symscr{F}_{\:\torus}}}
 
 \NewDocumentCommand{\cycles}{o m m}{\IfValueTF{#1}{#2^{\numset{Z}^{#1}/(#3)}}{#2^{\numset{Z}/#3}}}
-\NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}}_{\IfValueTF{#1}{\numset{Z}^#1}{\numset{Z}}/#2}}
-\NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}}_{#2}\IfValueT{#1}{^{(#1)}}}
-\NewDocumentCommand{\fshift}{o m}{\operateur{\symit{M}}_{#2}\IfValueT{#1}{^{(#1)}}}
+\NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}_{\:\IfValueTF{#1}{\numset{Z}^{#1}}{\numset{Z}}/#2}}}
+\NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\modulate}{o m}{\operateur{\symit{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
-\NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}}_{#2}\IfValueT{#1}{^{(#1)}}}
-\NewDocumentCommand{\tshift}{m}{\operateur{\symit{T}}_{#1}}
+\NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\translate}{m}{\operateur{\symit{T}_{#1}}}
 
 % 測度論
 \newcommand{\borelset}[1]{\symscr{B}(#1)}

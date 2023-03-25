@@ -8,7 +8,7 @@ from scipy.io import wavfile
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
-filename = "namine_ritsu.wav"
+filename = "time_domain.wav"
 samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
 duration = data.shape[0] / samplerate

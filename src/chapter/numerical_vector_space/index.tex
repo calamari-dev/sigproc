@@ -833,13 +833,13 @@
 
 離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線型結合
 \[
-  f(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\napr^{\iuni kt})
+  g(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\napr^{\iuni kt})
 \]
 で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，整数値などの離散的な引数を大かっこで書く．}．
 
-\(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(f(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
+\(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(g(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
-  \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{x[n]-f(\vect{c};t_n)}^2\quad(t_n=2\krez n/N)
+  \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{x[n]-g(\vect{c};t_n)}^2\quad(t_n=2\krez n/N)
 \]
 の値を最も小さくする\(\vect{c}\in\numset{C}^N\)を求める．それには正規方程式\(\htrps{\mat{\Phi}}\mat{\Phi}\vect{c}=\htrps{\mat{\Phi}}\vect{x}\)を解けばよい．ただし\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)かつ
 \[
@@ -849,13 +849,13 @@
 である．ところが，\(\mat{\Phi}\)は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるので\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
 つまり，正規方程式は初めから解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{x}=(1/\sqrt{N})\htrps{\mat{W}}\vect{x}=(1/\sqrt{N})\dft{N}\vect{x}\)である．
 
-まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(f(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
+まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(g(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
 また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
 \begin{note}
   標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．そこで\(N\to\infty\)の極限をとってみよう．エイリアシングを考慮すると，形式的には
   \begin{gather*}
-    f(\vect{c};t) = \sum_{k=-N/2}^{N/2-1}c_k\napr^{\iuni kt}
+    g(\vect{c};t) = \sum_{k=-N/2}^{N/2-1}c_k\napr^{\iuni kt}
     \to \sum_{k=-\infty}^\infty c_k\napr^{\iuni kt}, \\
     c_k = \frac{1}{N}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}
     = \frac{1}{2\krez}\sum_{n=0}^{N-1}f(t_n)\napr^{-\iuni kt_n}\frac{2\krez}{N}
@@ -1033,7 +1033,7 @@
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/filtering.pdf}
-    \caption{\(x\)と\(y=h\circconv x\)の一例．}
+    \caption{\(x\)と\(y=h\circconv x\)の例．}
   \end{minipage}
 \end{figure}
 
@@ -1082,55 +1082,94 @@
 
 まず，記号をいくつか定義する．
 
-2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}^2}{\numset{K}}\)}と書く．
-また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と表す．
+2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)}と表す．
+また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と書く．
 \(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{M,N}\)は
 \[
-  \cycles[2]{\numset{K}}{M,N} = \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)}}
+  \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)（\(m,n\in\numset{Z}\)）}}
 \]
 と書ける．
 
 短時間フーリエ変換は，数列（信号）\(x\)に重みを掛けて離散フーリエ変換する手法である．
 
 \begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
-  \(L\)を自然数，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
+  \(L\)を自然数，\(w\)を\(\cycles{\numset{C}}{L}\)の零でない\footnotemark 元とする．各\(x\in\cycles{\numset{C}}{L}\)を
   \[
     (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}
   \]
-  に写す写像\(\stft[L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{L,L}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
+  に写す写像\(\stft[L]{w}\colon\cycles{\numset{C}}{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
 
+\footnotetext{\(\Set{n\in\numset{Z}\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)が存在してもよい．}
 \(w\)を\(\stft[L]{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．文脈から\(L\)の値が明らかであれば，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．
 
-\(x,y\in\cycles{\numset{C}}{L}\)の内積を\(\innerp{x}{y}=\sum_{n=0}^{L-1}x[n]\conj*{y[n]}\)で定義する．
+\(x,y\in\cycles{\numset{C}}{L}\)の内積を
+\[
+  \innerp{x}{y} = \sum_{n=0}^{L-1}x[n]\conj*{y[n]}
+\]
+で定義する．
 
 \begin{proposition}{}{stft_and_shift}
-  \(\cycles{\numset{C}}{L}\)上の写像\(\tshift{m}\)，\(\fshift{k}\)を
+  線型写像\(\translate{m}\colon\cycles{\numset{C}}{L}\to\cycles{\numset{C}}{L}\)，\(\modulate{k}\colon\cycles{\numset{C}}{L}\to\cycles{\numset{C}}{L}\)を
   \[
-    (\tshift{m}x)[n] = x[n-m],
-    \quad(\fshift{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
+    (\translate{m}x)[n] = x[n-m],
+    \quad(\modulate{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
   \]
-  で定義する．このとき，任意の\(w,x\in\cycles{\numset{C}}{L}\)に対して次式が成立する．
+  で定義する．このとき，任意の\(x\in\cycles{\numset{C}}{L}\)に対して次式が成立する．
   \[
-    (\stft{w}x)[k,n] = \innerp{x}{\fshift{k}\tshift{n}w}\quad(k,n\in\numset{Z})
+    (\stft{w}x)[k,n] = \innerp{x}{\modulate{k}\translate{n}w}
   \]
 \end{proposition}
 
 \begin{proof}
-  実際
-  \begin{align*}
-    \innerp{x}{\fshift{k}\tshift{n}w} &= \sum_{m=0}^{L-1}x[m]\conj*{\napr^{2\krez\iuni km/L}(\tshift{n}w)[m]} \\
-    &= \sum_{m=0}^{L-1}x[m]\napr^{-2\krez\iuni km/L}\conj*{w[m-n]}
-    = (\stft{w})[k,n]
-  \end{align*}
+  実際\(\zeta=\napr^{2\krez\iuni/L}\)とすれば
+  \[
+    \innerp{x}{\modulate{k}\translate{n}w} = \sum_{m=0}^{L-1}x[m]\conj*{\zeta^{km}(\translate{n}w)[m]}
+    = \sum_{m=0}^{L-1}x[m]\zeta^{-km}\conj*{w[m-n]}
+  \]
   である．
 \end{proof}
 
+\(\translate{m}\)を\termdef{平行移動作用素}\index{へいこういどうさようそ@平行移動作用素}\index{T@\(\translate{s}\)}（translation operator），\(\modulate{k}=\modulate[L]{k}\)を\termdef{変調作用素}\index{へんちょうさようそ@変調作用素}\index{M@\(\modulate{\xi}\)}（modulation operator）という．
 \cref{proposition:stft_and_shift}から，次の系が得られる．
 
-\begin{corollary}{}{}
-  \(\stft{w}\)は線型写像である．
+\begin{corollary}{}{stft_cyclic}
+  \(\stft{w}\)は\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{L,L}\)を満たす線型写像である．
 \end{corollary}
+
+\begin{proof}
+  線型性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{\numset{C}}{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
+  このとき\(\modulate{k+L}=\modulate{k}\)，\(\translate{n+L}=\translate{n}\)より
+  \begin{gather*}
+    (\stft{w}x)[k+L,n] = \innerp{x}{\modulate{k+L}\translate{n}w}
+    = \innerp{x}{\modulate{k}\translate{n}w}
+    = (\stft{w}x)[k,n], \\
+    (\stft{w}x)[k,n+L] = \innerp{x}{\modulate{k}\translate{n+L}w}
+    = \innerp{x}{\modulate{k}\translate{n}w}
+    = (\stft{w}x)[k,n]
+  \end{gather*}
+  だから\((\stft{w}x)[\holder,n],(\stft{w}x)[k,\holder]\in\cycles{\numset{C}}{L}\)である．
+\end{proof}
+
+\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{L,L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\cycles[2]{\numset{C}}{L,L}\)に変える}．
+
+離散フーリエ変換のときと同様，ここでも他の諸性質を導く前に，短時間フーリエ変換の工学的重要性を見ておこう．
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/phone.pdf}
+  \caption{話声の波形．}
+  \label{figure:phone}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/stft.pdf}
+  \caption{話声のSTFT．}
+  \label{figure:stft}
+\end{figure}
+
+\cref{figure:phone}は「嘘でしょ」という音声\(x\)の波形，\cref{figure:stft}は\(x\)を周期数列とみなし，適当な窓関数\(w\)で\(\abs{(\stft{w}x)[k,n]}\)を計算した結果である\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
   \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
@@ -1149,12 +1188,12 @@
   を満たすとき，\(x\)は集合\(A\subseteq I\)に\termdef{\(\varepsilon\)‐集中}（\(\varepsilon\)‐concentrated）であるという．
 \end{definition}
 
-\begin{theorem}{Donoho‐Starkの不確定性原理}{discrete_donoho_stark}\index{Donoho‐Starkの不確定性原理}\index{ふかくていせいげんり@不確定性原理!Donoho‐Stark}
+\begin{theorem}{ドノホー・スタークの不確定性原理}{discrete_donoho_stark}\index{どのほーすたーくのふかくていせいげんり@ドノホー・スタークの不確定性原理}\index{ふかくていせいげんり@不確定性原理!どのほーすたーく@ドノホー・スターク}
   \(\varepsilon_{\symrm{T}},\varepsilon_{\symrm{F}}>0\)とする．\(\cycles{\numset{C}}{N}\)の元\(x\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}x\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
   \[
     (\sizeof{T})(\sizeof{F}) \geq N(1-\varepsilon_{\symrm{T}}-\varepsilon_{\symrm{F}})^2
   \]
-  である．これを\termdef{Donoho‐Starkの不確定性原理}（Donoho‐Stark uncertainity principle）という．
+  である．これを\termdef{ドノホー・スタークの不確定性原理}（Donoho‐Stark uncertainity principle）という．
 \end{theorem}
 
 \section{多重解像度解析}
