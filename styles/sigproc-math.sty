@@ -111,8 +111,8 @@
 \newcommand{\dtft}{\operateur{\symscr{F}_{\:\numset{Z}}}}
 \newcommand{\fseries}{\operateur{\symscr{F}_{\:\torus}}}
 
-\NewDocumentCommand{\cycles}{o m m}{\IfValueTF{#1}{#2^{\numset{Z}^{#1}/(#3)}}{#2^{\numset{Z}/#3}}}
-\NewDocumentCommand{\dft}{o m}{\operateur{\symscr{F}_{\:\IfValueTF{#1}{\numset{Z}^{#1}}{\numset{Z}}/#2}}}
+\NewDocumentCommand{\cycles}{o m m}{#2^{\numset{Z}\IfValueT{#1}{^{#1}}/#3}}
+\NewDocumentCommand{\dft}{s o m}{\operateur{\symscr{F}_{\:\numset{Z}\IfValueT{#2}{^{#2}}/#3}\IfBooleanT{#1}{^{-1}}}}
 \NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\modulate}{o m}{\operateur{\symit{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}

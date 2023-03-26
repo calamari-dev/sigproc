@@ -905,7 +905,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figures/shah.pdf}
+  \includegraphics{figures/comb.pdf}
   \caption{\(N=5\)のときの\(\comb\)と\(\lagop\comb\)の様子．}
 \end{figure}
 
@@ -972,7 +972,7 @@
 
 \begin{proof}
   2つめのみ示す．\(\dft{N}(x\circconv (y\circconv z))=\sqrt{N}\hat{x}\cdot\dft{N}(y\circconv z)=N\hat{x}\cdot(\hat{y}\cdot\hat{z})\)より
-  \(x\circconv(y\circconv z)=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft{N}^{-1}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
+  \(x\circconv(y\circconv z)=N\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
 \begin{note}
@@ -1005,9 +1005,9 @@
 
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{\numset{C}}{N}\)の元\(h\)を定める．
-  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft{N}^{-1})x=\dft{N}(h\circconv\dft{N}^{-1}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
 
-  一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft{N}^{-1}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
+  一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft*{N}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
   したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
 \end{proof}
 
@@ -1083,8 +1083,8 @@
 まず，記号をいくつか定義する．
 
 2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)}と表す．
-また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{M,N}\)\indexsymbol{\(\cycles[2]{\numset{K}}{M,N}\)}と書く．
-\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{M,N}\)は
+また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{(M,N)}\)\indexsymbol{\(\cycles[2]{\numset{K}}{(M,N)}\)}と書く．
+\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{(M,N)}\)は
 \[
   \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)（\(m,n\in\numset{Z}\)）}}
 \]
@@ -1134,7 +1134,7 @@
 \cref{proposition:stft_and_shift}から，次の系が得られる．
 
 \begin{corollary}{}{stft_cyclic}
-  \(\stft{w}\)は\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{L,L}\)を満たす線型写像である．
+  \(\stft{w}\)は\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{(L,L)}\)を満たす線型写像である．
 \end{corollary}
 
 \begin{proof}
@@ -1151,7 +1151,7 @@
   だから\((\stft{w}x)[\holder,n],(\stft{w}x)[k,\holder]\in\cycles{\numset{C}}{L}\)である．
 \end{proof}
 
-\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{L,L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\cycles[2]{\numset{C}}{L,L}\)に変える}．
+\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{(L,L)}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\cycles[2]{\numset{C}}{(L,L)}\)に変える}．
 
 離散フーリエ変換のときと同様，ここでも他の諸性質を導く前に，短時間フーリエ変換の工学的重要性を見ておこう．
 
@@ -1169,7 +1169,22 @@
   \label{figure:stft}
 \end{figure}
 
-\cref{figure:phone}は「嘘でしょ」という音声\(x\)の波形，\cref{figure:stft}は\(x\)を周期数列とみなし，適当な窓関数\(w\)で\(\abs{(\stft{w}x)[k,n]}\)を計算した結果である\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
+\cref{figure:phone}は「\ltjruby{嘘}{うそ}でしょ」という話声\(x\)の波形，\cref{figure:stft}は\(x\)を周期数列とみなし，適当な（実数値の）窓関数\(w\)で\(\abs{(\stft{w}x)[k,n]}^2\)を計算した結果である\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics{figures/window.pdf}
+  \caption{\(w\)，\(\translate{n}\conj{w}\)，\(x\)，および\(x\cdot\translate{n}\conj{w}\)のグラフ．}
+  \label{figure:window}
+\end{figure}
+
+\cref{figure:stft}を平面\(n=\text{(定数)}\)で縦断した断面は
+\[
+  (\stft{w}x)[k,n] = \sum_{m=0}^{L-1}x[m](\translate{n}\conj{w})[m]\napr^{-2\krez\iuni km/L}
+  = \sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]
+\]
+より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)（の定数倍）である．また\cref{figure:window}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
+そのため，\(\abs{(\stft{w}x)[k,n]}^2\)のグラフ（\cref{figure:stft}）は「各時刻\(n\)の周りにおける\(x\)の周波数成分のグラフ」と解釈できる．\(\abs{(\stft{w}x)[k,n]}^2\)を\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）という．
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
   \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
@@ -1177,7 +1192,7 @@
     (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
     &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
   \end{align*}
-  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{L/K,L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{(L/K,L/N)}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
