@@ -7,7 +7,7 @@ from constant import constants
 from scipy.io import wavfile
 
 plt.style.use(["sigproc", "sigproc-wide"])
-mpl.rc("figure", figsize=(2.8740, 3.5433))
+mpl.rc("figure", figsize=(2.8740, 2.6575))
 lw = constants.observation_linewidth
 
 filename = "phone.wav"
@@ -22,17 +22,14 @@ w = np.zeros(len(x))
 for i in range(0, 256):
     w[i] = 0.5 * (1 - np.cos(2 * np.pi * i / 256))
 
-fig, axs = plt.subplots(4, 1)
+fig, axs = plt.subplots(3, 1)
 axs[0].plot(t, w, label=r"$w$")
-axs[0].legend(loc="upper right")
-
 w = np.roll(w, samplerate // 10)
-
-axs[1].plot(t, w, label=r"$\translate{n}\conj{w}$")
+axs[0].plot(t, w, label=r"$\translate{n}\conj{w}$")
+axs[0].legend(loc="upper right")
+axs[1].plot(t, x, label=r"$x$", lw=lw)
 axs[1].legend(loc="upper right")
-axs[2].plot(t, x, label=r"$x$", lw=lw)
+axs[2].plot(t, w * x, label=r"$x\cdot\translate{n}\conj{w}$", lw=lw)
 axs[2].legend(loc="upper right")
-axs[3].plot(t, w * x, label=r"$x\cdot\translate{n}\conj{w}$", lw=lw)
-axs[3].legend(loc="upper right")
-axs[3].set_xlabel("時刻[s]")
+axs[2].set_xlabel("時刻[s]")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))

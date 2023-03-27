@@ -715,6 +715,7 @@
 以上を踏まえて，まずは\(\numset{C}^N\)に属する信号の理論を構成しよう．
 
 \subsection{離散フーリエ変換}
+\label{subsection:dft}
 
 \begin{definition}{離散フーリエ変換}{discrete_fourier_transform}\index{りさんふーりえへんかん@離散フーリエ変換!かずべくとる@数ベクトル}\index{DFT|see{離散フーリエ変換}}\index{FZN@\(\dft{N}\)}
   \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)とする．
@@ -722,7 +723,7 @@
     \dft{N}\vect{x} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
     \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
   \]
-  で定義される線型写像\(\dft{N}\colon\numset{C}^N\to\numset{C}^N\)を\termdef{離散フーリエ変換}（discrete Fourier transform; DFT）という．
+  で定義される\(\numset{C}^N\)上の線型変換\(\dft{N}\)を\termdef{離散フーリエ変換}（discrete Fourier transform; DFT）という．
 \end{definition}
 
 以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を単に\(\zeta\)と書く．
@@ -875,25 +876,25 @@
 本来なら，\cref{equation:idft}は\(0\leq n<N\)でしか意味をなさない．しかし，そのことを忘れて\(n\)が\(\numset{Z}\)全体を動くとすると，\(x_n\)は周期\(N\)の無限数列に拡張される．
 そこで，周期\(N\)の数列\(x=\seq{x[n]}\)に対し\(\hat{x}=\dft{N}x\)を次のように定義する．
 
-\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\indexsymbol{\(\cycles{\numset{K}}{N}\)}\index{FZN@\(\dft{N}\)}
-  \(N\)を周期に持つ\(\numset{K}\)上の数列全体を\(\cycles{\numset{K}}{N}\)と書く．線型写像\(\dft{N}\colon\cycles{\numset{C}}{N}\to\cycles{\numset{C}}{N}\)を次式で定義する．
+\begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\index{l2N@\(\cycles{N}\)}\index{FZN@\(\dft{N}\)}
+  \(N\)を周期に持つ複素数列全体を\(\cycles{N}\)と書く．\(\cycles{N}\)上の線型変換\(\dft{N}\)を次式で定義する．
   \[
     (\dft{N}x)[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
 \end{definition}
 
-明らかに\(\cycles{\numset{C}}{N}\)は数列空間の部分空間である．\(\cycles{\numset{C}}{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\comb\in\cycles{\numset{C}}{N}\)を
+明らかに\(\cycles{N}\)は数列空間の部分空間である．\(\cycles{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\comb\in\cycles{N}\)を
 \[
   \comb[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
 と定める\indexsymbol{\(\comb\)}\footnote{\(\comb\)（sha）はキリル文字．}．
 
 \begin{proposition}{}{}
-  集合\(\basis{D}=\Set{\lagop^m\comb\given 0\leq m<N}\)は\(\cycles{\numset{C}}{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
+  集合\(\basis{D}=\Set{\lagop^m\comb\given 0\leq m<N}\)は\(\cycles{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
 \end{proposition}
 
 \begin{proof}
-  \(x\in\cycles{\numset{C}}{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
+  \(x\in\cycles{N}\)，\(m,n\in\Set{0,\dots,N-1}\)を任意にとる．\(\abs{n-m}<N\)なので，\(n-m\)が\(N\)で割り切れるのは\(n-m=0\)のときだけである．
   よって\(x[m](\lagop^m\comb)[n]=x[m]\comb[n-m]=x[n]\kdelta{m}{n}\)だから
   \begin{equation}
     \label{equation:lagop_expansion}
@@ -910,7 +911,7 @@
 \end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
-  任意の\(x\in\cycles{\numset{C}}{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
+  任意の\(x\in\cycles{N}\)に対して\((\dft{N}\lagop x)[k]=\zeta^{-k}\hat{x}[k]\)である．
 \end{proposition}
 
 \begin{proof}
@@ -925,7 +926,7 @@
 \cref{proposition:dft_shift_theorem}を使うと，数列の積\(x\cdot y=\seq{x[n]y[n]}\)と離散フーリエ変換の間にある関係を示せる．積は\(\dft{N}\)で，次の2項演算へと写される．
 
 \begin{definition}{巡回畳み込み}{}\index{じゅんかいたたみこみ@巡回畳み込み}\index{たたみこみ@畳み込み!じゅんかい@巡回}\indexsymbol{\(x\circconv y\)}
-  \(x,y\in\cycles{\numset{C}}{N}\)とする．次式で定義される\(x\circconv y\in\cycles{\numset{C}}{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）という．
+  \(x,y\in\cycles{N}\)とする．次式で定義される\(x\circconv y\in\cycles{N}\)を\(x\)と\(y\)の\termdef{巡回畳み込み}（circular convolution）という．
   \[
     (x\circconv y)[n] = \sum_{m=0}^{N-1}x[m]y[n-m]\quad(n\in\numset{Z})
   \]
@@ -939,7 +940,7 @@
 \end{equation}
 
 \begin{proposition}{}{dft_convolution_theorem}
-  任意の\(x,y\in\cycles{\numset{C}}{N}\)に対して次式が成立する．
+  任意の\(x,y\in\cycles{N}\)に対して次式が成立する．
   \[
     \dft{N}(x\circconv y) = \sqrt{N}\hat{x}\cdot\hat{y},
     \quad\dft{N}(x\cdot y) = \frac{1}{\sqrt{N}}\hat{x}\circconv\hat{y}
@@ -962,7 +963,7 @@
 \end{proof}
 
 \begin{corollary}{}{circular_convolution_properties}
-  任意の\(x,y,z\in\cycles{\numset{C}}{N}\)に対して，以下の式が成立する．
+  任意の\(x,y,z\in\cycles{N}\)に対して，以下の式が成立する．
   \begin{enumerate}
     \item \(x\circconv y=y\circconv x\)
     \item \((x\circconv y)\circconv z=x\circconv (y\circconv z)\)
@@ -980,8 +981,8 @@
   実際，商を\(Q(T)\)，あまりを\(R(T)=\sum r_mT^m\)とすれば，\(X(T)Y(T)=Q(T)(T^N-1)+R(T)\)と\(\lagop^N=1\)から\(X(\lagop)Y(\lagop)=R(\lagop)=\sum r_m\lagop^m\)であり，\((x\circconv y)[n]=r_n\)（\(0\leq n<N\)）が分かる．
 \end{note}
 
-\(\cycles{\numset{C}}{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
-\(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{\numset{C}}{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対して
+\(\cycles{N}\)で得られた結果を\(\numset{C}^N\)で使える形に書き換えよう．
+\(\numset{C}^N\)の標準基底を\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)とおく．各\(x\in\cycles{N}\)，\(\vect{x}=\trps{\rowvect{x[0] & \cdots & x[N-1]}}\)に対して
 \begin{align*}
   \trps{\vect{x}}\matrice{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}} &= \matrice{x[N-1] & x[0] & \cdots & x[N-2]} \\
   &= \matrice{x[-1] & x[0] & \cdots & x[N-2]}
@@ -989,7 +990,7 @@
 なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}=\smallmatrice{ & 1 \\ \imat_{N-1} & }\)と書ける．
 同様に計算すれば，\(0<m<N\)のとき\(\lagop^m\)の表現行列は\(\mat{L}^m=\smallmatrice{ & \imat_m \\ \imat_{N-m} & }\)であることも分かる．
 
-\(h\in\cycles{\numset{C}}{N}\)を任意にとり，\(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義する．
+\(h\in\cycles{N}\)を任意にとり，\(\cycles{N}\)上の線型変換\(H\)を\(H(x)=h\circconv x\)で定義する．
 \cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)（\(h_m=h[m]\)）なので，\(H\)の表現行列\(\mat{H}\)は
 \[
   \mat{H} = h_0\imat+\sum_{m=1}^{N-1}h_m\matrice*{ & \imat_m \\ \imat_{N-m} & }
@@ -1004,8 +1005,8 @@
 \end{corollary}
 
 \begin{proof}
-  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{\numset{C}}{N}\)の元\(h\)を定める．
-  \(\cycles{\numset{C}}{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+  \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{N}\)の元\(h\)を定める．
+  \(\cycles{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
 
   一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft*{N}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
   したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
@@ -1013,7 +1014,7 @@
 
 \begin{example}
   \label{example:cyclic_filter}
-  \(N=32\)とし，\(\cycles{\numset{C}}{N}\)の元\(h\)を\(h[n]=1/3\)（\(0\leq n<3\)），\(h[n]=0\)（\(3\leq n<N\)）で定義する．このとき
+  \(N=32\)とし，\(\cycles{N}\)の元\(h\)を\(h[n]=1/3\)（\(0\leq n<3\)），\(h[n]=0\)（\(3\leq n<N\)）で定義する．このとき
   \[
     (h\circconv x)[n] = \sum_{m=0}^{N-1}h[m]x[n-m]
     = \frac{x[n]+x[n-1]+x[n-2]}{3}
@@ -1040,7 +1041,7 @@
 なお，\(k\geq 16\)で\cref{figure:filter_characteristics}がどうなっているかというと，次の命題から直線\(k=16\)に関して鏡写しになっている．
 
 \begin{proposition}{}{dft_mirroring_property}
-  \(x\in\cycles{\numset{R}}{N}\)ならば\(\hat{x}[-k]=\conj*{\hat{x}[k]}\)である．
+  \(x\in\cycles{N}\)が実数値なら\(\hat{x}[-k]=\conj*{\hat{x}[k]}\)である．
 \end{proposition}
 
 \begin{proof}
@@ -1059,7 +1060,7 @@
 
 \begin{proof}
   \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)，\(s=\sum_{m=0}^{N-1}x_m\lagop^m\comb\)とおくと，
-  \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{\numset{C}}{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
+  \cref{proposition:dft_mirroring_property}と\(\hat{s}\in\cycles{N}\)より\(\hat{x}_{N-k}=\hat{s}[N-k]=\hat{s}[-k]=\conj*{\hat{s}[k]}=\conj{\hat{x}}_k\)である．
 \end{proof}
 
 \section{短時間フーリエ変換}
@@ -1082,40 +1083,40 @@
 
 まず，記号をいくつか定義する．
 
-2つの整数を引数にとる\(\numset{K}\)上の数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)}と表す．
-また，\(\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\cycles[2]{\numset{K}}{(M,N)}\)\indexsymbol{\(\cycles[2]{\numset{K}}{(M,N)}\)}と書く．
-\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{K}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\cycles[2]{\numset{K}}{(M,N)}\)は
+2つの整数を引数にとる複素数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)}と表す．
+\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\doublecycles{M}{N}\)\index{l2MN@\(\doublecycles{M}{N}\)}と書く．
+\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{C}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\doublecycles{M}{N}\)は
 \[
-  \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{K}}\given\text{\(x[\holder,n]\in\cycles{\numset{K}}{M}\)，\(x[m,\holder]\in\cycles{\numset{K}}{N}\)（\(m,n\in\numset{Z}\)）}}
+  \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\given\text{\(x[\holder,n]\in\cycles{M}\)，\(x[m,\holder]\in\cycles{N}\)（\(m,n\in\numset{Z}\)）}}
 \]
 と書ける．
 
 短時間フーリエ変換は，数列（信号）\(x\)に重みを掛けて離散フーリエ変換する手法である．
 
 \begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
-  \(L\)を自然数，\(w\)を\(\cycles{\numset{C}}{L}\)の零でない\footnotemark 元とする．各\(x\in\cycles{\numset{C}}{L}\)を
+  \(L\)を自然数，\(w\)を\(\cycles{L}\)の零でない\footnotemark 元とする．各\(x\in\cycles{L}\)を
   \[
     (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}
   \]
-  に写す写像\(\stft[L]{w}\colon\cycles{\numset{C}}{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
+  に写す写像\(\stft[L]{w}\colon\cycles{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
 
 \footnotetext{\(\Set{n\in\numset{Z}\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)が存在してもよい．}
 \(w\)を\(\stft[L]{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．文脈から\(L\)の値が明らかであれば，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．
 
-\(x,y\in\cycles{\numset{C}}{L}\)の内積を
+\(x,y\in\cycles{L}\)の内積を
 \[
   \innerp{x}{y} = \sum_{n=0}^{L-1}x[n]\conj*{y[n]}
 \]
 で定義する．
 
 \begin{proposition}{}{stft_and_shift}
-  線型写像\(\translate{m}\colon\cycles{\numset{C}}{L}\to\cycles{\numset{C}}{L}\)，\(\modulate{k}\colon\cycles{\numset{C}}{L}\to\cycles{\numset{C}}{L}\)を
+  \(\cycles{L}\)上の線型変換\(\translate{m}\)，\(\modulate{k}\)を
   \[
     (\translate{m}x)[n] = x[n-m],
     \quad(\modulate{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
   \]
-  で定義する．このとき，任意の\(x\in\cycles{\numset{C}}{L}\)に対して次式が成立する．
+  で定義する．このとき，任意の\(x\in\cycles{L}\)に対して次式が成立する．
   \[
     (\stft{w}x)[k,n] = \innerp{x}{\modulate{k}\translate{n}w}
   \]
@@ -1134,11 +1135,11 @@
 \cref{proposition:stft_and_shift}から，次の系が得られる．
 
 \begin{corollary}{}{stft_cyclic}
-  \(\stft{w}\)は\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{(L,L)}\)を満たす線型写像である．
+  \(\stft{w}\)は\(\img\stft{w}\subseteq\doublecycles{L}{L}\)を満たす線型写像である．
 \end{corollary}
 
 \begin{proof}
-  線型性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{\numset{C}}{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
+  線型性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
   このとき\(\modulate{k+L}=\modulate{k}\)，\(\translate{n+L}=\translate{n}\)より
   \begin{gather*}
     (\stft{w}x)[k+L,n] = \innerp{x}{\modulate{k+L}\translate{n}w}
@@ -1148,10 +1149,10 @@
     = \innerp{x}{\modulate{k}\translate{n}w}
     = (\stft{w}x)[k,n]
   \end{gather*}
-  だから\((\stft{w}x)[\holder,n],(\stft{w}x)[k,\holder]\in\cycles{\numset{C}}{L}\)である．
+  だから\((\stft{w}x)[\holder,n],(\stft{w}x)[k,\holder]\in\cycles{L}\)である．
 \end{proof}
 
-\(\img\stft{w}\subseteq\cycles[2]{\numset{C}}{(L,L)}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\cycles[2]{\numset{C}}{(L,L)}\)に変える}．
+\(\img\stft{w}\subseteq\doublecycles{L}{L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\doublecycles{L}{L}\)に変える}．
 
 離散フーリエ変換のときと同様，ここでも他の諸性質を導く前に，短時間フーリエ変換の工学的重要性を見ておこう．
 
@@ -1164,39 +1165,42 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figures/stft.pdf}
+  \includegraphics{figures/phone_spectrogram.pdf}
   \caption{話声のSTFT．}
-  \label{figure:stft}
+  \label{figure:phone_spectrogram}
 \end{figure}
 
-\cref{figure:phone}は「\ltjruby{嘘}{うそ}でしょ」という話声\(x\)の波形，\cref{figure:stft}は\(x\)を周期数列とみなし，適当な（実数値の）窓関数\(w\)で\(\abs{(\stft{w}x)[k,n]}^2\)を計算した結果である\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
+\cref{figure:phone}は「\ltjruby{嘘}{うそ}でしょ」という話声\(x\)の波形，\cref{figure:phone_spectrogram}はある（実数値）窓関数\(w\)に関する\(\abs{(\stft{w}x)[k,n]}^2\)のグラフである\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
   \centering
   \includegraphics{figures/window.pdf}
   \caption{\(w\)，\(\translate{n}\conj{w}\)，\(x\)，および\(x\cdot\translate{n}\conj{w}\)のグラフ．}
   \label{figure:window}
 \end{figure}
 
-\cref{figure:stft}を平面\(n=\text{(定数)}\)で縦断した断面は
+\cref{figure:phone_spectrogram}を平面\(n=\text{(定数)}\)で縦断した断面は
 \[
   (\stft{w}x)[k,n] = \sum_{m=0}^{L-1}x[m](\translate{n}\conj{w})[m]\napr^{-2\krez\iuni km/L}
   = \sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]
 \]
-より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)（の定数倍）である．また\cref{figure:window}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
-そのため，\(\abs{(\stft{w}x)[k,n]}^2\)のグラフ（\cref{figure:stft}）は「各時刻\(n\)の周りにおける\(x\)の周波数成分のグラフ」と解釈できる．\(\abs{(\stft{w}x)[k,n]}^2\)を\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）という．
+より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)の定数倍である．また\cref{figure:window}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
+そのため，\cref{figure:phone_spectrogram}は「各時刻\(n\)の周りにおける周波数成分のグラフ」と解釈できる．
+2重数列\(\seq{\abs{(\stft{w}x)[k,n]}^2}\)と\ltjkenten{その}グラフを\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）といい，波形からは読み取りがたい情報を多く含んでいる．
+
+例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
-  \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{\numset{C}}{L}\)の元とする．各\(x\in\cycles{\numset{C}}{L}\)を
+  \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{L}\)の元とする．各\(x\in\cycles{L}\)を
   \begin{align*}
     (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
     &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
   \end{align*}
-  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{\numset{C}}{L}\to\cycles[2]{\numset{C}}{(L/K,L/N)}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles{L/K}{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
-  \(\varepsilon>0\)，\(x\in\cycles{\numset{C}}{N}\)とする．条件
+  \(\varepsilon>0\)，\(x\in\cycles{N}\)とする．条件
   \[
     \sum_{n\in I\setminus A}\abs{x[n]}^2 \leq \varepsilon^2\sum_{n\in I}\abs{x[n]}^2\quad(I=\Set{0,\dots,N-1})
   \]
@@ -1204,7 +1208,7 @@
 \end{definition}
 
 \begin{theorem}{ドノホー・スタークの不確定性原理}{discrete_donoho_stark}\index{どのほーすたーくのふかくていせいげんり@ドノホー・スタークの不確定性原理}\index{ふかくていせいげんり@不確定性原理!どのほーすたーく@ドノホー・スターク}
-  \(\varepsilon_{\symrm{T}},\varepsilon_{\symrm{F}}>0\)とする．\(\cycles{\numset{C}}{N}\)の元\(x\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}x\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
+  \(\varepsilon_{\symrm{T}},\varepsilon_{\symrm{F}}>0\)とする．\(\cycles{N}\)の元\(x\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}x\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
   \[
     (\sizeof{T})(\sizeof{F}) \geq N(1-\varepsilon_{\symrm{T}}-\varepsilon_{\symrm{F}})^2
   \]

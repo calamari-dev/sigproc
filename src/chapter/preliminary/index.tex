@@ -218,8 +218,9 @@
 それは単射\index{たんしゃ@単射}\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について(\(f(x)=f(y)\implies x=y\))が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}である．
 この写像\(\phi\)は，次に定義する「線型写像」の一例である．
 
-\begin{definition}{線型写像}{linear_mapping}\index{せんけいしゃぞう@線型写像}
-  \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．写像\(f\colon V\to W\)が以下の条件を満たすとき，\(f\)は\termdef{線型写像}（linear mapping）であるという．
+\begin{definition}{線型写像，線形変換}{linear_mapping}\index{せんけいしゃぞう@線型写像}\index{せんけいへんかん@線型変換}
+  \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．以下の条件を満たす写像\(f\colon V\to W\)を\termdef{線型写像}（linear mapping）という．
+  特に\(V=W\)なら，\(f\)を\(V\)上の\termdef{線形変換}（linear transformation）という．
   \begin{enumerate}
     \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)である．
     \item 任意の\(c\in\numset{K}\)，\(\vect{x}\in V\)に対して\(f(c\vect{x})=cf(\vect{x})\)である．
