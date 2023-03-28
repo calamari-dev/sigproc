@@ -38,10 +38,10 @@
 
 ついで，ベクトル空間にかかわる概念を2つ定義する．
 
-\begin{definition}{線型結合}{linear_combination}\index{せんけいけつごう@線型結合}
+\begin{definition}{線形結合}{linear_combination}\index{せんけいけつごう@線形結合}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(\vect{v}_1,\dots,\vect{v}_n\)を\(V\)の元とする．
   \(c_1\vect{v}_1+\dots+c_n\vect{v}_n\)（\(c_1,\dots,c_n\in\numset{K}\)）という形をした\(V\)の元を，
-  \(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線型結合}（linear combination）という．
+  \(\vect{v}_1,\dots,\vect{v}_n\)の\termdef{線形結合}（linear combination）という．
 \end{definition}
 
 \begin{definition}{部分空間}{subspace}\index{ぶぶんくうかん@部分空間}
@@ -83,9 +83,9 @@
 \subsection{基底}
 
 任意のベクトル\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{K}^n\)は，第\(i\)成分が\(1\)，他の成分が\(0\)のベクトル\(\vect{e}_i\)を用いて\(\vect{x}=x_1\vect{e}_1+\dots+x_n\vect{e}_n\)と表せる．
-すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のすべての元を\(\basis{S}_n\)の元の線型結合で書ける」という性質を持つ．
+すなわち，集合\(\basis{S}_n=\Set{\vect{e}_1,\dots,\vect{e}_n}\)は「\(\numset{K}^n\)のいかなるベクトルも元の線形結合で書ける」という性質を持つ．
 
-一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線型結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせい@生成!ぶぶんくうかん@部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する\texttwoemdash}（generated subspace）といい，
+一般に，ベクトル空間\(V\)の部分集合\(S\)に対して，\(S\)の元の線形結合で書けるベクトルの全体集合を\(S\)が\termdef{生成する部分空間}\index{せいせい@生成!ぶぶんくうかん@部分空間}\index{ぶぶんくうかん@部分空間!せいせいする@生成する\texttwoemdash}（generated subspace）といい，
 \(\spannedby S\)\index{span@\(\spannedby S\)}と表記する．この記法を使えば，先述した\(\basis{S}_n\)が持つ性質を「\(\spannedby\basis{S}_n=\numset{K}^n\)が成り立つ」と書き表せる．
 
 \begin{wrapfigure}[9]{o}{0pt}
@@ -94,15 +94,15 @@
 
 \(\spannedby S=\numset{K}^n\)を満たす集合\(S\subseteq\numset{K}^n\)は，\(\basis{S}_n\)以外にも無数にある．
 たとえば\(\numset{K}^n=\numset{R}^2\)のとき，集合\(T=\Set{\vect{v}_1,\vect{v}_2,\vect{v}_3}\)（\(\vect{v}_1=\smallmatrice{1 \\ 1}\)，\(\vect{v}_2=\smallmatrice{2 \\ -1}\)，\(\vect{v}_3=\smallmatrice{-1 \\ 0}\)）が生成する部分空間は\(\numset{R}^2\)である．
-しかし，\(\basis{S}_2=\Set{\smallmatrice{1 \\ 0},\smallmatrice{0 \\ 1}}\)の元の線型結合で\(\numset{R}^2\)の元を表す方法はただ一通りであるのに対して，\(T\)はこの性質を持たない．
+しかし，\(\basis{S}_2=\Set{\smallmatrice{1 \\ 0},\smallmatrice{0 \\ 1}}\)の元の線形結合で\(\numset{R}^2\)のベクトルを表す方法はただ一通りであるのに対して，\(T\)はこの性質を持たない．
 実際，\(\vect{x}=\smallmatrice{3/2 \\ 0}\)とすると\(\vect{x}=(1/2)\vect{v}_1+(1/2)\vect{v}_2=(-3/2)\vect{v}_3\)である．
 
-\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_i,b_i\in\numset{K}\)，\(\vect{v}_i\in S\)について
+\(S\)の元の個数を超えない自然数\(k\)を任意にとる．\(S\)の元の線形結合で\(\spannedby S\)のベクトルを一意に表せるなら，どの\(k\)元集合\(\Set{\vect{v}_1,\dots,\vect{v}_k}\subseteq S\)も条件
 \[
   \sum_{i=1}^ka_i\vect{v}_i = \sum_{i=1}^kb_i\vect{v}_i
   \implies\matrice{a_1 & \cdots & a_k} = \matrice{b_1 & \cdots & b_k}
 \]
-が成立する．\(b_1=\dots=b_k=0\)とすると
+を満たす．ただし，各\(a_i\)，\(b_i\)は勝手なスカラーである．\(b_i=0\)とすると
 \begin{equation}
   \label{equation:independence}
   a_1\vect{v}_1+\dots+a_k\vect{v}_k = \zvec
@@ -111,33 +111,33 @@
 が得られる．
 
 任意の\(a_1,\dots,a_k\in\numset{K}\)に対して\cref{equation:independence}が成立するとき，
-\(\vect{v}_1,\dots,\vect{v}_k\)は線型独立であるという．特に，\(V=\spannedby S\)かつ，\(S\)の元からなる有限個のベクトルの組が常に線型独立であるとき，\(S\)は\(V\)の基底であるという．
+\(\vect{v}_1,\dots,\vect{v}_k\)は線形独立であるという．特に\(V=\spannedby S\)かつ，\(S\)の元からなる有限個のベクトルの組が常に線形独立であるとき，\(S\)は\(V\)の基底であるという．
 
-\begin{definition}{生成系・線型独立・線型従属}{independence}
+\begin{definition}{生成系・線形独立・線形従属}{independence}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．また，\(\vect{v}_1,\dots,\vect{v}_k\)を\(V\)の元とする．
   \begin{enumerate}
     \item \(V=\spannedby S\)であるとき，\(S\)を\(V\)の\termdef{生成系}（generating set）という．
-    \item \(\sum_{i=1}^kc_i\vect{v}_i=\zvec\)を満たす\(c_1,\dots,c_k\in\numset{K}\)の組が\(c_1=\dots=c_k=0\)しかないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型独立}\index{せんけいどくりつ@線型独立}（linearly independent）であるという．
-    \item \(\vect{v}_1,\dots,\vect{v}_k\)が線型独立でないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線型従属}\index{せんけいじゅうぞく@線型従属}（linearly dependent）であるという．
+    \item \(\sum_{i=1}^kc_i\vect{v}_i=\zvec\)を満たす\(c_1,\dots,c_k\in\numset{K}\)の組が\(c_1=\dots=c_k=0\)しかないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線形独立}\index{せんけいどくりつ@線形独立}（linearly independent）であるという．
+    \item \(\vect{v}_1,\dots,\vect{v}_k\)が線形独立でないとき，\(\vect{v}_1,\dots,\vect{v}_k\)は\termdef{線形従属}\index{せんけいじゅうぞく@線形従属}（linearly dependent）であるという．
   \end{enumerate}
 \end{definition}
 
 \begin{definition}{基底}{basis}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(\basis{B}\)を\(V\)の部分集合とする．
-  \(\basis{B}\)が\(V\)の生成系かつ，\(\basis{B}\)に属する有限個のベクトル\(\vect{v}_1,\dots,\vect{v}_k\)が常に線型独立であるとき，\(\basis{B}\)は\(V\)の\termdef{基底}\index{きてい@基底}（basis）であるという．
+  \(\basis{B}\)が\(V\)の生成系かつ，\(\basis{B}\)に属する有限個のベクトル\(\vect{v}_1,\dots,\vect{v}_k\)が常に線形独立であるとき，\(\basis{B}\)は\(V\)の\termdef{基底}\index{きてい@基底}（basis）であるという．
 \end{definition}
 
 \begin{example}[標準基底]
   \(\basis{S}_n\)は\(\numset{K}^n\)の基底である．\(\basis{S}_n\)を\(\numset{K}^n\)の\termdef{標準基底}\index{ひょうじゅんきてい@標準基底}（standard basis）という．
 \end{example}
 
-さきほどの議論によれば，\(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_1,\dots,a_k\in\numset{K}\)について\cref{equation:independence}が成立する．
+さきほどの議論によれば，\(S\)の元の線形結合で\(\spannedby S\)の元を一意に表せるとき，任意の\(a_1,\dots,a_k\in\numset{K}\)について\cref{equation:independence}が成立する．
 すなわち，\(S\)は\(\spannedby S\)の基底である．この逆も成り立つので，次の命題が成立する．
 
 \begin{proposition}{}{span_and_uniqueness}
   \(V\)を\(\numset{K}\)上のベクトル空間，\(S\)を\(V\)の部分集合とする．このとき，次の命題は同値である．
   \begin{enumerate}
-    \item \(S\)の元の線型結合で\(\spannedby S\)の元を一意に表せる．
+    \item \(S\)の元の線形結合で\(\spannedby S\)の元を一意に表せる．
     \item \(S\)は\(\spannedby S\)の基底である．
   \end{enumerate}
 \end{proposition}
@@ -159,7 +159,7 @@
 \end{proposition}
 
 \begin{proposition}{基底の延長}{basis_extension}
-  \(V\)を\(\numset{K}\)上の\(n\)次元ベクトル空間とする．\(k<n\)個のベクトル\(\vect{v}_1,\dots,\vect{v}_k\in V\)が線型独立なら，
+  \(V\)を\(\numset{K}\)上の\(n\)次元ベクトル空間とする．\(k<n\)個のベクトル\(\vect{v}_1,\dots,\vect{v}_k\in V\)が線形独立なら，
   集合\(\Set{\vect{v}_1,\dots,\vect{v}_k,\vect{v}_{k+1},\dots,\vect{v}_n}\)が\(V\)の基底になる\(\vect{v}_{k+1},\dots,\vect{v}_n\in V\)が存在する．
 \end{proposition}
 
@@ -178,8 +178,8 @@
   \end{enumerate}
 \end{definition}
 
-内積が備わっているベクトル空間のことを\termdef{内積空間}\index{ないせきくうかん@内積空間}（inner product space）という．
-また，\(\innerp{\vect{v}}{\vect{w}}=0\)であるときベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交}\index{ちょっこう@直交}するという．
+内積を備えたベクトル空間を\termdef{内積空間}\index{ないせきくうかん@内積空間}（inner product space）という．
+また\(\innerp{\vect{v}}{\vect{w}}=0\)のとき，ベクトル\(\vect{v}\)と\(\vect{w}\)は\termdef{直交する}\index{ちょっこう@直交}（orthogonal）という．
 
 \begin{example}[標準内積]
   \(\innerp{\vect{v}_1}{\vect{v}_2}=\trps{\vect{v}_1}\conj{\vect{v}}_2\)（\(\vect{v}_1,\vect{v}_2\in\numset{K}^n\)）とすると，
@@ -188,16 +188,17 @@
 
 \begin{definition}{正規直交系，正規直交基底}{onb}\index{せいきちょっこうけい@正規直交系}\index{せいきちょっこうきてい@正規直交基底}\index{ONS|see{正規直交系}}\index{ONB|see{正規直交基底}}
   \(V\)を内積空間，\(\basis{B}\)を\(V\)の空でない部分集合とする．\(\basis{B}\)の相異なる2元が常に直交し，すべての\(\vect{e}\in\basis{B}\)が\(\innerp{\vect{e}}{\vect{e}}=1\)を満たすとき，
-  \(\basis{B}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．また，正規直交系である基底を\termdef{正規直交基底}（orthonormal basis; ONB）という．
+  \(\basis{B}\)は\termdef{正規直交系}（orthonormal system; ONS）であるという．また\(V\)が\alert{有限次元のとき}，正規直交系である基底を\termdef{正規直交基底}（orthonormal basis; ONB）という．
 \end{definition}
 
-\(\basis{B}\)が正規直交系なら，有限個の\(\basis{B}\)の元からなる組はすべて線型独立である．
-よって，\(\basis{B}\)が基底であることを見るには\(V=\spannedby\basis{B}\)だけ確かめればよい．
+\begin{note}
+  \(V\)が無限次元のときは少し違う形でONBを定義する．このことについては\cref{xr-chapter:hilbert_space}で説明する．
+\end{note}
 
-また，内積空間に属する線型独立なベクトルの組があれば，それらから正規直交系を作れる．
+内積空間に属する線形独立なベクトルの組があれば，それらから正規直交系を作れる．
 
 \begin{proposition}{グラム・シュミットの直交化法}{gram_schmidt}\index{ぐらむしゅみっとのちょっこうかほう@グラム・シュミットの直交化法}
-  \(V\)を内積空間とする．\(\vect{a}_1,\dots,\vect{a}_n\in V\)が線型独立なら
+  \(V\)を内積空間とする．\(\vect{a}_1,\dots,\vect{a}_n\in V\)が線形独立なら
   \[
     \vect{u}_1 = \vect{a}_1,
     \quad\vect{u}_k = \vect{a}_k-\sum_{i=1}^{k-1}\frac{\innerp{\vect{a}_k}{\vect{u}_i}}{\innerp{\vect{u}_i}{\vect{u}_i}}\vect{u}_i\quad(k\geq 2)
@@ -206,7 +207,7 @@
   正規直交系を作るこの方法を\termdef{グラム・シュミットの直交化法}（Gram–Schmidt orthogonalization）という．
 \end{proposition}
 
-\subsection{線型写像と表現行列}
+\subsection{線形写像と表現行列}
 \label{subsection:representation_matrix}
 
 \(V\)は有限次元とする．\cref{proposition:span_and_uniqueness}によれば，\(V\)の基底\(\basis{B}=\Set{\vect{v}_1,\dots,\vect{v}_m}\)を選ぶと，任意の\(\vect{x}\in V\)を
@@ -216,10 +217,10 @@
 \end{equation}
 の形で一意に表せる．言い換えれば，\(V\)の各元\(\vect{x}\)に\cref{equation:basis_comb}の\(\trps{\rowvect{c_1 & \cdots & c_m}}\)を割り当てる写像\(\phi\colon V\to\numset{K}^m\)を定義でき，
 それは単射\index{たんしゃ@単射}\footnote{写像\(f\)の定義域に属する任意の\(x,y\)について(\(f(x)=f(y)\implies x=y\))が成立するとき，\(f\)は\termdef{単射}（injection）であるという．}である．
-この写像\(\phi\)は，次に定義する「線型写像」の一例である．
+この写像\(\phi\)は，次に定義する「線形写像」の一例である．
 
-\begin{definition}{線型写像，線形変換}{linear_mapping}\index{せんけいしゃぞう@線型写像}\index{せんけいへんかん@線型変換}
-  \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．以下の条件を満たす写像\(f\colon V\to W\)を\termdef{線型写像}（linear mapping）という．
+\begin{definition}{線形写像，線形変換}{linear_mapping}\index{せんけいしゃぞう@線形写像}\index{せんけいへんかん@線形変換}
+  \(V\)と\(W\)を\(\numset{K}\)上のベクトル空間とする．以下の条件を満たす写像\(f\colon V\to W\)を\termdef{線形写像}（linear mapping）という．
   特に\(V=W\)なら，\(f\)を\(V\)上の\termdef{線形変換}（linear transformation）という．
   \begin{enumerate}
     \item 任意の\(\vect{x},\vect{y}\in V\)に対して\(f(\vect{x}+\vect{y})=f(\vect{x})+f(\vect{y})\)である．
@@ -232,9 +233,9 @@
   \vect{y} = d_1\vect{w}_1+\dots+d_n\vect{w}_n
   \iff\psi(\vect{y}) = \trps{\matrice{d_1 & \cdots & d_n}}
 \]
-を満たす線型写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
+を満たす線形写像\(\psi\colon W\to\numset{K}^n\)が定義できる．
 
-\(\phi\)と\(\psi\)を利用すると，\(V\)から\(W\)への任意の線型写像\(f\)を，対応する行列によって表現できる．
+\(\phi\)と\(\psi\)を利用すると，\(V\)から\(W\)への任意の線形写像\(f\)を，対応する行列によって表現できる．
 \(\vect{x}\in V\)を任意にとる．\(\phi(\vect{x})=\trps{\rowvect{c_1 & \cdots & c_m}}\)とおくと
 \begin{gather*}
   f(\vect{x}) = f\pqty*{\sum_{i=1}^mc_i\vect{v}_i} = \sum_{i=1}^mc_if(\vect{v}_i), \\
@@ -244,7 +245,7 @@
 であるから，\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)とおくと
 \begin{equation}
   \label{equation:representation_matrix}
-  \psi(f(\vect{x})) = T_A(\phi(\vect{x}))\quad(T_A(\vect{x})=\mat{A}\vect{x})
+  \psi(f(\vect{x})) = T_A(\phi(\vect{x}))\quad(T_A(\vect{r})=\mat{A}\vect{r})
 \end{equation}
 が成り立つ．
 
@@ -253,8 +254,7 @@
 \end{wrapfigure}
 
 ここまでの議論をまとめると，次のようになる．\(V\)の基底\(\basis{B}\)と，\(W\)の基底\(\basis{B}'\)をとるごとに，
-\(n\times m\)行列\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)を定義でき，
-\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
+\(n\times m\)行列\(\mat{A}=\rowvect{\psi(f(\vect{v}_1)) & \cdots & \psi(f(\vect{v}_m))}\)が定まり，\(\mat{A}\)は\cref{equation:representation_matrix}を満たす．
 この\(\mat{A}\)を，基底\(\basis{B}\)と\(\basis{B}'\)に関する\(f\)の\termdef{表現行列}\index{ひょうげんぎょうれつ@表現行列}\index{ぎょうれつ@行列!ひょうげん@表現\texttwoemdash}（representation matrix）という．
 
 なお，\(\basis{B}\)の元を並べる順序に応じて，\cref{equation:basis_comb}の\(c_1,\dots,c_n\)の順序も変化するので，
@@ -263,16 +263,16 @@
 
 \begin{example}[形式的な微分]
   次数が\(n\)未満の1変数多項式全体\(V_n=\Set{c_0+c_1x+\dots+c_{n-1}x^{n-1}\given c_0,\dots,c_{n-1}\in\numset{R}}\)は，\(\numset{R}\)上の\(n\)次元ベクトル空間である．
-  また，写像\(D\colon V_3\to V_2\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線型写像になる．
+  また，写像\(D\colon V_3\to V_2\)を\(D(c_0+c_1x+c_2x^2)=c_1+2c_2x\)で定義すると，これは線形写像になる．
   \(V_n\)の基底として\(\basis{B}_n=\Set{1,x,\dots,x^{n-1}}\)をとったとき，基底\(\basis{B}_3\)と\(\basis{B}_2\)に関する\(D\)の表現行列は\(\smallmatrice{0 & 1 & 0 \\ 0 & 0 & 2}\)である．
 \end{example}
 
 \subsection{核と像}
 
-線型写像に付随して，重要なベクトル空間が2つ定まる．
+線形写像に付随して，重要なベクトル空間が2つ定まる．
 
 \begin{definition}{核，像}{nul_img}\index{かく@核}\index{ぞう@像}\index{ker@\(\ker f\)}\index{im@\(\img f\)}
-  \(f\colon V\to W\)を線型写像とする．
+  \(f\colon V\to W\)を線形写像とする．
   \begin{enumerate}
     \item \(V\)の部分空間\(\inv{f}{\Set{\vect{0}}}\)を\(f\)の\termdef{核}（kernel）といい，\(\ker f\)と表す．
     \item \(W\)の部分空間\(\ran{f}{V}\)を\(f\)の\termdef{像}（image）といい，\(\img f\)と表す．
@@ -286,7 +286,7 @@
 \end{note}
 
 \begin{proposition}{}{nul_and_uniqueness}
-  \(f\colon V\to W\)を線型写像とする．このとき，\(f\)が単射であることと，\(\ker f=\Set{\zvec}\)が成立することは同値である．
+  \(f\colon V\to W\)を線形写像とする．このとき，\(f\)が単射であることと，\(\ker f=\Set{\zvec}\)が成立することは同値である．
 \end{proposition}
 
 \begin{proof}

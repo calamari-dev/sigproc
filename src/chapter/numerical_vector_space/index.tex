@@ -26,7 +26,7 @@
 
 \section{直交射影}
 
-本節では，あるベクトルを他のベクトルの線型結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
+本節では，あるベクトルを他のベクトルの線形結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
 \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
 
 \subsection{直交射影}
@@ -88,7 +88,7 @@
 
 \begin{proof}
   本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．
-  任意に\(\vect{y}\in V\)をとる．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，\(\vect{y}\)は\(\basis{B}\)の元の線型結合で\(\vect{y}=\sum z_i\vect{e}_i\)と書ける．
+  任意に\(\vect{y}\in V\)をとる．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，\(\vect{y}\)は\(\basis{B}\)の元の線形結合で\(\vect{y}=\sum z_i\vect{e}_i\)と書ける．
   また\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
     \vnorm*{\sum z_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
@@ -168,7 +168,7 @@
 \end{example}
 
 \begin{proposition}{}{}
-  \(\numset{K}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{K}^n\to V\)は線型写像である．
+  \(\numset{K}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{K}^n\to V\)は線形写像である．
 \end{proposition}
 
 \begin{proof}
@@ -233,7 +233,7 @@
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線型写像\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線形写像\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
@@ -246,13 +246,13 @@
 \end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
-以上の理由から，本書では線型写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+以上の理由から，本書では線形写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
 
 \begin{definition}{分解作用素，合成作用素}{analysis_and_synthesis}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
   \begin{enumerate}
-    \item 線型写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分解作用素}（analysis operator）という．
-    \item 線型写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
+    \item 線形写像\(T\colon\numset{K}^n\to\numset{K}^n\)，\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を\(\basis{B}\)に関する\termdef{分解作用素}（analysis operator）という．
+    \item 線形写像\(\synth{T}\colon\numset{K}^n\to\numset{K}^n\)，\(\synth{T}(\trps{\rowvect{x_1 & \cdots & x_n}})=\sum_{i=1}^nx_i\vect{e}_i\)を\(\basis{B}\)に関する\termdef{合成作用素}（synthesis operator）という．
   \end{enumerate}
 \end{definition}
 
@@ -299,7 +299,7 @@
 \end{note}
 
 \begin{corollary}{}{}
-  \(T\colon\numset{C}^n\to\numset{C}^n\)を線型写像とする．このとき，\(T\)に関する以下の条件は同値である．
+  \(T\colon\numset{C}^n\to\numset{C}^n\)を線形写像とする．このとき，\(T\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(T\)は\(\numset{C}^n\)のある正規直交基底に関する分解作用素である．
     \item 標準基底に関する\(T\)の表現行列はユニタリ行列である．
@@ -336,7 +336,7 @@
 \end{proposition}
 
 \begin{proof}
-  線型写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義する．
+  線形写像\(T_A\colon\numset{K}^p\to\numset{K}^n\)を\(T_A(\vect{x})=\mat{A}\vect{x}\)で定義する．
   関数\(\vnorm{\vect{\epsilon}(\vect{x})}\)の最小値は\(\min\Set{\vnorm{\vect{b}-\mat{A}\vect{x}}\given\vect{x}\in\numset{K}^p}=\min\Set{\vnorm{\vect{b}-\vect{z}}\given\vect{z}\in\img T_A}\)であり，\(\vnorm{\vect{b}-\vect{z}}\)の値を最小にする\(\vect{z}\in\img T_A\)は\(\proj_{\img T_A}\vect{b}\)ただ一つである．
   よって，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は方程式\(\mat{A}\vect{x}=\proj_{\img T_A}\vect{b}\)の解集合である．この方程式は明らかに解をもつから，\(\argmin_{\vect{x}\in\numset{K}^p}\vnorm{\vect{\epsilon}(\vect{x})}\)は空でない．
 \end{proof}
@@ -675,7 +675,7 @@
   \caption{\cref{example:linear_regression}の標本と\(f(\vect{c};x)\)の様子．\(\epsilon(\vect{c})\)は破線の長さの平方和である．}
 \end{figure}
 
-同じ考え方は，\(y\)が\(x\)の多項式関数でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\vect{\phi}(x)=\trps{\rowvect{\phi_1(x) & \cdots & \phi_p(x)}}\)で写像した線型結合によって
+同じ考え方は，\(y\)が\(x\)の多項式関数でなくても使える．変数\(y\)は，変数\(x\)を既知の関数\(\vect{\phi}(x)=\trps{\rowvect{\phi_1(x) & \cdots & \phi_p(x)}}\)で写像した線形結合によって
 \begin{equation}
   \label{equation:linear_combination_of_functions}
   y = c_1\phi_1(x)+\dots+c_p\phi_p(x)
@@ -684,8 +684,8 @@
 と書けるとする．関数\(\epsilon(\vect{c})=\sum_{i=1}^n\abs{y_i-f(\vect{c};x_i)}^2\)（\(f(\vect{c};x)=\sum_{k=1}^pc_k\phi_k(x)\)）が最小値をとる\(\vect{c}\in\numset{K}^p\)全体は，集合\(\argmin_{\vect{c}\in\numset{K}^p}\vnorm{\vect{y}-\mat{\Phi}\vect{c}}\)である．
 ただし，\(\mat{\Phi}\)は\(n\times p\)行列\(\mat{\Phi}=\trps{\rowvect{\vect{\phi}(x_1) & \cdots & \vect{\phi}(x_n)}}\)である．
 
-なお，\(\phi_1,\dots,\phi_p\)が線型従属だと\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
-そのため，しばしば\(\phi_1,\dots,\phi_p\)は線型独立になるよう設計される．
+なお，\(\phi_1,\dots,\phi_p\)が線形従属だと\cref{equation:linear_combination_of_functions}を満たす\(c_1,\dots,c_p\)の値は一意に定まらない．
+そのため，しばしば\(\phi_1,\dots,\phi_p\)は線形独立になるよう設計される．
 
 \section{離散フーリエ変換}
 \label{section:dft}
@@ -723,7 +723,7 @@
     \dft{N}\vect{x} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
     \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
   \]
-  で定義される\(\numset{C}^N\)上の線型変換\(\dft{N}\)を\termdef{離散フーリエ変換}（discrete Fourier transform; DFT）という．
+  で定義される\(\numset{C}^N\)上の線形変換\(\dft{N}\)を\termdef{離散フーリエ変換}（discrete Fourier transform; DFT）という．
 \end{definition}
 
 以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を単に\(\zeta\)と書く．
@@ -832,7 +832,7 @@
 \subsection{曲線あてはめとDFT}
 \label{subsection:dft_as_curve_fitting}
 
-離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線型結合
+離散フーリエ変換は曲線あてはめの観点からも理解できる．周期\(2\krez\)の関数\(f\)を，複素指数関数の線形結合
 \[
   g(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\napr^{\iuni kt})
 \]
@@ -877,7 +877,7 @@
 そこで，周期\(N\)の数列\(x=\seq{x[n]}\)に対し\(\hat{x}=\dft{N}x\)を次のように定義する．
 
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\index{l2N@\(\cycles{N}\)}\index{FZN@\(\dft{N}\)}
-  \(N\)を周期に持つ複素数列全体を\(\cycles{N}\)と書く．\(\cycles{N}\)上の線型変換\(\dft{N}\)を次式で定義する．
+  \(N\)を周期に持つ複素数列全体を\(\cycles{N}\)と書く．\(\cycles{N}\)上の線形変換\(\dft{N}\)を次式で定義する．
   \[
     (\dft{N}x)[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
@@ -990,7 +990,7 @@
 なので，基底\(\basis{D}\)に関する\(\lagop\)の表現行列\(\mat{L}\)は\(\mat{L}=\trps{\rowvect{\vect{e}_N & \vect{e}_1 & \cdots & \vect{e}_{N-1}}}=\smallmatrice{ & 1 \\ \imat_{N-1} & }\)と書ける．
 同様に計算すれば，\(0<m<N\)のとき\(\lagop^m\)の表現行列は\(\mat{L}^m=\smallmatrice{ & \imat_m \\ \imat_{N-m} & }\)であることも分かる．
 
-\(h\in\cycles{N}\)を任意にとり，\(\cycles{N}\)上の線型変換\(H\)を\(H(x)=h\circconv x\)で定義する．
+\(h\in\cycles{N}\)を任意にとり，\(\cycles{N}\)上の線形変換\(H\)を\(H(x)=h\circconv x\)で定義する．
 \cref{equation:discrete_impulse_response}から\(H=\sum_{m=0}^{N-1}h_m\lagop^m\)（\(h_m=h[m]\)）なので，\(H\)の表現行列\(\mat{H}\)は
 \[
   \mat{H} = h_0\imat+\sum_{m=1}^{N-1}h_m\matrice*{ & \imat_m \\ \imat_{N-m} & }
@@ -1006,7 +1006,7 @@
 
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{N}\)の元\(h\)を定める．
-  \(\cycles{N}\)上の線型写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
+  \(\cycles{N}\)上の線形写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
 
   一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft*{N}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
   したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
@@ -1111,7 +1111,7 @@
 で定義する．
 
 \begin{proposition}{}{stft_and_shift}
-  \(\cycles{L}\)上の線型変換\(\translate{m}\)，\(\modulate{k}\)を
+  \(\cycles{L}\)上の線形変換\(\translate{m}\)，\(\modulate{k}\)を
   \[
     (\translate{m}x)[n] = x[n-m],
     \quad(\modulate{k}x)[n] = \napr^{2\krez\iuni kn/L}x[n]
@@ -1135,11 +1135,11 @@
 \cref{proposition:stft_and_shift}から，次の系が得られる．
 
 \begin{corollary}{}{stft_cyclic}
-  \(\stft{w}\)は\(\img\stft{w}\subseteq\doublecycles{L}{L}\)を満たす線型写像である．
+  \(\stft{w}\)は\(\img\stft{w}\subseteq\doublecycles{L}{L}\)を満たす線形写像である．
 \end{corollary}
 
 \begin{proof}
-  線型性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
+  線形性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
   このとき\(\modulate{k+L}=\modulate{k}\)，\(\translate{n+L}=\translate{n}\)より
   \begin{gather*}
     (\stft{w}x)[k+L,n] = \innerp{x}{\modulate{k+L}\translate{n}w}
@@ -1174,9 +1174,9 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figures/window.pdf}
+  \includegraphics{figures/windowing.pdf}
   \caption{\(w\)，\(\translate{n}\conj{w}\)，\(x\)，および\(x\cdot\translate{n}\conj{w}\)のグラフ．}
-  \label{figure:window}
+  \label{figure:windowing}
 \end{figure}
 
 \cref{figure:phone_spectrogram}を平面\(n=\text{(定数)}\)で縦断した断面は
@@ -1184,11 +1184,34 @@
   (\stft{w}x)[k,n] = \sum_{m=0}^{L-1}x[m](\translate{n}\conj{w})[m]\napr^{-2\krez\iuni km/L}
   = \sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]
 \]
-より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)の定数倍である．また\cref{figure:window}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
+より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)の定数倍である．また\cref{figure:windowing}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
 そのため，\cref{figure:phone_spectrogram}は「各時刻\(n\)の周りにおける周波数成分のグラフ」と解釈できる．
-2重数列\(\seq{\abs{(\stft{w}x)[k,n]}^2}\)と\ltjkenten{その}グラフを\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）といい，波形からは読み取りがたい情報を多く含んでいる．
+2重数列\(\seq{\abs{(\stft{w}x)[k,n]}^2}\)と\ltjkenten{その}グラフを\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）という．
 
-例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
+スペクトログラムは波形から読み取りがたい情報を多く含んでいる．例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．
+このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
+
+\subsection{窓関数と不確定性}
+
+代表的な窓関数を3つ挙げておく．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
+短時間フーリエ変換で使うときは，信号を切り取る長さ\(N\)を決めて，次のように離散化すればよい．
+\[
+  \tilde{w}[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
+\]
+
+\begin{example}
+  \(w(t)=1\)を\termdef{矩形窓}\index{くけいまど@矩形窓}\index{まどかんすう@窓関数!くけいまど@矩形窓}（rectangular window）という．  
+\end{example}
+
+\begin{example}
+  \(w(t)=1-\abs{2t-1}\)を\termdef{三角窓}\index{さんかくまど@三角窓}\index{まどかんすう@窓関数!さんかくまど@三角窓}（triangular window）という．
+\end{example}
+
+\begin{example}
+  \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
+\end{example}
+
+\subsection{離散ガボール変換}
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
   \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{L}\)の元とする．各\(x\in\cycles{L}\)を
@@ -1196,7 +1219,7 @@
     (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
     &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
   \end{align*}
-  に写す線型写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles{L/K}{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+  に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles{L/K}{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
