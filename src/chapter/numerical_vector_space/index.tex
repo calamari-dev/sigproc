@@ -25,6 +25,7 @@
 \pagebreak
 
 \section{直交射影}
+\label{section:finite_projection}
 
 本節では，あるベクトルを他のベクトルの線形結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
 \(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
@@ -647,9 +648,9 @@
   \epsilon(\vect{c}) = \sum_{i=1}^n\abs{y_i-f(\vect{c};x_i)}^2
 \end{equation}
 を採用する．各\(f(\vect{c};x_i)\)の値が\(y_i\)の値に近いほど\(\epsilon(\vect{c})\)の値は小さくなるので，\(\epsilon(\vect{c})\)の値が小さいほど\(f(\vect{c};x)\)は標本によくあてはまっているといえる．
+\cref{equation:mean_square}の指標を\termdef{残差平方和}\index{ざんさへいほうわ@残差平方和}\index{RSS|see{残差平方和}}（residual sum of squares; RSS）という．
 
 \begin{note}
-  \cref{equation:mean_square}の指標を\termdef{残差平方和}\index{ざんさへいほうわ@残差平方和}\index{RSS|see{残差平方和}}（residual sum of squares; RSS）という．
   RSSであてはまりのよさを測るのが妥当かどうかは，データの性質や分析する目的にもよる．
   しかし，ほかの指標に関して\(\argmin\)を計算するのは\texttwoemdash 空集合でないことを保証するだけでも\texttwoemdash 難しいことが多い．まずはRSSが使えないか考えるべきだろう．
 \end{note}
@@ -706,7 +707,7 @@
 
 時間\(N\)が有限な離散信号の全体\(\mapset{\Set{0,\dots,N-1}}{\numset{K}}\)は，数ベクトル空間\(\numset{K}^N\)と同一視できる．
 これは対応\(x=\seq{x_n}_{n=0}^{N-1}\longleftrightarrow\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)を考えれば明らかであろう．
-また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)\texttwoemdash これを\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という\texttwoemdash も，次の演算でベクトル空間になる．
+また，数列全体\(\mapset{\numset{Z}}{\numset{K}}\)も次の演算でベクトル空間になる．\(\mapset{\numset{Z}}{\numset{K}}\)を\termdef{数列空間}\index{すうれつくうかん@数列空間}（sequence space）という．
 \[
   \seq{x_n}+\seq{y_n} = \seq{x_n+y_n},
   \quad\lambda\seq{x_n} = \seq{\lambda x_n}\quad\text{(\(\seq{x_n},\seq{y_n}\in\mapset{\numset{Z}}{\numset{K}}\)，\(\lambda\in\numset{K})\)}
@@ -1067,7 +1068,6 @@
 \label{section:stft}
 
 \cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
-この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
 
 \begin{figure}[htbp]
   \centering
@@ -1078,6 +1078,53 @@
 
 たとえば，\cref{figure:time_variant}の信号を見て「周波数が時とともに変化している」と感じるのは自然なことだろう．
 時間周波数解析の技法を用いると，周波数成分の時間変化をより定量的に追いかけられる．
+
+\subsection{フレーム}
+\label{subsection:frame}
+
+\cref{subsection:frame}では，基底を一般化する「フレーム」という対象を，有限次元の内積空間に限って紹介する（より一般的な定義は\cref{xr-chapter:hilbert_space}に回す）．
+
+特に断らない限り，\cref{subsection:frame}では\(H\)を任意の有限次元内積空間とする．
+
+\begin{definition}{フレーム}{frame}\index{ふれーむ@フレーム}
+  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)上の有限列とする．集合\(\Set{\vect{e}_i\given i\in I}\)が\(H\)の生成系であるとき，\(\seq{\vect{e}_i}_{i\in I}\)を\(H\)の\termdef{フレーム}（frame）という．
+\end{definition}
+
+\begin{proposition}{}{frame_characterization}
+  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)のフレームとする．このとき，ある実数\(A,B>0\)が存在し，任意の\(\vect{v}\in H\)に対して次式を満たす．
+  \[
+    A\vnorm{\vect{v}}^2 \leq \sum_{i\in I}\abs{\innerp{\vect{v}}{\vect{e}_i}}^2 \leq B\vnorm{\vect{v}}^2\quad(\vnorm{\vect{v}}=\sqrt{\innerp{\vect{v}}{\vect{v}}})
+  \]
+\end{proposition}
+
+\(A\)と\(B\)を\(\seq{\vect{e}_i}_{i\in I}\)の\termdef{フレーム限界}\index{ふれーむ@フレーム!げんかい@\texttwoemdash 限界}（frame bound）という．
+\cref{proposition:frame_characterization}を示すにあたり，1つ注意すべきことがある．我々は\cref{section:finite_projection}で，直交射影と直交補空間を\(\numset{K}^n\)の部分空間に対して定義した．
+しかし，\cref{section:finite_projection}の議論は\(\numset{K}^n\)を\(H\)に置き換えてもなんら問題ない．そのため，\(H\)の部分空間\(V\)についても\(\proj_V\)と\(\pcomp{V}=\pcomp[H]{V}\)はまったく同様に定義される．
+
+\begin{proof}
+  対偶を示す．\(V=\spannedby\Set{\vect{e}_i\given i\in I}\)とする．もし\(V\neq H\)なら\(\zvec\)でない\(\vect{v}\in\pcomp{V}\)がある．
+  すると，すべての\(i\in I\)で\(\innerp{\vect{v}}{\vect{e}_i}=0\)なので，いかなる\(A>0\)についても\(\sum_{i\in I}\abs{\innerp{\vect{v}}{\vect{e}_i}}^2=0<A\vnorm{\vect{v}}^2\)となる．
+  よってフレーム限界が存在しないので，\(\seq{\vect{e}_i}_{i\in I}\)はフレームでない．
+\end{proof}
+
+\begin{note}
+  実は\cref{proposition:frame_characterization}の逆も成り立つ．つまり，フレーム限界を持つ列は必ずフレームである（\cite{casazza2013}に証明がある）．
+  証明には，\(\dim H<+\infty\)より\(H\)の単位球面はコンパクトであり，単位球面上の点列はすべて収束部分列を持つことが効いてくる．
+\end{note}
+
+\begin{example}[\(\cycles{N}\)上のDFT]
+  \(\cycles{N}\)の内積を
+  \[
+    \innerp{x}{y} = \sum_{n=0}^{N-1}x[n]\conj*{y[n]}\quad(x,y\in\cycles{N})
+  \]
+  で定める．すると，数列\(w_k[n]=N^{-1/2}\napr^{2\krez\iuni kn/N}\)がなす集合\(\Set{w_k\given 0\leq k<N}\)は\(\cycles{N}\)の正規直交基底になる（証明は\cref{proposition:dft_onb}の焼き直しになるので省く）．
+  このことから，列\(\seq{w_k}_{k=0}^{N-1}\)は\(\cycles{N}\)のフレームといえる．実際
+  \[
+    v = \sum_{k=0}^{N-1}\innerp{v}{w_k}w_k,
+    \quad\vnorm{v}^2 = \sum_{k=0}^{N-1}\abs{\innerp{v}{w_k}}^2\quad(v\in\cycles{N})
+  \]
+  だから，\(\seq{w_k}_{k=0}^{N-1}\)はフレーム限界\(A=B=1\)のフレームである．
+\end{example}
 
 \subsection{短時間フーリエ変換}
 
@@ -1103,12 +1150,6 @@
 
 \footnotetext{\(\Set{n\in\numset{Z}\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)が存在してもよい．}
 \(w\)を\(\stft[L]{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．文脈から\(L\)の値が明らかであれば，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．
-
-\(x,y\in\cycles{L}\)の内積を
-\[
-  \innerp{x}{y} = \sum_{n=0}^{L-1}x[n]\conj*{y[n]}
-\]
-で定義する．
 
 \begin{proposition}{}{stft_and_shift}
   \(\cycles{L}\)上の線形変換\(\translate{m}\)，\(\modulate{k}\)を
