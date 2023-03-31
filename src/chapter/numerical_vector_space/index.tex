@@ -72,10 +72,10 @@
 \end{gather*}
 である．このように，\(\argmin_{x\in S}f(x)\)は空になることも，無限集合になることもある．
 
-\(\numset{K}=\numset{R}\)の場合も同様に証明できるので，\cref{proposition:finite_projection}まで証明では\(\numset{K}=\numset{C}\)を仮定する．また，部分空間が\(\Set{\zvec}\)でないことも仮定する．
+\cref{proposition:finite_projection}まで，\(H\)を任意の（\(\Set{\zvec}\)でない）有限次元内積空間とする．分かりにくければ\(H=\numset{K}^n\)と思ってよい．
 
 \begin{lemma}{}{binomial_square}
-  \(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)（\(\vect{x},\vect{y}\in\numset{K}^n\)）である．
+  \(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)（\(\vect{x},\vect{y}\in H\)）である．
 \end{lemma}
 
 \begin{proof}
@@ -83,7 +83,7 @@
 \end{proof}
 
 \begin{proposition}{}{finite_convex_projection}
-  \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
+  \(\vect{x}\in H\)かつ，\(V\)は\(H\)の部分空間とする．
   このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ一つの元からなる集合である．
 \end{proposition}
 
@@ -117,7 +117,7 @@
 \end{proof}
 
 \begin{proposition}{}{weak_finite_projection}
-  \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
+  \(\vect{x}\in H\)かつ，\(V\)は\(H\)の部分空間とする．
   \(V\)のある元\(\vect{m}\)が任意の\(\vect{v}\in V\)に対し\(\innerp{\vect{x}-\vect{m}}{\vect{v}}=0\)を満たすとき，
   \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
 \end{proposition}
@@ -129,7 +129,7 @@
 \end{proof}
 
 \begin{proposition}{}{finite_projection}
-  \(\vect{x}\in\numset{K}^n\)かつ，\(V\)は\(\numset{K}^n\)の部分空間とする．
+  \(\vect{x}\in H\)かつ，\(V\)は\(H\)の部分空間とする．
   このとき，\(V\)の元\(\vect{m}\)に関する以下の条件は同値であり，条件を満たす\(\vect{m}\)はただ一つ存在する．
   \begin{enumerate}
     \item \(\vect{m}\in\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)である．
@@ -169,41 +169,41 @@
 \end{example}
 
 \begin{proposition}{}{}
-  \(\numset{K}^n\)の任意の部分空間\(V\)について，写像\(\proj_V\colon\numset{K}^n\to V\)は線形写像である．
+  \(H\)の任意の部分空間\(V\)について，写像\(\proj_V\colon H\to V\)は線形写像である．
 \end{proposition}
 
 \begin{proof}
-  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in\numset{K}^n\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)，\(\vect{z}=s\vect{x}+t\vect{y}\)とおく．
+  \(s,t\in\numset{K}\)，\(\vect{x},\vect{y}\in H\)を任意にとり，\(\vect{m}=s\proj_V(\vect{x})+t\proj_V(\vect{y})\)，\(\vect{z}=s\vect{x}+t\vect{y}\)とおく．
   このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V\vect{x}}{\vect{v}}+t\innerp{\vect{y}-\proj_V\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
 \end{proof}
 
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp[V]{W}\)}\indexsymbol{\(\pcomp{V}\)}
-  \(V\)を\(\numset{K}^n\)の部分空間とする．\(W\)が\(V\)の部分空間なら，集合
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp[H]{V}\)}\indexsymbol{\(\pcomp{V}\)}
+  \(V\)を\(H\)の部分空間とする．このとき，集合
   \[
-    \Set{\vect{v}\in V\given\text{任意の\(\vect{w}\in W\)に対して\(\innerp{\vect{v}}{\vect{w}}=0\)}}
+    \Set{\vect{x}\in H\given\text{任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}}{\vect{v}}=0\)}}
   \]
-  も\(V\)の部分空間になる．この部分空間を（\(V\)における）\(W\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[V]{W}\)，\(\pcomp{W}\)などと書く．
+  も\(H\)の部分空間になる．この部分空間を（\(H\)における）\(V\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[H]{V}\)，\(\pcomp{V}\)などと書く．
 \end{definition}
 
 \begin{example}
-  \(W=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
-  このとき，\(\pcomp{W}\)は\(\vect{e}_1\)と\(\vect{e}_2\)に直交し\(\zvec\)でないベクトル\(\vect{e}_3\)が生成する直線\(\spannedby\Set{\vect{e}_3}\)である．
+  \(V=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
+  このとき，\(\pcomp{V}\)は\(\vect{e}_1\)と\(\vect{e}_2\)に直交し\(\zvec\)でないベクトル\(\vect{e}_3\)が生成する直線\(\spannedby\Set{\vect{e}_3}\)である．
   \(\innerp{\vect{e}_1}{\vect{e}_2}=0\)なら集合\(\Set{\vect{e}_i/\vnorm{\vect{e}_i}\given i=1,2,3}\)は\(\numset{R}^3\)の正規直交基底である．
 \end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/orthogonal_complement.pdf}
-  \caption{\(W\)と\(\vect{e}_1\)，\(\vect{e}_2\)，\(\vect{e}_3\)の様子．}
+  \caption{\(V\)と\(\vect{e}_1\)，\(\vect{e}_2\)，\(\vect{e}_3\)の様子．}
 \end{figure}
 
 \begin{proposition}{}{}
-  \(V\)は\(\numset{K}^n\)の部分空間で，\(W\)は\(V\)の部分空間とする．このとき\(V=W\oplus\pcomp[V]{W}\)である．
+  \(V\)を\(H\)の部分空間とする．このとき\(H=V\oplus\pcomp{V}\)である．
 \end{proposition}
 
 \begin{proof}
-  \(\vect{x}\in W\cap\pcomp{W}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)より\(\vect{x}=\zvec\)である．
-  また，任意の\(\vect{x}\in W\)に対して\(\vect{x}-\proj_W\vect{x}\in\pcomp{W}\)，\(\vect{x}=\proj_W(\vect{x})+(\vect{x}-\proj_W\vect{x})\in W+\pcomp{W}\)である．よって\(V=W\oplus\pcomp{W}\)である．
+  \(\vect{x}\in V\cap\pcomp{V}\)なら\(\innerp{\vect{x}}{\vect{x}}=0\)より\(\vect{x}=\zvec\)である．
+  また，任意の\(\vect{x}\in H\)に対して\(\vect{x}-\proj_V\vect{x}\in\pcomp{V}\)，\(\vect{x}=\proj_V(\vect{x})+(\vect{x}-\proj_V\vect{x})\in V+\pcomp{V}\)である．よって\(H=V\oplus\pcomp{V}\)である．
 \end{proof}
 
 \subsection{分析と合成}
@@ -1068,16 +1068,7 @@
 \label{section:stft}
 
 \cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/time_variant.pdf}
-  \caption{周波数が時間変化して見える信号の例．}
-  \label{figure:time_variant}
-\end{figure}
-
-たとえば，\cref{figure:time_variant}の信号を見て「周波数が時とともに変化している」と感じるのは自然なことだろう．
-時間周波数解析の技法を用いると，周波数成分の時間変化をより定量的に追いかけられる．
+この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
 
 \subsection{フレーム}
 \label{subsection:frame}
@@ -1087,19 +1078,19 @@
 特に断らない限り，\cref{subsection:frame}では\(H\)を任意の有限次元内積空間とする．
 
 \begin{definition}{フレーム}{frame}\index{ふれーむ@フレーム}
-  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)上の有限列とする．集合\(\Set{\vect{e}_i\given i\in I}\)が\(H\)の生成系であるとき，\(\seq{\vect{e}_i}_{i\in I}\)を\(H\)の\termdef{フレーム}（frame）という．
-\end{definition}
-
-\begin{proposition}{}{frame_characterization}
-  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)のフレームとする．このとき，ある実数\(A,B>0\)が存在し，任意の\(\vect{v}\in H\)に対して次式を満たす．
+  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)上の有限列とする．ある実数\(A,B>0\)が存在し，任意の\(\vect{v}\in H\)に対して
   \[
     A\vnorm{\vect{v}}^2 \leq \sum_{i\in I}\abs{\innerp{\vect{v}}{\vect{e}_i}}^2 \leq B\vnorm{\vect{v}}^2\quad(\vnorm{\vect{v}}=\sqrt{\innerp{\vect{v}}{\vect{v}}})
   \]
-\end{proposition}
+  を満たすとき，\(\seq{\vect{e}_i}_{i\in I}\)を\(H\)の\termdef{フレーム}（frame）という．
+\end{definition}
 
 \(A\)と\(B\)を\(\seq{\vect{e}_i}_{i\in I}\)の\termdef{フレーム限界}\index{ふれーむ@フレーム!げんかい@\texttwoemdash 限界}（frame bound）という．
-\cref{proposition:frame_characterization}を示すにあたり，1つ注意すべきことがある．我々は\cref{section:finite_projection}で，直交射影と直交補空間を\(\numset{K}^n\)の部分空間に対して定義した．
-しかし，\cref{section:finite_projection}の議論は\(\numset{K}^n\)を\(H\)に置き換えてもなんら問題ない．そのため，\(H\)の部分空間\(V\)についても\(\proj_V\)と\(\pcomp{V}=\pcomp[H]{V}\)はまったく同様に定義される．
+特に，\(A\)の最大値と\(B\)の最小値を\(\seq{\vect{e}_i}_{i\in I}\)の\termdef{最良フレーム限界}（optimal frame bound）という．
+
+\begin{proposition}{}{frame_characterization}
+  \(\seq{\vect{e}_i}_{i\in I}\)を\(H\)のフレームとする．このとき，集合\(\Set{\vect{e}_i\given i\in I}\)は\(H\)の生成系である．
+\end{proposition}
 
 \begin{proof}
   対偶を示す．\(V=\spannedby\Set{\vect{e}_i\given i\in I}\)とする．もし\(V\neq H\)なら\(\zvec\)でない\(\vect{v}\in\pcomp{V}\)がある．
@@ -1108,8 +1099,8 @@
 \end{proof}
 
 \begin{note}
-  実は\cref{proposition:frame_characterization}の逆も成り立つ．つまり，フレーム限界を持つ列は必ずフレームである（\cite{casazza2013}に証明がある）．
-  証明には，\(\dim H<+\infty\)より\(H\)の単位球面はコンパクトであり，単位球面上の点列はすべて収束部分列を持つことが効いてくる．
+  実は\cref{proposition:frame_characterization}の逆も成り立つ．つまり，有限次元内積空間の生成系はフレーム限界を持つ（\cite{casazza2013}に証明がある）．
+  証明には，\(\dim H<+\infty\)より\(H\)の単位球面はコンパクトであり，単位球面上の点列は収束部分列を持つことが効いてくる．
 \end{note}
 
 \begin{example}[\(\cycles{N}\)上のDFT]
@@ -1123,8 +1114,45 @@
     v = \sum_{k=0}^{N-1}\innerp{v}{w_k}w_k,
     \quad\vnorm{v}^2 = \sum_{k=0}^{N-1}\abs{\innerp{v}{w_k}}^2\quad(v\in\cycles{N})
   \]
-  だから，\(\seq{w_k}_{k=0}^{N-1}\)はフレーム限界\(A=B=1\)のフレームである．
+  なので，\(\seq{w_k}_{k=0}^{N-1}\)はフレーム限界\(A=B=1\)のフレームである．
 \end{example}
+
+例から分かるように，正規直交基底は\(A=B=1\)のフレームである．最良フレーム限界が等しい2数であるフレーム，すなわち，正数\(A\)が存在して
+\[
+  A\vnorm{\vect{v}}^2 = \sum_{i\in I}\abs{\innerp{\vect{v}}{\vect{e}_i}}^2\quad(\vect{v}\in H)
+\]
+となる有限列\(\seq{\vect{e}_i}_{i\in I}\)を\termdef{タイトフレーム}\index{たいとふれーむ@タイトフレーム}\index{ふれーむ@フレーム!たいと@タイト\texttwoemdash}（tight frame）という．
+\(A=1\)のタイトフレームは\termdef{パーセバルフレーム}\index{ぱーせばるふれーむ@パーセバルフレーム}\index{ふれーむ@フレーム!ぱーせばる@パーセバル\texttwoemdash}（Parseval frame）と呼ばれる．
+
+\begin{example}
+  \(\vect{e}_k=\trps{\rowvect{\cos(2\krez k/3+\krez/2) & \sin(2\krez k/3+\krez/2)}}\)のとき，列\(\seq{\vect{e}_k}_{k=0}^2\)は\(\numset{R}^2\)のタイトフレームである．
+  このフレームは\termdef{メルセデス・ベンツフレーム}\index{めるせですべんつふれーむ@メルセデス・ベンツフレーム}（Mercedes‐Benz frame）と呼ばれている\cite{casazza2013}．
+  そのわけは\cref{figure:mercedes_benz}から明らかであろう．
+\end{example}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figures/mercedes_benz.pdf}
+  \caption{メルセデス・ベンツフレーム．}
+  \label{figure:mercedes_benz}
+\end{figure}
+
+メルセデス・ベンツフレームがタイトであることを示す．\(\vect{e}_0=\trps{\rowvect{0 & 1}}\)，\(\vect{e}_1=\trps{\rowvect{-\sqrt{3} & -1}}/2\)，\(\vect{e}_2=\trps{\rowvect{\sqrt{3} & -1}}/2\)より，各\(\vect{v}=\trps{\rowvect{x & y}}\)に対して
+\[
+  \sum_{k=0}^2\abs{\innerp{\vect{v}}{\vect{e}_k}}^2 = y^2+\pqty*{-\frac{\sqrt{3}x}{2}-\frac{y}{2}}^2+\pqty*{\frac{\sqrt{3}x}{2}-\frac{y}{2}}^2
+\]
+である．右辺を整理すると\((3/2)(x^2+y^2)=(3/2)\vnorm{\vect{v}}^2\)となるので，メルセデス・ベンツフレームはフレーム限界\(3/2\)のタイトフレームである．
+
+フレームがあると3つの線形写像が定まる．これは\cref{definition:analysis_and_synthesis}で見た，正規直交基底に対する\(T\)と\(\synth{T}\)の拡張である．
+
+\begin{definition}{}{frame_analysis_synthesis}\index{ふれーむ@フレーム!さようそ@\texttwoemdash 作用素}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
+  \(\Phi=\seq{\vect{e}_i}_{i\in I}\)を\(H\)のフレームとする．
+  \begin{enumerate}
+    \item 線形変換\(S\colon H\to H\)，\(S(\vect{x})=\sum_{i\in I}\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)を\(\Phi\)の\termdef{フレーム作用素}（frame operator）という．
+    \item 線形写像\(T\colon H\to\mapset{I}{\numset{K}}\)，\(T(\vect{x})=\seq{\innerp{\vect{x}}{\vect{e}_i}}\)を\(\Phi\)の\termdef{分解作用素}（analysis operator）という．
+    \item 線形写像\(\synth{T}\colon\mapset{I}{\numset{K}}\to H\)，\(\synth{T}(\seq{x_i})=\sum_{i\in I}x_i\vect{e}_i\)を\(\Phi\)の\termdef{合成作用素}（synthesis operator）という．
+  \end{enumerate}
+\end{definition}
 
 \subsection{短時間フーリエ変換}
 
@@ -1369,7 +1397,7 @@
     \label{equation:dft_parseval}
     \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
   \end{equation}
-  であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセヴァルの定理}\index{ぱーせばるのていり@パーセヴァルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
+  であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセバルの定理}\index{ぱーせばるのていり@パーセバルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
 \end{enumerate}
 
 \end{document}
