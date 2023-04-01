@@ -5,22 +5,20 @@
 
 \RequirePackage{mathtools}
 \RequirePackage[group-digits=none]{siunitx}
-
 \ProvideDocumentCommand{\narrowbaselines}{}{}
 
 % 汎用
-\newcommand{\holder}{\mathvisiblespace}
-\newcommand{\operateur}[1]{\mathop{\kern\z@ #1}\nolimits}
-\newcommand{\pholder}{(\holder)}
+\NewDocumentCommand{\holder}{}{\mathvisiblespace}
+\NewDocumentCommand{\operateur}{m}{\mathop{\kern\z@ #1}\nolimits}
+\NewDocumentCommand{\pholder}{}{(\holder)}
 
 % 算術・代数
-\newcommand{\mapset}[2]{#2^{#1}}
-\newcommand{\numset}[1]{\symbb{#1}}
-\newcommand{\powerset}[1]{2^{#1}}
-\newcommand{\scomp}[1]{#1^{\symrm{c}}}
-\newcommand{\sizeof}[1]{\mathoctothorpe #1}
-
 \NewDocumentCommand{\conj}{s m}{\IfBooleanTF{#1}{\overline{#2}}{\bar{#2}}}
+\NewDocumentCommand{\mapset}{m m}{#2^{#1}}
+\NewDocumentCommand{\numset}{m}{\symbb{#1}}
+\NewDocumentCommand{\powerset}{m}{2^{#1}}
+\NewDocumentCommand{\scomp}{m}{#1^{\symrm{c}}}
+\NewDocumentCommand{\sizeof}{m}{\mathoctothorpe #1}
 
 \DeclareMathOperator{\ipart}{Im}
 \DeclareMathOperator{\rpart}{Re}
@@ -40,18 +38,17 @@
 \DeclarePairedDelimiterX{\Set}[1]{\lbrace}{\rbrace}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 
 % 線形代数
-\newcommand{\basis}[1]{\symscr{#1}}
-\newcommand{\htrps}[1]{#1^{\symsfup{H}}}
-\newcommand{\rowvect}[1]{({\narrowbaselines\begin{matrix}#1\end{matrix}})}
-\newcommand{\kdelta}[2]{\symrm{\delta}_{#1\,#2}}
-\newcommand{\mat}[1]{\symbf{#1}}
-\newcommand{\midx}[3]{#1_{#2\,#3}}
-\newcommand{\pinv}[1]{#1^{\mathord{+}}}
-\newcommand{\smallmatrice}[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
-\newcommand{\trps}[1]{#1^{\symsfup{T}}}
-\newcommand{\vect}[1]{\symbf{#1}}
-
+\NewDocumentCommand{\basis}{m}{\symscr{#1}}
+\NewDocumentCommand{\htrps}{m}{#1^{\symsfup{H}}}
+\NewDocumentCommand{\rowvect}{m}{({\narrowbaselines\begin{matrix}#1\end{matrix}})}
+\NewDocumentCommand{\kdelta}{m m}{\symrm{\delta}_{#1\,#2}}
+\NewDocumentCommand{\mat}{m}{\symbf{#1}}
+\NewDocumentCommand{\midx}{m m m}{#1_{#2\,#3}}
 \NewDocumentCommand{\pcomp}{o m}{#2^{\mathord{\perp}\IfValueT{#1}{\mid #1}}}
+\NewDocumentCommand{\pinv}{m}{#1^{\mathord{+}}}
+\NewDocumentCommand{\smallmatrice}{m}{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\NewDocumentCommand{\trps}{m}{#1^{\symsfup{T}}}
+\NewDocumentCommand{\vect}{m}{\symbf{#1}}
 
 \DeclareMathOperator{\colsp}{col}
 \DeclareMathOperator{\diag}{diag}
@@ -89,11 +86,10 @@
 \DeclarePairedDelimiterX{\ooival}[2]{\lparen}{\rparen}{#1,#2}
 
 % 関数解析
-\newcommand{\cont}[1]{C^{#1}}
-\newcommand{\lebesgue}[1]{\ell^{#1}}
-\newcommand{\torus}{\symbb{T}}
-
+\NewDocumentCommand{\cont}{m}{C^{#1}}
+\NewDocumentCommand{\lebesgue}{m}{\ell^{#1}}
 \NewDocumentCommand{\Lebesgue}{s m}{\IfBooleanTF{#1}{\symscr{L}}{L}^{#2}}
+\NewDocumentCommand{\torus}{}{\symbb{T}}
 
 \DeclareMathOperator{\clsr}{cl}
 \DeclareMathOperator*{\sqlim}{l{.}i{.}m{.}}
@@ -103,50 +99,47 @@
 \DeclarePairedDelimiterXPP{\Lpseminorm}[2]{}{\lVert}{\rVert}{_{\Lebesgue*{#1}}}{#2}
 
 % フレーム理論
-\newcommand{\synth}[1]{#1^{\mathord{\ast}}}
+\NewDocumentCommand{\synth}{m}{#1^{\mathord{\ast}}}
 
 % 時間周波数解析
-\newcommand{\circconv}{\ast}
-\newcommand{\comb}{\mathord{\mathrm{Ш}}}
-\newcommand{\dtft}{\operateur{\symscr{F}_{\:\numset{Z}}}}
-\newcommand{\fseries}{\operateur{\symscr{F}_{\:\torus}}}
-
+\NewDocumentCommand{\circconv}{}{\ast}
+\NewDocumentCommand{\comb}{}{\mathord{\mathrm{Ш}}}
 \NewDocumentCommand{\cycles}{m}{\ell^2(\numset{Z}_{#1})}
 \NewDocumentCommand{\dft}{s m}{\operateur{\symscr{F}_{\:\numset{Z}/#2}\IfBooleanT{#1}{^{-1}}}}
 \NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\doublecycles}{m m}{\ell^2(\numset{Z}_{#1}\times\numset{Z}_{#2})}
+\NewDocumentCommand{\dtft}{}{\operateur{\symscr{F}_{\:\numset{Z}}}}
 \NewDocumentCommand{\modulate}{o m}{\operateur{\symit{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\fseries}{}{\operateur{\symscr{F}_{\:\torus}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
 \NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\translate}{m}{\operateur{\symit{T}_{#1}}}
 
 % 測度論
-\newcommand{\borelset}[1]{\symscr{B}(#1)}
-\newcommand{\extendedreal}{\bar{\numset{R}}}
-\newcommand{\indicator}{\symbb{1}}
-\newcommand{\imgmeasure}[2]{#1\mathoctothorpe #2}
-\newcommand{\sigmaalg}[1]{\symscr{#1}}
-\newcommand{\sigmagen}[1]{\sigma(#1)}
-\newcommand{\simplefuncs}[1]{\operatorname{SF}(#1)}
-
 \NewDocumentCommand{\almosteverywhere}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\borelset}{m}{\symscr{B}(#1)}
+\NewDocumentCommand{\extendedreal}{}{\bar{\numset{R}}}
+\NewDocumentCommand{\indicator}{}{\symbb{1}}
+\NewDocumentCommand{\imgmeasure}{m m}{#1\mathoctothorpe #2}
 \NewDocumentCommand{\measured}{s o m}{\IfBooleanF{#1}{\,}\IfValueTF{#2}{#3(\symrm{d}#2)}{\symrm{d}#3}}
+\NewDocumentCommand{\sigmaalg}{m}{\symscr{#1}}
+\NewDocumentCommand{\sigmagen}{m}{\sigma(#1)}
+\NewDocumentCommand{\simplefuncs}{m}{\operatorname{SF}(#1)}
 
 % 確率統計
-\newcommand{\expval}{\symbb{E}}
-\newcommand{\prob}{\symbb{P}}
-\newcommand{\variant}{\symbb{V}}
-
 \NewDocumentCommand{\almostsurely}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}s{.}}\IfValueT{#2}{\;#2}}
+\NewDocumentCommand{\expval}{}{\symbb{E}}
+\NewDocumentCommand{\prob}{}{\symbb{P}}
+\NewDocumentCommand{\variant}{}{\symbb{V}}
 
 \DeclarePairedDelimiterXPP{\condexpval}[1]{\expval}{\lbrack}{\rbrack}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterXPP{\condprob}[1]{\prob}{\lparen}{\rparen}{}{\renewcommand{\given}{\SetSymbol[\delimsize]}#1}
 
 % 定数
-\newcommand{\imat}{\mat{I}}
-\newcommand{\iuni}{\symrm{i}}
-\newcommand{\krez}{\symrm{\pi}}
-\newcommand{\napr}{\symrm{e}}
-\newcommand{\zmat}{\mat{O}}
-\newcommand{\zvec}{\vect{0}}
+\NewDocumentCommand{\imat}{}{\mat{I}}
+\NewDocumentCommand{\iuni}{}{\symrm{i}}
+\NewDocumentCommand{\krez}{}{\symrm{\pi}}
+\NewDocumentCommand{\napr}{}{\symrm{e}}
+\NewDocumentCommand{\zmat}{}{\mat{O}}
+\NewDocumentCommand{\zvec}{}{\vect{0}}

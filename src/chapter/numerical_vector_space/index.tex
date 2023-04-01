@@ -27,8 +27,9 @@
 \section{直交射影}
 \label{section:finite_projection}
 
-本節では，あるベクトルを他のベクトルの線形結合で近似する手法を説明する．\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，
-\(\innerp{\holder}{\holder}\)は\(\numset{K}^n\)の標準内積を意味する．また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
+本節では，あるベクトルを他のベクトルの線形結合で近似する手法を説明する．
+\cref{chapter:numerical_vector_space}において\(\numset{K}\)は\(\numset{R}\)か\(\numset{C}\)を意味し，\(\innerp{\holder}{\holder}\)は内積を意味する．
+また，\(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}}\)を\(\vect{x}\)の\termdef{ノルム}\index{のるむ@ノルム}\indexsymbol{\(\vnorm{\holder}\)}（norm）と呼ぶ．
 
 \subsection{直交射影}
 
@@ -72,7 +73,8 @@
 \end{gather*}
 である．このように，\(\argmin_{x\in S}f(x)\)は空になることも，無限集合になることもある．
 
-\cref{proposition:finite_projection}まで，\(H\)を任意の（\(\Set{\zvec}\)でない）有限次元内積空間とする．分かりにくければ\(H=\numset{K}^n\)と思ってよい．
+\cref{proposition:finite_projection}まで，\(H\)を任意の有限次元内積空間とする．分かりにくければ\(H=\numset{K}^n\)と思ってよい．
+また，同じ方法で\(\numset{K}=\numset{R}\)でも示せるので，証明では\(\numset{K}=\numset{C}\)と\(H\neq\Set{\zvec}\)を仮定した．
 
 \begin{lemma}{}{binomial_square}
   \(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)（\(\vect{x},\vect{y}\in H\)）である．
@@ -169,7 +171,7 @@
 \end{example}
 
 \begin{proposition}{}{}
-  \(H\)の任意の部分空間\(V\)について，写像\(\proj_V\colon H\to V\)は線形写像である．
+  写像\(\proj_V\colon H\to V\)は線形写像である．
 \end{proposition}
 
 \begin{proof}
@@ -184,6 +186,8 @@
   \]
   も\(H\)の部分空間になる．この部分空間を（\(H\)における）\(V\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[H]{V}\)，\(\pcomp{V}\)などと書く．
 \end{definition}
+
+近似\(\proj_V\vect{x}\)で「失われる」成分は\(\vect{x}-\proj_V\vect{x}=(I-\proj_V)\vect{x}\)（\(I(\vect{x})=\vect{x}\)）であり，それら全体が作る線形空間\(\img(I-\proj_V)\)が\(\pcomp{V}\)である．
 
 \begin{example}
   \(V=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
@@ -280,7 +284,7 @@
 \end{proposition}
 
 \begin{proof}
-  まず，1と2の同値性を示す．
+  まず，2と1の同値性を示す．
   \[
     \htrps{\mat{U}}\mat{U} = \matrice*{\htrps{\vect{u}_1} \\ \vdots \\ \htrps{\vect{u}_n}}\matrice{\vect{u}_1 & \cdots & \vect{u}_n}
      = \matrice*{\htrps{\vect{u}_1}\vect{u}_1 & \cdots & \htrps{\vect{u}_1}\vect{u}_n \\ \vdots & \ddots & \vdots \\ \htrps{\vect{u}_n}\vect{u}_1 & \cdots & \htrps{\vect{u}_n}\vect{u}_n}
@@ -1067,15 +1071,12 @@
 \section{短時間フーリエ変換}
 \label{section:stft}
 
-\cref{section:stft,section:discrete_mra}では，時刻と周波数にまたがって現れる信号の特徴を調べる，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
-この理論は旋律・地震動・景気など，時が経つにつれ波の様子が移り変わる信号を解析する分野で活用されている．
+\cref{section:stft,section:discrete_mra}では，時とともに様子が変わる旋律・地震動・景気のような信号を調べるのに欠かせない，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
 
 \subsection{フレーム}
 \label{subsection:frame}
 
-\cref{subsection:frame}では，基底を一般化する「フレーム」という対象を，有限次元の内積空間に限って紹介する（より一般的な定義は\cref{xr-chapter:hilbert_space}に回す）．
-
-特に断らない限り，\cref{subsection:frame}では\(H\)を任意の有限次元内積空間とする．
+\cref{subsection:frame}において，\(H\)は任意の有限次元\footnote{\(H\)が無限次元の場合も同じような議論ができる．このことは\cref{xr-chapter:hilbert_space}で見る．}内積空間とする．
 
 \begin{definition}{フレーム}{frame}\index{ふれーむ@フレーム}
   \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)上の有限列とする．ある実数\(A,B>0\)が存在し，任意の\(\vect{x}\in H\)に対して
@@ -1094,13 +1095,11 @@
 
 \begin{proof}
   対偶を示す．\(V=\spannedby\Set{\vect{\phi}_i\given i\in I}\)とする．もし\(V\neq H\)なら\(\zvec\)でない\(\vect{x}\in\pcomp{V}\)がある．
-  すると，すべての\(i\in I\)で\(\innerp{\vect{x}}{\vect{\phi}_i}=0\)なので，いかなる\(A>0\)についても\(\sum_{i\in I}\abs{\innerp{\vect{x}}{\vect{\phi}_i}}^2=0<A\vnorm{\vect{x}}^2\)となる．
-  よってフレーム限界が存在しないので，\(\seq{\vect{\phi}_i}_{i\in I}\)はフレームでない．
+  すると\(\innerp{\vect{x}}{\vect{\phi}_i}=0\)なので，いかなる\(A>0\)についても\(\sum_{i\in I}\abs{\innerp{\vect{x}}{\vect{\phi}_i}}^2=0<A\vnorm{\vect{x}}^2\)となる．よって\(\seq{\vect{\phi}_i}_{i\in I}\)はフレームでない．
 \end{proof}
 
 \begin{note}
   実は\cref{proposition:frame_characterization}の逆も成り立つ．つまり，有限次元内積空間の生成系はフレーム限界を持つ（Casazza \cite{casazza2013}に証明がある）．
-  証明には，\(\dim H<+\infty\)より\(H\)の単位球面は点列コンパクトであることが効いてくる．
 \end{note}
 
 \begin{example}[\(\cycles{N}\)上のDFT]
@@ -1108,8 +1107,7 @@
   \[
     \innerp{x}{y} = \sum_{n=0}^{N-1}x[n]\conj*{y[n]}\quad(x,y\in\cycles{N})
   \]
-  で定める．すると，数列\(w_k[n]=N^{-1/2}\napr^{2\krez\iuni kn/N}\)がなす集合\(\Set{w_k\given 0\leq k<N}\)は\(\cycles{N}\)の正規直交基底になる（証明は\cref{proposition:dft_onb}の焼き直しになるので省く）．
-  このことから，列\(\seq{w_k}_{k=0}^{N-1}\)は\(\cycles{N}\)のフレームといえる．実際
+  で定める．すると\cref{proposition:dft_onb}より，数列\(w_k[n]=N^{-1/2}\napr^{2\krez\iuni kn/N}\)がなす集合\(\Set{w_k\given 0\leq k<N}\)は\(\cycles{N}\)の正規直交基底である．よって
   \[
     x = \sum_{k=0}^{N-1}\innerp{x}{w_k}w_k,
     \quad\vnorm{x}^2 = \sum_{k=0}^{N-1}\abs{\innerp{x}{w_k}}^2\quad(x\in\cycles{N})
@@ -1125,19 +1123,15 @@
 \(A=1\)のタイトフレームは\termdef{パーセバルフレーム}\index{ぱーせばるふれーむ@パーセバルフレーム}\index{ふれーむ@フレーム!ぱーせばる@パーセバル\texttwoemdash}（Parseval frame）と呼ばれる．
 
 \begin{example}
-  \(\vect{\phi}_k=\trps{\rowvect{\cos(2\krez k/3+\krez/2) & \sin(2\krez k/3+\krez/2)}}\)のとき，列\(\seq{\vect{\phi}_k}_{k=0}^2\)は\(\numset{R}^2\)のタイトフレームである．
-  このフレームは\termdef{メルセデス・ベンツフレーム}\index{めるせですべんつふれーむ@メルセデス・ベンツフレーム}（Mercedes‐Benz frame）と呼ばれている\cite{casazza2013}．
-  そのわけは\cref{figure:mercedes_benz}から明らかであろう．
+  \(\vect{\phi}_k=\smallmatrice{\cos\theta_k \\ \sin\theta_k}\)（\(\theta_k=2\krez k/3+\krez/2\)）のとき，列\(\seq{\vect{\phi}_k}_{k=0}^2\)は\(\numset{R}^2\)のタイトフレームである．
+  \(\seq{\vect{\phi}_k}_{k=0}^2\)を\termdef{メルセデス・ベンツフレーム}\index{めるせですべんつふれーむ@メルセデス・ベンツフレーム}\index{ふれーむ@フレーム!めるせですべんつ@メルセデス・ベンツ\texttwoemdash}（Mercedes‐Benz frame）という\cite{casazza2013}．名称の由来は図から明らかであろう．
 \end{example}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/mercedes_benz.pdf}
   \caption{メルセデス・ベンツフレーム．}
-  \label{figure:mercedes_benz}
 \end{figure}
-
-フレームがあると3つの線形写像が定まる．
 
 \begin{definition}{}{frame_analysis_synthesis}\index{ふれーむ@フレーム!さようそ@\texttwoemdash 作用素}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
   \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)のフレームとする．
@@ -1148,9 +1142,11 @@
   \end{enumerate}
 \end{definition}
 
-\begin{note}
-  \cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている．というより，分析（合成）作用素はフレームに対して定義するのが普通である．
-\end{note}
+\cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている\footnote{というより，分析（合成）作用素はフレームに対して定義するのが普通である．}．
+ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S=\synth{T}T\)が恒等写像であるとも限らない．
+
+基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の1つは，正規直交基底による分析・合成を冗長な生成系に拡張することである．
+読者諸氏はこう聞いて「なぜ冗長な生成系を使うのか？」と思われるかもしれない．実は，このあと考える短時間フーリエ変換がまさに，冗長なフレームの実例を与える．
 
 \subsection{短時間フーリエ変換}
 
@@ -1171,7 +1167,7 @@
   \[
     (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}
   \]
-  に写す写像\(\stft[L]{w}\colon\cycles{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
+  に写す線形写像\(\stft[L]{w}\colon\cycles{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
 
 \footnotetext{\(\Set{n\in\numset{Z}\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)が存在してもよい．}
@@ -1206,8 +1202,7 @@
 \end{corollary}
 
 \begin{proof}
-  線形性は\cref{proposition:stft_and_shift}からただちにしたがう．\(x\in\cycles{L}\)と\(k,n\in\numset{Z}\)を任意にとる．
-  このとき\(\modulate{k+L}=\modulate{k}\)，\(\translate{n+L}=\translate{n}\)より
+  \(x\in\cycles{L}\)を任意にとる．このとき\(\modulate{k+L}=\modulate{k}\)，\(\translate{n+L}=\translate{n}\)より
   \begin{gather*}
     (\stft{w}x)[k+L,n] = \innerp{x}{\modulate{k+L}\translate{n}w}
     = \innerp{x}{\modulate{k}\translate{n}w}
@@ -1221,15 +1216,6 @@
 
 \(\img\stft{w}\subseteq\doublecycles{L}{L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\doublecycles{L}{L}\)に変える}．
 
-離散フーリエ変換のときと同様，ここでも他の諸性質を導く前に，短時間フーリエ変換の工学的重要性を見ておこう．
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/phone.pdf}
-  \caption{話声の波形．}
-  \label{figure:phone}
-\end{figure}
-
 \begin{figure}[htbp]
   \centering
   \includegraphics{figures/phone_spectrogram.pdf}
@@ -1237,7 +1223,9 @@
   \label{figure:phone_spectrogram}
 \end{figure}
 
-\cref{figure:phone}は「\ltjruby{嘘}{うそ}でしょ」という話声\(x\)の波形，\cref{figure:phone_spectrogram}はある（実数値）窓関数\(w\)に関する\(\abs{(\stft{w}x)[k,n]}^2\)のグラフである\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
+離散フーリエ変換のときと同様，ここでも他の諸性質を導く前に，短時間フーリエ変換の工学的重要性を見ておこう．
+\cref{figure:phone_spectrogram}は「\ltjruby{嘘}{うそ}でしょ」という話声\(x\)に関する，\(\abs{(\stft{w}x)[k,n]}^2\)のグラフである\footnote{カノン\cite{canon}によるITAコーパス読み上げ音声を使用した．}．
+ただし，窓関数には\cref{figure:windowing}上段のような形の実数列を用いた．
 
 \begin{figure}[htbp]
   \centering
@@ -1263,7 +1251,7 @@
 代表的な窓関数を3つ挙げておく．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
 短時間フーリエ変換で使うときは，信号を切り取る長さ\(N\)を決めて，次のように離散化すればよい．
 \[
-  \tilde{w}[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
+  w[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
 \]
 
 \begin{example}

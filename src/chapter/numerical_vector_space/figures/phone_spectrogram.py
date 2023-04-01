@@ -9,7 +9,7 @@ from scipy.io import wavfile
 
 plt.style.use(["sigproc", "sigproc-wide"])
 
-filename = "phone.wav"
+filename = "phone_spectrogram.wav"
 samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
 x = (data.astype(np.double) - 128) / 127

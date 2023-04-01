@@ -133,8 +133,8 @@
 
 \newcommand{\seename}{→}
 \renewcommand{\@idxitem}{\par\setlength{\hangindent}{1\zw}}
-\renewcommand{\subitem}{\@idxitem\hspace*{2\zw}}
-\renewcommand{\subsubitem}{\@idxitem\hspace*{3\zw}}
+\renewcommand{\subitem}{\par\setlength{\hangindent}{3\zw}\hspace*{2\zw}}
+\renewcommand{\subsubitem}{\par\setlength{\hangindent}{4\zw}\hspace*{3\zw}}
 
 % 数式
 \setlength{\predisplaypenalty}{\z@}
