@@ -33,6 +33,11 @@
     \]
     であり，右辺は\(\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)に等しい．
   \item \cref{xr-proposition:unitary_matrix_characterization}と\cref{xr-proposition:dft_onb}からしたがう．
+  \item \(\vect{\phi}_0=\trps{\rowvect{0 & 1}}\)，\(\vect{\phi}_1=\trps{\rowvect{-\sqrt{3} & -1}}/2\)，\(\vect{\phi}_2=\trps{\rowvect{\sqrt{3} & -1}}/2\)より
+    \[
+      \sum_{k=0}^2\abs{\innerp{\vect{x}}{\vect{\phi}_k}}^2 = v^2+\pqty*{-\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2+\pqty*{\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2\quad(\vect{x}=\trps{\matrice{u & v}})
+    \]
+    である．右辺を整理すると\((3/2)(u^2+v^2)=(3/2)\vnorm{\vect{x}}^2\)となるので，メルセデス・ベンツフレームはフレーム限界\(3/2\)のタイトフレームである．
 \end{enumerate}
 
 \end{document}
