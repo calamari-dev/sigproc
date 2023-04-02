@@ -107,14 +107,14 @@
 \NewDocumentCommand{\cycles}{m}{\ell^2(\numset{Z}_{#1})}
 \NewDocumentCommand{\dft}{s m}{\operateur{\symscr{F}_{\:\numset{Z}/#2}\IfBooleanT{#1}{^{-1}}}}
 \NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}_{#2}\IfValueT{#1}{^{(#1)}}}}
-\NewDocumentCommand{\doublecycles}{m m}{\ell^2(\numset{Z}_{#1}\times\numset{Z}_{#2})}
+\NewDocumentCommand{\doublecycles}{o m}{\ell^2(\IfValueTF{#1}{\numset{Z}_{#1}\times\numset{Z}_{#2}}{\numset{Z}_{#2}^2})}
 \NewDocumentCommand{\dtft}{}{\operateur{\symscr{F}_{\:\numset{Z}}}}
-\NewDocumentCommand{\modulate}{o m}{\operateur{\symit{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\modulate}{o m}{\operateur{\symscr{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\fseries}{}{\operateur{\symscr{F}_{\:\torus}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
 \NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}_{#2}\IfValueT{#1}{^{(#1)}}}}
-\NewDocumentCommand{\translate}{m}{\operateur{\symit{T}_{#1}}}
+\NewDocumentCommand{\translate}{m}{\operateur{\symscr{T}_{#1}}}
 
 % 測度論
 \NewDocumentCommand{\almosteverywhere}{o o}{\allowbreak\;\IfValueT{#1}{\IfBlankF{#1}{#1\mathhyphen}}\mathrm{a{.}e{.}}\IfValueT{#2}{\;#2}}

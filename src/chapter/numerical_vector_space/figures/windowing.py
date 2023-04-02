@@ -10,7 +10,7 @@ plt.style.use(["sigproc", "sigproc-wide"])
 mpl.rc("figure", figsize=(2.8740, 2.6575))
 lw = constants.observation_linewidth
 
-filename = "phone.wav"
+filename = "phone_spectrogram.wav"
 samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
 x = (data.astype(np.double) - 128) / 127

@@ -179,7 +179,7 @@
   このとき，各\(\vect{v}\in V\)に対し\(\innerp{\vect{z}-\vect{m}}{\vect{v}}=s\innerp{\vect{x}-\proj_V\vect{x}}{\vect{v}}+t\innerp{\vect{y}-\proj_V\vect{y}}{\vect{v}}=s0+t0=0\)なので\(\proj_V\vect{z}=\vect{m}\)である．
 \end{proof}
 
-\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp[H]{V}\)}\indexsymbol{\(\pcomp{V}\)}
+\begin{definition}{直交補空間}{numerical_perpendicular_complement}\index{ちょっこうほくうかん@直交補空間}\indexsymbol{\(\pcomp{V}\)}
   \(V\)を\(H\)の部分空間とする．このとき，集合
   \[
     \Set{\vect{x}\in H\given\text{任意の\(\vect{v}\in V\)に対して\(\innerp{\vect{x}}{\vect{v}}=0\)}}
@@ -1099,7 +1099,7 @@
 \end{proof}
 
 \begin{note}
-  実は\cref{proposition:frame_characterization}の逆も成り立つ．つまり，有限次元内積空間の生成系はフレーム限界を持つ（Casazza \cite{casazza2013}に証明がある）．
+  実は\cref{proposition:frame_characterization}の逆も成り立つ．すなわち，有限集合\(S\)が\(H\)の生成系なら，\(S\)の各元に通し番号を振ると\(H\)のフレームになる（Casazza \cite{casazza2013}に証明がある）．
 \end{note}
 
 \begin{example}[\(\cycles{N}\)上のDFT]
@@ -1150,11 +1150,9 @@
 
 \subsection{短時間フーリエ変換}
 
-まず，記号をいくつか定義する．
-
-2つの整数を引数にとる複素数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)}と表す．
-\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)の元\(x=\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\doublecycles{M}{N}\)\index{l2MN@\(\doublecycles{M}{N}\)}と書く．
-\(m\)の値を固定してできる数列\(\seq{x[m,n]}_{n\in\numset{Z}}\in\mapset{\numset{Z}}{\numset{C}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\doublecycles{M}{N}\)は
+まず，記号をいくつか定義する．整数を2つ引数にとる複素数列（2重数列）全体を\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)\indexsymbol{\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)}と表す．
+\(\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)の元\(\seq{x[m,n]}\)で，\(m\)について周期\(M\)，\(n\)について周期\(N\)であるもの全体を\(\doublecycles[M]{N}\)\index{l2MN@\(\doublecycles[M]{N}\)}と書く．\(M=N\)なら\(\doublecycles{N}\)とも書く．
+\(m\)の値を固定した数列\(\seq{x[m,n]}_{n\in\numset{Z}}\)を\(x[m,\holder]\)と表し，\(n\)についても同様に\(x[\holder,n]\)を定めれば，\(\doublecycles[M]{N}\)は
 \[
   \Set{x\in\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\given\text{\(x[\holder,n]\in\cycles{M}\)，\(x[m,\holder]\in\cycles{N}\)（\(m,n\in\numset{Z}\)）}}
 \]
@@ -1198,7 +1196,7 @@
 \cref{proposition:stft_and_shift}から，次の系が得られる．
 
 \begin{corollary}{}{stft_cyclic}
-  \(\stft{w}\)は\(\img\stft{w}\subseteq\doublecycles{L}{L}\)を満たす線形写像である．
+  \(\img\stft{w}\subseteq\doublecycles{L}\)である．
 \end{corollary}
 
 \begin{proof}
@@ -1214,7 +1212,7 @@
   だから\((\stft{w}x)[\holder,n],(\stft{w}x)[k,\holder]\in\cycles{L}\)である．
 \end{proof}
 
-\(\img\stft{w}\subseteq\doublecycles{L}{L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\doublecycles{L}{L}\)に変える}．
+\cref{corollary:stft_cyclic}から\(\img\stft{w}\subseteq\doublecycles{L}\)なので，\alert{以降は\(\stft{w}\)の終域を\(\doublecycles{L}\)に変える}．
 
 \begin{figure}[htbp]
   \centering
@@ -1246,6 +1244,29 @@
 スペクトログラムは波形から読み取りがたい情報を多く含んでいる．例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．
 このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
 
+\subsection{フレームとSTFT}
+
+フレームの一般論を交えて，STFTが持つ性質を見ていこう．
+
+窓\(w\in\cycles{L}\)は零でないとする．\(I=\Set{(k,n)\given k,n\in\Set{0,\dots,L-1}}\)とおく．
+
+\begin{proposition}{}{}
+  列\(\seq{\modulate{k}\translate{n}w}_{(k,n)\in I}\)は\(\cycles{L}\)のタイトフレームである．
+\end{proposition}
+
+\begin{proof}
+  \(\innerp{x}{\modulate{k}\translate{n}w}=(\stft{w}x)[k,n]=\sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]\)かつ，\(\dft{L}\)はノルムを変えない．そのため
+  \begin{align*}
+    \sum_{k,n}\abs{\innerp{x}{\modulate{k}\translate{n}w}}^2 &= L\sum_{k,n}\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2
+    = L\sum_n\vnorm{\dft{L}(x\cdot\translate{n}\conj{w})}^2 \\
+    &= L\sum_n\vnorm{x\cdot\translate{n}\conj{w}}^2
+    = L\sum_n\sum_m\abs{x[m]\conj*{w[m-n]}}^2 \\
+    &= L\sum_m\abs{x[m]}^2\sum_n\abs{w[m-n]}^2
+    = L\vnorm{x}^2\vnorm{w}^2
+  \end{align*}
+  だから，\(\seq{\modulate{k}\translate{n}w}\)はフレーム限界\(L\vnorm{w}^2\)のタイトフレームである．
+\end{proof}
+
 \subsection{窓関数と不確定性}
 
 代表的な窓関数を3つ挙げておく．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
@@ -1274,7 +1295,7 @@
     (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
     &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
   \end{align*}
-  に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles{L/K}{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+  に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles[L/K]{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
