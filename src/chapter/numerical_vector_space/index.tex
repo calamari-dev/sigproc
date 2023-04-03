@@ -1251,7 +1251,7 @@
 窓\(w\in\cycles{L}\)は零でないとする．\(J=\Set{0,\dots,L-1}\)とおく．
 
 \begin{proposition}{}{stft_tight_frame}
-  列\(\seq{\modulate{k}\translate{n}w}_{(k,n)\in J^2}\)は\(\cycles{L}\)のタイトフレームである．
+  列\(\seq{\modulate{k}\translate{n}w}_{k,n\in J}\)は\(\cycles{L}\)のタイトフレームである．
 \end{proposition}
 
 \begin{proof}
@@ -1270,7 +1270,7 @@
 \cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の逆変換公式が得られる．
 
 \begin{lemma}{}{grammian_equals_zero}
-  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{\vect{x}}{G(\vect{y})}=\innerp{G(\vect{x})}{\vect{y}}\)，\(\innerp{\vect{x}}{G(\vect{x})}=0\)であるとする．
+  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{\vect{x}}{G(\vect{y})}=\innerp{G(\vect{x})}{\vect{y}}\)かつ\(\innerp{\vect{x}}{G(\vect{x})}=0\)であるとする．
   このとき\(\img G=\Set{\zvec}\)である．
 \end{lemma}
 
@@ -1298,14 +1298,28 @@
   よって\cref{lemma:grammian_equals_zero}より\(\img G=\Set{\zvec}\)である．
 \end{proof}
 
-\begin{corollary}{STFTの逆変換}{}
-  \(\hat{x}=\stft{w}x\)（\(x\in\cycles{L}\)）とする．このとき
-  \begin{align*}
-    x[n] &= \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J^2}\hat{x}[k,m](\modulate{k}\translate{m}w)[n] \\
-    &= \frac{1}{L\vnorm{w}^2}\sum_{k=0}^{L-1}\sum_{m=0}^{L-1}\hat{x}[k,m]w[n-m]\napr^{2\krez\iuni kn/L}
-  \end{align*}
+\begin{corollary}{STFTの逆変換}{stft_inversion}
+  \(x\in\cycles{L}\)，\(\hat{x}=\stft{w}x\)とする．このとき
+  \begin{gather*}
+    x = \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J}\hat{x}[k,m]\modulate{k}\translate{m}w,\\
+    x[n] = \frac{1}{L\vnorm{w}^2}\sum_{k=0}^{L-1}\sum_{m=0}^{L-1}\hat{x}[k,m]w[n-m]\napr^{2\krez\iuni kn/L}
+  \end{gather*}
   である．
 \end{corollary}
+
+\cref{corollary:stft_inversion}から\(\stft{w}\)は単射である．しかし\(\dim\cycles{L}=L\)，\(\dim\doublecycles{L}=L^2\)なので\texttwoemdash ごく例外的な\(L=1\)の場合を除き\texttwoemdash 全射ではなく，フレーム\(\seq{\modulate{k}\translate{n}w}\)は冗長である．
+言い換えると，\(\stft{w}\)は\(\cycles{L}\)の元を「無駄が多い」形で表す写像である．
+
+無駄を省く方法として，\(k\)と\(n\)の値を間引くことが考えられる．間引きをともなう短時間フーリエ変換を離散ガボール変換という．
+
+\begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
+  自然数\(K\)と\(N\)は\(L\)を割り切るとする．各\(x\in\cycles{L}\)を
+  \begin{align*}
+    (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
+    &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
+  \end{align*}
+  に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles[L/K]{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
+\end{definition}
 
 \subsection{窓関数と不確定性}
 
@@ -1328,15 +1342,6 @@
 \end{example}
 
 \subsection{離散ガボール変換}
-
-\begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
-  \((K,N,L)\)を自然数の3つ組，\(w\)を\(\cycles{L}\)の元とする．各\(x\in\cycles{L}\)を
-  \begin{align*}
-    (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
-    &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
-  \end{align*}
-  に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles[L/K]{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
-\end{definition}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
   \(\varepsilon>0\)，\(x\in\cycles{N}\)とする．条件
