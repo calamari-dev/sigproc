@@ -1099,7 +1099,7 @@
 \end{proof}
 
 \begin{note}
-  実は\cref{proposition:frame_characterization}の逆も成り立つ．すなわち，有限集合\(S\)が\(H\)の生成系なら，\(S\)の各元に通し番号を振ると\(H\)のフレームになる（Casazza \cite{casazza2013}に証明がある）．
+  実は\cref{proposition:frame_characterization}の逆も言える．すなわち，有限集合\(F\)が\(H\)の生成系なら，\(F\)の各元に通し番号を振ると\(H\)のフレームになる（Casazza et al. \cite{casazza2013}に証明がある）．
 \end{note}
 
 \begin{example}[\(\cycles{N}\)上のDFT]
@@ -1143,7 +1143,7 @@
 \end{definition}
 
 \cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている\footnote{というより，分析（合成）作用素はフレームに対して定義するのが普通である．}．
-ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S=\synth{T}T\)が恒等写像であるとも限らない．
+ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S=\synth{T}T\)が恒等変換であるとも限らない．
 
 基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の1つは，正規直交基底による分析・合成を冗長な生成系に拡張することである．
 読者諸氏はこう聞いて「なぜ冗長な生成系を使うのか？」と思われるかもしれない．実は，このあと考える短時間フーリエ変換がまさに，冗長なフレームの実例を与える．
@@ -1246,12 +1246,12 @@
 
 \subsection{フレームとSTFT}
 
-フレームの一般論を交えて，STFTが持つ性質を見ていこう．
+フレームの一般論を交えて，短時間フーリエ変換が持つ性質を見ていこう．
 
-窓\(w\in\cycles{L}\)は零でないとする．\(I=\Set{(k,n)\given k,n\in\Set{0,\dots,L-1}}\)とおく．
+窓\(w\in\cycles{L}\)は零でないとする．\(J=\Set{0,\dots,L-1}\)とおく．
 
-\begin{proposition}{}{}
-  列\(\seq{\modulate{k}\translate{n}w}_{(k,n)\in I}\)は\(\cycles{L}\)のタイトフレームである．
+\begin{proposition}{}{stft_tight_frame}
+  列\(\seq{\modulate{k}\translate{n}w}_{(k,n)\in J^2}\)は\(\cycles{L}\)のタイトフレームである．
 \end{proposition}
 
 \begin{proof}
@@ -1266,6 +1266,46 @@
   \end{align*}
   だから，\(\seq{\modulate{k}\translate{n}w}\)はフレーム限界\(L\vnorm{w}^2\)のタイトフレームである．
 \end{proof}
+
+\cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の逆変換公式が得られる．
+
+\begin{lemma}{}{grammian_equals_zero}
+  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{\vect{x}}{G(\vect{y})}=\innerp{G(\vect{x})}{\vect{y}}\)，\(\innerp{\vect{x}}{G(\vect{x})}=0\)であるとする．
+  このとき\(\img G=\Set{\zvec}\)である．
+\end{lemma}
+
+\begin{proof}
+  任意の\(\vect{x},\vect{y}\in H\)に対して\(\innerp{\vect{x}+\vect{y}}{G(\vect{x}+\vect{y})}=\innerp{\vect{x}}{G(\vect{y})}+\innerp{\vect{y}}{G(\vect{x})}=\innerp{G(\vect{x})}{\vect{y}}+\conj*{\innerp{G(\vect{x})}{\vect{y}}}=0\)だから，
+  \(\vect{y}=G(\vect{x})\)とすると\(2\vnorm{G(\vect{x})}^2=0\)が得られる．よって\(G(\vect{x})=\zvec\)，\(\img G=\Set{\zvec}\)である．
+\end{proof}
+
+\begin{proposition}{タイトフレームの逆変換}{tight_frame_inversion}
+  列\(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を最良フレーム限界\(A\)のタイトフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は恒等変換の\(A\)倍である．すなわち
+  \[
+    \vect{x} = \frac{1}{A}S(\vect{x})
+    = \frac{1}{A}\sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\vect{\phi}_i\quad(\vect{x}\in H)
+  \]
+  が成立する．
+\end{proposition}
+
+\begin{proof}
+  線形変換\(G(\vect{x})=\vect{x}-(1/A)S(\vect{x})\)について\(\img G=\Set{\zvec}\)を示せばよい．
+  \[
+    \innerp{G(\vect{x})}{\vect{y}} = \innerp{\vect{x}}{\vect{y}}-\frac{1}{A}\sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\innerp{\vect{\phi}_i}{\vect{y}}
+    = \innerp{\vect{x}}{\vect{y}}-\frac{1}{A}\sum_{i\in I}\conj*{\innerp{\vect{y}}{\vect{\phi}_i}}\innerp{\vect{x}}{\vect{\phi}_i}
+  \]
+  であり，右辺は\(\innerp{\vect{x}}{G(\vect{y})}\)に等しい．また，\(\vect{y}=\vect{x}\)なら\(\innerp{G(\vect{x})}{\vect{x}}=\vnorm{\vect{x}}^2-(1/A)A\vnorm{\vect{x}}^2=0\)である．
+  よって\cref{lemma:grammian_equals_zero}より\(\img G=\Set{\zvec}\)である．
+\end{proof}
+
+\begin{corollary}{STFTの逆変換}{}
+  \(\hat{x}=\stft{w}x\)（\(x\in\cycles{L}\)）とする．このとき
+  \begin{align*}
+    x[n] &= \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J^2}\hat{x}[k,m](\modulate{k}\translate{m}w)[n] \\
+    &= \frac{1}{L\vnorm{w}^2}\sum_{k=0}^{L-1}\sum_{m=0}^{L-1}\hat{x}[k,m]w[n-m]\napr^{2\krez\iuni kn/L}
+  \end{align*}
+  である．
+\end{corollary}
 
 \subsection{窓関数と不確定性}
 
