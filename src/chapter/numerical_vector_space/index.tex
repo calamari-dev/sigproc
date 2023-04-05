@@ -210,7 +210,7 @@
   また，任意の\(\vect{x}\in H\)に対して\(\vect{x}-\proj_V\vect{x}\in\pcomp{V}\)，\(\vect{x}=\proj_V(\vect{x})+(\vect{x}-\proj_V\vect{x})\in V+\pcomp{V}\)である．よって\(H=V\oplus\pcomp{V}\)である．
 \end{proof}
 
-\subsection{分析と合成}
+\subsection{分解と合成}
 \label{subsection:analysis_and_synthesis}
 
 \cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
@@ -920,10 +920,10 @@
 \end{proposition}
 
 \begin{proof}
-  \(\sum\)の添字\(n\)を\(m=n+1\)に置き換えると
+  \(\sum\)の添字\(n\)を\(m=n+1\)に置き換えると，\(x[n]=(\lagop x)[n+1]\)より
   \[
-    \zeta^{-k}\hat{x}[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni k(n+1)/N}
-    = \frac{1}{\sqrt{N}}\sum_{m=1}^Nx[m-1]\napr^{-2\krez\iuni km/N}
+    \zeta^{-k}\hat{x}[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}(\lagop x)[n+1]\zeta^{-k(n+1)}
+    = \frac{1}{\sqrt{N}}\sum_{m=1}^N(\lagop x)[m]\zeta^{-km}
   \]
   となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{m=1}^N\)を\(\sum_{m=0}^{N-1}\)に変えても値は変わらない．よって\(\zeta^{-k}\hat{x}[k]=(\dft{N}\lagop x)[k]\)である．
 \end{proof}
@@ -1142,10 +1142,10 @@
   \end{enumerate}
 \end{definition}
 
-\cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている\footnote{というより，分析（合成）作用素はフレームに対して定義するのが普通である．}．
+\cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている\footnote{というより，分解（合成）作用素はフレームに対して定義するのが普通である．}．
 ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S=\synth{T}T\)が恒等変換であるとも限らない．
 
-基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の1つは，正規直交基底による分析・合成を冗長な生成系に拡張することである．
+基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の1つは，正規直交基底による分解・合成を冗長な生成系に拡張することである．
 読者諸氏はこう聞いて「なぜ冗長な生成系を使うのか？」と思われるかもしれない．実は，このあと考える短時間フーリエ変換がまさに，冗長なフレームの実例を与える．
 
 \subsection{短時間フーリエ変換}
@@ -1163,7 +1163,7 @@
 \begin{definition}{短時間フーリエ変換}{discrete_stft}\index{たんじかんふーりえへんかん@短時間フーリエ変換}\index{STFT|see{短時間フーリエ変換}}\index{Vw@\(\stft{w}\)}
   \(L\)を自然数，\(w\)を\(\cycles{L}\)の零でない\footnotemark 元とする．各\(x\in\cycles{L}\)を
   \[
-    (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}
+    (\stft[L]{w}x)[k,n] = \sum_{m=0}^{L-1}x[m]\conj*{w[m-n]}\napr^{-2\krez\iuni km/L}\quad(k,n\in\numset{Z})
   \]
   に写す線形写像\(\stft[L]{w}\colon\cycles{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
@@ -1244,7 +1244,7 @@
 スペクトログラムは波形から読み取りがたい情報を多く含んでいる．例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．
 このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
 
-\subsection{フレームとSTFT}
+\subsection{STFTの逆変換}
 
 フレームの一般論を交えて，短時間フーリエ変換が持つ性質を見ていこう．
 
@@ -1270,12 +1270,12 @@
 \cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の逆変換公式が得られる．
 
 \begin{lemma}{}{grammian_equals_zero}
-  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{\vect{x}}{G(\vect{y})}=\innerp{G(\vect{x})}{\vect{y}}\)かつ\(\innerp{\vect{x}}{G(\vect{x})}=0\)であるとする．
+  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{G(\vect{x})}{\vect{y}}=\innerp{\vect{x}}{G(\vect{y})}\)かつ\(\innerp{G(\vect{x})}{\vect{x}}=0\)であるとする．
   このとき\(\img G=\Set{\zvec}\)である．
 \end{lemma}
 
 \begin{proof}
-  任意の\(\vect{x},\vect{y}\in H\)に対して\(\innerp{\vect{x}+\vect{y}}{G(\vect{x}+\vect{y})}=\innerp{\vect{x}}{G(\vect{y})}+\innerp{\vect{y}}{G(\vect{x})}=\innerp{G(\vect{x})}{\vect{y}}+\innerp{\vect{y}}{G(\vect{x})}=0\)だから，
+  任意の\(\vect{x},\vect{y}\in H\)に対して\(\innerp{G(\vect{x}+\vect{y})}{\vect{x}+\vect{y}}=\innerp{G(\vect{x})}{\vect{y}}+\innerp{G(\vect{y})}{\vect{x}}=\innerp{G(\vect{x})}{\vect{y}}+\innerp{\vect{y}}{G(\vect{x})}=0\)だから，
   \(\vect{y}=G(\vect{x})\)とすると\(2\vnorm{G(\vect{x})}^2=0\)が得られる．よって\(G(\vect{x})=\zvec\)，\(\img G=\Set{\zvec}\)である．
 \end{proof}
 
@@ -1313,13 +1313,25 @@
 無駄を省く方法として，\(k\)と\(n\)の値を間引くことが考えられる．間引きをともなう短時間フーリエ変換を離散ガボール変換という．
 
 \begin{definition}{離散ガボール変換}{discrete_gabor}\index{りさんがぼーるへんかん@離散ガボール変換}\index{DGT|see{離散ガボール変換}}\index{Gw@\(\dgt{w}\)}
-  自然数\(K\)と\(N\)は\(L\)を割り切るとする．各\(x\in\cycles{L}\)を
-  \begin{align*}
-    (\dgt[K,N,L]{w}x)[i,j] &= (\stft[L]{w}x)[iK,jN] \\
-    &= \sum_{m=0}^{L-1}x[m]\conj*{w[m-jN]}\napr^{-2\krez\iuni(iK)m/L}
-  \end{align*}
+  自然数\(K\)と\(N\)は\(L\)の約数とする．各\(x\in\cycles{L}\)を
+  \[
+    (\dgt[K,N,L]{w}x)[i,j] = (\stft[L]{w}x)[iK,jN]\quad(i,j\in\numset{Z})
+  \]
   に写す線形写像\(\dgt[K,N,L]{w}\colon\cycles{L}\to\doublecycles[L/K]{L/N}\)を\termdef{離散ガボール変換}（discrete Gabor transform; DGT）という．
 \end{definition}
+
+\(\stft{w}\)と同様，こちらも\((K,N,L)\)の値が明らかであれば\(\dgt{w}\)と略記する．
+
+\(\cycles{L}\)上の列
+\[
+  \gaborsys{w}{K}{N} = \seq{\modulate{iK}\translate{\:jN}w}_{(i,j)\in\Lambda}\quad(\Lambda=\Set{(i,j)\given iK,jN\in J})
+\]
+を\termdef{ガボールシステム}\index{がぼーるしすてむ@ガボールシステム}\index{GwKN@\(\gaborsys{w}{K}{N}\)}（Gabor system）という．
+\(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は\(T(x)[i,j]=(\dgt{w})[i,j]\)を満たす．しかし，パラメータ\(w\)・\(K\)・\(N\)・\(L\)の組み合わせによっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
+
+\begin{example}
+  \(L=N\geq 2\)のとき，\(w[n]=0\)となる\(n\)の値が1つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない（\(N=3\)などで確かめよ）．
+\end{example}
 
 \subsection{窓関数と不確定性}
 
@@ -1340,8 +1352,6 @@
 \begin{example}
   \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
 \end{example}
-
-\subsection{離散ガボール変換}
 
 \begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
   \(\varepsilon>0\)，\(x\in\cycles{N}\)とする．条件

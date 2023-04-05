@@ -106,9 +106,10 @@
 \NewDocumentCommand{\comb}{}{\mathord{\mathrm{Ш}}}
 \NewDocumentCommand{\cycles}{m}{\ell^2(\numset{Z}_{#1})}
 \NewDocumentCommand{\dft}{s m}{\operateur{\symscr{F}_{\:\numset{Z}/#2}\IfBooleanT{#1}{^{-1}}}}
-\NewDocumentCommand{\dgt}{o m}{\operateur{\symscr{G}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\dgt}{o m}{\operateur{G_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\doublecycles}{o m}{\ell^2(\IfValueTF{#1}{\numset{Z}_{#1}\times\numset{Z}_{#2}}{\numset{Z}_{#2}^2})}
 \NewDocumentCommand{\dtft}{}{\operateur{\symscr{F}_{\:\numset{Z}}}}
+\NewDocumentCommand{\gaborsys}{m m m}{\symcal{G}(#1,#2,#3)}
 \NewDocumentCommand{\modulate}{o m}{\operateur{\symscr{M}_{#2}\IfValueT{#1}{^{(#1)}}}}
 \NewDocumentCommand{\fseries}{}{\operateur{\symscr{F}_{\:\torus}}}
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
