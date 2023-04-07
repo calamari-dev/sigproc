@@ -222,23 +222,23 @@
 \end{definition}
 
 \footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．}
-\(\mat{U}=\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
+\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
-  \htrps{\mat{U}}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
+  \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
   = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
   \quad\mat{\Delta}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
-  \quad\mat{U}\vect{x} = \mat{U}\matrice*{x_1 \\ \vdots \\ x_n}
+  \quad\htrps{\mat{U}}\vect{x} = \htrps{\mat{U}}\matrice*{x_1 \\ \vdots \\ x_n}
   = \sum_{i=1}^nx_i\vect{e}_i
 \]
 であるから
 \[
-  \mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x} = \mat{U}\mat{\Delta}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
-  = \mat{U}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
+  \htrps{\mat{U}}\mat{\Delta}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Delta}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
+  = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\mat{U}\mat{\Delta}\htrps{\mat{U}}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線形写像\(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\mat{U}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\htrps{\mat{U}}\mat{\Delta}\mat{U}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線形写像\(T(\vect{x})=\mat{U}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
@@ -313,8 +313,8 @@
 
 \begin{proof}
   \(T\)を正規直交基底\(\basis{B}=\Set{\vect{u}_1,\dots,\vect{u}_n}\)に関する分解作用素とすると，\cref{subsection:analysis_and_synthesis}冒頭の議論から
-  \(T(\vect{x})=\htrps{\mat{U}}\vect{x}\)（\(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}\)）である．
-  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_characterization}より\(\mat{U}\)は\texttwoemdash よって\(\htrps{\mat{U}}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
+  \(T(\vect{x})=\mat{U}\vect{x}\)（\(\mat{U}=\htrps{\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}}\)）である．
+  また，\(\basis{B}\)は正規直交基底なので，\cref{proposition:unitary_matrix_characterization}より\(\htrps{\mat{U}}\)は\texttwoemdash よって\(\mat{U}\)も\texttwoemdash ユニタリ行列である．逆の証明は省略する．
 \end{proof}
 
 \section{最小2乗法}
@@ -1003,18 +1003,18 @@
 \]
 である．この形の行列を\termdef{巡回行列}\index{じゅんかいぎょうれつ@巡回行列}\index{ぎょうれつ@行列!じゅんかい@巡回\texttwoemdash}（circulant matrix）という．
 
-基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\htrps{\mat{W}}\)とおく．\(\htrps{\mat{W}}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
+基底\(\basis{D}\)に関する\(\dft{N}\)の表現行列を\(\mat{W}\)とおく．\(\mat{W}\)は\(\numset{C}^N\)上で定義した\(\dft{N}\)の，標準基底に関する表現行列でもある．
 
 \begin{corollary}{}{dft_convolution_matrix}
-  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
+  巡回行列は離散フーリエ変換で対角化される．すなわち，任意の\(N\)次巡回行列\(\mat{H}\)について\(\mat{W}\mat{H}\htrps{\mat{W}}\)は対角行列である．
 \end{corollary}
 
 \begin{proof}
   \(\mat{H}\)の第1列を\(\trps{\rowvect{h_0 & \cdots & h_{N-1}}}\)とおき，\(h[n]=h_n\)（\(0\leq n<N\)）となるように\(\cycles{N}\)の元\(h\)を定める．
   \(\cycles{N}\)上の線形写像\(H\)を\(H(x)=h\circconv x\)で定義すると，\cref{proposition:dft_convolution_theorem}より\((\dft{N}H\dft*{N})x=\dft{N}(h\circconv\dft*{N}x)=\hat{h}\cdot x\)となる．よって，\(\dft{N}H\dft*{N}\)の表現行列は\(\diag(\hat{h}[0],\dots,\hat{h}[N-1])\)である．
 
-  一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft*{N}\)の表現行列は\(\htrps{\mat{W}}\mat{H}\mat{W}\)でもある．
-  したがって\(\htrps{\mat{W}}\mat{H}\mat{W}\)は対角行列である．
+  一方，\(H\)の表現行列は\(\mat{H}\)だから\(\dft{N}H\dft*{N}\)の表現行列は\(\mat{W}\mat{H}\htrps{\mat{W}}\)でもある．
+  したがって\(\mat{W}\mat{H}\htrps{\mat{W}}\)は対角行列である．
 \end{proof}
 
 \begin{example}
@@ -1079,9 +1079,9 @@
 \cref{subsection:frame}において，\(H\)は任意の有限次元\footnote{\(H\)が無限次元の場合も同じような議論ができる．このことは\cref{xr-chapter:hilbert_space}で見る．}内積空間とする．
 
 \begin{definition}{フレーム}{frame}\index{ふれーむ@フレーム}
-  \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)上の有限列とする．ある実数\(A,B>0\)が存在し，任意の\(\vect{x}\in H\)に対して
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)上の有限列とする．ある実数\(A,B>0\)が存在し，任意の\(x\in H\)に対して
   \[
-    A\vnorm{\vect{x}}^2 \leq \sum_{i\in I}\abs{\innerp{\vect{x}}{\vect{\phi}_i}}^2 \leq B\vnorm{\vect{x}}^2\quad(\vnorm{\vect{x}}=\sqrt{\innerp{\vect{x}}{\vect{x}}})
+    A\vnorm{x}^2 \leq \sum_{i\in I}\abs{\innerp{x}{\phi_i}}^2 \leq B\vnorm{x}^2\quad(\vnorm{x}=\sqrt{\innerp{x}{x}})
   \]
   を満たすとき，\(\Phi\)を\(H\)の\termdef{フレーム}（frame）という．
 \end{definition}
@@ -1090,12 +1090,12 @@
 特に，\(A\)の最大値と\(B\)の最小値を\(\Phi\)の\termdef{最良フレーム限界}（optimal frame bound）という．
 
 \begin{proposition}{}{frame_characterization}
-  \(\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)のフレームとする．このとき，集合\(\Set{\vect{\phi}_i\given i\in I}\)は\(H\)の生成系である．
+  \(\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．このとき，集合\(\Set{\phi_i\given i\in I}\)は\(H\)の生成系である．
 \end{proposition}
 
 \begin{proof}
-  対偶を示す．\(V=\spannedby\Set{\vect{\phi}_i\given i\in I}\)とする．もし\(V\neq H\)なら\(\zvec\)でない\(\vect{x}\in\pcomp{V}\)がある．
-  すると\(\innerp{\vect{x}}{\vect{\phi}_i}=0\)なので，いかなる\(A>0\)についても\(\sum_{i\in I}\abs{\innerp{\vect{x}}{\vect{\phi}_i}}^2=0<A\vnorm{\vect{x}}^2\)となる．よって\(\seq{\vect{\phi}_i}_{i\in I}\)はフレームでない．
+  対偶を示す．\(V=\spannedby\Set{\phi_i\given i\in I}\)とする．もし\(V\neq H\)なら\(\zvec\)でない\(x\in\pcomp{V}\)がある．
+  すると\(\innerp{x}{\phi_i}=0\)なので，いかなる\(A>0\)についても\(\sum_{i\in I}\abs{\innerp{x}{\phi_i}}^2=0<A\vnorm{x}^2\)となる．よって\(\seq{\phi_i}_{i\in I}\)はフレームでない．
 \end{proof}
 
 \begin{note}
@@ -1117,9 +1117,9 @@
 
 例から分かるように，正規直交基底は\(A=B=1\)のフレームである．最良フレーム限界が等しい2数であるフレーム，すなわち，正数\(A\)が存在して
 \[
-  A\vnorm{\vect{x}}^2 = \sum_{i\in I}\abs{\innerp{\vect{x}}{\vect{\phi}_i}}^2\quad(\vect{x}\in H)
+  A\vnorm{x}^2 = \sum_{i\in I}\abs{\innerp{x}{\phi_i}}^2\quad(x\in H)
 \]
-となる有限列\(\seq{\vect{\phi}_i}_{i\in I}\)を\termdef{タイトフレーム}\index{たいとふれーむ@タイトフレーム}\index{ふれーむ@フレーム!たいと@タイト\texttwoemdash}（tight frame）という．
+となる有限列\(\seq{\phi_i}_{i\in I}\)を\termdef{タイトフレーム}\index{たいとふれーむ@タイトフレーム}\index{ふれーむ@フレーム!たいと@タイト\texttwoemdash}（tight frame）という．
 \(A=1\)のタイトフレームは\termdef{パーセバルフレーム}\index{ぱーせばるふれーむ@パーセバルフレーム}\index{ふれーむ@フレーム!ぱーせばる@パーセバル\texttwoemdash}（Parseval frame）と呼ばれる．
 
 \begin{example}
@@ -1134,11 +1134,11 @@
 \end{figure}
 
 \begin{definition}{}{frame_analysis_synthesis}\index{ふれーむ@フレーム!さようそ@\texttwoemdash 作用素}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
-  \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)のフレームとする．
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．
   \begin{enumerate}
-    \item 線形変換\(S\colon H\to H\)，\(S(\vect{x})=\sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\vect{\phi}_i\)を\(\Phi\)の\termdef{フレーム作用素}（frame operator）という．
-    \item 線形写像\(T\colon H\to\mapset{I}{\numset{K}}\)，\(T(\vect{x})=\seq{\innerp{\vect{x}}{\vect{\phi}_i}}\)を\(\Phi\)の\termdef{分解作用素}（analysis operator）という．
-    \item 線形写像\(\synth{T}\colon\mapset{I}{\numset{K}}\to H\)，\(\synth{T}(\seq{x_i})=\sum_{i\in I}x_i\vect{\phi}_i\)を\(\Phi\)の\termdef{合成作用素}（synthesis operator）という．
+    \item 線形変換\(S\colon H\to H\)，\(S(x)=\sum_{i\in I}\innerp{x}{\phi_i}\phi_i\)を\(\Phi\)の\termdef{フレーム作用素}（frame operator）という．
+    \item 線形写像\(T\colon H\to\mapset{I}{\numset{K}}\)，\(T(x)=\seq{\innerp{x}{\phi_i}}\)を\(\Phi\)の\termdef{分解作用素}（analysis operator）という．
+    \item 線形写像\(\synth{T}\colon\mapset{I}{\numset{K}}\to H\)，\(\synth{T}(\seq{c_i})=\sum_{i\in I}c_i\phi_i\)を\(\Phi\)の\termdef{合成作用素}（synthesis operator）という．
   \end{enumerate}
 \end{definition}
 
@@ -1242,7 +1242,7 @@
 2重数列\(\seq{\abs{(\stft{w}x)[k,n]}^2}\)と\ltjkenten{その}グラフを\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）という．
 
 スペクトログラムは波形から読み取りがたい情報を多く含んでいる．例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．
-このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば旋律の時間変化を読み取れる．
+このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば音程の時間変化を読み取れる．
 
 \subsection{STFTの逆変換}
 
@@ -1270,32 +1270,31 @@
 \cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の逆変換公式が得られる．
 
 \begin{lemma}{}{grammian_equals_zero}
-  \(G\)は\(H\)上の線形変換で，任意の\(\vect{x},\vect{y}\in H\)に対し\(\innerp{G(\vect{x})}{\vect{y}}=\innerp{\vect{x}}{G(\vect{y})}\)かつ\(\innerp{G(\vect{x})}{\vect{x}}=0\)であるとする．
-  このとき\(\img G=\Set{\zvec}\)である．
+  \(G\)は\(H\)上の線形変換で，任意の\(x,y\in H\)に対し\(\innerp{G(x)}{y}=\innerp{x}{G(y)}\)かつ\(\innerp{G(x)}{x}=0\)であるとする．このとき\(\ker G=H\)である．
 \end{lemma}
 
 \begin{proof}
-  任意の\(\vect{x},\vect{y}\in H\)に対して\(\innerp{G(\vect{x}+\vect{y})}{\vect{x}+\vect{y}}=\innerp{G(\vect{x})}{\vect{y}}+\innerp{G(\vect{y})}{\vect{x}}=\innerp{G(\vect{x})}{\vect{y}}+\innerp{\vect{y}}{G(\vect{x})}=0\)だから，
-  \(\vect{y}=G(\vect{x})\)とすると\(2\vnorm{G(\vect{x})}^2=0\)が得られる．よって\(G(\vect{x})=\zvec\)，\(\img G=\Set{\zvec}\)である．
+  任意の\(x,y\in H\)に対して\(\innerp{G(x+y)}{x+y}=\innerp{G(x)}{y}+\innerp{G(y)}{x}=\innerp{G(x)}{y}+\innerp{y}{G(x)}=0\)だから，
+  \(y=G(x)\)とすると\(2\vnorm{G(x)}^2=0\)が得られる．よって\(\ker G=H\)である．
 \end{proof}
 
 \begin{proposition}{タイトフレームの逆変換}{tight_frame_inversion}
-  列\(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を最良フレーム限界\(A\)のタイトフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は恒等変換の\(A\)倍である．すなわち
+  列\(\Phi=\seq{\phi_i}_{i\in I}\)を最良フレーム限界\(A\)のタイトフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は恒等変換の\(A\)倍である．すなわち
   \[
-    \vect{x} = \frac{1}{A}S(\vect{x})
-    = \frac{1}{A}\sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\vect{\phi}_i\quad(\vect{x}\in H)
+    x = \frac{1}{A}S(x)
+    = \frac{1}{A}\sum_{i\in I}\innerp{x}{\phi_i}\phi_i\quad(x\in H)
   \]
   が成立する．
 \end{proposition}
 
 \begin{proof}
-  線形変換\(G(\vect{x})=\vect{x}-(1/A)S(\vect{x})\)について\(\img G=\Set{\zvec}\)を示せばよい．
+  線形変換\(G(x)=x-(1/A)S(x)\)について\(\ker G=H\)を示せばよい．
   \[
-    \innerp{G(\vect{x})}{\vect{y}} = \innerp{\vect{x}}{\vect{y}}-\frac{1}{A}\sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\innerp{\vect{\phi}_i}{\vect{y}}
-    = \innerp{\vect{x}}{\vect{y}}-\frac{1}{A}\sum_{i\in I}\conj*{\innerp{\vect{y}}{\vect{\phi}_i}}\innerp{\vect{x}}{\vect{\phi}_i}
+    \innerp{G(x)}{y} = \innerp{x}{y}-\frac{1}{A}\sum_{i\in I}\innerp{x}{\phi_i}\innerp{\phi_i}{y}
+    = \innerp{x}{y}-\frac{1}{A}\sum_{i\in I}\conj*{\innerp{y}{\phi_i}}\innerp{x}{\phi_i}
   \]
-  であり，右辺は\(\innerp{\vect{x}}{G(\vect{y})}\)に等しい．また，\(\vect{y}=\vect{x}\)なら\(\innerp{G(\vect{x})}{\vect{x}}=\vnorm{\vect{x}}^2-(1/A)A\vnorm{\vect{x}}^2=0\)である．
-  よって\cref{lemma:grammian_equals_zero}より\(\img G=\Set{\zvec}\)である．
+  であり，右辺は\(\innerp{x}{G(y)}\)に等しい．また，\(y=x\)なら\(\innerp{G(x)}{x}=\vnorm{x}^2-(1/A)A\vnorm{x}^2=0\)である．
+  よって\cref{lemma:grammian_equals_zero}より\(\ker G=H\)である．
 \end{proof}
 
 \begin{corollary}{STFTの逆変換}{stft_inversion}
@@ -1324,13 +1323,69 @@
 
 \(\cycles{L}\)上の列
 \[
-  \gaborsys{w}{K}{N} = \seq{\modulate{iK}\translate{\:jN}w}_{(i,j)\in\Lambda}\quad(\Lambda=\Set{(i,j)\given iK,jN\in J})
+  \gaborsys{w}{K}{N} = \seq{\modulate{iK}\translate{jN}w}_{(i,j)\in\Lambda}\quad(\Lambda=\Set{(i,j)\in\numset{Z}^2\given 0\leq iK,jN<L})
 \]
-を\termdef{ガボールシステム}\index{がぼーるしすてむ@ガボールシステム}\index{GwKN@\(\gaborsys{w}{K}{N}\)}（Gabor system）という．
-\(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は\(T(x)[i,j]=(\dgt{w})[i,j]\)を満たす．しかし，パラメータ\(w\)・\(K\)・\(N\)・\(L\)の組み合わせによっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
+を\termdef{ガボールシステム}\index{がぼーるしすてむ@ガボールシステム}\index{GwKN@\(\gaborsys{w}{K}{N}\)}（Gabor system）という．\(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は
+\[
+  \midx{\hat{x}}{i}{j} = (\dgt{w}x)[i,j]\quad\text{(\(x\in\cycles{L}\)，\(\seq{\midx{\hat{x}}{i}{j}}=T(x)\))}
+\]
+を満たす．しかし，パラメータの組み合わせによっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
 
 \begin{example}
-  \(L=N\geq 2\)のとき，\(w[n]=0\)となる\(n\)の値が1つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない（\(N=3\)などで確かめよ）．
+  \(L=N\geq 2\)のとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない．
+\end{example}
+
+\subsection{双対フレーム}
+
+\begin{lemma}{}{unitary_representation}
+  \(T\)を\(H\)上の線形変換，\(\basis{B}=\Set{u_1,\dots,u_N}\)を\(H\)の正規直交基底とする．このとき，\(\basis{B}\)に関する\(T\)の表現行列は\(\trps{\matfence{\innerp{T(u_i)}{u_j}}}\)である．
+\end{lemma}
+
+\begin{proof}
+  実際\(T(u_i)=\sum_{j=1}^N\innerp{T(u_i)}{u_j}u_j\)だから，\(\basis{B}\)に関する\(T\)の表現行列は\(\trps{\matfence{\innerp{T(u_i)}{u_j}}}\)である．
+\end{proof}
+
+\begin{proposition}{}{}
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は全単射である．
+\end{proposition}
+
+\begin{proof}
+  議論を簡単にするため，\(I=\Set{1,\dots,N}\)とし\(\mapset{I}{\numset{K}}\)を\(\numset{K}^N\)と同一視する．
+  \(\Set{u_1,\dots,u_M}\)を\(H\)の正規直交基底，\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)を\(\numset{K}^N\)の標準基底とする．
+  このとき，\(\Phi\)の分解作用素\(T\)と合成作用素\(\synth{T}\)はそれぞれ
+  \[
+    T(u_i) = \matrice*{\innerp{u_i}{\phi_1} \\ \vdots \\ \innerp{u_i}{\phi_N}}
+    = \sum_{j=1}^N\innerp{u_i}{\phi_j}\vect{e}_j,
+    \quad\synth{T}(\vect{e}_i) = \sum_{j=1}^N\kdelta{i}{j}\phi_j
+    = \sum_{j=1}^M\innerp{\phi_i}{u_j}u_j
+  \]
+  を満たすから，\(T\)の表現行列は\(\mat{T}=\trps{\matfence{\innerp{u_i}{\phi_j}}}\)，\(\synth{T}\)の表現行列は\(\trps{\matfence{\innerp{\phi_i}{u_j}}}=\matfence{\innerp{\phi_j}{u_i}}=\conj*{\matfence{\innerp{u_i}{\phi_j}}}=\htrps{\mat{T}}\)である．
+  したがって，\(S\)の表現行列は\(\mat{S}=\htrps{\mat{T}}\mat{T}\)であり，これは正規行列なのでスペクトル分解できる．すなわち，\(\mat{S}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)を満たす\(M\)次ユニタリ行列\(\mat{V}\)，対角行列\(\mat{\Lambda}\)がある．
+
+  \(S\)が全単射であることを示すには，\(\mat{\Lambda}\)が正則と言えればよい．\(\mat{V}=\matfence{\midx{v}{i}{j}}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_M}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_M)\)とおき，\(v_k\in H\)を\(v_k=\sum_{i=1}^M\midx{v}{i}{k}u_i\)で定める．すると
+  \[
+    \sum_{i=1}^M\abs{\innerp{v_k}{\phi_i}}^2 = \innerp{S(v_k)}{v_k}
+    = \sum_{i=1}^M\midx{v}{i}{k}\sum_{j=1}^M\innerp{S(u_i)}{u_j}\midx{\conj{v}}{j}{k}
+  \]
+  であり，\cref{lemma:unitary_representation}より\(\mat{S}=\trps{\matfence{\innerp{S(u_i)}{u_j}}}\)だから
+  \[
+    \sum_{i=1}^M\midx{v}{i}{k}\sum_{j=1}^M\innerp{S(u_i)}{u_j}\midx{\conj{v}}{j}{k} = \trps{\vect{v}_k}\trps{\mat{S}}\vect{\conj{v}}_k
+    = \trps{(\htrps{\vect{v}_k}(\mat{V}\mat{\Lambda}\htrps{\mat{V}})\vect{v}_k)}
+    = \lambda_k
+  \]
+  となる．\(\Phi\)がフレームなのでこの値は正であり，\(\mat{\Lambda}\)は正則である．
+\end{proof}
+
+\begin{definition}{双対フレーム}{dual_frame}\index{そうついふれーむ@双対フレーム}\index{ふれーむ@フレーム!そうつい@双対\texttwoemdash}
+  \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)のフレームとする．\(H\)のフレーム\(\Psi=\seq{\vect{\psi}_i}_{i\in I}\)が条件
+  \[
+    \vect{x} = \sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\vect{\psi}_i\quad(\vect{x}\in H)
+  \]
+  を満たすとき，\(\Psi\)を\(\Phi\)の\termdef{双対フレーム}（dual frame）という．
+\end{definition}
+
+\begin{example}
+  \(\Phi\)が\(H\)のパーセバルフレームなら，\cref{proposition:tight_frame_inversion}より\(\Phi\)自身が\(\Phi\)の双対フレームである．
 \end{example}
 
 \subsection{窓関数と不確定性}
