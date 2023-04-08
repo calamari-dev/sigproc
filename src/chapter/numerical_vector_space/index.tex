@@ -95,7 +95,7 @@
   また\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
     \vnorm*{\sum z_i\vect{e}_i}^2 = \innerp*{\sum_{i=1}^mz_i\vect{e}_i}{\sum_{j=1}^mz_j\vect{e}_j}
-    = \sum_{i=1}^mz_i\sum_{j=1}^m\conj{z}_j\innerp{\vect{e}_i}{\vect{e}_j}
+    = \sum_{i=1}^mz_i\sum_{j=1}^m\innerp{\vect{e}_i}{\vect{e}_j}\conj{z}_j
     = \sum z_i\conj{z}_i
     = \sum\abs{z_i}^2
   \]
@@ -103,8 +103,8 @@
   \begin{align*}
     \vnorm{\vect{x}-\vect{y}}^2 &= \vnorm*{\vect{x}-\sum z_i\vect{e}_i}^2
     = \vnorm{\vect{x}}^2-2\rpart\innerp*{\vect{x}}{\sum z_i\vect{e}_i}+\vnorm*{\sum z_i\vect{e}_i}^2 \\
-    &= \vnorm{\vect{x}}^2+\sum(-2\rpart(\conj{z}_i\innerp{\vect{x}}{\vect{e}_i})+\abs{z_i}^2) \\
-    &= \vnorm{\vect{x}}^2+\sum(-2\rpart((s_i-\iuni t_i)\innerp{\vect{x}}{\vect{e}_i})+s_i^2+t_i^2) \\
+    &= \vnorm{\vect{x}}^2+\sum(-2\rpart(\innerp{\vect{x}}{\vect{e}_i}\conj{z}_i)+\abs{z_i}^2) \\
+    &= \vnorm{\vect{x}}^2+\sum(-2\rpart(\innerp{\vect{x}}{\vect{e}_i}(s_i-\iuni t_i))+s_i^2+t_i^2) \\
     &= \vnorm{\vect{x}}^2+\sum(-2(s_i\rpart\innerp{\vect{x}}{\vect{e}_i}+t_i\ipart\innerp{\vect{x}}{\vect{e}_i})+s_i^2+t_i^2) \\
     &= \vnorm{\vect{x}}^2+\sum((s_i-\rpart\innerp{\vect{x}}{\vect{e}_i})^2+(t_i-\ipart\innerp{\vect{x}}{\vect{e}_i})^2-\abs{\innerp{\vect{x}}{\vect{e}_i}}^2)
   \end{align*}
@@ -146,7 +146,7 @@
   一方，\(x=\rpart z\)，\(y=\ipart z\)とおくと
   \begin{align*}
     \delta(z) &= \vnorm{(\vect{x}-\vect{m})-z\vect{v}}^2-\vnorm{\vect{x}-\vect{m}}^2
-    = -2\rpart(\conj{z}\innerp{\vect{x}-\vect{m}}{\vect{v}})+\abs{z}^2\vnorm{\vect{v}}^2 \\
+    = -2\rpart(\innerp{\vect{x}-\vect{m}}{\vect{v}}\conj{z})+\abs{z}^2\vnorm{\vect{v}}^2 \\
     &= -2(x\rpart\innerp{\vect{x}-\vect{m}}{\vect{v}}+y\ipart\innerp{\vect{x}-\vect{m}}{\vect{v}})+x^2+y^2 \\
     &= (x-\rpart\innerp{\vect{x}-\vect{m}}{\vect{v}})^2+(y-\ipart\innerp{\vect{x}-\vect{m}}{\vect{v}})^2-\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2 \\
     &= \abs{z-\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2-\abs{\innerp{\vect{x}-\vect{m}}{\vect{v}}}^2
@@ -403,7 +403,7 @@
 
 \(\vnorm{\vect{\epsilon}(\vect{x})}\)についてさらに詳しく調べるには，以下の定理が必要である．
 
-\begin{theorem}{スペクトル定理}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
+\begin{theorem}{スペクトル定理I}{spectral_theorem}\index{すぺくとるていり@スペクトル定理}
   \(\mat{A}\)を\(n\)次複素正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．これを\termdef{スペクトル定理}（spectral theorem）という．
   \begin{enumerate}
     \item \(\mat{A}\)は正規行列である．
@@ -1076,7 +1076,7 @@
 \subsection{フレーム}
 \label{subsection:frame}
 
-\cref{subsection:frame}において，\(H\)は任意の有限次元\footnote{\(H\)が無限次元の場合も同じような議論ができる．このことは\cref{xr-chapter:hilbert_space}で見る．}内積空間とする．
+\cref{section:stft}において，\(H\)は任意の有限次元\footnote{\(H\)が無限次元の場合も同じような議論ができる．このことは\cref{xr-chapter:hilbert_space}で見る．}内積空間とする．
 
 \begin{definition}{フレーム}{frame}\index{ふれーむ@フレーム}
   \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)上の有限列とする．ある実数\(A,B>0\)が存在し，任意の\(x\in H\)に対して
@@ -1133,20 +1133,20 @@
   \caption{メルセデス・ベンツフレーム．}
 \end{figure}
 
-\begin{definition}{}{frame_analysis_synthesis}\index{ふれーむ@フレーム!さようそ@\texttwoemdash 作用素}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
+\begin{definition}{}{frame_analysis_synthesis}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}\index{ふれーむ@フレーム!さようそ@\texttwoemdash 作用素}
   \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．
   \begin{enumerate}
-    \item 線形変換\(S\colon H\to H\)，\(S(x)=\sum_{i\in I}\innerp{x}{\phi_i}\phi_i\)を\(\Phi\)の\termdef{フレーム作用素}（frame operator）という．
     \item 線形写像\(T\colon H\to\mapset{I}{\numset{K}}\)，\(T(x)=\seq{\innerp{x}{\phi_i}}\)を\(\Phi\)の\termdef{分解作用素}（analysis operator）という．
     \item 線形写像\(\synth{T}\colon\mapset{I}{\numset{K}}\to H\)，\(\synth{T}(\seq{c_i})=\sum_{i\in I}c_i\phi_i\)を\(\Phi\)の\termdef{合成作用素}（synthesis operator）という．
+    \item \(H\)上の線形変換\(S=\synth{T}T\)を\(\Phi\)の\termdef{フレーム作用素}（frame operator）という．
   \end{enumerate}
 \end{definition}
 
 \cref{definition:frame_analysis_synthesis}は以前に見た，正規直交基底に関する\(T\)と\(\synth{T}\)の拡張になっている\footnote{というより，分解（合成）作用素はフレームに対して定義するのが普通である．}．
-ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S=\synth{T}T\)が恒等変換であるとも限らない．
+ただし，フレームが正規直交基底でないときは\(T^{-1}=\synth{T}\)とも\(S\)が恒等変換であるとも限らない．
 
-基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の1つは，正規直交基底による分解・合成を冗長な生成系に拡張することである．
-読者諸氏はこう聞いて「なぜ冗長な生成系を使うのか？」と思われるかもしれない．実は，このあと考える短時間フーリエ変換がまさに，冗長なフレームの実例を与える．
+基底でない生成系を\termdef{\ltjruby{冗長}{じようちよう}}\index{じょうちょう@冗長}（redundant）な生成系という．フレームを考える動機の一つは，正規直交基底による分解・合成を冗長な生成系に拡張することである．
+読者諸氏はこう聞いて「基底の代わりに冗長な生成系を使う利点はあるのか？」と疑問に思われるかもしれない．実は，このあと考える短時間フーリエ変換がまさに，冗長なフレームによる解析の実例を与える．
 
 \subsection{短時間フーリエ変換}
 
@@ -1168,7 +1168,7 @@
   に写す線形写像\(\stft[L]{w}\colon\cycles{L}\to\mapset{\numset{Z}\times\numset{Z}}{\numset{C}}\)を\termdef{短時間フーリエ変換}（short‐time Fourier transform; STFT）という．
 \end{definition}
 
-\footnotetext{\(\Set{n\in\numset{Z}\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)が存在してもよい．}
+\footnotetext{\(\Set{n\given w[n]=0}\neq\numset{Z}\)ということ．\(w[n]=0\)となる\(n\)の値があってもよい．}
 \(w\)を\(\stft[L]{w}\)の\termdef{窓関数}\index{まどかんすう@窓関数}（window function）という．文脈から\(L\)の値が明らかであれば，\(\stft[L]{w}\)を単に\(\stft{w}\)と書く．
 
 \begin{proposition}{}{stft_and_shift}
@@ -1244,7 +1244,7 @@
 スペクトログラムは波形から読み取りがたい情報を多く含んでいる．例として，\cref{figure:phone_spectrogram}中で縦に積み重なっている白い横線に注目する．
 このうち最も下にある横線は，基本周波数（\cref{subsection:dft}参照）が時間変化してできた軌跡である．したがって，この軌跡をなぞれば音程の時間変化を読み取れる．
 
-\subsection{STFTの逆変換}
+\subsection{タイトフレームとSTFT}
 
 フレームの一般論を交えて，短時間フーリエ変換が持つ性質を見ていこう．
 
@@ -1267,7 +1267,7 @@
   だから，\(\seq{\modulate{k}\translate{n}w}\)はフレーム限界\(L\vnorm{w}^2\)のタイトフレームである．
 \end{proof}
 
-\cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の逆変換公式が得られる．
+\cref{proposition:stft_tight_frame}と以下の命題から，短時間フーリエ変換の再構成公式が得られる．
 
 \begin{lemma}{}{grammian_equals_zero}
   \(G\)は\(H\)上の線形変換で，任意の\(x,y\in H\)に対し\(\innerp{G(x)}{y}=\innerp{x}{G(y)}\)かつ\(\innerp{G(x)}{x}=0\)であるとする．このとき\(\ker G=H\)である．
@@ -1278,7 +1278,7 @@
   \(y=G(x)\)とすると\(2\vnorm{G(x)}^2=0\)が得られる．よって\(\ker G=H\)である．
 \end{proof}
 
-\begin{proposition}{タイトフレームの逆変換}{tight_frame_inversion}
+\begin{proposition}{タイトフレームの再構成}{tight_frame_inversion}
   列\(\Phi=\seq{\phi_i}_{i\in I}\)を最良フレーム限界\(A\)のタイトフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は恒等変換の\(A\)倍である．すなわち
   \[
     x = \frac{1}{A}S(x)
@@ -1297,7 +1297,7 @@
   よって\cref{lemma:grammian_equals_zero}より\(\ker G=H\)である．
 \end{proof}
 
-\begin{corollary}{STFTの逆変換}{stft_inversion}
+\begin{corollary}{STFTの再構成}{stft_reconstruction}
   \(x\in\cycles{L}\)，\(\hat{x}=\stft{w}x\)とする．このとき
   \begin{gather*}
     x = \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J}\hat{x}[k,m]\modulate{k}\translate{m}w,\\
@@ -1306,7 +1306,7 @@
   である．
 \end{corollary}
 
-\cref{corollary:stft_inversion}から\(\stft{w}\)は単射である．しかし\(\dim\cycles{L}=L\)，\(\dim\doublecycles{L}=L^2\)なので\texttwoemdash ごく例外的な\(L=1\)の場合を除き\texttwoemdash 全射ではなく，フレーム\(\seq{\modulate{k}\translate{n}w}\)は冗長である．
+\cref{corollary:stft_reconstruction}から\(\stft{w}\)は単射である．しかし\(\dim\cycles{L}=L\)，\(\dim\doublecycles{L}=L^2\)なので\texttwoemdash ごく例外的な\(L=1\)の場合を除き\texttwoemdash 全射ではなく，フレーム\(\seq{\modulate{k}\translate{n}w}\)は冗長である．
 言い換えると，\(\stft{w}\)は\(\cycles{L}\)の元を「無駄が多い」形で表す写像である．
 
 無駄を省く方法として，\(k\)と\(n\)の値を間引くことが考えられる．間引きをともなう短時間フーリエ変換を離散ガボール変換という．
@@ -1335,51 +1335,50 @@
   \(L=N\geq 2\)のとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない．
 \end{example}
 
-\subsection{双対フレーム}
+\subsection{双対フレームとDGT}
 
-\begin{lemma}{}{unitary_representation}
-  \(T\)を\(H\)上の線形変換，\(\basis{B}=\Set{u_1,\dots,u_N}\)を\(H\)の正規直交基底とする．このとき，\(\basis{B}\)に関する\(T\)の表現行列は\(\trps{\matfence{\innerp{T(u_i)}{u_j}}}\)である．
-\end{lemma}
+ここではフレーム理論を通して，離散ガボール変換の再構成公式を導く．
+
+\begin{theorem}{スペクトル定理II}{spectral_theorem_two}\index{すぺくとるていり@スペクトル定理}
+  \(T\)は\(H\)上の線形変換であり，条件\(\innerp{T(x)}{y}=\innerp{x}{T(y)}\)（\(x,y\in H\)）を満たすとする．
+  このとき，\(T\)の固有ベクトルからなる\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)（\(n=\dim H\)）が存在する．また，各\(u_k\)が属する\(T\)の固有値を\(\lambda_k\)とおくと
+  \[
+    T(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+  \]
+  である．
+\end{theorem}
 
 \begin{proof}
-  実際\(T(u_i)=\sum_{j=1}^N\innerp{T(u_i)}{u_j}u_j\)だから，\(\basis{B}\)に関する\(T\)の表現行列は\(\trps{\matfence{\innerp{T(u_i)}{u_j}}}\)である．
+  \cref{subsection:proof_of_the_spectral_theorem}を参照せよ（ひとまず認めてもかまわない）．
 \end{proof}
 
-\begin{proposition}{}{}
-  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．このとき，\(\Phi\)のフレーム作用素\(S\)は全単射である．
-\end{proposition}
+\begin{corollary}{}{frame_bijection}
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S\)を\(\Phi\)のフレーム作用素とする．このとき，\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)と実数\(\lambda_1,\dots,\lambda_n\)が存在して
+  \[
+    S(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+  \]
+  を満たす．さらに，各\(\lambda_k\)はすべて正である．
+\end{corollary}
 
 \begin{proof}
-  議論を簡単にするため，\(I=\Set{1,\dots,N}\)とし\(\mapset{I}{\numset{K}}\)を\(\numset{K}^N\)と同一視する．
-  \(\Set{u_1,\dots,u_M}\)を\(H\)の正規直交基底，\(\Set{\vect{e}_1,\dots,\vect{e}_N}\)を\(\numset{K}^N\)の標準基底とする．
-  このとき，\(\Phi\)の分解作用素\(T\)と合成作用素\(\synth{T}\)はそれぞれ
+  \(\lambda_k>0\)以外は\cref{theorem:spectral_theorem_two}からただちにしたがう．\(T(u_k)=\lambda_ku_k\)より
   \[
-    T(u_i) = \matrice*{\innerp{u_i}{\phi_1} \\ \vdots \\ \innerp{u_i}{\phi_N}}
-    = \sum_{j=1}^N\innerp{u_i}{\phi_j}\vect{e}_j,
-    \quad\synth{T}(\vect{e}_i) = \sum_{j=1}^N\kdelta{i}{j}\phi_j
-    = \sum_{j=1}^M\innerp{\phi_i}{u_j}u_j
-  \]
-  を満たすから，\(T\)の表現行列は\(\mat{T}=\trps{\matfence{\innerp{u_i}{\phi_j}}}\)，\(\synth{T}\)の表現行列は\(\trps{\matfence{\innerp{\phi_i}{u_j}}}=\matfence{\innerp{\phi_j}{u_i}}=\conj*{\matfence{\innerp{u_i}{\phi_j}}}=\htrps{\mat{T}}\)である．
-  したがって，\(S\)の表現行列は\(\mat{S}=\htrps{\mat{T}}\mat{T}\)であり，これは正規行列なのでスペクトル分解できる．すなわち，\(\mat{S}=\mat{V}\mat{\Lambda}\htrps{\mat{V}}\)を満たす\(M\)次ユニタリ行列\(\mat{V}\)，対角行列\(\mat{\Lambda}\)がある．
-
-  \(S\)が全単射であることを示すには，\(\mat{\Lambda}\)が正則と言えればよい．\(\mat{V}=\matfence{\midx{v}{i}{j}}=\rowvect{\vect{v}_1 & \cdots & \vect{v}_M}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_M)\)とおき，\(v_k\in H\)を\(v_k=\sum_{i=1}^M\midx{v}{i}{k}u_i\)で定める．すると
-  \[
-    \sum_{i=1}^M\abs{\innerp{v_k}{\phi_i}}^2 = \innerp{S(v_k)}{v_k}
-    = \sum_{i=1}^M\midx{v}{i}{k}\sum_{j=1}^M\innerp{S(u_i)}{u_j}\midx{\conj{v}}{j}{k}
-  \]
-  であり，\cref{lemma:unitary_representation}より\(\mat{S}=\trps{\matfence{\innerp{S(u_i)}{u_j}}}\)だから
-  \[
-    \sum_{i=1}^M\midx{v}{i}{k}\sum_{j=1}^M\innerp{S(u_i)}{u_j}\midx{\conj{v}}{j}{k} = \trps{\vect{v}_k}\trps{\mat{S}}\vect{\conj{v}}_k
-    = \trps{(\htrps{\vect{v}_k}(\mat{V}\mat{\Lambda}\htrps{\mat{V}})\vect{v}_k)}
+    \sum_{i\in I}\abs{\innerp{u_k}{\phi_i}}^2 = \innerp{S(u_k)}{u_k}
+    = \innerp{\lambda_ku_k}{u_k}
     = \lambda_k
   \]
-  となる．\(\Phi\)がフレームなのでこの値は正であり，\(\mat{\Lambda}\)は正則である．
+  であり，\(\Phi\)はフレームなので，この値は正である．
 \end{proof}
 
+\begin{proposition}{}{dual_reconstruction}
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S_\Phi\)を\(\Phi\)のフレーム作用素とする．このとき，列\(\Psi=\seq{S_\Phi^{-1}(\phi_i)}_{i\in I}\)は\(H\)のフレームである．
+  また，\(\Phi\)の分解作用素を\(T_\Phi\)，\(\Psi\)の合成作用素を\(\synth{T_\Psi}\)とおくと，\(\synth{T_\Psi}T_\Phi\)は\(H\)上の恒等変換である．
+\end{proposition}
+
 \begin{definition}{双対フレーム}{dual_frame}\index{そうついふれーむ@双対フレーム}\index{ふれーむ@フレーム!そうつい@双対\texttwoemdash}
-  \(\Phi=\seq{\vect{\phi}_i}_{i\in I}\)を\(H\)のフレームとする．\(H\)のフレーム\(\Psi=\seq{\vect{\psi}_i}_{i\in I}\)が条件
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．\(H\)のフレーム\(\Psi=\seq{\psi_i}_{i\in I}\)が条件
   \[
-    \vect{x} = \sum_{i\in I}\innerp{\vect{x}}{\vect{\phi}_i}\vect{\psi}_i\quad(\vect{x}\in H)
+    x = \sum_{i\in I}\innerp{x}{\phi_i}\psi_i\quad(x\in H)
   \]
   を満たすとき，\(\Psi\)を\(\Phi\)の\termdef{双対フレーム}（dual frame）という．
 \end{definition}
@@ -1393,7 +1392,7 @@
 代表的な窓関数を3つ挙げておく．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
 短時間フーリエ変換で使うときは，信号を切り取る長さ\(N\)を決めて，次のように離散化すればよい．
 \[
-  w[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
+  w_{\symrm{D}}[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
 \]
 
 \begin{example}
@@ -1432,7 +1431,7 @@
 \subsection{スペクトル定理の証明}
 \label{subsection:proof_of_the_spectral_theorem}
 
-\cref{theorem:spectral_theorem}を証明する前に，次の定理を示そう．
+\cref{theorem:spectral_theorem}と\cref{theorem:spectral_theorem_two}を証明する前に，次の定理を示す．
 
 \begin{theorem}{シューア分解}{schur_decomposition}\index{しゅーあぶんかい@シューア分解}\index{うえさんかくぎょうれつ@上三角行列}\index{ぎょうれつ@行列!うえさんかく@上三角\texttwoemdash}
   任意の複素正方行列はユニタリ行列で上三角化できる．すなわち，任意の\(n\)次複素正方行列\(\mat{A}\)に対し，
@@ -1460,7 +1459,7 @@
 
 \cref{theorem:schur_decomposition}を利用すると，\cref{theorem:spectral_theorem}は次のようにして示せる．
 
-\begin{proof}[スペクトル定理の証明]
+\begin{proof}[スペクトル定理Iの証明]
   ユニタリ行列で対角化できれば正規行列であることはすぐ分かる．
   \(\mat{A}\)を\(n\)次正規行列とする．\(\mat{A}\)のシューア分解を\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)とおくと，
   \(\htrps{\mat{A}}\mat{A}-\mat{A}\htrps{\mat{A}}=\mat{U}(\htrps{\mat{B}}\mat{B}-\mat{B}\htrps{\mat{B}})\htrps{\mat{U}}=\zmat\)より\(\mat{B}\)も正規行列である．
@@ -1474,6 +1473,35 @@
   次に\(d=2\)とすると，\(\abs{\midx{b}{1}{2}}^2+\abs{\midx{b}{2}{2}}^2=\abs{\midx{b}{2}{2}}^2=\sum_{j=2}^n\abs{\midx{b}{2}{j}}^2\)より\(\midx{b}{2}{3}=\dots=\midx{b}{2}{n}=0\)である．
   同様に\(d=n\)まで計算すれば(\(i<j\implies\midx{b}{i}{j}=0\))が分かる．\(\mat{B}\)は上三角行列だから，これは\(\mat{B}\)が対角行列であることを意味する．
   つまり，シューア分解\(\mat{A}=\mat{U}\mat{B}\htrps{\mat{U}}\)は\(\mat{A}\)のスペクトル分解になっている．
+\end{proof}
+
+\cref{theorem:spectral_theorem_two}は\cref{theorem:spectral_theorem}の（同値ではない）言い換えである．
+
+\begin{proof}[スペクトル定理IIの証明]
+  \(\basis{B}=\Set{e_1,\dots,e_n}\)を\(H\)の正規直交基底とする．\(\basis{B}\)に関する\(T\)の表現行列は\(\mat{T}=\trps{\matfence{\innerp{T(e_i)}{e_j}}}\)であり，
+  \(\htrps{\mat{T}}=\conj*{\matfence{\innerp{T(e_i)}{e_j}}}=\matfence{\innerp{e_j}{T(e_i)}}=\matfence{\innerp{T(e_j)}{e_i}}=\trps{\matfence{\innerp{T(e_i)}{e_j}}}=\mat{T}\)だから\(\mat{T}\)は正規行列である．
+  よって，\cref{theorem:spectral_theorem}よりスペクトル分解\(\mat{T}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)が存在する．
+
+  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}=\matfence{\midx{u}{i}{j}}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおき，
+  \(H\)の元\(u_k\)を\(u_k=\sum_i\midx{u}{i}{k}e_i\)で定める．すると\(\innerp{e_i}{e_j}=\kdelta{i}{j}\)，\(\innerp{\vect{u}_k}{\vect{u}_l}=\kdelta{k}{l}\)より
+  \[
+    \innerp{u_k}{u_l} = \innerp[\bigg]{\sum_i\midx{u}{i}{k}e_i}{\sum_j\midx{u}{j}{l}e_j}
+    = \sum_i\midx{u}{i}{k}\sum_j\innerp{e_i}{e_j}\midx{\conj{u}}{j}{l}
+    = \sum_i\midx{u}{i}{k}\midx{\conj{u}}{i}{l}
+    = \kdelta{k}{l}
+  \]
+  だから，集合\(\basis{B}'=\Set{u_1,\dots,u_n}\)は\(H\)の正規直交基底である．また
+  \[
+    \innerp{T(u_k)}{u_l} = \sum_i\midx{u}{i}{k}\sum_j\innerp{T(e_i)}{e_j}\midx{\conj{u}}{j}{l}
+    = \trps{\vect{u}_k}(\trps{\mat{S}}\vect{\conj{u}}_l)
+    = \trps{(\htrps{\vect{u}_k}(\mat{U}\mat{\Lambda}\htrps{\mat{U}})\vect{u}_l)}
+  \]
+  なので\(\innerp{T(u_k)}{u_l}=\lambda_k\kdelta{k}{l}\)，\(T(u_k)=\lambda_ku_k\)である．したがって，各\(u_k\)は\(T\)の固有値\(\lambda_k\)に属する固有ベクトルだから
+  \[
+    T(x) = \sum_k\innerp{x}{u_k}T(u_k)
+    = \sum_k\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+  \]
+  である．
 \end{proof}
 
 \subsection{主成分分析}
