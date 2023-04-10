@@ -87,6 +87,7 @@
 
 \ModifyHeading{section}{font={\Large\gtfamily\bfseries}}
 \ModifyHeading{subsection}{font={\large\gtfamily\bfseries}}
+\jlreqsetup{proof_label_font={\gtfamily\bfseries}}
 
 % 目次・補遺
 \patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{empty}\@starttoc}{}{}

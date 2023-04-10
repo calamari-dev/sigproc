@@ -12,19 +12,10 @@
     \(\mat{A}\neq\zmat\)，\(n<p\)のとき，\(\htrps{\mat{A}}\)の特異値分解を\(\htrps{\mat{A}}=\mat{V}\mat{\Sigma}\htrps{\mat{U}}\)とおくと\(\mat{A}=\mat{U}\htrps{\mat{\Sigma}}\htrps{\mat{V}}\)である．
     \(\htrps{\mat{\Sigma}}\)をあらためて\(\mat{\Sigma}\)とすれば\(\mat{A}=\mat{U}\mat{\Sigma}\htrps{\mat{V}}\)であり，これは\(\mat{A}\)の特異値分解である．
   \item 左側を示す．\cref{xr-proposition:pseudoinverse_characterization}より，任意の\(\vect{n}\in\nulsp\mat{A}\)に対して
-    \(
-      \innerp{(\imat-\pinv{\mat{A}}\mat{A})\vect{x}-\vect{x}}{\vect{n}} = -\innerp{\vect{x}}{\htrps{(\pinv{\mat{A}}\mat{A})}\vect{n}}
-      = -\innerp{\vect{x}}{\pinv{\mat{A}}\mat{A}\vect{n}}
-      = 0
-    \)
-    である．よって\(\proj_{\nulsp\mat{A}}\vect{x}=(\imat-\pinv{\mat{A}}\mat{A})\vect{x}\)である．
-    同様に，任意の\(\mat{A}\vect{w}\in\colsp\mat{A}\)に対して
-    \(
-      \innerp{\mat{A}\pinv{\mat{A}}\vect{y}-\vect{y}}{\mat{A}\vect{w}} = \innerp{\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}\vect{y}-\htrps{\mat{A}}\vect{y}}{\vect{w}}
-      = \innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{y}}{\vect{w}}
-      = 0
-    \)
-    である．したがって\(\proj_{\colsp\mat{A}}\vect{y}=\mat{A}\pinv{\mat{A}}\vect{y}\)である．
+    \(\innerp{(\imat-\pinv{\mat{A}}\mat{A})\vect{x}-\vect{x}}{\vect{n}} = -\innerp{\vect{x}}{\htrps{(\pinv{\mat{A}}\mat{A})}\vect{n}}=-\innerp{\vect{x}}{\pinv{\mat{A}}\mat{A}\vect{n}}=0\)
+    だから\(\proj_{\nulsp\mat{A}}\vect{x}=(\imat-\pinv{\mat{A}}\mat{A})\vect{x}\)である．同様に，任意の\(\mat{A}\vect{w}\in\colsp\mat{A}\)に対して
+    \(\innerp{\mat{A}\pinv{\mat{A}}\vect{y}-\vect{y}}{\mat{A}\vect{w}}=\innerp{\htrps{\mat{A}}\htrps{(\mat{A}\pinv{\mat{A}})}\vect{y}-\htrps{\mat{A}}\vect{y}}{\vect{w}}=\innerp{(\htrps{(\mat{A}\pinv{\mat{A}}\mat{A})}-\htrps{\mat{A}})\vect{y}}{\vect{w}}=0\)
+    だから\(\proj_{\colsp\mat{A}}\vect{y}=\mat{A}\pinv{\mat{A}}\vect{y}\)である．
   \item \(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおくと，\(\mat{A}^k=(\mat{U}\mat{\Lambda}\htrps{\mat{U}})^k=\mat{U}\mat{\Lambda}^k\htrps{\mat{U}}\)より
     \[
       \exp\mat{A} = \sum\frac{\mat{A}^k}{k!}
@@ -37,7 +28,15 @@
     \[
       \sum_{k=0}^2\abs{\innerp{\vect{x}}{\vect{\phi}_k}}^2 = v^2+\pqty*{-\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2+\pqty*{\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2\quad(\vect{x}=\trps{\matrice{u & v}})
     \]
-    である．右辺を整理すると\((3/2)(u^2+v^2)=(3/2)\vnorm{\vect{x}}^2\)となるので，メルセデス・ベンツフレームはフレーム限界\(3/2\)のタイトフレームである．
+    である．右辺を整理すると\((3/2)(u^2+v^2)=(3/2)\vnorm{\vect{x}}^2\)となる．
+  \item \(x\in\cycles{N}\)を任意にとる．\((\dgt{w}x)[k,j]=(\stft{w}x)[k,jN]=\sqrt{N}\dft{N}(x\cdot\translate{jN}\conj{w})[k]\)，\(\translate{jN}w=w\)なので\((\dgt{w}x)[k,j]=\sqrt{N}\dft{N}(x\cdot\conj{w})[k]\)である．
+    仮に\ltjkenten{ある}\(m\)で\(w[m]=0\)だったとすると，\(x=\translate{m}\comb\)のとき
+    \[
+      (\dgt{w}x)[k,j] = \sum_{n=0}^{N-1}\comb[n-m]\conj*{w[n]}\napr^{-2\krez\iuni kn/N}
+      = \conj*{w[m]}\napr^{-2\krez\iuni km/N}
+      = 0
+    \]
+    となる．よって\(\translate{m}\comb\in\ker\dgt{w}\)だから，\(\dgt{w}\)は単射ではない．一方，\cref{xr-corollary:frame_bijection}より任意のフレームについて分解作用素は単射である．したがって，このとき\(\gaborsys{w}{K}{N}\)はフレームではない．
 \end{enumerate}
 
 \end{document}

@@ -90,7 +90,6 @@
 \end{proposition}
 
 \begin{proof}
-  本証明に限り，\(\sum_{i=1}^m\)（\(m=\dim V\)）を\(\sum\)と略記する．
   任意に\(\vect{y}\in V\)をとる．\(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_m}\)を\(V\)の正規直交基底とすると，\(\vect{y}\)は\(\basis{B}\)の元の線形結合で\(\vect{y}=\sum z_i\vect{e}_i\)と書ける．
   また\(\innerp{\vect{e}_i}{\vect{e}_j}=\kdelta{i}{j}\)だから
   \[
@@ -888,11 +887,11 @@
   \]
 \end{definition}
 
-明らかに\(\cycles{N}\)は数列空間の部分空間である．\(\cycles{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\comb\in\cycles{N}\)を
+明らかに\(\cycles{N}\)は数列空間の部分空間である．\(\cycles{N}\)上の\termdef{ラグ作用素}\index{らぐさようそ@ラグ作用素}（lag operator）\(\lagop\)を\(\lagop x=\seq{x[n-1]}\)で定義し，数列\(\comb=\comb_N\in\cycles{N}\)を
 \[
-  \comb[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
+  \comb_N[n] = \begin{cases}1 & \text{(\(n\)は\(N\)で割り切れる)},\\ 0 & \text{(otherwise)}\end{cases}
 \]
-と定める\indexsymbol{\(\comb\)}\footnote{\(\comb\)（sha）はキリル文字．}．
+と定める\indexsymbol{\(\comb\)}\footnote{\(\comb\)（sha）はキリル文字．この記号を使う理由は\cref{figure:comb}を見れば分かる．}．
 
 \begin{proposition}{}{}
   集合\(\basis{D}=\Set{\lagop^m\comb\given 0\leq m<N}\)は\(\cycles{N}\)の基底である．ただし\(\lagop^0x=x\)とする．
@@ -913,6 +912,7 @@
   \centering
   \includegraphics{figures/comb.pdf}
   \caption{\(N=5\)のときの\(\comb\)と\(\lagop\comb\)の様子．}
+  \label{figure:comb}
 \end{figure}
 
 \begin{proposition}{}{dft_shift_theorem}
@@ -1300,13 +1300,13 @@
 \begin{corollary}{STFTの再構成}{stft_reconstruction}
   \(x\in\cycles{L}\)，\(\hat{x}=\stft{w}x\)とする．このとき
   \begin{gather*}
-    x = \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J}\hat{x}[k,m]\modulate{k}\translate{m}w,\\
+    x = \frac{1}{L\vnorm{w}^2}\sum_{k,m\in J}\hat{x}[k,m]\modulate{k}\translate{m}w, \\
     x[n] = \frac{1}{L\vnorm{w}^2}\sum_{k=0}^{L-1}\sum_{m=0}^{L-1}\hat{x}[k,m]w[n-m]\napr^{2\krez\iuni kn/L}
   \end{gather*}
   である．
 \end{corollary}
 
-\cref{corollary:stft_reconstruction}から\(\stft{w}\)は単射である．しかし\(\dim\cycles{L}=L\)，\(\dim\doublecycles{L}=L^2\)なので\texttwoemdash ごく例外的な\(L=1\)の場合を除き\texttwoemdash 全射ではなく，フレーム\(\seq{\modulate{k}\translate{n}w}\)は冗長である．
+\cref{corollary:stft_reconstruction}から\(\stft{w}\)は単射である．しかし\(\dim\cycles{L}=L\)，\(\dim\doublecycles{L}=L^2\)なので，\(L\geq 2\)のとき全射ではなく，フレーム\(\seq{\modulate{k}\translate{n}w}\)は冗長である．
 言い換えると，\(\stft{w}\)は\(\cycles{L}\)の元を「無駄が多い」形で表す写像である．
 
 無駄を省く方法として，\(k\)と\(n\)の値を間引くことが考えられる．間引きをともなう短時間フーリエ変換を離散ガボール変換という．
@@ -1325,14 +1325,11 @@
 \[
   \gaborsys{w}{K}{N} = \seq{\modulate{iK}\translate{jN}w}_{(i,j)\in\Lambda}\quad(\Lambda=\Set{(i,j)\in\numset{Z}^2\given 0\leq iK,jN<L})
 \]
-を\termdef{ガボールシステム}\index{がぼーるしすてむ@ガボールシステム}\index{GwKN@\(\gaborsys{w}{K}{N}\)}（Gabor system）という．\(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は
-\[
-  \midx{\hat{x}}{i}{j} = (\dgt{w}x)[i,j]\quad\text{(\(x\in\cycles{L}\)，\(\seq{\midx{\hat{x}}{i}{j}}=T(x)\))}
-\]
-を満たす．しかし，パラメータの組み合わせによっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
+を\termdef{ガボールシステム}\index{がぼーるしすてむ@ガボールシステム}\index{GwKN@\(\gaborsys{w}{K}{N}\)}（Gabor system）という．
+\(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は\(T(x)=\seq{(\dgt{w}x)[i,j]}_{(i,j)\in\Lambda}\)を満たす．しかし，パラメータの選択によっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
 
 \begin{example}
-  \(L=N\geq 2\)のとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない．
+  \(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない．
 \end{example}
 
 \subsection{双対フレームとDGT}
@@ -1341,11 +1338,10 @@
 
 \begin{theorem}{スペクトル定理II}{spectral_theorem_two}\index{すぺくとるていり@スペクトル定理}
   \(T\)は\(H\)上の線形変換であり，条件\(\innerp{T(x)}{y}=\innerp{x}{T(y)}\)（\(x,y\in H\)）を満たすとする．
-  このとき，\(T\)の固有ベクトルからなる\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)（\(n=\dim H\)）が存在する．また，各\(u_k\)が属する\(T\)の固有値を\(\lambda_k\)とおくと
+  このとき，\(T\)の固有ベクトルからなる\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)（\(n=\dim H\)）が存在する．また，各\(u_k\)が属する\(T\)の固有値を\(\lambda_k\)とおくと，次式が成立する．
   \[
     T(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
   \]
-  である．
 \end{theorem}
 
 \begin{proof}
@@ -1361,19 +1357,58 @@
 \end{corollary}
 
 \begin{proof}
-  \(\lambda_k>0\)以外は\cref{theorem:spectral_theorem_two}からただちにしたがう．\(T(u_k)=\lambda_ku_k\)より
+  \(\lambda_k>0\)以外は\cref{theorem:spectral_theorem_two}からただちにしたがう．\(S(u_k)=\lambda_ku_k\)より
   \[
-    \sum_{i\in I}\abs{\innerp{u_k}{\phi_i}}^2 = \innerp{S(u_k)}{u_k}
+    \sum_{i\in I}\abs{\innerp{u_k}{\phi_i}}^2 = \sum_{i\in I}\innerp{u_k}{\phi_i}\innerp{\phi_i}{u_k}
+    = \innerp{S(u_k)}{u_k}
     = \innerp{\lambda_ku_k}{u_k}
     = \lambda_k
   \]
-  であり，\(\Phi\)はフレームなので，この値は正である．
+  であり，\(\Phi\)はフレームなのでこの値は正である．
 \end{proof}
 
-\begin{proposition}{}{dual_reconstruction}
-  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S_\Phi\)を\(\Phi\)のフレーム作用素とする．このとき，列\(\Psi=\seq{S_\Phi^{-1}(\phi_i)}_{i\in I}\)は\(H\)のフレームである．
+\begin{proposition}{}{canonical_dual_reconstruction}
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S\)を\(\Phi\)のフレーム作用素とする．このとき\(S\)は全単射で，列\(\Psi=\seq{S^{-1}(\phi_i)}_{i\in I}\)は\(H\)のフレームである．
   また，\(\Phi\)の分解作用素を\(T_\Phi\)，\(\Psi\)の合成作用素を\(\synth{T_\Psi}\)とおくと，\(\synth{T_\Psi}T_\Phi\)は\(H\)上の恒等変換である．
 \end{proposition}
+
+\begin{proof}
+  \cref{corollary:frame_bijection}より，\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)と正数\(\lambda_1,\dots,\lambda_n\)を
+  \[
+    S(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+  \]
+  となるように選べる．すると，\(S\)の逆写像は
+  \[
+    S^{-1}(x) = \sum_{k=1}^n\lambda_k^{-1}\innerp{x}{u_k}u_k\quad(x\in H)
+  \]
+  と書ける（\(S^{-1}(S(x))=S(S^{-1}(x))=x\)を確かめればよい）．
+
+  組\((A,B)\)を\(\Phi\)のフレーム限界とする．\(x\in H\)を任意にとる．\(y=S^{-1}(x)\)，\(\psi_i=S^{-1}(\phi_i)\)とおくと，\(\innerp{x}{\psi_i}=\innerp{S(y)}{\psi_i}=\innerp{y}{S(\psi_i)}=\innerp{y}{\phi_i}\)だから
+  \[
+    \sum_{i\in I}\abs{\innerp{x}{\psi_i}}^2 = \sum_{i\in I}\abs{\innerp{y}{\phi_i}}^2
+    \in \ccival{A\vnorm{y}^2}{B\vnorm{y}^2},
+    \quad\vnorm{y}^2 = \sum_{k=1}^n\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
+  \]
+  である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，
+  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{A(\lambda_{\mathrm{max}})^{-2}}{B(\lambda_{\mathrm{min}})^{-2}}\)が得られる．
+  したがって，列\(\Psi=\seq{\psi_i}_{i\in I}\)は\(H\)のフレームである．また
+  \[
+    x = S^{-1}(S(x))
+    = \sum_{i\in I}\innerp{x}{\phi_i}S^{-1}(\phi_i)
+    = \sum_{i\in I}\innerp{x}{\phi_i}\psi_i
+    = \synth{T_\Psi}(T_\Phi(x))
+  \]
+  なので，\(\synth{T_\Psi}T_\Phi\)は\(H\)上の恒等変換である．
+\end{proof}
+
+\cref{proposition:canonical_dual_reconstruction}より，フレーム\(\Phi=\seq{\phi_i}_{i\in I}\)の分解作用素を\(T\)とすると，\(T(x)\)から\(x\)は
+\[
+  \Psi = \seq{\psi_i}_{i\in I}
+  = \seq{S^{-1}(\phi_i)}_{i\in I}\quad\text{(\(S\)は\(\Phi\)のフレーム作用素)}
+\]
+で定義されるフレーム\(\Psi\)によって再構成できる．\(\Psi\)を\(\Phi\)の\termdef{標準双対フレーム}\index{ひょうじゅんそうついふれーむ@標準双対フレーム}\index{そうついふれーむ@双対フレーム!ひょうじゅん@標準\texttwoemdash}（canonical dual frame）という．
+
+より一般に，標準双対フレームと同じ式で，\(T(x)\)から\(x\)を再構成できるフレームを双対フレームという．
 
 \begin{definition}{双対フレーム}{dual_frame}\index{そうついふれーむ@双対フレーム}\index{ふれーむ@フレーム!そうつい@双対\texttwoemdash}
   \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレームとする．\(H\)のフレーム\(\Psi=\seq{\psi_i}_{i\in I}\)が条件
@@ -1386,6 +1421,63 @@
 \begin{example}
   \(\Phi\)が\(H\)のパーセバルフレームなら，\cref{proposition:tight_frame_inversion}より\(\Phi\)自身が\(\Phi\)の双対フレームである．
 \end{example}
+
+離散ガボール変換に関する再構成公式を導こう．以下，\(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定し，\(S\)を\(\gaborsys{w}{K}{N}\)のフレーム作用素とする．
+
+\begin{lemma}{}{dgt_shift}
+  任意の\(a,b\in\numset{Z}\)について，次式が成立する．
+  \[
+    S(\modulate{aK}\translate{bN}x) = \modulate{aK}\translate{bN}S(x)\quad(x\in\cycles{L})
+  \]
+\end{lemma}
+
+\begin{proof}
+  \(\zeta=\napr^{2\krez\iuni/L}\)，\(\midx{x}{a}{b}=\modulate{aK}\translate{bN}x\)，\(\midx{w}{i}{j}=\modulate{iK}\translate{jN}w\)とおく．すると
+  \begin{align*}
+    S(\midx{x}{a}{b}) &= \sum_{i,j}\innerp{\midx{x}{a}{b}}{\midx{w}{i}{j}}\midx{w}{i}{j}
+    = \sum_{i,j}\sum_n\midx{x}{a}{b}[n]\midx{\conj{w}}{i}{j}[n]\midx{w}{i}{j} \\
+    &= \sum_{i,j}\sum_n\zeta^{aKn}x[n-bN]\midx{\conj{w}}{i}{j}[n]\midx{w}{i}{j}
+  \end{align*}
+  である．\(m=n-bN\)とおき，\(\sum_n\)を\(\sum_m\)に変えると
+  \[
+    S(\midx{x}{a}{b}) = \sum_{(i,j)\in\Lambda}\sum_mx[m]\conj*{\zeta^{-aK(m+bN)}\midx{w}{i}{j}[m+bN]}\midx{w}{i}{j}
+  \]
+  となる．さらに\((\translate{t}\modulate{\xi}x)[n]=\zeta^{\xi(n-t)}x[n-t]\)（\(t,\xi\in\numset{Z}\)）なので
+  \begin{gather*}
+    (\translate{-bN}\modulate{-aK}\midx{w}{i}{j})[m] = \zeta^{-aK(m+bN)}\midx{w}{i}{j}[m+bN], \\
+    S(\midx{x}{a}{b}) = \sum_{i,j}\sum_mx[m]\conj*{(\translate{-bN}\modulate{-aK}\midx{w}{i}{j})[m]}\midx{w}{i}{j}, \\
+    \translate{-bN}\modulate{-aK}S(\midx{x}{a}{b}) = \sum_{i,j}\innerp{x}{\translate{-bN}\modulate{-aK}\midx{w}{i}{j}}\translate{-bN}\modulate{-aK}\midx{w}{i}{j}
+  \end{gather*}
+  であり，\((\translate{t}\modulate{\xi}x)[n]=\zeta^{-\xi t}\zeta^{\xi n}x[n-t]=\zeta^{-\xi t}(\modulate{\xi}\translate{t}x)[n]\)より
+  \begin{gather*}
+    \begin{aligned}
+      \translate{-bN}\modulate{-aK}\midx{w}{i}{j} &= \translate{-bN}\modulate{-aK}\modulate{iK}\translate{jN}w
+      = (\translate{-bN}\modulate{(i-a)K})\translate{jN}w \\
+      &= (\zeta^{(i-a)K(-bN)}\modulate{(i-a)K}\translate{-bN})\translate{jN}w \\
+      &= \zeta^{(a-i)KbN}\modulate{(i-a)K}\translate{(j-b)N}w
+      = \zeta^{(a-i)KbN}\midx{w}{i-a}{j-b},
+    \end{aligned} \\
+    \translate{-bN}\modulate{-aK}S(\midx{x}{a}{b}) = \sum_{i,j}\innerp{x}{\midx{w}{i-a}{j-b}}\midx{w}{i-a}{j-b}
+  \end{gather*}
+  である．この値は\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても変わらないので\(\translate{-bN}\modulate{-aK}S(\midx{x}{a}{b})=S(x)\)，\(S(\midx{x}{a}{b})=\modulate{aK}\translate{bN}S(x)\)である．
+\end{proof}
+
+\begin{corollary}{DGTの再構成}{dgt_reconstruction}
+  \(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定する．\(x\in\cycles{L}\)を任意にとり，\(\hat{x}=\dgt{w}x\)とおく．このとき
+  \begin{gather*}
+    x = \sum_{(i,j)\in\Lambda}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma, \\
+    x[n] = \sum_{i=0}^{L/K-1}\sum_{j=0}^{L/N-1}\hat{x}[i,j]\gamma[n-jN]\napr^{2\krez\iuni(iK)n/L}
+  \end{gather*}
+  を満たす窓関数\(\gamma\in\cycles{L}\)が存在する．
+\end{corollary}
+
+\begin{proof}
+  \(\gamma=S^{-1}(w)\)とおく．\cref{lemma:dgt_shift}より\(S(\modulate{aK}\translate{bN}\gamma)=\modulate{aK}\translate{bN}S(\gamma)=\modulate{aK}\translate{bN}w\)，\(S^{-1}(\modulate{aK}\translate{bN}w)=\modulate{aK}\translate{bN}\gamma\)である．
+  よって，\cref{proposition:canonical_dual_reconstruction}から\(x=\sum_{i,j}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma\)である．
+\end{proof}
+
+\(\gamma=S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
+\cref{corollary:dgt_reconstruction}から，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
 
 \subsection{窓関数と不確定性}
 
@@ -1493,8 +1585,8 @@
   だから，集合\(\basis{B}'=\Set{u_1,\dots,u_n}\)は\(H\)の正規直交基底である．また
   \[
     \innerp{T(u_k)}{u_l} = \sum_i\midx{u}{i}{k}\sum_j\innerp{T(e_i)}{e_j}\midx{\conj{u}}{j}{l}
-    = \trps{\vect{u}_k}(\trps{\mat{S}}\vect{\conj{u}}_l)
-    = \trps{(\htrps{\vect{u}_k}(\mat{U}\mat{\Lambda}\htrps{\mat{U}})\vect{u}_l)}
+    = \trps{\vect{u}_k}(\trps{\mat{T}}\vect{\conj{u}}_l)
+    = \trps{\vect{u}_k}\mat{\conj{U}}\mat{\Lambda}\trps{\mat{U}}\vect{\conj{u}}_l
   \]
   なので\(\innerp{T(u_k)}{u_l}=\lambda_k\kdelta{k}{l}\)，\(T(u_k)=\lambda_ku_k\)である．したがって，各\(u_k\)は\(T\)の固有値\(\lambda_k\)に属する固有ベクトルだから
   \[
@@ -1542,6 +1634,7 @@
     \end{equation}
     であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセバルの定理}\index{ぱーせばるのていり@パーセバルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
   \item メルセデス・ベンツフレームがタイトであることを示せ．
+  \item \(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならないことを示せ．
 \end{enumerate}
 
 \end{document}
