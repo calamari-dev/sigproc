@@ -1423,7 +1423,7 @@
 \end{example}
 
 離散ガボール変換に関する再構成公式を導こう．以下，\(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定し，\(S\)を\(\gaborsys{w}{K}{N}\)のフレーム作用素とする．
-また，\cref{lemma:dgt_shift}の証明まで\(\ftrans=\dft{L}\)，\(\zeta=\napr^{2\krez\iuni/L}\)と略記する．
+また，\cref{lemma:dgt_shift}の証明まで\(\ftrans=\sqrt{L}\dft{L}\)，\(\zeta=\napr^{2\krez\iuni/L}\)と略記する．
 
 \begin{lemma}{交換関係}{dft_commutation}
   以下の式が成り立つ．
@@ -1437,12 +1437,12 @@
 \begin{proof}
   1つめの式は\((\modulate{\nu}\translate{t}x)[n]=\zeta^{\nu n}x[n-t]=\zeta^{\nu t}\zeta^{\nu(n-t)}x[n-t]=\zeta^{\nu t}(\translate{t}\modulate{\nu}x)[n]\)から分かる．
 
-  2つめを示す．\(\sqrt{L}(\ftrans x)[k]=\sum_nx[n]\zeta^{-kn}=\sum_n(\modulate{-k}x)[n]\)なので
+  2つめを示す．\((\ftrans x)[k]=\sum_nx[n]\zeta^{-kn}=\sum_n(\modulate{-k}x)[n]\)なので
   \[
-    \sqrt{L}(\ftrans\translate{t}x)[k] = \sum_n(\modulate{-k}\translate{t}x)[n]
+    (\ftrans\translate{t}x)[k] = \sum_n(\modulate{-k}\translate{t}x)[n]
     = \zeta^{-kt}\sum_n(\translate{t}\modulate{-k}x)[n]
   \]
-  である．そして\(\modulate{-k}x\in\cycles{L}\)より\(\sum_n(\translate{t}\modulate{-k}x)[n]=\sum_n(\modulate{-k}x)[n]=\sqrt{L}(\ftrans x)[k]\)だから\((\ftrans\translate{t}x)[k]=\zeta^{-kt}(\ftrans x)[k]=(\modulate{-t}\ftrans x)[k]\)である．3つめも同様に示せる．
+  である．そして\(\modulate{-k}x\in\cycles{L}\)より\(\sum_n(\translate{t}\modulate{-k}x)[n]=\sum_n(\modulate{-k}x)[n]=(\ftrans x)[k]\)だから\((\ftrans\translate{t}x)[k]=\zeta^{-kt}(\ftrans x)[k]=(\modulate{-t}\ftrans x)[k]\)である．3つめも同様に示せる．
 \end{proof}
 
 \begin{lemma}{}{shift_convolution}
@@ -1477,20 +1477,20 @@
     S(\tfshift{a}{b}x) &= \sum_{i,j}(\stft{w}\tfshift{a}{b}x)[iK,jN]\tfshift{i}{j}w \\
     &= \sum_{i,j}\zeta^{(a-i)KbN}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i}{j}w
   \end{align*}
-  である．そして\(\tfshift*{a}{b}\tfshift{i}{j}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)だから\footnote{\(\tfshift*{a}{b}\tfshift{i}{j}=\translate{-bN}\modulate{(i-a)K}\translate{jN}=\zeta^{(i-a)KbN}\modulate{(i-a)K}\translate{(j-b)N}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)．}
-  \[
-    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w
-  \]
-  であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても値は変わらないので
+  である．そして\(\tfshift*{a}{b}\tfshift{i}{j}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)である\footnote{\(\tfshift*{a}{b}\tfshift{i}{j}=\translate{-bN}\modulate{(i-a)K}\translate{jN}=\zeta^{(i-a)KbN}\modulate{(i-a)K}\translate{(j-b)N}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)．}から
   \begin{align*}
-    \tfshift*{a}{b}S(\tfshift{a}{b}x) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j}\conj{w}))[(i+a)K]\tfshift{i}{j}w \\
-    &= \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
+    \tfshift*{a}{b}S(\tfshift{a}{b}x) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w \\
+    &= \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j-b}\conj{w}))[(i-a)K]\tfshift{i-a}{j-b}w
   \end{align*}
+  であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても値は変わらないので
+  \[
+    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
+  \]
   である．\(\translate{-aK}\ftrans\tfshift{a}{j}=\ftrans\modulate{-aK}\tfshift{a}{j}=\ftrans\translate{jN}\)だから
   \[
     \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]\tfshift{i}{j}w
   \]
-  である．これと\((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w})[iK]=\ftrans(x\cdot\translate{jN}\conj{w})[iK]=(\dgt{w})[i,j]\)より\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
+  である．これと\(((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]=\ftrans(x\cdot\translate{jN}\conj{w})[iK]=(\dgt{w})[i,j]\)より\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
 \end{proof}
 
 \begin{corollary}{DGTの再構成}{dgt_reconstruction}
