@@ -1494,12 +1494,12 @@
 \end{proof}
 
 \begin{corollary}{DGTの再構成}{dgt_reconstruction}
-  \(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定する．\(x\in\cycles{L}\)を任意にとり，\(\hat{x}=\dgt{w}x\)とおく．このとき
+  \(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームであれば，\(\cycles{L}\)の元\(\gamma\)が存在し，各\(x\in\cycles{L}\)，\(\hat{x}=\dgt{w}x\)に対して
   \begin{gather*}
     x = \sum_{(i,j)\in\Lambda}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma, \\
     x[n] = \sum_{i=0}^{L/K-1}\sum_{j=0}^{L/N-1}\hat{x}[i,j]\gamma[n-jN]\napr^{2\krez\iuni(iK)n/L}
   \end{gather*}
-  を満たす窓関数\(\gamma\in\cycles{L}\)が存在する．
+  を満たす．
 \end{corollary}
 
 \begin{proof}
@@ -1608,7 +1608,7 @@
   \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}=\matfence{\midx{u}{i}{j}}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおき，
   \(H\)の元\(u_k\)を\(u_k=\sum_i\midx{u}{i}{k}e_i\)で定める．すると\(\innerp{e_i}{e_j}=\kdelta{i}{j}\)，\(\innerp{\vect{u}_k}{\vect{u}_l}=\kdelta{k}{l}\)より
   \[
-    \innerp{u_k}{u_l} = \innerp[\bigg]{\sum_i\midx{u}{i}{k}e_i}{\sum_j\midx{u}{j}{l}e_j}
+    \innerp{u_k}{u_l} = \innerp*{\sum_i\midx{u}{i}{k}e_i}{\sum_j\midx{u}{j}{l}e_j}
     = \sum_i\midx{u}{i}{k}\sum_j\innerp{e_i}{e_j}\midx{\conj{u}}{j}{l}
     = \sum_i\midx{u}{i}{k}\midx{\conj{u}}{i}{l}
     = \kdelta{k}{l}
