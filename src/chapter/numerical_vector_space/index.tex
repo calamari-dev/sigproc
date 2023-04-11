@@ -212,15 +212,15 @@
 \subsection{分解と合成}
 \label{subsection:analysis_and_synthesis}
 
-\cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
-一方で，\(\vect{x}\)の性質を調べるのに使いたい\(\numset{C}^n\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)がさきにあって，そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)（\(m=1,\dots,n\)）への直交射影\(\proj_{V_m}\vect{x}\)を作ることも多い．
-そのような場合，直交射影は3つの操作に分解できる．
+\cref{proposition:finite_convex_projection}の証明では，\(\proj_V\vect{x}\)の存在を示すために\(V\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_m}\)を1つ選び，\(\proj_V\vect{x}\)を\(\sum\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)と表した．
+一方で，\(\vect{x}\)の性質を調べるのに使いたい\(\numset{C}^n\)の正規直交基底\(\Set{\vect{e}_1,\dots,\vect{e}_n}\)がさきにあって，そこから部分空間\(V_m=\spannedby\Set{\vect{e}_1,\dots,\vect{e}_m}\)への直交射影\(\proj_{V_m}\vect{x}\)を作ることも多い．
+後者の場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
   \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい\footnotemark ，\(\htrps{\mat{A}}\)と表す．
 \end{definition}
 
-\footnotetext{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．}
+\footnote{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．}
 \(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
@@ -1423,43 +1423,74 @@
 \end{example}
 
 離散ガボール変換に関する再構成公式を導こう．以下，\(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定し，\(S\)を\(\gaborsys{w}{K}{N}\)のフレーム作用素とする．
+また，\cref{lemma:dgt_shift}の証明まで\(\ftrans=\dft{L}\)，\(\zeta=\napr^{2\krez\iuni/L}\)と略記する．
+
+\begin{lemma}{交換関係}{dft_commutation}
+  以下の式が成り立つ．
+  \[
+    \modulate{\nu}\translate{t} = \zeta^{\nu t}\translate{t}\modulate{\nu},
+    \quad\ftrans\translate{t} = \modulate{-t}\ftrans,
+    \quad\ftrans\modulate{\nu} = \translate{\nu}\ftrans
+  \]
+\end{lemma}
+
+\begin{proof}
+  1つめの式は\((\modulate{\nu}\translate{t}x)[n]=\zeta^{\nu n}x[n-t]=\zeta^{\nu t}\zeta^{\nu(n-t)}x[n-t]=\zeta^{\nu t}(\translate{t}\modulate{\nu}x)[n]\)から分かる．
+
+  2つめを示す．\(\sqrt{L}(\ftrans x)[k]=\sum_nx[n]\zeta^{-kn}=\sum_n(\modulate{-k}x)[n]\)なので
+  \[
+    \sqrt{L}(\ftrans\translate{t}x)[k] = \sum_n(\modulate{-k}\translate{t}x)[n]
+    = \zeta^{-kt}\sum_n(\translate{t}\modulate{-k}x)[n]
+  \]
+  である．そして\(\modulate{-k}x\in\cycles{L}\)より\(\sum_n(\translate{t}\modulate{-k}x)[n]=\sum_n(\modulate{-k}x)[n]=\sqrt{L}(\ftrans x)[k]\)だから\((\ftrans\translate{t}x)[k]=\zeta^{-kt}(\ftrans x)[k]=(\modulate{-t}\ftrans x)[k]\)である．3つめも同様に示せる．
+\end{proof}
+
+\begin{lemma}{}{shift_convolution}
+  任意の\(x,y\in\cycles{L}\)に対して次式が成立する．
+  \[
+    \translate{t}(x\circconv y) = x\circconv(\translate{t}y),
+    \quad\modulate{\nu}(x\circconv y) = (\modulate{\nu}x)\circconv(\modulate{\nu}y)
+  \]
+\end{lemma}
+
+\begin{proof}
+  \((x\circconv y)[n]=\sum_mx[m]y[n-m]=\sum_mx[m](\translate{m}y)[n]\)だから\(x\circconv y=\sum_mx[m]\translate{m}y\)，よって\(\translate{t}(x\circconv y)=\sum_mx[m]\translate{t+m}y=x\circconv(\translate{t}y)\)である．
+  また，\cref{lemma:dft_commutation}から\(\modulate{\nu}(x\circconv y)=\sum_nx[n]\modulate{\nu}\translate{n}y=\sum_n\zeta^{\nu n}x[n]\translate{n}\modulate{\nu}y=(\modulate{\nu}x)\circconv(\modulate{\nu}y)\)である．
+\end{proof}
 
 \begin{lemma}{}{dgt_shift}
-  任意の\(a,b\in\numset{Z}\)について，次式が成立する．
+  任意の\(a,b\in\numset{Z}\)に対して次式が成立する．
   \[
     S(\modulate{aK}\translate{bN}x) = \modulate{aK}\translate{bN}S(x)\quad(x\in\cycles{L})
   \]
 \end{lemma}
 
 \begin{proof}
-  \(\zeta=\napr^{2\krez\iuni/L}\)，\(\midx{x}{a}{b}=\modulate{aK}\translate{bN}x\)，\(\midx{w}{i}{j}=\modulate{iK}\translate{jN}w\)とおく．すると
-  \begin{align*}
-    S(\midx{x}{a}{b}) &= \sum_{i,j}\innerp{\midx{x}{a}{b}}{\midx{w}{i}{j}}\midx{w}{i}{j}
-    = \sum_{i,j}\sum_n\midx{x}{a}{b}[n]\midx{\conj{w}}{i}{j}[n]\midx{w}{i}{j} \\
-    &= \sum_{i,j}\sum_n\zeta^{aKn}x[n-bN]\midx{\conj{w}}{i}{j}[n]\midx{w}{i}{j}
-  \end{align*}
-  である．\(m=n-bN\)とおき，\(\sum_n\)を\(\sum_m\)に変えると
+  \((\stft{w}x)[\holder,n]=\ftrans(x\cdot\translate{n}\conj{w})=(\ftrans x)\circconv(\ftrans\translate{n}\conj{w})\)より\(\stft{w}(\modulate{\nu}\translate{t}x)[\holder,n]=(\ftrans\modulate{\nu}\translate{t}x)\circconv(\modulate{-n}\ftrans\conj{w})=(\translate{\nu}\modulate{-t}\ftrans x)\circconv(\modulate{-n}\ftrans\conj{w})\)である．
+  さらに，\cref{lemma:shift_convolution}から\((\translate{\nu}\modulate{-t}\ftrans x)\circconv(\modulate{-n}\ftrans\conj{w})=(\modulate{-t}\ftrans x)\circconv(\translate{\nu}\modulate{-n}\ftrans\conj{w})=\modulate{-t}((\ftrans x)\circconv(\modulate{t}\translate{\nu}\modulate{-n}\ftrans\conj{w}))\)であり，
+  \(\modulate{t}\translate{\nu}\modulate{-n}\ftrans=\zeta^{\nu t}\translate{\nu}\modulate{t-n}\ftrans=\zeta^{\nu t}\ftrans\modulate{\nu}\translate{n-t}\)なので
   \[
-    S(\midx{x}{a}{b}) = \sum_{(i,j)\in\Lambda}\sum_mx[m]\conj*{\zeta^{-aK(m+bN)}\midx{w}{i}{j}[m+bN]}\midx{w}{i}{j}
+    (\stft{w}\modulate{\nu}\translate{t}x)[\holder,n] = \zeta^{\nu t}\modulate{-t}((\ftrans x)\circconv(\ftrans\modulate{\nu}\translate{n-t}\conj{w}))
   \]
-  となる．さらに\((\translate{t}\modulate{\xi}x)[n]=\zeta^{\xi(n-t)}x[n-t]\)（\(t,\xi\in\numset{Z}\)）なので
-  \begin{gather*}
-    (\translate{-bN}\modulate{-aK}\midx{w}{i}{j})[m] = \zeta^{-aK(m+bN)}\midx{w}{i}{j}[m+bN], \\
-    S(\midx{x}{a}{b}) = \sum_{i,j}\sum_mx[m]\conj*{(\translate{-bN}\modulate{-aK}\midx{w}{i}{j})[m]}\midx{w}{i}{j}, \\
-    \translate{-bN}\modulate{-aK}S(\midx{x}{a}{b}) = \sum_{i,j}\innerp{x}{\translate{-bN}\modulate{-aK}\midx{w}{i}{j}}\translate{-bN}\modulate{-aK}\midx{w}{i}{j}
-  \end{gather*}
-  であり，\((\translate{t}\modulate{\xi}x)[n]=\zeta^{-\xi t}\zeta^{\xi n}x[n-t]=\zeta^{-\xi t}(\modulate{\xi}\translate{t}x)[n]\)より
-  \begin{gather*}
-    \begin{aligned}
-      \translate{-bN}\modulate{-aK}\midx{w}{i}{j} &= \translate{-bN}\modulate{-aK}\modulate{iK}\translate{jN}w
-      = (\translate{-bN}\modulate{(i-a)K})\translate{jN}w \\
-      &= (\zeta^{(i-a)K(-bN)}\modulate{(i-a)K}\translate{-bN})\translate{jN}w \\
-      &= \zeta^{(a-i)KbN}\modulate{(i-a)K}\translate{(j-b)N}w
-      = \zeta^{(a-i)KbN}\midx{w}{i-a}{j-b},
-    \end{aligned} \\
-    \translate{-bN}\modulate{-aK}S(\midx{x}{a}{b}) = \sum_{i,j}\innerp{x}{\midx{w}{i-a}{j-b}}\midx{w}{i-a}{j-b}
-  \end{gather*}
-  である．この値は\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても変わらないので\(\translate{-bN}\modulate{-aK}S(\midx{x}{a}{b})=S(x)\)，\(S(\midx{x}{a}{b})=\modulate{aK}\translate{bN}S(x)\)である．
+  である．したがって，\(\tfshift{i}{j}=\modulate{iK}\translate{jN}\)とおくと
+  \begin{align*}
+    S(\tfshift{a}{b}x) &= \sum_{i,j}(\stft{w}\tfshift{a}{b}x)[iK,jN]\tfshift{i}{j}w \\
+    &= \sum_{i,j}\zeta^{(a-i)KbN}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i}{j}w
+  \end{align*}
+  である．そして\(\tfshift*{a}{b}\tfshift{i}{j}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)だから\footnote{\(\tfshift*{a}{b}\tfshift{i}{j}=\translate{-bN}\modulate{(i-a)K}\translate{jN}=\zeta^{(i-a)KbN}\modulate{(i-a)K}\translate{(j-b)N}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)．}
+  \[
+    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w
+  \]
+  であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても値は変わらないので
+  \begin{align*}
+    \tfshift*{a}{b}S(\tfshift{a}{b}x) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j}\conj{w}))[(i+a)K]\tfshift{i}{j}w \\
+    &= \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
+  \end{align*}
+  である．\(\translate{-aK}\ftrans\tfshift{a}{j}=\ftrans\modulate{-aK}\tfshift{a}{j}=\ftrans\translate{jN}\)だから
+  \[
+    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]\tfshift{i}{j}w
+  \]
+  である．これと\((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w})[iK]=\ftrans(x\cdot\translate{jN}\conj{w})[iK]=(\dgt{w})[i,j]\)より\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
 \end{proof}
 
 \begin{corollary}{DGTの再構成}{dgt_reconstruction}
@@ -1477,7 +1508,7 @@
 \end{proof}
 
 \(\gamma=S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
-\cref{corollary:dgt_reconstruction}から，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
+\cref{corollary:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
 
 \subsection{窓関数と不確定性}
 

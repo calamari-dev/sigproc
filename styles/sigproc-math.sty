@@ -115,6 +115,7 @@
 \NewDocumentCommand{\ftrans}{}{\operateur{\symscr{F}}}
 \NewDocumentCommand{\lagop}{}{\operateur{\symit{L}}}
 \NewDocumentCommand{\stft}{o m}{\operateur{\symscr{V}_{#2}\IfValueT{#1}{^{(#1)}}}}
+\NewDocumentCommand{\tfshift}{s m m}{\operateur{\midx{\pi}{#2}{#3}\IfBooleanT{#1}{^{-1}}}}
 \NewDocumentCommand{\translate}{m}{\operateur{\symscr{T}_{#1}}}
 
 % 測度論
