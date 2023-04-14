@@ -250,7 +250,7 @@
 \end{equation}
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
-以上の理由から，本書では線形写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum_{i=1}^nx_i\vect{e}_i\)を合成作用素と呼ぶ．
+以上の理由から，本書では線形写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum x_i\vect{e}_i\)を合成作用素と呼ぶ．
 
 \begin{definition}{分解作用素，合成作用素}{analysis_and_synthesis}\index{ぶんかいさようそ@分解作用素}\index{ごうせいさようそ@合成作用素}
   \(\basis{B}=\Set{\vect{e}_1,\dots,\vect{e}_n}\)を\(\numset{K}^n\)の正規直交基底とする．
@@ -584,7 +584,7 @@
 \cref{subsection:sd_and_svd}から\cref{subsection:pseudoinverse}の結果は，スペクトル分解と特異値分解を次の形で適当に読み替えれば\(\numset{K}=\numset{R}\)のときも適用できる．
 証明は\(\numset{K}=\numset{C}\)のときとほとんど変わらない．
 
-\begin{theorem}{スペクトル定理}{spectral_theorem_in_real}\index{すぺくとるていり@スペクトル定理!じつぎょうれつ@実行列}\index{ちょっこうぎょうれつ@直交行列}\index{ぎょうれつ@行列!ちょっこう@直交\texttwoemdash}
+\begin{theorem}{スペクトル定理I}{spectral_theorem_in_real}\index{すぺくとるていり@スペクトル定理!じつぎょうれつ@実行列}\index{ちょっこうぎょうれつ@直交行列}\index{ぎょうれつ@行列!ちょっこう@直交\texttwoemdash}
   \(\mat{A}\)を\(n\)次実正方行列とする．このとき，\(\mat{A}\)に関する以下の条件は同値である．
   \begin{enumerate}
     \item \(\mat{A}\)は正規行列である．
@@ -725,7 +725,7 @@
   \(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\in\numset{C}^N\)とする．
   \[
     \dft{N}\vect{x} = \trps{\matrice{\hat{x}_0 & \cdots & \hat{x}_{N-1}}},
-    \quad\hat{x}_k = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
+    \quad\hat{x}_k = \sum_{n=0}^{N-1}x_n\napr^{-2\krez\iuni kn/N}
   \]
   で定義される\(\numset{C}^N\)上の線形変換\(\dft{N}\)を\termdef{離散フーリエ変換}（discrete Fourier transform; DFT）という．
 \end{definition}
@@ -733,27 +733,32 @@
 以下では\(\napr^{2\krez\iuni/N}=\cos(2\krez/N)+\iuni\sin(2\krez/N)\)を単に\(\zeta\)と書く．
 
 \begin{proposition}{}{dft_onb}
-  \(\vect{w}_k=N^{-1/2}\trps{\rowvect{\zeta^{k\cdot 0} & \cdots & \zeta^{k(N-1)}}}\)とする．
-  このとき，集合\(\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)は\(\numset{C}^N\)の正規直交基底である．
+  \(\vect{w}_k=\trps{\rowvect{\zeta^{k\cdot 0} & \cdots & \zeta^{k(N-1)}}}\)とする．
+  このとき，集合\(\basis{W}=\Set{N^{-1/2}\vect{w}_k\given 0\leq k<N}\)は\(\numset{C}^N\)の正規直交基底である．
 \end{proposition}
 
 \begin{proof}
   \(\conj{\zeta}=\zeta^{-1}\)だから，\(\innerp{\vect{w}_i}{\vect{w}_j}=\trps{\vect{w}_i}\conj{\vect{w}}_j\)は
   \[
-    \sum_{n=0}^{N-1}\frac{\zeta^{in}}{\sqrt{N}}\frac{\conj{\zeta}^{jn}}{\sqrt{N}} = \frac{1}{N}\sum_{n=0}^{N-1}\zeta^{(i-j)n}
-    = \begin{cases}(\zeta^{(i-j)N}-1)/(N(\zeta^{i-j}-1)) & (i\neq j), \\ 1 & (i=j)\end{cases}
+    \sum_{n=0}^{N-1}\zeta^{in}\conj{\zeta}^{jn} = \sum_{n=0}^{N-1}\zeta^{(i-j)n}
+    = \begin{cases}(\zeta^{(i-j)N}-1)/(\zeta^{i-j}-1) & (i\neq j), \\ N & (i=j)\end{cases}
   \]
-  と変形できる．\(\zeta^N=1\)なので\(\innerp{\vect{w}_i}{\vect{w}_j}=\kdelta{i}{j}\)である．
+  と変形できる．\(\zeta^N=1\)なので\(\innerp{\vect{w}_i}{\vect{w}_j}=N\kdelta{i}{j}\)である．
 \end{proof}
 
-\cref{proposition:dft_onb}から，\(\dft{N}\)は正規直交基底\(\basis{W}=\Set{\vect{w}_0,\dots,\vect{w}_{N-1}}\)に関する分解作用素である．
+\(\innerp{\vect{x}}{N^{-1/2}\vect{w}_k}=N^{-1/2}\innerp{\vect{x}}{\vect{w}_k}=N^{-1/2}\hat{x}_k\)だから，\(\basis{W}\)に関する分解作用素\(T\)は\(T(\vect{x})=N^{-1/2}\dft{N}\vect{x}\)を満たす．
 分解作用素の逆写像は合成作用素なので，\(\dft{N}\)の逆変換は
 \begin{equation}
   \label{equation:idft}
-  \vect{x} = \sum_{k=0}^{N-1}\hat{x}_k\vect{w}_k,
-  \quad x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
+  \vect{x} = \sum_{k=0}^{N-1}\frac{\hat{x}_k}{\sqrt{N}}\frac{\vect{w}_k}{\sqrt{N}},
+  \quad x_n = \frac{1}{N}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
 \end{equation}
 と書ける．
+
+\begin{note}
+  \(T=N^{-1/2}\dft{N}\)だから，2つのベクトル\(\vect{x}\)と\(\vect{y}\)がともに\(\numset{C}^N\)の元であれば，\(T(\vect{x})\)と\(T(\vect{y})\)を比較するのも，\(\dft{N}\vect{x}\)と\(\dft{N}\vect{y}\)を比較するのも同じことである．
+  そこで，以降は\(\dft{N}\)を分解作用素\(T\)とほぼ同じものとみなす．
+\end{note}
 
 他の諸性質を導く前に，離散フーリエ変換の工学的重要性を見ておこう．
 
@@ -773,14 +778,14 @@
 \end{figure}
 
 \cref{figure:time_domain}は「あ」という音声の波形である\footnote{カノン\cite{canon}による波音リツ単独音バージョン1.5.1を使用した．}．
-冒頭で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．
-そして，分解作用素に関する考察によれば，\(\hat{x}_k=\innerp{\vect{x}}{\vect{w}_k}\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
-つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
+冒頭で述べたように，\cref{figure:time_domain}のデータは数ベクトル\(\vect{x}\in\numset{C}^N\)と見なせる．そして，分解作用素に関する考察によれば，\(\hat{x}_k\)は\(\vect{x}\)に含まれる\(\vect{w}_k\)の成分に相当する．
+つまり，\(\hat{x}_k\)の絶対値\(\abs{\hat{x}_k}\)は音声\(\vect{x}\)に含まれる\(\vect{w}_k\)の量を表すと考えられる．
+では，偏角\(\arg\hat{x}_k\)はどういう意味を持つのだろう\？極形式\(\hat{x}_k=\abs{\hat{x}_k}\napr^{\iuni\arg\hat{x}_k}\)を\cref{equation:idft}に代入すると
 \[
-  x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
-  = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\abs{\hat{x}_k}\napr^{\iuni(2\krez kn/N+\arg\hat{x}_k)}
+  x_n = \frac{1}{N}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
+  = \frac{1}{N}\sum_{k=0}^{N-1}\abs{\hat{x}_k}\napr^{\iuni(2\krez kn/N+\arg\hat{x}_k)}
 \]
-となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は\cref{figure:complex_sinusoid}のような螺旋形を描く（矢印は時間軸）．
+となるから，\(\arg\hat{x}_k\)は音声\(\vect{x}\)に含まれる周波数\(k/N\)の波\(\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)の初期位相を表している．この波は\cref{figure:complex_sinusoid}のような螺旋形を描く（矢印は時間軸）．
 
 実際に\(\abs{\hat{x}_k}\)を計算すると，\cref{figure:frequency_domain}実線部のようになる．
 
@@ -803,7 +808,7 @@
 
 \subsection{エイリアシング}
 
-さきほど「\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
+さきほど「\(\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は周波数\(k/N\)の波である」と述べたが，この表現には少し語弊がある．
 
 周波数\(f\)\,\si{Hz}の波\(\napr^{2\krez\iuni ft}\)について，瞬時値を1秒あたり\(f_{\symrm{s}}\)回記録すると数列\(\seq{\napr^{2\krez\iuni fn/f_{\symrm{s}}}}_{n\in\numset{Z}}\)ができる．
 一方，周波数(\(f-f_{\symrm{s}}\))\,\si{Hz}の波\(\napr^{2\krez\iuni(f-f_{\symrm{s}})t}\)について同じ方法で数列を作ると，
@@ -830,8 +835,8 @@
 \cref{figure:aliasing}の場合，標本化後の信号は周波数の絶対値が小さい（つまり低周波である）\SI{-0.5}{Hz}の波を表すと考えるほうが自然だろう．
 周波数\(f\)の波を標本化すると，\(f\)より低周波の波と区別できなくなるのは\(\abs{f}\geq f_{\symrm{s}}/2\)のときである．\(f_{\symrm{s}}/2\)のことを\termdef{ナイキスト周波数}\index{ないきすとしゅうはすう@ナイキスト周波数}（Nyquist frequency）という．
 
-話を離散フーリエ変換に戻すと，\(\sqrt{N}\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は\(f=k\)の波が\(f_{\symrm{s}}=N\)で標本化されたものとみなせる．
-そのため，\(k\geq N/2\)のとき\(\sqrt{N}\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
+話を離散フーリエ変換に戻すと，\(\midx{w}{k}{n}=\napr^{2\krez\iuni kn/N}\)は\(f=k\)の波が\(f_{\symrm{s}}=N\)で標本化されたものとみなせる．
+そのため，\(k\geq N/2\)のとき\(\midx{w}{k}{n}\)は周波数\(k/N\)の波ではなく，周波数\((k-N)/N\)の波を表すとみなすのが普通である．
 
 \subsection{曲線あてはめとDFT}
 \label{subsection:dft_as_curve_fitting}
@@ -840,9 +845,13 @@
 \[
   g(\vect{c};t) = c_0\phi_0(t)+\dots+c_{K-1}\phi_{K-1}(t)\quad(\phi_k(t)=\napr^{\iuni kt})
 \]
-で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる\footnote{信号処理では慣習的に，整数値などの離散的な引数を大かっこで書く．}．
+で近似しよう．標本化周波数\(N\)で\(f\)を標本化すると，離散信号\(x[n]=f(t_n)\)（\(t_n=2\krez n/N\)）が得られる．
 
-\(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(g(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（たとえば\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
+\begin{note}
+  信号処理では慣習的に，整数値などの離散的な引数を大かっこで書く．
+\end{note}
+
+\(N\)個の標本\(f(t_n)=x[n]\)（\(0\leq n<N\)）を用いて\(f\)を\(g(\vect{c};t)\)にあてはめる場合，\(K\)を\(N\)より大きくとると，\(\phi_0,\dots,\phi_{K-1}\)の中に標本化後は区別できなくなる組が現れてしまう（特に\(\phi_0\)と\(\phi_N\)）．そこで\(K=N\)とし，残差平方和
 \[
   \epsilon(\vect{c}) = \sum_{n=0}^{N-1}\abs{x[n]-g(\vect{c};t_n)}^2\quad(t_n=2\krez n/N)
 \]
@@ -851,11 +860,10 @@
   \mat{\Phi} = \trps{\matfence{\phi_{i-1}(t_{j-1})}}
   = \matrice*{\napr^{\iuni\cdot 0(2\krez\cdot 0/N)} & \cdots & \napr^{\iuni(N-1)(2\krez\cdot 0/N)} \\ \vdots & \ddots & \vdots \\ \napr^{\iuni\cdot 0(2\krez(N-1)/N)} & \cdots & \napr^{\iuni(N-1)(2\krez(N-1)/N)}}
 \]
-である．ところが，\(\mat{\Phi}\)は\cref{proposition:dft_onb}の正規直交基底を用いて\(\sqrt{N}\mat{W}\)（\(\mat{W}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)）と書けるので\(\htrps{\mat{\Phi}}\mat{\Phi}=N\htrps{\mat{W}}\mat{W}=N\imat\)である．
-つまり，正規方程式は初めから解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{x}=(1/\sqrt{N})\htrps{\mat{W}}\vect{x}=(1/\sqrt{N})\dft{N}\vect{x}\)である．
+である．ところが，\(\mat{\Phi}\)は\cref{proposition:dft_onb}の\(\vect{w}_k\)を用いて\(\mat{\Phi}=\rowvect{\vect{w}_0 & \cdots & \vect{w}_{N-1}}\)と書けるので\(\htrps{(N^{-1/2}\mat{\Phi})}(N^{-1/2}\mat{\Phi})=\imat\)，\(\htrps{\mat{\Phi}}\mat{\Phi}=N\imat\)である．
+つまり，正規方程式は初めから解かれているも同然であり，解は\(\vect{c}=(1/N)\htrps{\mat{\Phi}}\vect{x}=(1/N)\dft{N}\vect{x}\)である．
 
 まとめると，区間\(\ccival{0}{2\krez}\)を\(N\)等分した左端における\(f\)の値を標本とし，関数\(g(\vect{c};t)=\sum_{k=0}^{N-1}c_k\napr^{\iuni kt}\)で\(f\)を最もよく近似しようとすると，係数\(\vect{c}\)は\(\dft{N}\vect{x}\)の定数倍になる．
-また，各\(\phi_0,\dots,\phi_{N-1}\)を\(\sqrt{N}\)で割っておけば\(\vect{c}\)は完全に\(\dft{N}\vect{x}\)と等しくなる．
 
 \begin{note}
   標本化周波数\(N\)の値を大きくすれば，より多くの標本，より高周波の複素指数関数を近似に使える．そこで\(N\to\infty\)の極限をとってみよう．エイリアシングを考慮すると，形式的には
@@ -874,7 +882,7 @@
 
 以下に\cref{equation:idft}を再掲する．
 \[
-  x_n = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
+  x_n = \frac{1}{N}\sum_{k=0}^{N-1}\hat{x}_k\napr^{2\krez\iuni kn/N}
 \]
 
 本来なら，\cref{equation:idft}は\(0\leq n<N\)でしか意味をなさない．しかし，そのことを忘れて\(n\)が\(\numset{Z}\)全体を動くとすると，\(x_n\)は周期\(N\)の無限数列に拡張される．
@@ -883,7 +891,7 @@
 \begin{definition}{}{cycle_dft}\index{りさんふーりえへんかん@離散フーリエ変換!しゅうきすうれつ@周期数列}\index{l2N@\(\cycles{N}\)}\index{FZN@\(\dft{N}\)}
   \(N\)を周期に持つ複素数列全体を\(\cycles{N}\)と書く．\(\cycles{N}\)上の線形変換\(\dft{N}\)を次式で定義する．
   \[
-    (\dft{N}x)[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
+    (\dft{N}x)[k] = \sum_{n=0}^{N-1}x[n]\napr^{-2\krez\iuni kn/N}\quad(k\in\numset{Z})
   \]
 \end{definition}
 
@@ -905,7 +913,7 @@
     \sum_{m=0}^{N-1}x[m](\lagop^m\comb)[n] = x[n]\sum_{m=0}^{N-1}\kdelta{m}{n}
     = x[n]
   \end{equation}
-  である．よって\(x=\sum_{m=0}^{N-1}x[m]\lagop^m\comb\)なので，\(\basis{D}\)は基底である．
+  である．よって\(x=\sum x[m]\lagop^m\comb\)なので，\(\basis{D}\)は基底である．
 \end{proof}
 
 \begin{figure}[htbp]
@@ -922,8 +930,8 @@
 \begin{proof}
   \(\sum\)の添字\(n\)を\(m=n+1\)に置き換えると，\(x[n]=(\lagop x)[n+1]\)より
   \[
-    \zeta^{-k}\hat{x}[k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}(\lagop x)[n+1]\zeta^{-k(n+1)}
-    = \frac{1}{\sqrt{N}}\sum_{m=1}^N(\lagop x)[m]\zeta^{-km}
+    \zeta^{-k}\hat{x}[k] = \sum_{n=0}^{N-1}(\lagop x)[n+1]\zeta^{-k(n+1)}
+    = \sum_{m=1}^N(\lagop x)[m]\zeta^{-km}
   \]
   となる．右辺は周期数列の1周期に渡る和だから，\(\sum_{m=1}^N\)を\(\sum_{m=0}^{N-1}\)に変えても値は変わらない．よって\(\zeta^{-k}\hat{x}[k]=(\dft{N}\lagop x)[k]\)である．
 \end{proof}
@@ -947,8 +955,8 @@
 \begin{proposition}{}{dft_convolution_theorem}
   任意の\(x,y\in\cycles{N}\)に対して次式が成立する．
   \[
-    \dft{N}(x\circconv y) = \sqrt{N}\hat{x}\cdot\hat{y},
-    \quad\dft{N}(x\cdot y) = \frac{1}{\sqrt{N}}\hat{x}\circconv\hat{y}
+    \dft{N}(x\circconv y) = \hat{x}\cdot\hat{y},
+    \quad\dft{N}(x\cdot y) = \hat{x}\circconv\hat{y}
   \]
 \end{proposition}
 
@@ -962,9 +970,9 @@
   \[
     \hat{z}[k] = \sum_{m=0}^{N-1}x[m](\zeta^{-km}\hat{y}[k])
     = \pqty*{\sum_{m=0}^{N-1}x[m]\zeta^{-km}}\hat{y}[k]
-    = \sqrt{N}\hat{x}[k]\hat{y}[k]
+    = \hat{x}[k]\hat{y}[k]
   \]
-  となる．よって\(\hat{z}=\sqrt{N}\hat{x}\cdot\hat{y}\)である．
+  となる．よって\(\hat{z}=\hat{x}\cdot\hat{y}\)である．
 \end{proof}
 
 \begin{corollary}{}{circular_convolution_properties}
@@ -977,8 +985,7 @@
 \end{corollary}
 
 \begin{proof}
-  2つめのみ示す．\(\dft{N}(x\circconv (y\circconv z))=\sqrt{N}\hat{x}\cdot\dft{N}(y\circconv z)=N\hat{x}\cdot(\hat{y}\cdot\hat{z})\)より
-  \(x\circconv(y\circconv z)=N\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算によって\((x\circconv y)\circconv z=N\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
+  2つめのみ示す．\(\dft{N}(x\circconv (y\circconv z))=\hat{x}\cdot\dft{N}(y\circconv z)=\hat{x}\cdot(\hat{y}\cdot\hat{z})\)より\(x\circconv(y\circconv z)=\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)であり，同じ計算で\((x\circconv y)\circconv z=\dft*{N}(\hat{x}\cdot\hat{y}\cdot\hat{z})\)も確かめられる．
 \end{proof}
 
 \begin{note}
@@ -1052,8 +1059,8 @@
 \begin{proof}
   実際
   \[
-    \hat{x}[-k] = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
-    = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
+    \hat{x}[-k] = \sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
+    = \sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
     = \conj*{\hat{x}[k]}
   \]
   である．
@@ -1235,9 +1242,9 @@
 \cref{figure:phone_spectrogram}を平面\(n=\text{(定数)}\)で縦断した断面は
 \[
   (\stft{w}x)[k,n] = \sum_{m=0}^{L-1}x[m](\translate{n}\conj{w})[m]\napr^{-2\krez\iuni km/L}
-  = \sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]
+  = \dft{L}(x\cdot\translate{n}\conj{w})[k]
 \]
-より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)の定数倍である．また\cref{figure:windowing}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
+より\(\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2\)である．また\cref{figure:windowing}のように，\(\translate{n}\conj{w}\)を掛けると\(x\)から時刻\(n\)の周りだけが切り出される．
 そのため，\cref{figure:phone_spectrogram}は「各時刻\(n\)の周りにおける周波数成分のグラフ」と解釈できる．
 2重数列\(\seq{\abs{(\stft{w}x)[k,n]}^2}\)と\ltjkenten{その}グラフを\(x\)の\termdef{スペクトログラム}\index{すぺくとろぐらむ@スペクトログラム}（spectrogram）という．
 
@@ -1255,10 +1262,10 @@
 \end{proposition}
 
 \begin{proof}
-  \(\innerp{x}{\modulate{k}\translate{n}w}=(\stft{w}x)[k,n]=\sqrt{L}\dft{L}(x\cdot\translate{n}\conj{w})[k]\)かつ，\(\dft{L}\)はノルムを変えない．そのため
+  \(\innerp{x}{\modulate{k}\translate{n}w}=(\stft{w}x)[k,n]=\dft{L}(x\cdot\translate{n}\conj{w})[k]\)かつ，\(\dft{L}\)はノルムを\(\sqrt{L}\)倍する．そのため
   \begin{align*}
-    \sum_{k,n}\abs{\innerp{x}{\modulate{k}\translate{n}w}}^2 &= L\sum_{k,n}\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2
-    = L\sum_n\vnorm{\dft{L}(x\cdot\translate{n}\conj{w})}^2 \\
+    \sum_{k,n}\abs{\innerp{x}{\modulate{k}\translate{n}w}}^2 &= \sum_{k,n}\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2
+    = \sum_n\vnorm{\dft{L}(x\cdot\translate{n}\conj{w})}^2 \\
     &= L\sum_n\vnorm{x\cdot\translate{n}\conj{w}}^2
     = L\sum_n\sum_m\abs{x[m]\conj*{w[m-n]}}^2 \\
     &= L\sum_m\abs{x[m]}^2\sum_n\abs{w[m-n]}^2
@@ -1338,9 +1345,9 @@
 
 \begin{theorem}{スペクトル定理II}{spectral_theorem_two}\index{すぺくとるていり@スペクトル定理}
   \(T\)は\(H\)上の線形変換であり，条件\(\innerp{T(x)}{y}=\innerp{x}{T(y)}\)（\(x,y\in H\)）を満たすとする．
-  このとき，\(T\)の固有ベクトルからなる\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)（\(n=\dim H\)）が存在する．また，各\(u_k\)が属する\(T\)の固有値を\(\lambda_k\)とおくと，次式が成立する．
+  このとき，\(T\)の固有ベクトルからなる\(H\)の正規直交基底\(\Set{u_1,\dots,u_d}\)が存在する．また，各\(u_k\)が属する\(T\)の固有値を\(\lambda_k\)とおくと，次式が成立する．
   \[
-    T(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+    T(x) = \sum_{k=1}^d\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
   \]
 \end{theorem}
 
@@ -1349,11 +1356,11 @@
 \end{proof}
 
 \begin{corollary}{}{frame_bijection}
-  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S\)を\(\Phi\)のフレーム作用素とする．このとき，\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)と実数\(\lambda_1,\dots,\lambda_n\)が存在して
+  \(\Phi=\seq{\phi_i}_{i\in I}\)を\(H\)のフレーム，\(S\)を\(\Phi\)のフレーム作用素とする．このとき，\(H\)の正規直交基底\(\Set{u_1,\dots,u_d}\)と正数\(\lambda_1,\dots,\lambda_d\)が存在して
   \[
-    S(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
+    S(x) = \sum_{k=1}^d\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
   \]
-  を満たす．さらに，各\(\lambda_k\)はすべて正である．
+  を満たす．
 \end{corollary}
 
 \begin{proof}
@@ -1373,13 +1380,10 @@
 \end{proposition}
 
 \begin{proof}
-  \cref{corollary:frame_bijection}より，\(H\)の正規直交基底\(\Set{u_1,\dots,u_n}\)と正数\(\lambda_1,\dots,\lambda_n\)を
+  \cref{corollary:frame_bijection}より，\(H\)の正規直交基底\(\Set{u_1,\dots,u_d}\)と正数\(\lambda_k\)を\(S(x)=\sum\lambda_k\innerp{x}{u_k}u_k\)（\(x\in H\)）となるように選べる．
+  すると，\(S\)の逆写像は
   \[
-    S(x) = \sum_{k=1}^n\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
-  \]
-  となるように選べる．すると，\(S\)の逆写像は
-  \[
-    S^{-1}(x) = \sum_{k=1}^n\lambda_k^{-1}\innerp{x}{u_k}u_k\quad(x\in H)
+    S^{-1}(x) = \sum_{k=1}^d\lambda_k^{-1}\innerp{x}{u_k}u_k\quad(x\in H)
   \]
   と書ける（\(S^{-1}(S(x))=S(S^{-1}(x))=x\)を確かめればよい）．
 
@@ -1387,7 +1391,7 @@
   \[
     \sum_{i\in I}\abs{\innerp{x}{\psi_i}}^2 = \sum_{i\in I}\abs{\innerp{y}{\phi_i}}^2
     \in \ccival{A\vnorm{y}^2}{B\vnorm{y}^2},
-    \quad\vnorm{y}^2 = \sum_{k=1}^n\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
+    \quad\vnorm{y}^2 = \sum_{k=1}^d\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
   \]
   である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，
   \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{A(\lambda_{\mathrm{max}})^{-2}}{B(\lambda_{\mathrm{min}})^{-2}}\)が得られる．
@@ -1423,7 +1427,7 @@
 \end{example}
 
 離散ガボール変換に関する再構成公式を導こう．以下，\(\gaborsys{w}{K}{N}\)は\(\cycles{L}\)のフレームであると仮定し，\(S\)を\(\gaborsys{w}{K}{N}\)のフレーム作用素とする．
-また，\cref{lemma:dgt_shift}の証明まで\(\ftrans=\sqrt{L}\dft{L}\)，\(\zeta=\napr^{2\krez\iuni/L}\)と略記する．
+また，\cref{lemma:dgt_shift}の証明まで\(\ftrans=\dft{L}\)，\(\zeta=\napr^{2\krez\iuni/L}\)と略記する．
 
 \begin{lemma}{交換関係}{dft_commutation}
   以下の式が成り立つ．
@@ -1482,40 +1486,43 @@
     \tfshift*{a}{b}S(\tfshift{a}{b}x) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w \\
     &= \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j-b}\conj{w}))[(i-a)K]\tfshift{i-a}{j-b}w
   \end{align*}
-  であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても値は変わらないので
+  であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても和は変わらないので
   \[
     \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
   \]
   である．\(\translate{-aK}\ftrans\tfshift{a}{j}=\ftrans\modulate{-aK}\tfshift{a}{j}=\ftrans\translate{jN}\)だから
   \[
     \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]\tfshift{i}{j}w
+    = S(x)
   \]
-  である．これと\(((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]=\ftrans(x\cdot\translate{jN}\conj{w})[iK]=(\dgt{w})[i,j]\)より\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
+  である．よって\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
 \end{proof}
 
-\begin{corollary}{DGTの再構成}{dgt_reconstruction}
+\begin{proposition}{DGTの再構成}{dgt_reconstruction}
   \(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームであれば，\(\cycles{L}\)の元\(\gamma\)が存在し，各\(x\in\cycles{L}\)，\(\hat{x}=\dgt{w}x\)に対して
   \begin{gather*}
     x = \sum_{(i,j)\in\Lambda}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma, \\
     x[n] = \sum_{i=0}^{L/K-1}\sum_{j=0}^{L/N-1}\hat{x}[i,j]\gamma[n-jN]\napr^{2\krez\iuni(iK)n/L}
   \end{gather*}
   を満たす．
-\end{corollary}
+\end{proposition}
 
 \begin{proof}
-  \(\gamma=S^{-1}(w)\)とおく．\cref{lemma:dgt_shift}より\(S(\modulate{aK}\translate{bN}\gamma)=\modulate{aK}\translate{bN}S(\gamma)=\modulate{aK}\translate{bN}w\)，\(S^{-1}(\modulate{aK}\translate{bN}w)=\modulate{aK}\translate{bN}\gamma\)である．
+  \(\gamma=S^{-1}(w)\)とおく．\cref{lemma:dgt_shift}より\(S(\modulate{iK}\translate{jN}\gamma)=\modulate{iK}\translate{jN}S(\gamma)=\modulate{iK}\translate{jN}w\)，\(S^{-1}(\modulate{iK}\translate{jN}w)=\modulate{iK}\translate{jN}\gamma\)である．
   よって，\cref{proposition:canonical_dual_reconstruction}から\(x=\sum_{i,j}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma\)である．
 \end{proof}
 
 \(\gamma=S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
-\cref{corollary:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
+\cref{proposition:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
 
-\subsection{窓関数と不確定性}
+\subsection{窓関数の選択}
 
-代表的な窓関数を3つ挙げておく．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
-短時間フーリエ変換で使うときは，信号を切り取る長さ\(N\)を決めて，次のように離散化すればよい．
+最後に，窓関数の選択が短時間フーリエ変換（および離散ガボール変換）に与える影響を説明する．議論を簡単にするため，ここでは実数値の窓関数に話を限定する．
+
+代表的な窓関数を3つ挙げる．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
+短時間フーリエ変換で使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化すればよい．
 \[
-  w_{\symrm{D}}[n] = \begin{cases}w(n/N) & (0\leq n\leq N), \\ 0 & (N\leq n<L)\end{cases}
+  w_{\symrm{D}}[n] = \begin{cases}w(n/M) & (0\leq n\leq M), \\ 0 & (M\leq n<L)\end{cases}
 \]
 
 \begin{example}
@@ -1601,11 +1608,11 @@
 \cref{theorem:spectral_theorem_two}は\cref{theorem:spectral_theorem}の（同値ではない）言い換えである．
 
 \begin{proof}[スペクトル定理IIの証明]
-  \(\basis{B}=\Set{e_1,\dots,e_n}\)を\(H\)の正規直交基底とする．\(\basis{B}\)に関する\(T\)の表現行列は\(\mat{T}=\trps{\matfence{\innerp{T(e_i)}{e_j}}}\)であり，
+  \(\basis{B}=\Set{e_1,\dots,e_d}\)を\(H\)の正規直交基底とする．\(\basis{B}\)に関する\(T\)の表現行列は\(\mat{T}=\trps{\matfence{\innerp{T(e_i)}{e_j}}}\)であり，
   \(\htrps{\mat{T}}=\conj*{\matfence{\innerp{T(e_i)}{e_j}}}=\matfence{\innerp{e_j}{T(e_i)}}=\matfence{\innerp{T(e_j)}{e_i}}=\trps{\matfence{\innerp{T(e_i)}{e_j}}}=\mat{T}\)だから\(\mat{T}\)は正規行列である．
   よって，\cref{theorem:spectral_theorem}よりスペクトル分解\(\mat{T}=\mat{U}\mat{\Lambda}\htrps{\mat{U}}\)が存在する．
 
-  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_n}=\matfence{\midx{u}{i}{j}}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_n)\)とおき，
+  \(\mat{U}=\rowvect{\vect{u}_1 & \cdots & \vect{u}_d}=\matfence{\midx{u}{i}{j}}\)，\(\mat{\Lambda}=\diag(\lambda_1,\dots,\lambda_d)\)とおき，
   \(H\)の元\(u_k\)を\(u_k=\sum_i\midx{u}{i}{k}e_i\)で定める．すると\(\innerp{e_i}{e_j}=\kdelta{i}{j}\)，\(\innerp{\vect{u}_k}{\vect{u}_l}=\kdelta{k}{l}\)より
   \[
     \innerp{u_k}{u_l} = \innerp*{\sum_i\midx{u}{i}{k}e_i}{\sum_j\midx{u}{j}{l}e_j}
@@ -1613,13 +1620,14 @@
     = \sum_i\midx{u}{i}{k}\midx{\conj{u}}{i}{l}
     = \kdelta{k}{l}
   \]
-  だから，集合\(\basis{B}'=\Set{u_1,\dots,u_n}\)は\(H\)の正規直交基底である．また
+  だから，集合\(\basis{B}'=\Set{u_1,\dots,u_d}\)は\(H\)の正規直交基底である．また
   \[
     \innerp{T(u_k)}{u_l} = \sum_i\midx{u}{i}{k}\sum_j\innerp{T(e_i)}{e_j}\midx{\conj{u}}{j}{l}
     = \trps{\vect{u}_k}(\trps{\mat{T}}\vect{\conj{u}}_l)
     = \trps{\vect{u}_k}\mat{\conj{U}}\mat{\Lambda}\trps{\mat{U}}\vect{\conj{u}}_l
   \]
-  なので\(\innerp{T(u_k)}{u_l}=\lambda_k\kdelta{k}{l}\)，\(T(u_k)=\lambda_ku_k\)である．したがって，各\(u_k\)は\(T\)の固有値\(\lambda_k\)に属する固有ベクトルだから
+  なので\(\innerp{T(u_k)}{u_l}=\lambda_k\kdelta{k}{l}\)，\(T(u_k)=\lambda_ku_k\)である．
+  したがって，各\(u_k\)は\(T\)の固有値\(\lambda_k\)に属する固有ベクトルだから
   \[
     T(x) = \sum_k\innerp{x}{u_k}T(u_k)
     = \sum_k\lambda_k\innerp{x}{u_k}u_k\quad(x\in H)
@@ -1661,7 +1669,7 @@
   \item \(\dft{N}\vect{x}=\trps{\rowvect{\hat{x}_0 & \cdots & \hat{x}_{N-1}}}\)（\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)）のとき
     \begin{equation}
       \label{equation:dft_parseval}
-      \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = \sum_{n=0}^{N-1}\abs{x_n}^2
+      \sum_{n=0}^{N-1}\abs{x_n}^2 = \frac{1}{N}\sum_{k=0}^{N-1}\abs{\hat{x}_k}^2
     \end{equation}
     であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセバルの定理}\index{ぱーせばるのていり@パーセバルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
   \item メルセデス・ベンツフレームがタイトであることを示せ．

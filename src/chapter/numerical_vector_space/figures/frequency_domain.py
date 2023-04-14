@@ -12,13 +12,12 @@ filename = "time_domain.wav"
 samplerate, data = wavfile.read(str(PurePath(__file__).parent / filename))
 
 duration = data.shape[0] / samplerate
-normalizer = 1 / np.sqrt(data.shape[0])
 t = np.linspace(0, duration, num=data.shape[0])
 data = data / 32767
 
 x = fftfreq(data.shape[0], 1 / samplerate)
 x = x[(x >= 0) & (x <= 5000)]
-y = np.abs(normalizer * fft(data))
+y = np.abs(fft(data))
 
 h = fft(np.log(y))
 h[(t >= 1 / 350) & (t <= duration - 1 / 350)] = 0
@@ -39,6 +38,4 @@ ax.plot(
 )
 ax.plot(x, h[: len(x)], label=r"$\hat{h}_k")
 ax.legend()
-fig.savefig(
-    str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")), pad_inches=0.02
-)
+fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))
