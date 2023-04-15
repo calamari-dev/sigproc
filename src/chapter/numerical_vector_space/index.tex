@@ -1130,8 +1130,8 @@
 \(A=1\)のタイトフレームは\termdef{パーセバルフレーム}\index{ぱーせばるふれーむ@パーセバルフレーム}\index{ふれーむ@フレーム!ぱーせばる@パーセバル\texttwoemdash}（Parseval frame）と呼ばれる．
 
 \begin{example}
-  \(\vect{\phi}_k=\smallmatrice{\cos\theta_k \\ \sin\theta_k}\)（\(\theta_k=2\krez k/3+\krez/2\)）のとき，列\(\seq{\vect{\phi}_k}_{k=0}^2\)は\(\numset{R}^2\)のタイトフレームである．
-  \(\seq{\vect{\phi}_k}_{k=0}^2\)を\termdef{メルセデス・ベンツフレーム}\index{めるせですべんつふれーむ@メルセデス・ベンツフレーム}\index{ふれーむ@フレーム!めるせですべんつ@メルセデス・ベンツ\texttwoemdash}（Mercedes‐Benz frame）という\cite{casazza2013}．名称の由来は図から明らかであろう．
+  \(\vect{\phi}_k=\smallmatrice{\cos\theta_k \\ \sin\theta_k}\)（\(\theta_k=2\krez k/3+\krez/2\)）のとき，列\(\seq{\vect{\phi}_k}_{k=0}^2\)は\(\numset{R}^2\)のタイトフレームである（\cref{problem:mercedes_benz}）．
+  \(\seq{\vect{\phi}_k}_{k=0}^2\)を\termdef{メルセデス・ベンツフレーム}\index{めるせですべんつふれーむ@メルセデス・ベンツフレーム}\index{ふれーむ@フレーム!めるせですべんつ@メルセデス・ベンツ\texttwoemdash}（Mercedes‐Benz frame）という\cite{casazza2013}．
 \end{example}
 
 \begin{figure}[htbp]
@@ -1262,7 +1262,7 @@
 \end{proposition}
 
 \begin{proof}
-  \(\innerp{x}{\modulate{k}\translate{n}w}=(\stft{w}x)[k,n]=\dft{L}(x\cdot\translate{n}\conj{w})[k]\)かつ，\(\dft{L}\)はノルムを\(\sqrt{L}\)倍する．そのため
+  \(\innerp{x}{\modulate{k}\translate{n}w}=(\stft{w}x)[k,n]=\dft{L}(x\cdot\translate{n}\conj{w})[k]\)かつ，\(\dft{L}\)はノルムを\(\sqrt{L}\)倍する（\cref{problem:parseval}）．そのため
   \begin{align*}
     \sum_{k,n}\abs{\innerp{x}{\modulate{k}\translate{n}w}}^2 &= \sum_{k,n}\abs{\dft{L}(x\cdot\translate{n}\conj{w})[k]}^2
     = \sum_n\vnorm{\dft{L}(x\cdot\translate{n}\conj{w})}^2 \\
@@ -1336,7 +1336,7 @@
 \(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームなら，その分解作用素\(T\)は\(T(x)=\seq{(\dgt{w}x)[i,j]}_{(i,j)\in\Lambda}\)を満たす．しかし，パラメータの選択によっては\(\gaborsys{w}{K}{N}\)がフレームにならないこともある．
 
 \begin{example}
-  \(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない．
+  \(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならない（\cref{problem:gabor}）．
 \end{example}
 
 \subsection{双対フレームとDGT}
@@ -1516,11 +1516,15 @@
 \cref{proposition:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
 
 \subsection{窓関数の選択}
+\label{subsection:choice_of_window}
 
-最後に，窓関数の選択が短時間フーリエ変換（および離散ガボール変換）に与える影響を説明する．議論を簡単にするため，ここでは実数値の窓関数に話を限定する．
+最後に，窓関数の選択が時間周波数解析に与える影響を大雑把に説明する．
 
-代表的な窓関数を3つ挙げる．ただし，以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．
-短時間フーリエ変換で使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化すればよい．
+\begin{note}
+  影響を数学的に調べるのは\cref{xr-chapter:hilbert_space}に先送りする．\cref{subsection:choice_of_window}は，\(\stft{w}\)が持つ特徴を\(w\)のグラフから予想できるようになることを目標に読んでほしい．
+\end{note}
+
+以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．実際に使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化すればよい．
 \[
   w_{\symrm{D}}[n] = \begin{cases}w(n/M) & (0\leq n\leq M), \\ 0 & (M\leq n<L)\end{cases}
 \]
@@ -1536,22 +1540,6 @@
 \begin{example}
   \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
 \end{example}
-
-\begin{definition}{\(\varepsilon\)‐集中}{}\index{しゅうちゅう@\(\varepsilon\)‐集中}
-  \(\varepsilon>0\)，\(x\in\cycles{N}\)とする．条件
-  \[
-    \sum_{n\in I\setminus A}\abs{x[n]}^2 \leq \varepsilon^2\sum_{n\in I}\abs{x[n]}^2\quad(I=\Set{0,\dots,N-1})
-  \]
-  を満たすとき，\(x\)は集合\(A\subseteq I\)に\termdef{\(\varepsilon\)‐集中}（\(\varepsilon\)‐concentrated）であるという．
-\end{definition}
-
-\begin{theorem}{ドノホー・スタークの不確定性原理}{discrete_donoho_stark}\index{どのほーすたーくのふかくていせいげんり@ドノホー・スタークの不確定性原理}\index{ふかくていせいげんり@不確定性原理!どのほーすたーく@ドノホー・スターク}
-  \(\varepsilon_{\symrm{T}},\varepsilon_{\symrm{F}}>0\)とする．\(\cycles{N}\)の元\(x\)が集合\(T\)に\(\varepsilon_{\symrm{T}}\)‐集中，\(\dft{N}x\)が集合\(F\)に\(\varepsilon_{\symrm{F}}\)‐集中であるとき
-  \[
-    (\sizeof{T})(\sizeof{F}) \geq N(1-\varepsilon_{\symrm{T}}-\varepsilon_{\symrm{F}})^2
-  \]
-  である．これを\termdef{ドノホー・スタークの不確定性原理}（Donoho‐Stark uncertainity principle）という．
-\end{theorem}
 
 \section{多重解像度解析}
 \label{section:discrete_mra}
@@ -1635,27 +1623,9 @@
   である．
 \end{proof}
 
-\subsection{主成分分析}
+\section{章末問題}
 
-最小2乗法のもう一つの応用例として，\termdef{主成分分析}\index{しゅせいぶんぶんせき@主成分分析}\index{PCA|see{主成分分析}}（principal component analysis; PCA）という手法を紹介する．
-
-変数\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_p}}\)の観測値\(\vect{x}_1,\dots,\vect{x}_n\)を眺めても，\(\vect{x}\)が高次元\footnote{\(p\)の値が非常に大きいこと．}だとその特徴が分かりにくいことがある．
-主成分分析の目的は，この問題を解決するために\(\vect{x}\)の特徴を保ったまま次元を減らすことである．
-
-\begin{figure}[htbp]
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/scatter.pdf}
-  \end{minipage}%
-  \begin{minipage}{\linewidth/2}
-    \centering
-    \includegraphics{figures/pca.pdf}
-  \end{minipage}
-\end{figure}
-
-\section{演習問題}
-
-\begin{enumerate}
+\begin{problemenum}
   \item \cref{corollary:singular_value_decomposition}の証明を完成させよ．
   \item 任意の\(n\times p\)複素行列\(\mat{A}\)，\(\vect{x}\in\numset{C}^p\)，\(\vect{y}\in\numset{C}^n\)に対して，以下の式が成立することを示せ．
     \begin{gather*}
@@ -1666,14 +1636,15 @@
     \end{gather*}
   \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する．この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている．
     \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると\(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
-  \item \(\dft{N}\vect{x}=\trps{\rowvect{\hat{x}_0 & \cdots & \hat{x}_{N-1}}}\)（\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)）のとき
+  \item \label{problem:parseval}\(\dft{N}\vect{x}=\trps{\rowvect{\hat{x}_0 & \cdots & \hat{x}_{N-1}}}\)（\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)）のとき
     \begin{equation}
       \label{equation:dft_parseval}
-      \sum_{n=0}^{N-1}\abs{x_n}^2 = \frac{1}{N}\sum_{k=0}^{N-1}\abs{\hat{x}_k}^2
+      \vnorm{\dft{N}\vect{x}}^2 = N\vnorm{\vect{x}}^2,
+      \quad \sum_{k=0}^{N-1}\abs{\hat{x}_k}^2 = N\sum_{n=0}^{N-1}\abs{x_n}^2
     \end{equation}
-    であることを示せ．信号処理ではしばしば\cref{equation:dft_parseval}を\termdef{パーセバルの定理}\index{ぱーせばるのていり@パーセバルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ぶ．  
-  \item メルセデス・ベンツフレームがタイトであることを示せ．
-  \item \(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならないことを示せ．
-\end{enumerate}
+    であることを示せ．\cref{equation:dft_parseval}はしばしば\termdef{パーセバルの定理}\index{ぱーせばるのていり@パーセバルの定理}（Parseval's theorem），あるいは\termdef{プランシュレルの定理}\index{ぷらんしゅれるのていり@プランシュレルの定理}（Plancherel's theorem）と呼ばれる．
+  \item \label{problem:mercedes_benz}メルセデス・ベンツフレームがタイトであることを示せ．
+  \item \label{problem:gabor}\(K=1\)かつ\(L=N\geq 2\)とする．このとき，\(w[n]=0\)となる\(n\)の値が一つでもあると\(\gaborsys{w}{K}{N}\)はフレームにならないことを示せ．
+\end{problemenum}
 
 \end{document}

@@ -1,7 +1,7 @@
 \documentclass[../../main]{subfiles}
 
 \begin{document}
-\chapter{演習問題の略解}
+\chapter{章末問題の略解}
 \label{chapter:answer_of_exercises}
 \small
 
@@ -24,15 +24,10 @@
     \]
     であり，右辺は\(\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)に等しい．
   \item \cref{xr-proposition:unitary_matrix_characterization}と\cref{xr-proposition:dft_onb}からしたがう．
-  \item \(\vect{\phi}_0=\trps{\rowvect{0 & 1}}\)，\(\vect{\phi}_1=\trps{\rowvect{-\sqrt{3} & -1}}/2\)，\(\vect{\phi}_2=\trps{\rowvect{\sqrt{3} & -1}}/2\)より
+  \item \(\sum\abs{\innerp{\vect{x}}{\vect{\phi}_k}}^2 = v^2+((-\sqrt{3}u-v)/2)^2+((\sqrt{3}u-v)/2)^2\)（\(\vect{x}=\trps{\rowvect{u & v}}\)）であり，右辺を整理すると\((3/2)(u^2+v^2)=(3/2)\vnorm{\vect{x}}^2\)となる．
+  \item \((\dgt{w}x)[k,j]=(\stft{w}x)[k,jN]=\dft{N}(x\cdot\translate{jN}\conj{w})[k]\)，\(\translate{jN}\conj{w}=\conj{w}\)より\((\dgt{w}x)[k,j]=\dft{N}(x\cdot\conj{w})[k]\)である．ある\(m\)で\(w[m]=0\)だったとすると，\(x=\translate{m}\comb\)のとき
     \[
-      \sum_{k=0}^2\abs{\innerp{\vect{x}}{\vect{\phi}_k}}^2 = v^2+\pqty*{-\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2+\pqty*{\frac{\sqrt{3}u}{2}-\frac{v}{2}}^2\quad(\vect{x}=\trps{\matrice{u & v}})
-    \]
-    である．右辺を整理すると\((3/2)(u^2+v^2)=(3/2)\vnorm{\vect{x}}^2\)となる．
-  \item \(x\in\cycles{N}\)を任意にとる．\((\dgt{w}x)[k,j]=(\stft{w}x)[k,jN]=\sqrt{N}\dft{N}(x\cdot\translate{jN}\conj{w})[k]\)，\(\translate{jN}w=w\)なので\((\dgt{w}x)[k,j]=\sqrt{N}\dft{N}(x\cdot\conj{w})[k]\)である．
-    仮に\ltjkenten{ある}\(m\)で\(w[m]=0\)だったとすると，\(x=\translate{m}\comb\)のとき
-    \[
-      (\dgt{w}x)[k,j] = \sum_{n=0}^{N-1}\comb[n-m]\conj*{w[n]}\napr^{-2\krez\iuni kn/N}
+      (\dgt{w}x)[k,j] = \sum_n\comb[n-m]\conj*{w[n]}\napr^{-2\krez\iuni kn/N}
       = \conj*{w[m]}\napr^{-2\krez\iuni km/N}
       = 0
     \]

@@ -4,6 +4,7 @@
 \ExplSyntaxOff
 
 \RequirePackage{xcolor}
+\RequirePackage[loadonly]{enumitem}
 \RequirePackage{amsthm,thmtools}
 \RequirePackage{wrapfig}
 \RequirePackage{tcolorbox}
@@ -15,7 +16,7 @@
 \crefname{chapter}{}{}
 \crefname{equation}{式}{式}
 \crefname{figure}{図}{図}
-\crefname{problem}{演習問題}{演習問題}
+\crefname{problem}{章末問題}{章末問題}
 \crefname{section}{}{}
 \crefname{subsection}{}{}
 \crefname{table}{表}{表}
@@ -41,6 +42,11 @@
 \newcommand{\impact}[1]{{\gtfamily\bfseries #1}}
 \newcommand{\termdef}[1]{{\gtfamily\bfseries #1}}
 \newcommand{\texttwoemdash}{\resizebox{2\zw}{\height}{—}}
+
+% 章末問題
+\newlist{problemenum}{enumerate}{1}
+\setlist[problemenum]{label=\arabic*.,ref=\arabic*,labelsep=0.5\zw,leftmargin=2\zw}
+\crefalias{problemenumi}{problem}
 
 % 定理環境
 \newcounter{thcounter}
