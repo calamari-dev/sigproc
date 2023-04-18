@@ -186,7 +186,7 @@
   も\(H\)の部分空間になる．この部分空間を（\(H\)における）\(V\)の\termdef{直交補空間}（orthogonal complement）といい，\(\pcomp[H]{V}\)，\(\pcomp{V}\)などと書く．
 \end{definition}
 
-近似\(\proj_V\vect{x}\)で「失われる」成分は\(\vect{x}-\proj_V\vect{x}=(I-\proj_V)\vect{x}\)（\(I(\vect{x})=\vect{x}\)）であり，それら全体が作る線形空間\(\img(I-\proj_V)\)が\(\pcomp{V}\)である．
+近似\(\proj_V\vect{x}\)で失われる成分は\(\vect{x}-\proj_V\vect{x}=(\idmap-\proj_V)\vect{x}\)（\(\idmap(\vect{x})=\vect{x}\)）であり，それら全体が作るベクトル空間\(\img(\idmap-\proj_V)\)が\(\pcomp{V}\)である\index{id@\(\idmap\)}．
 
 \begin{example}
   \(V=\spannedby\Set{\vect{e}_1,\vect{e}_2}\)を\(\numset{R}^3\)の2次元部分空間とする．
@@ -217,37 +217,43 @@
 後者の場合，直交射影は3つの操作に分解できる．
 
 \begin{definition}{エルミート転置}{hermitian_transpose}\index{えるみーとてんち@エルミート転置}\index{ずいはんぎょうれつ@随伴行列|see{エルミート転置}}\index{H@\(\htrps{\mat{A}}\)}
-  \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい\footnotemark ，\(\htrps{\mat{A}}\)と表す．
+  \(\mat{A}\)を\(m\times n\)複素行列とする．\(n\times m\)行列\(\trps{\conj{\mat{A}}}\)を\(\mat{A}\)の\termdef{エルミート転置}（Hermitian transpose）といい，\(\htrps{\mat{A}}\)と表す．
 \end{definition}
 
-\footnote{エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．}
-\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Delta}=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
+\begin{note}
+  エルミート転置は\termdef{随伴行列}（adjoint matrix）と呼ばれることも多い．
+\end{note}
+
+\(\mat{U}=\htrps{\rowvect{\vect{e}_1 & \cdots & \vect{e}_n}}\)，\(\mat{\Delta}_m=\smallmatrice{\imat_m & \\ & \zmat_{n-m}}\)とおく（\(\imat_m\)は\(m\)次単位行列，\(\zmat_{n-m}\)は\(n-m\)次零行列）．
 このとき，任意の\(\vect{x}=\trps{\rowvect{x_1 & \cdots & x_n}}\in\numset{C}^n\)に対して
 \[
   \mat{U}\vect{x} = \matrice*{\htrps{\vect{e}_1}\vect{x} \\ \vdots \\ \htrps{\vect{e}_n}\vect{x}}
   = \matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}},
-  \quad\mat{\Delta}\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
-  \quad\htrps{\mat{U}}\vect{x} = \htrps{\mat{U}}\matrice*{x_1 \\ \vdots \\ x_n}
-  = \sum_{i=1}^nx_i\vect{e}_i
+  \quad\mat{\Delta}_m\vect{x} = \matrice*{x_1 \\ \vdots \\ x_m \\ \zvec},
+  \quad\htrps{\mat{U}}\vect{x} = \sum_{i=1}^nx_i\vect{e}_i
 \]
 であるから
 \[
-  \htrps{\mat{U}}\mat{\Delta}\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Delta}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
+  \htrps{\mat{U}}\mat{\Delta}_m\mat{U}\vect{x} = \htrps{\mat{U}}\mat{\Delta}_m\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_n}}
   = \htrps{\mat{U}}\matrice*{\innerp{\vect{x}}{\vect{e}_1} \\ \vdots \\ \innerp{\vect{x}}{\vect{e}_m} \\ \zvec}
   = \sum_{i=1}^m\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
   = \proj_{V_m}\vect{x}
 \]
-であり，\(\proj_{V_m}\vect{x}=\htrps{\mat{U}}\mat{\Delta}\mat{U}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線形写像\(T(\vect{x})=\mat{U}\vect{x}\)，\(D(\vect{x})=\mat{\Delta}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて\(\proj_{V_m}=\synth{T}DT\)と表せる．
+であり，\(\proj_{V_m}\vect{x}=\htrps{\mat{U}}\mat{\Delta}\mat{U}\vect{x}\)が成立する．よって，\(\proj_{V_m}\)は線形写像\(T(\vect{x})=\mat{U}\vect{x}\)，\(\synth{T}(\vect{x})=\htrps{\mat{U}}\vect{x}\)を用いて
+\begin{equation}
+  \label{equation:analysis_and_synthesis}
+  \proj_{V_m} = \synth{T}D_mT\quad(D_m(\vect{x})=\mat{\Delta}_m\vect{x})
+\end{equation}
+と表せる．
 
 \(T(\vect{x})\)の第\(i\)成分\(\innerp{\vect{x}}{\vect{e}_i}\)は，\(\vect{x}\)に含まれる\(\vect{e}_i\)の「成分」を表すと考えられる．その理由は2つある．
 1つめの理由は，\(\vnorm{\proj_{\spannedby\Set{\vect{e}_i}}\vect{x}}=\vnorm{\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i}=\abs{\innerp{\vect{x}}{\vect{e}_i}}\)なので，
 \(\abs{\innerp{\vect{x}}{\vect{e}_i}}\)が\(\vect{e}_i\)のスカラー倍で\(\vect{x}\)を最もよく近似するベクトルの長さを表すことである．
 もう一つの理由は，\(\basis{B}\)は\(\numset{K}^n\)の正規直交基底であるから
-\begin{equation}
-  \label{equation:analysis_and_synthesis}
+\[
   \vect{x} = \proj_{V_n}\vect{x}
   = \sum_{i=1}^n\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i
-\end{equation}
+\]
 が成立し，\(\innerp{\vect{x}}{\vect{e}_i}\vect{e}_i\)の和で\(\vect{x}\)が表されることである．
 
 以上の理由から，本書では線形写像\(T(\vect{x})=\trps{\rowvect{\innerp{\vect{x}}{\vect{e}_1} & \cdots & \innerp{\vect{x}}{\vect{e}_n}}}\)を分解作用素，\(\synth{T}(\vect{x})=\sum x_i\vect{e}_i\)を合成作用素と呼ぶ．
@@ -260,8 +266,8 @@
   \end{enumerate}
 \end{definition}
 
-\cref{equation:analysis_and_synthesis}より，合成作用素は分解作用素の逆写像である．
-また，分解作用素と合成作用素が持つ性質は，表現行列に関する条件へと言い換えられる．
+\cref{equation:analysis_and_synthesis}と\(\proj_{V_n}=D_n=\idmap\)より，\(\synth{T}\)は\(T\)の逆写像である．
+また，\(T\)と\(\synth{T}\)が持つ性質は，表現行列に関する条件へと言い換えられる．
 
 \begin{definition}{正規行列，ユニタリ行列}{regular_and_unitary_matrix}\index{せいきぎょうれつ@正規行列}\index{ぎょうれつ@行列!せいき@正規\texttwoemdash}\index{ゆにたりぎょうれつ@ユニタリ行列}\index{ぎょうれつ@行列!ゆにたり@ユニタリ\texttwoemdash}
   \(\mat{A}\)を\(n\)次複素正方行列とする．
@@ -1526,7 +1532,7 @@
 
 以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．実際に使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化すればよい．
 \[
-  w_{\symrm{D}}[n] = \begin{cases}w(n/M) & (0\leq n\leq M), \\ 0 & (M\leq n<L)\end{cases}
+  w_{\symrm{D}}[n] = \begin{cases}w(n/M) & (0\leq n<M), \\ 0 & (M\leq n<L)\end{cases}
 \]
 
 \begin{example}
