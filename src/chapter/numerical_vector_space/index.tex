@@ -1400,7 +1400,7 @@
     \quad\vnorm{y}^2 = \sum_{k=1}^d\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
   \]
   である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，
-  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{A(\lambda_{\mathrm{max}})^{-2}}{B(\lambda_{\mathrm{min}})^{-2}}\)が得られる．
+  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{(\lambda_{\mathrm{max}})^{-2}A}{(\lambda_{\mathrm{min}})^{-2}B}\)が得られる．
   したがって，列\(\Psi=\seq{\psi_i}_{i\in I}\)は\(H\)のフレームである．また
   \[
     x = S^{-1}(S(x))
@@ -1438,7 +1438,7 @@
 \begin{lemma}{交換関係}{dft_commutation}
   以下の式が成り立つ．
   \[
-    \modulate{\nu}\translate{t} = \zeta^{\nu t}\translate{t}\modulate{\nu},
+    \modulate{\nu}\translate{t} = \napr^{2\krez\iuni\nu t/L}\translate{t}\modulate{\nu},
     \quad\ftrans\translate{t} = \modulate{-t}\ftrans,
     \quad\ftrans\modulate{\nu} = \translate{\nu}\ftrans
   \]
@@ -1521,7 +1521,7 @@
 \(\gamma=S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
 \cref{proposition:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
 
-\subsection{窓関数の選択}
+\subsection{窓関数}
 \label{subsection:choice_of_window}
 
 最後に，窓関数の選択が時間周波数解析に与える影響を大雑把に説明する．
@@ -1530,9 +1530,9 @@
   影響を数学的に調べるのは\cref{xr-chapter:hilbert_space}に先送りする．\cref{subsection:choice_of_window}は，\(\stft{w}\)が持つ特徴を\(w\)のグラフから予想できるようになることを目標に読んでほしい．
 \end{note}
 
-以下では閉区間\(\ccival{0}{1}\)上で窓関数\(w(t)\)を定義する．実際に使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化すればよい．
+まず，閉区間\(\ccival{0}{1}\)上で定義される，代表的な窓関数\(w(t)\)を紹介する．実際に使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化する．
 \[
-  w_{\symrm{D}}[n] = \begin{cases}w(n/M) & (0\leq n<M), \\ 0 & (M\leq n<L)\end{cases}
+  w_M[n] = \begin{cases}w(n/M) & (0\leq n<M), \\ 0 & (M\leq n<L)\end{cases}
 \]
 
 \begin{example}
@@ -1546,6 +1546,23 @@
 \begin{example}
   \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
 \end{example}
+
+\(w\)をハン窓にして，\(M\)の値を変えたときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子が\cref{figure:sharp_time}と\cref{figure:sharp_frequency}である．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/sharp_time.pdf}
+    \caption{\(M=64\)}
+    \label{figure:sharp_time}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/sharp_frequency.pdf}
+    \caption{\(M=512\)}
+    \label{figure:sharp_frequency}
+  \end{minipage}
+\end{figure}
 
 \section{多重解像度解析}
 \label{section:discrete_mra}

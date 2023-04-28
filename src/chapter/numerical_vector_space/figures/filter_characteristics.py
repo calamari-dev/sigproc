@@ -11,7 +11,7 @@ K = N // 2 + 1
 n = np.linspace(0, K - 1, num=K)
 x = np.zeros(N)
 x[0:3] = 1 / 3
-y = np.abs(fft(x, norm="ortho"))
+y = np.abs(fft(x))
 
 fig, ax = plt.subplots()
 ax.ticklabel_format(style="sci", axis="y")
