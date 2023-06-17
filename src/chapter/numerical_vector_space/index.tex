@@ -74,7 +74,7 @@
 である．このように，\(\argmin_{x\in S}f(x)\)は空になることも，無限集合になることもある．
 
 \cref{proposition:finite_projection}まで，\(H\)を任意の有限次元内積空間とする．分かりにくければ\(H=\numset{K}^n\)と思ってよい．
-また，同じ方法で\(\numset{K}=\numset{R}\)でも示せるので，証明では\(\numset{K}=\numset{C}\)と\(H\neq\Set{\zvec}\)を仮定した．
+また，同じ方法で\(\numset{K}=\numset{R}\)でも示せるので，証明では\(\numset{K}=\numset{C}\)と\(H\neq\Set{\zvec}\)を仮定する．
 
 \begin{lemma}{}{binomial_square}
   \(\vnorm{\vect{x}+\vect{y}}^2=\vnorm{\vect{x}}^2+2\rpart\innerp{\vect{x}}{\vect{y}}+\vnorm{\vect{y}}^2\)（\(\vect{x},\vect{y}\in H\)）である．
@@ -86,7 +86,7 @@
 
 \begin{proposition}{}{finite_convex_projection}
   \(\vect{x}\in H\)かつ，\(V\)は\(H\)の部分空間とする．
-  このとき，\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ一つの元からなる集合である．
+  このとき，集合\(\argmin_{\vect{y}\in V}\vnorm{\vect{x}-\vect{y}}\)はただ一つの元からなる．
 \end{proposition}
 
 \begin{proof}
@@ -1039,7 +1039,7 @@
   \]
   だから，\((h\circconv x)[n]\)は時刻\(n,n-1,n-2\)における\(x\)の値の平均である．
 
-  平均をとると細かい変動が均されるので，高周波の成分は減るだろう．実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは\cref{figure:filter_characteristics}のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから\(h\)を畳み込むと高周波は削られる．
+  平均すると細かい変動が均されるので，高周波の成分は減るだろう．実際\(\abs{\hat{h}[k]}=(1/3)\abs{\zeta^{-k\cdot 0}+\zeta^{-k\cdot 1}+\zeta^{-k\cdot 2}}\)のグラフは\cref{figure:filter_characteristics}のようになり，\(\dft{N}(h\circconv x)=\hat{h}\cdot\hat{x}\)だから，\(h\)を畳み込むと高周波は削られる．
 \end{example}
 
 \begin{figure}[htbp]
@@ -1066,7 +1066,7 @@
   実際
   \[
     \hat{x}[-k] = \sum_{n=0}^{N-1}x[n]\zeta^{-(-k)n}
-    = \sum_{n=0}^{N-1}\conj*{x[n]}\conj{\zeta}^{-kn}
+    = \sum_{n=0}^{N-1}\conj*{x[n]\zeta^{-kn}}
     = \conj*{\hat{x}[k]}
   \]
   である．
@@ -1525,12 +1525,7 @@
 \label{subsection:choice_of_window}
 
 最後に，窓関数の選択が時間周波数解析に与える影響を大雑把に説明する．
-
-\begin{note}
-  影響を数学的に調べるのは\cref{xr-chapter:hilbert_space}に先送りする．\cref{subsection:choice_of_window}は，\(\stft{w}\)が持つ特徴を\(w\)のグラフから予想できるようになることを目標に読んでほしい．
-\end{note}
-
-まず，閉区間\(\ccival{0}{1}\)上で定義される，代表的な窓関数\(w(t)\)を紹介する．実際に使うときは，信号を切り取る長さ\(M\)を決めて，次のように離散化する．
+まず，閉区間\(\ccival{0}{1}\)上で定義される，代表的な窓関数\(w(t)\)を紹介する．実用上は，信号を切り取る長さ\(M\)を決めて，次のように離散化することが多い．
 \[
   w_M[n] = \begin{cases}w(n/M) & (0\leq n<M), \\ 0 & (M\leq n<L)\end{cases}
 \]
@@ -1553,16 +1548,39 @@
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/sharp_time.pdf}
-    \caption{\(M=64\)}
+    \caption{\(M=64\)の例．}
     \label{figure:sharp_time}
   \end{minipage}%
   \begin{minipage}{\linewidth/2}
     \centering
     \includegraphics{figures/sharp_frequency.pdf}
-    \caption{\(M=512\)}
+    \caption{\(M=512\)の例．}
     \label{figure:sharp_frequency}
   \end{minipage}
 \end{figure}
+
+\cref{figure:sharp_time}と\cref{figure:sharp_frequency}から，\(M\)の値を大きくすると，白線が時間方向（横軸）ではぼやけて，周波数方向（縦軸）では明瞭になることが分かる．
+実は，この傾向はハン窓に限ったものではなく，短時間フーリエ変換において，時間方向の明瞭さと，周波数方向の明瞭さは両立できない．この事実を\termdef{不確定性原理}\index{ふかくていせいげんり@不確定性原理}\index{ふかくていせいげんり@不確定性原理!はいぜんべるく@ハイゼンベルク}（uncertainty principle）という\footnote{不確定性原理は，不確定性の定義に応じて複数の定式化がある．その一つが，\cref{xr-chapter:hilbert_space}で紹介するハイゼンベルクの不確定性原理である．}．
+
+明瞭さは\(w(t)\)の選択によっても変化する．\cref{figure:rectangular}と\cref{figure:hann}は，それぞれ\(w(t)\)が矩形窓とハン窓のときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子である．ただし，\(M\)の値は256に設定した．
+
+\begin{figure}[htbp]
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/rectangular.pdf}
+    \caption{矩形窓の例．}
+    \label{figure:rectangular}
+  \end{minipage}%
+  \begin{minipage}{\linewidth/2}
+    \centering
+    \includegraphics{figures/hann.pdf}
+    \caption{ハン窓の例．}
+    \label{figure:hann}
+  \end{minipage}
+\end{figure}
+
+\cref{figure:rectangular}と\cref{figure:hann}を見比べると，下から数えて3つめくらいまでの白線は，\cref{figure:rectangular}のほうが明瞭に見える．しかし，\cref{figure:hann}からは\kenten{より}上の白線まで読み取れるのに対して，\cref{figure:rectangular}では全体的に白みがかっていて，読み取るのが難しい．
+この違いについては，\cref{xr-chapter:hilbert_space}で詳しく説明する．
 
 \section{多重解像度解析}
 \label{section:discrete_mra}
