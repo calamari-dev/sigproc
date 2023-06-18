@@ -1084,7 +1084,7 @@
 \section{短時間フーリエ変換}
 \label{section:stft}
 
-\cref{section:stft,section:discrete_mra}では，時とともに様子が変わる旋律・地震動・景気のような信号を調べるのに欠かせない，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
+\cref{section:stft}では，時とともに様子が変わる旋律・地震動・景気のような信号を調べるのに欠かせない，\termdef{時間周波数解析}\index{じかんしゅうはすうかいせき@時間周波数解析}（time–frequency analysis）の理論を説明する．
 
 \subsection{フレーム}
 \label{subsection:frame}
@@ -1400,7 +1400,7 @@
     \quad\vnorm{y}^2 = \sum_{k=1}^d\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
   \]
   である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，
-  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{(\lambda_{\mathrm{max}})^{-2}A}{(\lambda_{\mathrm{min}})^{-2}B}\)が得られる．
+  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{\lambda_{\mathrm{max}}^{-2}A}{\lambda_{\mathrm{min}}^{-2}B}\)が得られる．
   したがって，列\(\Psi=\seq{\psi_i}_{i\in I}\)は\(H\)のフレームである．また
   \[
     x = S^{-1}(S(x))
@@ -1542,7 +1542,7 @@
   \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
 \end{example}
 
-\(w\)をハン窓にして，\(M\)の値を変えたときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子が\cref{figure:sharp_time}と\cref{figure:sharp_frequency}である．
+p.\pageref{figure:phone_spectrogram}\cref{figure:phone_spectrogram}と同じ信号\(x\)について，\(w\)をハン窓にして，\(M\)の値を変えたときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子が\cref{figure:sharp_time}と\cref{figure:sharp_frequency}である．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1562,7 +1562,7 @@
 \cref{figure:sharp_time}と\cref{figure:sharp_frequency}から，\(M\)の値を大きくすると，白線が時間方向（横軸）ではぼやけて，周波数方向（縦軸）では明瞭になることが分かる．
 実は，この傾向はハン窓に限ったものではなく，短時間フーリエ変換において，時間方向の明瞭さと，周波数方向の明瞭さは両立できない．この事実を\termdef{不確定性原理}\index{ふかくていせいげんり@不確定性原理}\index{ふかくていせいげんり@不確定性原理!はいぜんべるく@ハイゼンベルク}（uncertainty principle）という\footnote{不確定性原理は，不確定性の定義に応じて複数の定式化がある．その一つが，\cref{xr-chapter:hilbert_space}で紹介するハイゼンベルクの不確定性原理である．}．
 
-明瞭さは\(w(t)\)の選択によっても変化する．\cref{figure:rectangular}と\cref{figure:hann}は，それぞれ\(w(t)\)が矩形窓とハン窓のときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子である．ただし，\(M\)の値は256に設定した．
+明瞭さは\(w(t)\)の選択によっても変化する．\cref{figure:rectangular}と\cref{figure:hann}は，それぞれ\(w(t)\)が矩形窓とハン窓のときの\(\abs{(\stft{w_{256}}x)[k,n]}^2\)の様子である．
 
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
@@ -1581,9 +1581,6 @@
 
 \cref{figure:rectangular}と\cref{figure:hann}を見比べると，下から数えて3つめくらいまでの白線は，\cref{figure:rectangular}のほうが明瞭に見える．しかし，\cref{figure:hann}からは\kenten{より}上の白線まで読み取れるのに対して，\cref{figure:rectangular}では全体的に白みがかっていて，読み取るのが難しい．
 この違いについては，\cref{xr-chapter:hilbert_space}で詳しく説明する．
-
-\section{多重解像度解析}
-\label{section:discrete_mra}
 
 \section{補遺}
 
@@ -1675,8 +1672,11 @@
       \proj_{\colsp\mat{A}}\vect{y} = \mat{A}\pinv{\mat{A}}\vect{y},
       \quad\proj_{\pcomp{(\colsp\mat{A})}}\vect{y} = (\imat-\mat{A}\pinv{\mat{A}})\vect{y}
     \end{gather*}
-  \item \(n\)次複素正方行列\(\mat{A}\)に対して\(\exp\mat{A}\)を\(\exp\mat{A}=\sum_{k=0}^\infty\mat{A}^k/(k!)\)で定義する．この極限は各成分の極限で定義され，\(\exp\mat{A}\)を定義する級数は常に収束することが分かっている．
-    \(\mat{A}\)が正規行列なら，そのスペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると\(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
+  \item \(n\)次複素正方行列\(\mat{A}\)に対して，\(\exp\mat{A}\)を
+    \[
+      \exp\mat{A} = \sum_{k=0}^\infty\frac{\mat{A}^k}{k!}
+    \]
+    で定義する．\(\mat{A}\)が正規行列なら，スペクトル分解を\(\mat{A}=\mat{U}\diag(\lambda_1,\dots,\lambda_n)\htrps{\mat{U}}\)とすると\(\exp\mat{A}=\mat{U}\diag(\napr^{\lambda_1},\dots,\napr^{\lambda_n})\htrps{\mat{U}}\)であることを示せ．
   \item \label{problem:parseval}\(\dft{N}\vect{x}=\trps{\rowvect{\hat{x}_0 & \cdots & \hat{x}_{N-1}}}\)（\(\vect{x}=\trps{\rowvect{x_0 & \cdots & x_{N-1}}}\)）のとき
     \begin{equation}
       \label{equation:dft_parseval}

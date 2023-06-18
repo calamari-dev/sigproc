@@ -18,10 +18,11 @@ f, t, spec = signal.spectrogram(
 )
 
 fig, ax = plt.subplots()
+f = f / 1000
 img = ax.pcolormesh(
     t, f, spec, norm=LogNorm(vmin=1e-10, vmax=np.max(spec)), rasterized=True
 )
 fig.colorbar(img)
 ax.set_xlabel("時刻[s]")
-ax.set_ylabel("周波数[Hz]")
+ax.set_ylabel("周波数[kHz]")
 fig.savefig(str(PurePath(__file__).parent / (PurePath(__file__).stem + ".pdf")))
