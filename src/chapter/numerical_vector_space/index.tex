@@ -1399,9 +1399,12 @@
     \in \ccival{A\vnorm{y}^2}{B\vnorm{y}^2},
     \quad\vnorm{y}^2 = \sum_{k=1}^d\lambda_k^{-2}\abs{\innerp{x}{u_k}}^2
   \]
-  である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，
-  \(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より\(\sum\abs{\innerp{x}{\psi_i}}^2\in\ccival{\lambda_{\mathrm{max}}^{-2}A}{\lambda_{\mathrm{min}}^{-2}B}\)が得られる．
-  したがって，列\(\Psi=\seq{\psi_i}_{i\in I}\)は\(H\)のフレームである．また
+  である．よって，\(\lambda_{\mathrm{min}}=\min\Set{\lambda_1,\dots,\lambda_n}\)，\(\lambda_{\mathrm{max}}=\max\Set{\lambda_1,\dots,\lambda_n}\)とおくと，\(\vnorm{x}^2=\sum\abs{\innerp{x}{u_k}}^2\)より
+  \[
+    \vnorm{y}^2 \in \ccival{\lambda_{\mathrm{max}}^{-2}\vnorm{x}^2}{\lambda_{\mathrm{min}}^{-2}\vnorm{x}^2},
+    \quad\sum_{i\in I}\abs{\innerp{x}{\psi_i}}^2 \in \ccival{A\lambda_{\mathrm{max}}^{-2}\vnorm{x}^2}{B\lambda_{\mathrm{min}}^{-2}\vnorm{x}^2}
+  \]
+  が得られる．したがって，列\(\Psi=\seq{\psi_i}_{i\in I}\)は\(H\)のフレームである．また
   \[
     x = S^{-1}(S(x))
     = \sum_{i\in I}\innerp{x}{\phi_i}S^{-1}(\phi_i)
@@ -1417,7 +1420,6 @@
   = \seq{S^{-1}(\phi_i)}_{i\in I}\quad\text{(\(S\)は\(\Phi\)のフレーム作用素)}
 \]
 で定義されるフレーム\(\Psi\)によって再構成できる．\(\Psi\)を\(\Phi\)の\termdef{標準双対フレーム}\index{ひょうじゅんそうついふれーむ@標準双対フレーム}\index{そうついふれーむ@双対フレーム!ひょうじゅん@標準\texttwoemdash}（canonical dual frame）という．
-
 より一般に，標準双対フレームと同じ式で，\(T(x)\)から\(x\)を再構成できるフレームを双対フレームという．
 
 \begin{definition}{双対フレーム}{dual_frame}\index{そうついふれーむ@双対フレーム}\index{ふれーむ@フレーム!そうつい@双対\texttwoemdash}
@@ -1445,14 +1447,22 @@
 \end{lemma}
 
 \begin{proof}
-  1つめの式は\((\modulate{\nu}\translate{t}x)[n]=\zeta^{\nu n}x[n-t]=\zeta^{\nu t}\zeta^{\nu(n-t)}x[n-t]=\zeta^{\nu t}(\translate{t}\modulate{\nu}x)[n]\)から分かる．
-
-  2つめを示す．\((\ftrans x)[k]=\sum_nx[n]\zeta^{-kn}=\sum_n(\modulate{-k}x)[n]\)なので
+  1つめの式は
+  \[
+    (\modulate{\nu}\translate{t}x)[n]=\zeta^{\nu n}x[n-t]=\zeta^{\nu t}\zeta^{\nu(n-t)}x[n-t]=\zeta^{\nu t}(\translate{t}\modulate{\nu}x)[n]
+  \]
+  から分かる．2つめを示す．\((\ftrans x)[k]=\sum_nx[n]\zeta^{-kn}=\sum_n(\modulate{-k}x)[n]\)より
   \[
     (\ftrans\translate{t}x)[k] = \sum_n(\modulate{-k}\translate{t}x)[n]
-    = \zeta^{-kt}\sum_n(\translate{t}\modulate{-k}x)[n]
+    = \sum_n\zeta^{-kt}(\translate{t}\modulate{-k}x)[n]
   \]
-  である．そして\(\modulate{-k}x\in\cycles{L}\)より\(\sum_n(\translate{t}\modulate{-k}x)[n]=\sum_n(\modulate{-k}x)[n]=(\ftrans x)[k]\)だから\((\ftrans\translate{t}x)[k]=\zeta^{-kt}(\ftrans x)[k]=(\modulate{-t}\ftrans x)[k]\)である．3つめも同様に示せる．
+  である．そして，数列\(\modulate{-k}x\)は\(L\)を周期に持つので
+  \[
+    \sum_n(\translate{t}\modulate{-k}x)[n] = \sum_n(\modulate{-k}x)[n-t]
+    = \sum_n(\modulate{-k}x)[n]
+    = (\ftrans x)[k]
+  \]
+  である．よって\((\ftrans\translate{t}x)[k]=\zeta^{-kt}(\ftrans x)[k]=(\modulate{-t}\ftrans x)[k]\)である．3つめの証明は省略する．
 \end{proof}
 
 \begin{lemma}{}{shift_convolution}
@@ -1464,8 +1474,19 @@
 \end{lemma}
 
 \begin{proof}
-  \((x\circconv y)[n]=\sum_mx[m]y[n-m]=\sum_mx[m](\translate{m}y)[n]\)だから\(x\circconv y=\sum_mx[m]\translate{m}y\)，よって\(\translate{t}(x\circconv y)=\sum_mx[m]\translate{t+m}y=x\circconv(\translate{t}y)\)である．
-  また，\cref{lemma:dft_commutation}から\(\modulate{\nu}(x\circconv y)=\sum_nx[n]\modulate{\nu}\translate{n}y=\sum_n\zeta^{\nu n}x[n]\translate{n}\modulate{\nu}y=(\modulate{\nu}x)\circconv(\modulate{\nu}y)\)である．
+  \(z=x\circconv y\)とおく．\(z[n]=\sum_mx[m]y[n-m]=\sum_mx[m](\translate{m}y)[n]\)だから
+  \[
+    z = \sum_mx[m]\translate{m}y,
+    \quad\translate{t}z = \sum_mx[m]\translate{t+m}y
+    = x\circconv(\translate{t}y)
+  \]
+  である．また，\cref{lemma:dft_commutation}より
+  \[
+    \modulate{\nu}z = \sum_mx[m]\modulate{\nu}\translate{m}y
+    = \sum_m\zeta^{\nu m}x[m]\translate{m}\modulate{\nu}y
+    = (\modulate{\nu}x)\circconv(\modulate{\nu}y)
+  \]
+  である．
 \end{proof}
 
 \begin{lemma}{}{dgt_shift}
@@ -1476,40 +1497,47 @@
 \end{lemma}
 
 \begin{proof}
-  \((\stft{w}x)[\holder,n]=\ftrans(x\cdot\translate{n}\conj{w})=(\ftrans x)\circconv(\ftrans\translate{n}\conj{w})\)より\(\stft{w}(\modulate{\nu}\translate{t}x)[\holder,n]=(\ftrans\modulate{\nu}\translate{t}x)\circconv(\modulate{-n}\ftrans\conj{w})=(\translate{\nu}\modulate{-t}\ftrans x)\circconv(\modulate{-n}\ftrans\conj{w})\)である．
-  さらに，\cref{lemma:shift_convolution}から\((\translate{\nu}\modulate{-t}\ftrans x)\circconv(\modulate{-n}\ftrans\conj{w})=(\modulate{-t}\ftrans x)\circconv(\translate{\nu}\modulate{-n}\ftrans\conj{w})=\modulate{-t}((\ftrans x)\circconv(\modulate{t}\translate{\nu}\modulate{-n}\ftrans\conj{w}))\)であり，
-  \(\modulate{t}\translate{\nu}\modulate{-n}\ftrans=\zeta^{\nu t}\translate{\nu}\modulate{t-n}\ftrans=\zeta^{\nu t}\ftrans\modulate{\nu}\translate{n-t}\)なので
+  \(\nu=aK\)，\(t=bN\)，\(y=\modulate{aK}\translate{bN}x\)とおく．\((\stft{w}x)[\holder,n]=\ftrans(x\cdot\translate{n}\conj{w})=(\ftrans x)\circconv(\ftrans\translate{n}\conj{w})\)より
   \[
-    (\stft{w}\modulate{\nu}\translate{t}x)[\holder,n] = \zeta^{\nu t}\modulate{-t}((\ftrans x)\circconv(\ftrans\modulate{\nu}\translate{n-t}\conj{w}))
+    (\stft{w}y)[\holder,n] = (\ftrans\modulate{\nu}\translate{t}x)\circconv(\ftrans\translate{n}\conj{w})
+    = (\translate{\nu}\modulate{-t}\ftrans x)\circconv(\ftrans\translate{n}\conj{w})
+  \]
+  である．さらに，\(z=\ftrans\translate{n}\conj{w}\)とおくと\cref{lemma:shift_convolution}より
+  \[
+    (\translate{\nu}\modulate{-t}\ftrans x)\circconv z = (\modulate{-t}\ftrans x)\circconv(\translate{\nu}z)
+    = \modulate{-t}((\ftrans x)\circconv(\modulate{t}\translate{\nu}z))
+  \]
+  であり，\(\modulate{t}\translate{\nu}z=(\modulate{t}\translate{\nu}\ftrans\translate{n})\conj{w}=(\zeta^{\nu t}\ftrans\modulate{\nu}\translate{n-t})\conj{w}\)なので
+  \[
+    (\stft{w}y)[\holder,n] = \zeta^{\nu t}\modulate{-t}((\ftrans x)\circconv(\ftrans\modulate{\nu}\translate{n-t}\conj{w}))
   \]
   である．したがって，\(\tfshift{i}{j}=\modulate{iK}\translate{jN}\)とおくと
   \begin{align*}
-    S(\tfshift{a}{b}x) &= \sum_{i,j}(\stft{w}\tfshift{a}{b}x)[iK,jN]\tfshift{i}{j}w \\
+    S(y) &= \sum_{i,j}(\stft{w}y)[iK,jN]\tfshift{i}{j}w \\
     &= \sum_{i,j}\zeta^{(a-i)KbN}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i}{j}w
   \end{align*}
   である．そして\(\tfshift*{a}{b}\tfshift{i}{j}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)である\footnote{\(\tfshift*{a}{b}\tfshift{i}{j}=\translate{-bN}\modulate{(i-a)K}\translate{jN}=\zeta^{(i-a)KbN}\modulate{(i-a)K}\translate{(j-b)N}=\zeta^{(i-a)KbN}\tfshift{i-a}{j-b}\)．}から
   \begin{align*}
-    \tfshift*{a}{b}S(\tfshift{a}{b}x) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w \\
-    &= \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j-b}\conj{w}))[(i-a)K]\tfshift{i-a}{j-b}w
+    \tfshift*{a}{b}S(y) &= \sum_{i,j}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[iK]\tfshift{i-a}{j-b}w \\
+    &= \sum_{i,j}\translate{-aK}((\ftrans x)\circconv(\ftrans\tfshift{a}{j-b}\conj{w}))[(i-a)K]\tfshift{i-a}{j-b}w
   \end{align*}
   であり，\(i-a\)を\(i\)に，\(j-b\)を\(j\)に置き換えても和は変わらないので
   \[
-    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\translate{-aK}\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
+    \tfshift*{a}{b}S(y) = \sum_{i,j}\translate{-aK}((\ftrans x)\circconv(\ftrans\tfshift{a}{j}\conj{w}))[iK]\tfshift{i}{j}w
   \]
-  である．\(\translate{-aK}\ftrans\tfshift{a}{j}=\ftrans\modulate{-aK}\tfshift{a}{j}=\ftrans\translate{jN}\)だから
+  である．\(\translate{-aK}\ftrans\tfshift{a}{j}=\ftrans\modulate{-aK}\tfshift{a}{j}=\ftrans\translate{jN}\)だから，\cref{lemma:shift_convolution}より
   \[
-    \tfshift*{a}{b}S(\tfshift{a}{b}x) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]\tfshift{i}{j}w
+    \tfshift*{a}{b}S(y) = \sum_{i,j}((\ftrans x)\circconv(\ftrans\translate{jN}\conj{w}))[iK]\tfshift{i}{j}w
     = S(x)
   \]
-  である．よって\(\tfshift*{a}{b}S(\tfshift{a}{b}x)=S(x)\)，\(S(\tfshift{a}{b}x)=\tfshift{a}{b}S(x)\)である．
+  である．よって\(\tfshift*{a}{b}S(y)=S(x)\)，\(S(y)=\tfshift{a}{b}S(x)\)である．
 \end{proof}
 
 \begin{proposition}{DGTの再構成}{dgt_reconstruction}
   \(\gaborsys{w}{K}{N}\)が\(\cycles{L}\)のフレームであれば，\(\cycles{L}\)の元\(\gamma\)が存在し，各\(x\in\cycles{L}\)，\(\hat{x}=\dgt{w}x\)に対して
-  \begin{gather*}
-    x = \sum_{(i,j)\in\Lambda}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma, \\
-    x[n] = \sum_{i=0}^{L/K-1}\sum_{j=0}^{L/N-1}\hat{x}[i,j]\gamma[n-jN]\napr^{2\krez\iuni(iK)n/L}
-  \end{gather*}
+  \[
+    x = \sum_{(i,j)\in\Lambda}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma
+  \]
   を満たす．
 \end{proposition}
 
@@ -1518,14 +1546,11 @@
   よって，\cref{proposition:canonical_dual_reconstruction}から\(x=\sum_{i,j}\hat{x}[i,j]\modulate{iK}\translate{jN}\gamma\)である．
 \end{proof}
 
-\(\gamma=S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
-\cref{proposition:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{\gamma}{K}{N}\)によって再構成できる．
+\cref{proposition:dgt_reconstruction}より，\(\gaborsys{w}{K}{N}\)がフレームであれば，\(\dgt{w}x\)から\(x\)は新たなガボールシステム\(\gaborsys{S^{-1}(w)}{K}{N}\)によって再構成できる．
+\(S^{-1}(w)\)を\(w\)の\termdef{標準双対窓}\index{ひょうじゅんそうついまど@標準双対窓}（canonical dual window）という．
 
-\subsection{窓関数}
-\label{subsection:choice_of_window}
-
-最後に，窓関数の選択が時間周波数解析に与える影響を大雑把に説明する．
-まず，閉区間\(\ccival{0}{1}\)上で定義される，代表的な窓関数\(w(t)\)を紹介する．実用上は，信号を切り取る長さ\(M\)を決めて，次のように離散化することが多い．
+最後に少しだけ，窓関数の違いが時間周波数解析に与える影響を説明する．
+まず，閉区間\(\ccival{0}{1}\)上で定義される，代表的な窓関数\(w(t)\)を3つ紹介する．実用上は，信号を切り取る長さ\(M\)を決めて，次のように離散化することが多い．
 \[
   w_M[n] = \begin{cases}w(n/M) & (0\leq n<M), \\ 0 & (M\leq n<L)\end{cases}
 \]
@@ -1542,8 +1567,6 @@
   \(w(t)=(1-\cos(2\krez t))/2\)を\termdef{ハン窓}\index{はんまど@ハン窓}\index{まどかんすう@窓関数!はんまど@ハン窓}（Hann window）という．
 \end{example}
 
-p.\pageref{figure:phone_spectrogram}\cref{figure:phone_spectrogram}と同じ信号\(x\)について，\(w\)をハン窓にして，\(M\)の値を変えたときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子が\cref{figure:sharp_time}と\cref{figure:sharp_frequency}である．
-
 \begin{figure}[htbp]
   \begin{minipage}{\linewidth/2}
     \centering
@@ -1559,8 +1582,14 @@ p.\pageref{figure:phone_spectrogram}\cref{figure:phone_spectrogram}と同じ信�
   \end{minipage}
 \end{figure}
 
-\cref{figure:sharp_time}と\cref{figure:sharp_frequency}から，\(M\)の値を大きくすると，白線が時間方向（横軸）ではぼやけて，周波数方向（縦軸）では明瞭になることが分かる．
-実は，この傾向はハン窓に限ったものではなく，短時間フーリエ変換において，時間方向の明瞭さと，周波数方向の明瞭さは両立できない．この事実を\termdef{不確定性原理}\index{ふかくていせいげんり@不確定性原理}\index{ふかくていせいげんり@不確定性原理!はいぜんべるく@ハイゼンベルク}（uncertainty principle）という\footnote{不確定性原理は，不確定性の定義に応じて複数の定式化がある．その一つが，\cref{xr-chapter:hilbert_space}で紹介するハイゼンベルクの不確定性原理である．}．
+p.\pageref{figure:phone_spectrogram}\cref{figure:phone_spectrogram}と同じ信号\(x\)について，\(w\)をハン窓にして，\(M\)の値を変えたときの\(\abs{(\stft{w_M}x)[k,n]}^2\)の様子が\cref{figure:sharp_time}と\cref{figure:sharp_frequency}である．
+図から，\(M\)の値を大きくすると，白線が時間方向（横軸）ではぼやけて，周波数方向（縦軸）では明瞭になることが分かる．
+
+実は，この傾向はハン窓に限ったものではなく，短時間フーリエ変換において，時間方向の明瞭さと，周波数方向の明瞭さは両立できない．この事実を\termdef{不確定性原理}\index{ふかくていせいげんり@不確定性原理}（uncertainty principle）という．
+
+\begin{note}
+  不確定性原理は，不確定性の定義に応じて複数の定式化がある．その一つが，\cref{xr-chapter:hilbert_space}で紹介するハイゼンベルクの不確定性原理\index{ふかくていせいげんり@不確定性原理!はいぜんべるく@ハイゼンベルク}である．
+\end{note}
 
 明瞭さは\(w(t)\)の選択によっても変化する．\cref{figure:rectangular}と\cref{figure:hann}は，それぞれ\(w(t)\)が矩形窓とハン窓のときの\(\abs{(\stft{w_{256}}x)[k,n]}^2\)の様子である．
 
@@ -1580,7 +1609,7 @@ p.\pageref{figure:phone_spectrogram}\cref{figure:phone_spectrogram}と同じ信�
 \end{figure}
 
 \cref{figure:rectangular}と\cref{figure:hann}を見比べると，下から数えて3つめくらいまでの白線は，\cref{figure:rectangular}のほうが明瞭に見える．しかし，\cref{figure:hann}からは\kenten{より}上の白線まで読み取れるのに対して，\cref{figure:rectangular}では全体的に白みがかっていて，読み取るのが難しい．
-この違いについては，\cref{xr-chapter:hilbert_space}で詳しく説明する．
+\cref{xr-chapter:hilbert_space}では，短時間フーリエ変換が持つこれらの性質を調べていく．
 
 \section{補遺}
 

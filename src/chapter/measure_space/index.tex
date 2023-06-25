@@ -242,7 +242,7 @@
   \includegraphics{figures/integration.pdf}
 \end{wrapfigure}
 
-より具体的に，\(\int f\measured{\mu}\)を非負値単関数の積分に関する極限で表すこともできる．\(\midx{E}{n}{k}=\inv{f}{\coival{2^{-n}k}{2^{-n}(k+1)}}\)とする．このとき
+なお，\(\int f\measured{\mu}\)は非負値単関数の積分の極限で表せる．\(\midx{E}{n}{k}=\Set{x\given 2^{-n}k\leq f(x)<2^{-n}(k+1)}\)とする．このとき
 \[
   \phi_n = n\indicator_{\inv{f}{\coival{n}{+\infty}}}+\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\indicator_{\midx{E}{n}{k}}
 \]
@@ -253,7 +253,7 @@
   \int f\measured{\mu} = \int f^{\mathord{+}}\measured{\mu}-\int f^{\mathord{-}}\measured{\mu}
 \]
 とする．ただし，\(\int f^{\mathord{-}}\measured{\mu}=\int f^{\mathord{+}}\measured{\mu}=+\infty\)のとき\(\int f\measured{\mu}\)は定義されない．
-\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がともに有限\texttwoemdash つまり\(\int\abs{f(x)}\measured[x]{\mu}<+\infty\)\texttwoemdash のとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．また，集合\(S\in\sigmaalg{F}\)上での積分は
+\(\int f^{\mathord{-}}\measured{\mu}\)と\(\int f^{\mathord{+}}\measured{\mu}\)がともに有限\texttwoemdash つまり\(\int\abs{f(x)}\measured[x]{\mu}\)が有限\texttwoemdash のとき，\(f\)は\termdef{可積分}\index{かせきぶん@可積分}（integrable）であるという．また，集合\(S\in\sigmaalg{F}\)上での積分は
 \[
   \int_Sf\measured{\mu} = \int_Sf(x)\measured[x]{\mu}
   = \int f(x)\indicator_S(x)\measured[x]{\mu}
@@ -288,14 +288,14 @@
 \begin{note}
   積分区間が非有界なときは注意が要る．実際，\termdef{ディリクレ積分}\index{でぃりくれせきぶん@ディリクレ積分}（Dirichlet integral）と呼ばれる広義積分
   \[
-    \int_0^\infty\frac{\sin x}{x}\intd{x} = \lim_{\varepsilon\downarrow 0}\int_\varepsilon^1f(x)\intd{x}+\lim_{R\to\infty}\int_1^Rf(x)\intd{x}\quad(f(x)=(1/x)\sin x)
+    \int_0^\infty\frac{\sin x}{x}\intd{x} = \lim_{\varepsilon\downarrow 0}\int_\varepsilon^1f(x)\intd{x}+\lim_{R\to\infty}\int_1^Rf(x)\intd{x}\quad(f(x)=\sin(x)/x)
   \]
   の値は\(\krez/2\)だが\(\int f^{\mathord{+}}\measured{\lambda}=\int f^{\mathord{-}}\measured{\lambda}=+\infty\)であり，\(\int f\measured{\lambda}\)は定義されない．
 \end{note}
 
 最後に，複素数値可測関数の積分を定義しよう．関数\(\rpart f(x)\)，\(\ipart f(x)\)がどちらも\(\sigmaalg{F}\)‐可測であるとき，関数\(f\colon\Omega\to\numset{C}\)は\(\sigmaalg{F}\)‐可測であるという．\(f\)の積分は
 \[
-  \int f\measured{\mu} = \int(\rpart f(x))\measured[x]{\mu}+\iuni\int(\ipart f(x))\measured[x]{\mu}
+  \int f\measured{\mu} = \int\rpart(f(x))\measured[x]{\mu}+\iuni\int\ipart(f(x))\measured[x]{\mu}
 \]
 で定義される．
 
