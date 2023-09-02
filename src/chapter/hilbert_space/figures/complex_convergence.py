@@ -14,7 +14,7 @@ ax.scatter(
     np.real(z),
     np.imag(z),
     label=r"$z_n$",
-    linewidths=constants.scatter_linewidth,
+    linewidths=constants.observation_linewidth,
 )
 ax.legend()
 ax.set_xticks(np.linspace(0, 1, num=6))

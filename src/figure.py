@@ -12,4 +12,5 @@ if __name__ == "__main__":
     for tex in selfdir.glob("chapter/**/figures/*.tex"):
         print("processing " + tex.name + " ...")
         cwd = tex.parent.as_posix()
-        subprocess.run(["lualatex", tex.stem], cwd=cwd, stdout=subprocess.DEVNULL)
+        subprocess.run(["lualatex", tex.stem], cwd=cwd,
+                       stdout=subprocess.DEVNULL)

@@ -2,7 +2,7 @@ source = "main.tex"
 sequence = ["latex", "mendex"]
 
 [programs.mendex]
-command = "upmendex"
+command = "mendex"
 target = "%B.idx"
 opts = ["-s"]
 args = ["./index", "%T"]
